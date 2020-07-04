@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:yellow_dye"
+    },
+    {
+	  "item": "minecraft:white_dye"
+    }
+  ],
+  "result": "ve:wasteland_painting",
+  "count": 1
+}

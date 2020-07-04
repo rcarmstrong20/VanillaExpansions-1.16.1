@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#X#",
+	"# #",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:glass_pane"
+    },
+    "X":
+    {
+	  "tag": "minecraft:planks"
+    }
+  },
+  "result":
+  {
+    "item": "ve:glass_vial"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "TTT",
+    "RBR",
+    "YAY"
+  ],
+  "key":
+  {
+    "T":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"R":
+	{
+	  "item": "minecraft:red_wool"
+	},
+	"Y":
+	{
+	  "item": "minecraft:yellow_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"A":
+	{
+	  "item": "minecraft:acacia_sapling"
+	}
+  },
+  "result":
+  {
+    "item": "ve:savanna_villager_plush"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:light_blue_dye"
+    },
+    {
+	  "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result": "ve:bomb_painting",
+  "count": 1
+}

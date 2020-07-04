@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:brown_dye"
+    },
+    {
+	  "item": "minecraft:white_dye"
+    }
+  ],
+  "result": "ve:kebab_painting",
+  "count": 1
+}

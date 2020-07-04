@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BBB",
+    "BFB",
+    "WOW"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:brown_wool"
+    },
+	"O":
+	{
+      "item": "minecraft:orange_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"F":
+	{
+	  "tag": "ve:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "ve:tabby_cat_plush"
+  }
+}

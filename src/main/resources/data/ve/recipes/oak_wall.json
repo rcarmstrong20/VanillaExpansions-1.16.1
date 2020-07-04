@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_wall",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "tag": "ve:oak_logs"
+    }
+  },
+  "result":
+  {
+    "item": "ve:oak_wall",
+	"count": 6
+  }
+}

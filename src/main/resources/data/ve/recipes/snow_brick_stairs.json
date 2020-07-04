@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:snow_bricks"
+    }
+  },
+  "result":
+  {
+    "item": "ve:snow_brick_stairs",
+	"count": 4
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "frames",
+  "pattern":
+  [
+    "###",
+    "#X#",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "tag": "ve:birch_logs"
+    },
+	"X":
+	{
+	  "tag": "ve:stripped_birch_logs"
+	}
+  },
+  "result":
+  {
+    "item": "ve:birch_frame"
+  }
+}

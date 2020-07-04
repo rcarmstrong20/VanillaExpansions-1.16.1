@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:blue_dye"
+    },
+    {
+	  "item": "minecraft:white_dye"
+    }
+  ],
+  "result": "ve:aztec_painting_two",
+  "count": 1
+}

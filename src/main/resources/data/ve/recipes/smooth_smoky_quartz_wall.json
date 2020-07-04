@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "smoky_quartz_wall",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:smooth_smoky_quartz"
+    }
+  },
+  "result":
+  {
+    "item": "ve:smooth_smoky_quartz_wall",
+	"count": 6
+  }
+}

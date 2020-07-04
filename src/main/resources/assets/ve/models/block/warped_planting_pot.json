@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_nether_planting_pot",
+    "textures":
+	{
+        "material": "block/warped_planks",
+		"pillar" : "block/warped_stem"
+    }
+}

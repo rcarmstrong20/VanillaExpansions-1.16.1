@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "TTT",
+    "CBC",
+    "WSW"
+  ],
+  "key":
+  {
+    "T":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"C":
+	{
+	  "item": "minecraft:cyan_wool"
+	},
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"S":
+	{
+	  "item": "minecraft:snow_block"
+	}
+  },
+  "result":
+  {
+    "item": "ve:snow_villager_plush"
+  }
+}
