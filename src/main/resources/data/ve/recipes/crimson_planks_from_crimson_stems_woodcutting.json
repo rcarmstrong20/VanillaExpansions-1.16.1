@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "tag": "minecraft:crimson_logs"
+  },
+  "result": "minecraft:crimson_planks",
+  "count": 6
+}

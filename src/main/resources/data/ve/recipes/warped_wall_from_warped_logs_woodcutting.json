@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "tag": "ve:warped_stems"
+  },
+  "result": "ve:warped_wall",
+  "count": 1
+}

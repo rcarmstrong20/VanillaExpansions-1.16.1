@@ -243,6 +243,9 @@ public class VanillaExpansions
 	}
 	
 	/*
+	 * Disabled due to me not knowing how to render the double slab
+	 */
+	/*
 	@SubscribeEvent
 	public void onRightClickSlab(final PlayerInteractEvent.RightClickBlock event)
 	{

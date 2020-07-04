@@ -265,6 +265,7 @@ public class VeBlocks
 	public static Block nephilite_brick_slab = register("nephilite_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_brick_stairs = register("nephilite_brick_stairs", true, new StairsBlock(() -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_brick_wall = register("nephilite_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
+	public static Block chiseled_nephilite = register("chiseled_nephilite", true, new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block double_slab = register("double_slab", false, new VeDoubleSlabBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
 	public static Block easel = register("easel", true, new VeEaselBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
 	public static Block snow_slab = register("snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
