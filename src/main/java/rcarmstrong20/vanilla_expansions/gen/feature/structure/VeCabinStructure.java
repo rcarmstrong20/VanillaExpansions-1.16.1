@@ -1,10 +1,7 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
-import java.util.List;
-
 import com.mojang.serialization.Codec;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -14,13 +11,11 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.VeConfig;
 
-public class CabinStructure extends Structure<NoFeatureConfig>
+public class VeCabinStructure extends Structure<NoFeatureConfig>
 {
-	public CabinStructure(Codec<NoFeatureConfig> config)
+	public VeCabinStructure(Codec<NoFeatureConfig> config)
 	{
 		super(config);
 	}
@@ -34,9 +29,10 @@ public class CabinStructure extends Structure<NoFeatureConfig>
 	@Override
 	public Structure.IStartFactory<NoFeatureConfig> getStartFactory()
 	{
-		return CabinStructure.Start::new;
+		return VeCabinStructure.Start::new;
 	}
 	
+	//ShipwreckStructure
 	/**
 	 * An 'id' for the structure, distinct from registry id
 	 * Used for the Locate command (by forge only, vanilla uses its own system)
@@ -60,7 +56,7 @@ public class CabinStructure extends Structure<NoFeatureConfig>
 		{
 			super(structure, chunkX, chunkZ, boundingBox, references, seed);
 		}
-		
+		//SwampHutStructure
 		/**
 		 * For most structures this is the only method you will need to care about
 		 * Not a lot needs to be done here, most of the work is done by structure pieces
@@ -72,41 +68,10 @@ public class CabinStructure extends Structure<NoFeatureConfig>
 		@Override
 		public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig featureConfig)
 		{
-			ResourceLocation templateResource = null;
-			if(isBiome(biome, VeConfig.Common.taigaCabinSpawnBiomes.get()))
-			{
-				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
-			}
-			else if(isBiome(biome, VeConfig.Common.birchForestCabinSpawnBiomes.get()))
-			{
-				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
-			}
-			else if (isBiome(biome, VeConfig.Common.forestCabinSpawnBiomes.get()))
-			{
-				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "forest_cabin");
-			}
-			
-			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			CabinPiece piece = new CabinPiece(templateManager, templateResource, new BlockPos(chunkX * 16, 0, chunkZ * 16), rotation);
-			this.components.add(piece);
+			Rotation rotation = Rotation.randomRotation(this.rand);
+			BlockPos blockPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+			VeCabinPieces.init(templateManager, biome, blockPos, rotation, this.components);
 			this.recalculateStructureSize();
-		}
-		
-		/**
-		 * Check to see if the current biome exists in the given list of biomes.
-		 */
-		private static boolean isBiome(Biome currentBiome, List<String> biomeNames)
-		{
-			for(int i = 0; i < biomeNames.size(); i++)
-			{
-				Biome biome = ForgeRegistries.BIOMES.getValue(new ResourceLocation(biomeNames.get(i)));
-				
-				if(currentBiome == biome)
-				{
-					return true;
-				}
-			}
-			return false;
 		}
 	}
 }
