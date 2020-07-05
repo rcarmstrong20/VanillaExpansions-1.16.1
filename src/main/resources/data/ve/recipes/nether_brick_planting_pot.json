@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "nether_planting_pot",
+  "pattern":
+  [
+    "#S#",
+    "###",
+    " B "
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:nether_brick"
+    },
+	"S":
+	{
+	  "tag": "minecraft:soul_fire_base_blocks"
+	},
+	"B":
+	{
+	  "item": "minecraft:lava_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:nether_brick_planting_pot"
+  }
+}

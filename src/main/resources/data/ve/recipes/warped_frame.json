@@ -11,16 +11,16 @@
   {
     "#":
 	{
-      "tag": "ve:jungle_logs"
+      "tag": "ve:warped_stems"
     },
 	"X":
 	{
-	  "tag": "ve:stripped_jungle_logs"
+	  "tag": "ve:stripped_warped_stems"
 	}
   },
   "result":
   {
-    "item": "ve:jungle_frame",
+    "item": "ve:warped_frame",
 	"count": 9
   }
 }

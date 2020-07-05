@@ -20,6 +20,7 @@
   },
   "result":
   {
-    "item": "ve:dark_oak_frame"
+    "item": "ve:dark_oak_frame",
+	"count": 9
   }
 }

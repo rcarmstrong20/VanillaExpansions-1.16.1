@@ -4,6 +4,6 @@
   {
     "tag": "minecraft:acacia_logs"
   },
-  "result": "minecraft:acacia_planks",
-  "count": 4
+  "result": "ve:acacia_frame",
+  "count": 1
 }

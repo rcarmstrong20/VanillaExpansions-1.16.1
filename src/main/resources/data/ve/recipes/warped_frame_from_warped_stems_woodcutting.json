@@ -4,6 +4,6 @@
   {
     "tag": "minecraft:warped_stems"
   },
-  "result": "minecraft:warped_planks",
-  "count": 4
+  "result": "ve:warped_frame",
+  "count": 1
 }

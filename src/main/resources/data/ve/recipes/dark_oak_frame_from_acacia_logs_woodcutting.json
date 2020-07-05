@@ -4,6 +4,6 @@
   {
     "tag": "minecraft:dark_oak_logs"
   },
-  "result": "minecraft:dark_oak_planks",
-  "count": 4
+  "result": "ve:dark_oak_frame",
+  "count": 1
 }

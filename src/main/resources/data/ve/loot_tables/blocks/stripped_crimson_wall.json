@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:nether_planting_pot"
+          "name": "ve:stripped_crimson_wall"
         }
       ],
       "conditions":

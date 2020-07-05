@@ -4,6 +4,6 @@
   {
     "tag": "minecraft:spruce_logs"
   },
-  "result": "minecraft:spruce_planks",
-  "count": 4
+  "result": "ve:spruce_frame",
+  "count": 1
 }

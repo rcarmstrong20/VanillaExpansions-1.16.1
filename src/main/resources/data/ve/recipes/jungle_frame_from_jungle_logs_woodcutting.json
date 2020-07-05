@@ -4,6 +4,6 @@
   {
     "tag": "minecraft:jungle_logs"
   },
-  "result": "minecraft:jungle_planks",
-  "count": 4
+  "result": "ve:jungle_frame",
+  "count": 1
 }
