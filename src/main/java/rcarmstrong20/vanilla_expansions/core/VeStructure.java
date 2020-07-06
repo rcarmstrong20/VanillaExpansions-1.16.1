@@ -3,17 +3,13 @@ package rcarmstrong20.vanilla_expansions.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
 /**
@@ -24,8 +20,6 @@ public class VeStructure
 {
 	
 	private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
-	
-	public static final IStructurePieceType CABIN_PIECE = register("cabin", VeCabinPieces.VePiece::new);
 	
 	public static final Structure<NoFeatureConfig> CABIN = register("cabin", new VeCabinStructure(NoFeatureConfig.field_236558_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
 	
@@ -40,15 +34,7 @@ public class VeStructure
 	}
 	
 	/**
-	 * Create registers for the structure pieces and add them to the registry list.
-	 */
-	private static IStructurePieceType register(String name, IStructurePieceType type)
-	{
-		return Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(VanillaExpansions.MOD_ID, name), type);
-	}
-	
-	/**
-	 * Register the Features to the game
+	 * Register the Structures to the game
 	 */
 	@SubscribeEvent
 	public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)

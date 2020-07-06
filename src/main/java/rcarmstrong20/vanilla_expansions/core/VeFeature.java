@@ -42,7 +42,6 @@ public class VeFeature
 	@SubscribeEvent
 	public static void registerFeaturesAndStructures(final RegistryEvent.Register<Feature<?>> event)
 	{
-		//Register the features
 		FEATURES.forEach(feature -> event.getRegistry().register(feature));
 		FEATURES.clear();
 		

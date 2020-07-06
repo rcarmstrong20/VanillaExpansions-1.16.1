@@ -29,7 +29,7 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.VeConfig;
-import rcarmstrong20.vanilla_expansions.core.VeStructure;
+import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
  * Pieces are where the structure is actually added to the world, a structure can have one or more of them
@@ -90,7 +90,7 @@ public class VeCabinPieces
 		 */
 		public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos, Rotation rotation)
 		{
-			super(VeStructure.CABIN_PIECE, 0);
+			super(VeStructurePieceTypes.CABIN_PIECE, 0);
 			this.templateResource = templateResource;
 			this.templatePosition = pos;
 			this.rotation = rotation;
@@ -102,7 +102,7 @@ public class VeCabinPieces
 		 */
 		public VePiece(TemplateManager templateManager, CompoundNBT nbt)
 		{
-			super(VeStructure.CABIN_PIECE, nbt);
+			super(VeStructurePieceTypes.CABIN_PIECE, nbt);
 			this.templateResource = new ResourceLocation(nbt.getString("Template"));
 			this.rotation = Rotation.valueOf(nbt.getString("Rot"));
 			setupTemplate(templateManager);

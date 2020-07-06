@@ -32,7 +32,6 @@ public class VeCabinStructure extends Structure<NoFeatureConfig>
 		return VeCabinStructure.Start::new;
 	}
 	
-	//ShipwreckStructure
 	/**
 	 * An 'id' for the structure, distinct from registry id
 	 * Used for the Locate command (by forge only, vanilla uses its own system)
