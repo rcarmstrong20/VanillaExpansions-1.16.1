@@ -251,7 +251,7 @@ public class VeBlocks
 	public static Block green_campfire = register("green_campfire", true, new VeColoredCampfireBlock(AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
 	public static Block red_campfire = register("red_campfire", true, new VeColoredCampfireBlock(AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
 	public static Block black_campfire = register("black_campfire", true, new VeColoredCampfireBlock(AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-	public static Block witchs_cradle = register("witchs_cradle", false, new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
+	public static Block witchs_cradle = register("witchs_cradle", false, new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.SWEET_BERRY_BUSH)));
 	public static Block void_liquid = register("void", false, new VeFlowingVoidBlock(() -> VeFluids.FLOWING_VOID, AbstractBlock.Properties.create(Material.WATER, MaterialColor.BLACK).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
 	public static Block bamboo_fence = register("bamboo_fence", true, new FenceBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
 	public static Block bamboo_fence_gate = register("bamboo_fence_gate", true, new FenceGateBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
