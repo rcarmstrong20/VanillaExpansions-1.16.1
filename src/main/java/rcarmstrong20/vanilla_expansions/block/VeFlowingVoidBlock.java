@@ -43,8 +43,8 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 		}
 	}
 	
-	/*
-	 * 
+	/**
+	 * This method forms the new blocks when the correct liquids make contact.
 	 */
 	private boolean reactWithNeighbors(World worldIn, BlockPos pos, BlockState state)
 	{
