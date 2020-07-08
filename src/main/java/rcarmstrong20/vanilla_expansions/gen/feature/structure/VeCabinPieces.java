@@ -26,9 +26,8 @@ import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.VeConfig;
+import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
@@ -47,11 +46,11 @@ public class VeCabinPieces
 	
 	private static ResourceLocation getVariant(Biome biome)
 	{
-		if(isBiome(biome, VeConfig.Common.taigaCabinSpawnBiomes.get()))
+		if(isBiome(biome, VeBiomes.TAIGA_CABIN_BIOMES))
 		{
 			return new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
 		}
-		else if(isBiome(biome, VeConfig.Common.birchForestCabinSpawnBiomes.get()))
+		else if(isBiome(biome, VeBiomes.BIRCH_CABIN_BIOMES))
 		{
 			return new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
 		}
@@ -64,12 +63,10 @@ public class VeCabinPieces
 	/**
 	 * Check to see if the current biome exists in the given list of biomes.
 	 */
-	private static boolean isBiome(Biome currentBiome, List<String> biomeNames)
+	private static boolean isBiome(Biome currentBiome, List<Biome> biomes)
 	{
-		for(int i = 0; i < biomeNames.size(); i++)
+		for(Biome biome : biomes)
 		{
-			Biome biome = ForgeRegistries.BIOMES.getValue(new ResourceLocation(biomeNames.get(i)));
-			
 			if(currentBiome == biome)
 			{
 				return true;
