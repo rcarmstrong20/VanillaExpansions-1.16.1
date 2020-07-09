@@ -143,7 +143,7 @@ public class VanillaExpansions
 		if(!event.getWorld().isRemote)
 		{
 			//If the block your clicking is a crop and your not using bone meal return true.
-			if(!VeCropConfig.rightClickHarvestBlackList.get().contains(worldState.getBlock().getRegistryName().toString()) && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+			if(VeCropConfig.enableRightClickHarvesting.get() && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
 				for(int i = 0; event.getWorld().getBlockState(pos.down(i)).getBlock() instanceof CropsBlock; i++)
 				{
