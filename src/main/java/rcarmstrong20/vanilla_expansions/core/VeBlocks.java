@@ -167,7 +167,9 @@ public class VeBlocks
 	public static Block garlic = register("garlic", false, new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
 	public static Block green_onions = register("green_onions", false, new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
 	public static Block quinoa = register("quinoa", false, new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-	public static Block stone_brick_planting_pot = register("stone_brick_planting_pot", true, new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.BRICKS)));
+	public static Block stone_brick_planting_pot = register("stone_brick_planting_pot", true, new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
+	public static Block mossy_stone_brick_planting_pot = register("mossy_stone_brick_planting_pot", true, new VePlantingPotBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICKS)));
+	public static Block cracked_stone_brick_planting_pot = register("cracked_stone_brick_planting_pot", true, new VePlantingPotBlock(Block.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
 	public static Block oak_planting_pot = register("oak_planting_pot", true, new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
 	public static Block spruce_planting_pot = register("spruce_planting_pot", true, new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
 	public static Block birch_planting_pot = register("birch_planting_pot", true, new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
@@ -271,6 +273,8 @@ public class VeBlocks
 	public static Block snow_slab = register("snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_stairs = register("snow_stairs", true, new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_wall = register("snow_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
+	public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
+	public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
 	
 	//Vanilla Replacements
 	
