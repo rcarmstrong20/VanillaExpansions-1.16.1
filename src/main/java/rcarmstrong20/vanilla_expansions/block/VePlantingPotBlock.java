@@ -3,7 +3,9 @@ package rcarmstrong20.vanilla_expansions.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.PlantBlockHelper;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -21,6 +23,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
+import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
 public class VePlantingPotBlock extends Block implements IWaterLoggable
@@ -79,18 +82,19 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
 	{
-		PlantType plantType = plantable.getPlantType(world, pos);
+		//PlantType plantType = plantable.getPlantType(world, pos);
 		Block plantBlock = plantable.getPlant(world, pos).getBlock();
-		if(this == VeBlocks.nether_brick_planting_pot && plantType == PlantType.NETHER)
+		if(VeBlockTags.NETHER_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.NETHER_PLANTS.func_230235_a_(plantBlock))
 		{
 			return true;
 		}
-		else if(this == VeBlocks.oak_planting_pot || this == VeBlocks.spruce_planting_pot || this == VeBlocks.birch_planting_pot || this == VeBlocks.jungle_planting_pot || this == VeBlocks.acacia_planting_pot || this == VeBlocks.dark_oak_planting_pot)
+		else if(VeBlockTags.OVERWORLD_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.OVERWORLD_PLANTS.func_230235_a_(plantBlock))
 		{
-			if(plantBlock instanceof CropsBlock || plantBlock instanceof SweetBerryBushBlock)
-			{
-				return true;
-			}
+			return true;
+		}
+		else if(VeBlockTags.END_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.END_PLANTS.func_230235_a_(plantBlock))
+		{
+			return true;
 		}
 		return false;
 	}

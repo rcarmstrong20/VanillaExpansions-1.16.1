@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:nether_brick_planting_pot",
+    "ve:warped_planting_pot",
+	"ve:crimson_planting_pot"
+  ]
+}
