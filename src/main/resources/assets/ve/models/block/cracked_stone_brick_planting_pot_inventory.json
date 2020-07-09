@@ -2,7 +2,7 @@
     "parent": "ve:block/template_overworld_planting_pot_inventory",
     "textures":
 	{
-		"material": "block/stone_bricks",
-		"pillar": "block/stone"
+		"material": "block/cracked_stone_bricks",
+		"pillar": "block/cobblestone"
     }
 }

@@ -102,6 +102,8 @@
   "block.ve.red_glass": "Red Glass",
   "block.ve.red_glass_pane": "Red Glass Pane",
   "block.ve.stone_brick_planting_pot": "Stone Brick Planting Pot",
+  "block.ve.mossy_stone_brick_planting_pot": "Mossy Stone Brick Planting Pot",
+  "block.ve.cracked_stone_brick_planting_pot": "Cracked Stone Brick Planting Pot",
   "block.ve.oak_planting_pot": "Oak Planting Pot",
   "block.ve.spruce_planting_pot": "Spruce Planting Pot",
   "block.ve.birch_planting_pot": "Birch Planting Pot",
@@ -197,7 +199,9 @@
   "block.ve.snow_slab": "Snow Slab",
   "block.ve.snow_stairs": "Snow Stairs",
   "block.ve.snow_wall": "Snow Wall",
-  
+  "block.ve.warped_chytrid_nether_bricks": "Warped Chytrid Nether Bricks",
+  "block.ve.crimson_chytrid_nether_bricks": "Crimson Chytrid Nether Bricks",
+
   "container.woodcutter": "Woodcutter",
   "container.easel": "Easel",  
 
