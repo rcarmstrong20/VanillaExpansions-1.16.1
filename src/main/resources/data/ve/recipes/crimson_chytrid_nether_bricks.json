@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:nether_bricks"
+    },
+    {
+      "tag": "ve:crimson_plants"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:crimson_chytrid_nether_bricks"
+  }
+}

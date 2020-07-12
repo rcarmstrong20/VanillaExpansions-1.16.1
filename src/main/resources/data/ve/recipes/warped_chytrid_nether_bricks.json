@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:nether_bricks"
+    },
+    {
+      "tag": "ve:warped_plants"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:warped_chytrid_nether_bricks"
+  }
+}
