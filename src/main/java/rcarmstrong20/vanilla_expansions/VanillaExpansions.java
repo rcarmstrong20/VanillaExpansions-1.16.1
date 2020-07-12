@@ -21,12 +21,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.TableLootEntry;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,6 +37,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -99,6 +103,9 @@ public class VanillaExpansions
 		PROXY.onSetupClient();
 	}
 	
+	/**
+	 * Compiles a string that has the id and name enabling me to use vanilla methods for my mod such as make wrapper tag.
+	 */
 	public static String compileName(String id, String name)
 	{
 		return id + ":" + name;
@@ -147,7 +154,7 @@ public class VanillaExpansions
 			{
 				for(int i = 0; event.getWorld().getBlockState(pos.down(i)).getBlock() instanceof CropsBlock; i++)
 				{
-					if(event.getWorld().getBlockState(pos.down()) == Blocks.FARMLAND.getDefaultState())
+					if(!(event.getWorld().getBlockState(pos.down()).getBlock() instanceof CropsBlock))
 					{
 						if(worldState.getBlock() instanceof BeetrootBlock)
 						{
@@ -166,10 +173,10 @@ public class VanillaExpansions
 							event.setResult(Result.ALLOW);
 							event.setCanceled(true);
 						}
-					}
-					else
-					{
-						Block.replaceBlock(worldState, Blocks.AIR.getDefaultState(), world, pos, 1);
+						else
+						{
+							Block.replaceBlock(worldState, Blocks.AIR.getDefaultState(), world, pos, 1);
+						}
 					}
 				}
 			}
@@ -247,6 +254,24 @@ public class VanillaExpansions
 	private int getMaxAge(IntegerProperty age)
 	{
 		return age.getAllowedValues().size() - 1;
+	}
+	
+	@SubscribeEvent
+	public void onLootLoad(final LootTableLoadEvent event)
+	{
+		ResourceLocation customJungleChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/jungle_temple");
+		ResourceLocation vanillaJungleChestLocation = new ResourceLocation("chests/jungle_temple");
+		ResourceLocation customDesertChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/desert_pyramid");
+		ResourceLocation vanillaDesertChestLocation = new ResourceLocation("chests/desert_pyramid");
+		
+		if(event.getName().equals(vanillaJungleChestLocation))
+		{
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customJungleChestLocation)).build());
+		}
+		else if(event.getName().equals(vanillaDesertChestLocation))
+		{
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customDesertChestLocation)).build());
+		}
 	}
 	
 	/*
