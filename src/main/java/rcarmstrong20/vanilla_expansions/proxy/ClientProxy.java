@@ -115,6 +115,8 @@ public class ClientProxy extends CommonProxy
 		RenderTypeLookup.setRenderLayer(VeBlocks.cranberry_bush, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.witchs_cradle, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.regigigas_pokedoll, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.snapdragon, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.potted_snapdragon, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.enderman_plush, RenderType.getCutoutMipped());
 		
 		//Register translucent renders
