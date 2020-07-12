@@ -19,6 +19,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -39,10 +40,12 @@ import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
 import rcarmstrong20.vanilla_expansions.block.VePaneBlock;
 import rcarmstrong20.vanilla_expansions.block.VePlantingPotBlock;
 import rcarmstrong20.vanilla_expansions.block.VePlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VePottedSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VePufferfishPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePurpleHugeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSevenStageCropBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSlimDoorBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTallPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
@@ -273,8 +276,28 @@ public class VeBlocks
 	public static Block snow_slab = register("snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_stairs = register("snow_stairs", true, new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_wall = register("snow_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-	public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
-	public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
+	public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) ->
+	{
+		return 10;
+	})));
+	public static Block warped_chytrid_nether_brick_stairs = register("warped_chytrid_nether_brick_stairs", true, new StairsBlock(() -> VeBlocks.warped_chytrid_nether_bricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
+	public static Block warped_chytrid_nether_brick_slab = register("warped_chytrid_nether_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
+	public static Block warped_chytrid_nether_brick_wall = register("warped_chytrid_nether_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
+	public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) ->
+	{
+		return 7;
+	})));
+	public static Block crimson_chytrid_nether_brick_stairs = register("crimson_chytrid_nether_brick_stairs", true, new StairsBlock(() -> VeBlocks.crimson_chytrid_nether_bricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
+	public static Block crimson_chytrid_nether_brick_slab = register("crimson_chytrid_nether_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
+	public static Block crimson_chytrid_nether_brick_wall = register("crimson_chytrid_nether_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
+	public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8, AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) ->
+	{
+		return 4;
+	})));
+	public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).func_235838_a_((state) ->
+	{
+		return 4;
+	})));
 	
 	//Vanilla Replacements
 	
@@ -331,7 +354,9 @@ public class VeBlocks
 	{
 		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasItemBlock, block, new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(size));
 	}
-	
+	/**
+	 * Registers a block that can have a custom item group and a minecraft id.
+	 */
 	@SuppressWarnings("unused")
 	private static Block register(String name, boolean hasItemBlock, Block block, ItemGroup group)
 	{
@@ -352,7 +377,9 @@ public class VeBlocks
 	private static Block register(ResourceLocation name, boolean hasItemBlock, Block block, BlockItem item)
 	{
 		block.setRegistryName(name);
+		
 		BLOCKS.add(block);
+		
 		if(hasItemBlock && block.getRegistryName() != null)
 		{
 			item.setRegistryName(name);

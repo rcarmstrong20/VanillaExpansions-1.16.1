@@ -63,10 +63,13 @@ public class VeBiomes
 	public static final BlockState WITCHS_CRADLE = VeBlocks.witchs_cradle.getDefaultState().with(VeBerryBushBlock.AGE, 3);
 	public static final BlockState VOID_LIQUID = VeBlocks.void_liquid.getDefaultState();
 	public static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
+	public static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
+	public static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();
 	public static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purple_mushroom_block.getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
 	public static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
 	public static final BlockClusterFeatureConfig BLUEBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(BLUEBERRY_BUSH), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(CRANBERRY_BUSH), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
+	public static final BlockClusterFeatureConfig SNAPDRAGON_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(SNAPDRAGON), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(END_STONE.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(WITCHS_CRADLE), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
 	
@@ -82,6 +85,7 @@ public class VeBiomes
 		addFeature("ve:witchs_cradle", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(WITCHS_CRADLE_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(10))), VeFeatureGenConfig.enableWitchsCradleSpawns.get(), Category.SWAMP);
 		addFeature("ve:big_purple_mushroom", Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(1))), VeFeatureGenConfig.enableBigPurpleMushroomSpawns.get(), DARK_FOREST_BIOMES);
 		addFeature("ve:void_lake", Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VOID_LIQUID)).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))), VeFeatureGenConfig.enableVoidLakeSpawns.get(), END_CITY_BIOMES);
+		addFeature("ve:snapdragon", Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(SNAPDRAGON_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(2))), VeFeatureGenConfig.enableSnapdragonSpawns.get(), END_CITY_BIOMES);
 		addStructureFeature("ve:cabin", VeFeature.CABIN, VeFeatureGenConfig.enableCabinSpawns.get(), CABIN_BIOMES);
 		
 		VanillaExpansions.LOGGER.info("Biome Features registered.");
