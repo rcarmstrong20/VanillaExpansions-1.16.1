@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "ve:block/warped_chytrid_nether_brick_slab" },
+        "type=top": { "model": "ve:block/warped_chytrid_nether_brick_slab_top" },
+        "type=double": { "model": "ve:block/warped_chytrid_nether_bricks" }
+	}
+}
