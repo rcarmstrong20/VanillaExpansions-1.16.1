@@ -18,7 +18,6 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {
-	
 	private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 	
 	public static final Structure<NoFeatureConfig> CABIN = register("cabin", new VeCabinStructure(NoFeatureConfig.field_236558_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
