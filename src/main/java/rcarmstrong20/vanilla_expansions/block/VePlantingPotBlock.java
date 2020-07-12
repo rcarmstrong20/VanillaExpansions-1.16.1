@@ -2,11 +2,7 @@ package rcarmstrong20.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.PlantBlockHelper;
-import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -22,9 +18,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
 public class VePlantingPotBlock extends Block implements IWaterLoggable
 {
@@ -82,21 +76,18 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
 	{
-		//PlantType plantType = plantable.getPlantType(world, pos);
 		Block plantBlock = plantable.getPlant(world, pos).getBlock();
-		if(VeBlockTags.NETHER_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.NETHER_PLANTS.func_230235_a_(plantBlock))
-		{
-			return true;
-		}
-		else if(VeBlockTags.OVERWORLD_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.OVERWORLD_PLANTS.func_230235_a_(plantBlock))
-		{
-			return true;
-		}
-		else if(VeBlockTags.END_PLANTING_POTS.func_230235_a_(this.getBlock()) && VeBlockTags.END_PLANTS.func_230235_a_(plantBlock))
-		{
-			return true;
-		}
-		return false;
+		return isValid(this.getBlock(), plantBlock);
+	}
+	
+	/**
+	 * A helper method used for checking that the plant placement is valid.
+	 */
+	private boolean isValid(Block soilBlock, Block plantBlock)
+	{
+		return VeBlockTags.NETHER_PLANTABLE.func_230235_a_(this.getBlock()) && VeBlockTags.NETHER_POTTABLE.func_230235_a_(plantBlock)       ||
+			   VeBlockTags.OVERWORLD_PLANTABLE.func_230235_a_(this.getBlock()) && VeBlockTags.OVERWORLD_POTTABLE.func_230235_a_(plantBlock) ||
+			   VeBlockTags.END_PLANTABLE.func_230235_a_(this.getBlock()) && VeBlockTags.END_POTTABLE.func_230235_a_(plantBlock);
 	}
 	
 	@Override
