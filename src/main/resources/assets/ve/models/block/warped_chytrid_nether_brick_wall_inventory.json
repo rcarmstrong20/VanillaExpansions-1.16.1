@@ -1,0 +1,7 @@
+{
+    "parent": "block/wall_inventory",
+    "textures":
+	{
+        "wall": "ve:block/warped_chytrid_nether_bricks"
+    }
+}
