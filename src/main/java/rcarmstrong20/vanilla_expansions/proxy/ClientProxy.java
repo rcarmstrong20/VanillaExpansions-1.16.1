@@ -24,18 +24,10 @@ public class ClientProxy extends CommonProxy
 	{
 		super.onSetupClient();
 		VeBlockAndItemColors.registerColorHandlers();
-		this.registerCustomModelLoaders();
 		this.registerTrades();
 		this.registerScreenFactories();
 		this.registerTileEntityRenderers();
 		this.registerRenders();
-	}
-	
-	private void registerCustomModelLoaders()
-	{
-		//ModelLoaderRegistry.registerLoader(new ResourceLocation(VanillaExpansions.MOD_ID, "models/block/double_slab"), new VeDoubleSlabLoader());
-		
-		VanillaExpansions.LOGGER.info("Registered custom model loaders.");
 	}
 	
 	/**
@@ -56,7 +48,6 @@ public class ClientProxy extends CommonProxy
 	{
 		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.colored_campfire, VeColoredCampfireTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.frame, VeFrameTileEntityRenderer::new);
-		//ClientRegistry.bindTileEntityRenderer(VeTileEntityType.double_slab, VeDoubleSlabTileEntityRenderer::new);
 		
 		VanillaExpansions.LOGGER.info("Registered tile entity renderers.");
 	}

@@ -18,7 +18,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
@@ -30,7 +29,6 @@ import rcarmstrong20.vanilla_expansions.VeBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
-import rcarmstrong20.vanilla_expansions.block.VeDoubleSlabBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
@@ -51,16 +49,11 @@ import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWoodcutterBlock;
 
-/*
- * Author: rcarmstrong20
- */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeBlocks
 {
 	private static final List<Block> BLOCKS = new ArrayList<>();
 	private static final List<Item> ITEMS = new ArrayList<>();
-	
-	//Vanilla Expansions
 	
 	public static Block bat_plush = register("bat_plush", true, new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
 	public static Block blaze_plush = register("blaze_plush", true, new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
@@ -271,116 +264,62 @@ public class VeBlocks
 	public static Block nephilite_brick_stairs = register("nephilite_brick_stairs", true, new StairsBlock(() -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_brick_wall = register("nephilite_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block chiseled_nephilite = register("chiseled_nephilite", true, new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-	public static Block double_slab = register("double_slab", false, new VeDoubleSlabBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
 	public static Block easel = register("easel", true, new VeEaselBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
 	public static Block snow_slab = register("snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_stairs = register("snow_stairs", true, new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_wall = register("snow_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-	public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) ->
-	{
-		return 10;
-	})));
+	public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) -> 10)));
 	public static Block warped_chytrid_nether_brick_stairs = register("warped_chytrid_nether_brick_stairs", true, new StairsBlock(() -> VeBlocks.warped_chytrid_nether_bricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
 	public static Block warped_chytrid_nether_brick_slab = register("warped_chytrid_nether_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
 	public static Block warped_chytrid_nether_brick_wall = register("warped_chytrid_nether_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
-	public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) ->
-	{
-		return 7;
-	})));
+	public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true, new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) -> 7)));
 	public static Block crimson_chytrid_nether_brick_stairs = register("crimson_chytrid_nether_brick_stairs", true, new StairsBlock(() -> VeBlocks.crimson_chytrid_nether_bricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
 	public static Block crimson_chytrid_nether_brick_slab = register("crimson_chytrid_nether_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
 	public static Block crimson_chytrid_nether_brick_wall = register("crimson_chytrid_nether_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
-	public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8, AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) ->
-	{
-		return 4;
-	})));
-	public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).func_235838_a_((state) ->
-	{
-		return 4;
-	})));
+	public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8, AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) -> 4)));
+	public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).func_235838_a_((state) -> 4)));
 	
-	//Vanilla Replacements
-	
-	/*
-	public static final Block PRISMARINE_SLAB = register("prismarine_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.PRISMARINE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PRISMARINE_BRICK_SLAB = register("prismarine_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.PRISMARINE_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DARK_PRISMARINE_SLAB = register("dark_prismarine_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.DARK_PRISMARINE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block OAK_SLAB = register("oak_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.OAK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SPRUCE_SLAB = register("spruce_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SPRUCE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BIRCH_SLAB = register("birch_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.BIRCH_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block JUNGLE_SLAB = register("jungle_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.JUNGLE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ACACIA_SLAB = register("acacia_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.ACACIA_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DARK_OAK_SLAB = register("dark_oak_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.DARK_OAK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block STONE_SLAB = register("stone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.STONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_STONE_SLAB = register("smooth_stone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SMOOTH_STONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SANDSTONE_SLAB = register("sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CUT_SANDSTONE_SLAB = register("cut_sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.CUT_SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PETRIFIED_OAK_SLAB = register("petrified_oak_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.PETRIFIED_OAK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block COBBLESTONE_SLAB = register("cobblestone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.COBBLESTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BRICK_SLAB = register("brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block STONE_BRICK_SLAB = register("stone_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.STONE_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block NETHER_BRICK_SLAB = register("nether_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.NETHER_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block QUARTZ_SLAB = register("quartz_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.QUARTZ_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_SLAB = register("red_sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.RED_SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CUT_RED_SANDSTONE_SLAB = register("cut_red_sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.CUT_RED_SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PURPUR_SLAB = register("purpur_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.PURPUR_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_GRANITE_SLAB = register("polished_granite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.POLISHED_GRANITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_RED_SANDSTONE_SLAB = register("smooth_red_sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SMOOTH_RED_SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_STONE_BRICK_SLAB = register("mossy_stone_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_DIORITE_SLAB = register("polished_diorite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.POLISHED_DIORITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_COBBLESTONE_SLAB = register("mossy_cobblestone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.MOSSY_COBBLESTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block END_STONE_BRICK_SLAB = register("end_stone_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.END_STONE_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_SANDSTONE_SLAB = register("smooth_sandstone_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SMOOTH_SANDSTONE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_QUARTZ_SLAB = register("smooth_quartz_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.SMOOTH_QUARTZ_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRANITE_SLAB = register("granite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.GRANITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ANDESITE_SLAB = register("andesite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.ANDESITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_NETHER_BRICK_SLAB = register("red_nether_brick_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.RED_NETHER_BRICK_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_ANDESITE_SLAB = register("polished_andesite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.POLISHED_ANDESITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DIORITE_SLAB = register("diorite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.DIORITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
-	*/
-	
-	/*
-	 * Registers a normal block that has default properties.
-	 */
-	private static Block register(String name, boolean hasItemBlock, Block block)
-	{
-		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasItemBlock, block, new Item.Properties().group(VanillaExpansions.VE_GROUP));
-	}
-	
-	/*
-	 * Registers a block that can have a custom stack size.
-	 */
-	private static Block register(String name, boolean hasItemBlock, Block block, int size)
-	{
-		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasItemBlock, block, new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(size));
-	}
 	/**
-	 * Registers a block that can have a custom item group and a minecraft id.
+	 * @param name         The name for the block.
+	 * @param hasBlockItem Whether this block has a block item.
+	 * @param block        A new instance of the block class for this block.
+	 * @return             A new block with an item that has default properties.
 	 */
-	@SuppressWarnings("unused")
-	private static Block register(String name, boolean hasItemBlock, Block block, ItemGroup group)
+	private static Block register(String name, boolean hasBlockItem, Block block)
 	{
-		return register(new ResourceLocation(name), hasItemBlock, block, new Item.Properties().group(group));
+		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasBlockItem, block, new Item.Properties().group(VanillaExpansions.VE_GROUP));
+	}
+	
+	/**
+	 * @param name         The name for the block.
+	 * @param hasBlockItem Whether this block has a block item.
+	 * @param block        A new instance of the block class for this block.
+	 * @param maxStackSize The maximum size that this block can stack up to.
+	 * @return             A new block with an item that has a custom stack size.
+	 */
+	private static Block register(String name, boolean hasBlockItem, Block block, int maxStackSize)
+	{
+		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasBlockItem, block, new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(maxStackSize));
 	}
 	
 	/*
 	 * A method that gets the data from the other registry methods and is used in the register merthod that creates each list
 	 */
-	private static Block register(ResourceLocation name, boolean hasItemBlock, Block block, Item.Properties properties)
+	private static Block register(ResourceLocation name, boolean hasBlockItem, Block block, Item.Properties properties)
 	{
-		return register(name, hasItemBlock, block, new BlockItem(block, properties));
+		return register(name, hasBlockItem, block, new BlockItem(block, properties));
 	}
 	
 	/*
 	 * Adds the blocks and block items to two lists
 	 */
-	private static Block register(ResourceLocation name, boolean hasItemBlock, Block block, BlockItem item)
+	private static Block register(ResourceLocation name, boolean hasBlockItem, Block block, BlockItem item)
 	{
 		block.setRegistryName(name);
 		
 		BLOCKS.add(block);
 		
-		if(hasItemBlock && block.getRegistryName() != null)
+		if(hasBlockItem && block.getRegistryName() != null)
 		{
 			item.setRegistryName(name);
 			ITEMS.add(item);
