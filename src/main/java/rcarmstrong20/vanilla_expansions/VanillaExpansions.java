@@ -144,32 +144,22 @@ public class VanillaExpansions
 			//If the block your clicking is a crop and your not using bone meal return true.
 			if(VeCropConfig.enableRightClickHarvesting.get() && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
-				for(int i = 0; event.getWorld().getBlockState(pos.down(i)).getBlock() instanceof CropsBlock; i++)
+				if(worldState.getBlock() instanceof BeetrootBlock)
 				{
-					if(!(event.getWorld().getBlockState(pos.down()).getBlock() instanceof CropsBlock))
+					//When the beet root crop is fully grown and clicked then harvest it.
+					if(worldState.get(beetrootAge) == getMaxAge(beetrootAge))
 					{
-						if(worldState.getBlock() instanceof BeetrootBlock)
-						{
-							//When the beet root crop is fully grown and clicked then harvest it.
-							if(worldState.get(beetrootAge) == getMaxAge(beetrootAge))
-							{
-								resetCrop(worldState, world, pos, beetrootAge);
-								event.setResult(Result.ALLOW);
-								event.setCanceled(true);
-							}
-						}
-						//If its not a beet root and a crop then it must be a normal 7 stage crop and if it's fully grown harvest it.
-						else if(worldState.get(cropsAge) == getMaxAge(cropsAge))
-						{
-							resetCrop(worldState, world, pos, cropsAge);
-							event.setResult(Result.ALLOW);
-							event.setCanceled(true);
-						}
-						else
-						{
-							Block.replaceBlock(worldState, Blocks.AIR.getDefaultState(), world, pos, 1);
-						}
+						resetCrop(worldState, world, pos, beetrootAge);
+						event.setResult(Result.ALLOW);
+						event.setCanceled(true);
 					}
+				}
+				//If its not a beet root and a crop then it must be a normal 7 stage crop and if it's fully grown harvest it.
+				else if(worldState.get(cropsAge) == getMaxAge(cropsAge))
+				{
+					resetCrop(worldState, world, pos, cropsAge);
+					event.setResult(Result.ALLOW);
+					event.setCanceled(true);
 				}
 			}
 			//If its not a crop it might be nether wart and if so check if it's fully grown and if so harvest it.
