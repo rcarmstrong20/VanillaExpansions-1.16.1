@@ -24,15 +24,21 @@ public class VeVillagerProfessions
 	private static final List<VillagerProfession> VILLAGER_PROFESSIONS = new ArrayList<>();
 	
 	
-	public static final VillagerProfession LUMBERJACK = register(VanillaExpansions.MOD_ID, "lumberjack", VePointOfInterestTypes.LUMBERJACK, SoundEvents.ENTITY_VILLAGER_WORK_MASON);
+	public static final VillagerProfession LUMBERJACK = register("lumberjack", VePointOfInterestTypes.LUMBERJACK, SoundEvents.ENTITY_VILLAGER_WORK_MASON);
 	
-	private static VillagerProfession register(String id, String name, PointOfInterestType pointOfInterest, SoundEvent sound)
+	/**
+	 * @param name            The name for associated with the villager profession.
+	 * @param pointOfInterest The villagers work block.
+	 * @param sound           The sound played when the villager works at the workstation.
+	 * @return                The new profession.
+	 */
+	private static VillagerProfession register(String name, PointOfInterestType pointOfInterest, SoundEvent sound)
 	{
 		VillagerProfession profession = null;
 		
 		try
 		{
-			profession = VILLAGER_POFESSION_CONSTRUCTOR.newInstance(id + ":" + name, pointOfInterest, ImmutableSet.of(), ImmutableSet.of(), sound);
+			profession = VILLAGER_POFESSION_CONSTRUCTOR.newInstance(VanillaExpansions.MOD_ID + ":" + name, pointOfInterest, ImmutableSet.of(), ImmutableSet.of(), sound);
 		}
 		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{

@@ -34,48 +34,60 @@ public class VeCollisionUtil
 		return collision;
 	}
 	
-	/*
-	 * Rotate the passed voxel shape collection 90 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 90 degrees.
 	 */
 	public static VoxelShape rotate90(@Nullable Axis axis, Collection<VoxelShape> shapes)
 	{
 		return rotate(axis, NINETY_DEGREES, shapes);
 	}
 	
-	/*
-	 * Rotate the passed in voxel shapes 90 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 90 degrees.
 	 */
 	public static VoxelShape rotate90(@Nullable Axis axis, VoxelShape... shapes)
 	{
 		return rotate(axis, NINETY_DEGREES, shapes);
 	}
 	
-	/*
-	 * Rotate the passed voxel shape collection 180 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 180 degrees.
 	 */
 	public static VoxelShape rotate180(@Nullable Axis axis, Collection<VoxelShape> shapes)
 	{
 		return rotate(axis, ONE_HUNDRED_EIGHTY_DEGREES, shapes);
 	}
 	
-	/*
-	 * Rotate the passed in voxel shapes 180 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 180 degrees.
 	 */
 	public static VoxelShape rotate180(@Nullable Axis axis, VoxelShape... shapes)
 	{
 		return rotate(axis, ONE_HUNDRED_EIGHTY_DEGREES, shapes);
 	}
 	
-	/*
-	 * Rotate the passed voxel shape collection 270 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 270 degrees.
 	 */
 	public static VoxelShape rotate270(@Nullable Axis axis, Collection<VoxelShape> shapes)
 	{
 		return rotate(axis, TWO_HUNDRED_SEVENTY_DEGREES, shapes);
 	}
 	
-	/*
-	 * Rotate the passed in voxel shapes 270 degrees.
+	/**
+	 * @param axis   The axis to rotate the shapes on.
+	 * @param shapes The shapes to rotate.
+	 * @return       The shapes passed rotated 270 degrees.
 	 */
 	public static VoxelShape rotate270(@Nullable Axis axis, VoxelShape... shapes)
 	{

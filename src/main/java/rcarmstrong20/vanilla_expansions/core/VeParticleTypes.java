@@ -26,6 +26,11 @@ public class VeParticleTypes
 		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), new BasicParticleType(alwaysShow));
 	}
 	
+	/**
+	 * @param name     A name for the particle type.
+	 * @param particle A new instance of BasicParticleType for the particle type.
+	 * @return         A new particle type.
+	 */
 	private static BasicParticleType register(ResourceLocation name, BasicParticleType particle)
 	{
 		particle.setRegistryName(name);

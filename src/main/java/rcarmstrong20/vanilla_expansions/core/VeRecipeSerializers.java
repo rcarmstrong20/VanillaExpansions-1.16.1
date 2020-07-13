@@ -21,6 +21,12 @@ public class VeRecipeSerializers
     public static IRecipeSerializer<VeWoodcuttingRecipe> woodcutting = register("woodcutting", new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
     public static IRecipeSerializer<VeEaselRecipe> easel = register("easel", new VeEaselRecipe.Serializer<>(VeEaselRecipe::new));
     
+    /**
+     * @param <S>
+     * @param name   The name for the recipe serializer.
+     * @param recipe A new instance of recipe serializer.
+     * @return       A new recipe serializer.
+     */
 	private static <S extends IRecipeSerializer<? extends IRecipe<?>>> S register(String name, S recipe)
     {
         recipe.setRegistryName(new ResourceLocation(VanillaExpansions.MOD_ID, name));

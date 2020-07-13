@@ -10,16 +10,21 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 public class VeRecipeTypes
 {
-	public static IRecipeType<VeWoodcuttingRecipe> woodcutting = register(VanillaExpansions.MOD_ID, "woodcutting");
-	public static IRecipeType<VeEaselRecipe> easel = register(VanillaExpansions.MOD_ID, "easel");
+	public static IRecipeType<VeWoodcuttingRecipe> woodcutting = register("woodcutting");
+	public static IRecipeType<VeEaselRecipe> easel = register("easel");
 	
-	static <T extends IRecipe<?>> IRecipeType<T> register(final String id, final String key)
+	/**
+	 * @param <T>
+	 * @param  Name The name for the recipe type.
+	 * @return New recipe type.
+	 */
+	static <T extends IRecipe<?>> IRecipeType<T> register(String name)
 	{
-		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(id, key), new IRecipeType<T>()
+		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(VanillaExpansions.MOD_ID, name), new IRecipeType<T>()
 		{
 			public String toString()
 			{
-				return key;
+				return name;
 			}
 		});
 	}

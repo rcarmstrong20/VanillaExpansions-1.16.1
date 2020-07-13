@@ -16,9 +16,6 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.fluid.VoidFluid;
 
-/*
- * Author: rcarmstrong20
- */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeFluids
 {
@@ -27,6 +24,11 @@ public class VeFluids
 	public static final Fluid VOID = register("void", new VoidFluid.Source());
 	public static final FlowingFluid FLOWING_VOID = register("flowing_void", new VoidFluid.Flowing());
 	
+	/**
+	 * @param  name  A name for the fluid.
+	 * @param  fluid A new instance of flowing fluid.
+	 * @return A new fluid.
+	 */
 	private static FlowingFluid register(String name, FlowingFluid fluid)
 	{
 		fluid.setRegistryName(VanillaExpansions.MOD_ID, name);

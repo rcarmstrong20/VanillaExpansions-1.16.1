@@ -13,10 +13,6 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeEaselContainer;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 
-/*
- * Author: rcarmstrong20
- */
-
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeContainerTypes
 {
@@ -25,6 +21,12 @@ public class VeContainerTypes
 	public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
 	public static ContainerType<VeEaselContainer> easel = register("easel", VeEaselContainer::new);
 	
+	/**
+	 * @param <T>
+	 * @param name    A name for the container type.
+	 * @param factory A container factory for the container type.
+	 * @return        A new container type.
+	 */
 	private static <T extends Container> ContainerType<T> register(String name, ContainerType.IFactory<T> factory)
 	{
 		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), factory);

@@ -23,7 +23,11 @@ public class VeStructure
 	public static final Structure<NoFeatureConfig> CABIN = register("cabin", new VeCabinStructure(NoFeatureConfig.field_236558_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
 	
 	/**
-	 * Set the registry name for the structures and add them to the registry list.
+	 * @param <F>
+	 * @param name       The name for the structure.
+	 * @param structure  A new instance of the Structure<config> class.
+	 * @param decoration The decoration category for this structure.
+	 * @return           A new structure.
 	 */
 	private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decoration)
 	{

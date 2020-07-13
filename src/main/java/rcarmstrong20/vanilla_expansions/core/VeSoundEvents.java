@@ -24,6 +24,10 @@ public class VeSoundEvents
 	public static final SoundEvent BLOCK_CAMPFIRE_DYED = register("block.campfire_dyed");
 	public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
 	
+	/**
+	 * @param  name The name for the sound event.
+	 * @return new sound event.
+	 */
 	private static SoundEvent register(String name)
     {
 		ResourceLocation location = new ResourceLocation(VanillaExpansions.MOD_ID, name);

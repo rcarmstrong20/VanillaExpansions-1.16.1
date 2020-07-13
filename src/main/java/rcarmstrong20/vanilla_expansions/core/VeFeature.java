@@ -7,9 +7,6 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BigRedMushroomFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,10 +21,16 @@ public class VeFeature
 	private static final List<Feature<?>> FEATURES = new ArrayList<>();
 	
 	public static final Feature<BigMushroomFeatureConfig> HUGE_PURPLE_MUSHROOM = register("huge_purple_mushroom", new BigRedMushroomFeature(BigMushroomFeatureConfig.field_236528_a_));
-	public static final StructureFeature<NoFeatureConfig, ? extends Structure<NoFeatureConfig>> CABIN = VeStructure.CABIN.func_236391_a_(NoFeatureConfig.field_236559_b_);
 	
 	/**
 	 * Set the registry name for the features and add them to the registry list.
+	 */
+	
+	/**
+	 * @param <C>
+	 * @param name    A name for the feature.
+	 * @param feature A new instance of the class feature.
+	 * @return        A new feature.
 	 */
 	private static <C extends IFeatureConfig> Feature<C> register(String name, Feature<C> feature)
 	{

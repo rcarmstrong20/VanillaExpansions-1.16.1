@@ -1,6 +1,5 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,24 +20,14 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VePointOfInterestTypes
 {
-	private static final Constructor<PointOfInterestType> POINT_OF_INTEREST_CONSTRUCTOR = ObfuscationReflectionHelper.findConstructor(PointOfInterestType.class, String.class, Set.class, int.class, int.class);
+	//private static final Constructor<PointOfInterestType> POINT_OF_INTEREST_CONSTRUCTOR = ObfuscationReflectionHelper.findConstructor(PointOfInterestType.class, String.class, Set.class, int.class, int.class);
 	private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
-	
 	
 	public static final PointOfInterestType LUMBERJACK = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
 	
-	private static PointOfInterestType register(String name, Set<BlockState> blockState, int p_221051_2_, int p_221051_4_)
+	private static PointOfInterestType register(String name, Set<BlockState> blockState, int maxFreeTicketsIn, int p_221051_4_)
 	{
-		try
-		{
-			return register(name, POINT_OF_INTEREST_CONSTRUCTOR.newInstance(name, blockState, p_221051_2_, p_221051_4_));
-		}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return null;
+		return register(name, new PointOfInterestType(name, blockState, maxFreeTicketsIn, p_221051_4_));
 	}
 	
 	private static Set<BlockState> getAllStates(Block block)
@@ -60,18 +49,30 @@ public class VePointOfInterestTypes
 		try
 		{
 			Method func_221052_a = ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "func_221052_a", PointOfInterestType.class);
-			func_221052_a.invoke(null, cyclePointOfInterestType(POINT_OF_INTEREST_TYPES));
+			POINT_OF_INTEREST_TYPES.forEach(poi ->
+			{
+				try
+				{
+					func_221052_a.invoke(null, poi);
+				}
+				catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+				{
+					e.printStackTrace();
+				}
+			});
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
 		VanillaExpansions.LOGGER.info("Point of Interests registered.");
 	}
 	
 	/*
 	 * Cycle through all the point of interest types in the given list.
 	 */
+	/*
 	private static PointOfInterestType cyclePointOfInterestType(List<PointOfInterestType> pointOfInterestTypeList)
 	{
 		for(PointOfInterestType pointOfInterestType : pointOfInterestTypeList)
@@ -80,4 +81,5 @@ public class VePointOfInterestTypes
 		}
 		return null;
 	}
+	*/
 }
