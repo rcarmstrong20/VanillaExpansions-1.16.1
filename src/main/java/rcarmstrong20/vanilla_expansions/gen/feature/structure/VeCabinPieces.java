@@ -44,13 +44,17 @@ public class VeCabinPieces
 		list.add(new VeCabinPieces.VePiece(templateManager, templateResource, pos, rotation));
 	}
 	
+	/**
+	 * @param biome The current biome the player is in.
+	 * @return      A new resource location containing the cabin for the biome.
+	 */
 	private static ResourceLocation getVariant(Biome biome)
 	{
-		if(isBiome(biome, VeBiomes.TAIGA_CABIN_BIOMES))
+		if(VeBiomes.TAIGA_CABIN_BIOMES.contains(biome))
 		{
 			return new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
 		}
-		else if(isBiome(biome, VeBiomes.BIRCH_CABIN_BIOMES))
+		else if(VeBiomes.BIRCH_CABIN_BIOMES.contains(biome))
 		{
 			return new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
 		}
@@ -58,21 +62,6 @@ public class VeCabinPieces
 		{
 			return new ResourceLocation(VanillaExpansions.MOD_ID, "forest_cabin");
 		}
-	}
-	
-	/**
-	 * Check to see if the current biome exists in the given list of biomes.
-	 */
-	private static boolean isBiome(Biome currentBiome, List<Biome> biomes)
-	{
-		for(Biome biome : biomes)
-		{
-			if(currentBiome == biome)
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public static class VePiece extends TemplateStructurePiece
