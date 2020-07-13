@@ -1,16 +1,15 @@
-/*
+
 package rcarmstrong20.vanilla_expansions.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.entity.VeRabbitEntity;
 
 //@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeEntityType
@@ -19,6 +18,7 @@ public class VeEntityType
 	
 	//public static final EntityType<VeRabbitEntity> rabbit = buildType(VanillaExpansions.MINECRAFT_ID, "rabbit", EntityType.Builder.create(VeRabbitEntity::new, EntityClassification.CREATURE));
 	
+	@SuppressWarnings("unused")
 	private static <T extends Entity> EntityType<T> buildType(String id, String name, EntityType.Builder<T> builder)
     {
         EntityType<T> type = builder.build(id + ":" + name);
@@ -35,6 +35,4 @@ public class VeEntityType
         
         VanillaExpansions.LOGGER.info("Entity types registered.");
     }
-    
 }
-*/

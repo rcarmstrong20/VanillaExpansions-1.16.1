@@ -104,14 +104,6 @@ public class VanillaExpansions
 	}
 	
 	/**
-	 * Compiles a string that has the id and name enabling me to use vanilla methods for my mod such as make wrapper tag.
-	 */
-	public static String compileName(String id, String name)
-	{
-		return id + ":" + name;
-	}
-	
-	/**
 	 * This takes care of registering the particle factories if they are not registered under the particle factory event there will be a bug.
 	 */
 	@OnlyIn(Dist.CLIENT)
