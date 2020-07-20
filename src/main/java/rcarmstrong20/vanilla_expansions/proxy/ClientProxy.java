@@ -112,14 +112,6 @@ public class ClientProxy extends CommonProxy
 		
 		//Register translucent renders
 		
-		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass_pane, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.black_spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.black_spider_glass_pane, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass_pane, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass_pane, RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(VeBlocks.glass_of_darkness, RenderType.getTranslucent());
 		
 		VanillaExpansions.LOGGER.info("Registered Renders.");
