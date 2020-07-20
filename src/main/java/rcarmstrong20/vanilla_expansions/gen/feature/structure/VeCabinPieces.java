@@ -16,7 +16,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructureManager;
@@ -27,7 +26,6 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
@@ -38,30 +36,9 @@ import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
  */
 public class VeCabinPieces
 {
-	public static void init(TemplateManager templateManager, Biome biome, BlockPos pos, Rotation rotation, List<StructurePiece> list)
+	public static void init(TemplateManager templateManager, ResourceLocation templateLocation, BlockPos pos, Rotation rotation, List<StructurePiece> list)
 	{
-		ResourceLocation templateResource = getVariant(biome);
-		list.add(new VeCabinPieces.VePiece(templateManager, templateResource, pos, rotation));
-	}
-	
-	/**
-	 * @param biome The current biome the player is in.
-	 * @return      A new resource location containing the cabin for the biome.
-	 */
-	private static ResourceLocation getVariant(Biome biome)
-	{
-		if(VeBiomes.TAIGA_CABIN_BIOMES.contains(biome))
-		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
-		}
-		else if(VeBiomes.BIRCH_CABIN_BIOMES.contains(biome))
-		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
-		}
-		else
-		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "forest_cabin");
-		}
+		list.add(new VeCabinPieces.VePiece(templateManager, templateLocation, pos, rotation));
 	}
 	
 	public static class VePiece extends TemplateStructurePiece

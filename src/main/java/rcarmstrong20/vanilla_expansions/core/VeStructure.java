@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinFeatureConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
 /**
@@ -20,7 +20,7 @@ public class VeStructure
 {
 	private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 	
-	public static final Structure<NoFeatureConfig> CABIN = register("cabin", new VeCabinStructure(NoFeatureConfig.field_236558_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
+	public static final Structure<VeCabinFeatureConfig> CABIN = register("cabin", new VeCabinStructure(VeCabinFeatureConfig.field_236627_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
 	
 	/**
 	 * @param <F>

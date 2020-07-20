@@ -1,6 +1,5 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.TwoFeatureChoiceConfig;
@@ -39,6 +37,8 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinFeatureConfig;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VeBiomes
@@ -48,13 +48,8 @@ public class VeBiomes
 	public static final List<Biome> DARK_FOREST_BIOMES = Arrays.asList(Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS);
 	public static final List<Biome> END_CITY_BIOMES = Arrays.asList(Biomes.END_BARRENS, Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS, Biomes.SMALL_END_ISLANDS);
 	public static final List<Biome> TAIGA_CABIN_BIOMES = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS, Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS);
-	public static final List<Biome> FOREST_CABIN_BIOME = Arrays.asList(Biomes.FOREST);
-	public static final List<Biome> BIRCH_CABIN_BIOMES = Arrays.asList(Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
-	
-	private static final List<Biome> CABIN_BIOMES = combineLists(TAIGA_CABIN_BIOMES,
-																 FOREST_CABIN_BIOME,
-																 BIRCH_CABIN_BIOMES);
-	
+	public static final List<Biome> FOREST_CABIN_BIOMES = Arrays.asList(Biomes.FOREST);
+	public static final List<Biome> BIRCH_FOREST_CABIN_BIOMES = Arrays.asList(Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
 	public static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smoky_quartz_ore.getDefaultState();
 	public static final BlockState NETHER_RUBY_ORE = VeBlocks.ruby_ore.getDefaultState();
 	public static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberry_bush.getDefaultState().with(VeBerryBushBlock.AGE, 3);
@@ -71,7 +66,9 @@ public class VeBiomes
 	public static final BlockClusterFeatureConfig SNAPDRAGON_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(SNAPDRAGON), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(END_STONE.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(WITCHS_CRADLE), new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
-	public static final StructureFeature<NoFeatureConfig, ? extends Structure<NoFeatureConfig>> CABIN = VeStructure.CABIN.func_236391_a_(NoFeatureConfig.field_236559_b_);
+	public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> TAIGA_CABIN = VeStructure.CABIN.func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.TAIGA));
+	public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> BIRCH_FOREST_CABIN = VeStructure.CABIN.func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.BIRCH_FOREST));
+	public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> FOREST_CABIN = VeStructure.CABIN.func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.FOREST));
 	
 	@SubscribeEvent
 	public static void registerBiomes(final RegistryEvent.Register<Biome> event)
@@ -86,23 +83,11 @@ public class VeBiomes
 		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(1))), VeFeatureGenConfig.enableBigPurpleMushroomSpawns.get(), DARK_FOREST_BIOMES);
 		addFeature(Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VOID_LIQUID)).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))), VeFeatureGenConfig.enableVoidLakeSpawns.get(), END_CITY_BIOMES);
 		addFeature(Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(SNAPDRAGON_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(2))), VeFeatureGenConfig.enableSnapdragonSpawns.get(), END_CITY_BIOMES);
-		addStructureFeature(CABIN, VeFeatureGenConfig.enableCabinSpawns.get(), CABIN_BIOMES);
+		addStructureFeature(TAIGA_CABIN, VeFeatureGenConfig.enableCabinSpawns.get(), TAIGA_CABIN_BIOMES);
+		addStructureFeature(BIRCH_FOREST_CABIN, VeFeatureGenConfig.enableCabinSpawns.get(), BIRCH_FOREST_CABIN_BIOMES);
+		addStructureFeature(FOREST_CABIN, VeFeatureGenConfig.enableCabinSpawns.get(), FOREST_CABIN_BIOMES);
 		
 		VanillaExpansions.LOGGER.info("Biome Features registered.");
-	}
-	
-	/**
-	 * @param list1 The first biome list.
-	 * @param list2 The second biome list.
-	 * @param list3 The third biome list.
-	 * @return A new list containing every element from the 3 inputed lists.
-	 */
-	private static List<Biome> combineLists(List<Biome> list1, List<Biome> list2, List<Biome> list3)
-	{
-		List<Biome> newList = new ArrayList<>(list1);
-		newList.addAll(list2);
-		newList.addAll(list3);
-		return newList;
 	}
 	
 	/**
