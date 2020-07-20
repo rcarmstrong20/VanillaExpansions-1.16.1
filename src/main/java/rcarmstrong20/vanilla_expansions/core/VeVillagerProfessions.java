@@ -9,7 +9,6 @@ import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +23,7 @@ public class VeVillagerProfessions
 	private static final List<VillagerProfession> VILLAGER_PROFESSIONS = new ArrayList<>();
 	
 	
-	public static final VillagerProfession LUMBERJACK = register("lumberjack", VePointOfInterestTypes.LUMBERJACK, SoundEvents.ENTITY_VILLAGER_WORK_MASON);
+	public static final VillagerProfession LUMBERJACK = register("lumberjack", VePointOfInterestTypes.LUMBERJACK, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT);
 	
 	/**
 	 * @param name            The name for associated with the villager profession.
