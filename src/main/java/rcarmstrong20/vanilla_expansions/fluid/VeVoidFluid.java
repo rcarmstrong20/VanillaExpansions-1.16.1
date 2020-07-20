@@ -30,10 +30,8 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
-public abstract class VoidFluid extends WaterFluid
+public abstract class VeVoidFluid extends WaterFluid
 {
-	private static int lastPlayed = 0;
-	
 	@Override
 	public Fluid getFlowingFluid()
 	{
@@ -55,27 +53,13 @@ public abstract class VoidFluid extends WaterFluid
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(World worldIn, BlockPos pos, FluidState state, Random random)
 	{
-		//Spawn under void particles in the liquid when the number selected between 0 and 100 is 0.
 		if (random.nextInt(100) == 0)
 		{
 			worldIn.addParticle(VeParticleTypes.undervoid, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + (double)random.nextFloat(), (double)pos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
-		
-		if (lastPlayed == 0)
+		else if(random.nextInt(600) == 0)
 		{
-			if(random.nextInt(200) == 0)
-			{
-				worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.BLOCK_VOID_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 0.2F, random.nextFloat() + 0.5F, false);
-				lastPlayed += 260; //Add the amount of time that it takes to end the sound to last played.
-			}
-			else
-			{
-				lastPlayed += random.nextInt(60); //If number selected is not 0 add a random number between 0 and 60 to last played.
-			}
-		}
-		else
-		{
-			lastPlayed -= 1; //Decrease the time last played by 1 every tick.
+			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.BLOCK_VOID_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 0.2F, random.nextFloat() + 0.5F, false);
 		}
 	}
 	
@@ -112,10 +96,10 @@ public abstract class VoidFluid extends WaterFluid
 	@Override
 	public int getTickRate(IWorldReader p_205569_1_)
 	{
-		return 10;
+		return 13;
 	}
 	
-	public static class Flowing extends VoidFluid
+	public static class Flowing extends VeVoidFluid
 	{
 		@Override
 		protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder)
@@ -137,7 +121,7 @@ public abstract class VoidFluid extends WaterFluid
 		}
 	}
 	
-	public static class Source extends VoidFluid
+	public static class Source extends VeVoidFluid
 	{
 		@Override
 		public int getLevel(FluidState p_207192_1_)

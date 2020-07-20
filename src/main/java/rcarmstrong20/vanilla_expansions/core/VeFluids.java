@@ -14,15 +14,15 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.fluid.VoidFluid;
+import rcarmstrong20.vanilla_expansions.fluid.VeVoidFluid;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeFluids
 {
 	private static final List<Fluid> FLUIDS = new ArrayList<>();
 	
-	public static final Fluid VOID = register("void", new VoidFluid.Source());
-	public static final FlowingFluid FLOWING_VOID = register("flowing_void", new VoidFluid.Flowing());
+	public static final Fluid VOID = register("void", new VeVoidFluid.Source());
+	public static final FlowingFluid FLOWING_VOID = register("flowing_void", new VeVoidFluid.Flowing());
 	
 	/**
 	 * @param  name  A name for the fluid.
@@ -51,10 +51,10 @@ public class VeFluids
 	{
 		ActiveRenderInfo info = event.getInfo();
 		FluidState state = info.getFluidState();
-		if (state.getFluid() instanceof VoidFluid)
+		if (state.getFluid() instanceof VeVoidFluid)
 		{
 			event.setRed(0.0F);
-			event.setGreen(0.0F);
+			event.setGreen(20.0F);
 			event.setBlue(0.0F);
 		}
 	}
@@ -65,9 +65,9 @@ public class VeFluids
 	{
 		ActiveRenderInfo info = event.getInfo();
 		FluidState state = info.getFluidState();
-		if (state.getFluid() instanceof VoidFluid)
+		if (state.getFluid() instanceof VeVoidFluid)
 		{
-			event.setDensity(1.0F);
+			event.setDensity(5.0F);
 			event.setCanceled(true);
 		}
 	}
