@@ -28,6 +28,9 @@
 	"ve:bamboo_wall",
 	"ve:nephilite_wall",
 	"ve:nephilite_brick_wall",
-	"ve:snow_wall"
+	"ve:snow_wall",
+	"ve:warped_chytrid_nether_brick_wall",
+	"ve:crimson_chytrid_nether_brick_wall",
+	"ve:smooth_end_stone_wall"
   ]
 }
