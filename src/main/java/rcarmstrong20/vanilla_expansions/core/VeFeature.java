@@ -12,9 +12,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
-/**
- * Author: rcarmstrong20
- */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeFeature
 {
@@ -24,9 +21,7 @@ public class VeFeature
 	
 	/**
 	 * Set the registry name for the features and add them to the registry list.
-	 */
-	
-	/**
+	 * 
 	 * @param <C>
 	 * @param name    A name for the feature.
 	 * @param feature A new instance of the class feature.

@@ -13,9 +13,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 
-/**
- * Author: rcarmstrong20
- */
+
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeTileEntityType
 {

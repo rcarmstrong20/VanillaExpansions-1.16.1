@@ -92,10 +92,11 @@ public class VeBiomes
 	
 	/**
 	 * Add a new feature to the spawn list for every biome that exists in a certain category.
-	 * @param decoration  The decoration category for this feature.
-	 * @param feature     The spawn configuration for this feature.
-	 * @param enable      If true this feature will spawn. This is part of the feature config.
-	 * @param category    The biome category of the biomes that this feature can spawn in.
+	 * 
+	 * @param decoration The decoration category for this feature.
+	 * @param feature    The spawn configuration for this feature.
+	 * @param enable     If true this feature will spawn. This is part of the feature config.
+	 * @param category   The biome category of the biomes that this feature can spawn in.
 	 */
 	private static void addFeature(Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable, Biome.Category category)
 	{
@@ -113,10 +114,11 @@ public class VeBiomes
 	
 	/**
 	 * Add a new feature to the spawn list for specific biomes.
-	 * @param decoration  The decoration category for this feature.
-	 * @param feature     The spawn configuration for this feature.
-	 * @param enable      If true this feature will spawn. This is part of the feature config.
-	 * @param biomes      A list of biomes that this feature will spawn in.
+	 * 
+	 * @param decoration The decoration category for this feature.
+	 * @param feature    The spawn configuration for this feature.
+	 * @param enable     If true this feature will spawn. This is part of the feature config.
+	 * @param biomes     A list of biomes that this feature will spawn in.
 	 */
 	private static void addFeature(Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable, List<Biome> biomes)
 	{
@@ -134,6 +136,7 @@ public class VeBiomes
 	
 	/**
 	 * Add a new structure to be spawned into the world.
+	 * 
 	 * @param structureFeature The spawn configuration for this structure.
 	 * @param enable           If true this structure will spawn. This is part of the structure config.
 	 * @param biomes           A list of biomes that this structure will spawn in.

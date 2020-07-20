@@ -20,7 +20,6 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VePointOfInterestTypes
 {
-	//private static final Constructor<PointOfInterestType> POINT_OF_INTEREST_CONSTRUCTOR = ObfuscationReflectionHelper.findConstructor(PointOfInterestType.class, String.class, Set.class, int.class, int.class);
 	private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
 	
 	public static final PointOfInterestType LUMBERJACK = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
@@ -68,18 +67,4 @@ public class VePointOfInterestTypes
 		
 		VanillaExpansions.LOGGER.info("Point of Interests registered.");
 	}
-	
-	/*
-	 * Cycle through all the point of interest types in the given list.
-	 */
-	/*
-	private static PointOfInterestType cyclePointOfInterestType(List<PointOfInterestType> pointOfInterestTypeList)
-	{
-		for(PointOfInterestType pointOfInterestType : pointOfInterestTypeList)
-		{
-			return pointOfInterestType;
-		}
-		return null;
-	}
-	*/
 }

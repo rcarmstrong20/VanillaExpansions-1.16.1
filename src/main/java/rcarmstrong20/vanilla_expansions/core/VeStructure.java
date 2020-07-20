@@ -12,9 +12,6 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinFeatureConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
-/**
- * Author: rcarmstrong20
- */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {
@@ -42,7 +39,6 @@ public class VeStructure
 	@SubscribeEvent
 	public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)
 	{
-		//Register the structures
 		STRUCTURES.forEach(structure -> event.getRegistry().register(structure));
 		STRUCTURES.clear();
 		
