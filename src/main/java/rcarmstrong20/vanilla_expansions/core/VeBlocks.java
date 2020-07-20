@@ -9,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
@@ -35,7 +36,6 @@ import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
-import rcarmstrong20.vanilla_expansions.block.VePaneBlock;
 import rcarmstrong20.vanilla_expansions.block.VePlantingPotBlock;
 import rcarmstrong20.vanilla_expansions.block.VePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePottedSnapdragonBlock;
@@ -156,7 +156,7 @@ public class VeBlocks
 	public static Block smooth_quartz_wall = register("smooth_quartz_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.SMOOTH_QUARTZ)));
 	public static Block stone_wall = register("stone_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.STONE)));
 	public static Block red_glass = register("red_glass", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block red_glass_pane = register("red_glass_pane", true, new VePaneBlock(AbstractBlock.Properties.from(Blocks.GLASS_PANE)));
+	public static Block red_glass_pane = register("red_glass_pane", true, new PaneBlock(AbstractBlock.Properties.from(Blocks.GLASS_PANE)));
 	public static Block blueberry_bush = register("blueberry_bush", false, new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
 	public static Block cranberry_bush = register("cranberry_bush", false, new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
 	public static Block bok_choy = register("bok_choy", false, new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
@@ -220,15 +220,7 @@ public class VeBlocks
 	public static Block packed_snow_block = register("packed_snow_block", true, new Block(AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW).hardnessAndResistance(0.4F).harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW).slipperiness(0.98F)));
 	public static Block packed_snow_stairs = register("packed_snow_stairs", true, new StairsBlock(() -> VeBlocks.packed_snow_block.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
 	public static Block packed_snow_slab = register("packed_snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
-	public static Block spider_glass = register("spider_glass", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block spider_glass_pane = register("spider_glass_pane", true, new VePaneBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block black_spider_glass = register("black_spider_glass", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block black_spider_glass_pane = register("black_spider_glass_pane", true, new VePaneBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block fancy_spider_glass = register("fancy_spider_glass", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block fancy_spider_glass_pane = register("fancy_spider_glass_pane", true, new VePaneBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block black_fancy_spider_glass = register("black_fancy_spider_glass", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block black_fancy_spider_glass_pane = register("black_fancy_spider_glass_pane", true, new VePaneBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-	public static Block turkey = register("turkey", true, new VeTurkeyBlock(AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.SNOW)), 1);
+	public static Block turkey = register("turkey", true, new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.SNOW)), 1);
 	public static Block glass_of_darkness = register("glass_of_darkness", true, new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
 	public static Block purple_mushroom = register("purple_mushroom", true, new VeMushroomBlock(AbstractBlock.Properties.from(Blocks.RED_MUSHROOM)));
 	public static Block purple_mushroom_block = register("purple_mushroom_block", true, new VePurpleHugeMushroomBlock(AbstractBlock.Properties.from(Blocks.RED_MUSHROOM_BLOCK)));
@@ -263,7 +255,7 @@ public class VeBlocks
 	public static Block nephilite_brick_slab = register("nephilite_brick_slab", true, new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_brick_stairs = register("nephilite_brick_stairs", true, new StairsBlock(() -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_brick_wall = register("nephilite_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-	public static Block chiseled_nephilite = register("chiseled_nephilite", true, new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
+	public static Block chiseled_nephilite_bricks = register("chiseled_nephilite_bricks", true, new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
 	public static Block easel = register("easel", true, new VeEaselBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
 	public static Block snow_slab = register("snow_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	public static Block snow_stairs = register("snow_stairs", true, new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
@@ -278,6 +270,10 @@ public class VeBlocks
 	public static Block crimson_chytrid_nether_brick_wall = register("crimson_chytrid_nether_brick_wall", true, new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
 	public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8, AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) -> 4)));
 	public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).func_235838_a_((state) -> 4)));
+	public static Block smooth_end_stone = register("smooth_end_stone", true, new Block(AbstractBlock.Properties.from(Blocks.END_STONE)));
+	public static Block smooth_end_stone_slab = register("smooth_end_stone_slab", true, new SlabBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
+	public static Block smooth_end_stone_stairs = register("smooth_end_stone_stairs", true, new StairsBlock(() -> Blocks.END_STONE.getDefaultState(), AbstractBlock.Properties.from(Blocks.END_STONE)));
+	public static Block smooth_end_stone_wall = register("smooth_end_stone_wall", true, new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
 	
 	/**
 	 * @param name         The name for the block.
@@ -303,7 +299,7 @@ public class VeBlocks
 	}
 	
 	/*
-	 * A method that gets the data from the other registry methods and is used in the register merthod that creates each list
+	 * A method that gets the data from the other registry methods and is used in the register method that creates each list
 	 */
 	private static Block register(ResourceLocation name, boolean hasBlockItem, Block block, Item.Properties properties)
 	{
