@@ -7,8 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 import com.google.common.collect.ImmutableMap.Builder;
 
 import net.minecraft.block.Block;
@@ -186,6 +184,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)).with(NORTH, false).with(SOUTH, false).with(WEST, false).with(EAST, false).with(UP, false).with(DOWN, false));
 	}
 	
+	/**
+	 * Called when the player right-clicks a block.
+	 */
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTrace)
 	{
@@ -769,9 +770,16 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		return frameTileEntity.getInventory().get(0) == ItemStack.EMPTY;
 	}
 	
-	private static boolean matchesFacing(BlockState state, BlockState worldState)
+	/**
+	 * A helper that checks whether the two facing properties match.
+	 * 
+	 * @param state1 The first block state.
+	 * @param state2 The second block state.
+	 * @return       If both are the same return true otherwise return false.
+	 */
+	private static boolean matchesFacing(BlockState state1, BlockState state2)
 	{
-		return state.get(FACING) == worldState.get(FACING);
+		return state1.get(FACING) == state2.get(FACING);
 	}
 	
 	private static void playPlacePaintingEvent(World world, BlockPos clickedPos, ItemStack itemStack)
@@ -780,18 +788,13 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		itemStack.shrink(1);
 	}
 	
-	/*
-	 * Borrowed from LadderBlock
-	 */
+	
 	private boolean canAttachTo(IBlockReader blockReader, BlockPos pos, Direction direction)
 	{
 		BlockState blockstate = blockReader.getBlockState(pos);
 		return blockstate.isSolidSide(blockReader, pos, direction);
 	}
 	
-	/*
-	 * Borrowed from LadderBlock
-	 */
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
@@ -799,9 +802,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		return this.canAttachTo(worldIn, pos.offset(direction.getOpposite()), direction);
 	}
 	
-	/*
-	 * Borrowed from LadderBlock
-	 */
+	
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context)
@@ -1136,6 +1137,13 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		super.onBlockHarvested(world, pos, state, player);
 	}
 	
+	/**
+	 * A method that clears every frame that contains the painting currently being harvested.
+	 * 
+	 * @param world          The current world.
+	 * @param framePositions A list of frame positions.
+	 * @param paintingParts  A list of painting maps.
+	 */
 	private void harvestPainting(World world, List<BlockPos> framePositions, List<Map<Item, Item>> paintingParts)
 	{
 		if(this.isPaintingPart(world, framePositions, paintingParts))
@@ -1145,7 +1153,13 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	}
 	
 	/**
-	 * A helper method that returns true if both blocks make up the painting harvested. It returns an exception if both lists are different sizes.
+	 * A helper method that returns true if both blocks make up the painting harvested. 
+	 * It returns an exception if the two lists passed lists are different sizes.
+	 * 
+	 * @param world            The current world.
+	 * @param posList          A list of frame positions.
+	 * @param paintingPartsMap A list of painting maps.
+	 * @return                 true if both blocks make up the painting that is currently being harvested otherwise return false.
 	 */
 	private boolean isPaintingPart(World world, List<BlockPos> posList, List<Map<Item, Item>> paintingPartsMap)
 	{
@@ -1163,6 +1177,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 				{
 					VeFrameTileEntity currentFrame = (VeFrameTileEntity) currentTileEntity;
 					
+					//If the criteria is met return true.
 					if(state.getBlock() == currentState.getBlock()	  			 		      &&
 					   matchesFacing(state, currentState) 		 				 	  		  &&
 					   !isEmpty(currentFrame)			  	  					 	  		  &&
@@ -1176,10 +1191,16 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		}
 		else
 		{
-			return ExceptionUtils.wrapAndThrow(new Throwable("The two lists are different sizes!!!"));
+			throw new IllegalArgumentException("The two lists are different sizes!!!");
 		}
 	}
 	
+	/**
+	 * A helper method that is called when the method isPaintingPart returns true 
+	 * 
+	 * @param world   The current world
+	 * @param posList A list of frame positions to clear.
+	 */
 	private void clearFrames(World world, List<BlockPos> posList)
 	{
 		for(int i = 0; i < posList.size(); i++)
