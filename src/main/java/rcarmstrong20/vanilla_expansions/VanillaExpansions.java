@@ -1,6 +1,7 @@
 package rcarmstrong20.vanilla_expansions;
 
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +39,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -87,6 +89,8 @@ public class VanillaExpansions
 	
 	/**
 	 * Called on the mod's setup.
+	 * 
+	 * @param event Called on server and client setup.
 	 */
 	private void setup(final FMLCommonSetupEvent event)
 	{
@@ -96,6 +100,8 @@ public class VanillaExpansions
 	
 	/**
 	 * Called exclusively on the client.
+	 * 
+	 * @param event Called on client setup.
 	 */
 	private void clientRegistries(final FMLClientSetupEvent event)
 	{
@@ -105,6 +111,8 @@ public class VanillaExpansions
 	
 	/**
 	 * This takes care of registering the particle factories if they are not registered under the particle factory event there will be a bug.
+	 * 
+	 * @param event Called during particle factory registry.
 	 */
 	@OnlyIn(Dist.CLIENT)
 	private void onRegisterParticle(ParticleFactoryRegisterEvent event)
@@ -117,6 +125,8 @@ public class VanillaExpansions
 	
 	/**
 	 * Controls right-click crop harvesting and campfire re-coloring behavior.
+	 * 
+	 * @param event Called when the player right-clicks a block.
 	 */
 	@SubscribeEvent
 	public void onRightClickBlock(final RightClickBlock event)
@@ -222,16 +232,22 @@ public class VanillaExpansions
 	}
 	
 	/**
-	 * A helper method that harvests and the passed in crop.
+	 * A helper method that harvests the passed in crop.
+	 * 
+	 * @param state The state of the crop to harvest.
+	 * @param world The current world.
+	 * @param pos   The position for the crop to harvest.
+	 * @param age   The age property for this crop.
 	 */
 	private void resetCrop(BlockState state, World world, BlockPos pos, IntegerProperty age)
 	{
-		Block.replaceBlock(state, Blocks.AIR.getDefaultState(), world, pos, 1); //If the replacement block is anything but air the blocks don't drop and play their appropriate sound.
+		Block.replaceBlock(state, Blocks.AIR.getDefaultState(), world, pos, 1); //Note: If the replacement block is anything but air the blocks don't drop and play their appropriate sound.
 		world.setBlockState(pos, state.with(age, 0));
 	}
 	
 	/**
-	 * A helper method that gets the max age for the age property passed.
+	 * @param age The age property to use.
+	 * @return    The max age for the age property passed.
 	 */
 	private int getMaxAge(IntegerProperty age)
 	{
@@ -241,89 +257,40 @@ public class VanillaExpansions
 	@SubscribeEvent
 	public void onLootLoad(final LootTableLoadEvent event)
 	{
-		ResourceLocation customJungleChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/jungle_temple");
-		ResourceLocation vanillaJungleChestLocation = new ResourceLocation("chests/jungle_temple");
-		ResourceLocation customDesertChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/desert_pyramid");
-		ResourceLocation vanillaDesertChestLocation = new ResourceLocation("chests/desert_pyramid");
-		
-		if(event.getName().equals(vanillaJungleChestLocation))
-		{
-			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customJungleChestLocation)).build());
-		}
-		else if(event.getName().equals(vanillaDesertChestLocation))
-		{
-			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customDesertChestLocation)).build());
-		}
+		addPoolToTable(event, "jungle_temple");
+		addPoolToTable(event, "desert_pyramid");
+		addPoolToTable(event, "nether_bridge");
 	}
 	
-	/*
-	 * Disabled due to me not knowing how to render the double slab
+	/**
+	 * A helper method that adds a new pool to a vanilla table.
+	 * 
+	 * @param event    An instance of the current loot table event.
+	 * @param lootName The name of the loot table that should be added to.
 	 */
-	/*
-	@SubscribeEvent
-	public void onRightClickSlab(final PlayerInteractEvent.RightClickBlock event)
+	private void addPoolToTable(LootTableLoadEvent event, String lootName)
 	{
-		BlockPos pos = event.getPos();
-		World world = event.getWorld();
-		Direction direction = event.getFace();
+		String lootPath = "chests/" + lootName;
+		ResourceLocation modLocation = new ResourceLocation(VanillaExpansions.MOD_ID, lootPath);
+		ResourceLocation vanillaLocation = new ResourceLocation(lootPath);
 		
-		BlockState worldState = event.getWorld().getBlockState(pos);
-		BlockState worldStateUp = event.getWorld().getBlockState(pos.up());
-		Item item = event.getItemStack().getItem();
-		Block itemBlock = Block.getBlockFromItem(item.getItem());
-		
-		if(worldState.getBlock() instanceof SlabBlock && itemBlock instanceof SlabBlock)
+		if(event.getName().equals(vanillaLocation))
 		{
-			if(worldState.getMaterial() == itemBlock.getDefaultState().getMaterial())
-			{
-				SlabType slabtype = worldState.get(SlabBlock.TYPE);
-				
-				if(slabtype != SlabType.DOUBLE && worldState.getBlock() != itemBlock)
-				{
-					if (slabtype == SlabType.BOTTOM && direction == Direction.UP || direction.getAxis().isHorizontal())
-					{
-						System.out.print("Placed top on bottom");
-						VeDoubleSlabBlock.fillInventory(itemBlock, worldState.getBlock());
-					}
-					else if (slabtype == SlabType.TOP && direction == Direction.DOWN || direction.getAxis().isHorizontal())
-					{
-						System.out.print("Placed bottom under top");
-						VeDoubleSlabBlock.fillInventory(worldState.getBlock(), itemBlock);
-					}
-					world.setBlockState(pos, VeBlocks.double_slab.getDefaultState());
-					event.setResult(Result.ALLOW);
-					event.setCanceled(true);
-				}
-			}
-		}
-		else if(worldStateUp.getBlock() instanceof SlabBlock && itemBlock instanceof SlabBlock)
-		{
-			if(worldStateUp.getMaterial() == itemBlock.getDefaultState().getMaterial())
-			{
-				SlabType slabtypeUp = worldStateUp.get(SlabBlock.TYPE);
-				
-				if(slabtypeUp != SlabType.DOUBLE && worldState.getBlock() != itemBlock)
-				{
-					if (slabtypeUp == SlabType.TOP && direction == Direction.UP)
-					{
-						System.out.print("Placed bottom on top from bottom");
-						VeDoubleSlabBlock.fillInventory(itemBlock, worldStateUp.getBlock());
-						world.setBlockState(pos.up(), VeBlocks.double_slab.getDefaultState());
-						event.setResult(Result.ALLOW);
-						event.setCanceled(true);
-					}
-				}
-			}
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(modLocation)).build());
 		}
 	}
 	
 	/**
-	 * Individually tracks the naming behavior for each white or killer rabbit entity, then either sets the rabbit type to 99 or 1.
+	 * Individually tracks the naming behavior for each white and killer rabbit entity, then either sets the rabbit type to 99 or 1.
+	 * 
+	 * @param event Called when the player right-clicks any entity.
 	 */
 	@SubscribeEvent
 	public void onNameBunnyEntity(final PlayerInteractEvent.EntityInteractSpecific event)
 	{
-		if(event.getTarget() instanceof RabbitEntity)
+		World world = event.getWorld();
+		
+		if(!world.isRemote && event.getTarget() instanceof RabbitEntity)
 		{
 			RabbitEntity rabbit = (RabbitEntity) event.getTarget();
 			ItemStack itemStack = event.getItemStack();
@@ -335,17 +302,49 @@ public class VanillaExpansions
 					if("The Killer Bunny".equals(itemStack.getDisplayName().getUnformattedComponentText()))
 					{
 						rabbit.setRabbitType(99);
-						rabbit.getRabbitType();
-						rabbit.tick();
 					}
 					else
 					{
 						rabbit.setRabbitType(1);
-						rabbit.getRabbitType();
-						rabbit.tick();
 					}
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Used to add functionality for growing snapdragons on end stone when using bone meal.
+	 * 
+	 * @param event Called when the player uses bone meal.
+	 */
+	@SubscribeEvent
+	public void onBonemeal(final BonemealEvent event)
+	{
+		World world = event.getWorld();
+		BlockPos pos = event.getPos();
+		Random random = new Random();
+		
+		if(event.getBlock().getBlock() == Blocks.END_STONE)
+		{
+			if(!world.isRemote) //Only place the blocks on the server
+			{
+				for(int i = 0; i < 128; ++i)
+				{
+					BlockPos blockpos = pos;
+					BlockState blockstate = VeBlocks.snapdragon.getDefaultState();
+					
+					for(int j = 0; j < i / 16; ++j)
+					{
+						blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+						
+						if(world.getBlockState(blockpos.down()).getBlock() == Blocks.END_STONE && world.getBlockState(blockpos).isAir(world, blockpos))
+						{
+							world.setBlockState(blockpos, blockstate);
+						}
+					}
+				}
+			}
+			event.setResult(Result.ALLOW);
 		}
 	}
 }

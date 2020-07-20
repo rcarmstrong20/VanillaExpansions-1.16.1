@@ -26,6 +26,9 @@ public class VeEaselBlock extends HorizontalBlock
 		super(properties);
 	}
 	
+	/**
+	 * Called when the player right-clicks a block.
+	 */
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_) {
 		if (worldIn.isRemote)
 		{
@@ -38,6 +41,9 @@ public class VeEaselBlock extends HorizontalBlock
 		}
 	}
 	
+	/**
+	 * Returns a new container.
+	 */
 	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos)
 	{
 		return new SimpleNamedContainerProvider((p_220254_2_, p_220254_3_, p_220254_4_) ->
@@ -46,11 +52,18 @@ public class VeEaselBlock extends HorizontalBlock
 		}, EASEL_CONTAINER_NAME);
 	}
 	
+	/**
+	 * @param context An instance of BlockItemUseContext.
+	 * @return        The state of this block when placed.
+	 */
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(HORIZONTAL_FACING);

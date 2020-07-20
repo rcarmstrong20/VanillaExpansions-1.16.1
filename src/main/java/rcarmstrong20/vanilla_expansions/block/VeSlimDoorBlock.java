@@ -22,6 +22,9 @@ public class VeSlimDoorBlock extends DoorBlock
 		super(builder);
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{

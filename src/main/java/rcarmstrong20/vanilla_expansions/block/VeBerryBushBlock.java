@@ -35,6 +35,9 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		super(properties);
 	}
 	
+	/**
+	 * Called when the player right-clicks a block.
+	 */
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
 	{
@@ -55,6 +58,9 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		return super.onBlockActivated(state, world, pos, player, handIn, hit);
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
@@ -68,6 +74,9 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		}
 	}
 	
+	/**
+	 * Called when pick-blocking this block.
+	 */
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
 	{
@@ -88,11 +97,17 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		return super.getItem(world, pos, state);
 	}
 	
+	/**
+	 * @return The max age of this plant.
+	 */
 	private int getMaxAge()
 	{
 		return 3;
 	}
 	
+	/**
+	 * Called when an entity collides with this block.
+	 */
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn)
 	{
@@ -109,6 +124,9 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		}
 	}
 	
+	/**
+	 * Decides what blocks this plant can be placed on.
+	 */
 	@Override
 	public PlantType getPlantType(IBlockReader world, BlockPos pos)
 	{

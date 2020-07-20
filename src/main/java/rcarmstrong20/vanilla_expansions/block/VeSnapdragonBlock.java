@@ -45,6 +45,11 @@ public class VeSnapdragonBlock extends FlowerBlock
 		return isValidBlock(world, pos);
 	}
 	
+	/**
+	 * Called periodically clientside on blocks near the player to show effects (like furnace fire particles). Note that
+	 * this method is unrelated to {@link randomTick} and {@link #needsRandomTick}, and will always be called regardless
+	 * of whether the block can receive random update ticks
+	 */
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
@@ -58,6 +63,10 @@ public class VeSnapdragonBlock extends FlowerBlock
 	
 	/**
 	 * A helper method used for checking that the plant placement is valid.
+	 * 
+	 * @param world The current world.
+	 * @param pos   The plants position.
+	 * @return      True if the soil can support the plant.
 	 */
 	private boolean isValidBlock(IBlockReader world, BlockPos pos)
 	{
@@ -73,6 +82,9 @@ public class VeSnapdragonBlock extends FlowerBlock
 		}
 	}
 	
+	/**
+	 * Called when an entity collides with this block.
+	 */
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{

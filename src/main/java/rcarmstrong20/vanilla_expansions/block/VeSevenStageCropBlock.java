@@ -16,6 +16,9 @@ public class VeSevenStageCropBlock extends CropsBlock
 		super(properties);
 	}
 	
+	/**
+	 * Called when the player pick-block's this crop.
+	 */
 	@Override
     protected IItemProvider getSeedsItem()
     {
@@ -32,6 +35,9 @@ public class VeSevenStageCropBlock extends CropsBlock
 		return Items.WHEAT_SEEDS;
     }
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{

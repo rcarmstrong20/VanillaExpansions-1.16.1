@@ -21,6 +21,9 @@ public class VeWoodcutterBlock extends StonecutterBlock
 		super(properties);
 	}
 	
+	/**
+	 * Returns a new container.
+	 */
 	@Override
 	@Nullable
 	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {

@@ -1613,6 +1613,10 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		super(properties);
 	}
 	
+	/**
+	 * @param context An instance of BlockItemUseContext.
+	 * @return        The state of this block when placed.
+	 */
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
@@ -1637,11 +1641,18 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(HORIZONTAL_FACING, WATERLOGGED);
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{

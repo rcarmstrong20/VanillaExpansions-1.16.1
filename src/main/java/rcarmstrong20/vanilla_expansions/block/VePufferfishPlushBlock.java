@@ -82,6 +82,9 @@ public class VePufferfishPlushBlock extends VePlushBlock
 		super(properties);
 	}
 	
+	/**
+	 * Called when the player right-clicks a block.
+	 */
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace)
 	{
@@ -100,12 +103,45 @@ public class VePufferfishPlushBlock extends VePlushBlock
 		return ActionResultType.SUCCESS;
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
-		return VePufferfishPlushBlock.defineShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE, PUFFERFISH_2_NORTH_SHAPE, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE, PUFFERFISH_2_SOUTH_SHAPE, PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE, PUFFERFISH_2_WEST_SHAPE, PUFFERFISH_0_EAST_SHAPE, PUFFERFISH_1_EAST_SHAPE, PUFFERFISH_2_EAST_SHAPE);
+		return VePufferfishPlushBlock.defineShapes(state,
+												   PUFFERFISH_0_NORTH_SHAPE,
+												   PUFFERFISH_1_NORTH_SHAPE,
+												   PUFFERFISH_2_NORTH_SHAPE,
+												   PUFFERFISH_0_SOUTH_SHAPE,
+												   PUFFERFISH_1_SOUTH_SHAPE,
+												   PUFFERFISH_2_SOUTH_SHAPE,
+												   PUFFERFISH_0_WEST_SHAPE,
+												   PUFFERFISH_1_WEST_SHAPE,
+												   PUFFERFISH_2_WEST_SHAPE,
+												   PUFFERFISH_0_EAST_SHAPE,
+												   PUFFERFISH_1_EAST_SHAPE,
+												   PUFFERFISH_2_EAST_SHAPE);
 	}
 	
+	/**
+	 * A helper method that collects every shape for the pufferfish block.
+	 * 
+	 * @param state           The current state this block is in.
+	 * @param northPuffShape0 North shape with puff level 0.
+	 * @param northPuffShape1 North shape with puff level 1.
+	 * @param northPuffShape2 North shape with puff level 2.
+	 * @param southPuffShape0 South shape with puff level 0.
+	 * @param southPuffShape1 South shape with puff level 1.
+	 * @param southPuffShape2 South shape with puff level 2.
+	 * @param westPuffShape0  West shape with puff level 0.
+	 * @param westPuffShape1  West shape with puff level 1.
+	 * @param westPuffShape2  West shape with puff level 2.
+	 * @param eastPuffShape0  East shape with puff level 0.
+	 * @param eastPuffShape1  East shape with puff level 1.
+	 * @param eastPuffShape2  East shape with puff level 2.
+	 * @return                The appropriate shape for the current state.
+	 */
 	private static VoxelShape defineShapes(BlockState state, VoxelShape northPuffShape0, VoxelShape northPuffShape1, VoxelShape northPuffShape2, VoxelShape southPuffShape0, VoxelShape southPuffShape1, VoxelShape southPuffShape2, VoxelShape westPuffShape0, VoxelShape westPuffShape1, VoxelShape westPuffShape2, VoxelShape eastPuffShape0, VoxelShape eastPuffShape1, VoxelShape eastPuffShape2)
 	{
 		switch((Direction)state.get(HORIZONTAL_FACING))
@@ -121,19 +157,29 @@ public class VePufferfishPlushBlock extends VePlushBlock
 		}
 	}
 	
-	private static VoxelShape getPuffedShapes(BlockState state, VoxelShape puffShape1, VoxelShape puffShape2, VoxelShape puffShape3)
+	/**
+	 * @param state      The current state that this block is in.
+	 * @param puffShape0 When the puff level is 0.
+	 * @param puffShape1 When the puff level is 1.
+	 * @param puffShape2 When the puff level is 2.
+	 * @return           The appropriate shape for the current state.
+	 */
+	private static VoxelShape getPuffedShapes(BlockState state, VoxelShape puffShape0, VoxelShape puffShape1, VoxelShape puffShape2)
 	{
 		switch((int)state.get(PUFFED))
 		{
 		case 0:
-			return puffShape1;
+			return puffShape0;
 		case 1:
-			return puffShape2;
+			return puffShape1;
 		default:
-			return puffShape3;
+			return puffShape2;
 		}
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{

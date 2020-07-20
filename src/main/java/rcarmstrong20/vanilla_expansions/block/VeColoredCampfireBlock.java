@@ -34,6 +34,9 @@ public class VeColoredCampfireBlock extends CampfireBlock
 		super(true, 1, propertiesIn);
 	}
 	
+	/**
+	 * Called when the player right-clicks a block.
+	 */
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_)
 	{
@@ -56,6 +59,9 @@ public class VeColoredCampfireBlock extends CampfireBlock
 		return ActionResultType.PASS;
 	}
 	
+	/**
+	 * Called when the player right-clicks this block with a new block.
+	 */
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
 	{
@@ -106,11 +112,14 @@ public class VeColoredCampfireBlock extends CampfireBlock
 	}
 	
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn)
+	public TileEntity createNewTileEntity(IBlockReader world)
 	{
 		return new VeColoredCampfireTileEntity();
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{

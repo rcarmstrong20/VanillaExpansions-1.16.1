@@ -18,27 +18,46 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
 		super(properties);
 	}
 	
+	/**
+	 * Called when an Entity lands on this Block. This method *must* update motionY because the entity will not do that
+	 * on its own.
+	 */
 	@Override
-	public void onLanded(IBlockReader worldIn, Entity entityIn) {}
+	public void onLanded(IBlockReader world, Entity entity) {}
 	
+	/**
+	 * Block's chance to react to a living entity falling on it.
+	 */
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+	public void onFallenUpon(World world, BlockPos pos, Entity entityIn, float fallDistance)
 	{
 		float strength = 2.0F;
 		float height = entityIn.fallDistance * strength;
-        if(height > 0 && !entityIn.isCrouching())
-        {
-            if(height >= 100)
-            {
-            	height = 100;
-            }
-            entityIn.setMotion(entityIn.getMotion().mul(1.0, 0.0, 1.0));
-            entityIn.addVelocity(0, Math.sqrt(0.22 * (height + 0.25F)), 0);
-            worldIn.playSound(null, pos, VeSoundEvents.BLOCK_MUSHROOM_BOUNCE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-        }
-        entityIn.fallDistance = 0;
+		if(height > 0 && !entityIn.isCrouching())
+		{
+			if(height >= 100)
+			{
+				height = 100;
+			}
+			entityIn.setMotion(entityIn.getMotion().mul(1.0, 0.0, 1.0));
+			entityIn.addVelocity(0, Math.sqrt(0.22 * (height + 0.25F)), 0);
+			world.playSound(null, pos, VeSoundEvents.BLOCK_MUSHROOM_BOUNCE, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+		}
+		entityIn.fallDistance = 0;
 	}
 	
+	/**
+     *  Allows a block to override the standard EntityLivingBase.updateFallState
+     *  particles, this is a server side method that spawns particles with
+     *  WorldServer.spawnParticle.
+     *
+     * @param worldserver The current Server World
+     * @param pos The position of the block.
+     * @param state2 The state at the specific world/pos
+     * @param entity The entity that hit landed on the block
+     * @param numberOfParticles That vanilla world have spawned
+     * @return True to prevent vanilla landing particles from spawning
+     */
 	@Override
 	public boolean addLandingEffects(BlockState state1, ServerWorld worldserver, BlockPos pos, BlockState state2, LivingEntity entity, int numberOfParticles)
 	{

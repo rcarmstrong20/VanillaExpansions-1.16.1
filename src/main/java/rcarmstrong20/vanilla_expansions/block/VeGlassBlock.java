@@ -14,6 +14,9 @@ public class VeGlassBlock extends GlassBlock
 		super(properties);
 	}
 	
+	/**
+	 * Checks whether this block should let light pass through.
+	 */
 	@Override
 	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{

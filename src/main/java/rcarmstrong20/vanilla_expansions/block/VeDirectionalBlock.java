@@ -23,18 +23,29 @@ public class VeDirectionalBlock extends HorizontalBlock
 		return 1.0F;
 	}
 	
+	/**
+	 * Whether this block shoulder let light pass through itself.
+	 */
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
 	{
 		return true;
 	}
 	
+	/**
+	 * @param context An instance of BlockItemUseContext.
+	 * @return        The state of this block when placed.
+	 */
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(HORIZONTAL_FACING);

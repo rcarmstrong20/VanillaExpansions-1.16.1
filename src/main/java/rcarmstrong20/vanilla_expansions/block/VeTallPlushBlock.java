@@ -141,6 +141,10 @@ public class VeTallPlushBlock extends VePlushBlock
 		return false;
 	}
 	
+	/**
+	 * Called before the Block is set to air in the world. Called regardless of if the player's tool can actually collect
+	 * this block
+	 */
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
@@ -168,12 +172,18 @@ public class VeTallPlushBlock extends VePlushBlock
 		}
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{
 		builder.add(HORIZONTAL_FACING, WATERLOGGED, PLUSH_STACK_SIZE, HALF);
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
@@ -189,21 +199,22 @@ public class VeTallPlushBlock extends VePlushBlock
 	}
 	
 	/**
-	 * Note - Keeping the rotations as global variables results in the least amount of lag.
-	 * @param state - The current state this block is in.
-	 * @param northShape1 - The north shape for stack size 1.
-	 * @param northShape2 - The north shape for stack size 2.
-	 * @param northShape3 - The north shape for stack size 3.
-	 * @param southShape1 - The south shape for stack size 1.
-	 * @param southShape2 - The south shape for stack size 2.
-	 * @param southShape3 - The south shape for stack size 3.
-	 * @param westShape1 - The west shape for stack size 1.
-	 * @param westShape2 - The west shape for stack size 2.
-	 * @param westShape3 - The west shape for stack size 3.
-	 * @param eastShape1 - The east shape for stack size 1.
-	 * @param eastShape2 - The east shape for stack size 2.
-	 * @param eastShape3 - The east shape for stack size 3.
-	 * @return The appropriate bounding box for the given state.
+	 * Note - Keeping the rotations as global variables keeps the lag down.
+	 * 
+	 * @param state       The current state this block is in.
+	 * @param northShape1 The north shape for stack size 1.
+	 * @param northShape2 The north shape for stack size 2.
+	 * @param northShape3 The north shape for stack size 3.
+	 * @param southShape1 The south shape for stack size 1.
+	 * @param southShape2 The south shape for stack size 2.
+	 * @param southShape3 The south shape for stack size 3.
+	 * @param westShape1  The west shape for stack size 1.
+	 * @param westShape2  The west shape for stack size 2.
+	 * @param westShape3  The west shape for stack size 3.
+	 * @param eastShape1  The east shape for stack size 1.
+	 * @param eastShape2  The east shape for stack size 2.
+	 * @param eastShape3  The east shape for stack size 3.
+	 * @return            The appropriate bounding box for the given state.
 	 */
 	private static VoxelShape defineShapes(BlockState state, VoxelShape northShape1, VoxelShape northShape2, VoxelShape northShape3, VoxelShape southShape1, VoxelShape southShape2, VoxelShape southShape3, VoxelShape westShape1, VoxelShape westShape2, VoxelShape westShape3, VoxelShape eastShape1, VoxelShape eastShape2, VoxelShape eastShape3)
 	{
@@ -221,12 +232,12 @@ public class VeTallPlushBlock extends VePlushBlock
 	}
 	
 	/**
-	 * @param state - The current state this block is in.
-	 * @param stackSizeShape1 - The shape for stack size 1.
-	 * @param stackSizeShape2 - The shape for stack size 2.
-	 * @param stackSizeShapeTop3 - The shape for the top of stack size 3.
-	 * @param stackSizeShapeBottom3 - The shape for the bottom of stack size 3.
-	 * @return The appropriate bounding box for the given state.
+	 * @param state                 The current state this block is in.
+	 * @param stackSizeShape1       The shape for stack size 1.
+	 * @param stackSizeShape2       The shape for stack size 2.
+	 * @param stackSizeShapeTop3    The shape for the top of stack size 3.
+	 * @param stackSizeShapeBottom3 The shape for the bottom of stack size 3.
+	 * @return                      The appropriate bounding box for the given state.
 	 */
 	private static VoxelShape getStackSizeShapes(BlockState state, VoxelShape stackSizeShape1, VoxelShape stackSizeShape2, VoxelShape stackSizeShapeTop3, VoxelShape stackSizeShapeBottom3)
 	{

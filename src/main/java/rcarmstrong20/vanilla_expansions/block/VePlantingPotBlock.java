@@ -43,6 +43,9 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
 		super(properties);
 	}
 	
+	/**
+	 * Creates the bounding box for this block.
+	 */
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
@@ -90,6 +93,9 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
 			   VeBlockTags.END_PLANTABLE.func_230235_a_(this.getBlock()) && VeBlockTags.END_POTTABLE.func_230235_a_(plantBlock);
 	}
 	
+	/**
+	 * Creates a list of properties that this block can have.
+	 */
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{

@@ -19,6 +19,9 @@ public class VeMushroomBlock extends MushroomBlock
 		super(properties);
 	}
 	
+	/**
+	 * Lets the small purple mushroom grow big when using bone meal.
+	 */
 	@Override
 	public boolean func_226940_a_(ServerWorld serverWorld, BlockPos blockPos, BlockState blockState, Random random)
 	{
