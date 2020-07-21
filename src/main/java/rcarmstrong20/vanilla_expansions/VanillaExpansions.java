@@ -170,7 +170,7 @@ public class VanillaExpansions
                         event.setCanceled(true);
                     }
                 }
-                // If its not a beet root and a crop then it must be a normal 7 stage crop and
+                // If its not a beet root crop then it must be a normal 7 stage crop and
                 // if it's fully grown harvest it.
                 else if (worldState.get(cropsAge) == getMaxAge(cropsAge))
                 {
