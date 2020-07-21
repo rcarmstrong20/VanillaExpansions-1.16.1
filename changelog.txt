@@ -1,3 +1,28 @@
+Build: 1.16.1-32.0.71 - Mon Jul 20 22:56:31 GMT 2020
+	cyborgmas18:
+		Load Modded Datapacks in DatapackScreen, before world creation (#6913)
+
+=========
+Build: 1.16.1-32.0.70 - Sat Jul 18 22:35:53 GMT 2020
+	tterrag:
+		Fix inconsistencies with model/blockstate datagen
+
+=========
+Build: 1.16.1-32.0.69 - Fri Jul 17 17:35:47 GMT 2020
+	dev:
+		Filter duplicate mod files from mod file scan data (#6855)
+
+=========
+Build: 1.16.1-32.0.68 - Thu Jul 16 21:56:30 GMT 2020
+	lex:
+		Fixed Forge commands. Closes #6973 Closes #6974 Closes #6976
+
+=========
+Build: 1.16.1-32.0.67 - Wed Jul 15 19:30:53 GMT 2020
+	jaredlll08:
+		Added an event for registering commands. closes #6968 (#6969)
+
+=========
 Build: 1.16.1-32.0.66 - Tue Jul 14 00:15:41 GMT 2020
 	darklime:
 		Make all functions in Style common. (#6931)
