@@ -49,7 +49,8 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
         if (!maxAgeFlag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL)
         {
             return ActionResultType.PASS;
-        } else if (currentAge > 1)
+        }
+        else if (currentAge > 1)
         {
             spawnDrops(state, world, pos);
             world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH,
@@ -69,7 +70,8 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
         if (this.getBlock() == VeBlocks.witchs_cradle && state.get(AGE) == 0)
         {
             return WITCHS_CRADLE_STAGE_0_SHAPE;
-        } else
+        }
+        else
         {
             return super.getShape(state, world, pos, context);
         }
@@ -78,6 +80,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     /**
      * Called when pick-blocking this block.
      */
+    @Override
     @OnlyIn(Dist.CLIENT)
     public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
     {
@@ -86,10 +89,12 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
         if (block == VeBlocks.blueberry_bush)
         {
             return new ItemStack(VeItems.blueberries);
-        } else if (block == VeBlocks.cranberry_bush)
+        }
+        else if (block == VeBlocks.cranberry_bush)
         {
             return new ItemStack(VeItems.cranberries);
-        } else if (block == VeBlocks.witchs_cradle)
+        }
+        else if (block == VeBlocks.witchs_cradle)
         {
             return new ItemStack(VeItems.witchs_cradle_branch);
         }
@@ -113,12 +118,13 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
         if (this.getBlock() == VeBlocks.witchs_cradle)
         {
             super.onEntityCollision(state, world, pos, entityIn);
-        } else
+        }
+        else
         {
             if (entityIn instanceof LivingEntity && entityIn.getType() != EntityType.FOX
                     && entityIn.getType() != EntityType.BEE)
             {
-                entityIn.setMotionMultiplier(state, new Vector3d((double) 0.8F, 0.75D, (double) 0.8F));
+                entityIn.setMotionMultiplier(state, new Vector3d(0.8F, 0.75D, 0.8F));
             }
         }
     }
