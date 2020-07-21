@@ -26,7 +26,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.VeBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
@@ -211,22 +210,20 @@ public class VeBlocks
             new VePufferfishPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block regice_pokedoll = register("regice_pokedoll", true,
             new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.ICE)
-                    .hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.CLOTH).notSolid()));
+                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
     public static Block regirock_pokedoll = register("regirock_pokedoll", true,
             new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.SAND)
-                    .hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.CLOTH).notSolid()));
+                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
     public static Block registeel_pokedoll = register("registeel_pokedoll", true,
             new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.IRON)
-                    .hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.CLOTH).notSolid()));
+                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
     public static Block regigigas_pokedoll = register("regigigas_pokedoll", true,
             new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.STONE)
-                    .hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.CLOTH).notSolid()));
+                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
     public static Block ruby_ore = register("nether_ruby_ore", true,
-            new VeOreBlock(AbstractBlock.Properties.create(Material.ROCK)
-                    .hardnessAndResistance(VeBlock.STONE_HARDNESS, VeBlock.STONE_RESISTANCE).sound(SoundType.STONE)));
-    public static Block ruby_block = register("ruby_block", true,
-            new Block(AbstractBlock.Properties.create(Material.IRON, MaterialColor.RED)
-                    .hardnessAndResistance(VeBlock.STONE_HARDNESS, VeBlock.STONE_RESISTANCE).sound(SoundType.STONE)));
+            new VeOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE)));
+    public static Block ruby_block = register("ruby_block", true, new Block(AbstractBlock.Properties
+            .create(Material.IRON, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.STONE)));
     public static Block smoky_quartz_ore = register("nether_smoky_quartz_ore", true,
             new VeOreBlock(AbstractBlock.Properties.from(Blocks.NETHER_QUARTZ_ORE)));
     public static Block smoky_quartz_block = register("smoky_quartz_block", true,
@@ -407,10 +404,8 @@ public class VeBlocks
                     AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
     public static Block packed_snow_slab = register("packed_snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
-    public static Block turkey = register("turkey", true,
-            new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN)
-                    .hardnessAndResistance(VeBlock.CLOTH_HARDNESS).sound(SoundType.SNOW)),
-            1);
+    public static Block turkey = register("turkey", true, new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties
+            .create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(0.5F).sound(SoundType.SNOW)), 1);
     public static Block glass_of_darkness = register("glass_of_darkness", true,
             new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
     public static Block purple_mushroom = register("purple_mushroom", true,
