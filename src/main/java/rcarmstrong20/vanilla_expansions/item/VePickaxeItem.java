@@ -5,8 +5,8 @@ import net.minecraft.item.PickaxeItem;
 
 public class VePickaxeItem extends PickaxeItem
 {
-	public VePickaxeItem(IItemTier tier, int attackDamageIn, Properties builder)
-	{
-		super(tier, attackDamageIn, -2.8F, builder);
-	}
+    public VePickaxeItem(IItemTier tier, int attackDamageIn, Properties builder)
+    {
+        super(tier, attackDamageIn, -2.8F, builder);
+    }
 }

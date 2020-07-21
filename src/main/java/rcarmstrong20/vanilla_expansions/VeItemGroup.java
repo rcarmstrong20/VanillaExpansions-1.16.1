@@ -6,14 +6,14 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public class VeItemGroup extends ItemGroup
 {
-	public VeItemGroup(String label)
-	{
-		super(label);
-	}
-	
-	@Override
-	public ItemStack createIcon()
-	{
-		return new ItemStack(VeItems.ruby);
-	}
+    public VeItemGroup(String label)
+    {
+        super(label);
+    }
+
+    @Override
+    public ItemStack createIcon()
+    {
+        return new ItemStack(VeItems.ruby);
+    }
 }

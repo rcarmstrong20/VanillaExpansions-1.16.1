@@ -14,22 +14,23 @@ import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContaine
 
 public class VeWoodcutterBlock extends StonecutterBlock
 {
-	private static final TranslationTextComponent name = new TranslationTextComponent("container.woodcutter");
-	
-	public VeWoodcutterBlock(Properties properties)
-	{
-		super(properties);
-	}
-	
-	/**
-	 * Returns a new container.
-	 */
-	@Override
-	@Nullable
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-		return new SimpleNamedContainerProvider((p_220283_2_, p_220283_3_, p_220283_4_) ->
-		{
-			return new VeWoodcutterContainer(p_220283_2_, p_220283_3_, IWorldPosCallable.of(worldIn, pos));
-		}, name);
-	}
+    private static final TranslationTextComponent name = new TranslationTextComponent("container.woodcutter");
+
+    public VeWoodcutterBlock(Properties properties)
+    {
+        super(properties);
+    }
+
+    /**
+     * Returns a new container.
+     */
+    @Override
+    @Nullable
+    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos)
+    {
+        return new SimpleNamedContainerProvider((p_220283_2_, p_220283_3_, p_220283_4_) ->
+        {
+            return new VeWoodcutterContainer(p_220283_2_, p_220283_3_, IWorldPosCallable.of(worldIn, pos));
+        }, name);
+    }
 }

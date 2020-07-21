@@ -9,21 +9,21 @@ import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
 public class VeGlassBlock extends GlassBlock
 {
-	public VeGlassBlock(Block.Properties properties)
-	{
-		super(properties);
-	}
-	
-	/**
-	 * Checks whether this block should let light pass through.
-	 */
-	@Override
-	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		if(this == VeBlocks.glass_of_darkness)
-		{
-			return worldIn.getMaxLightLevel();
-		}
-		return state.propagatesSkylightDown(worldIn, pos) ? 0 : 1;
-	}
+    public VeGlassBlock(Block.Properties properties)
+    {
+        super(properties);
+    }
+
+    /**
+     * Checks whether this block should let light pass through.
+     */
+    @Override
+    public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
+    {
+        if (this == VeBlocks.glass_of_darkness)
+        {
+            return worldIn.getMaxLightLevel();
+        }
+        return state.propagatesSkylightDown(worldIn, pos) ? 0 : 1;
+    }
 }

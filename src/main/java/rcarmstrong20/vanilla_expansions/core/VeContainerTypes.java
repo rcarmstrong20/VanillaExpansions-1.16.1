@@ -16,35 +16,36 @@ import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContaine
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeContainerTypes
 {
-	public static final List<ContainerType<?>> CONTAINER_TYPES = new ArrayList<>();
-	
-	public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
-	public static ContainerType<VeEaselContainer> easel = register("easel", VeEaselContainer::new);
-	
-	/**
-	 * @param <T>
-	 * @param name    A name for the container type.
-	 * @param factory A container factory for the container type.
-	 * @return        A new container type.
-	 */
-	private static <T extends Container> ContainerType<T> register(String name, ContainerType.IFactory<T> factory)
-	{
-		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), factory);
-	}
-	
-	private static <T extends Container> ContainerType<T> register(ResourceLocation name, ContainerType.IFactory<T> factory)
-	{
-		ContainerType<T> type = new ContainerType<>(factory);
-		type.setRegistryName(name);
-		CONTAINER_TYPES.add(type);
-		return type;
-	}
-	
-	@SubscribeEvent
+    public static final List<ContainerType<?>> CONTAINER_TYPES = new ArrayList<>();
+
+    public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
+    public static ContainerType<VeEaselContainer> easel = register("easel", VeEaselContainer::new);
+
+    /**
+     * @param <T>
+     * @param name    A name for the container type.
+     * @param factory A container factory for the container type.
+     * @return A new container type.
+     */
+    private static <T extends Container> ContainerType<T> register(String name, ContainerType.IFactory<T> factory)
+    {
+        return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), factory);
+    }
+
+    private static <T extends Container> ContainerType<T> register(ResourceLocation name,
+            ContainerType.IFactory<T> factory)
+    {
+        ContainerType<T> type = new ContainerType<>(factory);
+        type.setRegistryName(name);
+        CONTAINER_TYPES.add(type);
+        return type;
+    }
+
+    @SubscribeEvent
     public static void registerTypes(final RegistryEvent.Register<ContainerType<?>> event)
     {
-		CONTAINER_TYPES.forEach(type -> event.getRegistry().register(type));
-		CONTAINER_TYPES.clear();
-		VanillaExpansions.LOGGER.info("Container types registered.");
+        CONTAINER_TYPES.forEach(type -> event.getRegistry().register(type));
+        CONTAINER_TYPES.clear();
+        VanillaExpansions.LOGGER.info("Container types registered.");
     }
 }

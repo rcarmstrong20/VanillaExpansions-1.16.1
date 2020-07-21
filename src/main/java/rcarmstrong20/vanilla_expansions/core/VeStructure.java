@@ -15,33 +15,34 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {
-	private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
-	
-	public static final Structure<VeCabinFeatureConfig> CABIN = register("cabin", new VeCabinStructure(VeCabinFeatureConfig.field_236627_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
-	
-	/**
-	 * @param <F>
-	 * @param name       The name for the structure.
-	 * @param structure  A new instance of the Structure<config> class.
-	 * @param decoration The decoration category for this structure.
-	 * @return           A new structure.
-	 */
-	private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decoration)
-	{
-		structure.setRegistryName(VanillaExpansions.MOD_ID, name);
-		STRUCTURES.add(structure);
-		return structure;
-	}
-	
-	/**
-	 * Register the Structures to the game
-	 */
-	@SubscribeEvent
-	public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)
-	{
-		STRUCTURES.forEach(structure -> event.getRegistry().register(structure));
-		STRUCTURES.clear();
-		
-		VanillaExpansions.LOGGER.info("Structures registered.");
-	}
+    private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
+
+    public static final Structure<VeCabinFeatureConfig> CABIN = register("cabin",
+            new VeCabinStructure(VeCabinFeatureConfig.field_236627_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
+
+    /**
+     * @param <F>
+     * @param name       The name for the structure.
+     * @param structure  A new instance of the Structure<config> class.
+     * @param decoration The decoration category for this structure.
+     * @return A new structure.
+     */
+    private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decoration)
+    {
+        structure.setRegistryName(VanillaExpansions.MOD_ID, name);
+        STRUCTURES.add(structure);
+        return structure;
+    }
+
+    /**
+     * Register the Structures to the game
+     */
+    @SubscribeEvent
+    public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)
+    {
+        STRUCTURES.forEach(structure -> event.getRegistry().register(structure));
+        STRUCTURES.clear();
+
+        VanillaExpansions.LOGGER.info("Structures registered.");
+    }
 }

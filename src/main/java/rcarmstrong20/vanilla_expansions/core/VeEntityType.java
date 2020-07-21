@@ -14,25 +14,28 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 //@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeEntityType
 {
-	private static final List<EntityType<?>> ENTITY_TYPES = new ArrayList<>();
-	
-	//public static final EntityType<VeRabbitEntity> rabbit = buildType(VanillaExpansions.MINECRAFT_ID, "rabbit", EntityType.Builder.create(VeRabbitEntity::new, EntityClassification.CREATURE));
-	
-	@SuppressWarnings("unused")
-	private static <T extends Entity> EntityType<T> buildType(String id, String name, EntityType.Builder<T> builder)
+    private static final List<EntityType<?>> ENTITY_TYPES = new ArrayList<>();
+
+    // public static final EntityType<VeRabbitEntity> rabbit =
+    // buildType(VanillaExpansions.MINECRAFT_ID, "rabbit",
+    // EntityType.Builder.create(VeRabbitEntity::new,
+    // EntityClassification.CREATURE));
+
+    @SuppressWarnings("unused")
+    private static <T extends Entity> EntityType<T> buildType(String id, String name, EntityType.Builder<T> builder)
     {
         EntityType<T> type = builder.build(id + ":" + name);
         type.setRegistryName(new ResourceLocation(id, name));
         ENTITY_TYPES.add(type);
         return type;
     }
-	
-	@SubscribeEvent
+
+    @SubscribeEvent
     public static void registerTypes(final RegistryEvent.Register<EntityType<?>> event)
     {
         ENTITY_TYPES.forEach(type -> event.getRegistry().register(type));
         ENTITY_TYPES.clear();
-        
+
         VanillaExpansions.LOGGER.info("Entity types registered.");
     }
 }

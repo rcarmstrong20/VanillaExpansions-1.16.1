@@ -5,9 +5,8 @@ import net.minecraft.item.SwordItem;
 
 public class VeSwordItem extends SwordItem
 {
-	public VeSwordItem(IItemTier tier, int attackDamageIn, Properties builder)
-	{
-		super(tier, attackDamageIn, -2.4F, builder);
-	}
-
+    public VeSwordItem(IItemTier tier, int attackDamageIn, Properties builder)
+    {
+        super(tier, attackDamageIn, -2.4F, builder);
+    }
 }
