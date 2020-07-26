@@ -243,70 +243,72 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
         BlockPos bottomNorthPos = bottomPos.north();
         BlockPos bottomSouthPos = bottomPos.south();
 
+        TileEntity tileEntity = world.getTileEntity(pos);
+
         /*
          * TileEntity tileEntity = world.getTileEntity(pos);
-         * 
+         *
          * TileEntity topTileEntity = world.getTileEntity(pos.up()); TileEntity
          * bottomTileEntity = world.getTileEntity(pos.down());
-         * 
+         *
          * TileEntity eastTileEntity = world.getTileEntity(pos.east()); TileEntity
          * westTileEntity = world.getTileEntity(pos.west()); TileEntity northTileEntity
          * = world.getTileEntity(pos.north()); TileEntity southTileEntity =
          * world.getTileEntity(pos.south());
-         * 
+         *
          * TileEntity topEastTileEntity = world.getTileEntity(pos.up().east());
          * TileEntity topWestTileEntity = world.getTileEntity(pos.up().west());
          * TileEntity topNorthTileEntity = world.getTileEntity(pos.up().north());
          * TileEntity topSouthTileEntity = world.getTileEntity(pos.up().south());
-         * 
+         *
          * TileEntity bottomEastTileEntity = world.getTileEntity(pos.down().east());
          * TileEntity bottomWestTileEntity = world.getTileEntity(pos.down().west());
          * TileEntity bottomNorthTileEntity = world.getTileEntity(pos.down().north());
          * TileEntity bottomSouthTileEntity = world.getTileEntity(pos.down().south());
-         * 
+         *
          * TileEntity east2TileEntity = world.getTileEntity(pos.east(2)); TileEntity
          * east3TileEntity = world.getTileEntity(pos.east(3)); TileEntity
          * west2TileEntity = world.getTileEntity(pos.west(2)); TileEntity
          * west3TileEntity = world.getTileEntity(pos.west(3));
-         * 
+         *
          * TileEntity bottomEast2TileEntity = world.getTileEntity(pos.down().east(2));
          * TileEntity bottomEast3TileEntity = world.getTileEntity(pos.down().east(3));
          * TileEntity bottomWest2TileEntity = world.getTileEntity(pos.down().west(2));
          * TileEntity bottomWest3TileEntity = world.getTileEntity(pos.down().west(3));
-         * 
+         *
          * TileEntity topEast2TileEntity = world.getTileEntity(pos.up().east(2));
          * TileEntity topEast3TileEntity = world.getTileEntity(pos.up().east(3));
          * TileEntity topWest2TileEntity = world.getTileEntity(pos.up().west(2));
          * TileEntity topWest3TileEntity = world.getTileEntity(pos.up().west(3));
-         * 
+         *
          * BlockState topState = world.getBlockState(pos.up()); BlockState bottomState =
          * world.getBlockState(pos.down());
-         * 
+         *
          * BlockState eastState = world.getBlockState(pos.east()); BlockState westState
          * = world.getBlockState(pos.west()); BlockState southState =
          * world.getBlockState(pos.south()); BlockState northState =
          * world.getBlockState(pos.north());
-         * 
+         *
          * BlockState topEastState = world.getBlockState(pos.up().east()); BlockState
          * topWestState = world.getBlockState(pos.up().west()); BlockState topSouthState
          * = world.getBlockState(pos.up().south()); BlockState topNorthState =
          * world.getBlockState(pos.up().north());
-         * 
+         *
          * BlockState bottomEastState = world.getBlockState(pos.down().east());
          * BlockState bottomWestState = world.getBlockState(pos.down().west());
          * BlockState bottomSouthState = world.getBlockState(pos.down().south());
          * BlockState bottomNorthState = world.getBlockState(pos.down().north());
-         * 
+         *
          * BlockState east2State = world.getBlockState(pos.east(2)); BlockState
          * east3State = world.getBlockState(pos.east(3)); BlockState west2State =
          * world.getBlockState(pos.west(2)); BlockState west3State =
          * world.getBlockState(pos.west(3));
-         * 
+         *
          * BlockState bottomEast2State = world.getBlockState(pos.down().east(2));
          * BlockState bottomEast3State = world.getBlockState(pos.down().east(3));
          * BlockState bottomWest2State = world.getBlockState(pos.down().west(2));
          * BlockState bottomWest3State = world.getBlockState(pos.down().west(3));
-         * 
+         *
          * BlockState topEast2State = world.getBlockState(pos.up().east(2)); BlockState
          * topEast3State = world.getBlockState(pos.up().east(3)); BlockState
          * topWest2State = world.getBlockState(pos.up().west(2)); BlockState
@@ -433,22 +435,27 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
                     return ActionResultType.SUCCESS;
                 }
             }
+            // func_230235_a_(item) is the same as .contains(item)
+            else if (VeItemTags.PAINTINGS.func_230235_a_(heldItem.getItem()) && tileEntity instanceof VeFrameTileEntity)
+            {
+                VeFrameTileEntity clickedFrame = (VeFrameTileEntity) tileEntity;
 
-            /*
-             * else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()) &&
-             * isEmpty(clickedFrame)) { clickedFrame.addItem(heldItem);
-             * world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE,
-             * SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F); return
-             * ActionResultType.CONSUME; }
-             */
+                if (isEmpty(clickedFrame))
+                {
+                    clickedFrame.addItem(heldItem);
+                    world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F,
+                            0.8F + world.rand.nextFloat() * 0.4F);
+                    return ActionResultType.CONSUME;
+                }
+            }
         }
         return ActionResultType.FAIL;
     }
     /*
      * if(!world.isRemote && tileEntity instanceof VeFrameTileEntity) {
      * VeFrameTileEntity clickedFrame = (VeFrameTileEntity) tileEntity;
-     * 
-     * 
+     *
+     *
      * /* //Eight block paintings start. else
      * if(VeEightBlockPainting.getBottomLeftMiddlePaintingMap().containsKey(heldItem
      * .getItem()) ||
@@ -477,7 +484,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * (VeFrameTileEntity) bottomEastTileEntity; VeFrameTileEntity bottomEast2Frame
      * = (VeFrameTileEntity) bottomEast2TileEntity; VeFrameTileEntity
      * bottomEast3Frame = (VeFrameTileEntity) bottomEast3TileEntity;
-     * 
+     *
      * if(VeEightBlockPainting.frameFitsPainting(state, bottomState, eastState,
      * east2State, east3State, bottomEastState, bottomEast2State, bottomEast3State,
      * clickedFrame, bottomFrame, eastFrame, east2Frame, east3Frame,
@@ -514,7 +521,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * (VeFrameTileEntity) topEastTileEntity; VeFrameTileEntity topEast2Frame =
      * (VeFrameTileEntity) topEast2TileEntity; VeFrameTileEntity topEast3Frame =
      * (VeFrameTileEntity) topEast3TileEntity;
-     * 
+     *
      * if(VeEightBlockPainting.frameFitsPainting(state, topState, eastState,
      * east2State, east3State, topEastState, topEast2State, topEast3State,
      * clickedFrame, topFrame, eastFrame, east2Frame, east3Frame, topEastFrame,
@@ -550,7 +557,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * (VeFrameTileEntity) bottomWestTileEntity; VeFrameTileEntity bottomEastFrame =
      * (VeFrameTileEntity) bottomEastTileEntity; VeFrameTileEntity bottomEast2Frame
      * = (VeFrameTileEntity) bottomEast2TileEntity;
-     * 
+     *
      * if(VeEightBlockPainting.frameFitsPainting(state, bottomState, westState,
      * eastState, east2State, bottomWestState, bottomEastState, bottomEast2State,
      * clickedFrame, bottomFrame, westFrame, eastFrame, east2Frame, bottomWestFrame,
@@ -573,7 +580,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * getItem())))) { world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE,
      * SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
      * heldItem.shrink(1); return ActionResultType.SUCCESS; } } }
-     * 
+     *
      * //Place the painting from bottom west right middle. Fix if(topTileEntity
      * instanceof VeFrameTileEntity && westTileEntity instanceof VeFrameTileEntity
      * && eastTileEntity instanceof VeFrameTileEntity && east2TileEntity instanceof
@@ -587,7 +594,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * (VeFrameTileEntity) topWestTileEntity; VeFrameTileEntity topEastFrame =
      * (VeFrameTileEntity) topEastTileEntity; VeFrameTileEntity topEast2Frame =
      * (VeFrameTileEntity) topEast2TileEntity;
-     * 
+     *
      * if(VeEightBlockPainting.frameFitsPainting(state, topState, westState,
      * eastState, east2State, topWestState, topEastState, topEast2State,
      * clickedFrame, topFrame, westFrame, eastFrame, east2Frame, topWestFrame,
@@ -610,7 +617,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * )))) { world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE,
      * SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
      * heldItem.shrink(1); return ActionResultType.SUCCESS; } } }
-     * 
+     *
      * //Place the painting from top west left middle. if(bottomTileEntity
      * instanceof VeFrameTileEntity && eastTileEntity instanceof VeFrameTileEntity
      * && westTileEntity instanceof VeFrameTileEntity && west2TileEntity instanceof
@@ -624,7 +631,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * (VeFrameTileEntity) bottomEastTileEntity; VeFrameTileEntity bottomWestFrame =
      * (VeFrameTileEntity) bottomWestTileEntity; VeFrameTileEntity bottomWest2Frame
      * = (VeFrameTileEntity) bottomWest2TileEntity;
-     * 
+     *
      * if(VeEightBlockPainting.frameFitsPainting(state, bottomState, eastState,
      * westState, west2State, bottomEastState, bottomWestState, bottomWest2State,
      * clickedFrame, bottomFrame, eastFrame, westFrame, west2Frame, bottomEastFrame,
@@ -664,7 +671,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
     /**
      * A helper that checks whether the two facing properties match.
-     * 
+     *
      * @param state1 The first block state.
      * @param state2 The second block state.
      * @return If both are the same return true otherwise return false.
@@ -750,11 +757,13 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
         if (stateIn.get(WATERLOGGED))
         {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-        } else if (facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
+        }
+        else if (facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
         {
             super.onBlockHarvested(worldIn.getWorld(), currentPos, stateIn, null);
             return Blocks.AIR.getDefaultState();
-        } else
+        }
+        else
         {
             return stateIn.with(UP, Boolean.valueOf(upFlag)).with(DOWN, Boolean.valueOf(downFlag))
                     .with(NORTH, Boolean.valueOf(northFlag)).with(EAST, Boolean.valueOf(eastFlag))
@@ -892,7 +901,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
                 spawnAsEntity(world, pos, new ItemStack(tallPaintingMap.get(inventoryItem))); // Spawn the drops in the
                                                                                               // world.
-            } else if (sidePaintingMap.containsKey(inventoryItem))
+            }
+            else if (sidePaintingMap.containsKey(inventoryItem))
             {
                 // Harvest from x-axis right.
                 harvestPainting(world, Arrays.asList(pos, eastPos), Arrays
@@ -912,7 +922,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
                 spawnAsEntity(world, pos, new ItemStack(sidePaintingMap.get(inventoryItem))); // Spawn the drops in the
                                                                                               // world.
-            } else if (fourPaintingMap.containsKey(inventoryItem))
+            }
+            else if (fourPaintingMap.containsKey(inventoryItem))
             {
                 // Harvest from x-axis top right.
                 harvestPainting(world, Arrays.asList(pos, bottomPos, eastPos, bottomEastPos), Arrays.asList(
@@ -956,7 +967,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
                 spawnAsEntity(world, pos, new ItemStack(fourPaintingMap.get(inventoryItem))); // Spawn the drops in the
                                                                                               // world.
-            } else if (VeItemTags.PAINTINGS.func_230235_a_(inventoryItem) && !isEmpty(clickedFrame))
+            }
+            else if (VeItemTags.PAINTINGS.func_230235_a_(inventoryItem) && !isEmpty(clickedFrame))
             {
                 spawnAsEntity(world, pos, new ItemStack(inventoryItem)); // Spawn the drops in the world.
             }
@@ -967,7 +979,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
     /**
      * A method that clears every frame that contains the painting currently being
      * harvested.
-     * 
+     *
      * @param world          The current world.
      * @param framePositions A list of frame positions.
      * @param paintingParts  A list of painting maps.
@@ -984,7 +996,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
      * A helper method that returns true if both blocks make up the painting
      * harvested. It returns an exception if the two lists passed lists are
      * different sizes.
-     * 
+     *
      * @param world            The current world.
      * @param posList          A list of frame positions.
      * @param paintingPartsMap A list of painting maps.
@@ -1017,7 +1029,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
                 }
             }
             return false;
-        } else
+        }
+        else
         {
             throw new IllegalArgumentException("The two lists are different sizes!!!");
         }
@@ -1025,7 +1038,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
     /**
      * A helper method that is called when the method isPaintingPart returns true
-     * 
+     *
      * @param world   The current world
      * @param posList A list of frame positions to clear.
      */
@@ -1047,7 +1060,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        switch ((Direction) state.get(FACING))
+        switch (state.get(FACING))
         {
             case NORTH:
                 return defineShapes(state, state.get(WEST), state.get(EAST), Direction.NORTH, FRAME_NORTH_TOP_RIM_SHAPE,
@@ -1106,6 +1119,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
         return new VeFrameTileEntity();
     }
 
+    @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(FACING, WATERLOGGED, NORTH, SOUTH, WEST, EAST, UP, DOWN);
@@ -1122,109 +1136,132 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
         if (state.get(DOWN) && state.get(UP) && secondSide && firstSide)
         {
             return frameNone;
-        } else if (state.get(UP) && state.get(DOWN))
+        }
+        else if (state.get(UP) && state.get(DOWN))
         {
             if (secondSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameRightRim;
-                } else
+                }
+                else
                 {
                     return frameLeftRim;
                 }
-            } else if (firstSide)
+            }
+            else if (firstSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameLeftRim;
-                } else
+                }
+                else
                 {
                     return frameRightRim;
                 }
-            } else
+            }
+            else
             {
                 return frameRightAndLeftRim;
             }
-        } else if (secondSide && firstSide)
+        }
+        else if (secondSide && firstSide)
         {
             if (state.get(UP))
             {
                 return frameBottomRim;
-            } else if (state.get(DOWN))
+            }
+            else if (state.get(DOWN))
             {
                 return frameTopRim;
-            } else
+            }
+            else
             {
                 return frameTopAndBottomRim;
             }
-        } else if (state.get(UP))
+        }
+        else if (state.get(UP))
         {
             if (secondSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameBottomAndRightRim;
-                } else
+                }
+                else
                 {
                     return frameBottomAndLeftRim;
                 }
-            } else if (firstSide)
+            }
+            else if (firstSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameBottomAndLeftRim;
-                } else
+                }
+                else
                 {
                     return frameBottomAndRightRim;
                 }
-            } else
+            }
+            else
             {
                 return frameBottomLeftAndRightRim;
             }
-        } else if (state.get(DOWN))
+        }
+        else if (state.get(DOWN))
         {
             if (secondSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameTopAndRightRim;
-                } else
+                }
+                else
                 {
                     return frameTopAndLeftRim;
                 }
-            } else if (firstSide)
+            }
+            else if (firstSide)
             {
                 if (state.get(FACING) == secondDirection)
                 {
                     return frameTopAndLeftRim;
-                } else
+                }
+                else
                 {
                     return frameTopAndRightRim;
                 }
-            } else
+            }
+            else
             {
                 return frameTopLeftAndRightRim;
             }
-        } else if (secondSide)
+        }
+        else if (secondSide)
         {
             if (state.get(FACING) == secondDirection)
             {
                 return frameTopBottomAndRightRim;
-            } else
+            }
+            else
             {
                 return frameTopBottomAndLeftRim;
             }
-        } else if (firstSide)
+        }
+        else if (firstSide)
         {
             if (state.get(FACING) == secondDirection)
             {
                 return frameTopBottomAndLeftRim;
-            } else
+            }
+            else
             {
                 return frameTopBottomAndRightRim;
             }
-        } else
+        }
+        else
         {
             return frameAll;
         }
@@ -1328,10 +1365,10 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
          * for(int i2 = 0; i2 > paintingPartsList.size(); i2++) { Map<Item, Item>
          * currentMap = paintingPartsList.get(i2); TileEntity currentTileEntity2 =
          * world.getTileEntity(posList.get(i2));
-         * 
+         *
          * if(currentTileEntity2 instanceof VeFrameTileEntity) { VeFrameTileEntity
          * currentFrame2 = (VeFrameTileEntity) currentTileEntity2;
-         * 
+         *
          * if(!currentMap.containsValue(currentFrame2.getInventory().get(0).getItem()))
          * { return false; } } }
          */
@@ -1416,8 +1453,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
          * VeFrameTileEntity frame2, VeFrameTileEntity frame3, VeFrameTileEntity frame4)
          * { if(tileEntity3 instanceof VeFrameTileEntity && tileEntity4 instanceof
          * VeFrameTileEntity) {
-         * 
-         * 
+         *
+         *
          * return VeTwoBlockPainting.framesFitPainting(clickedState, state2,
          * clickedFrame, frame2) && clickedState.getBlock() == state3.getBlock() &&
          * clickedState.getBlock() == state4.getBlock() && matchesFacing(clickedState,
@@ -1439,8 +1476,6 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
             TileEntity tileEntity3 = world.getTileEntity(pos3);
             TileEntity tileEntity4 = world.getTileEntity(pos4);
 
-            // if()
-            // {
             VeFrameTileEntity frame3 = (VeFrameTileEntity) tileEntity3;
             VeFrameTileEntity frame4 = (VeFrameTileEntity) tileEntity4;
 
@@ -1454,7 +1489,6 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
                 {
                     return true;
                 }
-                // }
             }
             return false;
         }

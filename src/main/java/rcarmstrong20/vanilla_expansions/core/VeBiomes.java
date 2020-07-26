@@ -155,7 +155,7 @@ public class VeBiomes
     /**
      * Add a new feature to the spawn list for every biome that exists in a certain
      * category.
-     * 
+     *
      * @param decoration The decoration category for this feature.
      * @param feature    The spawn configuration for this feature.
      * @param enable     If true this feature will spawn. This is part of the
@@ -180,7 +180,7 @@ public class VeBiomes
 
     /**
      * Add a new feature to the spawn list for specific biomes.
-     * 
+     *
      * @param decoration The decoration category for this feature.
      * @param feature    The spawn configuration for this feature.
      * @param enable     If true this feature will spawn. This is part of the
@@ -204,7 +204,7 @@ public class VeBiomes
 
     /**
      * Add a new structure to be spawned into the world.
-     * 
+     *
      * @param structureFeature The spawn configuration for this structure.
      * @param enable           If true this structure will spawn. This is part of
      *                         the structure config.
