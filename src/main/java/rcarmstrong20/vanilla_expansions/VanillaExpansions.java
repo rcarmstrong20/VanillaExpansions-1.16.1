@@ -17,6 +17,7 @@ import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -89,7 +90,7 @@ public class VanillaExpansions
 
     /**
      * Called on the mod's setup.
-     * 
+     *
      * @param event Called on server and client setup.
      */
     private void setup(final FMLCommonSetupEvent event)
@@ -100,7 +101,7 @@ public class VanillaExpansions
 
     /**
      * Called exclusively on the client.
-     * 
+     *
      * @param event Called on client setup.
      */
     private void clientRegistries(final FMLClientSetupEvent event)
@@ -112,7 +113,7 @@ public class VanillaExpansions
     /**
      * This takes care of registering the particle factories if they are not
      * registered under the particle factory event there will be a bug.
-     * 
+     *
      * @param event Called during particle factory registry.
      */
     @OnlyIn(Dist.CLIENT)
@@ -125,11 +126,12 @@ public class VanillaExpansions
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_void,
                 VeDripParticle.VeLandingVoidFactory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid, VeUndervoidParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.yellow_spark, LavaParticle.Factory::new);
     }
 
     /**
      * Controls right-click crop harvesting and campfire re-coloring behavior.
-     * 
+     *
      * @param event Called when the player right-clicks a block.
      */
     @SubscribeEvent
@@ -240,7 +242,7 @@ public class VanillaExpansions
 
     /**
      * A helper method that harvests the passed in crop.
-     * 
+     *
      * @param state The state of the crop to harvest.
      * @param world The current world.
      * @param pos   The position for the crop to harvest.
@@ -274,7 +276,7 @@ public class VanillaExpansions
 
     /**
      * A helper method that adds a new pool to a vanilla table.
-     * 
+     *
      * @param event    An instance of the current loot table event.
      * @param lootName The name of the loot table that should be added to.
      */
@@ -293,7 +295,7 @@ public class VanillaExpansions
     /**
      * Individually tracks the naming behavior for each white and killer rabbit
      * entity, then either sets the rabbit type to 99 or 1.
-     * 
+     *
      * @param event Called when the player right-clicks any entity.
      */
     @SubscribeEvent
@@ -326,7 +328,7 @@ public class VanillaExpansions
     /**
      * Used to add functionality for growing snapdragons on end stone when using
      * bone meal.
-     * 
+     *
      * @param event Called when the player uses bone meal.
      */
     @SubscribeEvent
