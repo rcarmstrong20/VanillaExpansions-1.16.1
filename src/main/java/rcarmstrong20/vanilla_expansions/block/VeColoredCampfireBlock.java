@@ -1,6 +1,7 @@
 package rcarmstrong20.vanilla_expansions.block;
 
 import java.util.Optional;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,6 +26,10 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
 
 public class VeColoredCampfireBlock extends CampfireBlock
@@ -32,6 +37,35 @@ public class VeColoredCampfireBlock extends CampfireBlock
     public VeColoredCampfireBlock(Properties propertiesIn)
     {
         super(true, 1, propertiesIn);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+        Block block = this.getBlock();
+
+        if (stateIn.get(LIT))
+        {
+            if (rand.nextInt(10) == 0)
+            {
+                worldIn.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+                        SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(),
+                        rand.nextFloat() * 0.7F + 0.6F, false);
+            }
+
+            if (rand.nextInt(5) == 0)
+            {
+                for (int i = 0; i < rand.nextInt(1) + 1; ++i)
+                {
+                    if (block == VeBlocks.yellow_campfire)
+                    {
+                        worldIn.addParticle(VeParticleTypes.yellow_spark, pos.getX() + 0.5D, pos.getY() + 0.5D,
+                                pos.getZ() + 0.5D, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -94,7 +128,8 @@ public class VeColoredCampfireBlock extends CampfireBlock
                     {
                         spawnSmokeParticles(worldIn.getWorld(), pos, state.get(SIGNAL_FIRE), true);
                     }
-                } else
+                }
+                else
                 {
                     worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
                             SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -108,7 +143,8 @@ public class VeColoredCampfireBlock extends CampfireBlock
             worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(),
                     fluidStateIn.getFluid().getTickRate(worldIn));
             return true;
-        } else
+        }
+        else
         {
             return false;
         }

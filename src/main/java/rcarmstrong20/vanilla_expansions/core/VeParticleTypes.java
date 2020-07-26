@@ -20,6 +20,7 @@ public class VeParticleTypes
     public static BasicParticleType falling_void = register("falling_void", false);
     public static BasicParticleType landing_void = register("landing_void", false);
     public static BasicParticleType undervoid = register("undervoid", true);
+    public static BasicParticleType yellow_spark = register("yellow_spark", false);
 
     private static BasicParticleType register(String name, boolean alwaysShow)
     {
