@@ -126,7 +126,22 @@ public class VanillaExpansions
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_void,
                 VeDripParticle.VeLandingVoidFactory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid, VeUndervoidParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.white_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orange_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.magenta_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.light_blue_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.yellow_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lime_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.pink_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.gray_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.light_gray_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.cyan_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.purple_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blue_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.brown_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.green_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.red_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.black_spark, LavaParticle.Factory::new);
     }
 
     /**
@@ -226,8 +241,8 @@ public class VanillaExpansions
                 {
                     world.playSound((PlayerEntity) null, pos, VeSoundEvents.BLOCK_CAMPFIRE_DYED, SoundCategory.BLOCKS,
                             1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-                    world.setBlockState(pos, dyeToCampfire.get(itemStack.getItem()).getDefaultState()
-                            .with(CampfireBlock.FACING, currentFacing));
+                    Block.replaceBlock(worldState, dyeToCampfire.get(itemStack.getItem()).getDefaultState()
+                            .with(CampfireBlock.FACING, currentFacing), world, pos, 3);
                     itemStack.shrink(1);
                     event.setResult(Result.ALLOW);
                     event.setCanceled(true);

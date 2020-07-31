@@ -13,6 +13,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
@@ -28,23 +29,22 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
 
 public class VeColoredCampfireBlock extends CampfireBlock
 {
-    public VeColoredCampfireBlock(Properties propertiesIn)
+    private final IParticleData particle;
+
+    public VeColoredCampfireBlock(IParticleData particle, Properties propertiesIn)
     {
         super(true, 1, propertiesIn);
+        this.particle = particle;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        Block block = this.getBlock();
-
         if (stateIn.get(LIT))
         {
             if (rand.nextInt(10) == 0)
@@ -58,11 +58,8 @@ public class VeColoredCampfireBlock extends CampfireBlock
             {
                 for (int i = 0; i < rand.nextInt(1) + 1; ++i)
                 {
-                    if (block == VeBlocks.yellow_campfire)
-                    {
-                        worldIn.addParticle(VeParticleTypes.yellow_spark, pos.getX() + 0.5D, pos.getY() + 0.5D,
-                                pos.getZ() + 0.5D, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
-                    }
+                    worldIn.addParticle(particle, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+                            rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
                 }
             }
         }
