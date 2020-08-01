@@ -6,15 +6,16 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class VeCabinFeatureConfig implements IFeatureConfig
 {
-    public static final Codec<VeCabinFeatureConfig> field_236627_a_ = VeCabinStructure.Location.field_236342_h_
-            .fieldOf("cabin_type").xmap(VeCabinFeatureConfig::new, (p_236629_0_) ->
+    public static final Codec<VeCabinFeatureConfig> field_236627_a_ = VeCabinStructure.Type.field_236998_c_
+            .fieldOf("portal_type").xmap(VeCabinFeatureConfig::new, (function) ->
             {
-                return p_236629_0_.location;
+                return function.type;
             }).codec();
-    public final VeCabinStructure.Location location;
 
-    public VeCabinFeatureConfig(VeCabinStructure.Location location)
+    public final VeCabinStructure.Type type;
+
+    public VeCabinFeatureConfig(VeCabinStructure.Type type)
     {
-        this.location = location;
+        this.type = type;
     }
 }

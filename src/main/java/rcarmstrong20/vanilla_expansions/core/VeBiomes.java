@@ -89,11 +89,11 @@ public class VeBiomes
     public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(
             new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
     public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> TAIGA_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.TAIGA));
+            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.TAIGA_CABIN));
     public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> BIRCH_FOREST_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.BIRCH_FOREST));
+            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.BIRCH_FOREST_CABIN));
     public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> FOREST_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Location.FOREST));
+            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.FOREST_CABIN));
 
     @SubscribeEvent
     public static void registerBiomes(final RegistryEvent.Register<Biome> event)

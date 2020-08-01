@@ -55,7 +55,7 @@ public class VeCabinPieces
         /**
          * This is the constructor we use ourselves, the other constructor is needed for
          * the piece type
-         * 
+         *
          * @return
          */
         public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos,
@@ -119,15 +119,18 @@ public class VeCabinPieces
             {
                 LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                         new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
-            } else if ("forest_cabin_chest".equals(function))
+            }
+            else if ("forest_cabin_chest".equals(function))
             {
                 LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                         new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
-            } else if ("birch_forest_cabin_chest".equals(function))
+            }
+            else if ("birch_forest_cabin_chest".equals(function))
             {
                 LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                         new ResourceLocation(VanillaExpansions.MOD_ID, "chests/birch_forest_cabin"));
-            } else if ("cabin_flowers".equals(function))
+            }
+            else if ("cabin_flowers".equals(function))
             {
                 world.setBlockState(pos.down(), flowerPots.get(rand.nextInt(flowerPots.size())).getDefaultState(), 3);
             }

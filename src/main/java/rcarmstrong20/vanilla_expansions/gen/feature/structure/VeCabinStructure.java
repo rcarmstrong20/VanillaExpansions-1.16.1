@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 import com.mojang.serialization.Codec;
 
 import net.minecraft.util.IStringSerializable;
@@ -17,6 +19,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 
 public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
 {
@@ -50,28 +53,34 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
         return VanillaExpansions.MOD_ID + ":cabin";
     }
 
-    public static enum Location implements IStringSerializable
+    public static enum Type implements IStringSerializable
     {
-        TAIGA("taiga_cabin"), BIRCH_FOREST("birch_forest_cabin"), FOREST("forest_cabin");
-
-        public static final Codec<VeCabinStructure.Location> field_236342_h_ = IStringSerializable
-                .func_233023_a_(VeCabinStructure.Location::values, VeCabinStructure.Location::func_236346_a_);
-        private static final Map<String, VeCabinStructure.Location> field_236343_i_ = Arrays.stream(values())
-                .collect(Collectors.toMap(VeCabinStructure.Location::func_176610_l, (p_236345_0_) ->
-                {
-                    return p_236345_0_;
-                }));
+        TAIGA_CABIN("taiga_cabin"), BIRCH_FOREST_CABIN("birch_forest_cabin"), FOREST_CABIN("forest_cabin");
 
         private final String name;
 
-        private Location(String name)
+        private Type(String name)
         {
             this.name = name;
         }
 
-        public static VeCabinStructure.Location func_236346_a_(String locationName)
+        public static final Codec<Type> field_236998_c_ = IStringSerializable.func_233023_a_(Type::values,
+                Type::getType);
+        private static final Map<String, Type> BY_NAME = Arrays.stream(values())
+                .collect(Collectors.toMap(Type::getName, (p_215134_0_) ->
+                {
+                    return p_215134_0_;
+                }));
+
+        public String getName()
         {
-            return field_236343_i_.get(locationName);
+            return this.name;
+        }
+
+        @Nullable
+        public static Type getType(String nameIn)
+        {
+            return BY_NAME.get(nameIn);
         }
 
         @Override
@@ -108,15 +117,18 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
             String id = VanillaExpansions.MOD_ID;
             ResourceLocation templateLocation;
 
-            if (featureConfig.location == VeCabinStructure.Location.TAIGA)
+            if (VeBiomes.TAIGA_CABIN_BIOMES.contains(biome))// featureConfig.type == VeCabinStructure.Type.TAIGA
             {
-                templateLocation = new ResourceLocation(id, VeCabinStructure.Location.TAIGA.func_176610_l());
-            } else if (featureConfig.location == VeCabinStructure.Location.BIRCH_FOREST)
+                templateLocation = new ResourceLocation(id, VeCabinStructure.Type.TAIGA_CABIN.getName());
+            }
+            else if (VeBiomes.BIRCH_FOREST_CABIN_BIOMES.contains(biome))// featureConfig.type ==
+                                                                        // VeCabinStructure.Type.BIRCH_FOREST
             {
-                templateLocation = new ResourceLocation(id, VeCabinStructure.Location.BIRCH_FOREST.func_176610_l());
-            } else
+                templateLocation = new ResourceLocation(id, VeCabinStructure.Type.BIRCH_FOREST_CABIN.getName());
+            }
+            else
             {
-                templateLocation = new ResourceLocation(id, VeCabinStructure.Location.FOREST.func_176610_l());
+                templateLocation = new ResourceLocation(id, VeCabinStructure.Type.FOREST_CABIN.getName());
             }
 
             Rotation rotation = Rotation.randomRotation(this.rand);
