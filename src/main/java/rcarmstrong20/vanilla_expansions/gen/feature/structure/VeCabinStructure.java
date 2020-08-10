@@ -41,11 +41,9 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
     }
 
     /**
-     * An 'id' for the structure, distinct from registry id Used for the Locate
-     * command (by forge only, vanilla uses its own system) Should probably be in
-     * the format 'modid:name'
+     * The name used for the locate command.
      *
-     * @return name of structure
+     * @return The name for the structure
      */
     @Override
     public String getStructureName()
@@ -67,9 +65,9 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
         public static final Codec<Type> field_236998_c_ = IStringSerializable.func_233023_a_(Type::values,
                 Type::getType);
         private static final Map<String, Type> BY_NAME = Arrays.stream(values())
-                .collect(Collectors.toMap(Type::getName, (p_215134_0_) ->
+                .collect(Collectors.toMap(Type::getName, (type) ->
                 {
-                    return p_215134_0_;
+                    return type;
                 }));
 
         public String getName()
@@ -78,9 +76,9 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
         }
 
         @Nullable
-        public static Type getType(String nameIn)
+        public static Type getType(String name)
         {
-            return BY_NAME.get(nameIn);
+            return BY_NAME.get(name);
         }
 
         @Override
