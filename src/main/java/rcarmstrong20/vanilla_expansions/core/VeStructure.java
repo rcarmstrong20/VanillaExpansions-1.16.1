@@ -9,7 +9,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinFeatureConfig;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -17,8 +17,8 @@ public class VeStructure
 {
     private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 
-    public static final Structure<VeCabinFeatureConfig> CABIN = register("cabin",
-            new VeCabinStructure(VeCabinFeatureConfig.field_236627_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
+    public static final Structure<VeCabinConfig> CABIN = register("cabin",
+            new VeCabinStructure(VeCabinConfig.field_236627_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
 
     /**
      * @param <F>
@@ -35,7 +35,9 @@ public class VeStructure
     }
 
     /**
-     * Register the Structures to the game
+     * Register the Structures to the game.
+     *
+     * @param event An instance of the forge structure registry event.
      */
     @SubscribeEvent
     public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)

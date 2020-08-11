@@ -21,9 +21,9 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 
-public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
+public class VeCabinStructure extends Structure<VeCabinConfig>
 {
-    public VeCabinStructure(Codec<VeCabinFeatureConfig> config)
+    public VeCabinStructure(Codec<VeCabinConfig> config)
     {
         super(config);
     }
@@ -35,7 +35,7 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
      * @return method reference to Start constructor
      */
     @Override
-    public Structure.IStartFactory<VeCabinFeatureConfig> getStartFactory()
+    public Structure.IStartFactory<VeCabinConfig> getStartFactory()
     {
         return VeCabinStructure.Start::new;
     }
@@ -92,9 +92,9 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
      * The structure start is responsible for creating the structure in memory, but
      * not for placing the blocks themselves
      */
-    public static class Start extends StructureStart<VeCabinFeatureConfig>
+    public static class Start extends StructureStart<VeCabinConfig>
     {
-        public Start(Structure<VeCabinFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox,
+        public Start(Structure<VeCabinConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox,
                 int references, long seed)
         {
             super(structure, chunkX, chunkZ, boundingBox, references, seed);
@@ -110,7 +110,7 @@ public class VeCabinStructure extends Structure<VeCabinFeatureConfig>
          */
         @Override
         public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ,
-                Biome biome, VeCabinFeatureConfig featureConfig)
+                Biome biome, VeCabinConfig featureConfig)
         {
             String id = VanillaExpansions.MOD_ID;
             ResourceLocation templateLocation;

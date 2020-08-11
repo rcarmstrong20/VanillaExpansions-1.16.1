@@ -37,7 +37,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinFeatureConfig;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -88,12 +88,12 @@ public class VeBiomes
                     .whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
     public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(
             new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
-    public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> TAIGA_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.TAIGA_CABIN));
-    public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> BIRCH_FOREST_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.BIRCH_FOREST_CABIN));
-    public static final StructureFeature<VeCabinFeatureConfig, ? extends Structure<VeCabinFeatureConfig>> FOREST_CABIN = VeStructure.CABIN
-            .func_236391_a_(new VeCabinFeatureConfig(VeCabinStructure.Type.FOREST_CABIN));
+    public static final StructureFeature<VeCabinConfig, ? extends Structure<VeCabinConfig>> TAIGA_CABIN = VeStructure.CABIN
+            .func_236391_a_(new VeCabinConfig(VeCabinStructure.Type.TAIGA_CABIN));
+    public static final StructureFeature<VeCabinConfig, ? extends Structure<VeCabinConfig>> BIRCH_FOREST_CABIN = VeStructure.CABIN
+            .func_236391_a_(new VeCabinConfig(VeCabinStructure.Type.BIRCH_FOREST_CABIN));
+    public static final StructureFeature<VeCabinConfig, ? extends Structure<VeCabinConfig>> FOREST_CABIN = VeStructure.CABIN
+            .func_236391_a_(new VeCabinConfig(VeCabinStructure.Type.FOREST_CABIN));
 
     @SubscribeEvent
     public static void registerBiomes(final RegistryEvent.Register<Biome> event)
