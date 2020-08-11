@@ -35,9 +35,9 @@ public class VeColoredCampfireBlock extends CampfireBlock
 {
     private final IParticleData particle;
 
-    public VeColoredCampfireBlock(IParticleData particle, Properties propertiesIn)
+    public VeColoredCampfireBlock(IParticleData particle, Properties properties)
     {
-        super(true, 1, propertiesIn);
+        super(true, 1, properties);
         this.particle = particle;
     }
 
