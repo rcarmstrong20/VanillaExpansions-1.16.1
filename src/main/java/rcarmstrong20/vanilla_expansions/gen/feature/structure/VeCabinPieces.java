@@ -1,12 +1,10 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -45,10 +43,6 @@ public class VeCabinPieces
 
     public static class VePiece extends TemplateStructurePiece
     {
-        private List<Block> flowerPots = Arrays.asList(Blocks.POTTED_DANDELION, Blocks.POTTED_POPPY,
-                Blocks.POTTED_BLUE_ORCHID, Blocks.POTTED_ALLIUM, Blocks.POTTED_AZURE_BLUET, Blocks.POTTED_RED_TULIP,
-                Blocks.POTTED_ORANGE_TULIP, Blocks.POTTED_WHITE_TULIP, Blocks.POTTED_PINK_TULIP,
-                Blocks.POTTED_OXEYE_DAISY, Blocks.POTTED_CORNFLOWER, Blocks.POTTED_LILY_OF_THE_VALLEY);
         private final ResourceLocation templateResource;
         private final Rotation rotation;
 
@@ -132,7 +126,7 @@ public class VeCabinPieces
             }
             else if ("cabin_flowers".equals(function))
             {
-                world.setBlockState(pos.down(), flowerPots.get(rand.nextInt(flowerPots.size())).getDefaultState(), 3);
+                world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
             }
         }
 
