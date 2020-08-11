@@ -32,12 +32,12 @@ public class VeConfig
     public static void loadConfig(ForgeConfigSpec config, String path)
     {
         VanillaExpansions.LOGGER.info("Loading config: " + path);
-        final CommentedFileConfig FILE = CommentedFileConfig.builder(new File(path)).sync().autosave()
+        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).sync().autosave()
                 .writingMode(WritingMode.REPLACE).build();
         VanillaExpansions.LOGGER.info("Built config: " + path);
-        FILE.load();
+        file.load();
         VanillaExpansions.LOGGER.info("Loaded config: " + path);
-        config.setConfig(FILE);
+        config.setConfig(file);
     }
 
     /**
