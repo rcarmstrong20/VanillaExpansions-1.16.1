@@ -22,7 +22,7 @@ public class VeFeature
 
     /**
      * Set the registry name for the features and add them to the registry list.
-     * 
+     *
      * @param <C>
      * @param name    A name for the feature.
      * @param feature A new instance of the class feature.
