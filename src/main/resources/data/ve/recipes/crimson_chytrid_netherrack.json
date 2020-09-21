@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:crimson_chytrid_netherrack"
+  }
+}
