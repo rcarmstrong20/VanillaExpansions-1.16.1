@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:crimson_chytrid_nether_bricks"
+  },
+  "result": "ve:crimson_chytrid_nether_brick_wall",
+  "count": 1
+}
