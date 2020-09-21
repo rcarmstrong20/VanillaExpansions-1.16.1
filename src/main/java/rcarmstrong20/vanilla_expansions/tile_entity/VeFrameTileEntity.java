@@ -39,6 +39,7 @@ public class VeFrameTileEntity extends TileEntity implements IClearable
         return compound;
     }
 
+    @Override
     @Nullable
     public SUpdateTileEntityPacket getUpdatePacket()
     {
@@ -103,7 +104,7 @@ public class VeFrameTileEntity extends TileEntity implements IClearable
 
     public void dropAllItems()
     {
-        if (!this.getWorld().isRemote)
+        if (!this.getWorld().isRemote())
         {
             InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
         }
