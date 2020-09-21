@@ -146,7 +146,8 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
             if (i == this.container.getSelectedRecipe())
             {
                 l1 += 14;
-            } else if (mouseX >= j1 && mouseY >= k1 && mouseX < j1 + 14 && mouseY < k1 + 14)
+            }
+            else if (mouseX >= j1 && mouseY >= k1 && mouseX < j1 + 14 && mouseY < k1 + 14)
             {
                 l1 += 28;
             }
@@ -192,8 +193,8 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
             for (int l = this.recipeIndexOffset; l < k; ++l)
             {
                 int i1 = l - this.recipeIndexOffset;
-                double d0 = p_mouseClicked_1_ - (double) (i + i1 % 4 * 14);
-                double d1 = p_mouseClicked_3_ - (double) (j + i1 / 4 * 14);
+                double d0 = p_mouseClicked_1_ - (i + i1 % 4 * 14);
+                double d1 = p_mouseClicked_3_ - (j + i1 / 4 * 14);
                 if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D
                         && this.container.enchantItem(this.getMinecraft().player, l))
                 {
@@ -206,8 +207,8 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 
             i = this.guiLeft + 119;
             j = this.guiTop + 9;
-            if (p_mouseClicked_1_ >= (double) i && p_mouseClicked_1_ < (double) (i + 12)
-                    && p_mouseClicked_3_ >= (double) j && p_mouseClicked_3_ < (double) (j + 54))
+            if (p_mouseClicked_1_ >= i && p_mouseClicked_1_ < i + 12 && p_mouseClicked_3_ >= j
+                    && p_mouseClicked_3_ < j + 54)
             {
                 this.clickedOnScroll = true;
             }
@@ -226,11 +227,12 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
         {
             int i = this.guiTop + 13;
             int j = i + 67;
-            this.sliderProgress = ((float) p_mouseDragged_3_ - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
+            this.sliderProgress = ((float) p_mouseDragged_3_ - i - 7.5F) / (j - i - 15.0F);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-            this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) this.getHiddenRows()) + 0.5D) / 4;
+            this.recipeIndexOffset = (int) (this.sliderProgress * this.getHiddenRows() + 0.5D) / 4;
             return true;
-        } else
+        }
+        else
         {
             return super.func_231045_a_(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_,
                     p_mouseDragged_8_);
@@ -246,9 +248,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
         if (this.canScroll())
         {
             int i = this.getHiddenRows();
-            this.sliderProgress = (float) ((double) this.sliderProgress - p_mouseScrolled_5_ / (double) i);
+            this.sliderProgress = (float) (this.sliderProgress - p_mouseScrolled_5_ / i);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-            this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) i) + 0.5D) * 4;
+            this.recipeIndexOffset = (int) (this.sliderProgress * i + 0.5D) * 4;
         }
         return true;
     }

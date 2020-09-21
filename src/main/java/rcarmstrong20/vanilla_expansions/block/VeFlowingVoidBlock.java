@@ -58,7 +58,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 
     /**
      * This method forms the new blocks when the correct liquids make contact.
-     * 
+     *
      * @param world The current world.
      * @param pos   The position where the fluids collide and where the new block
      *              will be formed.
@@ -72,7 +72,8 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
             if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.WATER))
             {
                 return generateBlocks(world, pos, direction, VeBlocks.nephilite, Blocks.END_STONE);
-            } else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+            }
+            else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
             {
                 return generateBlocks(world, pos, direction, VeBlocks.snowflake_obsidian, Blocks.END_STONE);
             }
@@ -83,7 +84,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
     /**
      * Generates the blocks from the fluids reacting with one another based off
      * their positions in the world.
-     * 
+     *
      * @param world          The current world.
      * @param pos            The position where the fluids collide and where the new
      *                       block will be formed.
@@ -102,7 +103,8 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
             world.setBlockState(pos,
                     ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, sourceBlock.getDefaultState()));
             return true;
-        } else if (world.getBlockState(pos.offset(foundDirection)).getFluidState().getFluid() != Fluids.EMPTY)
+        }
+        else if (world.getBlockState(pos.offset(foundDirection)).getFluidState().getFluid() != Fluids.EMPTY)
         {
             this.triggerMixEffects(world, pos);
             world.setBlockState(pos.offset(foundDirection),
@@ -115,7 +117,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
     /**
      * A helper method that plays the undervoid sound and plays smoke particles when
      * called.
-     * 
+     *
      * @param world The current world.
      * @param pos   The position to play the sound and particles at.
      */
@@ -127,7 +129,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
          * world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.up().getY(),
          * pos.getZ(), 0.0, 0.0, 0.0); }
          */
-        world.getWorld().playSound(null, pos, VeSoundEvents.BLOCK_VOID_HARDENS, SoundCategory.BLOCKS,
+        world.playSound(null, pos, VeSoundEvents.BLOCK_VOID_HARDENS, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
     }
 
@@ -169,7 +171,8 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
                 entity.setMotion(0.01, 0.0, 0.01);
             }
             entity.fallDistance = 0;
-        } else
+        }
+        else
         {
             // Make items float on void with firework particles.
             world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),

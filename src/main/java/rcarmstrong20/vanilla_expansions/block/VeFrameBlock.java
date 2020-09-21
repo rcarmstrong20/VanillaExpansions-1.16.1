@@ -741,7 +741,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world,
             BlockPos currentPos, BlockPos facingPos)
     {
         boolean attachFlag = this.getBlock() == facingState.getBlock()
@@ -756,11 +756,11 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 
         if (stateIn.get(WATERLOGGED))
         {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        else if (facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
+        else if (facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(world, currentPos))
         {
-            super.onBlockHarvested(worldIn.getWorld(), currentPos, stateIn, null);
+            super.onBlockHarvested((World) world, currentPos, stateIn, null);
             return Blocks.AIR.getDefaultState();
         }
         else

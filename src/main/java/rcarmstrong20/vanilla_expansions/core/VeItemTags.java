@@ -10,6 +10,7 @@ public class VeItemTags
 {
     public static final ITag<Item> PAINTINGS = VeItemTags.makeWrapperTag("paintings");
     public static final ITag<Item> FRAMES = VeItemTags.makeWrapperTag("frames");
+    public static final ITag<Item> PACKET_SEEDS = VeItemTags.makeWrapperTag("packet_seeds");
 
     /**
      * @param name The name of the tag.
@@ -17,6 +18,6 @@ public class VeItemTags
      */
     private static ITag<Item> makeWrapperTag(String name)
     {
-        return ItemTags.getCollection().getOrCreate(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ItemTags.getCollection().func_241834_b(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

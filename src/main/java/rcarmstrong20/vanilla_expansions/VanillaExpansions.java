@@ -18,6 +18,7 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -40,6 +41,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -57,6 +59,7 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
+import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
@@ -170,7 +173,7 @@ public class VanillaExpansions
         // Campfire properties
         BooleanProperty isLit = CampfireBlock.LIT;
 
-        if (!event.getWorld().isRemote)
+        if (!event.getWorld().isRemote())
         {
             // If the block your clicking is a crop and your not using bone meal return
             // true.
@@ -281,6 +284,11 @@ public class VanillaExpansions
         return age.getAllowedValues().size() - 1;
     }
 
+    /**
+     * Called when the vanilla loot tables load.
+     *
+     * @param event A new instance of the LootTableLoadEvent.
+     */
     @SubscribeEvent
     public void onLootLoad(final LootTableLoadEvent event)
     {
@@ -308,16 +316,16 @@ public class VanillaExpansions
     }
 
     /**
-     * Individually tracks the naming behavior for each white and killer rabbit
-     * entity, then either sets the rabbit type to 99 or 1.
+     * When the player interacts with another entity in any way this event is called
      *
-     * @param event Called when the player right-clicks any entity.
+     * @param event An instance of the PlayerInteractEvent.EntityInteractSpecific.
      */
     @SubscribeEvent
-    public void onNameBunnyEntity(final PlayerInteractEvent.EntityInteractSpecific event)
+    public void onEntityInteract(final PlayerInteractEvent.EntityInteractSpecific event)
     {
         World world = event.getWorld();
 
+        // Controls white rabbit to killer rabbit conversion and the other way around.
         if (!world.isRemote && event.getTarget() instanceof RabbitEntity)
         {
             RabbitEntity rabbit = (RabbitEntity) event.getTarget();
@@ -341,10 +349,25 @@ public class VanillaExpansions
     }
 
     /**
-     * Used to add functionality for growing snapdragons on end stone when using
-     * bone meal.
+     * Called when a living entity is falling.
      *
-     * @param event Called when the player uses bone meal.
+     * @param event An instance of the LivingFallEvent.
+     */
+    @SubscribeEvent
+    public void onEntityFall(final LivingFallEvent event)
+    {
+        LivingEntity entity = event.getEntityLiving();
+
+        if (VeEntityConfig.enableSaveTheBunnies.get() && entity instanceof RabbitEntity)
+        {
+            event.setCanceled(true);
+        }
+    }
+
+    /**
+     * Called when the player attempts to use bone meal on a block.
+     *
+     * @param event A new instance of the BonemealEvent.
      */
     @SubscribeEvent
     public void onBonemeal(final BonemealEvent event)
@@ -353,9 +376,11 @@ public class VanillaExpansions
         BlockPos pos = event.getPos();
         Random random = new Random();
 
+        // Used to add functionality for growing snapdragons on end stone when using
+        // bone meal.
         if (event.getBlock().getBlock() == Blocks.END_STONE)
         {
-            if (!world.isRemote) // Only place the blocks on the server
+            if (!world.isRemote) // Only place the snapdragon blocks on the server
             {
                 for (int i = 0; i < 128; ++i)
                 {

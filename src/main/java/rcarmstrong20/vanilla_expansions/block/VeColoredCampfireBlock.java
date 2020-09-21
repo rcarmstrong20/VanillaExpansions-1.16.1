@@ -119,22 +119,14 @@ public class VeColoredCampfireBlock extends CampfireBlock
             boolean flag = state.get(LIT);
             if (flag)
             {
-                if (worldIn.isRemote())
-                {
-                    for (int i = 0; i < 20; ++i)
-                    {
-                        spawnSmokeParticles(worldIn.getWorld(), pos, state.get(SIGNAL_FIRE), true);
-                    }
-                }
-                else
+                if (!worldIn.isRemote())
                 {
                     worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
                             SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
-
-                TileEntity tileentity = worldIn.getTileEntity(pos);
-                ((VeColoredCampfireTileEntity) tileentity).dropAllItems();
+                func_235475_c_(worldIn, pos, state);
             }
+
             worldIn.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(WATERLOGGED, Boolean.valueOf(true))
                     .with(LIT, Boolean.valueOf(false)), 3);
             worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(),

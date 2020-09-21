@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructureManager;
@@ -106,7 +106,7 @@ public class VeCabinPieces
          * @param pos      the position of the structure block in the world
          */
         @Override
-        protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
+        protected void handleDataMarker(String function, BlockPos pos, IServerWorld world, Random rand,
                 MutableBoundingBox boundingBox)
         {
             if ("taiga_cabin_chest".equals(function))
@@ -119,11 +119,6 @@ public class VeCabinPieces
                 LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                         new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
             }
-            else if ("birch_forest_cabin_chest".equals(function))
-            {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/birch_forest_cabin"));
-            }
             else if ("cabin_flowers".equals(function))
             {
                 world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
@@ -133,9 +128,7 @@ public class VeCabinPieces
         /**
          * Here is the magic place where blocks are added to the world Actually most of
          * that is handled by the super method, for template structure pieces But
-         * something that can be done here is setting the y-level of the structure As an
-         * example, this sets the y-level to the average height of the terrain under the
-         * structure
+         * something that can be done here is setting the y-level of the structure.
          */
         @Override
         public boolean func_230383_a_(ISeedReader seedReader, StructureManager structureManager,

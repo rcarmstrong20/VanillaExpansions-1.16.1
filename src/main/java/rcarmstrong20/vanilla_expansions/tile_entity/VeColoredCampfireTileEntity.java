@@ -91,8 +91,8 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
                             }).orElse(itemstack);
 
                     BlockPos blockpos = this.getPos();
-                    InventoryHelper.spawnItemStack(this.world, (double) blockpos.getX(), (double) blockpos.getY(),
-                            (double) blockpos.getZ(), itemstack1);
+                    InventoryHelper.spawnItemStack(this.world, blockpos.getX(), blockpos.getY(), blockpos.getZ(),
+                            itemstack1);
                     this.inventory.set(i, ItemStack.EMPTY);
                     this.inventoryChanged();
                 }
@@ -124,11 +124,11 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
                 {
                     Direction direction = Direction.byHorizontalIndex(Math.floorMod(j + l, 4));
 
-                    double d0 = (double) blockpos.getX() + 0.5D - (double) ((float) direction.getXOffset() * 0.3125F)
-                            + (double) ((float) direction.rotateY().getXOffset() * 0.3125F);
-                    double d1 = (double) blockpos.getY() + 0.5D;
-                    double d2 = (double) blockpos.getZ() + 0.5D - (double) ((float) direction.getZOffset() * 0.3125F)
-                            + (double) ((float) direction.rotateY().getZOffset() * 0.3125F);
+                    double d0 = blockpos.getX() + 0.5D - direction.getXOffset() * 0.3125F
+                            + direction.rotateY().getXOffset() * 0.3125F;
+                    double d1 = blockpos.getY() + 0.5D;
+                    double d2 = blockpos.getZ() + 0.5D - direction.getZOffset() * 0.3125F
+                            + direction.rotateY().getZOffset() * 0.3125F;
 
                     for (int k = 0; k < 4; ++k)
                     {
@@ -184,6 +184,7 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
         return compound;
     }
 
+    @Override
     @Nullable
     public SUpdateTileEntityPacket getUpdatePacket()
     {
@@ -242,7 +243,7 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
 
     public void dropAllItems()
     {
-        if (!this.getWorld().isRemote)
+        if (!this.getWorld().isRemote())
         {
             InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
         }
