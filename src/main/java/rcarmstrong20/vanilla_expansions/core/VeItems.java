@@ -25,6 +25,7 @@ import rcarmstrong20.vanilla_expansions.enums.VeArmorMaterial;
 import rcarmstrong20.vanilla_expansions.enums.VeItemTier;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
+import rcarmstrong20.vanilla_expansions.item.VeMixedSeedPacketItem;
 import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
 import rcarmstrong20.vanilla_expansions.item.VeShovelItem;
 import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
@@ -118,6 +119,8 @@ public class VeItems
     public static Item blood_vial = register("blood_vial",
             new VeDrinkItem(new Item.Properties().containerItem(VeItems.glass_vial).group(VanillaExpansions.VE_GROUP)
                     .maxStackSize(16).food(VeFoods.BLOOD_VIAL)));
+    public static Item mixed_seed_packet = register("mixed_seed_packet",
+            new VeMixedSeedPacketItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
     public static Item fire_painting = register("fire_painting",
             new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
     public static Item water_painting = register("water_painting",
@@ -225,10 +228,8 @@ public class VeItems
             new Item(new Item.Properties()));
     public static Item void_painting_bottom_left = register("void_painting_bottom_left",
             new Item(new Item.Properties()));
-
     public static Item fighters_painting = register("fighters_painting",
             new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-
     public static Item fighters_painting_top_right = register("fighters_painting_top_right",
             new Item(new Item.Properties()));
     public static Item fighters_painting_top_right_middle = register("fighters_painting_top_right_middle",
