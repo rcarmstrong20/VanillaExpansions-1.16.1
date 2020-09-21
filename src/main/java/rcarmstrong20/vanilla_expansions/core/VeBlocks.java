@@ -488,7 +488,7 @@ public class VeBlocks
     public static Block snow_wall = register("snow_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
     public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true,
-            new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) -> 10)));
+            new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
     public static Block warped_chytrid_nether_brick_stairs = register("warped_chytrid_nether_brick_stairs", true,
             new StairsBlock(() -> VeBlocks.warped_chytrid_nether_bricks.getDefaultState(),
                     AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
@@ -496,8 +496,10 @@ public class VeBlocks
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
     public static Block warped_chytrid_nether_brick_wall = register("warped_chytrid_nether_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
+    public static Block warped_chytrid_netherrack = register("warped_chytrid_netherrack", true,
+            new Block(AbstractBlock.Properties.from(Blocks.NETHERRACK)));
     public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true,
-            new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).func_235838_a_((state) -> 7)));
+            new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
     public static Block crimson_chytrid_nether_brick_stairs = register("crimson_chytrid_nether_brick_stairs", true,
             new StairsBlock(() -> VeBlocks.crimson_chytrid_nether_bricks.getDefaultState(),
                     AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
@@ -505,6 +507,8 @@ public class VeBlocks
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
     public static Block crimson_chytrid_nether_brick_wall = register("crimson_chytrid_nether_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
+    public static Block crimson_chytrid_netherrack = register("crimson_chytrid_netherrack", true,
+            new Block(AbstractBlock.Properties.from(Blocks.NETHERRACK)));
     public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8,
             AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) -> 4)));
     public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(
