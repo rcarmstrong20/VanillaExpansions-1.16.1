@@ -10,10 +10,10 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 public class CabinPools
 {
     public static final JigsawPattern taiga_cabin_pattern = JigsawPatternRegistry.func_244094_a(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/taiga_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
+            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/overworld/taiga_cabin"),
+            new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
 
     public static final JigsawPattern forest_cabin_pattern = JigsawPatternRegistry.func_244094_a(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/forest_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
+            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/overworld/forest_cabin"),
+            new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
 }

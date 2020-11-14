@@ -19,6 +19,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
@@ -35,12 +36,13 @@ import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
  */
 public class VeCabinPieces
 {
-    public static void init(TemplateManager templateManager, ResourceLocation templateLocation, BlockPos pos,
-            Rotation rotation, List<StructurePiece> list)
+    public static void init(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> list,
+            VillageConfig config)
     {
-        list.add(new VeCabinPieces.VePiece(templateManager, templateLocation, pos, rotation));
+        list.add(new VeCabinPieces.VePiece(templateManager, config.func_242810_c().get().getName(), pos, rotation));
     }
 
+    // Features
     public static class VePiece extends TemplateStructurePiece
     {
         private final ResourceLocation templateResource;
@@ -55,7 +57,7 @@ public class VeCabinPieces
         public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos,
                 Rotation rotation)
         {
-            super(VeStructurePieceTypes.CABIN_PIECE, 0);
+            super(VeStructurePieceTypes.cabin_piece, 0);
             this.templateResource = templateResource;
             this.templatePosition = pos;
             this.rotation = rotation;
@@ -68,7 +70,7 @@ public class VeCabinPieces
          */
         public VePiece(TemplateManager templateManager, CompoundNBT nbt)
         {
-            super(VeStructurePieceTypes.CABIN_PIECE, nbt);
+            super(VeStructurePieceTypes.cabin_piece, nbt);
             this.templateResource = new ResourceLocation(nbt.getString("Template"));
             this.rotation = Rotation.valueOf(nbt.getString("Rot"));
             setupTemplate(templateManager);

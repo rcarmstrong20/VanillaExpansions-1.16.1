@@ -10,7 +10,7 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
-    public static final IStructurePieceType CABIN_PIECE = register("cabin", VeCabinPieces.VePiece::new);
+    public static final IStructurePieceType cabin_piece = register("cabin", VeCabinPieces.VePiece::new);
 
     /**
      * @param name The name of the new piece.
