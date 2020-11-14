@@ -1,5 +1,7 @@
 package rcarmstrong20.vanilla_expansions;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,6 +18,7 @@ import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.entity.LivingEntity;
@@ -32,10 +35,19 @@ import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -45,7 +57,9 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -60,7 +74,10 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidPart
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
+import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
+import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
@@ -321,6 +338,123 @@ public class VanillaExpansions
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onLoadBiome(final BiomeLoadingEvent event)
+    {
+        final List<String> endCityBiomes = Arrays.asList("end_barrens", "end_highlands", "end_midlands",
+                "small_end_islands");
+        final List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
+
+        final List<String> forestBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
+                "tall_birch_forest", "tall_birch_hills", "flower_forest");
+        final List<RegistryKey<Biome>> taigaBiomes = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS,
+                Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS,
+                Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS,
+                Biomes.SNOWY_TAIGA_MOUNTAINS);
+        final List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
+                "tall_birch_forest", "tall_birch_hills");
+
+        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeFeatures.NETHER_SMOKY_QUARTZ_ORE,
+                VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
+        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeFeatures.NETHER_RUBY_ORE,
+                VeOreGenConfig.enableNetherRubyOreSpawns.get());
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+                VeFeatures.PATCH_BLUEBERRY_BUSH_DECORATED, VeFeatureGenConfig.enableBlueberryBushSpawns.get());
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_BLUEBERRY_BUSH_SPARSE,
+                VeFeatureGenConfig.enableBlueberryBushSpawns.get());
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+                VeFeatures.PATCH_CRANBERRY_BUSH_DECORATED, VeFeatureGenConfig.enableCranberryBushSpawns.get());
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_CRANBERRY_BUSH_SPARSE,
+                VeFeatureGenConfig.enableCranberryBushSpawns.get());
+        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_WITCHS_CRADLE_DECORATED,
+                VeFeatureGenConfig.enableWitchsCradleSpawns.get());
+        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_WITCHS_CRADLE_SPARSE,
+                VeFeatureGenConfig.enableWitchsCradleSpawns.get());
+        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeFeatures.VOID_LAKE,
+                VeFeatureGenConfig.enableVoidLakeSpawns.get());
+        this.addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.SNAPDRAGON_AND_GRASS,
+                VeFeatureGenConfig.enableSnapdragonSpawns.get());
+        this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.HUGE_PURPLE_MUSHROOM,
+                VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
+
+        // this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES,
+        // VeStructure.CABIN,
+        // VeFeatures.TAIGA_CABIN, VeFeatureGenConfig.enableCabinSpawns.get());
+        /*
+         * if (event.getName().equals(forestBiomes.get(0).getRegistryName())) { //
+         * event.getGeneration().func_242513_a(Decoration.VEGETAL_DECORATION, //
+         * VeFeatures.HUGE_PURPLE_MUSHROOM);// .getFeatures().add(() // -> );
+         *
+         * /* event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION) .add(()
+         * -> VeFeatures.PATCH_CRANBERRY_BUSH_DECORATED);
+         *
+         * event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION) .add(() ->
+         * VeFeatures.PATCH_CRANBERRY_BUSH_SPARSE);
+         */
+    }
+
+    /**
+     *
+     * @param event      An instance of the BiomeLoadingEvent.
+     * @param category   The category of biomes to add this feature to.
+     * @param decoration The decoration category that this feature belongs to.
+     * @param feature    The feature to add.
+     * @param enable     If the config has this enabled this should evaluate to
+     *                   true.
+     */
+    private void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
+            ConfiguredFeature<?, ?> feature, boolean enable)
+    {
+        if (event.getCategory() == category && enable)
+        {
+            event.getGeneration().getFeatures(decorationType).add(() -> feature);
+        }
+    }
+
+    /**
+     * Adds a new feature to specific existing biomes using the minecraft name
+     * space.
+     *
+     * @param event      An instance of the BiomeLoadingEvent.
+     * @param biomes     The biomes to add the feature to.
+     * @param decoration The decoration category that this feature belongs to.
+     * @param feature    The feature to add.
+     * @param enable     If the config has this enabled this should evaluate to
+     *                   true.
+     */
+    private void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,
+            ConfiguredFeature<?, ?> feature, boolean enable)
+    {
+        if (enable)
+        {
+            for (String biome : biomes)
+            {
+                if (event.getName().equals(new ResourceLocation("minecraft:" + biome)))
+                {
+                    System.out.println("Add feature to biome");
+                    event.getGeneration().getFeatures(decoration).add(() -> feature);
+                }
+            }
+        }
+    }
+
+    /**
+     * Add a new structure that uses the village config to the spawn list for
+     * specific biomes.
+     */
+    private void addStructure(BiomeLoadingEvent event, Category category, Decoration decorationType,
+            Structure<VillageConfig> cabin,
+            StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> taigaCabin, boolean enable)
+    {
+        if (enable)
+        {
+            if (event.getCategory() == category)
+            {
+                event.getGeneration().getStructures().add(() -> taigaCabin);
+            }
+        }
+    }
+
     /**
      * When the player interacts with another entity in any way this event is called
      *
@@ -399,7 +533,7 @@ public class VanillaExpansions
                                 random.nextInt(3) - 1);
 
                         if (world.getBlockState(blockpos.down()).getBlock() == Blocks.END_STONE
-                                && world.getBlockState(blockpos).isAir(world, blockpos))
+                                && isAir(world.getBlockState(blockpos)))
                         {
                             world.setBlockState(blockpos, blockstate);
                         }
@@ -408,5 +542,15 @@ public class VanillaExpansions
             }
             event.setResult(Result.ALLOW);
         }
+    }
+
+    public static boolean isAir(BlockState state)
+    {
+        return state.getMaterial() == Material.AIR;
+    }
+
+    public static boolean isLiquid(BlockState state)
+    {
+        return state.getMaterial() == Material.WATER || state.getMaterial() == Material.LAVA;
     }
 }
