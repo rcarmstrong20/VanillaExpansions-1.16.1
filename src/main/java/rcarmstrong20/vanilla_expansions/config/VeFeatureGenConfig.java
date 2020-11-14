@@ -8,7 +8,7 @@ public class VeFeatureGenConfig
     public static BooleanValue enableBlueberryBushSpawns;
     public static BooleanValue enableCranberryBushSpawns;
     public static BooleanValue enableWitchsCradleSpawns;
-    public static BooleanValue enableBigPurpleMushroomSpawns;
+    public static BooleanValue enableHugePurpleMushroomSpawns;
     public static BooleanValue enableCabinSpawns;
 
     public static BooleanValue enableVoidLakeSpawns;
@@ -32,7 +32,7 @@ public class VeFeatureGenConfig
                 .translation("ve.configBushes.enableWitchsCradleSpawns").worldRestart()
                 .define("enable_witchs_cradle_spawns", true);
 
-        enableBigPurpleMushroomSpawns = server.comment(compileOverworldComment("big purple mushrooms"))
+        enableHugePurpleMushroomSpawns = server.comment(compileOverworldComment("big purple mushrooms"))
                 .translation("ve.configMushroom.enableBigPurpleMushroomSpawns").worldRestart()
                 .define("enable_big_purple_mushroom_spawns", true);
 
