@@ -80,6 +80,7 @@ import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
+import rcarmstrong20.vanilla_expansions.core.VeStructure;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
@@ -376,21 +377,8 @@ public class VanillaExpansions
                 VeFeatureGenConfig.enableSnapdragonSpawns.get());
         this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.HUGE_PURPLE_MUSHROOM,
                 VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
-
-        // this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES,
-        // VeStructure.CABIN,
-        // VeFeatures.TAIGA_CABIN, VeFeatureGenConfig.enableCabinSpawns.get());
-        /*
-         * if (event.getName().equals(forestBiomes.get(0).getRegistryName())) { //
-         * event.getGeneration().func_242513_a(Decoration.VEGETAL_DECORATION, //
-         * VeFeatures.HUGE_PURPLE_MUSHROOM);// .getFeatures().add(() // -> );
-         *
-         * /* event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION) .add(()
-         * -> VeFeatures.PATCH_CRANBERRY_BUSH_DECORATED);
-         *
-         * event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION) .add(() ->
-         * VeFeatures.PATCH_CRANBERRY_BUSH_SPARSE);
-         */
+        this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES, VeStructure.cabin,
+                VeFeatures.TAIGA_CABIN, VeFeatureGenConfig.enableCabinSpawns.get());
     }
 
     /**
@@ -409,6 +397,24 @@ public class VanillaExpansions
         {
             event.getGeneration().getFeatures(decorationType).add(() -> feature);
         }
+    }
+
+    /**
+     * Adds a new feature to a single specific existing biome using the minecraft
+     * name space.
+     *
+     * @param event      An instance of the BiomeLoadingEvent.
+     * @param biomeName  The name of the biome to add this feature to.
+     * @param decoration The decoration category that this feature belongs to.
+     * @param feature    The feature to add.
+     * @param enable     If the config has this enabled this should evaluate to
+     *                   true.
+     */
+    @SuppressWarnings("unused")
+    private void addFeature(BiomeLoadingEvent event, String biomeName, Decoration decoration,
+            ConfiguredFeature<?, ?> feature, boolean enable)
+    {
+        this.addFeature(event, Arrays.asList(biomeName), decoration, feature, enable);
     }
 
     /**
@@ -442,12 +448,18 @@ public class VanillaExpansions
      * Add a new structure that uses the village config to the spawn list for
      * specific biomes.
      */
-    private void addStructure(BiomeLoadingEvent event, Category category, Decoration decorationType,
-            Structure<VillageConfig> cabin,
+    private void addStructure(BiomeLoadingEvent event, Category category, Decoration decoration,
+            Structure<VillageConfig> structure,
             StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> taigaCabin, boolean enable)
     {
         if (enable)
         {
+            // biome.addFeature(decoration, structure.withConfiguration(config)
+            // .withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+
+            // event.getGeneration().getFeatures(decoration).add(() ->
+            // structure.withConfiguration(p_236391_1_));
+
             if (event.getCategory() == category)
             {
                 event.getGeneration().getStructures().add(() -> taigaCabin);
