@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -16,7 +15,6 @@ import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -24,6 +22,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
@@ -139,14 +138,19 @@ public class VeTallPlushBlock extends VePlushBlock
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
     {
+        BlockPos posUp = pos.up();
+        FluidState fluidState = world.getFluidState(posUp);
+        boolean flag = fluidState.isTagged(FluidTags.WATER) && fluidState.getLevel() == 8;
+
         if (state.get(PLUSH_STACK_SIZE) == 3)
         {
-            worldIn.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER), 3);
+            world.setBlockState(posUp, state.with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, flag), 3);
         }
     }
 
+    @Override
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
@@ -155,10 +159,12 @@ public class VeTallPlushBlock extends VePlushBlock
         {
             return blockstate.with(PLUSH_STACK_SIZE,
                     Integer.valueOf(Math.min(3, blockstate.get(PLUSH_STACK_SIZE) + 1)));
-        } else
+        }
+        else
         {
-            FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-            boolean flag = ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
+            FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+            boolean flag = fluidstate.isTagged(FluidTags.WATER) && fluidstate.getLevel() == 8;
+
             return super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(flag));
         }
     }
@@ -168,42 +174,30 @@ public class VeTallPlushBlock extends VePlushBlock
     {
         BlockPos pos = useContext.getPos().up();
         BlockState worldState = useContext.getWorld().getBlockState(pos);
+
         if (useContext.getItem().getItem() == this.asItem())
         {
-            return state.get(PLUSH_STACK_SIZE) == 1 || worldState == Blocks.AIR.getDefaultState()
-                    || worldState == Blocks.WATER.getDefaultState()
-                    || worldState == Blocks.LAVA.getDefaultState() && state.get(PLUSH_STACK_SIZE) < 3 ? true : false;
+            return state.get(PLUSH_STACK_SIZE) < 3
+                    && (VanillaExpansions.isAir(worldState) || VanillaExpansions.isLiquid(worldState)) ? true : false;
         }
         return false;
     }
 
-    /**
-     * Called before the Block is set to air in the world. Called regardless of if
-     * the player's tool can actually collect this block
-     */
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
+    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player)
     {
-        if (state.func_235901_b_(HALF)) // Same as .has(property)
+        if (state.get(PLUSH_STACK_SIZE) == 3)
         {
-            if (state.get(PLUSH_STACK_SIZE) == 3)
+            if (state.get(HALF) == DoubleBlockHalf.UPPER)
             {
-                if (state.get(HALF) == DoubleBlockHalf.UPPER)
-                {
-                    worldIn.destroyBlock(pos.down(), false);
-                } else if (state.get(HALF) == DoubleBlockHalf.LOWER)
-                {
-                    worldIn.destroyBlock(pos.up(), false);
-                }
+                world.destroyBlock(pos.down(), false);
             }
-            if (player.isCreative())
+            else if (state.get(HALF) == DoubleBlockHalf.LOWER)
             {
-                worldIn.destroyBlock(pos, false);
-            } else
-            {
-                worldIn.destroyBlock(pos, true);
+                world.destroyBlock(pos.up(), false);
             }
         }
+        world.destroyBlock(pos, Boolean.valueOf(!player.isCreative()));
     }
 
     /**
@@ -221,78 +215,68 @@ public class VeTallPlushBlock extends VePlushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        if (this == VeBlocks.slime_plush)
-        {
-            return VeTallPlushBlock.defineShapes(state, ONE_SLIME_NORTH_SHAPE, TWO_SLIME_NORTH_SHAPE,
-                    THREE_SLIME_NORTH_SHAPE, ONE_SLIME_SOUTH_SHAPE, TWO_SLIME_SOUTH_SHAPE, THREE_SLIME_SOUTH_SHAPE,
-                    ONE_SLIME_WEST_SHAPE, TWO_SLIME_WEST_SHAPE, THREE_SLIME_WEST_SHAPE, ONE_SLIME_EAST_SHAPE,
-                    TWO_SLIME_EAST_SHAPE, THREE_SLIME_EAST_SHAPE);
-        } else if (this == VeBlocks.magma_cube_plush)
-        {
-            return VeTallPlushBlock.defineShapes(state, ONE_MAGMA_CUBE_NORTH_SHAPE, TWO_MAGMA_CUBE_NORTH_SHAPE,
-                    THREE_MAGMA_CUBE_NORTH_SHAPE, ONE_MAGMA_CUBE_SOUTH_SHAPE, TWO_MAGMA_CUBE_SOUTH_SHAPE,
-                    THREE_MAGMA_CUBE_SOUTH_SHAPE, ONE_MAGMA_CUBE_WEST_SHAPE, TWO_MAGMA_CUBE_WEST_SHAPE,
-                    THREE_MAGMA_CUBE_WEST_SHAPE, ONE_MAGMA_CUBE_EAST_SHAPE, TWO_MAGMA_CUBE_EAST_SHAPE,
-                    THREE_MAGMA_CUBE_EAST_SHAPE);
-        }
-        return VoxelShapes.fullCube();
-    }
+        Block block = this.getBlock();
 
-    /**
-     * Note - Keeping the rotations as global variables keeps the lag down.
-     * 
-     * @param state       The current state this block is in.
-     * @param northShape1 The north shape for stack size 1.
-     * @param northShape2 The north shape for stack size 2.
-     * @param northShape3 The north shape for stack size 3.
-     * @param southShape1 The south shape for stack size 1.
-     * @param southShape2 The south shape for stack size 2.
-     * @param southShape3 The south shape for stack size 3.
-     * @param westShape1  The west shape for stack size 1.
-     * @param westShape2  The west shape for stack size 2.
-     * @param westShape3  The west shape for stack size 3.
-     * @param eastShape1  The east shape for stack size 1.
-     * @param eastShape2  The east shape for stack size 2.
-     * @param eastShape3  The east shape for stack size 3.
-     * @return The appropriate bounding box for the given state.
-     */
-    private static VoxelShape defineShapes(BlockState state, VoxelShape northShape1, VoxelShape northShape2,
-            VoxelShape northShape3, VoxelShape southShape1, VoxelShape southShape2, VoxelShape southShape3,
-            VoxelShape westShape1, VoxelShape westShape2, VoxelShape westShape3, VoxelShape eastShape1,
-            VoxelShape eastShape2, VoxelShape eastShape3)
-    {
-        switch ((Direction) state.get(HORIZONTAL_FACING))
+        if (block == VeBlocks.slime_plush)
         {
-            case NORTH:
-                return getStackSizeShapes(state, northShape1, northShape2, northShape3, northShape2);
-            case SOUTH:
-                return getStackSizeShapes(state, southShape1, southShape2, southShape3, southShape2);
-            case WEST:
-                return getStackSizeShapes(state, westShape1, westShape2, westShape3, westShape2);
-            default:
-                return getStackSizeShapes(state, eastShape1, eastShape2, eastShape3, eastShape2);
+            switch (state.get(HORIZONTAL_FACING))
+            {
+                case NORTH:
+                    return getStackSizeShapes(state, ONE_SLIME_NORTH_SHAPE, TWO_SLIME_NORTH_SHAPE,
+                            THREE_SLIME_NORTH_SHAPE);
+                case SOUTH:
+                    return getStackSizeShapes(state, ONE_SLIME_SOUTH_SHAPE, TWO_SLIME_SOUTH_SHAPE,
+                            THREE_SLIME_SOUTH_SHAPE);
+                case WEST:
+                    return getStackSizeShapes(state, ONE_SLIME_WEST_SHAPE, TWO_SLIME_WEST_SHAPE,
+                            THREE_SLIME_WEST_SHAPE);
+                default:
+                    return getStackSizeShapes(state, ONE_SLIME_EAST_SHAPE, TWO_SLIME_EAST_SHAPE,
+                            THREE_SLIME_EAST_SHAPE);
+            }
+        }
+        else if (block == VeBlocks.magma_cube_plush)
+        {
+            switch (state.get(HORIZONTAL_FACING))
+            {
+                case NORTH:
+                    return getStackSizeShapes(state, ONE_MAGMA_CUBE_NORTH_SHAPE, TWO_MAGMA_CUBE_NORTH_SHAPE,
+                            THREE_MAGMA_CUBE_NORTH_SHAPE);
+                case SOUTH:
+                    return getStackSizeShapes(state, ONE_MAGMA_CUBE_SOUTH_SHAPE, TWO_MAGMA_CUBE_SOUTH_SHAPE,
+                            THREE_MAGMA_CUBE_SOUTH_SHAPE);
+                case WEST:
+                    return getStackSizeShapes(state, ONE_MAGMA_CUBE_WEST_SHAPE, TWO_MAGMA_CUBE_WEST_SHAPE,
+                            THREE_MAGMA_CUBE_WEST_SHAPE);
+                default:
+                    return getStackSizeShapes(state, ONE_MAGMA_CUBE_EAST_SHAPE, TWO_MAGMA_CUBE_EAST_SHAPE,
+                            THREE_MAGMA_CUBE_EAST_SHAPE);
+            }
+        }
+        else
+        {
+            return VoxelShapes.fullCube();
         }
     }
 
     /**
-     * @param state                 The current state this block is in.
-     * @param stackSizeShape1       The shape for stack size 1.
-     * @param stackSizeShape2       The shape for stack size 2.
-     * @param stackSizeShapeTop3    The shape for the top of stack size 3.
-     * @param stackSizeShapeBottom3 The shape for the bottom of stack size 3.
+     * @param state              The current state this block is in.
+     * @param stackSizeShape1    The shape for stack size 1.
+     * @param stackSizeShape2    The shape for stack size 2.
+     * @param stackSizeShapeTop3 The shape for the top of stack size 3.
      * @return The appropriate bounding box for the given state.
      */
     private static VoxelShape getStackSizeShapes(BlockState state, VoxelShape stackSizeShape1,
-            VoxelShape stackSizeShape2, VoxelShape stackSizeShapeTop3, VoxelShape stackSizeShapeBottom3)
+            VoxelShape stackSizeShape2, VoxelShape stackSizeShapeTop3)
     {
-        switch ((int) state.get(PLUSH_STACK_SIZE))
+        switch (state.get(PLUSH_STACK_SIZE))
         {
             case 1:
                 return stackSizeShape1;
             case 2:
                 return stackSizeShape2;
             default:
-                return state.get(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop3 : stackSizeShapeBottom3;
+                return state.get(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop3 : stackSizeShape2;
         }
     }
 }
