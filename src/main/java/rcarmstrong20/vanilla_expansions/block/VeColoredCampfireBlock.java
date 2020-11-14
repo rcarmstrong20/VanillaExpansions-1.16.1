@@ -124,7 +124,7 @@ public class VeColoredCampfireBlock extends CampfireBlock
                     worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
                             SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
-                func_235475_c_(worldIn, pos, state);
+                extinguish(worldIn, pos, state);
             }
 
             worldIn.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(WATERLOGGED, Boolean.valueOf(true))

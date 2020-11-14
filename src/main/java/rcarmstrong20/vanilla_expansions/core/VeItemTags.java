@@ -18,6 +18,6 @@ public class VeItemTags
      */
     private static ITag<Item> makeWrapperTag(String name)
     {
-        return ItemTags.getCollection().func_241834_b(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ItemTags.getCollection().get(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

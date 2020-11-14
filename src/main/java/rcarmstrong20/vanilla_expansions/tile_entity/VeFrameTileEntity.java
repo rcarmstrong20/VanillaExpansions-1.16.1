@@ -24,9 +24,9 @@ public class VeFrameTileEntity extends TileEntity implements IClearable
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) // Same as read
+    public void read(BlockState state, CompoundNBT compound)
     {
-        super.func_230337_a_(state, compound); // Same as read
+        super.read(state, compound);
         this.inventory.clear();
         ItemStackHelper.loadAllItems(compound, this.inventory);
     }
@@ -50,7 +50,7 @@ public class VeFrameTileEntity extends TileEntity implements IClearable
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
     {
         CompoundNBT compound = pkt.getNbtCompound();
-        this.func_230337_a_(this.getBlockState(), compound); // Same as read
+        this.read(this.getBlockState(), compound);
     }
 
     @Override

@@ -435,8 +435,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
                     return ActionResultType.SUCCESS;
                 }
             }
-            // func_230235_a_(item) is the same as .contains(item)
-            else if (VeItemTags.PAINTINGS.func_230235_a_(heldItem.getItem()) && tileEntity instanceof VeFrameTileEntity)
+            else if (VeItemTags.PAINTINGS.contains(heldItem.getItem()) && tileEntity instanceof VeFrameTileEntity)
             {
                 VeFrameTileEntity clickedFrame = (VeFrameTileEntity) tileEntity;
 
@@ -968,7 +967,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
                 spawnAsEntity(world, pos, new ItemStack(fourPaintingMap.get(inventoryItem))); // Spawn the drops in the
                                                                                               // world.
             }
-            else if (VeItemTags.PAINTINGS.func_230235_a_(inventoryItem) && !isEmpty(clickedFrame))
+            else if (VeItemTags.PAINTINGS.contains(inventoryItem) && !isEmpty(clickedFrame))
             {
                 spawnAsEntity(world, pos, new ItemStack(inventoryItem)); // Spawn the drops in the world.
             }

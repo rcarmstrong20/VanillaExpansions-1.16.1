@@ -30,6 +30,7 @@ import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
+import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
@@ -298,9 +299,9 @@ public class VeBlocks
     public static Block nether_brick_planting_pot = register("nether_brick_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
     public static Block warped_planting_pot = register("warped_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.field_235345_mD_)));
+            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
     public static Block crimson_planting_pot = register("crimson_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.field_235344_mC_)));
+            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
     public static Block obsidian_planting_pot = register("obsidian_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block oak_wall = register("oak_wall", true,
@@ -316,9 +317,9 @@ public class VeBlocks
     public static Block dark_oak_wall = register("dark_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
     public static Block warped_wall = register("warped_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.field_235345_mD_)));
+            new WallBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
     public static Block crimson_wall = register("crimson_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.field_235344_mC_)));
+            new WallBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
     public static Block stripped_oak_wall = register("stripped_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
     public static Block stripped_spruce_wall = register("stripped_spruce_wall", true,
@@ -332,9 +333,9 @@ public class VeBlocks
     public static Block stripped_dark_oak_wall = register("stripped_dark_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
     public static Block stripped_warped_wall = register("stripped_warped_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.field_235345_mD_)));
+            new WallBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
     public static Block stripped_crimson_wall = register("stripped_crimson_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.field_235344_mC_)));
+            new WallBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
     public static Block spruce_ladder = register("spruce_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
     public static Block birch_ladder = register("birch_ladder", true,
@@ -381,10 +382,10 @@ public class VeBlocks
             new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
                     .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
     public static Block warped_frame = register("warped_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.field_237214_y_, MaterialColor.field_241543_af_)
+            new VeFrameBlock(AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.WARPED_STEM)
                     .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
     public static Block crimson_frame = register("crimson_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.field_237214_y_, MaterialColor.field_241543_af_)
+            new VeFrameBlock(AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.CRIMSON_STEM)
                     .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
     public static Block snow_bricks = register("snow_bricks", true,
             new Block(AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW)
@@ -510,9 +511,11 @@ public class VeBlocks
     public static Block crimson_chytrid_netherrack = register("crimson_chytrid_netherrack", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHERRACK)));
     public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8,
-            AbstractBlock.Properties.from(Blocks.POPPY).func_235838_a_((state) -> 4)));
+            AbstractBlock.Properties.from(Blocks.POPPY).setLightLevel((state) -> 4)));
     public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(
-            VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).func_235838_a_((state) -> 4)));
+            VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).setLightLevel((state) -> 4)));
+    public static Block ender_grass = register("ender_grass", true,
+            new VeEnderGrassBlock(Block.Properties.from(Blocks.GRASS).setLightLevel((state) -> 4)));
     public static Block smooth_end_stone = register("smooth_end_stone", true,
             new Block(AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block smooth_end_stone_slab = register("smooth_end_stone_slab", true,

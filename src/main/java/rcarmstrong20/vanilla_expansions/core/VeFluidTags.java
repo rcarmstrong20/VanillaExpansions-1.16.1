@@ -16,6 +16,6 @@ public class VeFluidTags
      */
     private static ITag<Fluid> makeWrapperTag(String name)
     {
-        return FluidTags.getCollection().func_241834_b(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return FluidTags.getCollection().get(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

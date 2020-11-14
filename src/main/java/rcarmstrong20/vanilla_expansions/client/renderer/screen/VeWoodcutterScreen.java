@@ -9,11 +9,11 @@ import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
@@ -38,43 +38,29 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
     {
         super(container, playerInv, title);
         container.setInventoryUpdateListener(this::onInventoryUpdate);
-        --this.field_238743_q_;
+        --this.titleY;
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int p_230430_2_, int p_230430_3_, float p_230430_4_) // Same as
-                                                                                                             // render
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
-        super.func_230430_a_(matrixStack, p_230430_2_, p_230430_3_, p_230430_4_); // Same as render
-        this.func_230459_a_(matrixStack, p_230430_2_, p_230430_3_); // Same as renderHoveredToolTip
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
-
-    /**
-     * Draw the foreground layer for the GuiContainer (everything in front of the
-     * items)
-     */
-    /*
-     * protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-     * this.font.drawString(this.title.getFormattedText(), 8.0F, 4.0F, 4210752);
-     * this.font.drawString(this.playerInventory.getDisplayName().getFormattedText()
-     * , 8.0F, (float)(this.ySize - 94), 4210752); }
-     */
 
     /**
      * Draws the background layer of this container (behind the items).
      */
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) // Same as
-                                                                                                       // drawGuiContainerBackgroundLayer
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY)
     {
-        this.func_230446_a_(matrixStack); // Same as renderBackground
+        this.renderBackground(matrixStack);
         this.getMinecraft().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         int i = this.guiLeft;
         int j = this.guiTop;
-        this.func_238474_b_(matrixStack, i, j, 0, 0, this.xSize, this.ySize); // Same as blit
+        this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
         int k = (int) (41.0F * this.sliderProgress);
-        this.func_238474_b_(matrixStack, i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15); // Same as
-                                                                                                             // blit
+        this.blit(matrixStack, i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
         int l = this.guiLeft + 52;
         int i1 = this.guiTop + 14;
         int j1 = this.recipeIndexOffset + 12;
@@ -83,9 +69,9 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
     }
 
     @Override
-    protected void func_230459_a_(MatrixStack matrixStack, int p_230459_2_, int p_230459_3_)
+    protected void renderHoveredTooltip(MatrixStack matrixStack, int x, int y)
     {
-        super.func_230459_a_(matrixStack, p_230459_2_, p_230459_3_);
+        super.renderHoveredTooltip(matrixStack, x, y);
         if (this.hasItemsInInputSlot)
         {
             int i = this.guiLeft + 52;
@@ -98,9 +84,9 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
                 int i1 = l - this.recipeIndexOffset;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
-                if (p_230459_2_ >= j1 && p_230459_2_ < j1 + 16 && p_230459_3_ >= k1 && p_230459_3_ < k1 + 18)
+                if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18)
                 {
-                    this.func_230457_a_(matrixStack, list.get(l).getRecipeOutput(), p_230459_2_, p_230459_3_);
+                    this.renderTooltip(matrixStack, list.get(l).getRecipeOutput(), x, y);
                 }
             }
         }
@@ -122,11 +108,12 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
             if (i == this.container.getSelectedRecipe())
             {
                 j1 += 18;
-            } else if (mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18)
+            }
+            else if (mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18)
             {
                 j1 += 36;
             }
-            this.func_238474_b_(matrixStack, k, i1 - 1, 0, j1, 16, 18); // Same as blit
+            this.blit(matrixStack, k, i1 - 1, 0, j1, 16, 18);
         }
     }
 
@@ -148,10 +135,10 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
     }
 
     /**
-     * Called when the mouse is clicked. Same as mouseClicked
+     * Called when the mouse is clicked.
      */
     @Override
-    public boolean func_231044_a_(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_)
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
         this.clickedOnScroll = false;
         if (this.hasItemsInInputSlot)
@@ -163,63 +150,58 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
             for (int l = this.recipeIndexOffset; l < k; ++l)
             {
                 int i1 = l - this.recipeIndexOffset;
-                double d0 = p_mouseClicked_1_ - (double) (i + i1 % 4 * 16);
-                double d1 = p_mouseClicked_3_ - (double) (j + i1 / 4 * 18);
+                double d0 = mouseX - (i + i1 % 4 * 16);
+                double d1 = mouseY - (j + i1 / 4 * 18);
                 if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D
-                        && this.container.enchantItem(this.getMinecraft().player, l))
+                        && this.container.enchantItem(this.minecraft.player, l))
                 {
                     Minecraft.getInstance().getSoundHandler()
-                            .play(SimpleSound.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    this.getMinecraft().playerController.sendEnchantPacket((this.container).windowId, l);
+                            .play(SimpleSound.master(VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT, 1.0F));
+                    this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
                     return true;
                 }
             }
 
             i = this.guiLeft + 119;
             j = this.guiTop + 9;
-            if (p_mouseClicked_1_ >= (double) i && p_mouseClicked_1_ < (double) (i + 12)
-                    && p_mouseClicked_3_ >= (double) j && p_mouseClicked_3_ < (double) (j + 54))
+            if (mouseX >= i && mouseX < i + 12 && mouseY >= j && mouseY < j + 54)
             {
                 this.clickedOnScroll = true;
             }
         }
-        return super.func_231044_a_(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_); // Same as mouseClicked
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     /**
-     * Called when the mouse is dragged. Same as mouseDragged.
+     * Called when the mouse is dragged.
      */
     @Override
-    public boolean func_231045_a_(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_,
-            double p_mouseDragged_6_, double p_mouseDragged_8_)
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY)
     {
         if (this.clickedOnScroll && this.canScroll())
         {
             int i = this.guiTop + 14;
             int j = i + 54;
-            this.sliderProgress = ((float) p_mouseDragged_3_ - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
+            this.sliderProgress = ((float) mouseY - i - 7.5F) / (j - i - 15.0F);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-            this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) this.getHiddenRows()) + 0.5D) * 4;
+            this.recipeIndexOffset = (int) (this.sliderProgress * this.getHiddenRows() + 0.5D) * 4;
             return true;
-        } else
+        }
+        else
         {
-            return super.func_231045_a_(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_,
-                    p_mouseDragged_8_); // Same as mouseDragged
+            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
         }
     }
 
-    /**
-     * Same as mouseScrolled.
-     */
     @Override
-    public boolean func_231043_a_(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
+    public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
     {
         if (this.canScroll())
         {
             int i = this.getHiddenRows();
-            this.sliderProgress = (float) ((double) this.sliderProgress - p_mouseScrolled_5_ / (double) i);
+            this.sliderProgress = (float) (this.sliderProgress - p_mouseScrolled_5_ / i);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-            this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) i) + 0.5D) * 4;
+            this.recipeIndexOffset = (int) (this.sliderProgress * i + 0.5D) * 4;
         }
         return true;
     }

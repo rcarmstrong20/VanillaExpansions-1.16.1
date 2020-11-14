@@ -149,9 +149,9 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) // Same as read
+    public void read(BlockState state, CompoundNBT compound)
     {
-        super.func_230337_a_(state, compound); // Same as read
+        super.read(state, compound);
         this.inventory.clear();
         ItemStackHelper.loadAllItems(compound, this.inventory);
         if (compound.contains("CookingTimes", 11))
@@ -195,7 +195,7 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
     {
         CompoundNBT compound = pkt.getNbtCompound();
-        this.func_230337_a_(this.getBlockState(), compound);
+        this.read(this.getBlockState(), compound);
     }
 
     @Override

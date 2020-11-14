@@ -21,9 +21,6 @@ public class VeBlockTags
      */
     private static ITag<Block> makeWrapperTag(String name)
     {
-        return BlockTags.getCollection().func_241834_b(new ResourceLocation(VanillaExpansions.MOD_ID, name)); // func_241834_b
-                                                                                                              // is the
-                                                                                                              // same as
-                                                                                                              // getOrCreate
+        return BlockTags.getCollection().get(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

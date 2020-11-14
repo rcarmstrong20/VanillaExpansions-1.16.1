@@ -40,33 +40,30 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
     {
         super(containerIn, playerInv, titleIn);
         containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
-        --this.field_238743_q_;
+        --this.titleY;
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int p_230430_2_, int p_230430_3_, float p_230430_4_) // Same as
-                                                                                                             // render
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
-        super.func_230430_a_(matrixStack, p_230430_2_, p_230430_3_, p_230430_4_); // Same as render
-        this.func_230459_a_(matrixStack, p_230430_2_, p_230430_3_); // Same as renderHoveredToolTip
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     /**
      * Draws the background layer of this container (behind the items).
      */
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) // Same as
-                                                                                                       // drawGuiContainerBackgroundLayer
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY)
     {
-        this.func_230446_a_(matrixStack); // Same as renderBackground
+        this.renderBackground(matrixStack);
         this.getMinecraft().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         int startXPos = this.guiLeft;
         int startYPos = this.guiTop;
-        this.func_238474_b_(matrixStack, startXPos, startYPos, 0, 0, this.xSize, this.ySize); // Same as blit, render
-                                                                                              // background
+        this.blit(matrixStack, startXPos, startYPos, 0, 0, this.xSize, this.ySize); // Render background
         int sliderProgressPos = (int) (41.0F * this.sliderProgress);
-        this.func_238474_b_(matrixStack, startXPos + 119, startYPos + 13 + sliderProgressPos,
-                232 + (this.canScroll() ? 0 : 12), 0, 12, 15); // Same as blit, render scroll wheel
+        this.blit(matrixStack, startXPos + 119, startYPos + 13 + sliderProgressPos, 232 + (this.canScroll() ? 0 : 12),
+                0, 12, 15); // Render scroll wheel
         int l = this.guiLeft + 52;
         int i1 = this.guiTop + 14;
         int j1 = this.recipeIndexOffset + 12;
@@ -75,9 +72,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
     }
 
     @Override
-    protected void func_230459_a_(MatrixStack matrixStack, int p_230459_2_, int p_230459_3_)
+    protected void renderHoveredTooltip(MatrixStack matrixStack, int x, int y)
     {
-        super.func_230459_a_(matrixStack, p_230459_2_, p_230459_3_);
+        super.renderHoveredTooltip(matrixStack, x, y);
         if (this.hasItemsInInputSlot)
         {
             int i = this.guiLeft + 52;
@@ -90,9 +87,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
                 int i1 = l - this.recipeIndexOffset;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
-                if (p_230459_2_ >= j1 && p_230459_2_ < j1 + 16 && p_230459_3_ >= k1 && p_230459_3_ < k1 + 18)
+                if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18)
                 {
-                    this.func_230457_a_(matrixStack, list.get(l).getRecipeOutput(), p_230459_2_, p_230459_3_);
+                    this.renderTooltip(matrixStack, list.get(l).getRecipeOutput(), x, y);
                 }
             }
         }
@@ -114,23 +111,19 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
         // Draw the paper icon when the slot is empty
         if (!paperSlot.getHasStack())
         {
-            this.func_238474_b_(matrixStack, guiXPos + paperSlot.xPos, guiYPos + paperSlot.yPos, this.xSize, 0, 16, 16); // Same
-                                                                                                                         // as
-                                                                                                                         // blit
+            this.blit(matrixStack, guiXPos + paperSlot.xPos, guiYPos + paperSlot.yPos, this.xSize, 0, 16, 16);
         }
 
         // Draw the first dye slot icon when the slot is empty
         if (!dyeSlot1.getHasStack())
         {
-            this.func_238474_b_(matrixStack, guiXPos + dyeSlot1.xPos, guiYPos + dyeSlot1.yPos, this.xSize + 16, 0, 16,
-                    16); // Same as blit
+            this.blit(matrixStack, guiXPos + dyeSlot1.xPos, guiYPos + dyeSlot1.yPos, this.xSize + 16, 0, 16, 16);
         }
 
         // Draw the second dye slot icon when the slot is empty
         if (!dyeSlot2.getHasStack())
         {
-            this.func_238474_b_(matrixStack, guiXPos + dyeSlot2.xPos, guiYPos + dyeSlot2.yPos, this.xSize + 16, 0, 16,
-                    16); // Same as blit
+            this.blit(matrixStack, guiXPos + dyeSlot2.xPos, guiYPos + dyeSlot2.yPos, this.xSize + 16, 0, 16, 16);
         }
 
         int i2 = this.guiLeft + 60;
@@ -151,7 +144,7 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
             {
                 l1 += 28;
             }
-            this.func_238474_b_(matrixStack, j1, k1, 0, l1, 14, 14); // Same as blit
+            this.blit(matrixStack, j1, k1, 0, l1, 14, 14);
         }
     }
 
@@ -180,8 +173,7 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
      * Called when the mouse is clicked
      */
     @Override
-    public boolean func_231044_a_(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) // Same as
-                                                                                                             // mouseClicked
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
         this.clickedOnScroll = false;
         if (this.hasItemsInInputSlot)
@@ -193,62 +185,56 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
             for (int l = this.recipeIndexOffset; l < k; ++l)
             {
                 int i1 = l - this.recipeIndexOffset;
-                double d0 = p_mouseClicked_1_ - (i + i1 % 4 * 14);
-                double d1 = p_mouseClicked_3_ - (j + i1 / 4 * 14);
+                double d0 = mouseX - (i + i1 % 4 * 14);
+                double d1 = mouseY - (j + i1 / 4 * 14);
                 if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D
-                        && this.container.enchantItem(this.getMinecraft().player, l))
+                        && this.container.enchantItem(this.minecraft.player, l))
                 {
                     Minecraft.getInstance().getSoundHandler()
                             .play(SimpleSound.master(SoundEvents.UI_LOOM_SELECT_PATTERN, 1.0F));
-                    this.getMinecraft().playerController.sendEnchantPacket((this.container).windowId, l);
+                    this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
                     return true;
                 }
             }
 
             i = this.guiLeft + 119;
             j = this.guiTop + 9;
-            if (p_mouseClicked_1_ >= i && p_mouseClicked_1_ < i + 12 && p_mouseClicked_3_ >= j
-                    && p_mouseClicked_3_ < j + 54)
+            if (mouseX >= i && mouseX < i + 12 && mouseY >= j && mouseY < j + 54)
             {
                 this.clickedOnScroll = true;
             }
         }
-        return super.func_231044_a_(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_); // Same as mouseClicked
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     /**
-     * Called when the mouse is dragged. Same as mouseDragged.
+     * Called when the mouse is dragged.
      */
     @Override
-    public boolean func_231045_a_(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_,
-            double p_mouseDragged_6_, double p_mouseDragged_8_) // Same as mouseDragged
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY)
     {
         if (this.clickedOnScroll && this.canScroll())
         {
             int i = this.guiTop + 13;
             int j = i + 67;
-            this.sliderProgress = ((float) p_mouseDragged_3_ - i - 7.5F) / (j - i - 15.0F);
+            this.sliderProgress = ((float) mouseY - i - 7.5F) / (j - i - 15.0F);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int) (this.sliderProgress * this.getHiddenRows() + 0.5D) / 4;
             return true;
         }
         else
         {
-            return super.func_231045_a_(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_,
-                    p_mouseDragged_8_);
+            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
         }
     }
 
-    /**
-     * Same as mouseScrolled.
-     */
     @Override
-    public boolean func_231043_a_(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta)
     {
         if (this.canScroll())
         {
             int i = this.getHiddenRows();
-            this.sliderProgress = (float) (this.sliderProgress - p_mouseScrolled_5_ / i);
+            this.sliderProgress = (float) (this.sliderProgress - delta / i);
             this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int) (this.sliderProgress * i + 0.5D) * 4;
         }
