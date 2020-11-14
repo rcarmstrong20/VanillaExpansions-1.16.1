@@ -70,7 +70,7 @@ public class ClientProxy extends CommonProxy
      */
     private void registerRenders()
     {
-        // Register cutout and cutout mipped renders
+        // cutout renders
 
         RenderTypeLookup.setRenderLayer(VeBlocks.red_glass, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.red_glass_pane, RenderType.getCutout());
@@ -111,9 +111,13 @@ public class ClientProxy extends CommonProxy
         RenderTypeLookup.setRenderLayer(VeBlocks.regigigas_pokedoll, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.snapdragon, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.potted_snapdragon, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.ender_grass, RenderType.getCutout());
+
+        // Cut out mipped renders
+
         RenderTypeLookup.setRenderLayer(VeBlocks.enderman_plush, RenderType.getCutoutMipped());
 
-        // Register translucent renders
+        // Translucent renders
 
         RenderTypeLookup.setRenderLayer(VeBlocks.glass_of_darkness, RenderType.getTranslucent());
 
