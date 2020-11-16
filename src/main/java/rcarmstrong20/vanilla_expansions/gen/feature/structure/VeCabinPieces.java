@@ -77,18 +77,6 @@ public class VeCabinPieces
         }
 
         /**
-         * Where to save things to nbt You might get away with simply using Write, but
-         * this is what vanilla uses
-         */
-        @Override
-        protected void readAdditional(CompoundNBT nbt)
-        {
-            super.readAdditional(nbt);
-            nbt.putString("Template", this.templateResource.toString());
-            nbt.putString("Rot", this.rotation.name());
-        }
-
-        /**
          * Setup and prepare the template for placement
          */
         private void setupTemplate(TemplateManager templateManager)
@@ -98,6 +86,18 @@ public class VeCabinPieces
                     .setMirror(Mirror.NONE).setCenterOffset(new BlockPos(0, 0, 0))
                     .addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
             this.setup(template, this.templatePosition, placementsettings);
+        }
+
+        /**
+         * Where to save things to nbt You might get away with simply using Write, but
+         * this is what vanilla uses
+         */
+        @Override
+        protected void readAdditional(CompoundNBT nbt)
+        {
+            super.readAdditional(nbt);
+            nbt.putString("Template", this.templateResource.toString());
+            nbt.putString("Rot", this.rotation.name());
         }
 
         /**

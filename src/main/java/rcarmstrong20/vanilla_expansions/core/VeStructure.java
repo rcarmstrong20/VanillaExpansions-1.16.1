@@ -8,16 +8,16 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
 
-@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+// @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus =
+// Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {
     private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 
-    public static final Structure<VillageConfig> cabin = register("cabin",
+    public static Structure<VillageConfig> cabin = register("cabin",
             new VeCabinStructure(VillageConfig.field_236533_a_), GenerationStage.Decoration.SURFACE_STRUCTURES);
 
     /**
@@ -29,6 +29,7 @@ public class VeStructure
      */
     private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decoration)
     {
+        Structure.NAME_STRUCTURE_BIMAP.put((VanillaExpansions.MOD_ID + ":" + name), structure);
         structure.setRegistryName(VanillaExpansions.MOD_ID, name);
         STRUCTURES.add(structure);
         return structure;

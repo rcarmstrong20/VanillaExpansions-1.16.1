@@ -13,7 +13,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeCabinStructure extends JigsawStructure
 {
@@ -28,7 +27,6 @@ public class VeCabinStructure extends JigsawStructure
      *
      * @return method reference to Start constructor.
      */
-
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory()
     {
@@ -36,21 +34,9 @@ public class VeCabinStructure extends JigsawStructure
     }
 
     /**
-     * The name used for the locate command.
-     *
-     * @return The name for the structure.
-     */
-    @Override
-    public String getStructureName()
-    {
-        return VanillaExpansions.MOD_ID + ":cabin";
-    }
-
-    /**
      * The structure start is responsible for creating the structure in memory, but
      * not for placing the blocks themselves
      */
-
     public static class Start extends StructureStart<VillageConfig>
     {
         public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox,
@@ -71,8 +57,8 @@ public class VeCabinStructure extends JigsawStructure
         public void func_230364_a_(DynamicRegistries dynamicRegistry, ChunkGenerator generator,
                 TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, VillageConfig structureConfig)
         {
+            BlockPos blockPos = new BlockPos(chunkX * 16, 90, chunkZ * 16);
             Rotation rotation = Rotation.randomRotation(this.rand);
-            BlockPos blockPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
             VeCabinPieces.init(templateManager, blockPos, rotation, this.components, structureConfig);
             this.recalculateStructureSize();
         }
