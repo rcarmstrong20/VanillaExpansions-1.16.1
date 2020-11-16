@@ -11,7 +11,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
-import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeTileEntityType
@@ -25,10 +24,6 @@ public class VeTileEntityType
                     VeBlocks.light_gray_campfire, VeBlocks.cyan_campfire, VeBlocks.purple_campfire,
                     VeBlocks.blue_campfire, VeBlocks.brown_campfire, VeBlocks.green_campfire, VeBlocks.red_campfire,
                     VeBlocks.black_campfire));
-    public static TileEntityType<VeFrameTileEntity> frame = register("frame",
-            TileEntityType.Builder.create(VeFrameTileEntity::new, VeBlocks.oak_frame, VeBlocks.spruce_frame,
-                    VeBlocks.birch_frame, VeBlocks.jungle_frame, VeBlocks.acacia_frame, VeBlocks.dark_oak_frame,
-                    VeBlocks.warped_frame, VeBlocks.crimson_frame));
 
     /**
      * @param <T>     An instance of the TileEntity class.
