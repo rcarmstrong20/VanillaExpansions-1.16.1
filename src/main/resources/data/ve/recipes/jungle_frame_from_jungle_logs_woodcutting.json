@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "tag": "minecraft:jungle_logs"
-  },
-  "result": "ve:jungle_frame",
-  "count": 1
-}

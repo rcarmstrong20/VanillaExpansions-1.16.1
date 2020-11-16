@@ -1,7 +1,0 @@
-{
-    "parent": "ve:item/template_painting",
-    "textures":
-	{
-        "painting": "ve:item/wither_painting_bottom_right"
-    }
-}

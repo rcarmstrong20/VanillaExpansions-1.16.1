@@ -1,7 +1,0 @@
-{
-    "parent": "ve:item/template_painting",
-    "textures":
-	{
-        "painting": "ve:item/stage_painting_top_right"
-    }
-}

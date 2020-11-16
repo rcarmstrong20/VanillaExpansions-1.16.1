@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "tag": "minecraft:dark_oak_logs"
-  },
-  "result": "ve:dark_oak_frame",
-  "count": 1
-}

@@ -10,7 +10,6 @@ import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeEaselScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCampfireTileEntityRenderer;
-import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeFrameTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
 import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
@@ -48,7 +47,6 @@ public class ClientProxy extends CommonProxy
     {
         ClientRegistry.bindTileEntityRenderer(VeTileEntityType.colored_campfire,
                 VeColoredCampfireTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(VeTileEntityType.frame, VeFrameTileEntityRenderer::new);
 
         VanillaExpansions.LOGGER.info("Registered tile entity renderers.");
     }

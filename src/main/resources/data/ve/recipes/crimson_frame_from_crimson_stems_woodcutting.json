@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "tag": "minecraft:crimson_stems"
-  },
-  "result": "ve:crimson_frame",
-  "count": 1
-}

@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "half=lower": { "model": "block/oak_graham_painting_bottom" },
-        "half=upper":    { "model": "block/oak_graham_painting_top" }
-    }
-}
