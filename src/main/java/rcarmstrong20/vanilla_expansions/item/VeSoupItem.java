@@ -14,6 +14,7 @@ public class VeSoupItem extends Item
         super(properties);
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity livingEntityIn)
     {
         super.onItemUseFinish(stack, worldIn, livingEntityIn);
@@ -22,10 +23,12 @@ public class VeSoupItem extends Item
         if (item == VeItems.noodle_soup)
         {
             return new ItemStack(VeItems.noodle_bowl);
-        } else if (item == VeItems.void_bucket)
+        }
+        else if (item == VeItems.dark_matter_bucket)
         {
             return new ItemStack(Items.BUCKET);
-        } else if (item == VeItems.caramel_apple)
+        }
+        else if (item == VeItems.caramel_apple)
         {
             return new ItemStack(Items.STICK);
         }
