@@ -7,10 +7,10 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
-@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+// @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus =
+// Mod.EventBusSubscriber.Bus.MOD)
 public class VeFeature
 {
     private static final List<Feature<?>> FEATURES = new ArrayList<>();
