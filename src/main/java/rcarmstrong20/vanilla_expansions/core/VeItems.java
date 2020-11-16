@@ -42,7 +42,6 @@ public class VeItems
     private static final List<Item> ITEMS = new ArrayList<>();
 
     // Vanilla Expansions Items
-
     public static Item ruby = register("ruby", new Item(VE_ITEMS));
     public static Item ruby_axe = register("ruby_axe", new AxeItem(VeItemTier.RUBY, 5.0F, -2.8F,
             new Item.Properties().addToolType(ToolType.AXE, 4).group(VanillaExpansions.VE_GROUP)));
@@ -99,8 +98,8 @@ public class VeItems
     public static Item quinoa_cerceal = register("quinoa_cerceal", new SoupItem(new Item.Properties().maxStackSize(1)
             .containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP).food(VeFoods.QUINOA_CERCEAL)));
     public static Item smoky_quartz = register("smoky_quartz", new Item(VE_ITEMS));
-    public static Item void_bucket = register("void_bucket",
-            new BucketItem(Suppliers.ofInstance(VeFluids.VOID), new Item.Properties().containerItem(Items.BUCKET)
+    public static Item dark_matter_bucket = register("dark_matter_bucket",
+            new BucketItem(Suppliers.ofInstance(VeFluids.dark_matter), new Item.Properties().containerItem(Items.BUCKET)
                     .maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.VOID_BUCKET)));
     public static Item caramel_apple = register("caramel_apple", new VeSoupItem(new Item.Properties().maxStackSize(1)
             .containerItem(Items.STICK).group(VanillaExpansions.VE_GROUP).food(VeFoods.CARAMEL_APPLE)));

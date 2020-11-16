@@ -21,9 +21,11 @@ import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -50,9 +52,12 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.TickEvent.WorldTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -70,7 +75,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
-import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
+import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUnderDarkMatterParticle;
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
@@ -78,9 +83,10 @@ import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFeatures;
+import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
-import rcarmstrong20.vanilla_expansions.core.VeStructure;
+import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
@@ -122,6 +128,7 @@ public class VanillaExpansions
     private void setup(final FMLCommonSetupEvent event)
     {
         VanillaExpansions.LOGGER.info("setup method registered");
+        // VePaintingType.VE_PAINTING_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         PROXY.onSetupCommon();
     }
 
@@ -146,13 +153,14 @@ public class VanillaExpansions
     @OnlyIn(Dist.CLIENT)
     private void onRegisterParticle(ParticleFactoryRegisterEvent event)
     {
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.dripping_void,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.dripping_dark_matter,
                 VeDripParticle.VeDrippingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.falling_void,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.falling_dark_matter,
                 VeDripParticle.VeFallingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_void,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_dark_matter,
                 VeDripParticle.VeLandingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid, VeUndervoidParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid,
+                VeUnderDarkMatterParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.white_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orange_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.magenta_spark, LavaParticle.Factory::new);
@@ -169,6 +177,56 @@ public class VanillaExpansions
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.green_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.red_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.black_spark, LavaParticle.Factory::new);
+    }
+
+    public void onPlayerTick(PlayerTickEvent event)
+    {
+        event.player.handleFluidAcceleration(VeFluidTags.dark_matter, 2.0);
+    }
+
+    public void onWorldTick(WorldTickEvent event)
+    {
+
+    }
+
+    /**
+     * Makes the fog black when the player is in a dark matter block.
+     *
+     * @param event An instance of the FogColors class.
+     */
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onFogColor(EntityViewRenderEvent.FogColors event)
+    {
+        ActiveRenderInfo info = event.getInfo();
+        FluidState state = info.getFluidState();
+
+        float black = 0.0F;
+
+        if (state.getFluid() instanceof VeDarkMatterFluid)
+        {
+            event.setRed(black);
+            event.setGreen(black);
+            event.setBlue(black);
+        }
+    }
+
+    /**
+     * Controls the density of the fog color when in a dark matter block.
+     *
+     * @param event An instance of the FogDensity class.
+     */
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onFogDensity(EntityViewRenderEvent.FogDensity event)
+    {
+        ActiveRenderInfo info = event.getInfo();
+        FluidState state = info.getFluidState();
+        if (state.getFluid() instanceof VeDarkMatterFluid)
+        {
+            event.setDensity(0.5F);
+            event.setCanceled(true);
+        }
     }
 
     /**
@@ -371,14 +429,17 @@ public class VanillaExpansions
                 VeFeatureGenConfig.enableWitchsCradleSpawns.get());
         this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_WITCHS_CRADLE_SPARSE,
                 VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeFeatures.VOID_LAKE,
+        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeFeatures.DARK_MATTER_LAKE,
                 VeFeatureGenConfig.enableVoidLakeSpawns.get());
         this.addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.SNAPDRAGON_AND_GRASS,
                 VeFeatureGenConfig.enableSnapdragonSpawns.get());
         this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.HUGE_PURPLE_MUSHROOM,
                 VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
-        this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES, VeStructure.cabin,
-                VeFeatures.TAIGA_CABIN, VeFeatureGenConfig.enableCabinSpawns.get());
+        /*
+         * this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES,
+         * VeStructure.cabin, VeFeatures.TAIGA_CABIN,
+         * VeFeatureGenConfig.enableCabinSpawns.get());
+         */
     }
 
     /**
