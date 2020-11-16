@@ -128,7 +128,6 @@ public class VanillaExpansions
     private void setup(final FMLCommonSetupEvent event)
     {
         VanillaExpansions.LOGGER.info("setup method registered");
-        // VePaintingType.VE_PAINTING_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         PROXY.onSetupCommon();
     }
 
