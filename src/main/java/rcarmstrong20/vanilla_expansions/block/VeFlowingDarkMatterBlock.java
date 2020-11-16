@@ -8,26 +8,27 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
-public class VeFlowingVoidBlock extends FlowingFluidBlock
+public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
 {
-    public VeFlowingVoidBlock(Supplier<? extends FlowingFluid> supplier, Properties builder)
+    public VeFlowingDarkMatterBlock(Supplier<? extends FlowingFluid> supplier, Properties builder)
     {
         super(supplier, builder);
     }
@@ -134,9 +135,16 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
     }
 
     @Override
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
+    public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return false;
+        if (world.getFluidState(pos).isTagged(VeFluidTags.dark_matter) && entity.getMotion().getY() != 0.0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
@@ -153,23 +161,23 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
             double yMot = entity.getMotion().getY();
             double zMot = entity.getMotion().getZ();
 
-            // Slow the players descent when falling.
-            if (yMot < 0.0D)
+            entity.setMotion(xMot / 200000, yMot / 200000, zMot / 200000);
+
+            if (!(world.getFluidState(pos).isTagged(VeFluidTags.dark_matter)))
             {
-                entity.setMotion(0.0, -0.01, 0.0);
+                double yCurMot = yMot;
+
+                entity.setMotion(xMot / 200000, yCurMot - (yMot / 200000), zMot / 200000);
             }
-            // Play firework particles and raise the player.
-            else if (yMot > 0.0D)
+
+            // Play firework particles when the player is in the fluid.
+            if (random.nextInt(10) == 0)
             {
                 world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
                         entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-                entity.setMotion(new Vector3d(0.0D, 0.2D, 0.0D));
             }
-            // Slow the players movement when walking
-            else if (yMot == 0.0D && xMot != 0.0D || zMot != 0.0D)
-            {
-                entity.setMotion(0.01, 0.0, 0.01);
-            }
+
+            // Cancel fall damage.
             entity.fallDistance = 0;
         }
         else
@@ -177,7 +185,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
             // Make items float on void with firework particles.
             world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
                     entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-            entity.setMotion(new Vector3d(0.0D, 0.2D, 0.0D));
+            entity.setMotion(new Vector3d(0.0D, 0.1D + random.nextFloat(), 0.0D));
         }
     }
 }

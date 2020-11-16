@@ -16,9 +16,9 @@ public class VeParticleTypes
 {
     private static final List<BasicParticleType> PARTICLES = new ArrayList<>();
 
-    public static BasicParticleType dripping_void = register("dripping_void", false);
-    public static BasicParticleType falling_void = register("falling_void", false);
-    public static BasicParticleType landing_void = register("landing_void", false);
+    public static BasicParticleType dripping_dark_matter = register("dripping_dark_matter", false);
+    public static BasicParticleType falling_dark_matter = register("falling_dark_matter", false);
+    public static BasicParticleType landing_dark_matter = register("landing_dark_matter", false);
     public static BasicParticleType undervoid = register("undervoid", true);
     public static BasicParticleType white_spark = register("white_spark", false);
     public static BasicParticleType orange_spark = register("orange_spark", false);

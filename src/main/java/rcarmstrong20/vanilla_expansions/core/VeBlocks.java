@@ -31,8 +31,7 @@ import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
-import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
-import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
+import rcarmstrong20.vanilla_expansions.block.VeFlowingDarkMatterBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
@@ -363,30 +362,6 @@ public class VeBlocks
             new SlabBlock(AbstractBlock.Properties.from(Blocks.COARSE_DIRT)));
     public static Block coarse_dirt_stairs = register("coarse_dirt_stairs", true, new StairsBlock(
             () -> Blocks.COARSE_DIRT.getDefaultState(), AbstractBlock.Properties.from(Blocks.COARSE_DIRT)));
-    public static Block oak_frame = register("oak_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block spruce_frame = register("spruce_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block birch_frame = register("birch_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block jungle_frame = register("jungle_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block acacia_frame = register("acacia_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block dark_oak_frame = register("dark_oak_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block warped_frame = register("warped_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.WARPED_STEM)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
-    public static Block crimson_frame = register("crimson_frame", true,
-            new VeFrameBlock(AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.CRIMSON_STEM)
-                    .hardnessAndResistance(0.2F).sound(SoundType.WOOD).notSolid().doesNotBlockMovement()));
     public static Block snow_bricks = register("snow_bricks", true,
             new Block(AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW)
                     .hardnessAndResistance(0.6F).harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW)));
@@ -449,8 +424,8 @@ public class VeBlocks
             new VeColoredCampfireBlock(VeParticleTypes.black_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
     public static Block witchs_cradle = register("witchs_cradle", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.SWEET_BERRY_BUSH)));
-    public static Block void_liquid = register("void", false,
-            new VeFlowingVoidBlock(() -> VeFluids.FLOWING_VOID,
+    public static Block dark_matter = register("dark_matter", false,
+            new VeFlowingDarkMatterBlock(() -> VeFluids.flowing_dark_matter,
                     AbstractBlock.Properties.create(Material.WATER, MaterialColor.BLACK).doesNotBlockMovement()
                             .hardnessAndResistance(100.0F).noDrops()));
     public static Block bamboo_fence = register("bamboo_fence", true,

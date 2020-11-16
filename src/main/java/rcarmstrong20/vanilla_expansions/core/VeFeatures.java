@@ -51,14 +51,12 @@ public class VeFeatures
             .withPlacement(Features.Placements.PATCH_PLACEMENT);
     public static final ConfiguredFeature<?, ?> PATCH_WITCHS_CRADLE_DECORATED = PATCH_WITCHS_CRADLE
             .withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12);
-
     public static final ConfiguredFeature<?, ?> HUGE_PURPLE_MUSHROOM = Feature.HUGE_RED_MUSHROOM
             .withConfiguration(VeFeatures.Configs.BIG_PURPLE_MUSHROOM_CONFIG)
             .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
-    public static final ConfiguredFeature<?, ?> VOID_LAKE = Feature.LAKE
-            .withConfiguration(new BlockStateFeatureConfig(VeFeatures.States.VOID_LIQUID))
+    public static final ConfiguredFeature<?, ?> DARK_MATTER_LAKE = Feature.LAKE
+            .withConfiguration(new BlockStateFeatureConfig(VeFeatures.States.DARK_MATTER))
             .withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4)));
-
     public static final ConfiguredFeature<?, ?> SNAPDRAGON_AND_GRASS = Feature.FLOWER
             .withConfiguration(VeFeatures.Configs.SNAPDRAGON_AND_GRASS_CONFIG)
             .withPlacement(Features.Placements.VEGETATION_PLACEMENT)
@@ -76,13 +74,11 @@ public class VeFeatures
         public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
                 new SimpleBlockStateProvider(VeFeatures.States.CRANBERRY_BUSH), SimpleBlockPlacer.PLACER)).tries(64)
                         .whitelist(ImmutableSet.of(VeFeatures.States.GRASS_BLOCK.getBlock())).func_227317_b_().build();
-
         public static final BlockClusterFeatureConfig SNAPDRAGON_AND_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(
                 (new WeightedBlockStateProvider()).addWeightedBlockstate(VeFeatures.States.ENDER_GRASS, 2)
                         .addWeightedBlockstate(VeFeatures.States.SNAPDRAGON, 1),
                 SimpleBlockPlacer.PLACER)).tries(64).whitelist(ImmutableSet.of(VeFeatures.States.END_STONE.getBlock()))
                         .func_227317_b_().build();
-
         public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(
                 new SimpleBlockStateProvider(VeFeatures.States.WITCHS_CRADLE), SimpleBlockPlacer.PLACER)).tries(64)
                         .whitelist(ImmutableSet.of(VeFeatures.States.GRASS_BLOCK.getBlock())).func_227317_b_().build();
@@ -93,7 +89,7 @@ public class VeFeatures
 
     public static final class States
     {
-        protected static final BlockState VOID_LIQUID = VeBlocks.void_liquid.getDefaultState();
+        protected static final BlockState DARK_MATTER = VeBlocks.dark_matter.getDefaultState();
         protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
         protected static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
         protected static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();

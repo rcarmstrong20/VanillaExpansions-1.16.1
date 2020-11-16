@@ -30,24 +30,24 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
-public abstract class VeVoidFluid extends WaterFluid
+public abstract class VeDarkMatterFluid extends WaterFluid
 {
     @Override
     public Fluid getFlowingFluid()
     {
-        return VeFluids.FLOWING_VOID;
+        return VeFluids.flowing_dark_matter;
     }
 
     @Override
     public Fluid getStillFluid()
     {
-        return VeFluids.VOID;
+        return VeFluids.dark_matter;
     }
 
     @Override
     public Item getFilledBucket()
     {
-        return VeItems.void_bucket;
+        return VeItems.dark_matter_bucket;
     }
 
     @Override
@@ -70,15 +70,15 @@ public abstract class VeVoidFluid extends WaterFluid
     @Override
     public boolean canDisplace(FluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction)
     {
-        return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.VOID);
+        return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.dark_matter);
     }
 
     @Override
     protected FluidAttributes createAttributes()
     {
         return FluidAttributes
-                .builder(new ResourceLocation(VanillaExpansions.MOD_ID, "block/void_still"),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "block/void_flow"))
+                .builder(new ResourceLocation(VanillaExpansions.MOD_ID, "block/dark_matter_still"),
+                        new ResourceLocation(VanillaExpansions.MOD_ID, "block/dark_matter_flow"))
                 .luminosity(20).density(1000).viscosity(3000).build(this);
     }
 
@@ -87,20 +87,20 @@ public abstract class VeVoidFluid extends WaterFluid
     @OnlyIn(Dist.CLIENT)
     public IParticleData getDripParticleData()
     {
-        return VeParticleTypes.dripping_void;
+        return VeParticleTypes.dripping_dark_matter;
     }
 
     @Override
     public BlockState getBlockState(FluidState state)
     {
-        return VeBlocks.void_liquid.getDefaultState().with(FlowingFluidBlock.LEVEL,
+        return VeBlocks.dark_matter.getDefaultState().with(FlowingFluidBlock.LEVEL,
                 Integer.valueOf(getLevelFromState(state)));
     }
 
     @Override
     public boolean isEquivalentTo(Fluid fluidIn)
     {
-        return fluidIn == VeFluids.VOID || fluidIn == VeFluids.FLOWING_VOID;
+        return fluidIn == VeFluids.dark_matter || fluidIn == VeFluids.flowing_dark_matter;
     }
 
     @Override
@@ -109,7 +109,7 @@ public abstract class VeVoidFluid extends WaterFluid
         return 13;
     }
 
-    public static class Flowing extends VeVoidFluid
+    public static class Flowing extends VeDarkMatterFluid
     {
         @Override
         protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder)
@@ -131,7 +131,7 @@ public abstract class VeVoidFluid extends WaterFluid
         }
     }
 
-    public static class Source extends VeVoidFluid
+    public static class Source extends VeDarkMatterFluid
     {
         @Override
         public int getLevel(FluidState fluidState)

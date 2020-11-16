@@ -29,11 +29,13 @@ public class VeDripParticle extends SpriteTexturedParticle
         this.fluid = fluid;
     }
 
+    @Override
     public IParticleRenderType getRenderType()
     {
         return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
+    @Override
     public void tick()
     {
         this.prevPosX = this.posX;
@@ -42,18 +44,18 @@ public class VeDripParticle extends SpriteTexturedParticle
         this.func_217576_g();
         if (!this.isExpired)
         {
-            this.motionY -= (double) this.particleGravity;
+            this.motionY -= this.particleGravity;
             this.move(this.motionX, this.motionY, this.motionZ);
             this.func_217577_h();
             if (!this.isExpired)
             {
-                this.motionX *= (double) 0.98F;
-                this.motionY *= (double) 0.98F;
-                this.motionZ *= (double) 0.98F;
+                this.motionX *= 0.98F;
+                this.motionY *= 0.98F;
+                this.motionZ *= 0.98F;
                 BlockPos blockpos = new BlockPos(this.posX, this.posY, this.posZ);
                 FluidState ifluidstate = this.world.getFluidState(blockpos);
-                if (ifluidstate.getFluid() == this.fluid && this.posY < (double) ((float) blockpos.getY()
-                        + ifluidstate.getActualHeight(this.world, blockpos)))
+                if (ifluidstate.getFluid() == this.fluid
+                        && this.posY < blockpos.getY() + ifluidstate.getActualHeight(this.world, blockpos))
                 {
                     this.setExpired();
                 }
@@ -70,8 +72,7 @@ public class VeDripParticle extends SpriteTexturedParticle
     }
 
     protected void func_217577_h()
-    {
-    }
+    {}
 
     @OnlyIn(Dist.CLIENT)
     static class VeDripping extends VeDripParticle
@@ -86,6 +87,7 @@ public class VeDripParticle extends SpriteTexturedParticle
             this.maxAge = 40;
         }
 
+        @Override
         protected void func_217576_g()
         {
             if (this.maxAge-- <= 0)
@@ -96,6 +98,7 @@ public class VeDripParticle extends SpriteTexturedParticle
             }
         }
 
+        @Override
         protected void func_217577_h()
         {
             this.motionX *= 0.02D;
@@ -114,11 +117,12 @@ public class VeDripParticle extends SpriteTexturedParticle
             this.sprite = sprite;
         }
 
+        @Override
         public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeDripping drip_particle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.VOID,
-                    VeParticleTypes.falling_void);
+            VeDripping drip_particle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.dark_matter,
+                    VeParticleTypes.falling_dark_matter);
             drip_particle.particleGravity *= 0.01F;
             drip_particle.maxAge = 100;
             drip_particle.setColor(0.1F, 0.1F, 0.1F);
@@ -140,6 +144,7 @@ public class VeDripParticle extends SpriteTexturedParticle
             this.maxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
         }
 
+        @Override
         protected void func_217577_h()
         {
             if (this.onGround)
@@ -160,11 +165,12 @@ public class VeDripParticle extends SpriteTexturedParticle
             this.sprite = sprite;
         }
 
+        @Override
         public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
             VeFallingLiquidParticle falling_particle = new VeDripParticle.VeFallingLiquidParticle(world, x, y, z,
-                    VeFluids.VOID, VeParticleTypes.landing_void);
+                    VeFluids.dark_matter, VeParticleTypes.landing_dark_matter);
             falling_particle.setColor(0.1F, 0.1F, 0.1F);
             falling_particle.selectSpriteRandomly(this.sprite);
             return falling_particle;
@@ -191,10 +197,11 @@ public class VeDripParticle extends SpriteTexturedParticle
             this.sprite = sprite;
         }
 
+        @Override
         public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeLanding land_particle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.VOID);
+            VeLanding land_particle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.dark_matter);
             land_particle.maxAge = (int) (128.0D / (Math.random() * 0.8D + 0.2D));
             land_particle.setColor(0.1F, 0.1F, 0.1F);
             land_particle.selectSpriteRandomly(this.sprite);

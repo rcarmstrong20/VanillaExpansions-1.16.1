@@ -3,26 +3,21 @@ package rcarmstrong20.vanilla_expansions.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.fluid.VeVoidFluid;
+import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeFluids
 {
     private static final List<Fluid> FLUIDS = new ArrayList<>();
 
-    public static final Fluid VOID = register("void", new VeVoidFluid.Source());
-    public static final FlowingFluid FLOWING_VOID = register("flowing_void", new VeVoidFluid.Flowing());
+    public static Fluid dark_matter = register("dark_matter", new VeDarkMatterFluid.Source());
+    public static FlowingFluid flowing_dark_matter = register("flowing_dark_matter", new VeDarkMatterFluid.Flowing());
 
     /**
      * @param name  A name for the fluid.
@@ -43,32 +38,5 @@ public class VeFluids
         FLUIDS.clear();
 
         VanillaExpansions.LOGGER.info("Fluids registered.");
-    }
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void onFogColor(EntityViewRenderEvent.FogColors event)
-    {
-        ActiveRenderInfo info = event.getInfo();
-        FluidState state = info.getFluidState();
-        if (state.getFluid() instanceof VeVoidFluid)
-        {
-            event.setRed(0.0F);
-            event.setGreen(20.0F);
-            event.setBlue(0.0F);
-        }
-    }
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void onFogDensity(EntityViewRenderEvent.FogDensity event)
-    {
-        ActiveRenderInfo info = event.getInfo();
-        FluidState state = info.getFluidState();
-        if (state.getFluid() instanceof VeVoidFluid)
-        {
-            event.setDensity(5.0F);
-            event.setCanceled(true);
-        }
     }
 }

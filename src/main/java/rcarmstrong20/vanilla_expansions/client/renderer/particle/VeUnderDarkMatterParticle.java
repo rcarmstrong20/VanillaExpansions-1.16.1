@@ -13,9 +13,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VeUndervoidParticle extends SpriteTexturedParticle
+public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
 {
-    private VeUndervoidParticle(ClientWorld world, double x, double y, double z)
+    private VeUnderDarkMatterParticle(ClientWorld world, double x, double y, double z)
     {
         super(world, x, y, z);
         this.particleRed = 14.0F;
@@ -26,11 +26,13 @@ public class VeUndervoidParticle extends SpriteTexturedParticle
         this.maxAge = (int) (16.0D / (Math.random() * 0.8D + 0.2D));
     }
 
+    @Override
     public IParticleRenderType getRenderType()
     {
         return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
+    @Override
     public void tick()
     {
         this.prevPosX = this.posX;
@@ -39,7 +41,8 @@ public class VeUndervoidParticle extends SpriteTexturedParticle
         if (this.maxAge-- <= 0)
         {
             this.setExpired();
-        } else
+        }
+        else
         {
             this.move(this.motionX, this.motionY, this.motionZ);
             if (!this.world.getFluidState(new BlockPos(this.posX, this.posY, this.posZ)).isTagged(FluidTags.WATER))
@@ -59,12 +62,13 @@ public class VeUndervoidParticle extends SpriteTexturedParticle
             this.spriteSet = spriteSet;
         }
 
+        @Override
         public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeUndervoidParticle undervoidparticle = new VeUndervoidParticle(worldIn, x, y, z);
-            undervoidparticle.selectSpriteRandomly(this.spriteSet);
-            return undervoidparticle;
+            VeUnderDarkMatterParticle underDarkMatterParticle = new VeUnderDarkMatterParticle(worldIn, x, y, z);
+            underDarkMatterParticle.selectSpriteRandomly(this.spriteSet);
+            return underDarkMatterParticle;
         }
     }
 }
