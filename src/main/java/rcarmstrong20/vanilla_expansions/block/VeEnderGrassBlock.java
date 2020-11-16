@@ -69,11 +69,11 @@ public class VeEnderGrassBlock extends BushBlock
 
         if (block instanceof VePlantingPotBlock)
         {
-            return VeBlockTags.END_PLANTABLE.contains(block) && VeBlockTags.END_POTTABLE.contains(this.getBlock());
+            return VeBlockTags.end_plantable.contains(block) && VeBlockTags.end_pottable.contains(this.getBlock());
         }
         else
         {
-            return VeBlockTags.END_PLANTABLE.contains(block);
+            return VeBlockTags.end_plantable.contains(block);
         }
     }
 

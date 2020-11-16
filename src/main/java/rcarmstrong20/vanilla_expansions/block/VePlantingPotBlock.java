@@ -93,11 +93,11 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
      */
     private boolean isValid(Block soilBlock, Block plantBlock)
     {
-        return VeBlockTags.NETHER_PLANTABLE.contains(this.getBlock())
-                && VeBlockTags.NETHER_POTTABLE.contains(plantBlock)
-                || VeBlockTags.OVERWORLD_PLANTABLE.contains(this.getBlock())
-                        && VeBlockTags.OVERWORLD_POTTABLE.contains(plantBlock)
-                || VeBlockTags.END_PLANTABLE.contains(this.getBlock()) && VeBlockTags.END_POTTABLE.contains(plantBlock);
+        return VeBlockTags.nether_plantable.contains(this.getBlock())
+                && VeBlockTags.nether_pottable.contains(plantBlock)
+                || VeBlockTags.overworld_plantable.contains(this.getBlock())
+                        && VeBlockTags.overworld_pottable.contains(plantBlock)
+                || VeBlockTags.end_plantable.contains(this.getBlock()) && VeBlockTags.end_pottable.contains(plantBlock);
     }
 
     /**
