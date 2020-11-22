@@ -7,7 +7,6 @@ import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
-import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeEaselScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCampfireTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
@@ -35,7 +34,6 @@ public class ClientProxy extends CommonProxy
     private void registerScreenFactories()
     {
         ScreenManager.registerFactory(VeContainerTypes.woodcutter, VeWoodcutterScreen::new);
-        ScreenManager.registerFactory(VeContainerTypes.easel, VeEaselScreen::new);
 
         VanillaExpansions.LOGGER.info("Registered screen factories.");
     }

@@ -192,7 +192,6 @@
   "block.ve.nephilite_brick_stairs": "Nephilite Brick Stairs",
   "block.ve.nephilite_brick_wall": "Nephilite Brick Wall",
   "block.ve.chiseled_nephilite_bricks": "Chiseled Nephilite Bricks",
-  "block.ve.easel": "Easel",
   "block.ve.snow_slab": "Snow Slab",
   "block.ve.snow_stairs": "Snow Stairs",
   "block.ve.snow_wall": "Snow Wall",
@@ -207,13 +206,13 @@
   "block.ve.crimson_chytrid_nether_brick_wall": "Crimson Chytrid Nether Brick Wall",
   "block.ve.crimson_chytrid_netherrack": "Crimson Chytrid Netherrack",
   "block.ve.snapdragon": "Snapdragon",
+  "block.ve.ender_grass": "Ender Grass",
   "block.ve.smooth_end_stone": "Smooth End Stone",
   "block.ve.smooth_end_stone_slab": "Smooth End Stone Slab",
   "block.ve.smooth_end_stone_stairs": "Smooth End Stone Stairs",
   "block.ve.smooth_end_stone_wall": "Smooth End Stone Wall",
 
-  "container.woodcutter": "Woodcutter",
-  "container.easel": "Easel",  
+  "container.woodcutter": "Woodcutter", 
 
   "item.ve.ruby": "Nether Ruby",
   "item.ve.ruby_axe": "Ruby Axe",
@@ -250,7 +249,7 @@
   "item.ve.noodle_bowl": "Noodle Bowl",
   "item.ve.quinoa_cerceal": "Quinoa Cerceal",
   "item.ve.smoky_quartz": "Nether Smoky Quartz",
-  "item.ve.void_bucket": "Void Bucket",
+  "item.ve.dark_matter_bucket": "Dark Matter Bucket",
   "item.ve.caramel_apple": "Caramel Apple",
   "item.ve.caramel": "Caramel",
   "item.ve.bread_crumbs": "Bread Crumbs",
@@ -301,7 +300,7 @@
   "advancements.ve.story.craft_witchs_cradle_soup.title": "Is this even edible!?",
   "advancements.ve.story.craft_witchs_cradle_soup.description": "Craft witchs cradle soup from a blood vile, a witchs cradle branch, and a bowl",
   
-  "liquid.ve.void": "Void",
+  "liquid.ve.dark_matter": "Dark Matter",
   
   "itemGroup.ve": "Vanilla Expansions Mod",
   

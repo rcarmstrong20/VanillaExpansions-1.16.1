@@ -15,11 +15,11 @@ public class VeSoundEvents
 {
     private static final List<SoundEvent> SOUNDS = new ArrayList<>();
 
-    public static final SoundEvent BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
-    public static final SoundEvent BLOCK_VOID_AMBIENT = register("block.void_ambient");
-    public static final SoundEvent BLOCK_VOID_HARDENS = register("block.void_hardens");
-    public static final SoundEvent BLOCK_CAMPFIRE_DYED = register("block.campfire_dyed");
-    public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
+    public static SoundEvent block_mushroom_bounce = register("block.mushroom_bounce");
+    public static SoundEvent block_dark_matter_ambient = register("block.dark_matter_ambient");
+    public static SoundEvent block_dark_matter_hardens = register("block.dark_matter_hardens");
+    public static SoundEvent block_campfire_dyed = register("block.campfire_dyed");
+    public static SoundEvent ui_woodcutter_take_result = register("ui.woodcutter.take_result");
 
     /**
      * @param name The name for the sound event.

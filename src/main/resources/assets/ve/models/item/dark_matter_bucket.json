@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
 	{
-        "layer0": "ve:item/void_bucket"
+        "layer0": "ve:item/dark_matter_bucket"
     }
 }

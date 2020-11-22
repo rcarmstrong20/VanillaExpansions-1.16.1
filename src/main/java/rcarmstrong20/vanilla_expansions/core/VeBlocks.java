@@ -29,7 +29,6 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
-import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingDarkMatterBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
@@ -454,8 +453,6 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
     public static Block chiseled_nephilite_bricks = register("chiseled_nephilite_bricks", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block easel = register("easel", true, new VeEaselBlock(AbstractBlock.Properties.create(Material.WOOD)
-            .hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
     public static Block snow_slab = register("snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
     public static Block snow_stairs = register("snow_stairs", true,

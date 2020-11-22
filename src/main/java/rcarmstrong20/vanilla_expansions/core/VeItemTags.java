@@ -8,9 +8,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeItemTags
 {
-    public static final ITag<Item> PAINTINGS = VeItemTags.makeWrapperTag("paintings");
-    public static final ITag<Item> FRAMES = VeItemTags.makeWrapperTag("frames");
-    public static final ITag<Item> PACKET_SEEDS = VeItemTags.makeWrapperTag("packet_seeds");
+    public static ITag<Item> packet_seeds = VeItemTags.makeWrapperTag("packet_seeds");
 
     /**
      * @param name The name of the tag.

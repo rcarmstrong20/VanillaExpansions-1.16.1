@@ -158,7 +158,7 @@ public class VanillaExpansions
                 VeDripParticle.VeFallingVoidFactory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_dark_matter,
                 VeDripParticle.VeLandingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.under_dark_matter,
                 VeUnderDarkMatterParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.white_spark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orange_spark, LavaParticle.Factory::new);
@@ -178,14 +178,18 @@ public class VanillaExpansions
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.black_spark, LavaParticle.Factory::new);
     }
 
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public void onPlayerTick(PlayerTickEvent event)
     {
-        event.player.handleFluidAcceleration(VeFluidTags.dark_matter, 2.0);
+        event.player.handleFluidAcceleration(VeFluidTags.dark_matter, 0.005);
     }
 
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public void onWorldTick(WorldTickEvent event)
     {
-
+        // event.handleFluidAcceleration(VeFluidTags.dark_matter, 0.005);
     }
 
     /**
@@ -323,7 +327,7 @@ public class VanillaExpansions
                 if (worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem())
                         && campfireInventory.get(0) == ItemStack.EMPTY)
                 {
-                    world.playSound((PlayerEntity) null, pos, VeSoundEvents.BLOCK_CAMPFIRE_DYED, SoundCategory.BLOCKS,
+                    world.playSound((PlayerEntity) null, pos, VeSoundEvents.block_campfire_dyed, SoundCategory.BLOCKS,
                             1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
                     Block.replaceBlock(worldState, dyeToCampfire.get(itemStack.getItem()).getDefaultState()
                             .with(CampfireBlock.FACING, currentFacing), world, pos, 3);
@@ -497,7 +501,6 @@ public class VanillaExpansions
             {
                 if (event.getName().equals(new ResourceLocation("minecraft:" + biome)))
                 {
-                    System.out.println("Add feature to biome");
                     event.getGeneration().getFeatures(decoration).add(() -> feature);
                 }
             }
@@ -517,8 +520,7 @@ public class VanillaExpansions
             // biome.addFeature(decoration, structure.withConfiguration(config)
             // .withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-            // event.getGeneration().getFeatures(decoration).add(() ->
-            // structure.withConfiguration(p_236391_1_));
+            // event.getGeneration().getFeatures(decoration).add(() -> structure);
 
             if (event.getCategory() == category)
             {

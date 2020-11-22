@@ -25,7 +25,7 @@ public class VeVillagerProfessions
     private static final List<VillagerProfession> VILLAGER_PROFESSIONS = new ArrayList<>();
 
     public static final VillagerProfession LUMBERJACK = register("lumberjack", VePointOfInterestTypes.LUMBERJACK,
-            VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT);
+            VeSoundEvents.ui_woodcutter_take_result);
 
     /**
      * @param name            The name for associated with the villager profession.
@@ -42,8 +42,8 @@ public class VeVillagerProfessions
         {
             profession = VILLAGER_POFESSION_CONSTRUCTOR.newInstance(VanillaExpansions.MOD_ID + ":" + name,
                     pointOfInterest, ImmutableSet.of(), ImmutableSet.of(), sound);
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e)
+        }
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
             e.printStackTrace();
         }

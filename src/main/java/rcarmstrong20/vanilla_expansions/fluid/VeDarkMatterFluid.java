@@ -56,13 +56,13 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     {
         if (random.nextInt(100) == 0)
         {
-            worldIn.addParticle(VeParticleTypes.undervoid, (double) pos.getX() + (double) random.nextFloat(),
+            worldIn.addParticle(VeParticleTypes.under_dark_matter, (double) pos.getX() + (double) random.nextFloat(),
                     (double) pos.getY() + (double) random.nextFloat(),
                     (double) pos.getZ() + (double) random.nextFloat(), 0.0D, 0.0D, 0.0D);
         }
         else if (random.nextInt(600) == 0)
         {
-            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.BLOCK_VOID_AMBIENT,
+            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.block_dark_matter_ambient,
                     SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 0.2F, random.nextFloat() + 0.5F, false);
         }
     }

@@ -10,7 +10,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeEaselContainer;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -19,7 +18,6 @@ public class VeContainerTypes
     public static final List<ContainerType<?>> CONTAINER_TYPES = new ArrayList<>();
 
     public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
-    public static ContainerType<VeEaselContainer> easel = register("easel", VeEaselContainer::new);
 
     /**
      * @param <T>

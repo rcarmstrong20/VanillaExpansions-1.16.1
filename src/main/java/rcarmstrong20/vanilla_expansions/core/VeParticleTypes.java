@@ -19,7 +19,7 @@ public class VeParticleTypes
     public static BasicParticleType dripping_dark_matter = register("dripping_dark_matter", false);
     public static BasicParticleType falling_dark_matter = register("falling_dark_matter", false);
     public static BasicParticleType landing_dark_matter = register("landing_dark_matter", false);
-    public static BasicParticleType undervoid = register("undervoid", true);
+    public static BasicParticleType under_dark_matter = register("under_dark_matter", true);
     public static BasicParticleType white_spark = register("white_spark", false);
     public static BasicParticleType orange_spark = register("orange_spark", false);
     public static BasicParticleType magenta_spark = register("magenta_spark", false);

@@ -45,11 +45,11 @@ public class VeWoodcutterContainer extends Container
     /** The inventory slot that stores the output of the crafting recipe. */
     final Slot outputInventorySlot;
     private Runnable inventoryUpdateListener = () ->
-    {
-    };
+    {};
 
     public final IInventory inputInventory = new Inventory(1)
     {
+        @Override
         public void markDirty()
         {
             super.markDirty();
@@ -78,11 +78,13 @@ public class VeWoodcutterContainer extends Container
              * Check if the stack is allowed to be placed in this slot, used for armor slots
              * as well as furnace fuel.
              */
+            @Override
             public boolean isItemValid(ItemStack stack)
             {
                 return false;
             }
 
+            @Override
             public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack)
             {
                 ItemStack itemstack = VeWoodcutterContainer.this.inputInventorySlot.decrStackSize(1);
@@ -97,7 +99,7 @@ public class VeWoodcutterContainer extends Container
                     long l = world.getGameTime();
                     if (VeWoodcutterContainer.this.lastOnTake != l)
                     {
-                        world.playSound((PlayerEntity) null, pos, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT,
+                        world.playSound((PlayerEntity) null, pos, VeSoundEvents.ui_woodcutter_take_result,
                                 SoundCategory.BLOCKS, 1.0F, 1.0F);
                         VeWoodcutterContainer.this.lastOnTake = l;
                     }
@@ -125,6 +127,7 @@ public class VeWoodcutterContainer extends Container
     /**
      * Determines whether supplied player can use this container
      */
+    @Override
     public boolean canInteractWith(PlayerEntity playerIn)
     {
         return isWithinUsableDistance(this.worldPosCallable, playerIn, VeBlocks.woodcutter);
@@ -134,6 +137,7 @@ public class VeWoodcutterContainer extends Container
      * Handles the given Button-click on the server, currently only used by
      * enchanting. Name is for legacy.
      */
+    @Override
     public boolean enchantItem(PlayerEntity playerIn, int id)
     {
         if (id >= 0 && id < this.getRecipeList().size())
@@ -147,6 +151,7 @@ public class VeWoodcutterContainer extends Container
     /**
      * Callback for when the crafting matrix is changed.
      */
+    @Override
     public void onCraftMatrixChanged(IInventory inventoryIn)
     {
         ItemStack itemstack = this.inputInventorySlot.getStack();
@@ -175,13 +180,15 @@ public class VeWoodcutterContainer extends Container
         {
             VeWoodcuttingRecipe woodcuttingRecipe = this.getRecipeList().get(this.selectedRecipe.get());
             this.outputInventorySlot.putStack(woodcuttingRecipe.getCraftingResult(this.inputInventory));
-        } else
+        }
+        else
         {
             this.outputInventorySlot.putStack(ItemStack.EMPTY);
         }
         this.detectAndSendChanges();
     }
 
+    @Override
     public ContainerType<?> getType()
     {
         return VeContainerTypes.woodcutter;
@@ -198,6 +205,7 @@ public class VeWoodcutterContainer extends Container
      * (double-click) code. The stack passed in is null for the initial slot that
      * was double-clicked.
      */
+    @Override
     public boolean canMergeSlot(ItemStack stack, Slot slotIn)
     {
         return slotIn.inventory != this.outputInventory && super.canMergeSlot(stack, slotIn);
@@ -207,6 +215,7 @@ public class VeWoodcutterContainer extends Container
      * Handle when the stack in slot {@code index} is shift-clicked. Normally this
      * moves the stack between the player inventory and the other inventory(s).
      */
+    @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -225,26 +234,30 @@ public class VeWoodcutterContainer extends Container
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            } else if (index == 0)
+            }
+            else if (index == 0)
             {
                 if (!this.mergeItemStack(itemstack1, 2, 38, false))
                 {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.world.getRecipeManager()
+            }
+            else if (this.world.getRecipeManager()
                     .getRecipe(VeRecipeTypes.woodcutting, new Inventory(itemstack1), this.world).isPresent())
             {
                 if (!this.mergeItemStack(itemstack1, 0, 1, false))
                 {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 2 && index < 29)
+            }
+            else if (index >= 2 && index < 29)
             {
                 if (!this.mergeItemStack(itemstack1, 29, 38, false))
                 {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 29 && index < 38 && !this.mergeItemStack(itemstack1, 2, 29, false))
+            }
+            else if (index >= 29 && index < 38 && !this.mergeItemStack(itemstack1, 2, 29, false))
             {
                 return ItemStack.EMPTY;
             }
@@ -269,6 +282,7 @@ public class VeWoodcutterContainer extends Container
     /**
      * Called when the container is closed.
      */
+    @Override
     public void onContainerClosed(PlayerEntity playerIn)
     {
         super.onContainerClosed(playerIn);

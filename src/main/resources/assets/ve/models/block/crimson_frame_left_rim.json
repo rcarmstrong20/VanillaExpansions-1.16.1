@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_frame_left_rim",
-    "textures":
-	{
-        "frame": "block/crimson_stem",
-		"frame_inside": "block/stripped_crimson_stem"
-    }
-}

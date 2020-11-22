@@ -130,21 +130,14 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
          * world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.up().getY(),
          * pos.getZ(), 0.0, 0.0, 0.0); }
          */
-        world.playSound(null, pos, VeSoundEvents.BLOCK_VOID_HARDENS, SoundCategory.BLOCKS,
+        world.playSound(null, pos, VeSoundEvents.block_dark_matter_hardens, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
     }
 
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        if (world.getFluidState(pos).isTagged(VeFluidTags.dark_matter) && entity.getMotion().getY() != 0.0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return world.getFluidState(pos.up()).isTagged(VeFluidTags.dark_matter) && entity.getMotion().getY() != 0.0;
     }
 
     /**
@@ -161,13 +154,14 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             double yMot = entity.getMotion().getY();
             double zMot = entity.getMotion().getZ();
 
-            entity.setMotion(xMot / 200000, yMot / 200000, zMot / 200000);
-
-            if (!(world.getFluidState(pos).isTagged(VeFluidTags.dark_matter)))
+            if ((entity.getPosY() - entity.prevPosY) > 0.0
+                    && world.getBlockState(pos.up()) != this.getBlock().getDefaultState())
             {
-                double yCurMot = yMot;
-
-                entity.setMotion(xMot / 200000, yCurMot - (yMot / 200000), zMot / 200000);
+                entity.addVelocity(0.0, 0.05, 0.0);
+            }
+            else
+            {
+                entity.setMotion(xMot / 200000, yMot / 200000, zMot / 200000);
             }
 
             // Play firework particles when the player is in the fluid.

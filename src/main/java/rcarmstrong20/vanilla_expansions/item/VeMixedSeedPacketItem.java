@@ -28,7 +28,7 @@ public class VeMixedSeedPacketItem extends Item
         {
             for (int i = 0; i <= 2; i++)
             {
-                Item randomSeed = VeItemTags.PACKET_SEEDS.getRandomElement(random);
+                Item randomSeed = VeItemTags.packet_seeds.getRandomElement(random);
                 int randomCount = random.nextInt(i + 1) + 1;
 
                 player.addItemStackToInventory(new ItemStack(randomSeed, randomCount));
