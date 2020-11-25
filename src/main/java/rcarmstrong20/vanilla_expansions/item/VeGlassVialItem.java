@@ -30,7 +30,7 @@ public class VeGlassVialItem extends Item
     public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target,
             Hand hand)
     {
-        if (stack.getItem() == VeItems.glass_vial)
+        if (stack.getItem() == VeItems.glassVial)
         {
             if (target instanceof AnimalEntity && target.getHealth() > 0.0
                     && ANIMALS_THAT_GIVE_BLOOD.contains(target.getType()))
@@ -39,7 +39,7 @@ public class VeGlassVialItem extends Item
 
                 if (animalTarget.attackEntityFrom(DamageSource.GENERIC, 1))
                 {
-                    playerIn.addItemStackToInventory(new ItemStack(VeItems.blood_vial));
+                    playerIn.addItemStackToInventory(new ItemStack(VeItems.bloodVial));
                     animalTarget.playSound(SoundEvents.ITEM_BOTTLE_FILL, 1.0F, 1.0F);
                     stack.shrink(1);
                     return ActionResultType.CONSUME;

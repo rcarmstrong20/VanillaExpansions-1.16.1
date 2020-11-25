@@ -14,14 +14,14 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public class VeThreeStageCropsBlock extends BeetrootBlock
 {
-    private static final VoxelShape[] ONION_SHAPE_BY_AGE = new VoxelShape[]
-    { Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
+    private static final VoxelShape[] ONION_SHAPE_BY_AGE = new VoxelShape[] {
+            Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
             Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
             Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
             Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D) };
 
-    private static final VoxelShape[] GINGER_SHAPE_BY_AGE = new VoxelShape[]
-    { Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
+    private static final VoxelShape[] GINGER_SHAPE_BY_AGE = new VoxelShape[] {
+            Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
@@ -37,10 +37,11 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        if (this == VeBlocks.green_onions || this == VeBlocks.garlic)
+        if (this == VeBlocks.greenOnions || this == VeBlocks.garlic)
         {
             return ONION_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
-        } else
+        }
+        else
         {
             return GINGER_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
         }
@@ -52,13 +53,15 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
     @Override
     protected IItemProvider getSeedsItem()
     {
-        if (this == VeBlocks.green_onions)
+        if (this == VeBlocks.greenOnions)
         {
-            return VeItems.green_onion;
-        } else if (this == VeBlocks.garlic)
+            return VeItems.greenOnion;
+        }
+        else if (this == VeBlocks.garlic)
         {
             return VeItems.garlic;
-        } else
+        }
+        else
         {
             return Items.WHEAT_SEEDS;
         }

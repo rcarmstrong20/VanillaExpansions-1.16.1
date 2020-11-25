@@ -3,14 +3,14 @@ package rcarmstrong20.vanilla_expansions.core;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
 
-// @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus =
-// Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
-    public static IStructurePieceType cabin_piece = register("cabin_piece", VeCabinPieces.VePiece::new);
+    public static IStructurePieceType cabinPiece = register("cabin_piece", VeCabinPieces.VePiece::new);
 
     /**
      * @param name The name of the new piece.

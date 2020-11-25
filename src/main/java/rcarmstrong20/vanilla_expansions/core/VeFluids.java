@@ -16,8 +16,8 @@ public class VeFluids
 {
     private static final List<Fluid> FLUIDS = new ArrayList<>();
 
-    public static Fluid dark_matter = register("dark_matter", new VeDarkMatterFluid.Source());
-    public static FlowingFluid flowing_dark_matter = register("flowing_dark_matter", new VeDarkMatterFluid.Flowing());
+    public static Fluid darkMatter = register("dark_matter", new VeDarkMatterFluid.Source());
+    public static FlowingFluid flowingDarkMatter = register("flowing_dark_matter", new VeDarkMatterFluid.Flowing());
 
     /**
      * @param name  A name for the fluid.

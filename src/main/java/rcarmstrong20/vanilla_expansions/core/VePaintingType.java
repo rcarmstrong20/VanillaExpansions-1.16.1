@@ -14,13 +14,9 @@ public class VePaintingType
 {
     private static final List<PaintingType> PAINTING_TYPES = new ArrayList<>();
 
-    public static PaintingType earth = register("earth", new PaintingType(16, 16));
-    public static PaintingType fire = register("fire", new PaintingType(16, 16));
-    public static PaintingType nether_wastes = register("nether_wastes", new PaintingType(16, 16));
-    public static PaintingType starry_night = register("starry_night", new PaintingType(16, 16));
-    public static PaintingType the_scream = register("the_scream", new PaintingType(16, 16));
-    public static PaintingType water = register("water", new PaintingType(16, 16));
-    public static PaintingType wind = register("wind", new PaintingType(16, 16));
+    public static PaintingType netherWastes = register("nether_wastes", new PaintingType(16, 16));
+    public static PaintingType starryNight = register("starry_night", new PaintingType(16, 16));
+    public static PaintingType theScream = register("the_scream", new PaintingType(16, 16));
 
     public static PaintingType register(String name, PaintingType paintingType)
     {

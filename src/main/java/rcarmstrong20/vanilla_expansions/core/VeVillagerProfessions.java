@@ -22,10 +22,11 @@ public class VeVillagerProfessions
     private static final Constructor<VillagerProfession> VILLAGER_POFESSION_CONSTRUCTOR = ObfuscationReflectionHelper
             .findConstructor(VillagerProfession.class, String.class, PointOfInterestType.class, ImmutableSet.class,
                     ImmutableSet.class, SoundEvent.class);
+
     private static final List<VillagerProfession> VILLAGER_PROFESSIONS = new ArrayList<>();
 
-    public static final VillagerProfession LUMBERJACK = register("lumberjack", VePointOfInterestTypes.LUMBERJACK,
-            VeSoundEvents.ui_woodcutter_take_result);
+    public static VillagerProfession lumberjack = register("lumberjack", VePointOfInterestTypes.lumberjack,
+            VeSoundEvents.uiWoodcutterTakeResult);
 
     /**
      * @param name            The name for associated with the villager profession.

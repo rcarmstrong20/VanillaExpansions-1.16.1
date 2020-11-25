@@ -42,7 +42,7 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
             }
             entityIn.setMotion(entityIn.getMotion().mul(1.0, 0.0, 1.0));
             entityIn.addVelocity(0, Math.sqrt(0.22 * (height + 0.25F)), 0);
-            world.playSound(null, pos, VeSoundEvents.block_mushroom_bounce, SoundCategory.BLOCKS, 1.0F,
+            world.playSound(null, pos, VeSoundEvents.blockMushroomBounce, SoundCategory.BLOCKS, 1.0F,
                     0.8F + world.rand.nextFloat() * 0.4F);
         }
         entityIn.fallDistance = 0;

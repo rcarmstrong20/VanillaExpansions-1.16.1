@@ -15,29 +15,32 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeVillagerTrades
 {
-    public static final Int2ObjectMap<ITrade[]> LUMBERJACK_TRADES = getAsIntMap(
-            ImmutableMap.of(1, new VillagerTrades.ITrade[]
-            { itemForEmeraldTrade(new ItemStack(Items.APPLE), 16, 2),
-                    itemForEmeraldTrade(new ItemStack(VeItems.spruce_cone), 10, 2) }, 2, new VillagerTrades.ITrade[]
-            { new BasicTrade(2, new ItemStack(Items.GOLDEN_AXE), 6, 10, 0.02F),
-                    new BasicTrade(3, new ItemStack(Items.IRON_AXE), 3, 15, 0.02F) }, 3, new VillagerTrades.ITrade[]
-            { convertItemForEmeraldTrade(new ItemStack(Blocks.OAK_LOG, 5), new ItemStack(Items.CHARCOAL, 5), 5, 15),
-                    convertItemForEmeraldTrade(new ItemStack(Blocks.BIRCH_LOG, 5), new ItemStack(Items.CHARCOAL, 5), 5,
-                            15),
-                    convertItemForEmeraldTrade(new ItemStack(Blocks.JUNGLE_LOG, 5), new ItemStack(Items.CHARCOAL, 5), 5,
-                            15),
-                    convertItemForEmeraldTrade(new ItemStack(Blocks.ACACIA_LOG, 5), new ItemStack(Items.CHARCOAL, 5), 5,
-                            15),
-                    convertItemForEmeraldTrade(new ItemStack(Blocks.DARK_OAK_LOG, 5), new ItemStack(Items.CHARCOAL, 5),
-                            5, 15) },
-                    4, new VillagerTrades.ITrade[]
-                    { new BasicTrade(1, new ItemStack(Blocks.OAK_SAPLING, 3), 5, 20, 0.05F),
+    public static Int2ObjectMap<ITrade[]> lumberjackTrades = getAsIntMap(
+            ImmutableMap.of(1,
+                    new VillagerTrades.ITrade[] { itemForEmeraldTrade(new ItemStack(Items.APPLE), 16, 2),
+                            itemForEmeraldTrade(new ItemStack(VeItems.spruceCone), 10, 2) },
+                    2,
+                    new VillagerTrades.ITrade[] { new BasicTrade(2, new ItemStack(Items.GOLDEN_AXE), 6, 10, 0.02F),
+                            new BasicTrade(3, new ItemStack(Items.IRON_AXE), 3, 15, 0.02F) },
+                    3,
+                    new VillagerTrades.ITrade[] {
+                            convertItemForEmeraldTrade(new ItemStack(Blocks.OAK_LOG, 5),
+                                    new ItemStack(Items.CHARCOAL, 5), 5, 15),
+                            convertItemForEmeraldTrade(new ItemStack(Blocks.BIRCH_LOG, 5),
+                                    new ItemStack(Items.CHARCOAL, 5), 5, 15),
+                            convertItemForEmeraldTrade(new ItemStack(Blocks.JUNGLE_LOG, 5),
+                                    new ItemStack(Items.CHARCOAL, 5), 5, 15),
+                            convertItemForEmeraldTrade(new ItemStack(Blocks.ACACIA_LOG, 5),
+                                    new ItemStack(Items.CHARCOAL, 5), 5, 15),
+                            convertItemForEmeraldTrade(
+                                    new ItemStack(Blocks.DARK_OAK_LOG, 5), new ItemStack(Items.CHARCOAL, 5), 5, 15) },
+                    4,
+                    new VillagerTrades.ITrade[] { new BasicTrade(1, new ItemStack(Blocks.OAK_SAPLING, 3), 5, 20, 0.05F),
                             new BasicTrade(1, new ItemStack(Blocks.BIRCH_SAPLING, 3), 5, 20, 0.05F),
                             new BasicTrade(1, new ItemStack(Blocks.JUNGLE_SAPLING, 5), 5, 20, 0.05F),
                             new BasicTrade(1, new ItemStack(Blocks.ACACIA_SAPLING, 5), 5, 20, 0.05F),
                             new BasicTrade(1, new ItemStack(Blocks.DARK_OAK_SAPLING, 10), 5, 20, 0.05F) },
-                    5, new VillagerTrades.ITrade[]
-                    { masterTrade(1, new ItemStack(Blocks.NOTE_BLOCK), 10, 0.05F),
+                    5, new VillagerTrades.ITrade[] { masterTrade(1, new ItemStack(Blocks.NOTE_BLOCK), 10, 0.05F),
                             masterTrade(5, new ItemStack(Blocks.JUKEBOX), 5, 0.05F) }));
 
     /**
@@ -52,7 +55,7 @@ public class VeVillagerTrades
 
     /**
      * Create villager trades that convert an item to an emerald.
-     * 
+     *
      * @param price     The item to trade.
      * @param maxTrades The number of times the player can trade before it locks.
      * @param xp        The amount of xp this villager receives for trading.
@@ -66,7 +69,7 @@ public class VeVillagerTrades
     /**
      * Create villager trades that convert a material and emerald to make a new
      * item. Example, wood -> coal.
-     * 
+     *
      * @param price     The resource to trade.
      * @param forSale   The item that is being sold.
      * @param maxTrades The number of times the player can trade before it locks.
@@ -80,7 +83,7 @@ public class VeVillagerTrades
 
     /**
      * Create villager trades for the master level.
-     * 
+     *
      * @param emeralds  Number of emeralds this item goes for.
      * @param forSale   The item that is being sold.
      * @param maxTrades The number of times the player can trade before it locks.

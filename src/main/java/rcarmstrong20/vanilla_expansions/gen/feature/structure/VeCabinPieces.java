@@ -57,7 +57,7 @@ public class VeCabinPieces
         public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos,
                 Rotation rotation)
         {
-            super(VeStructurePieceTypes.cabin_piece, 0);
+            super(VeStructurePieceTypes.cabinPiece, 0);
             this.templateResource = templateResource;
             this.templatePosition = pos;
             this.rotation = rotation;
@@ -70,7 +70,7 @@ public class VeCabinPieces
          */
         public VePiece(TemplateManager templateManager, CompoundNBT nbt)
         {
-            super(VeStructurePieceTypes.cabin_piece, nbt);
+            super(VeStructurePieceTypes.cabinPiece, nbt);
             this.templateResource = new ResourceLocation(nbt.getString("Template"));
             this.rotation = Rotation.valueOf(nbt.getString("Rot"));
             setupTemplate(templateManager);

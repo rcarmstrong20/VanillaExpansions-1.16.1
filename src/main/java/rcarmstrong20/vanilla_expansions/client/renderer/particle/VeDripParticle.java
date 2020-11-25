@@ -121,8 +121,8 @@ public class VeDripParticle extends SpriteTexturedParticle
         public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeDripping drip_particle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.dark_matter,
-                    VeParticleTypes.falling_dark_matter);
+            VeDripping drip_particle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.darkMatter,
+                    VeParticleTypes.fallingDarkMatter);
             drip_particle.particleGravity *= 0.01F;
             drip_particle.maxAge = 100;
             drip_particle.setColor(0.1F, 0.1F, 0.1F);
@@ -170,7 +170,7 @@ public class VeDripParticle extends SpriteTexturedParticle
                 double xSpeed, double ySpeed, double zSpeed)
         {
             VeFallingLiquidParticle falling_particle = new VeDripParticle.VeFallingLiquidParticle(world, x, y, z,
-                    VeFluids.dark_matter, VeParticleTypes.landing_dark_matter);
+                    VeFluids.darkMatter, VeParticleTypes.landingDarkMatter);
             falling_particle.setColor(0.1F, 0.1F, 0.1F);
             falling_particle.selectSpriteRandomly(this.sprite);
             return falling_particle;
@@ -201,7 +201,7 @@ public class VeDripParticle extends SpriteTexturedParticle
         public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeLanding land_particle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.dark_matter);
+            VeLanding land_particle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.darkMatter);
             land_particle.maxAge = (int) (128.0D / (Math.random() * 0.8D + 0.2D));
             land_particle.setColor(0.1F, 0.1F, 0.1F);
             land_particle.selectSpriteRandomly(this.sprite);

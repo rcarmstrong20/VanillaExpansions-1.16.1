@@ -22,8 +22,7 @@ public class VePointOfInterestTypes
 {
     private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
 
-    public static final PointOfInterestType LUMBERJACK = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1,
-            1);
+    public static PointOfInterestType lumberjack = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
 
     private static PointOfInterestType register(String name, Set<BlockState> blockState, int maxFreeTicketsIn,
             int p_221051_4_)
@@ -56,12 +55,14 @@ public class VePointOfInterestTypes
                 try
                 {
                     func_221052_a.invoke(null, poi);
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+                }
+                catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
                 {
                     e.printStackTrace();
                 }
             });
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

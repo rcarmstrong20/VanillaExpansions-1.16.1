@@ -67,7 +67,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
     {
-        if (this.getBlock() == VeBlocks.witchs_cradle && state.get(AGE) == 0)
+        if (this.getBlock() == VeBlocks.witchsCradle && state.get(AGE) == 0)
         {
             return WITCHS_CRADLE_STAGE_0_SHAPE;
         }
@@ -86,17 +86,17 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     {
         Block block = this.getBlock();
 
-        if (block == VeBlocks.blueberry_bush)
+        if (block == VeBlocks.blueberryBush)
         {
             return new ItemStack(VeItems.blueberries);
         }
-        else if (block == VeBlocks.cranberry_bush)
+        else if (block == VeBlocks.cranberryBush)
         {
             return new ItemStack(VeItems.cranberries);
         }
-        else if (block == VeBlocks.witchs_cradle)
+        else if (block == VeBlocks.witchsCradle)
         {
-            return new ItemStack(VeItems.witchs_cradle_branch);
+            return new ItemStack(VeItems.witchsCradleBranch);
         }
         return super.getItem(world, pos, state);
     }
@@ -115,7 +115,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn)
     {
-        if (this.getBlock() == VeBlocks.witchs_cradle)
+        if (this.getBlock() == VeBlocks.witchsCradle)
         {
             super.onEntityCollision(state, world, pos, entityIn);
         }

@@ -21,10 +21,11 @@ public class VeOreBlock extends OreBlock
         if (silktouch == 0)
         {
             int i = 0;
-            if (this == VeBlocks.ruby_ore)
+            if (this == VeBlocks.rubyOre)
             {
                 i = MathHelper.nextInt(RANDOM, 4, 8);
-            } else if (this == VeBlocks.smoky_quartz_ore)
+            }
+            else if (this == VeBlocks.smokyQuartzOre)
             {
                 i = MathHelper.nextInt(RANDOM, 2, 5);
             }

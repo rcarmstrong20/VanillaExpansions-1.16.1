@@ -89,23 +89,23 @@ public class VeFeatures
 
     public static final class States
     {
-        protected static final BlockState DARK_MATTER = VeBlocks.dark_matter.getDefaultState();
+        protected static final BlockState DARK_MATTER = VeBlocks.darkMatter.getDefaultState();
         protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
         protected static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
         protected static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();
-        protected static final BlockState ENDER_GRASS = VeBlocks.ender_grass.getDefaultState();
-        protected static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purple_mushroom_block.getDefaultState()
+        protected static final BlockState ENDER_GRASS = VeBlocks.enderGrass.getDefaultState();
+        protected static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purpleMushroomBlock.getDefaultState()
                 .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
         protected static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState()
                 .with(HugeMushroomBlock.UP, Boolean.valueOf(false))
                 .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
-        protected static final BlockState WITCHS_CRADLE = VeBlocks.witchs_cradle.getDefaultState()
+        protected static final BlockState WITCHS_CRADLE = VeBlocks.witchsCradle.getDefaultState()
                 .with(VeBerryBushBlock.AGE, 3);
-        protected static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smoky_quartz_ore.getDefaultState();
-        protected static final BlockState NETHER_RUBY_ORE = VeBlocks.ruby_ore.getDefaultState();
-        protected static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberry_bush.getDefaultState()
+        protected static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smokyQuartzOre.getDefaultState();
+        protected static final BlockState NETHER_RUBY_ORE = VeBlocks.rubyOre.getDefaultState();
+        protected static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberryBush.getDefaultState()
                 .with(VeBerryBushBlock.AGE, 3);
-        protected static final BlockState CRANBERRY_BUSH = VeBlocks.cranberry_bush.getDefaultState()
+        protected static final BlockState CRANBERRY_BUSH = VeBlocks.cranberryBush.getDefaultState()
                 .with(VeBerryBushBlock.AGE, 3);
     }
 }

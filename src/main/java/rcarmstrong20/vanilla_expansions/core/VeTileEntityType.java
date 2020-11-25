@@ -18,12 +18,11 @@ public class VeTileEntityType
     public static final List<TileEntityType<?>> TILE_ENTITY_TYPES = new ArrayList<>();
 
     public static TileEntityType<VeColoredCampfireTileEntity> colored_campfire = register("colored_campfire",
-            TileEntityType.Builder.create(VeColoredCampfireTileEntity::new, VeBlocks.white_campfire,
-                    VeBlocks.orange_campfire, VeBlocks.magenta_campfire, VeBlocks.light_blue_campfire,
-                    VeBlocks.yellow_campfire, VeBlocks.lime_campfire, VeBlocks.pink_campfire, VeBlocks.gray_campfire,
-                    VeBlocks.light_gray_campfire, VeBlocks.cyan_campfire, VeBlocks.purple_campfire,
-                    VeBlocks.blue_campfire, VeBlocks.brown_campfire, VeBlocks.green_campfire, VeBlocks.red_campfire,
-                    VeBlocks.black_campfire));
+            TileEntityType.Builder.create(VeColoredCampfireTileEntity::new, VeBlocks.whiteCampfire,
+                    VeBlocks.orangeCampfire, VeBlocks.magentaCampfire, VeBlocks.lightBlueCampfire,
+                    VeBlocks.yellowCampfire, VeBlocks.limeCampfire, VeBlocks.pinkCampfire, VeBlocks.grayCampfire,
+                    VeBlocks.lightGrayCampfire, VeBlocks.cyanCampfire, VeBlocks.purpleCampfire, VeBlocks.blueCampfire,
+                    VeBlocks.brownCampfire, VeBlocks.greenCampfire, VeBlocks.redCampfire, VeBlocks.blackCampfire));
 
     /**
      * @param <T>     An instance of the TileEntity class.

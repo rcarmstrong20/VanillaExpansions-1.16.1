@@ -55,8 +55,7 @@ public class ClientProxy extends CommonProxy
      */
     private void registerTrades()
     {
-        VillagerTrades.VILLAGER_DEFAULT_TRADES.put(VeVillagerProfessions.LUMBERJACK,
-                VeVillagerTrades.LUMBERJACK_TRADES);
+        VillagerTrades.VILLAGER_DEFAULT_TRADES.put(VeVillagerProfessions.lumberjack, VeVillagerTrades.lumberjackTrades);
 
         VanillaExpansions.LOGGER.info("Registered villager trades.");
     }
@@ -68,54 +67,53 @@ public class ClientProxy extends CommonProxy
     {
         // cutout renders
 
-        RenderTypeLookup.setRenderLayer(VeBlocks.red_glass, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.red_glass_pane, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.spruce_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.birch_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.jungle_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.acacia_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.dark_oak_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.warped_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.crimson_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.iron_ladder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.modern_door, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.purple_mushroom, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.redGlass, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.redGlassPane, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.spruceLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.birchLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.jungleLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.acaciaLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.darkOakLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.warpedLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.crimsonLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.ironLadder, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.modernDoor, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.purpleMushroom, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.woodcutter, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.white_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.orange_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.magenta_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.light_blue_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.yellow_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.lime_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.pink_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.light_gray_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.gray_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.cyan_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.purple_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.blue_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.brown_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.green_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.red_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.black_campfire, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.bok_choy, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.whiteCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.orangeCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.magentaCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.lightBlueCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.yellowCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.limeCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.pinkCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.lightGrayCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.grayCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.cyanCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.purpleCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.blueCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.brownCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.greenCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.redCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.blackCampfire, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.bokChoy, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.garlic, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.green_onions, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.greenOnions, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.quinoa, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.blueberry_bush, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.cranberry_bush, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.witchs_cradle, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.regigigas_pokedoll, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.blueberryBush, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.cranberryBush, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.witchsCradle, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.snapdragon, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.potted_snapdragon, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.ender_grass, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.pottedSnapdragon, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.enderGrass, RenderType.getCutout());
 
         // Cut out mipped renders
 
-        RenderTypeLookup.setRenderLayer(VeBlocks.enderman_plush, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(VeBlocks.endermanPlush, RenderType.getCutoutMipped());
 
         // Translucent renders
 
-        RenderTypeLookup.setRenderLayer(VeBlocks.glass_of_darkness, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(VeBlocks.glassOfDarkness, RenderType.getTranslucent());
 
         VanillaExpansions.LOGGER.info("Registered Renders.");
     }

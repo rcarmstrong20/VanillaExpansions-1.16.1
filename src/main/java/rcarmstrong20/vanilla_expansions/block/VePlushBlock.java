@@ -1952,166 +1952,202 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        if (this == VeBlocks.blaze_plush)
+        if (this == VeBlocks.blazePlush)
         {
             return VePlushBlock.defineShapes(state, BLAZE_NORTH_SHAPE, BLAZE_SOUTH_SHAPE, BLAZE_WEST_SHAPE,
                     BLAZE_EAST_SHAPE);
-        } else if (this == VeBlocks.creeper_plush)
+        }
+        else if (this == VeBlocks.creeperPlush)
         {
             return VePlushBlock.defineShapes(state, CREEPER_NORTH_SHAPE, CREEPER_SOUTH_SHAPE, CREEPER_WEST_SHAPE,
                     CREEPER_EAST_SHAPE);
-        } else if (this == VeBlocks.zombie_plush)
+        }
+        else if (this == VeBlocks.zombiePlush)
         {
             return VePlushBlock.defineShapes(state, ZOMBIE_NORTH_SHAPE, ZOMBIE_SOUTH_SHAPE, ZOMBIE_WEST_SHAPE,
                     ZOMBIE_EAST_SHAPE);
-        } else if (this == VeBlocks.zombie_demon_plush)
+        }
+        else if (this == VeBlocks.zombieDemonPlush)
         {
             return VePlushBlock.defineShapes(state, ZOMBIE_DEMON_NORTH_SHAPE, ZOMBIE_DEMON_SOUTH_SHAPE,
                     ZOMBIE_DEMON_WEST_SHAPE, ZOMBIE_DEMON_EAST_SHAPE);
         }
-        if (this == VeBlocks.zombie_pigman_plush)
+        else if (this == VeBlocks.zombiePigmanPlush)
         {
             return VePlushBlock.defineShapes(state, ZOMBIE_PIGMAN_NORTH_SHAPE, ZOMBIE_PIGMAN_SOUTH_SHAPE,
                     ZOMBIE_PIGMAN_WEST_SHAPE, ZOMBIE_PIGMAN_EAST_SHAPE);
-        } else if (this == VeBlocks.endermite_plush)
+        }
+        else if (this == VeBlocks.endermitePlush)
         {
             return VePlushBlock.defineShapes(state, ENDERMITE_NORTH_SHAPE, ENDERMITE_SOUTH_SHAPE, ENDERMITE_WEST_SHAPE,
                     ENDERMITE_EAST_SHAPE);
-        } else if (this == VeBlocks.white_sheep_plush || this == VeBlocks.orange_sheep_plush
-                || this == VeBlocks.magenta_sheep_plush || this == VeBlocks.light_blue_sheep_plush
-                || this == VeBlocks.yellow_sheep_plush || this == VeBlocks.lime_sheep_plush
-                || this == VeBlocks.pink_sheep_plush || this == VeBlocks.gray_sheep_plush
-                || this == VeBlocks.light_gray_sheep_plush || this == VeBlocks.cyan_sheep_plush
-                || this == VeBlocks.purple_sheep_plush || this == VeBlocks.blue_sheep_plush
-                || this == VeBlocks.brown_sheep_plush || this == VeBlocks.green_sheep_plush
-                || this == VeBlocks.red_sheep_plush || this == VeBlocks.black_sheep_plush)
+        }
+        else if (this == VeBlocks.whiteSheepPlush || this == VeBlocks.orangeSheepPlush
+                || this == VeBlocks.magentaSheepPlush || this == VeBlocks.lightBlueSheepPlush
+                || this == VeBlocks.yellowSheepPlush || this == VeBlocks.limeSheepPlush
+                || this == VeBlocks.pinkSheepPlush || this == VeBlocks.graySheepPlush
+                || this == VeBlocks.lightGraySheepPlush || this == VeBlocks.cyanSheepPlush
+                || this == VeBlocks.purpleSheepPlush || this == VeBlocks.blueSheepPlush
+                || this == VeBlocks.brownSheepPlush || this == VeBlocks.greenSheepPlush
+                || this == VeBlocks.redSheepPlush || this == VeBlocks.blackSheepPlush)
         {
             return VePlushBlock.defineShapes(state, SHEEP_NORTH_SHAPE, SHEEP_SOUTH_SHAPE, SHEEP_WEST_SHAPE,
                     SHEEP_EAST_SHAPE);
-        } else if (this == VeBlocks.chicken_plush)
+        }
+        else if (this == VeBlocks.chickenPlush)
         {
             return VePlushBlock.defineShapes(state, CHICKEN_NORTH_SHAPE, CHICKEN_SOUTH_SHAPE, CHICKEN_WEST_SHAPE,
                     CHICKEN_EAST_SHAPE);
-        } else if (this == VeBlocks.squid_plush)
+        }
+        else if (this == VeBlocks.squidPlush)
         {
             return VePlushBlock.defineShapes(state, SQUID_NORTH_SHAPE, SQUID_SOUTH_SHAPE, SQUID_WEST_SHAPE,
                     SQUID_EAST_SHAPE);
-        } else if (this == VeBlocks.pig_plush)
+        }
+        else if (this == VeBlocks.pigPlush)
         {
             return VePlushBlock.defineShapes(state, PIG_NORTH_SHAPE, PIG_SOUTH_SHAPE, PIG_WEST_SHAPE, PIG_EAST_SHAPE);
-        } else if (this == VeBlocks.cow_plush)
+        }
+        else if (this == VeBlocks.cowPlush)
         {
             return VePlushBlock.defineShapes(state, COW_NORTH_SHAPE, COW_SOUTH_SHAPE, COW_WEST_SHAPE, COW_EAST_SHAPE);
-        } else if (this == VeBlocks.baby_cow_plush)
+        }
+        else if (this == VeBlocks.babyCowPlush)
         {
             return VePlushBlock.defineShapes(state, BABY_COW_NORTH_SHAPE, BABY_COW_SOUTH_SHAPE, BABY_COW_WEST_SHAPE,
                     BABY_COW_EAST_SHAPE);
-        } else if (this == VeBlocks.red_mooshroom_plush || this == VeBlocks.brown_mooshroom_plush)
+        }
+        else if (this == VeBlocks.redMooshroomPlush || this == VeBlocks.brownMooshroomPlush)
         {
             return VePlushBlock.defineShapes(state, MOOSHROOM_NORTH_SHAPE, MOOSHROOM_SOUTH_SHAPE, MOOSHROOM_WEST_SHAPE,
                     MOOSHROOM_EAST_SHAPE);
-        } else if (this == VeBlocks.baby_red_mooshroom_plush || this == VeBlocks.baby_brown_mooshroom_plush)
+        }
+        else if (this == VeBlocks.babyRedMooshroomPlush || this == VeBlocks.babyBrownMooshroomPlush)
         {
             return VePlushBlock.defineShapes(state, BABY_MOOSHROOM_NORTH_SHAPE, BABY_MOOSHROOM_SOUTH_SHAPE,
                     BABY_MOOSHROOM_WEST_SHAPE, BABY_MOOSHROOM_EAST_SHAPE);
-        } else if (this == VeBlocks.ocelot_plush || this == VeBlocks.tabby_cat_plush
-                || this == VeBlocks.tuxedo_cat_plush || this == VeBlocks.red_cat_plush
-                || this == VeBlocks.siamese_cat_plush || this == VeBlocks.british_shorthair_cat_plush
-                || this == VeBlocks.calico_cat_plush || this == VeBlocks.ragdoll_cat_plush
-                || this == VeBlocks.white_cat_plush || this == VeBlocks.jellie_cat_plush
-                || this == VeBlocks.black_cat_plush)
+        }
+        else if (this == VeBlocks.ocelotPlush || this == VeBlocks.tabbyCatPlush || this == VeBlocks.tuxedoCatPlush
+                || this == VeBlocks.redCatPlush || this == VeBlocks.siameseCatPlush
+                || this == VeBlocks.britishShorthairCatPlush || this == VeBlocks.calicoCatPlush
+                || this == VeBlocks.ragdollCatPlush || this == VeBlocks.whiteCatPlush || this == VeBlocks.jellieCatPlush
+                || this == VeBlocks.blackCatPlush)
         {
             return VePlushBlock.defineShapes(state, OCELOT_NORTH_SHAPE, OCELOT_SOUTH_SHAPE, OCELOT_WEST_SHAPE,
                     OCELOT_EAST_SHAPE);
-        } else if (this == VeBlocks.persian_cat_plush)
+        }
+        else if (this == VeBlocks.persianCatPlush)
         {
             return VePlushBlock.defineShapes(state, PERSIAN_NORTH_SHAPE, PERSIAN_SOUTH_SHAPE, PERSIAN_WEST_SHAPE,
                     PERSIAN_EAST_SHAPE);
-        } else if (this == VeBlocks.wolf_plush)
+        }
+        else if (this == VeBlocks.wolfPlush)
         {
             return VePlushBlock.defineShapes(state, WOLF_NORTH_SHAPE, WOLF_SOUTH_SHAPE, WOLF_WEST_SHAPE,
                     WOLF_EAST_SHAPE);
-        } else if (this == VeBlocks.enderman_plush)
+        }
+        else if (this == VeBlocks.endermanPlush)
         {
             return VePlushBlock.defineShapes(state, ENDERMAN_NORTH_SHAPE, ENDERMAN_SOUTH_SHAPE, ENDERMAN_WEST_SHAPE,
                     ENDERMAN_EAST_SHAPE);
-        } else if (this == VeBlocks.ghast_plush)
+        }
+        else if (this == VeBlocks.ghastPlush)
         {
             return VePlushBlock.defineShapes(state, GHAST_NORTH_SHAPE, GHAST_SOUTH_SHAPE, GHAST_WEST_SHAPE,
                     GHAST_EAST_SHAPE);
-        } else if (this == VeBlocks.spider_plush)
+        }
+        else if (this == VeBlocks.spiderPlush)
         {
             return VePlushBlock.defineShapes(state, SPIDER_NORTH_SHAPE, SPIDER_SOUTH_SHAPE, SPIDER_WEST_SHAPE,
                     SPIDER_EAST_SHAPE);
-        } else if (this == VeBlocks.white_horse_plush || this == VeBlocks.gray_horse_plush
-                || this == VeBlocks.light_gray_horse_plush || this == VeBlocks.brown_horse_plush
-                || this == VeBlocks.black_horse_plush || this == VeBlocks.purple_horse_plush)
+        }
+        else if (this == VeBlocks.whiteHorsePlush || this == VeBlocks.grayHorsePlush
+                || this == VeBlocks.lightGrayHorsePlush || this == VeBlocks.brownHorsePlush
+                || this == VeBlocks.blackHorsePlush || this == VeBlocks.purpleHorsePlush)
         {
             return VePlushBlock.defineShapes(state, HORSE_NORTH_SHAPE, HORSE_SOUTH_SHAPE, HORSE_WEST_SHAPE,
                     HORSE_EAST_SHAPE);
-        } else if (this == VeBlocks.bat_plush)
+        }
+        else if (this == VeBlocks.batPlush)
         {
             return VePlushBlock.defineShapes(state, BAT_NORTH_SHAPE, BAT_SOUTH_SHAPE, BAT_WEST_SHAPE, BAT_EAST_SHAPE);
-        } else if (this == VeBlocks.brown_rabbit_plush || this == VeBlocks.white_rabbit_plush
-                || this == VeBlocks.black_rabbit_plush || this == VeBlocks.white_splotched_rabbit_plush
-                || this == VeBlocks.gold_rabbit_plush || this == VeBlocks.toast_rabbit_plush
-                || this == VeBlocks.salt_rabbit_plush)
+        }
+        else if (this == VeBlocks.brownRabbitPlush || this == VeBlocks.whiteRabbitPlush
+                || this == VeBlocks.blackRabbitPlush || this == VeBlocks.whiteSplotchedRabbitPlush
+                || this == VeBlocks.goldRabbitPlush || this == VeBlocks.toastRabbitPlush
+                || this == VeBlocks.saltRabbitPlush)
         {
             return VePlushBlock.defineShapes(state, RABBIT_NORTH_SHAPE, RABBIT_SOUTH_SHAPE, RABBIT_WEST_SHAPE,
                     RABBIT_EAST_SHAPE);
-        } else if (this == VeBlocks.skeleton_plush)
+        }
+        else if (this == VeBlocks.skeletonPlush)
         {
             return VePlushBlock.defineShapes(state, SKELETON_NORTH_SHAPE, SKELETON_SOUTH_SHAPE, SKELETON_WEST_SHAPE,
                     SKELETON_EAST_SHAPE);
-        } else if (this == VeBlocks.guardian_plush)
+        }
+        else if (this == VeBlocks.guardianPlush)
         {
             return VePlushBlock.defineShapes(state, GUARDIAN_NORTH_SHAPE, GUARDIAN_SOUTH_SHAPE, GUARDIAN_WEST_SHAPE,
                     GUARDIAN_EAST_SHAPE);
-        } else if (this == VeBlocks.silverfish_plush)
+        }
+        else if (this == VeBlocks.silverfishPlush)
         {
             return VePlushBlock.defineShapes(state, SILVERFISH_NORTH_SHAPE, SILVERFISH_SOUTH_SHAPE,
                     SILVERFISH_WEST_SHAPE, SILVERFISH_EAST_SHAPE);
-        } else if (this == VeBlocks.plains_villager_plush)
+        }
+        else if (this == VeBlocks.plainsVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, PLAINS_VILLAGER_NORTH_SHAPE, PLAINS_VILLAGER_SOUTH_SHAPE,
                     PLAINS_VILLAGER_WEST_SHAPE, PLAINS_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.desert_villager_plush)
+        }
+        else if (this == VeBlocks.desertVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, DESERT_VILLAGER_NORTH_SHAPE, DESERT_VILLAGER_SOUTH_SHAPE,
                     DESERT_VILLAGER_WEST_SHAPE, DESERT_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.savanna_villager_plush)
+        }
+        else if (this == VeBlocks.savannaVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, SAVANNA_VILLAGER_NORTH_SHAPE, SAVANNA_VILLAGER_SOUTH_SHAPE,
                     SAVANNA_VILLAGER_WEST_SHAPE, SAVANNA_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.swamp_villager_plush)
+        }
+        else if (this == VeBlocks.swampVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, SWAMP_VILLAGER_NORTH_SHAPE, SWAMP_VILLAGER_SOUTH_SHAPE,
                     SWAMP_VILLAGER_WEST_SHAPE, SWAMP_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.snow_villager_plush)
+        }
+        else if (this == VeBlocks.snowVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, SNOW_VILLAGER_NORTH_SHAPE, SNOW_VILLAGER_SOUTH_SHAPE,
                     SNOW_VILLAGER_WEST_SHAPE, SNOW_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.taiga_villager_plush)
+        }
+        else if (this == VeBlocks.taigaVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, TAIGA_VILLAGER_NORTH_SHAPE, TAIGA_VILLAGER_SOUTH_SHAPE,
                     TAIGA_VILLAGER_WEST_SHAPE, TAIGA_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.jungle_villager_plush)
+        }
+        else if (this == VeBlocks.jungleVillagerPlush)
         {
             return VePlushBlock.defineShapes(state, JUNGLE_VILLAGER_NORTH_SHAPE, JUNGLE_VILLAGER_SOUTH_SHAPE,
                     JUNGLE_VILLAGER_WEST_SHAPE, JUNGLE_VILLAGER_EAST_SHAPE);
-        } else if (this == VeBlocks.witch_plush)
+        }
+        else if (this == VeBlocks.witchPlush)
         {
             return VePlushBlock.defineShapes(state, WITCH_NORTH_SHAPE, WITCH_SOUTH_SHAPE, WITCH_WEST_SHAPE,
                     WITCH_EAST_SHAPE);
-        } else if (this == VeBlocks.cave_spider_plush)
+        }
+        else if (this == VeBlocks.caveSpiderPlush)
         {
             return VePlushBlock.defineShapes(state, CAVE_SPIDER_NORTH_SHAPE, CAVE_SPIDER_SOUTH_SHAPE,
                     CAVE_SPIDER_WEST_SHAPE, CAVE_SPIDER_EAST_SHAPE);
-        } else if (this == VeBlocks.bee_plush)
+        }
+        else if (this == VeBlocks.beePlush)
         {
             return VePlushBlock.defineShapes(state, BEE_NORTH_SHAPE, BEE_SOUTH_SHAPE, BEE_WEST_SHAPE, BEE_EAST_SHAPE);
         }
-        return VoxelShapes.fullCube();
+        else
+        {
+            return VoxelShapes.fullCube();
+        }
     }
 
     /**
@@ -2120,7 +2156,7 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
     private static VoxelShape defineShapes(BlockState state, VoxelShape northShape, VoxelShape southShape,
             VoxelShape westShape, VoxelShape eastShape)
     {
-        switch ((Direction) state.get(HORIZONTAL_FACING))
+        switch (state.get(HORIZONTAL_FACING))
         {
             case NORTH:
                 return northShape;

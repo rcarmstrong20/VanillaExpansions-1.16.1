@@ -156,7 +156,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
                         && this.container.enchantItem(this.minecraft.player, l))
                 {
                     Minecraft.getInstance().getSoundHandler()
-                            .play(SimpleSound.master(VeSoundEvents.ui_woodcutter_take_result, 1.0F));
+                            .play(SimpleSound.master(VeSoundEvents.uiWoodcutterTakeResult, 1.0F));
                     this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
                     return true;
                 }

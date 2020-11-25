@@ -20,15 +20,15 @@ public class VeSoupItem extends Item
         super.onItemUseFinish(stack, worldIn, livingEntityIn);
         Item item = this.getItem();
 
-        if (item == VeItems.noodle_soup)
+        if (item == VeItems.noodleSoup)
         {
-            return new ItemStack(VeItems.noodle_bowl);
+            return new ItemStack(VeItems.noodleBowl);
         }
-        else if (item == VeItems.dark_matter_bucket)
+        else if (item == VeItems.darkMatterBucket)
         {
             return new ItemStack(Items.BUCKET);
         }
-        else if (item == VeItems.caramel_apple)
+        else if (item == VeItems.caramelApple)
         {
             return new ItemStack(Items.STICK);
         }

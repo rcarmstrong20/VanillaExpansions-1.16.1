@@ -76,7 +76,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             }
             else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.snowflake_obsidian, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VeBlocks.snowflakeObsidian, Blocks.END_STONE);
             }
         }
         return true;
@@ -130,14 +130,14 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
          * world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.up().getY(),
          * pos.getZ(), 0.0, 0.0, 0.0); }
          */
-        world.playSound(null, pos, VeSoundEvents.block_dark_matter_hardens, SoundCategory.BLOCKS,
+        world.playSound(null, pos, VeSoundEvents.blockDarkMatterHardens, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
     }
 
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return world.getFluidState(pos.up()).isTagged(VeFluidTags.dark_matter) && entity.getMotion().getY() != 0.0;
+        return world.getFluidState(pos.up()).isTagged(VeFluidTags.darkMatter) && entity.getMotion().getY() != 0.0;
     }
 
     /**

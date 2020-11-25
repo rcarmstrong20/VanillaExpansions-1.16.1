@@ -217,7 +217,7 @@ public class VeTallPlushBlock extends VePlushBlock
     {
         Block block = this.getBlock();
 
-        if (block == VeBlocks.slime_plush)
+        if (block == VeBlocks.slimePlush)
         {
             switch (state.get(HORIZONTAL_FACING))
             {
@@ -235,7 +235,7 @@ public class VeTallPlushBlock extends VePlushBlock
                             THREE_SLIME_EAST_SHAPE);
             }
         }
-        else if (block == VeBlocks.magma_cube_plush)
+        else if (block == VeBlocks.magmaCubePlush)
         {
             switch (state.get(HORIZONTAL_FACING))
             {

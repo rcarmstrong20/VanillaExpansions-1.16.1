@@ -24,10 +24,11 @@ public class VeSevenStageCropBlock extends CropsBlock
     {
         Block block = this.getBlock();
 
-        if (block == VeBlocks.bok_choy)
+        if (block == VeBlocks.bokChoy)
         {
-            return VeItems.bok_choy_seeds;
-        } else if (block == VeBlocks.quinoa)
+            return VeItems.bokChoySeeds;
+        }
+        else if (block == VeBlocks.quinoa)
         {
             return VeItems.quinoa;
         }

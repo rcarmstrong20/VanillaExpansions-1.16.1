@@ -20,7 +20,7 @@ public class VeGlassBlock extends GlassBlock
     @Override
     public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
-        if (this == VeBlocks.glass_of_darkness)
+        if (this == VeBlocks.glassOfDarkness)
         {
             return worldIn.getMaxLightLevel();
         }

@@ -152,37 +152,37 @@ public class VanillaExpansions
     @OnlyIn(Dist.CLIENT)
     private void onRegisterParticle(ParticleFactoryRegisterEvent event)
     {
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.dripping_dark_matter,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.drippingDarkMatter,
                 VeDripParticle.VeDrippingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.falling_dark_matter,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.fallingDarkMatter,
                 VeDripParticle.VeFallingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_dark_matter,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landingDarkMatter,
                 VeDripParticle.VeLandingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.under_dark_matter,
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.underDarkMatter,
                 VeUnderDarkMatterParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.white_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orange_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.magenta_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.light_blue_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.yellow_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lime_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.pink_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.gray_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.light_gray_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.cyan_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.purple_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blue_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.brown_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.green_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.red_spark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.black_spark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.whiteSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orangeSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.magentaSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lightBlueSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.yellowSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.limeSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.pinkSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.graySpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lightGraySpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.cyanSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.purpleSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blueSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.brownSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.greenSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.redSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blackSpark, LavaParticle.Factory::new);
     }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onPlayerTick(PlayerTickEvent event)
     {
-        event.player.handleFluidAcceleration(VeFluidTags.dark_matter, 0.005);
+        event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
     }
 
     @SubscribeEvent
@@ -307,16 +307,16 @@ public class VanillaExpansions
             else if (worldState.getBlock() == Blocks.CAMPFIRE && tileEntity instanceof CampfireTileEntity)
             {
                 Map<Item, Block> dyeToCampfire = (new Builder<Item, Block>())
-                        .put(Items.WHITE_DYE, VeBlocks.white_campfire).put(Items.ORANGE_DYE, VeBlocks.orange_campfire)
-                        .put(Items.MAGENTA_DYE, VeBlocks.magenta_campfire)
-                        .put(Items.LIGHT_BLUE_DYE, VeBlocks.light_blue_campfire)
-                        .put(Items.YELLOW_DYE, VeBlocks.yellow_campfire).put(Items.LIME_DYE, VeBlocks.lime_campfire)
-                        .put(Items.PINK_DYE, VeBlocks.pink_campfire).put(Items.GRAY_DYE, VeBlocks.gray_campfire)
-                        .put(Items.LIGHT_GRAY_DYE, VeBlocks.light_gray_campfire)
-                        .put(Items.CYAN_DYE, VeBlocks.cyan_campfire).put(Items.PURPLE_DYE, VeBlocks.purple_campfire)
-                        .put(Items.BLUE_DYE, VeBlocks.blue_campfire).put(Items.BROWN_DYE, VeBlocks.brown_campfire)
-                        .put(Items.GREEN_DYE, VeBlocks.green_campfire).put(Items.RED_DYE, VeBlocks.red_campfire)
-                        .put(Items.BLACK_DYE, VeBlocks.black_campfire).build();
+                        .put(Items.WHITE_DYE, VeBlocks.whiteCampfire).put(Items.ORANGE_DYE, VeBlocks.orangeCampfire)
+                        .put(Items.MAGENTA_DYE, VeBlocks.magentaCampfire)
+                        .put(Items.LIGHT_BLUE_DYE, VeBlocks.lightBlueCampfire)
+                        .put(Items.YELLOW_DYE, VeBlocks.yellowCampfire).put(Items.LIME_DYE, VeBlocks.limeCampfire)
+                        .put(Items.PINK_DYE, VeBlocks.pinkCampfire).put(Items.GRAY_DYE, VeBlocks.grayCampfire)
+                        .put(Items.LIGHT_GRAY_DYE, VeBlocks.lightGrayCampfire)
+                        .put(Items.CYAN_DYE, VeBlocks.cyanCampfire).put(Items.PURPLE_DYE, VeBlocks.purpleCampfire)
+                        .put(Items.BLUE_DYE, VeBlocks.blueCampfire).put(Items.BROWN_DYE, VeBlocks.brownCampfire)
+                        .put(Items.GREEN_DYE, VeBlocks.greenCampfire).put(Items.RED_DYE, VeBlocks.redCampfire)
+                        .put(Items.BLACK_DYE, VeBlocks.blackCampfire).build();
 
                 CampfireTileEntity campfireTileEntity = (CampfireTileEntity) tileEntity;
                 NonNullList<ItemStack> campfireInventory = campfireTileEntity.getInventory();
@@ -327,7 +327,7 @@ public class VanillaExpansions
                 if (worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem())
                         && campfireInventory.get(0) == ItemStack.EMPTY)
                 {
-                    world.playSound((PlayerEntity) null, pos, VeSoundEvents.block_campfire_dyed, SoundCategory.BLOCKS,
+                    world.playSound((PlayerEntity) null, pos, VeSoundEvents.blockCampfireDyed, SoundCategory.BLOCKS,
                             1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
                     Block.replaceBlock(worldState, dyeToCampfire.get(itemStack.getItem()).getDefaultState()
                             .with(CampfireBlock.FACING, currentFacing), world, pos, 3);

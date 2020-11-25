@@ -35,19 +35,19 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     @Override
     public Fluid getFlowingFluid()
     {
-        return VeFluids.flowing_dark_matter;
+        return VeFluids.flowingDarkMatter;
     }
 
     @Override
     public Fluid getStillFluid()
     {
-        return VeFluids.dark_matter;
+        return VeFluids.darkMatter;
     }
 
     @Override
     public Item getFilledBucket()
     {
-        return VeItems.dark_matter_bucket;
+        return VeItems.darkMatterBucket;
     }
 
     @Override
@@ -56,13 +56,13 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     {
         if (random.nextInt(100) == 0)
         {
-            worldIn.addParticle(VeParticleTypes.under_dark_matter, (double) pos.getX() + (double) random.nextFloat(),
+            worldIn.addParticle(VeParticleTypes.underDarkMatter, (double) pos.getX() + (double) random.nextFloat(),
                     (double) pos.getY() + (double) random.nextFloat(),
                     (double) pos.getZ() + (double) random.nextFloat(), 0.0D, 0.0D, 0.0D);
         }
         else if (random.nextInt(600) == 0)
         {
-            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.block_dark_matter_ambient,
+            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.blockDarkMatterAmbient,
                     SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 0.2F, random.nextFloat() + 0.5F, false);
         }
     }
@@ -70,7 +70,7 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     @Override
     public boolean canDisplace(FluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction)
     {
-        return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.dark_matter);
+        return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.darkMatter);
     }
 
     @Override
@@ -87,20 +87,20 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     @OnlyIn(Dist.CLIENT)
     public IParticleData getDripParticleData()
     {
-        return VeParticleTypes.dripping_dark_matter;
+        return VeParticleTypes.drippingDarkMatter;
     }
 
     @Override
     public BlockState getBlockState(FluidState state)
     {
-        return VeBlocks.dark_matter.getDefaultState().with(FlowingFluidBlock.LEVEL,
+        return VeBlocks.darkMatter.getDefaultState().with(FlowingFluidBlock.LEVEL,
                 Integer.valueOf(getLevelFromState(state)));
     }
 
     @Override
     public boolean isEquivalentTo(Fluid fluidIn)
     {
-        return fluidIn == VeFluids.dark_matter || fluidIn == VeFluids.flowing_dark_matter;
+        return fluidIn == VeFluids.darkMatter || fluidIn == VeFluids.flowingDarkMatter;
     }
 
     @Override

@@ -28,7 +28,6 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
-import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingDarkMatterBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
@@ -53,448 +52,435 @@ public class VeBlocks
     private static final List<Block> BLOCKS = new ArrayList<>();
     private static final List<Item> ITEMS = new ArrayList<>();
 
-    public static Block bat_plush = register("bat_plush", true,
+    public static Block batPlush = register("bat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
-    public static Block blaze_plush = register("blaze_plush", true,
+    public static Block blazePlush = register("blaze_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block cave_spider_plush = register("cave_spider_plush", true,
+    public static Block caveSpiderPlush = register("cave_spider_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
-    public static Block chicken_plush = register("chicken_plush", true,
+    public static Block chickenPlush = register("chicken_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block cow_plush = register("cow_plush", true,
+    public static Block cowPlush = register("cow_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block baby_cow_plush = register("baby_cow_plush", true,
+    public static Block babyCowPlush = register("baby_cow_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block creeper_plush = register("creeper_plush", true,
+    public static Block creeperPlush = register("creeper_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
-    public static Block enderman_plush = register("enderman_plush", true,
+    public static Block endermanPlush = register("enderman_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block endermite_plush = register("endermite_plush", true,
+    public static Block endermitePlush = register("endermite_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block ghast_plush = register("ghast_plush", true,
+    public static Block ghastPlush = register("ghast_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block guardian_plush = register("guardian_plush", true,
+    public static Block guardianPlush = register("guardian_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
-    public static Block white_horse_plush = register("white_horse_plush", true,
+    public static Block whiteHorsePlush = register("white_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block gray_horse_plush = register("gray_horse_plush", true,
+    public static Block grayHorsePlush = register("gray_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
-    public static Block light_gray_horse_plush = register("light_gray_horse_plush", true,
+    public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
-    public static Block brown_horse_plush = register("brown_horse_plush", true,
+    public static Block brownHorsePlush = register("brown_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block black_horse_plush = register("black_horse_plush", true,
+    public static Block blackHorsePlush = register("black_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block purple_horse_plush = register("purple_horse_plush", true,
+    public static Block purpleHorsePlush = register("purple_horse_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block magma_cube_plush = register("magma_cube_plush", true,
+    public static Block magmaCubePlush = register("magma_cube_plush", true,
             new VeTallPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
-    public static Block red_mooshroom_plush = register("red_mooshroom_plush", true,
+    public static Block redMooshroomPlush = register("red_mooshroom_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
-    public static Block baby_red_mooshroom_plush = register("baby_red_mooshroom_plush", true,
+    public static Block babyRedMooshroomPlush = register("baby_red_mooshroom_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
-    public static Block brown_mooshroom_plush = register("brown_mooshroom_plush", true,
+    public static Block brownMooshroomPlush = register("brown_mooshroom_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
-    public static Block baby_brown_mooshroom_plush = register("baby_brown_mooshroom_plush", true,
+    public static Block babyBrownMooshroomPlush = register("baby_brown_mooshroom_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block ocelot_plush = register("ocelot_plush", true,
+    public static Block ocelotPlush = register("ocelot_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block tabby_cat_plush = register("tabby_cat_plush", true,
+    public static Block tabbyCatPlush = register("tabby_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block tuxedo_cat_plush = register("tuxedo_cat_plush", true,
+    public static Block tuxedoCatPlush = register("tuxedo_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block red_cat_plush = register("red_cat_plush", true,
+    public static Block redCatPlush = register("red_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
-    public static Block siamese_cat_plush = register("siamese_cat_plush", true,
+    public static Block siameseCatPlush = register("siamese_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block british_shorthair_cat_plush = register("british_shorthair_cat_plush", true,
+    public static Block britishShorthairCatPlush = register("british_shorthair_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
-    public static Block calico_cat_plush = register("calico_cat_plush", true,
+    public static Block calicoCatPlush = register("calico_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block persian_cat_plush = register("persian_cat_plush", true,
+    public static Block persianCatPlush = register("persian_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block ragdoll_cat_plush = register("ragdoll_cat_plush", true,
+    public static Block ragdollCatPlush = register("ragdoll_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block white_cat_plush = register("white_cat_plush", true,
+    public static Block whiteCatPlush = register("white_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block jellie_cat_plush = register("jellie_cat_plush", true,
+    public static Block jellieCatPlush = register("jellie_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block black_cat_plush = register("black_cat_plush", true,
+    public static Block blackCatPlush = register("black_cat_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block pig_plush = register("pig_plush", true,
+    public static Block pigPlush = register("pig_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
-    public static Block brown_rabbit_plush = register("brown_rabbit_plush", true,
+    public static Block brownRabbitPlush = register("brown_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block white_rabbit_plush = register("white_rabbit_plush", true,
+    public static Block whiteRabbitPlush = register("white_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block black_rabbit_plush = register("black_rabbit_plush", true,
+    public static Block blackRabbitPlush = register("black_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block white_splotched_rabbit_plush = register("white_splotched_rabbit_plush", true,
+    public static Block whiteSplotchedRabbitPlush = register("white_splotched_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block gold_rabbit_plush = register("gold_rabbit_plush", true,
+    public static Block goldRabbitPlush = register("gold_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block toast_rabbit_plush = register("toast_rabbit_plush", true,
+    public static Block toastRabbitPlush = register("toast_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block salt_rabbit_plush = register("salt_rabbit_plush", true,
+    public static Block saltRabbitPlush = register("salt_rabbit_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block white_sheep_plush = register("white_sheep_plush", true,
+    public static Block whiteSheepPlush = register("white_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block orange_sheep_plush = register("orange_sheep_plush", true,
+    public static Block orangeSheepPlush = register("orange_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
-    public static Block magenta_sheep_plush = register("magenta_sheep_plush", true,
+    public static Block magentaSheepPlush = register("magenta_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.MAGENTA_WOOL)));
-    public static Block light_blue_sheep_plush = register("light_blue_sheep_plush", true,
+    public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_BLUE_WOOL)));
-    public static Block yellow_sheep_plush = register("yellow_sheep_plush", true,
+    public static Block yellowSheepPlush = register("yellow_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block lime_sheep_plush = register("lime_sheep_plush", true,
+    public static Block limeSheepPlush = register("lime_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
-    public static Block pink_sheep_plush = register("pink_sheep_plush", true,
+    public static Block pinkSheepPlush = register("pink_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
-    public static Block gray_sheep_plush = register("gray_sheep_plush", true,
+    public static Block graySheepPlush = register("gray_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
-    public static Block light_gray_sheep_plush = register("light_gray_sheep_plush", true,
+    public static Block lightGraySheepPlush = register("light_gray_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
-    public static Block cyan_sheep_plush = register("cyan_sheep_plush", true,
+    public static Block cyanSheepPlush = register("cyan_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
-    public static Block purple_sheep_plush = register("purple_sheep_plush", true,
+    public static Block purpleSheepPlush = register("purple_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block blue_sheep_plush = register("blue_sheep_plush", true,
+    public static Block blueSheepPlush = register("blue_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
-    public static Block brown_sheep_plush = register("brown_sheep_plush", true,
+    public static Block brownSheepPlush = register("brown_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block green_sheep_plush = register("green_sheep_plush", true,
+    public static Block greenSheepPlush = register("green_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
-    public static Block red_sheep_plush = register("red_sheep_plush", true,
+    public static Block redSheepPlush = register("red_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
-    public static Block black_sheep_plush = register("black_sheep_plush", true,
+    public static Block blackSheepPlush = register("black_sheep_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block silverfish_plush = register("silverfish_plush", true,
+    public static Block silverfishPlush = register("silverfish_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
-    public static Block skeleton_plush = register("skeleton_plush", true,
+    public static Block skeletonPlush = register("skeleton_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
-    public static Block slime_plush = register("slime_plush", true,
+    public static Block slimePlush = register("slime_plush", true,
             new VeTallPlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
-    public static Block spider_plush = register("spider_plush", true,
+    public static Block spiderPlush = register("spider_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block squid_plush = register("squid_plush", true,
+    public static Block squidPlush = register("squid_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
-    public static Block bee_plush = register("bee_plush", true,
+    public static Block beePlush = register("bee_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block plains_villager_plush = register("plains_villager_plush", true,
+    public static Block plainsVillagerPlush = register("plains_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block desert_villager_plush = register("desert_villager_plush", true,
+    public static Block desertVillagerPlush = register("desert_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
-    public static Block jungle_villager_plush = register("jungle_villager_plush", true,
+    public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block savanna_villager_plush = register("savanna_villager_plush", true,
+    public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block snow_villager_plush = register("snow_villager_plush", true,
+    public static Block snowVillagerPlush = register("snow_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block swamp_villager_plush = register("swamp_villager_plush", true,
+    public static Block swampVillagerPlush = register("swamp_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block taiga_villager_plush = register("taiga_villager_plush", true,
+    public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block witch_plush = register("witch_plush", true,
+    public static Block witchPlush = register("witch_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block wolf_plush = register("wolf_plush", true,
+    public static Block wolfPlush = register("wolf_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block zombie_plush = register("zombie_plush", true,
+    public static Block zombiePlush = register("zombie_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
-    public static Block zombie_demon_plush = register("zombie_demon_plush", true,
+    public static Block zombieDemonPlush = register("zombie_demon_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block zombie_pigman_plush = register("zombie_pigman_plush", true,
+    public static Block zombiePigmanPlush = register("zombie_pigman_plush", true,
             new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
-    public static Block pufferfish_plush = register("pufferfish_plush", true,
+    public static Block pufferfishPlush = register("pufferfish_plush", true,
             new VePufferfishPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block regice_pokedoll = register("regice_pokedoll", true,
-            new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.ICE)
-                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
-    public static Block regirock_pokedoll = register("regirock_pokedoll", true,
-            new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.SAND)
-                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
-    public static Block registeel_pokedoll = register("registeel_pokedoll", true,
-            new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.IRON)
-                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
-    public static Block regigigas_pokedoll = register("regigigas_pokedoll", true,
-            new VeDirectionalBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.STONE)
-                    .hardnessAndResistance(0.2F).sound(SoundType.CLOTH).notSolid()));
-    public static Block ruby_ore = register("nether_ruby_ore", true,
+    public static Block rubyOre = register("nether_ruby_ore", true,
             new VeOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE)));
-    public static Block ruby_block = register("ruby_block", true, new Block(AbstractBlock.Properties
+    public static Block rubyBlock = register("ruby_block", true, new Block(AbstractBlock.Properties
             .create(Material.IRON, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.STONE)));
-    public static Block smoky_quartz_ore = register("nether_smoky_quartz_ore", true,
+    public static Block smokyQuartzOre = register("nether_smoky_quartz_ore", true,
             new VeOreBlock(AbstractBlock.Properties.from(Blocks.NETHER_QUARTZ_ORE)));
-    public static Block smoky_quartz_block = register("smoky_quartz_block", true,
+    public static Block smokyQuartzBlock = register("smoky_quartz_block", true,
             new Block(AbstractBlock.Properties.from(Blocks.QUARTZ_BLOCK)));
-    public static Block chiseled_smoky_quartz_block = register("chiseled_smoky_quartz_block", true,
-            new Block(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smoky_quartz_pillar = register("smoky_quartz_pillar", true,
-            new RotatedPillarBlock(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smoky_quartz_stairs = register("smoky_quartz_stairs", true,
-            new StairsBlock(() -> VeBlocks.smoky_quartz_block.getDefaultState(),
-                    AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smoky_quartz_slab = register("smoky_quartz_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smoky_quartz_wall = register("smoky_quartz_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smooth_smoky_quartz = register("smooth_smoky_quartz", true,
-            new Block(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smooth_smoky_quartz_stairs = register("smooth_smoky_quartz_stairs", true,
-            new StairsBlock(() -> VeBlocks.smooth_smoky_quartz.getDefaultState(),
-                    AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smooth_smoky_quartz_slab = register("smooth_smoky_quartz_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block smooth_smoky_quartz_wall = register("smooth_smoky_quartz_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.smoky_quartz_block)));
-    public static Block cracked_stone_brick_stairs = register("cracked_stone_brick_stairs", true,
+    public static Block chiseledSmokyQuartzBlock = register("chiseled_smoky_quartz_block", true,
+            new Block(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smokyQuartzPillar = register("smoky_quartz_pillar", true,
+            new RotatedPillarBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smokyQuartzStairs = register("smoky_quartz_stairs", true,
+            new StairsBlock(() -> VeBlocks.smokyQuartzBlock.getDefaultState(),
+                    AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smokyQuartzSlab = register("smoky_quartz_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smokyQuartzWall = register("smoky_quartz_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smoothSmokyQuartz = register("smooth_smoky_quartz", true,
+            new Block(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smoothSmokyQuartzStairs = register("smooth_smoky_quartz_stairs", true,
+            new StairsBlock(() -> VeBlocks.smokyQuartzBlock.getDefaultState(),
+                    AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smoothSmokyQuartzSlab = register("smooth_smoky_quartz_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smoothSmokyQuartzWall = register("smooth_smoky_quartz_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block crackedStoneBrickStairs = register("cracked_stone_brick_stairs", true,
             new StairsBlock(() -> Blocks.CRACKED_STONE_BRICKS.getDefaultState(),
                     AbstractBlock.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
-    public static Block cracked_stone_brick_slab = register("cracked_stone_brick_slab", true,
+    public static Block crackedStoneBrickSlab = register("cracked_stone_brick_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
-    public static Block cracked_stone_brick_wall = register("cracked_stone_brick_wall", true,
+    public static Block crackedStoneBrickWall = register("cracked_stone_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
-    public static Block quartz_wall = register("quartz_wall", true,
+    public static Block quartzWall = register("quartz_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.QUARTZ_BLOCK)));
-    public static Block smooth_quartz_wall = register("smooth_quartz_wall", true,
+    public static Block smoothQuartzWall = register("smooth_quartz_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.SMOOTH_QUARTZ)));
-    public static Block stone_wall = register("stone_wall", true,
+    public static Block stoneWall = register("stone_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.STONE)));
-    public static Block red_glass = register("red_glass", true,
+    public static Block redGlass = register("red_glass", true,
             new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static Block red_glass_pane = register("red_glass_pane", true,
+    public static Block redGlassPane = register("red_glass_pane", true,
             new PaneBlock(AbstractBlock.Properties.from(Blocks.GLASS_PANE)));
-    public static Block blueberry_bush = register("blueberry_bush", false,
+    public static Block blueberryBush = register("blueberry_bush", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block cranberry_bush = register("cranberry_bush", false,
+    public static Block cranberryBush = register("cranberry_bush", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block bok_choy = register("bok_choy", false,
+    public static Block bokChoy = register("bok_choy", false,
             new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block garlic = register("garlic", false,
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block green_onions = register("green_onions", false,
+    public static Block greenOnions = register("green_onions", false,
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block quinoa = register("quinoa", false,
             new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block stone_brick_planting_pot = register("stone_brick_planting_pot", true,
+    public static Block stoneBrickPlantingPot = register("stone_brick_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
-    public static Block mossy_stone_brick_planting_pot = register("mossy_stone_brick_planting_pot", true,
+    public static Block mossyStoneBrickPlantingPot = register("mossy_stone_brick_planting_pot", true,
             new VePlantingPotBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICKS)));
-    public static Block cracked_stone_brick_planting_pot = register("cracked_stone_brick_planting_pot", true,
+    public static Block crackedStoneBrickPlantingPot = register("cracked_stone_brick_planting_pot", true,
             new VePlantingPotBlock(Block.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
-    public static Block oak_planting_pot = register("oak_planting_pot", true,
+    public static Block oakPlantingPot = register("oak_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
-    public static Block spruce_planting_pot = register("spruce_planting_pot", true,
+    public static Block sprucePlantingPot = register("spruce_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
-    public static Block birch_planting_pot = register("birch_planting_pot", true,
+    public static Block birchPlantingPot = register("birch_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
-    public static Block jungle_planting_pot = register("jungle_planting_pot", true,
+    public static Block junglePlantingPot = register("jungle_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.JUNGLE_PLANKS)));
-    public static Block acacia_planting_pot = register("acacia_planting_pot", true,
+    public static Block acaciaPlantingPot = register("acacia_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.ACACIA_PLANKS)));
-    public static Block dark_oak_planting_pot = register("dark_oak_planting_pot", true,
+    public static Block darkOakPlantingPot = register("dark_oak_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
-    public static Block nether_brick_planting_pot = register("nether_brick_planting_pot", true,
+    public static Block netherBrickPlantingPot = register("nether_brick_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
-    public static Block warped_planting_pot = register("warped_planting_pot", true,
+    public static Block warpedPlantingPot = register("warped_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
-    public static Block crimson_planting_pot = register("crimson_planting_pot", true,
+    public static Block crimsonPlantingPot = register("crimson_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
-    public static Block obsidian_planting_pot = register("obsidian_planting_pot", true,
+    public static Block obsidianPlantingPot = register("obsidian_planting_pot", true,
             new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block oak_wall = register("oak_wall", true,
+    public static Block oakWall = register("oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
-    public static Block spruce_wall = register("spruce_wall", true,
+    public static Block spruceWall = register("spruce_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
-    public static Block birch_wall = register("birch_wall", true,
+    public static Block birchWall = register("birch_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
-    public static Block jungle_wall = register("jungle_wall", true,
+    public static Block jungleWall = register("jungle_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.JUNGLE_PLANKS)));
-    public static Block acacia_wall = register("acacia_wall", true,
+    public static Block acaciaWall = register("acacia_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.ACACIA_PLANKS)));
-    public static Block dark_oak_wall = register("dark_oak_wall", true,
+    public static Block darkOakWall = register("dark_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
-    public static Block warped_wall = register("warped_wall", true,
+    public static Block warpedWall = register("warped_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
-    public static Block crimson_wall = register("crimson_wall", true,
+    public static Block crimsonWall = register("crimson_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
-    public static Block stripped_oak_wall = register("stripped_oak_wall", true,
+    public static Block strippedOakWall = register("stripped_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
-    public static Block stripped_spruce_wall = register("stripped_spruce_wall", true,
+    public static Block strippedSpruceWall = register("stripped_spruce_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
-    public static Block stripped_birch_wall = register("stripped_birch_wall", true,
+    public static Block strippedBirchWall = register("stripped_birch_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
-    public static Block stripped_jungle_wall = register("stripped_jungle_wall", true,
+    public static Block strippedJungleWall = register("stripped_jungle_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.JUNGLE_PLANKS)));
-    public static Block stripped_acacia_wall = register("stripped_acacia_wall", true,
+    public static Block strippedAcaciaWall = register("stripped_acacia_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.ACACIA_PLANKS)));
-    public static Block stripped_dark_oak_wall = register("stripped_dark_oak_wall", true,
+    public static Block strippedDarkOakWall = register("stripped_dark_oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
-    public static Block stripped_warped_wall = register("stripped_warped_wall", true,
+    public static Block strippedWarpedWall = register("stripped_warped_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
-    public static Block stripped_crimson_wall = register("stripped_crimson_wall", true,
+    public static Block strippedCrimsonWall = register("stripped_crimson_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
-    public static Block spruce_ladder = register("spruce_ladder", true,
+    public static Block spruceLadder = register("spruce_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block birch_ladder = register("birch_ladder", true,
+    public static Block birchLadder = register("birch_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block jungle_ladder = register("jungle_ladder", true,
+    public static Block jungleLadder = register("jungle_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block acacia_ladder = register("acacia_ladder", true,
+    public static Block acaciaLadder = register("acacia_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block dark_oak_ladder = register("dark_oak_ladder", true,
+    public static Block darkOakLadder = register("dark_oak_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block warped_ladder = register("warped_ladder", true,
+    public static Block warpedLadder = register("warped_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block crimson_ladder = register("crimson_ladder", true,
+    public static Block crimsonLadder = register("crimson_ladder", true,
             new LadderBlock(AbstractBlock.Properties.from(Blocks.LADDER)));
-    public static Block iron_ladder = register("iron_ladder", true,
+    public static Block ironLadder = register("iron_ladder", true,
             new LadderBlock(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
                     .hardnessAndResistance(0.4F, 5.0F).sound(SoundType.METAL).notSolid()));
-    public static Block modern_door = register("modern_door", true, new VeSlimDoorBlock(AbstractBlock.Properties
+    public static Block modernDoor = register("modern_door", true, new VeSlimDoorBlock(AbstractBlock.Properties
             .create(Material.ANVIL, MaterialColor.IRON).hardnessAndResistance(5.0F).sound(SoundType.METAL)));
-    public static Block dirt_slab = register("dirt_slab", true,
+    public static Block dirtSlab = register("dirt_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.DIRT)));
-    public static Block dirt_stairs = register("dirt_stairs", true,
+    public static Block dirtStairs = register("dirt_stairs", true,
             new StairsBlock(() -> Blocks.DIRT.getDefaultState(), AbstractBlock.Properties.from(Blocks.DIRT)));
-    public static Block coarse_dirt_slab = register("coarse_dirt_slab", true,
+    public static Block coarseDirtSlab = register("coarse_dirt_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.COARSE_DIRT)));
-    public static Block coarse_dirt_stairs = register("coarse_dirt_stairs", true, new StairsBlock(
+    public static Block coarseDirtStairs = register("coarse_dirt_stairs", true, new StairsBlock(
             () -> Blocks.COARSE_DIRT.getDefaultState(), AbstractBlock.Properties.from(Blocks.COARSE_DIRT)));
-    public static Block snow_bricks = register("snow_bricks", true,
+    public static Block snowBricks = register("snow_bricks", true,
             new Block(AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW)
                     .hardnessAndResistance(0.6F).harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW)));
-    public static Block snow_brick_stairs = register("snow_brick_stairs", true, new StairsBlock(
-            () -> VeBlocks.snow_bricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.snow_bricks)));
-    public static Block snow_brick_slab = register("snow_brick_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.snow_bricks)));
-    public static Block snow_brick_wall = register("snow_brick_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.snow_bricks)));
-    public static Block packed_snow_block = register("packed_snow_block", true,
+    public static Block snowBrickStairs = register("snow_brick_stairs", true, new StairsBlock(
+            () -> VeBlocks.snowBricks.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.snowBricks)));
+    public static Block snowBrickSlab = register("snow_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.snowBricks)));
+    public static Block snowBrickWall = register("snow_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.snowBricks)));
+    public static Block packedSnowBlock = register("packed_snow_block", true,
             new Block(
                     AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW).hardnessAndResistance(0.4F)
                             .harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW).slipperiness(0.98F)));
-    public static Block packed_snow_stairs = register("packed_snow_stairs", true,
-            new StairsBlock(() -> VeBlocks.packed_snow_block.getDefaultState(),
-                    AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
-    public static Block packed_snow_slab = register("packed_snow_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packed_snow_block)));
+    public static Block packedSnowStairs = register("packed_snow_stairs", true, new StairsBlock(
+            () -> VeBlocks.packedSnowBlock.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
+    public static Block packedSnowSlab = register("packed_snow_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
     public static Block turkey = register("turkey", true, new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties
             .create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(0.5F).sound(SoundType.SNOW)), 1);
-    public static Block glass_of_darkness = register("glass_of_darkness", true,
+    public static Block glassOfDarkness = register("glass_of_darkness", true,
             new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static Block purple_mushroom = register("purple_mushroom", true,
+    public static Block purpleMushroom = register("purple_mushroom", true,
             new VeMushroomBlock(AbstractBlock.Properties.from(Blocks.RED_MUSHROOM)));
-    public static Block purple_mushroom_block = register("purple_mushroom_block", true,
+    public static Block purpleMushroomBlock = register("purple_mushroom_block", true,
             new VePurpleHugeMushroomBlock(AbstractBlock.Properties.from(Blocks.RED_MUSHROOM_BLOCK)));
     public static Block woodcutter = register("woodcutter", true,
             new VeWoodcutterBlock(AbstractBlock.Properties.from(Blocks.STONECUTTER)));
-    public static Block white_campfire = register("white_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.white_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block orange_campfire = register("orange_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.orange_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block magenta_campfire = register("magenta_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.magenta_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block light_blue_campfire = register("light_blue_campfire", true, new VeColoredCampfireBlock(
-            VeParticleTypes.light_blue_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block yellow_campfire = register("yellow_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.yellow_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block lime_campfire = register("lime_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.lime_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block pink_campfire = register("pink_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.pink_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block gray_campfire = register("gray_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.gray_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block light_gray_campfire = register("light_gray_campfire", true, new VeColoredCampfireBlock(
-            VeParticleTypes.light_gray_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block cyan_campfire = register("cyan_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.cyan_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block purple_campfire = register("purple_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.purple_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block blue_campfire = register("blue_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.blue_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block brown_campfire = register("brown_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.brown_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block green_campfire = register("green_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.green_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block red_campfire = register("red_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.red_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block black_campfire = register("black_campfire", true,
-            new VeColoredCampfireBlock(VeParticleTypes.black_spark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
-    public static Block witchs_cradle = register("witchs_cradle", false,
+    public static Block whiteCampfire = register("white_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.whiteSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block orangeCampfire = register("orange_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.orangeSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block magentaCampfire = register("magenta_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.magentaSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block lightBlueCampfire = register("light_blue_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.lightBlueSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block yellowCampfire = register("yellow_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.yellowSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block limeCampfire = register("lime_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.limeSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block pinkCampfire = register("pink_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.pinkSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block grayCampfire = register("gray_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.graySpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block lightGrayCampfire = register("light_gray_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.lightGraySpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block cyanCampfire = register("cyan_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.cyanSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block purpleCampfire = register("purple_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.purpleSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block blueCampfire = register("blue_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.blueSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block brownCampfire = register("brown_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.brownSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block greenCampfire = register("green_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.greenSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block redCampfire = register("red_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.redSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block blackCampfire = register("black_campfire", true,
+            new VeColoredCampfireBlock(VeParticleTypes.blackSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block witchsCradle = register("witchs_cradle", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.SWEET_BERRY_BUSH)));
-    public static Block dark_matter = register("dark_matter", false,
-            new VeFlowingDarkMatterBlock(() -> VeFluids.flowing_dark_matter,
+    public static Block darkMatter = register("dark_matter", false,
+            new VeFlowingDarkMatterBlock(() -> VeFluids.flowingDarkMatter,
                     AbstractBlock.Properties.create(Material.WATER, MaterialColor.BLACK).doesNotBlockMovement()
                             .hardnessAndResistance(100.0F).noDrops()));
-    public static Block bamboo_fence = register("bamboo_fence", true,
+    public static Block bambooFence = register("bamboo_fence", true,
             new FenceBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
-    public static Block bamboo_fence_gate = register("bamboo_fence_gate", true,
+    public static Block bambooFenceGate = register("bamboo_fence_gate", true,
             new FenceGateBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
-    public static Block bamboo_wall = register("bamboo_wall", true,
+    public static Block bambooWall = register("bamboo_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
-    public static Block snowflake_obsidian = register("snowflake_obsidian", true,
+    public static Block snowflakeObsidian = register("snowflake_obsidian", true,
             new Block(AbstractBlock.Properties.from(Blocks.OBSIDIAN)));
     public static Block nephilite = register("nephilite", true, new Block(
             AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
-    public static Block nephilite_slab = register("nephilite_slab", true,
+    public static Block nephiliteSlab = register("nephilite_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_stairs = register("nephilite_stairs", true, new StairsBlock(
+    public static Block nephiliteStairs = register("nephilite_stairs", true, new StairsBlock(
             () -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_wall = register("nephilite_wall", true,
+    public static Block nephiliteWall = register("nephilite_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_bricks = register("nephilite_bricks", true,
+    public static Block nephiliteBricks = register("nephilite_bricks", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_brick_slab = register("nephilite_brick_slab", true,
+    public static Block nephiliteBrickSlab = register("nephilite_brick_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_brick_stairs = register("nephilite_brick_stairs", true, new StairsBlock(
+    public static Block nephiliteBrickStairs = register("nephilite_brick_stairs", true, new StairsBlock(
             () -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephilite_brick_wall = register("nephilite_brick_wall", true,
+    public static Block nephiliteBrickWall = register("nephilite_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block chiseled_nephilite_bricks = register("chiseled_nephilite_bricks", true,
+    public static Block chiseledNephiliteBricks = register("chiseled_nephilite_bricks", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block snow_slab = register("snow_slab", true,
+    public static Block snowSlab = register("snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-    public static Block snow_stairs = register("snow_stairs", true,
+    public static Block snowStairs = register("snow_stairs", true,
             new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(),
                     AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-    public static Block snow_wall = register("snow_wall", true,
+    public static Block snowWall = register("snow_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-    public static Block warped_chytrid_nether_bricks = register("warped_chytrid_nether_bricks", true,
+    public static Block warpedChytridNetherBricks = register("warped_chytrid_nether_bricks", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
-    public static Block warped_chytrid_nether_brick_stairs = register("warped_chytrid_nether_brick_stairs", true,
-            new StairsBlock(() -> VeBlocks.warped_chytrid_nether_bricks.getDefaultState(),
-                    AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
-    public static Block warped_chytrid_nether_brick_slab = register("warped_chytrid_nether_brick_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
-    public static Block warped_chytrid_nether_brick_wall = register("warped_chytrid_nether_brick_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.warped_chytrid_nether_bricks)));
-    public static Block warped_chytrid_netherrack = register("warped_chytrid_netherrack", true,
+    public static Block warpedChytridNetherBrickStairs = register("warped_chytrid_nether_brick_stairs", true,
+            new StairsBlock(() -> VeBlocks.warpedChytridNetherBricks.getDefaultState(),
+                    AbstractBlock.Properties.from(VeBlocks.warpedChytridNetherBricks)));
+    public static Block warpedChytridNetherBrickSlab = register("warped_chytrid_nether_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.warpedChytridNetherBricks)));
+    public static Block warpedChytridNetherBrickWall = register("warped_chytrid_nether_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.warpedChytridNetherBricks)));
+    public static Block warpedChytridNetherrack = register("warped_chytrid_netherrack", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHERRACK)));
-    public static Block crimson_chytrid_nether_bricks = register("crimson_chytrid_nether_bricks", true,
+    public static Block crimsonChytridNetherBricks = register("crimson_chytrid_nether_bricks", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
-    public static Block crimson_chytrid_nether_brick_stairs = register("crimson_chytrid_nether_brick_stairs", true,
-            new StairsBlock(() -> VeBlocks.crimson_chytrid_nether_bricks.getDefaultState(),
-                    AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
-    public static Block crimson_chytrid_nether_brick_slab = register("crimson_chytrid_nether_brick_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
-    public static Block crimson_chytrid_nether_brick_wall = register("crimson_chytrid_nether_brick_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimson_chytrid_nether_bricks)));
-    public static Block crimson_chytrid_netherrack = register("crimson_chytrid_netherrack", true,
+    public static Block crimsonChytridNetherBrickStairs = register("crimson_chytrid_nether_brick_stairs", true,
+            new StairsBlock(() -> VeBlocks.crimsonChytridNetherBricks.getDefaultState(),
+                    AbstractBlock.Properties.from(VeBlocks.crimsonChytridNetherBricks)));
+    public static Block crimsonChytridNetherBrickSlab = register("crimson_chytrid_nether_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.crimsonChytridNetherBricks)));
+    public static Block crimsonChytridNetherBrickWall = register("crimson_chytrid_nether_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.crimsonChytridNetherBricks)));
+    public static Block crimsonChytridNetherrack = register("crimson_chytrid_netherrack", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHERRACK)));
     public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8,
             AbstractBlock.Properties.from(Blocks.POPPY).setLightLevel((state) -> 4)));
-    public static Block potted_snapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(
+    public static Block pottedSnapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(
             VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).setLightLevel((state) -> 4)));
-    public static Block ender_grass = register("ender_grass", true,
+    public static Block enderGrass = register("ender_grass", true,
             new VeEnderGrassBlock(Block.Properties.from(Blocks.GRASS).setLightLevel((state) -> 4)));
-    public static Block smooth_end_stone = register("smooth_end_stone", true,
+    public static Block smoothEndStone = register("smooth_end_stone", true,
             new Block(AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smooth_end_stone_slab = register("smooth_end_stone_slab", true,
+    public static Block smoothEndStoneSlab = register("smooth_end_stone_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smooth_end_stone_stairs = register("smooth_end_stone_stairs", true,
+    public static Block smoothEndStoneStairs = register("smooth_end_stone_stairs", true,
             new StairsBlock(() -> Blocks.END_STONE.getDefaultState(), AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smooth_end_stone_wall = register("smooth_end_stone_wall", true,
+    public static Block smoothEndStoneWall = register("smooth_end_stone_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
 
     /**

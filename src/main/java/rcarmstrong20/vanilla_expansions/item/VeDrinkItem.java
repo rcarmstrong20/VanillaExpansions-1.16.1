@@ -21,10 +21,11 @@ public class VeDrinkItem extends Item
     {
         if (entityLiving instanceof PlayerEntity)
         {
-            if (this == VeItems.blood_vial)
+            if (this == VeItems.bloodVial)
             {
-                ((PlayerEntity) entityLiving).addItemStackToInventory(new ItemStack(VeItems.glass_vial));
-            } else
+                ((PlayerEntity) entityLiving).addItemStackToInventory(new ItemStack(VeItems.glassVial));
+            }
+            else
             {
                 ((PlayerEntity) entityLiving).addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
             }
@@ -32,6 +33,7 @@ public class VeDrinkItem extends Item
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 
+    @Override
     public UseAction getUseAction(ItemStack stack)
     {
         return UseAction.DRINK;

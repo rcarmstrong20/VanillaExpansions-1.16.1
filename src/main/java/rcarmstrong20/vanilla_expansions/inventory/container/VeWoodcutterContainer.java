@@ -99,7 +99,7 @@ public class VeWoodcutterContainer extends Container
                     long l = world.getGameTime();
                     if (VeWoodcutterContainer.this.lastOnTake != l)
                     {
-                        world.playSound((PlayerEntity) null, pos, VeSoundEvents.ui_woodcutter_take_result,
+                        world.playSound((PlayerEntity) null, pos, VeSoundEvents.uiWoodcutterTakeResult,
                                 SoundCategory.BLOCKS, 1.0F, 1.0F);
                         VeWoodcutterContainer.this.lastOnTake = l;
                     }
