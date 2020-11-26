@@ -31,15 +31,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
+import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -84,6 +90,7 @@ import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
+import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
@@ -182,7 +189,47 @@ public class VanillaExpansions
     @OnlyIn(Dist.CLIENT)
     public void onPlayerTick(PlayerTickEvent event)
     {
+        // Push the player when interacting with flowing dark matter.
         event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+
+        // Damage the totem of the guardian when the player runs out of air and is
+        // holding it.
+        List<Item> totem = Arrays.asList(VeItems.totemOfTheGuardianI, VeItems.totemOfTheGuardianII,
+                VeItems.totemOfTheGuardianIII);
+
+        Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
+                .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400).build();
+
+        activateTotem(totemGuardianMap, Hand.MAIN_HAND, event.player);
+        activateTotem(totemGuardianMap, Hand.OFF_HAND, event.player);
+    }
+
+    private void activateTotem(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
+    {
+        Random rand = new Random();
+        Item heldItem = player.getHeldItem(hand).getItem();
+        int newCount = player.getHeldItem(hand).getCount() - 1;
+        int maxAir = player.getMaxAir();
+
+        if (player.getAir() == 0 && itemToPowerLvl.containsKey(heldItem))
+        {
+            player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldItem)));
+            player.setAir(maxAir);
+            player.setHeldItem(hand, new ItemStack(heldItem, newCount));
+            player.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
+
+            spawnParticles(ParticleTypes.SPLASH, player, rand);
+            spawnParticles(ParticleTypes.CLOUD, player, rand);
+        }
+    }
+
+    private void spawnParticles(BasicParticleType particle, PlayerEntity player, Random rand)
+    {
+        for (int i = (rand.nextInt(20) + 10); i >= 0; i--)
+        {
+            player.getEntityWorld().addOptionalParticle(particle, player.getPosXRandom(1.0), player.getPosYRandom(),
+                    player.getPosZRandom(1.0), 0.0, 0.0 + rand.nextDouble(), 0.0);
+        }
     }
 
     @SubscribeEvent

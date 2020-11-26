@@ -21,10 +21,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.block.VeTotemItem;
 import rcarmstrong20.vanilla_expansions.enums.VeArmorMaterial;
 import rcarmstrong20.vanilla_expansions.enums.VeItemTier;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
+import rcarmstrong20.vanilla_expansions.item.VeFoods;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
 import rcarmstrong20.vanilla_expansions.item.VeMixedSeedPacketItem;
 import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
@@ -40,6 +40,11 @@ public class VeItems
     public static final Item.Properties VE_ITEMS = new Item.Properties().group(VanillaExpansions.VE_GROUP);
     public static final Item.Properties VE_SINGLE_ITEMS = new Item.Properties().maxStackSize(1)
             .group(VanillaExpansions.VE_GROUP);
+    public static final Item.Properties VE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
+            .group(VanillaExpansions.VE_GROUP);
+    public static final Item.Properties VE_RARE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
+            .group(VanillaExpansions.VE_GROUP);
+
     private static final List<Item> ITEMS = new ArrayList<>();
 
     // Vanilla Expansions Items
@@ -101,7 +106,7 @@ public class VeItems
     public static Item smokyQuartz = register("smoky_quartz", new Item(VE_ITEMS));
     public static Item darkMatterBucket = register("dark_matter_bucket",
             new BucketItem(Suppliers.ofInstance(VeFluids.darkMatter), new Item.Properties().containerItem(Items.BUCKET)
-                    .maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.VOID_BUCKET)));
+                    .maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.DARK_MATTER_BUCKET)));
     public static Item caramelApple = register("caramel_apple", new VeSoupItem(new Item.Properties().maxStackSize(1)
             .containerItem(Items.STICK).group(VanillaExpansions.VE_GROUP).food(VeFoods.CARAMEL_APPLE)));
     public static Item caramel = register("caramel", new Item(VE_ITEMS));
@@ -120,12 +125,15 @@ public class VeItems
                     .maxStackSize(16).food(VeFoods.BLOOD_VIAL)));
     public static Item mixedSeedPacket = register("mixed_seed_packet",
             new VeMixedSeedPacketItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-    public static Item blankTotem = register("blank_totem",
-            new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-    public static Item totemOfTheGuardian = register("totem_of_the_guardian",
-            new VeTotemItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-    public static Item totemOfTheFortunate = register("totem_of_the_fortunate",
-            new VeTotemItem(new Item.Properties().group(VanillaExpansions.VE_GROUP).maxDamage(16)));
+
+    public static Item blankTotem = register("blank_totem", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(VE_16_STACK_ITEMS));
+
+    public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii", new Item(VE_16_STACK_ITEMS));
 
     /**
      * @param name          The horse armor name for the item.

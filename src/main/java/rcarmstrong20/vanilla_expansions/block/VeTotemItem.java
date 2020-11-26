@@ -10,13 +10,9 @@ import net.minecraft.world.World;
 
 public class VeTotemItem extends Item
 {
-    // private ItemStack stack = new ItemStack(this.getItem());
-
     public VeTotemItem(Item.Properties properties)
     {
         super(properties);
-
-        // this.setDamage(stack, 13);
     }
 
     @Override
