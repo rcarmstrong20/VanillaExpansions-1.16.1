@@ -31,6 +31,7 @@ import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
 import rcarmstrong20.vanilla_expansions.item.VeShovelItem;
 import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
 import rcarmstrong20.vanilla_expansions.item.VeSwordItem;
+import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
@@ -125,15 +126,19 @@ public class VeItems
                     .maxStackSize(16).food(VeFoods.BLOOD_VIAL)));
     public static Item mixedSeedPacket = register("mixed_seed_packet",
             new VeMixedSeedPacketItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-
     public static Item blankTotem = register("blank_totem", new Item(VE_16_STACK_ITEMS));
     public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(VE_16_STACK_ITEMS));
     public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(VE_16_STACK_ITEMS));
     public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(VE_16_STACK_ITEMS));
-
-    public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
+            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 0));
+    public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
+            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 1));
+    public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii",
+            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 2));
+    public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(VE_16_STACK_ITEMS));
+    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(VE_16_STACK_ITEMS));
 
     /**
      * @param name          The horse armor name for the item.

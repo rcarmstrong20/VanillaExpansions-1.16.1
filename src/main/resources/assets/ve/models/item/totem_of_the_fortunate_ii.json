@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
 	{
-        "layer0": "ve:item/totem_of_the_fortunate"
+        "layer0": "ve:item/totem_of_the_fortunate_ii"
     }
 }

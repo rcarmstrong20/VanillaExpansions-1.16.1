@@ -192,35 +192,69 @@ public class VanillaExpansions
         // Push the player when interacting with flowing dark matter.
         event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
 
-        // Damage the totem of the guardian when the player runs out of air and is
-        // holding it.
-        List<Item> totem = Arrays.asList(VeItems.totemOfTheGuardianI, VeItems.totemOfTheGuardianII,
-                VeItems.totemOfTheGuardianIII);
-
+        // Totem of the guardian.
         Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
                 .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400).build();
 
-        activateTotem(totemGuardianMap, Hand.MAIN_HAND, event.player);
-        activateTotem(totemGuardianMap, Hand.OFF_HAND, event.player);
+        // Totem of the brute
+        Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
+                .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).build();
+
+        System.out.println(event.isCancelable());
+
+        activateTotemOfTheGuardian(totemGuardianMap, Hand.MAIN_HAND, event.player);
+        activateTotemOfTheGuardian(totemGuardianMap, Hand.OFF_HAND, event.player);
+        activateTotemOfTheBrute(totemBruteMap, Hand.MAIN_HAND, event.player);
+        activateTotemOfTheBrute(totemBruteMap, Hand.OFF_HAND, event.player);
     }
 
-    private void activateTotem(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
+    private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
     {
         Random rand = new Random();
-        Item heldItem = player.getHeldItem(hand).getItem();
-        int newCount = player.getHeldItem(hand).getCount() - 1;
+        ItemStack heldStack = player.getHeldItem(hand);
+        float halfHealth = player.getMaxHealth() / 2;
+        boolean onCooldown = false;
+
+        long startTime = System.currentTimeMillis();
+
+        if (player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()) && !onCooldown)
+        {
+            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 100, itemToPowerLvl.get(heldStack.getItem())));
+            removeFromStack(player, heldStack, hand);
+
+            spawnParticles(ParticleTypes.FLAME, player, rand);
+            spawnParticles(ParticleTypes.ASH, player, rand);
+            onCooldown = true;
+        }
+    }
+
+    private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
+    {
+        Random rand = new Random();
+        ItemStack heldStack = player.getHeldItem(hand);
         int maxAir = player.getMaxAir();
 
-        if (player.getAir() == 0 && itemToPowerLvl.containsKey(heldItem))
+        if (player.getAir() == 0 && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldItem)));
+            player.addPotionEffect(
+                    new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
             player.setAir(maxAir);
-            player.setHeldItem(hand, new ItemStack(heldItem, newCount));
-            player.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
+            removeFromStack(player, heldStack, hand);
 
             spawnParticles(ParticleTypes.SPLASH, player, rand);
             spawnParticles(ParticleTypes.CLOUD, player, rand);
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void removeFromStack(PlayerEntity player, ItemStack heldStack, Hand hand)
+    {
+        player.setHeldItem(hand, new ItemStack(heldStack.getItem(), (heldStack.getCount() - 1)));
+        player.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
     }
 
     private void spawnParticles(BasicParticleType particle, PlayerEntity player, Random rand)

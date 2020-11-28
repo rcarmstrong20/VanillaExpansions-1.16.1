@@ -1,4 +1,4 @@
-package rcarmstrong20.vanilla_expansions.block;
+package rcarmstrong20.vanilla_expansions.item;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
