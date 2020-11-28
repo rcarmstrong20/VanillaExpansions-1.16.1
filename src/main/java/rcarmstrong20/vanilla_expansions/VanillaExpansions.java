@@ -1,5 +1,6 @@
 package rcarmstrong20.vanilla_expansions;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +111,8 @@ public class VanillaExpansions
     public static final String MOD_ID = "ve";
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    public static int lastMinuteGathered = 0;
+    public static boolean onCooldown = false;
 
     public VanillaExpansions()
     {
@@ -200,34 +203,62 @@ public class VanillaExpansions
         Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
                 .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).build();
 
-        System.out.println(event.isCancelable());
-
         activateTotemOfTheGuardian(totemGuardianMap, Hand.MAIN_HAND, event.player);
         activateTotemOfTheGuardian(totemGuardianMap, Hand.OFF_HAND, event.player);
+
         activateTotemOfTheBrute(totemBruteMap, Hand.MAIN_HAND, event.player);
         activateTotemOfTheBrute(totemBruteMap, Hand.OFF_HAND, event.player);
     }
 
+    /**
+     * Trigger the brute totem's power.
+     *
+     * @param itemToPowerLvl A map that associates the item with an amplifier level.
+     * @param hand           The player's hand which is holding the item.
+     * @param player         The player using this item.
+     * @return true if this method successfully enacts an action.
+     */
     private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
     {
         Random rand = new Random();
         ItemStack heldStack = player.getHeldItem(hand);
         float halfHealth = player.getMaxHealth() / 2;
-        boolean onCooldown = false;
+        int currentMinute = LocalDateTime.now().getMinute();
 
-        long startTime = System.currentTimeMillis();
-
-        if (player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()) && !onCooldown)
+        if (onCooldown && (currentMinute - lastMinuteGathered) >= 1)
         {
-            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 100, itemToPowerLvl.get(heldStack.getItem())));
+            System.out.println("The totem's cooldown is over");
+            onCooldown = false;
+            lastMinuteGathered = currentMinute;
+            // Minecraft.getInstance().player.sendChatMessage("The totem's cool down is
+            // over");
+            return true;
+        }
+        else if (!onCooldown && player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()))
+        {
+            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 600, itemToPowerLvl.get(heldStack.getItem())));
+            player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 600, 1));
             removeFromStack(player, heldStack, hand);
 
             spawnParticles(ParticleTypes.FLAME, player, rand);
-            spawnParticles(ParticleTypes.ASH, player, rand);
+            spawnParticles(ParticleTypes.SMOKE, player, rand);
             onCooldown = true;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
+    /**
+     * Trigger the guardian totem's power.
+     *
+     * @param itemToPowerLvl A map that associates the item with a time duration.
+     * @param hand           The player's hand which is holding the item.
+     * @param player         The player using this item.
+     * @return true if this method successfully enacts an action.
+     */
     private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
     {
         Random rand = new Random();
