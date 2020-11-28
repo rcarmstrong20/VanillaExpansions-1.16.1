@@ -26,25 +26,55 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.block.VeBabyCowPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeBabyMooshroomPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeBatPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeBeePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeBlazePlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeCatPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeCaveSpiderPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeChickenPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
+import rcarmstrong20.vanilla_expansions.block.VeCowPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeCreeperPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
+import rcarmstrong20.vanilla_expansions.block.VeEndermanPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeEndermitePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingDarkMatterBlock;
+import rcarmstrong20.vanilla_expansions.block.VeGhastPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
+import rcarmstrong20.vanilla_expansions.block.VeGuardianPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeHorsePlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeMagmaCubePlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeMooshroomPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
+import rcarmstrong20.vanilla_expansions.block.VePersianCatPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VePigPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePlantingPotBlock;
-import rcarmstrong20.vanilla_expansions.block.VePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePottedSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VePufferfishPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePurpleHugeMushroomBlock;
+import rcarmstrong20.vanilla_expansions.block.VeRabbitPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSevenStageCropBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSheepPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSilverfishPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSkeletonPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSlimDoorBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSlimePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSnapdragonBlock;
-import rcarmstrong20.vanilla_expansions.block.VeTallPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSpiderPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeSquidPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
+import rcarmstrong20.vanilla_expansions.block.VeVillagerPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeWitchPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeWolfPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWoodcutterBlock;
+import rcarmstrong20.vanilla_expansions.block.VeZombieDemonPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeZombiePigmanPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeZombiePlushBlock;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeBlocks
@@ -53,157 +83,157 @@ public class VeBlocks
     private static final List<Item> ITEMS = new ArrayList<>();
 
     public static Block batPlush = register("bat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
+            new VeBatPlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
     public static Block blazePlush = register("blaze_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeBlazePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block caveSpiderPlush = register("cave_spider_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
+            new VeCaveSpiderPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
     public static Block chickenPlush = register("chicken_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeChickenPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block cowPlush = register("cow_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeCowPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block babyCowPlush = register("baby_cow_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeBabyCowPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block creeperPlush = register("creeper_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
+            new VeCreeperPlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
     public static Block endermanPlush = register("enderman_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeEndermanPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block endermitePlush = register("endermite_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeEndermitePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block ghastPlush = register("ghast_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeGhastPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block guardianPlush = register("guardian_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
+            new VeGuardianPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
     public static Block whiteHorsePlush = register("white_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block grayHorsePlush = register("gray_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
     public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
     public static Block brownHorsePlush = register("brown_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block blackHorsePlush = register("black_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block purpleHorsePlush = register("purple_horse_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block magmaCubePlush = register("magma_cube_plush", true,
-            new VeTallPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeMagmaCubePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
     public static Block redMooshroomPlush = register("red_mooshroom_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
     public static Block babyRedMooshroomPlush = register("baby_red_mooshroom_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
     public static Block brownMooshroomPlush = register("brown_mooshroom_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
     public static Block babyBrownMooshroomPlush = register("baby_brown_mooshroom_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block ocelotPlush = register("ocelot_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block tabbyCatPlush = register("tabby_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block tuxedoCatPlush = register("tuxedo_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block redCatPlush = register("red_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
     public static Block siameseCatPlush = register("siamese_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block britishShorthairCatPlush = register("british_shorthair_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
     public static Block calicoCatPlush = register("calico_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block persianCatPlush = register("persian_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VePersianCatPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block ragdollCatPlush = register("ragdoll_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block whiteCatPlush = register("white_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block jellieCatPlush = register("jellie_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block blackCatPlush = register("black_cat_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block pigPlush = register("pig_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VePigPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
     public static Block brownRabbitPlush = register("brown_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block whiteRabbitPlush = register("white_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block blackRabbitPlush = register("black_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block whiteSplotchedRabbitPlush = register("white_splotched_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block goldRabbitPlush = register("gold_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block toastRabbitPlush = register("toast_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block saltRabbitPlush = register("salt_rabbit_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block whiteSheepPlush = register("white_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block orangeSheepPlush = register("orange_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
     public static Block magentaSheepPlush = register("magenta_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.MAGENTA_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.MAGENTA_WOOL)));
     public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_BLUE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_BLUE_WOOL)));
     public static Block yellowSheepPlush = register("yellow_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block limeSheepPlush = register("lime_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
     public static Block pinkSheepPlush = register("pink_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
     public static Block graySheepPlush = register("gray_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
     public static Block lightGraySheepPlush = register("light_gray_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
     public static Block cyanSheepPlush = register("cyan_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
     public static Block purpleSheepPlush = register("purple_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block blueSheepPlush = register("blue_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
     public static Block brownSheepPlush = register("brown_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block greenSheepPlush = register("green_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
     public static Block redSheepPlush = register("red_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
     public static Block blackSheepPlush = register("black_sheep_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block silverfishPlush = register("silverfish_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSilverfishPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
     public static Block skeletonPlush = register("skeleton_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSkeletonPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
     public static Block slimePlush = register("slime_plush", true,
-            new VeTallPlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
+            new VeSlimePlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
     public static Block spiderPlush = register("spider_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeSpiderPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block squidPlush = register("squid_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
+            new VeSquidPlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
     public static Block beePlush = register("bee_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeBeePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block plainsVillagerPlush = register("plains_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block desertVillagerPlush = register("desert_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
     public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block snowVillagerPlush = register("snow_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block swampVillagerPlush = register("swamp_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
     public static Block witchPlush = register("witch_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeWitchPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block wolfPlush = register("wolf_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeWolfPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
     public static Block zombiePlush = register("zombie_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
+            new VeZombiePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
     public static Block zombieDemonPlush = register("zombie_demon_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeZombieDemonPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
     public static Block zombiePigmanPlush = register("zombie_pigman_plush", true,
-            new VePlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VeZombiePigmanPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
     public static Block pufferfishPlush = register("pufferfish_plush", true,
             new VePufferfishPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block rubyOre = register("nether_ruby_ore", true,
