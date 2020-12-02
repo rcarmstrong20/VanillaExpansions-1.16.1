@@ -48,6 +48,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -55,8 +56,6 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
@@ -64,7 +63,6 @@ import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
-import net.minecraftforge.event.TickEvent.WorldTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -89,11 +87,13 @@ import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeFeatures;
+import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
+import rcarmstrong20.vanilla_expansions.core.VeConfiguredStructures;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
+import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
@@ -138,6 +138,9 @@ public class VanillaExpansions
     private void setup(final FMLCommonSetupEvent event)
     {
         VanillaExpansions.LOGGER.info("setup method registered");
+        VeConfiguredFeatures.register();
+        VeConfiguredStructures.register();
+        VeStructurePieceTypes.register();
         PROXY.onSetupCommon();
     }
 
@@ -225,13 +228,13 @@ public class VanillaExpansions
         float halfHealth = player.getMaxHealth() / 2;
         int currentMinute = LocalDateTime.now().getMinute();
 
-        if (onCooldown && (currentMinute - lastMinuteGathered) >= 1)
+        if (onCooldown && (currentMinute - lastMinuteGathered) >= 5)
         {
+            player.sendStatusMessage(ITextComponent
+                    .getTextComponentOrEmpty("\u00A72" + "<Totem Of The Brute> The totem's cooldown is over."), false);
             System.out.println("The totem's cooldown is over");
             onCooldown = false;
             lastMinuteGathered = currentMinute;
-            // Minecraft.getInstance().player.sendChatMessage("The totem's cool down is
-            // over");
             return true;
         }
         else if (!onCooldown && player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()))
@@ -295,13 +298,6 @@ public class VanillaExpansions
             player.getEntityWorld().addOptionalParticle(particle, player.getPosXRandom(1.0), player.getPosYRandom(),
                     player.getPosZRandom(1.0), 0.0, 0.0 + rand.nextDouble(), 0.0);
         }
-    }
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void onWorldTick(WorldTickEvent event)
-    {
-        // event.handleFluidAcceleration(VeFluidTags.dark_matter, 0.005);
     }
 
     /**
@@ -528,33 +524,32 @@ public class VanillaExpansions
         final List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
                 "tall_birch_forest", "tall_birch_hills");
 
-        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeFeatures.NETHER_SMOKY_QUARTZ_ORE,
-                VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
-        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeFeatures.NETHER_RUBY_ORE,
+        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES,
+                VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
+        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
                 VeOreGenConfig.enableNetherRubyOreSpawns.get());
         this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeFeatures.PATCH_BLUEBERRY_BUSH_DECORATED, VeFeatureGenConfig.enableBlueberryBushSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_BLUEBERRY_BUSH_SPARSE,
+                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED,
                 VeFeatureGenConfig.enableBlueberryBushSpawns.get());
         this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeFeatures.PATCH_CRANBERRY_BUSH_DECORATED, VeFeatureGenConfig.enableCranberryBushSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_CRANBERRY_BUSH_SPARSE,
+                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableBlueberryBushSpawns.get());
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED,
                 VeFeatureGenConfig.enableCranberryBushSpawns.get());
-        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_WITCHS_CRADLE_DECORATED,
-                VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION, VeFeatures.PATCH_WITCHS_CRADLE_SPARSE,
-                VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeFeatures.DARK_MATTER_LAKE,
+        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableCranberryBushSpawns.get());
+        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
+                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
+        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
+                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
+        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE,
                 VeFeatureGenConfig.enableVoidLakeSpawns.get());
-        this.addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.SNAPDRAGON_AND_GRASS,
+        this.addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                 VeFeatureGenConfig.enableSnapdragonSpawns.get());
-        this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeFeatures.HUGE_PURPLE_MUSHROOM,
-                VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
-        /*
-         * this.addStructure(event, Category.TAIGA, Decoration.SURFACE_STRUCTURES,
-         * VeStructure.cabin, VeFeatures.TAIGA_CABIN,
-         * VeFeatureGenConfig.enableCabinSpawns.get());
-         */
+        this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION,
+                VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM, VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
+        this.addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
+                VeFeatureGenConfig.enableCabinSpawns.get());
     }
 
     /**
@@ -623,20 +618,16 @@ public class VanillaExpansions
      * Add a new structure that uses the village config to the spawn list for
      * specific biomes.
      */
-    private void addStructure(BiomeLoadingEvent event, Category category, Decoration decoration,
-            Structure<VillageConfig> structure,
-            StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> taigaCabin, boolean enable)
+    private void addStructure(BiomeLoadingEvent event, Category category, StructureFeature<?, ?> configuredTaigaCabin,
+            boolean enable)
     {
         if (enable)
         {
-            // biome.addFeature(decoration, structure.withConfiguration(config)
-            // .withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-
-            // event.getGeneration().getFeatures(decoration).add(() -> structure);
-
             if (event.getCategory() == category)
             {
-                event.getGeneration().getStructures().add(() -> taigaCabin);
+                System.out.println("Added " + configuredTaigaCabin.field_236268_b_.getStructureName() + " to "
+                        + event.getName().toString());
+                event.getGeneration().getStructures().add(() -> configuredTaigaCabin);
             }
         }
     }
