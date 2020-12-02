@@ -1,0 +1,17 @@
+{
+  "name": "ve:taiga_cabin_side_pool",
+  "fallback": "minecraft:empty",
+  "elements":
+  [
+    {
+      "weight": 1,
+      "element":
+      {
+        "location": "ve:taiga_cabin",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
