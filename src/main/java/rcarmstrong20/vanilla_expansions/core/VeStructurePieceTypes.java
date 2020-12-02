@@ -1,25 +1,44 @@
 package rcarmstrong20.vanilla_expansions.core;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
 
-// @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus =
-// Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
+    public static final Map<String, IStructurePieceType> STRUCTURE_PIECES = new HashMap<>();
+
     public static IStructurePieceType cabinPiece = register("cabin_piece", VeCabinPieces.VePiece::new);
 
-    /**
-     * @param name The name of the new piece.
-     * @param type The structure piece factory for the new piece.
-     * @return Registers a new structure piece.
-     */
-    private static IStructurePieceType register(String name, IStructurePieceType type)
+    public static void register()
     {
-        System.out.println("Structure pieces registered.");
-        return Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(VanillaExpansions.MOD_ID, name), type);
+        Registry<IStructurePieceType> registry = Registry.STRUCTURE_PIECE;
+
+        STRUCTURE_PIECES.forEach((name, structurePiece) -> Registry.register(registry,
+                new ResourceLocation(VanillaExpansions.MOD_ID, name), structurePiece));
+        STRUCTURE_PIECES.clear();
+
+        VanillaExpansions.LOGGER.info("Structure pieces registered.");
+    }
+
+    /**
+     * @param name           The name of this piece.
+     * @param structurePiece An instance of a new structure piece.
+     * @return The instance of this piece.
+     */
+    private static IStructurePieceType register(String name, IStructurePieceType structurePiece)
+    {
+        if (!STRUCTURE_PIECES.containsKey(name))
+        {
+            STRUCTURE_PIECES.put(name, structurePiece);
+        }
+        return structurePiece;
     }
 }
