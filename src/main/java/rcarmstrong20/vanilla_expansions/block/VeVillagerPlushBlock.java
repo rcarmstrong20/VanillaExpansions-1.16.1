@@ -8,11 +8,12 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
 public class VeVillagerPlushBlock extends VePlushBlock
 {
+    private int type;
+
     // Shared Shapes
 
     protected static final VoxelShape NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.5D, 9.0D, 5.5D, 10.5D, 15.0D, 11.5D);
@@ -40,48 +41,37 @@ public class VeVillagerPlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_BODY_SHAPE = VoxelShapes.or(NORTH_HEAD_SHAPE, NORTH_TORSO_SHAPE,
             NORTH_ARM_SHAPE, NORTH_FACE_SHAPE);
 
-    public VeVillagerPlushBlock(Properties properties)
+    public VeVillagerPlushBlock(Properties properties, int type)
     {
         super(properties);
+        this.type = type;
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        Block block = this.getBlock();
-
-        if (block == VeBlocks.plainsVillagerPlush)
+        switch (type)
         {
-            return defineShapes(state, Plains.NORTH_SHAPE, Plains.SOUTH_SHAPE, Plains.WEST_SHAPE, Plains.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.desertVillagerPlush)
-        {
-            return defineShapes(state, Desert.NORTH_SHAPE, Desert.SOUTH_SHAPE, Desert.WEST_SHAPE, Desert.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.jungleVillagerPlush)
-        {
-            return defineShapes(state, Jungle.NORTH_SHAPE, Jungle.SOUTH_SHAPE, Jungle.WEST_SHAPE, Jungle.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.savannaVillagerPlush)
-        {
-            return defineShapes(state, Savanna.NORTH_SHAPE, Savanna.SOUTH_SHAPE, Savanna.WEST_SHAPE,
-                    Savanna.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.snowVillagerPlush)
-        {
-            return defineShapes(state, Snow.NORTH_SHAPE, Snow.SOUTH_SHAPE, Snow.WEST_SHAPE, Snow.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.swampVillagerPlush)
-        {
-            return defineShapes(state, Swamp.NORTH_SHAPE, Swamp.SOUTH_SHAPE, Swamp.WEST_SHAPE, Swamp.EAST_SHAPE);
-        }
-        else if (block == VeBlocks.taigaVillagerPlush)
-        {
-            return defineShapes(state, Taiga.NORTH_SHAPE, Taiga.SOUTH_SHAPE, Taiga.WEST_SHAPE, Taiga.EAST_SHAPE);
-        }
-        else
-        {
-            return VoxelShapes.fullCube();
+            case 0:
+                return defineShapes(state, Plains.NORTH_SHAPE, Plains.SOUTH_SHAPE, Plains.WEST_SHAPE,
+                        Plains.EAST_SHAPE);
+            case 1:
+                return defineShapes(state, Desert.NORTH_SHAPE, Desert.SOUTH_SHAPE, Desert.WEST_SHAPE,
+                        Desert.EAST_SHAPE);
+            case 2:
+                return defineShapes(state, Jungle.NORTH_SHAPE, Jungle.SOUTH_SHAPE, Jungle.WEST_SHAPE,
+                        Jungle.EAST_SHAPE);
+            case 3:
+                return defineShapes(state, Savanna.NORTH_SHAPE, Savanna.SOUTH_SHAPE, Savanna.WEST_SHAPE,
+                        Savanna.EAST_SHAPE);
+            case 4:
+                return defineShapes(state, Snow.NORTH_SHAPE, Snow.SOUTH_SHAPE, Snow.WEST_SHAPE, Snow.EAST_SHAPE);
+            case 5:
+                return defineShapes(state, Swamp.NORTH_SHAPE, Swamp.SOUTH_SHAPE, Swamp.WEST_SHAPE, Swamp.EAST_SHAPE);
+            case 6:
+                return defineShapes(state, Taiga.NORTH_SHAPE, Taiga.SOUTH_SHAPE, Taiga.WEST_SHAPE, Taiga.EAST_SHAPE);
+            default:
+                return VoxelShapes.fullCube();
         }
     }
 

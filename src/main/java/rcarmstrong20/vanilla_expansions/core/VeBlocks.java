@@ -20,7 +20,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -211,19 +210,19 @@ public class VeBlocks
     public static Block beePlush = register("bee_plush", true,
             new VeBeePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
     public static Block plainsVillagerPlush = register("plains_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 0));
     public static Block desertVillagerPlush = register("desert_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL), 1));
     public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL), 2));
     public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 3));
     public static Block snowVillagerPlush = register("snow_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 4));
     public static Block swampVillagerPlush = register("swamp_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 5));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 6));
     public static Block witchPlush = register("witch_plush", true,
             new VeWitchPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block wolfPlush = register("wolf_plush", true,
@@ -514,75 +513,67 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
 
     /**
-     * @param name         The name for the block.
-     * @param hasBlockItem Whether this block has a block item.
-     * @param block        A new instance of the block class for this block.
-     * @return A new block with an item that has default properties.
+     * Used to register a block with default item properties.
+     *
+     * @param name         The name of the block.
+     * @param hasItem      If this block has an item.
+     * @param block        A new block object.
+     * @param maxStackSize The block item max stack size.
+     * @return The main registry method.
      */
-    private static Block register(String name, boolean hasBlockItem, Block block)
+    private static Block register(String name, boolean hasItem, Block block, int maxStackSize)
     {
-        return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasBlockItem, block,
-                new Item.Properties().group(VanillaExpansions.VE_GROUP));
-    }
-
-    /**
-     * @param name         The name for the block.
-     * @param hasBlockItem Whether this block has a block item.
-     * @param block        A new instance of the block class for this block.
-     * @param maxStackSize The maximum size that this block can stack up to.
-     * @return A new block with an item that has a custom stack size.
-     */
-    private static Block register(String name, boolean hasBlockItem, Block block, int maxStackSize)
-    {
-        return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasBlockItem, block,
+        return register(name, hasItem, block,
                 new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(maxStackSize));
     }
 
-    /*
-     * A method that gets the data from the other registry methods and is used in
-     * the register method that creates each list
+    /**
+     * Used to register a block with default item properties.
+     *
+     * @param name    The name of the block.
+     * @param hasItem If this block has an item.
+     * @param block   A new block object.
+     * @return The main registry method.
      */
-    private static Block register(ResourceLocation name, boolean hasBlockItem, Block block, Item.Properties properties)
+    private static Block register(String name, boolean hasItem, Block block)
     {
-        return register(name, hasBlockItem, block, new BlockItem(block, properties));
+        return register(name, hasItem, block, new Item.Properties().group(VanillaExpansions.VE_GROUP));
     }
 
-    /*
-     * Adds the blocks and block items to two lists
+    /**
+     * Helper method for registering all blocks and block items.
      */
-    private static Block register(ResourceLocation name, boolean hasBlockItem, Block block, BlockItem item)
+    private static Block register(String name, boolean hasItem, Block block, Item.Properties properties)
     {
-        block.setRegistryName(name);
+        String id = VanillaExpansions.MOD_ID;
 
-        BLOCKS.add(block);
-
-        if (hasBlockItem && block.getRegistryName() != null)
+        if (hasItem)
         {
-            item.setRegistryName(name);
+            Item item = new BlockItem(block, properties);
+            item.setRegistryName(id, name);
             ITEMS.add(item);
         }
+
+        block.setRegistryName(id, name);
+        BLOCKS.add(block);
         return block;
     }
 
-    /*
-     * Registers the blocks
-     */
     @SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event)
     {
         BLOCKS.forEach(block -> event.getRegistry().register(block));
         BLOCKS.clear();
+
         VanillaExpansions.LOGGER.info("Blocks registered.");
     }
 
-    /*
-     * Registers the item blocks
-     */
     @SubscribeEvent
-    public static void registerItemBlocks(final RegistryEvent.Register<Item> event)
+    public static void registerItems(final RegistryEvent.Register<Item> event)
     {
         ITEMS.forEach(item -> event.getRegistry().register(item));
         ITEMS.clear();
-        VanillaExpansions.LOGGER.info("Item blocks registered.");
+
+        VanillaExpansions.LOGGER.info("Block Items registered.");
     }
 }
