@@ -8,7 +8,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeFluidTags
 {
-    public static ITag<Fluid> darkMatter = VeFluidTags.makeWrapperTag("dark_matter");
+    public static ITag<Fluid> darkMatter = makeWrapperTag("dark_matter");
 
     /**
      * @param name The name of the tag.
