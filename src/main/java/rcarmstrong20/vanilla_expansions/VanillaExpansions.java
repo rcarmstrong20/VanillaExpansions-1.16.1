@@ -368,14 +368,11 @@ public class VanillaExpansions
 
         if (!event.getWorld().isRemote())
         {
-            // If the block your clicking is a crop and your not using bone meal return
-            // true.
             if (VeCropConfig.enableRightClickHarvesting.get() && worldState.getBlock() instanceof CropsBlock
                     && itemStack.getItem() != Items.BONE_MEAL)
             {
                 if (worldState.getBlock() instanceof BeetrootBlock)
                 {
-                    // When the beet root crop is fully grown and clicked then harvest it.
                     if (worldState.get(beetrootAge) == getMaxAge(beetrootAge))
                     {
                         resetCrop(worldState, world, pos, beetrootAge);
@@ -383,8 +380,6 @@ public class VanillaExpansions
                         event.setCanceled(true);
                     }
                 }
-                // If its not a beet root crop then it must be a normal 7 stage crop and
-                // if it's fully grown harvest it.
                 else if (worldState.get(cropsAge) == getMaxAge(cropsAge))
                 {
                     resetCrop(worldState, world, pos, cropsAge);
@@ -392,8 +387,6 @@ public class VanillaExpansions
                     event.setCanceled(true);
                 }
             }
-            // If its not a crop it might be nether wart and if so check if it's fully grown
-            // and if so harvest it.
             else if (worldState.getBlock() instanceof NetherWartBlock)
             {
                 if (worldState.get(netherWartAge) == getMaxAge(netherWartAge))
