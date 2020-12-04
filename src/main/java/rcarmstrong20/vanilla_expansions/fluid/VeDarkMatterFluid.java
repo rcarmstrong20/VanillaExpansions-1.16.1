@@ -106,7 +106,7 @@ public abstract class VeDarkMatterFluid extends WaterFluid
     @Override
     public int getTickRate(IWorldReader p_205569_1_)
     {
-        return 13;
+        return 10;
     }
 
     public static class Flowing extends VeDarkMatterFluid
