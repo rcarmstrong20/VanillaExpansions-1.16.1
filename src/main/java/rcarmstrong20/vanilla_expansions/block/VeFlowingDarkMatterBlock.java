@@ -11,16 +11,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
@@ -57,62 +56,83 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         }
     }
 
-    /**
-     * This method forms the new blocks when the correct liquids make contact.
-     *
-     * @param world The current world.
-     * @param pos   The position where the fluids collide and where the new block
-     *              will be formed.
-     * @return True if a block touching this block changes.
-     */
     private boolean reactWithNeighbors(World world, BlockPos pos)
     {
-        // Find the direction that corresponds to where the lava or water is at.
         for (Direction direction : Direction.values())
         {
-            if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.WATER))
-            {
-                return generateBlocks(world, pos, direction, VeBlocks.nephilite, Blocks.END_STONE);
-            }
-            else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+            if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
             {
                 return generateBlocks(world, pos, direction, VeBlocks.snowflakeObsidian, Blocks.END_STONE);
             }
+            else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.WATER))
+            {
+                return generateBlocks(world, pos, direction, VeBlocks.nephilite, Blocks.END_STONE);
+            }
         }
-        return true;
+        return true; // This method needs to always return true to keep flowing functionality intact.
     }
 
     /**
-     * Generates the blocks from the fluids reacting with one another based off
-     * their positions in the world.
+     * This method generates the appropriate blocks when fluids interact.
      *
-     * @param world          The current world.
-     * @param pos            The position where the fluids collide and where the new
-     *                       block will be formed.
-     * @param foundDirection The direction that the fluid is located at.
-     * @param sourceBlock    The block that should be formed when the fluid is a
-     *                       source.
-     * @param otherBlock     The alternative block that should be formed.
-     * @return True if the block is formed.
+     * @param world
+     * @param pos
+     * @param foundDirection The direction where the fluid is located.
+     * @param sourceBlock    The block to generate when converting a source block.
+     * @param otherBlock     The block to generate when converting a flowing block.
+     * @return true when this method generates a block.
      */
     private boolean generateBlocks(World world, BlockPos pos, Direction foundDirection, Block sourceBlock,
             Block otherBlock)
     {
-        if (world.getFluidState(pos).isSource() && foundDirection == Direction.UP)
+        if (foundDirection == Direction.UP)
         {
-            this.triggerMixEffects(world, pos);
-            world.setBlockState(pos,
-                    ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, sourceBlock.getDefaultState()));
-            return true;
+            if (world.getFluidState(pos).isSource())
+            {
+                placeBlockAt(world, pos, sourceBlock);
+                return true;
+            }
+            else
+            {
+                placeBlockAt(world, pos, otherBlock);
+                return true;
+            }
         }
-        else if (world.getBlockState(pos.offset(foundDirection)).getFluidState().getFluid() != Fluids.EMPTY)
+        else
         {
-            this.triggerMixEffects(world, pos);
-            world.setBlockState(pos.offset(foundDirection),
-                    ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, otherBlock.getDefaultState()));
-            return true;
+            if (world.getFluidState(pos).isSource())
+            {
+                placeBlockAt(world, pos, sourceBlock);
+                return true;
+            }
+            else
+            {
+                placeBlockAtOffset(world, pos, foundDirection, otherBlock);
+                return true;
+            }
         }
-        return false;
+    }
+
+    /**
+     * @param world
+     * @param pos   The position to start at.
+     * @param block The block to place.
+     */
+    private void placeBlockAt(World world, BlockPos pos, Block block)
+    {
+        this.triggerMixEffects(world, pos);
+        world.setBlockState(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, block.getDefaultState()));
+    }
+
+    /**
+     * @param world
+     * @param pos       The position to start at.
+     * @param direction The direction offset to place the block at.
+     * @param block     The block to place.
+     */
+    private void placeBlockAtOffset(World world, BlockPos pos, Direction direction, Block block)
+    {
+        placeBlockAt(world, pos.offset(direction), block);
     }
 
     /**
@@ -122,16 +142,22 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
      * @param world The current world.
      * @param pos   The position to play the sound and particles at.
      */
-    private void triggerMixEffects(IWorld world, BlockPos pos)
+    private void triggerMixEffects(World world, BlockPos pos)
     {
         Random random = new Random();
-        /*
-         * for(int i = 0; i < (random.nextInt(20) + 10); i++) {
-         * world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.up().getY(),
-         * pos.getZ(), 0.0, 0.0, 0.0); }
-         */
+
+        spawnParticles(ParticleTypes.POOF, (ServerWorld) world, pos.up(), random);
         world.playSound(null, pos, VeSoundEvents.blockDarkMatterHardens, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
+    }
+
+    private void spawnParticles(IParticleData particle, ServerWorld world, BlockPos pos, Random rand)
+    {
+        double x = pos.getX() + rand.nextDouble();
+        double y = pos.getY() + rand.nextDouble();
+        double z = pos.getZ() + rand.nextDouble();
+
+        world.spawnParticle(particle, x, y, z, rand.nextInt(20) + 10, 0.0, 0.0, 0.0, 0.0);
     }
 
     @Override
@@ -164,22 +190,35 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
                 entity.setMotion(xMot / 200000, yMot / 200000, zMot / 200000);
             }
 
-            // Play firework particles when the player is in the fluid.
             if (random.nextInt(10) == 0)
             {
                 world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
                         entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
             }
-
-            // Cancel fall damage.
             entity.fallDistance = 0;
         }
         else
         {
             // Make items float on void with firework particles.
-            world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
-                    entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-            entity.setMotion(new Vector3d(0.0D, 0.1D + random.nextFloat(), 0.0D));
+
+            if (random.nextInt(10) == 0)
+            {
+                world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
+                        entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
+            }
+            /*
+             * if (world.getFluidState(pos.up()).isTagged(VeFluidTags.darkMatter)) {
+             *
+             * } else { entity.setMotion(0.0D, entity.getMotion().getY() + 0.01D, 0.0D); }
+             */
+
+            entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D);
+
+            /*
+             * if (entity.getMotion().getY() >= 0) {
+             *
+             * }
+             */
         }
     }
 }
