@@ -5,8 +5,7 @@
 			[
 				{"model": "ve:block/bamboo1_fence_post"},
 				{"model": "ve:block/bamboo2_fence_post"},
-				{"model": "ve:block/bamboo3_fence_post"},
-				{"model": "ve:block/bamboo4_fence_post"}
+				{"model": "ve:block/bamboo3_fence_post"}
 			]
 		},
         {   "when": { "north": "true" },
@@ -14,8 +13,7 @@
 			[
 				{ "model": "ve:block/bamboo1_fence_side" },
 				{ "model": "ve:block/bamboo2_fence_side" },
-				{ "model": "ve:block/bamboo3_fence_side" },
-				{ "model": "ve:block/bamboo4_fence_side" }
+				{ "model": "ve:block/bamboo3_fence_side" }
 			]
         },
         {   "when": { "east": "true" },
@@ -23,8 +21,7 @@
 			[
 				{ "model": "ve:block/bamboo1_fence_side", "y": 90 },
 				{ "model": "ve:block/bamboo2_fence_side", "y": 90 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 90 },
-				{ "model": "ve:block/bamboo4_fence_side", "y": 90 }
+				{ "model": "ve:block/bamboo3_fence_side", "y": 90 }
 			]
         },
         {   "when": { "south": "true" },
@@ -32,8 +29,7 @@
 			[
 				{ "model": "ve:block/bamboo1_fence_side", "y": 180 },
 				{ "model": "ve:block/bamboo2_fence_side", "y": 180 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 180 },
-				{ "model": "ve:block/bamboo4_fence_side", "y": 180 }
+				{ "model": "ve:block/bamboo3_fence_side", "y": 180 }
 			]
         },
         {   "when": { "west": "true" },
@@ -41,8 +37,7 @@
 			[
 				{ "model": "ve:block/bamboo1_fence_side", "y": 270 },
 				{ "model": "ve:block/bamboo2_fence_side", "y": 270 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 270 },
-				{ "model": "ve:block/bamboo4_fence_side", "y": 270 }
+				{ "model": "ve:block/bamboo3_fence_side", "y": 270 }
 			]
         }
     ]
