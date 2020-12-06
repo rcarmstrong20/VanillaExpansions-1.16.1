@@ -15,7 +15,7 @@ public class VePaintingType
     private static final List<PaintingType> PAINTING_TYPES = new ArrayList<>();
 
     public static PaintingType netherWastes = register("nether_wastes", new PaintingType(16, 16));
-    public static PaintingType starryNight = register("starry_night", new PaintingType(16, 16));
+    public static PaintingType starryNight = register("starry_night", new PaintingType(32, 32));
     public static PaintingType theScream = register("the_scream", new PaintingType(16, 16));
 
     public static PaintingType register(String name, PaintingType paintingType)
