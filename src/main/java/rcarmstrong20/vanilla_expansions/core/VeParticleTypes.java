@@ -36,6 +36,8 @@ public class VeParticleTypes
     public static BasicParticleType greenSpark = register("green_spark", false);
     public static BasicParticleType redSpark = register("red_spark", false);
     public static BasicParticleType blackSpark = register("black_spark", false);
+    public static BasicParticleType totemOfTheGuardian = register("totem_of_the_guardian", false);
+    public static BasicParticleType totemOfTheBrute = register("totem_of_the_brute", false);
 
     private static BasicParticleType register(String name, boolean alwaysShow)
     {
