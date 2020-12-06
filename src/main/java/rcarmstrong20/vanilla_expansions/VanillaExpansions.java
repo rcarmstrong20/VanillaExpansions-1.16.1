@@ -26,6 +26,7 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,6 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
@@ -80,6 +80,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
+import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeTotemOfTheBruteParticle;
+import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeTotemOfTheGuardianParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUnderDarkMatterParticle;
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
@@ -111,7 +113,7 @@ public class VanillaExpansions
     public static final String MOD_ID = "ve";
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-    public static int lastMinuteGathered = 0;
+    public static int lastMinuteGathered = LocalDateTime.now().getMinute();
     public static boolean onCooldown = false;
 
     public VanillaExpansions()
@@ -189,15 +191,23 @@ public class VanillaExpansions
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.greenSpark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.redSpark, LavaParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blackSpark, LavaParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.totemOfTheGuardian,
+                VeTotemOfTheGuardianParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.totemOfTheBrute,
+                VeTotemOfTheBruteParticle.Factory::new);
     }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
+    public void onClientPlayer(PlayerTickEvent event)
+    {
+        // Push the player when in flowing dark matter.
+        event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+    }
+
+    @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event)
     {
-        // Push the player when interacting with flowing dark matter.
-        event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
-
         // Totem of the guardian.
         Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
                 .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400).build();
@@ -206,11 +216,42 @@ public class VanillaExpansions
         Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
                 .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).build();
 
-        activateTotemOfTheGuardian(totemGuardianMap, Hand.MAIN_HAND, event.player);
-        activateTotemOfTheGuardian(totemGuardianMap, Hand.OFF_HAND, event.player);
+        if (event.player instanceof ServerPlayerEntity)
+        {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) event.player;
 
-        activateTotemOfTheBrute(totemBruteMap, Hand.MAIN_HAND, event.player);
-        activateTotemOfTheBrute(totemBruteMap, Hand.OFF_HAND, event.player);
+            if (activateTotemOfTheBrute(totemBruteMap, Hand.MAIN_HAND, serverPlayer))
+            {
+                removeFromMainHand(serverPlayer);
+            }
+            else if (activateTotemOfTheBrute(totemBruteMap, Hand.OFF_HAND, serverPlayer))
+            {
+                removeFromOffHand(serverPlayer);
+            }
+            else if (activateTotemOfTheGuardian(totemGuardianMap, Hand.MAIN_HAND, serverPlayer))
+            {
+                removeFromMainHand(serverPlayer);
+            }
+            else if (activateTotemOfTheGuardian(totemGuardianMap, Hand.OFF_HAND, serverPlayer))
+            {
+                removeFromOffHand(serverPlayer);
+            }
+        }
+    }
+
+    private void removeFromMainHand(ServerPlayerEntity player)
+    {
+        removeFromStack(player, player.getHeldItem(Hand.MAIN_HAND), Hand.MAIN_HAND);
+    }
+
+    private void removeFromOffHand(ServerPlayerEntity player)
+    {
+        removeFromStack(player, player.getHeldItem(Hand.OFF_HAND), Hand.OFF_HAND);
+    }
+
+    private void removeFromStack(ServerPlayerEntity player, ItemStack heldStack, Hand hand)
+    {
+        player.setHeldItem(hand, new ItemStack(heldStack.getItem(), (heldStack.getCount() - 1)));
     }
 
     /**
@@ -221,37 +262,40 @@ public class VanillaExpansions
      * @param player         The player using this item.
      * @return true if this method successfully enacts an action.
      */
-    private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
+    private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
         Random rand = new Random();
         ItemStack heldStack = player.getHeldItem(hand);
         float halfHealth = player.getMaxHealth() / 2;
         int currentMinute = LocalDateTime.now().getMinute();
 
-        if (onCooldown && (currentMinute - lastMinuteGathered) >= 5)
+        if (!onCooldown && player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            player.sendStatusMessage(ITextComponent
-                    .getTextComponentOrEmpty("\u00A72" + "<Totem Of The Brute> The totem's cooldown is over."), false);
-            System.out.println("The totem's cooldown is over");
-            onCooldown = false;
-            lastMinuteGathered = currentMinute;
-            return true;
-        }
-        else if (!onCooldown && player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()))
-        {
+            setOnCooldown(true);
+
             player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 600, itemToPowerLvl.get(heldStack.getItem())));
             player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 600, 1));
-            removeFromStack(player, heldStack, hand);
-
-            spawnParticles(ParticleTypes.FLAME, player, rand);
-            spawnParticles(ParticleTypes.SMOKE, player, rand);
-            onCooldown = true;
+            spawnParticles(VeParticleTypes.totemOfTheBrute, player, rand);
+            VanillaExpansions.LOGGER.info("Used brute totem");
             return true;
+        }
+        else if (onCooldown && (currentMinute - lastMinuteGathered) >= 4)
+        {
+            setOnCooldown(false);
+            player.sendStatusMessage(ITextComponent
+                    .getTextComponentOrEmpty("\u00A72" + "<Totem Of The Brute> The totem's cooldown is over."), false);
+            lastMinuteGathered = currentMinute;
+            return false;
         }
         else
         {
             return false;
         }
+    }
+
+    public static void setOnCooldown(boolean onCooldown)
+    {
+        VanillaExpansions.onCooldown = onCooldown;
     }
 
     /**
@@ -262,7 +306,7 @@ public class VanillaExpansions
      * @param player         The player using this item.
      * @return true if this method successfully enacts an action.
      */
-    private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, PlayerEntity player)
+    private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
         Random rand = new Random();
         ItemStack heldStack = player.getHeldItem(hand);
@@ -273,10 +317,8 @@ public class VanillaExpansions
             player.addPotionEffect(
                     new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
             player.setAir(maxAir);
-            removeFromStack(player, heldStack, hand);
 
-            spawnParticles(ParticleTypes.SPLASH, player, rand);
-            spawnParticles(ParticleTypes.CLOUD, player, rand);
+            spawnParticles(VeParticleTypes.totemOfTheGuardian, player, rand);
             return true;
         }
         else
@@ -285,18 +327,21 @@ public class VanillaExpansions
         }
     }
 
-    private void removeFromStack(PlayerEntity player, ItemStack heldStack, Hand hand)
+    private void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer, Random rand)
     {
-        player.setHeldItem(hand, new ItemStack(heldStack.getItem(), (heldStack.getCount() - 1)));
-        player.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
-    }
+        int max = rand.nextInt(15) + 15;
 
-    private void spawnParticles(BasicParticleType particle, PlayerEntity player, Random rand)
-    {
-        for (int i = (rand.nextInt(20) + 10); i >= 0; i--)
+        serverPlayer.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
+
+        for (int i = 0; i <= max; i++)
         {
-            player.getEntityWorld().addOptionalParticle(particle, player.getPosXRandom(1.0), player.getPosYRandom(),
-                    player.getPosZRandom(1.0), 0.0, 0.0 + rand.nextDouble(), 0.0);
+            int count = rand.nextInt(5) + 5;
+            double x = serverPlayer.getPosXRandom(2.0);
+            double y = serverPlayer.getPosYRandom();
+            double z = serverPlayer.getPosZRandom(2.0);
+
+            serverPlayer.getServerWorld().spawnParticle(serverPlayer, particle, true, x, y, z, count, 0.0, 1.0, 0.0,
+                    0.0);
         }
     }
 
