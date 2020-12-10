@@ -9,15 +9,15 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeCabinPools
 {
-    public static JigsawPattern taigaCabinPattern = JigsawPatternRegistry.func_244094_a(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin_start_pool"),
-            new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
+    public static JigsawPattern taigaCabinPattern = JigsawPatternRegistry
+            .func_244094_a(new JigsawPattern(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin_house"),
+                    new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.RIGID));
 
-    public static JigsawPattern forestCabinPattern = JigsawPatternRegistry.func_244094_a(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/overworld/forest_cabin"),
-            new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
+    public static JigsawPattern forestCabinPattern = JigsawPatternRegistry.func_244094_a(
+            new JigsawPattern(new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/overworld/forest_cabin"),
+                    new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.RIGID));
 
-    public static JigsawPattern crimsonCabinPattern = JigsawPatternRegistry.func_244094_a(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/nether/crimson_cabin"),
-            new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.TERRAIN_MATCHING));
+    public static JigsawPattern crimsonCabinPattern = JigsawPatternRegistry.func_244094_a(
+            new JigsawPattern(new ResourceLocation(VanillaExpansions.MOD_ID, "cabins/nether/crimson_cabin"),
+                    new ResourceLocation("empty"), ImmutableList.of(), JigsawPattern.PlacementBehaviour.RIGID));
 }

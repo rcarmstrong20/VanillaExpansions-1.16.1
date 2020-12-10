@@ -53,9 +53,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
@@ -68,6 +72,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -95,6 +100,7 @@ import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
+import rcarmstrong20.vanilla_expansions.core.VeStructure;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
@@ -534,7 +540,7 @@ public class VanillaExpansions
      * @param event    An instance of the current loot table event.
      * @param lootName The name of the loot table that should be added to.
      */
-    private void addPoolToTable(LootTableLoadEvent event, String lootName)
+    private static void addPoolToTable(LootTableLoadEvent event, String lootName)
     {
         String lootPath = "chests/" + lootName;
         ResourceLocation modLocation = new ResourceLocation(VanillaExpansions.MOD_ID, lootPath);
@@ -544,6 +550,43 @@ public class VanillaExpansions
         {
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(modLocation)).build());
         }
+    }
+
+    @SubscribeEvent
+    public void onLoad(final WorldEvent.Load event)
+    {
+        if (event.getWorld() instanceof ServerWorld)
+        {
+            ServerWorld serverWorld = (ServerWorld) event.getWorld();
+
+            // Don't add structures to superflat worlds.
+            if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator
+                    && serverWorld.getDimensionKey().equals(World.OVERWORLD))
+            {
+                return;
+            }
+
+            addSpacing(serverWorld, VeStructure.overworldCabin, 15, 10, 724628428);
+            addSpacing(serverWorld, VeStructure.netherCabin, 15, 10, 487422842);
+        }
+    }
+
+    /**
+     * @param serverWorld        Server side world
+     * @param structure          The structure to add.
+     * @param maxChunkSeperation The minimum chunk distance between spawning
+     *                           attempts.
+     * @param minChunkSeperation The maximum chunk distance between spawning
+     *                           attempts.
+     * @param structureSeed      The seed that is used to make sure that the
+     *                           structure is not spawned at the same position as
+     *                           another of this type.
+     */
+    private static void addSpacing(ServerWorld serverWorld, Structure<?> structure, int maxChunkSeperation,
+            int minChunkSeperation, int structureSeed)
+    {
+        serverWorld.getChunkProvider().getChunkGenerator().func_235957_b_().func_236195_a_().put(structure,
+                new StructureSeparationSettings(maxChunkSeperation, minChunkSeperation, structureSeed));
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -587,17 +630,22 @@ public class VanillaExpansions
         this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM, VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
         this.addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
-                VeFeatureGenConfig.enableCabinSpawns.get());
+                VeFeatureGenConfig.enableTaigaCabinSpawns.get());
+        this.addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin,
+                VeFeatureGenConfig.enableForestCabinSpawns.get());
+        this.addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin,
+                VeFeatureGenConfig.enableCrimsonCabinSpawns.get());
     }
 
     /**
+     * Adds a new feature to a category of biomes.
      *
      * @param event      An instance of the BiomeLoadingEvent.
      * @param category   The category of biomes to add this feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
-     * @param enable     If the config has this enabled this should evaluate to
-     *                   true.
+     * @param enable     A boolean from the config used to enable and disable this
+     *                   feature.
      */
     private void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
             ConfiguredFeature<?, ?> feature, boolean enable)
@@ -609,21 +657,20 @@ public class VanillaExpansions
     }
 
     /**
-     * Adds a new feature to a single specific existing biome using the minecraft
-     * name space.
+     * A helper method that only adds the feature to one biome.
      *
      * @param event      An instance of the BiomeLoadingEvent.
-     * @param biomeName  The name of the biome to add this feature to.
+     * @param biome      The biome's name to add the feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
-     * @param enable     If the config has this enabled this should evaluate to
-     *                   true.
+     * @param enable     A boolean from the config used to enable and disable this
+     *                   feature.
      */
     @SuppressWarnings("unused")
-    private void addFeature(BiomeLoadingEvent event, String biomeName, Decoration decoration,
+    private void addFeature(BiomeLoadingEvent event, String biome, Decoration decoration,
             ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        this.addFeature(event, Arrays.asList(biomeName), decoration, feature, enable);
+        this.addFeature(event, Arrays.asList(biome), decoration, feature, enable);
     }
 
     /**
@@ -631,11 +678,11 @@ public class VanillaExpansions
      * space.
      *
      * @param event      An instance of the BiomeLoadingEvent.
-     * @param biomes     The biomes to add the feature to.
+     * @param biomes     The biome names to add the feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
-     * @param enable     If the config has this enabled this should evaluate to
-     *                   true.
+     * @param enable     A boolean from the config used to enable and disable this
+     *                   feature.
      */
     private void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,
             ConfiguredFeature<?, ?> feature, boolean enable)
@@ -653,21 +700,64 @@ public class VanillaExpansions
     }
 
     /**
-     * Add a new structure that uses the village config to the spawn list for
-     * specific biomes.
+     * Adds a new structure to a category of biomes.
+     *
+     * @param event            An instance of the BiomeLoadingEvent.
+     * @param category         The category of biomes to add this structure to.
+     * @param structureFeature The structure to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this structure.
      */
-    private void addStructure(BiomeLoadingEvent event, Category category, StructureFeature<?, ?> configuredTaigaCabin,
+    private void addStructure(BiomeLoadingEvent event, Category category, StructureFeature<?, ?> structureFeature,
             boolean enable)
     {
         if (enable)
         {
             if (event.getCategory() == category)
             {
-                System.out.println("Added " + configuredTaigaCabin.field_236268_b_.getStructureName() + " to "
-                        + event.getName().toString());
-                event.getGeneration().getStructures().add(() -> configuredTaigaCabin);
+                event.getGeneration().getStructures().add(() -> structureFeature);
             }
         }
+    }
+
+    /**
+     * Adds a new structure to specific existing biomes using the minecraft name
+     * space.
+     *
+     * @param event            An instance of the BiomeLoadingEvent.
+     * @param biomes           The biome names to add the structure to.
+     * @param structureFeature The structure to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this structure.
+     */
+    private void addStructure(BiomeLoadingEvent event, List<String> biomes, StructureFeature<?, ?> structureFeature,
+            boolean enable)
+    {
+        if (enable)
+        {
+            for (String biome : biomes)
+            {
+                if (event.getName().equals(new ResourceLocation("minecraft:" + biome)))
+                {
+                    event.getGeneration().getStructures().add(() -> structureFeature);
+                }
+            }
+        }
+    }
+
+    /**
+     * A helper method that only adds the feature to one biome.
+     *
+     * @param event            An instance of the BiomeLoadingEvent.
+     * @param biome            The biome's name to add the structure to.
+     * @param structureFeature The structure to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this structure.
+     */
+    private void addStructure(BiomeLoadingEvent event, String biome, StructureFeature<?, ?> structureFeature,
+            boolean enable)
+    {
+        this.addStructure(event, Arrays.asList(biome), structureFeature, enable);
     }
 
     /**

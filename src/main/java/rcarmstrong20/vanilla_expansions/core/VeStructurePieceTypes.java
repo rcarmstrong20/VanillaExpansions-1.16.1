@@ -8,14 +8,14 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinPieces;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
     public static final Map<String, IStructurePieceType> STRUCTURE_PIECES = new HashMap<>();
 
-    public static IStructurePieceType cabinPiece = register("cabin_piece", VeCabinPieces.VePiece::new);
+    public static IStructurePieceType cabinPiece = register("cabin_piece", VeOverworldCabinPieces.VePiece::new);
 
     public static void register()
     {

@@ -9,7 +9,9 @@ public class VeFeatureGenConfig
     public static BooleanValue enableCranberryBushSpawns;
     public static BooleanValue enableWitchsCradleSpawns;
     public static BooleanValue enableHugePurpleMushroomSpawns;
-    public static BooleanValue enableCabinSpawns;
+    public static BooleanValue enableTaigaCabinSpawns;
+    public static BooleanValue enableForestCabinSpawns;
+    public static BooleanValue enableCrimsonCabinSpawns;
 
     public static BooleanValue enableVoidLakeSpawns;
     public static BooleanValue enableSnapdragonSpawns;
@@ -36,8 +38,17 @@ public class VeFeatureGenConfig
                 .translation("ve.configMushroom.enableBigPurpleMushroomSpawns").worldRestart()
                 .define("enable_big_purple_mushroom_spawns", true);
 
-        enableCabinSpawns = server.comment(compileOverworldComment("cabins"))
-                .translation("ve.configStructure.enableCabinSpawns").worldRestart().define("enable_cabin_spawns", true);
+        enableTaigaCabinSpawns = server.comment(compileOverworldComment("taiga cabins"))
+                .translation("ve.configStructure.enableTaigaCabinSpawns").worldRestart()
+                .define("enable_taiga_cabin_spawns", true);
+
+        enableForestCabinSpawns = server.comment(compileOverworldComment("forest cabins"))
+                .translation("ve.configStructure.enableForestCabinSpawns").worldRestart()
+                .define("enable_forest_cabin_spawns", true);
+
+        enableCrimsonCabinSpawns = server.comment(compileNetherComment("crimson cabins"))
+                .translation("ve.configStructure.enableCrimsonCabinSpawns").worldRestart()
+                .define("enable_crimson_cabin_spawns", true);
 
         server.pop();
 
@@ -57,6 +68,11 @@ public class VeFeatureGenConfig
     private static String compileOverworldComment(String name)
     {
         return compileComment(name, "overworld");
+    }
+
+    private static String compileNetherComment(String name)
+    {
+        return compileComment(name, "nether");
     }
 
     private static String compileEndComment(String name)

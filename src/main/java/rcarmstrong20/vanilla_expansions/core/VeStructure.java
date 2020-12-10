@@ -5,27 +5,30 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructure;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinStructure;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinStructure;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {
     public static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 
-    public static Structure<NoFeatureConfig> cabin = registerVillage("cabin",
-            new VeCabinStructure(NoFeatureConfig.field_236558_a_));
+    public static Structure<VillageConfig> overworldCabin = registerVillage("overworld_cabin",
+            new VeOverworldCabinStructure(VillageConfig.field_236533_a_));
+    public static Structure<VillageConfig> netherCabin = registerVillage("nether_cabin",
+            new VeNetherCabinStructure(VillageConfig.field_236533_a_));
 
     /**
      * Helper method for registering all structures
      */
-    private static Structure<NoFeatureConfig> registerVillage(String name, Structure<NoFeatureConfig> structure)
+    private static Structure<VillageConfig> registerVillage(String name, Structure<VillageConfig> structure)
     {
         VanillaExpansions.LOGGER.info("Structures registered.");
 
@@ -35,7 +38,7 @@ public class VeStructure
     }
 
     @SubscribeEvent
-    public static void registerBlocks(final RegistryEvent.Register<Structure<?>> event)
+    public static void registerStructures(final RegistryEvent.Register<Structure<?>> event)
     {
         STRUCTURES.forEach(structure -> event.getRegistry().register(structure));
         STRUCTURES.forEach(
@@ -43,7 +46,7 @@ public class VeStructure
         STRUCTURES.clear();
         // register();
 
-        VanillaExpansions.LOGGER.info("Blocks registered.");
+        VanillaExpansions.LOGGER.info("Structure registered.");
     }
 
     public static void register()
@@ -51,7 +54,9 @@ public class VeStructure
         // StructureSeperationSettings(max spawn attempts (chunks), min spawn attempts
         // (chunks), structure seed);
 
-        register(cabin, new StructureSeparationSettings(10, 5, 724628428), true);
+        register(overworldCabin, new StructureSeparationSettings(10, 5, 724628428), true);
+        // register(overworldCabin, new StructureSeparationSettings(10, 5, 724628428),
+        // true);
     }
 
     /**

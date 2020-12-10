@@ -15,7 +15,6 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
@@ -34,12 +33,13 @@ import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
  * see vanilla classes for different ways they can be used This particular class
  * layout is similar to what vanilla uses for more recent structures
  */
-public class VeCabinPieces
+public class VeNetherCabinPieces
 {
     public static void init(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> list,
             VillageConfig config)
     {
-        list.add(new VeCabinPieces.VePiece(templateManager, config.func_242810_c().get().getName(), pos, rotation));
+        list.add(new VeNetherCabinPieces.VePiece(templateManager, config.func_242810_c().get().getName(), pos,
+                rotation));
     }
 
     // Features
@@ -137,22 +137,41 @@ public class VeCabinPieces
                 ChunkGenerator chunkGenerator, Random random, MutableBoundingBox boundingBox, ChunkPos chunkPos,
                 BlockPos blockPos)
         {
-            float height = 0;
-            BlockPos structureSize = this.templatePosition.add(this.template.getSize().getX() - 1, 0,
-                    this.template.getSize().getZ() - 1);
+            BlockPos pos = this.findHeight(seedReader, blockPos);
 
-            for (BlockPos pos : BlockPos.getAllInBoxMutable(this.templatePosition, structureSize))
-            {
-                int k = seedReader.getHeight(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ());
-                height += k;
-            }
-
-            height = height / (this.template.getSize().getX() * this.template.getSize().getZ());
-
-            this.templatePosition = new BlockPos(this.templatePosition.getX(), height, this.templatePosition.getZ());
+            this.templatePosition = pos;
 
             return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
                     blockPos); // New method for create
+        }
+
+        private BlockPos findHeight(ISeedReader seedReader, BlockPos pos)
+        {
+
+            // BlockPos structureSize =
+            // this.templatePosition.add(this.template.getSize().getX() - 1, 0,
+            // this.template.getSize().getZ() - 1);
+
+            /*
+             * for (BlockPos pos : BlockPos.getAllInBoxMutable(this.templatePosition,
+             * structureSize)) { if (seedReader.getBlockState(pos).getBlock() != Blocks.AIR)
+             * { if (pos.getY() >= 128) // 128 is the height the ceiling in the nether. {
+             * return pos; } pos = pos.up(); } System.out.println("Found at " + pos.getY());
+             * return pos; }
+             */
+
+            return templatePosition;
+
+            /*
+             * while (seedReader.getBlockState(pos).getBlock() != Blocks.AIR) { if
+             * (pos.getY() >= 128) // 128 is the height the ceiling in the nether. { return
+             * pos; } pos = pos.up(); }
+             */
+
+            /*
+             * System.out.println( "Found height at " + pos.getY() + " " +
+             * seedReader.getBlockState(pos).getBlock().getRegistryName()); return pos;
+             */
         }
     }
 }
