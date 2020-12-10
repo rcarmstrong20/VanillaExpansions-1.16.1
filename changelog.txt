@@ -1,3 +1,38 @@
+Build: 1.16.4-35.1.10 - Sat Dec 05 20:07:14 GMT 2020
+	richard:
+		Make TEs invalidate capabilities when the chunk they are in unloads (#7529)
+		
+		Fixed LazyOptional potentially notifying invalidation listeners multiple times.
+
+=========
+Build: 1.16.4-35.1.9 - Sat Dec 05 20:01:00 GMT 2020
+	Cordonfreeman:
+		Fixed entity navigation to stop entities spinning - MC-94054 (#7520)
+
+=========
+Build: 1.16.4-35.1.8 - Sat Dec 05 19:52:56 GMT 2020
+	20846147+Unbekannt1998:
+		Fix wrong function call in BlockStateProvider::horizontalFaceBlock (#7514)
+
+=========
+Build: 1.16.4-35.1.7 - Sun Nov 29 02:11:08 GMT 2020
+	tterrag:
+		Fix datagen order of multipart conditions being unstable
+
+=========
+Build: 1.16.4-35.1.6 - Sat Nov 28 02:56:55 GMT 2020
+	35673674+alcatrazEscapee:
+		Fix forge config option for default world type not applying unless you change the default world type (#7521)
+
+=========
+Build: 1.16.4-35.1.5 - Fri Nov 27 23:57:23 GMT 2020
+	David Quintana:
+		Implement feature for mods to define new world types (#7448)
+		
+		* Mods can now register world types via a new forge registry, and optionally register a settings screen to tweak them.
+		  * The default world type for dedicated servers and singleplayer world creation is configurable via forge's common config.
+
+=========
 Build: 1.16.4-35.1.4 - Tue Nov 24 17:14:21 GMT 2020
 	csh2001331:
 		Fix dimType not encode to registries (#7513)
