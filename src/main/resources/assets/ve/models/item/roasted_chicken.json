@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
 	{
-        "layer0": "ve:item/turkey"
+        "layer0": "ve:item/roasted_chicken"
     }
 }
