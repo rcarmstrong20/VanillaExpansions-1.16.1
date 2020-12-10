@@ -394,8 +394,10 @@ public class VeBlocks
             () -> VeBlocks.packedSnowBlock.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
     public static Block packedSnowSlab = register("packed_snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
-    public static Block turkey = register("turkey", true, new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties
-            .create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(0.5F).sound(SoundType.SNOW)), 1);
+    public static Block roasted_chicken = register("roasted_chicken", true,
+            new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN)
+                    .hardnessAndResistance(0.5F).sound(SoundType.SNOW)),
+            1);
     public static Block glassOfDarkness = register("glass_of_darkness", true,
             new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
     public static Block purpleMushroom = register("purple_mushroom", true,
