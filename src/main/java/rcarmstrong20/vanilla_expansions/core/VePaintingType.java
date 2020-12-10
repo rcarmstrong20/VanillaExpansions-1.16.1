@@ -17,6 +17,7 @@ public class VePaintingType
     public static PaintingType netherWastes = register("nether_wastes", new PaintingType(16, 16));
     public static PaintingType starryNight = register("starry_night", new PaintingType(32, 32));
     public static PaintingType theScream = register("the_scream", new PaintingType(16, 16));
+    public static PaintingType rainsRustle = register("rains_rustle", new PaintingType(64, 48));
 
     public static PaintingType register(String name, PaintingType paintingType)
     {
