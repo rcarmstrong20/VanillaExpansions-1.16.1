@@ -1,8 +1,8 @@
 {
 	"__comment": "Designed by Rcarmstrong20 with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
 	"textures": {
-		"particle": "ve:block/turkey",
-		"turkey": "ve:block/turkey",
+		"particle": "ve:block/roasted_chicken",
+		"turkey": "ve:block/roasted_chicken",
 		"quartz": "block/quartz_block_top",
 		"bone": "block/bone_block_side"
 	},

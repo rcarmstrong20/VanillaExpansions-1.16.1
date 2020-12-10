@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:turkey"
+      "ve:roasted_chicken"
     ]
   },
   "criteria":
   {
-    "has_cooked_chicken":
+    "has_chicken":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:cooked_chicken"
+            "item": "minecraft:chicken"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:turkey"
+        "recipe": "ve:roasted_chicken"
       }
     }
   },
   "requirements":
   [
     [
-      "has_cooked_chicken",
+      "has_chicken",
       "has_the_recipe"
     ]
   ]
