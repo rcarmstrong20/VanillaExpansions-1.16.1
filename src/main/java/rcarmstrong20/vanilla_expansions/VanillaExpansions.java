@@ -110,6 +110,8 @@ import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
  *
  * @author Ryan
  *
+ *         The main mod class.
+ *
  */
 @Mod("ve")
 public class VanillaExpansions

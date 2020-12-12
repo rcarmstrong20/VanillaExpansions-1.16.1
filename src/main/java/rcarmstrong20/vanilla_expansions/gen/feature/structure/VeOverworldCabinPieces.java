@@ -3,6 +3,7 @@ package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
@@ -129,8 +130,8 @@ public class VeOverworldCabinPieces
         }
 
         /**
-         * Here is the magic place where blocks are added to the world Actually most of
-         * that is handled by the super method, for template structure pieces But
+         * Here is the magic place where blocks are added to the world. Actually most of
+         * that is handled by the super method, for template structure pieces. But
          * something that can be done here is setting the y-level of the structure.
          */
         @Override
@@ -148,14 +149,26 @@ public class VeOverworldCabinPieces
             {
                 int k = seedReader.getHeight(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ());
                 height += k;
-            }
 
-            height = height / (sizeX * sizeZ);
+                // Keeps the cabin from matching the land exactly in order to keep the cabin
+                // in one piece.
+                if (seedReader.getBlockState(pos.down()).getBlock() != Blocks.AIR)
+                {
+                    break;
+                }
+            }
 
             this.templatePosition = new BlockPos(this.templatePosition.getX(), height, this.templatePosition.getZ());
 
-            return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
-                    blockPos); // New method for create
+            if (seedReader.getFluidState(templatePosition.down()).isEmpty())
+            {
+                return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
+                        blockPos); // New method for create
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

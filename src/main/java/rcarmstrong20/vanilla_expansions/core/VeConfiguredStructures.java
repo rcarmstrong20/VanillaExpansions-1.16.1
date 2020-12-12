@@ -17,12 +17,12 @@ public class VeConfiguredStructures
 {
     public static final Map<String, StructureFeature<?, ?>> CONFIGURED_STRUCTURES = new HashMap<>();
 
-    public static StructureFeature<?, ?> configuredTaigaCabin = VeStructure.overworldCabin
-            .withConfiguration(new VillageConfig(() -> VeCabinPools.taigaCabinPattern, 2));
-    public static StructureFeature<?, ?> configuredForestCabin = VeStructure.overworldCabin
-            .withConfiguration(new VillageConfig(() -> VeCabinPools.forestCabinPattern, 2));
-    public static StructureFeature<?, ?> configuredCrimsonCabin = VeStructure.netherCabin
-            .withConfiguration(new VillageConfig(() -> VeCabinPools.crimsonCabinPattern, 2));
+    public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin",
+            VeStructure.overworldCabin.withConfiguration(new VillageConfig(() -> VeCabinPools.taigaCabinPattern, 2)));
+    public static StructureFeature<?, ?> configuredForestCabin = register("forest_cabin",
+            VeStructure.overworldCabin.withConfiguration(new VillageConfig(() -> VeCabinPools.forestCabinPattern, 2)));
+    public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin",
+            VeStructure.netherCabin.withConfiguration(new VillageConfig(() -> VeCabinPools.crimsonCabinPattern, 2)));
 
     /**
      * @param name      The name of this configured structure.
