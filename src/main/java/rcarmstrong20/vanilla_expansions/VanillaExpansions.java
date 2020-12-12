@@ -607,35 +607,35 @@ public class VanillaExpansions
         final List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
                 "tall_birch_forest", "tall_birch_hills");
 
-        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES,
-                VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
-        this.addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
+        addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE,
+                VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
+        addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
                 VeOreGenConfig.enableNetherRubyOreSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED,
                 VeFeatureGenConfig.enableBlueberryBushSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableBlueberryBushSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED,
                 VeFeatureGenConfig.enableCranberryBushSpawns.get());
-        this.addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableCranberryBushSpawns.get());
-        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        this.addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
+        addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        this.addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE,
+        addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE,
                 VeFeatureGenConfig.enableVoidLakeSpawns.get());
-        this.addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
+        addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                 VeFeatureGenConfig.enableSnapdragonSpawns.get());
-        this.addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM, VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
-        this.addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
+        addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM,
+                VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
+        addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
                 VeFeatureGenConfig.enableTaigaCabinSpawns.get());
-        this.addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin,
+        addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin,
                 VeFeatureGenConfig.enableForestCabinSpawns.get());
-        this.addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin,
+        addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin,
                 VeFeatureGenConfig.enableCrimsonCabinSpawns.get());
     }
 
@@ -649,7 +649,7 @@ public class VanillaExpansions
      * @param enable     A boolean from the config used to enable and disable this
      *                   feature.
      */
-    private void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
+    private static void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
             ConfiguredFeature<?, ?> feature, boolean enable)
     {
         if (event.getCategory() == category && enable)
@@ -669,10 +669,10 @@ public class VanillaExpansions
      *                   feature.
      */
     @SuppressWarnings("unused")
-    private void addFeature(BiomeLoadingEvent event, String biome, Decoration decoration,
+    private static void addFeature(BiomeLoadingEvent event, String biome, Decoration decoration,
             ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        this.addFeature(event, Arrays.asList(biome), decoration, feature, enable);
+        addFeature(event, Arrays.asList(biome), decoration, feature, enable);
     }
 
     /**
@@ -686,7 +686,7 @@ public class VanillaExpansions
      * @param enable     A boolean from the config used to enable and disable this
      *                   feature.
      */
-    private void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,
+    private static void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,
             ConfiguredFeature<?, ?> feature, boolean enable)
     {
         if (enable)
@@ -710,8 +710,8 @@ public class VanillaExpansions
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private void addStructure(BiomeLoadingEvent event, Category category, StructureFeature<?, ?> structureFeature,
-            boolean enable)
+    private static void addStructure(BiomeLoadingEvent event, Category category,
+            StructureFeature<?, ?> structureFeature, boolean enable)
     {
         if (enable)
         {
@@ -732,8 +732,8 @@ public class VanillaExpansions
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private void addStructure(BiomeLoadingEvent event, List<String> biomes, StructureFeature<?, ?> structureFeature,
-            boolean enable)
+    private static void addStructure(BiomeLoadingEvent event, List<String> biomes,
+            StructureFeature<?, ?> structureFeature, boolean enable)
     {
         if (enable)
         {
@@ -756,10 +756,10 @@ public class VanillaExpansions
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private void addStructure(BiomeLoadingEvent event, String biome, StructureFeature<?, ?> structureFeature,
+    private static void addStructure(BiomeLoadingEvent event, String biome, StructureFeature<?, ?> structureFeature,
             boolean enable)
     {
-        this.addStructure(event, Arrays.asList(biome), structureFeature, enable);
+        addStructure(event, Arrays.asList(biome), structureFeature, enable);
     }
 
     /**
