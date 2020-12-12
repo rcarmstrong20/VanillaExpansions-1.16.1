@@ -113,19 +113,21 @@ public class VeOverworldCabinPieces
         protected void handleDataMarker(String function, BlockPos pos, IServerWorld world, Random rand,
                 MutableBoundingBox boundingBox)
         {
-            if ("taiga_cabin_chest".equals(function))
+            switch (function)
             {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
-            }
-            else if ("forest_cabin_chest".equals(function))
-            {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
-            }
-            else if ("cabin_flowers".equals(function))
-            {
-                world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
+                case "taiga_cabin_chest":
+                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
+                            new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
+                    break;
+                case "forest_cabin_chest":
+                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
+                            new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
+                    break;
+                case "cabin_flowers":
+                    world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
+                    break;
+                default:
+                    break;
             }
         }
 
