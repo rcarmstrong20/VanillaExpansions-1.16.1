@@ -272,8 +272,12 @@
   "item.ve.totem_of_the_brute_ii": "Totem of the Brute II",
   "item.ve.totem_of_the_brute_iii": "Totem of the Brute III",
   
+  "advancements.ve.story.root.title": "Vanilla expansions",
+  "advancements.ve.story.root.description": "A mod designed to enhance vanilla gameplay",
   "advancements.ve.story.craft_witchs_cradle_soup.title": "Is this even edible!?",
   "advancements.ve.story.craft_witchs_cradle_soup.description": "Craft witchs cradle soup from a blood vile, a witchs cradle branch, and a bowl",
+  "advancements.ve.story.find_nether_cabin.title": "A long way from home",
+  "advancements.ve.story.find_nether_cabin.description": "Visit a cabin from the nether",
   
   "liquid.ve.dark_matter": "Dark Matter",
   
