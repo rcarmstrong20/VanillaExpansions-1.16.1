@@ -5,17 +5,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -25,7 +22,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -69,24 +65,39 @@ public class VeColoredCampfireBlock extends CampfireBlock
      * Called when the player right-clicks a block.
      */
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-            Hand handIn, BlockRayTraceResult blockRayTradeResult)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn,
+            Hand handIn, BlockRayTraceResult hit)
     {
         if (state.get(LIT))
         {
             VeColoredCampfireTileEntity campfiretileentity = (VeColoredCampfireTileEntity) worldIn.getTileEntity(pos);
-            ItemStack itemstack = player.getHeldItem(handIn);
+            ItemStack itemstack = playerIn.getHeldItem(handIn);
             Optional<CampfireCookingRecipe> optional = campfiretileentity.findMatchingRecipe(itemstack);
 
             if (optional.isPresent())
             {
                 if (!worldIn.isRemote && campfiretileentity.addItem(
-                        player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime()))
+                        playerIn.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime()))
                 {
-                    player.addStat(Stats.INTERACT_WITH_CAMPFIRE);
+                    playerIn.addStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ActionResultType.SUCCESS;
                 }
                 return ActionResultType.CONSUME;
+            }
+        }
+        else
+        {
+            ItemStack heldItem = playerIn.getHeldItem(handIn);
+
+            if (!state.get(WATERLOGGED) && heldItem.getItem() == Items.FLINT_AND_STEEL)
+            {
+                heldItem.damageItem(1, playerIn, (player) ->
+                {
+                    player.sendBreakAnimation(handIn);
+                });
+                worldIn.setBlockState(pos, state.with(LIT, true));
+                playerIn.addStat(Stats.INTERACT_WITH_CAMPFIRE);
+                return ActionResultType.SUCCESS;
             }
         }
         return ActionResultType.PASS;
@@ -108,34 +119,6 @@ public class VeColoredCampfireBlock extends CampfireBlock
                 InventoryHelper.dropItems(worldIn, pos, campfireTileEntity.getInventory());
             }
             super.onReplaced(state, worldIn, pos, newState, isMoving);
-        }
-    }
-
-    @Override
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
-    {
-        if (!state.get(BlockStateProperties.WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
-        {
-            boolean flag = state.get(LIT);
-            if (flag)
-            {
-                if (!worldIn.isRemote())
-                {
-                    worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
-                            SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-                extinguish(worldIn, pos, state);
-            }
-
-            worldIn.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(WATERLOGGED, Boolean.valueOf(true))
-                    .with(LIT, Boolean.valueOf(false)), 3);
-            worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(),
-                    fluidStateIn.getFluid().getTickRate(worldIn));
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 
