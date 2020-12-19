@@ -174,7 +174,18 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     {
         Random random = new Random();
 
-        if (!(entity instanceof ItemEntity))
+        if (entity instanceof ItemEntity)
+        {
+            // Make items float on dark matter with firework particles.
+            if (random.nextInt(10) == 0)
+            {
+                world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
+                        entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
+            }
+
+            entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D);
+        }
+        else
         {
             double xMot = entity.getMotion().getX();
             double yMot = entity.getMotion().getY();
@@ -196,29 +207,6 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
                         entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
             }
             entity.fallDistance = 0;
-        }
-        else
-        {
-            // Make items float on void with firework particles.
-
-            if (random.nextInt(10) == 0)
-            {
-                world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
-                        entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-            }
-            /*
-             * if (world.getFluidState(pos.up()).isTagged(VeFluidTags.darkMatter)) {
-             *
-             * } else { entity.setMotion(0.0D, entity.getMotion().getY() + 0.01D, 0.0D); }
-             */
-
-            entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D);
-
-            /*
-             * if (entity.getMotion().getY() >= 0) {
-             *
-             * }
-             */
         }
     }
 }
