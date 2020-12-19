@@ -18,7 +18,6 @@ public class VeSoundEvents
     public static SoundEvent blockMushroomBounce = register("block.mushroom_bounce");
     public static SoundEvent blockDarkMatterAmbient = register("block.dark_matter_ambient");
     public static SoundEvent blockDarkMatterHardens = register("block.dark_matter_hardens");
-    public static SoundEvent blockCampfireDyed = register("block.campfire_dyed");
     public static SoundEvent uiWoodcutterTakeResult = register("ui.woodcutter.take_result");
 
     /**
