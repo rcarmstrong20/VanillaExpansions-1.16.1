@@ -25,7 +25,14 @@ import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
+import rcarmstrong20.vanilla_expansions.config.VeOreDataGenConfig;
 
+/**
+ * A class used to store the feature configurations.
+ *
+ * @author Ryan
+ *
+ */
 public class VeConfiguredFeatures
 {
     public static final Map<String, ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = new HashMap<>();
@@ -33,13 +40,15 @@ public class VeConfiguredFeatures
     public static final ConfiguredFeature<?, ?> NETHER_SMOKY_QUARTZ_ORE = register("nether_smoky_quartz_ore",
             Feature.ORE
                     .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
-                            VeConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE, 14))
-                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square().func_242731_b(16));
+                            VeConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE,
+                            VeOreDataGenConfig.netherSmokyQuartzOreVeinSize.get()))
+                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
+                    .func_242731_b(VeOreDataGenConfig.netherSmokyQuartzOreSpread.get()));
     public static final ConfiguredFeature<?, ?> NETHER_RUBY_ORE = register("nether_ruby_ore",
-            Feature.ORE
-                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
-                            VeConfiguredFeatures.States.NETHER_RUBY_ORE, 3))
-                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square().func_242731_b(7));
+            Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
+                    VeConfiguredFeatures.States.NETHER_RUBY_ORE, VeOreDataGenConfig.netherRubyOreVeinSize.get()))
+                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
+                    .func_242731_b(VeOreDataGenConfig.netherRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
             .withConfiguration(VeConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",
@@ -97,6 +106,12 @@ public class VeConfiguredFeatures
         return feature;
     }
 
+    /**
+     * A sub-class used to store some of the more complex feature config.
+     *
+     * @author Ryan
+     *
+     */
     public static final class Configs
     {
         public static final BlockClusterFeatureConfig BLUEBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
@@ -122,6 +137,12 @@ public class VeConfiguredFeatures
                 new SimpleBlockStateProvider(VeConfiguredFeatures.States.MUSHROOM_STEM), 2);
     }
 
+    /**
+     * A sub-class used to store block states used in the feature configurations.
+     *
+     * @author Ryan
+     *
+     */
     public static final class States
     {
         protected static final BlockState DARK_MATTER = VeBlocks.darkMatter.getDefaultState();

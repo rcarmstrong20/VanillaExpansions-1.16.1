@@ -21,7 +21,7 @@ public class VeConfig
 
     static
     {
-        VeOreGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VeOreDataGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VeCropConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VeFeatureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VeEntityConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
