@@ -15,7 +15,6 @@ import net.minecraft.block.BeetrootBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
@@ -25,7 +24,6 @@ import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
@@ -36,23 +34,15 @@ import net.minecraft.loot.TableLootEntry;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
-import net.minecraft.tileentity.CampfireTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -92,14 +82,12 @@ import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
-import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredStructures;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
-import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.core.VeStructure;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
@@ -157,7 +145,7 @@ public class VanillaExpansions
     /**
      * Called exclusively on the client.
      *
-     * @param event Called on client setup.
+     * @param event Called on client setup using Dist.CLIENT.
      */
     private void clientRegistries(final FMLClientSetupEvent event)
     {
@@ -401,27 +389,18 @@ public class VanillaExpansions
     @SubscribeEvent
     public void onRightClickBlock(final RightClickBlock event)
     {
-        // General variables
         BlockPos pos = event.getPos();
         World world = event.getWorld();
-
-        // Block and items
         BlockState worldState = event.getWorld().getBlockState(pos);
         ItemStack itemStack = event.getItemStack();
-        TileEntity tileEntity = event.getWorld().getTileEntity(pos);
-
-        // Crop age properties
         IntegerProperty cropsAge = CropsBlock.AGE;
         IntegerProperty netherWartAge = NetherWartBlock.AGE;
         IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
         IntegerProperty cocoaAge = CocoaBlock.AGE;
 
-        // Campfire properties
-        BooleanProperty isLit = CampfireBlock.LIT;
-
         if (!event.getWorld().isRemote())
         {
-            if (VeCropConfig.enableRightClickHarvesting.get() && worldState.getBlock() instanceof CropsBlock
+            if (VeCropConfig.enableSmartHarvest.get() && worldState.getBlock() instanceof CropsBlock
                     && itemStack.getItem() != Items.BONE_MEAL)
             {
                 if (worldState.getBlock() instanceof BeetrootBlock)
@@ -454,38 +433,6 @@ public class VanillaExpansions
                 if (worldState.get(cocoaAge) == getMaxAge(cocoaAge))
                 {
                     resetCrop(worldState, world, pos, cocoaAge);
-                    event.setResult(Result.ALLOW);
-                    event.setCanceled(true);
-                }
-            }
-            else if (worldState.getBlock() == Blocks.CAMPFIRE && tileEntity instanceof CampfireTileEntity)
-            {
-                Map<Item, Block> dyeToCampfire = (new Builder<Item, Block>())
-                        .put(Items.WHITE_DYE, VeBlocks.whiteCampfire).put(Items.ORANGE_DYE, VeBlocks.orangeCampfire)
-                        .put(Items.MAGENTA_DYE, VeBlocks.magentaCampfire)
-                        .put(Items.LIGHT_BLUE_DYE, VeBlocks.lightBlueCampfire)
-                        .put(Items.YELLOW_DYE, VeBlocks.yellowCampfire).put(Items.LIME_DYE, VeBlocks.limeCampfire)
-                        .put(Items.PINK_DYE, VeBlocks.pinkCampfire).put(Items.GRAY_DYE, VeBlocks.grayCampfire)
-                        .put(Items.LIGHT_GRAY_DYE, VeBlocks.lightGrayCampfire)
-                        .put(Items.CYAN_DYE, VeBlocks.cyanCampfire).put(Items.PURPLE_DYE, VeBlocks.purpleCampfire)
-                        .put(Items.BLUE_DYE, VeBlocks.blueCampfire).put(Items.BROWN_DYE, VeBlocks.brownCampfire)
-                        .put(Items.GREEN_DYE, VeBlocks.greenCampfire).put(Items.RED_DYE, VeBlocks.redCampfire)
-                        .put(Items.BLACK_DYE, VeBlocks.blackCampfire).build();
-
-                CampfireTileEntity campfireTileEntity = (CampfireTileEntity) tileEntity;
-                NonNullList<ItemStack> campfireInventory = campfireTileEntity.getInventory();
-                Direction currentFacing = worldState.get(CampfireBlock.FACING);
-
-                // Only convert if the campfire is lit, the player is holding one of the dyes,
-                // and the campfire's inventory is empty.
-                if (worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem())
-                        && campfireInventory.get(0) == ItemStack.EMPTY)
-                {
-                    world.playSound((PlayerEntity) null, pos, VeSoundEvents.blockCampfireDyed, SoundCategory.BLOCKS,
-                            1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-                    Block.replaceBlock(worldState, dyeToCampfire.get(itemStack.getItem()).getDefaultState()
-                            .with(CampfireBlock.FACING, currentFacing), world, pos, 3);
-                    itemStack.shrink(1);
                     event.setResult(Result.ALLOW);
                     event.setCanceled(true);
                 }
@@ -594,23 +541,15 @@ public class VanillaExpansions
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onLoadBiome(final BiomeLoadingEvent event)
     {
-        final List<String> endCityBiomes = Arrays.asList("end_barrens", "end_highlands", "end_midlands",
-                "small_end_islands");
-        final List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
-
-        final List<String> forestBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
-                "tall_birch_forest", "tall_birch_hills", "flower_forest");
-        final List<RegistryKey<Biome>> taigaBiomes = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS,
-                Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS,
-                Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS,
-                Biomes.SNOWY_TAIGA_MOUNTAINS);
-        final List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
+        List<String> endCityBiomes = Arrays.asList("end_barrens", "end_highlands", "end_midlands", "small_end_islands");
+        List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
+        List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
                 "tall_birch_forest", "tall_birch_hills");
 
         addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE,
-                VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get());
+                VeFeatureGenConfig.enableNetherSmokyQuartzOreSpawns.get());
         addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
-                VeOreGenConfig.enableNetherRubyOreSpawns.get());
+                VeFeatureGenConfig.enableNetherRubyOreSpawns.get());
         addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
                 VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED,
                 VeFeatureGenConfig.enableBlueberryBushSpawns.get());
@@ -628,7 +567,7 @@ public class VanillaExpansions
         addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE,
                 VeFeatureGenConfig.enableVoidLakeSpawns.get());
         addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
-                VeFeatureGenConfig.enableSnapdragonSpawns.get());
+                VeFeatureGenConfig.enableSnapdragonAndEnderGrassSpawns.get());
         addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM,
                 VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
         addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
@@ -642,7 +581,7 @@ public class VanillaExpansions
     /**
      * Adds a new feature to a category of biomes.
      *
-     * @param event      An instance of the BiomeLoadingEvent.
+     * @param event      The biome loading event to use.
      * @param category   The category of biomes to add this feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
@@ -661,7 +600,7 @@ public class VanillaExpansions
     /**
      * A helper method that only adds the feature to one biome.
      *
-     * @param event      An instance of the BiomeLoadingEvent.
+     * @param event      The biome loading event to use.
      * @param biome      The biome's name to add the feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
@@ -679,7 +618,7 @@ public class VanillaExpansions
      * Adds a new feature to specific existing biomes using the minecraft name
      * space.
      *
-     * @param event      An instance of the BiomeLoadingEvent.
+     * @param event      The biome loading event to use.
      * @param biomes     The biome names to add the feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
@@ -704,7 +643,7 @@ public class VanillaExpansions
     /**
      * Adds a new structure to a category of biomes.
      *
-     * @param event            An instance of the BiomeLoadingEvent.
+     * @param event            The biome loading event to use.
      * @param category         The category of biomes to add this structure to.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
@@ -726,7 +665,7 @@ public class VanillaExpansions
      * Adds a new structure to specific existing biomes using the minecraft name
      * space.
      *
-     * @param event            An instance of the BiomeLoadingEvent.
+     * @param event            The biome loading event to use.
      * @param biomes           The biome names to add the structure to.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
@@ -750,7 +689,7 @@ public class VanillaExpansions
     /**
      * A helper method that only adds the feature to one biome.
      *
-     * @param event            An instance of the BiomeLoadingEvent.
+     * @param event            The biome loading event to use.
      * @param biome            The biome's name to add the structure to.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
@@ -825,24 +764,24 @@ public class VanillaExpansions
 
         // Used to add functionality for growing snapdragons on end stone when using
         // bone meal.
-        if (event.getBlock().getBlock() == Blocks.END_STONE)
+        if (VeBlockTags.end_bone_mealable.contains(event.getBlock().getBlock()))
         {
-            if (!world.isRemote) // Only place the snapdragon blocks on the server
+            if (!world.isRemote) // Only place the snapdragon blocks server side.
             {
                 for (int i = 0; i < 128; ++i)
                 {
                     BlockPos blockpos = pos;
-                    BlockState blockstate = VeBlocks.snapdragon.getDefaultState();
 
                     for (int j = 0; j < i / 16; ++j)
                     {
                         blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2,
                                 random.nextInt(3) - 1);
 
-                        if (world.getBlockState(blockpos.down()).getBlock() == Blocks.END_STONE
+                        if (VeBlockTags.end_bone_mealable.contains(world.getBlockState(blockpos.down()).getBlock())
                                 && isAir(world.getBlockState(blockpos)))
                         {
-                            world.setBlockState(blockpos, blockstate);
+                            world.setBlockState(blockpos,
+                                    VeBlockTags.end_bone_meal_plants.getRandomElement(random).getDefaultState());
                         }
                     }
                 }
@@ -851,11 +790,20 @@ public class VanillaExpansions
         }
     }
 
+    /**
+     * @param state The block state to check.
+     * @return true if the block state's material is air.
+     */
     public static boolean isAir(BlockState state)
     {
         return state.getMaterial() == Material.AIR;
     }
 
+    /**
+     * @param state The block state to check.
+     * @return true if the block state's material matches one of the vanilla liquid
+     *         materials.
+     */
     public static boolean isLiquid(BlockState state)
     {
         return state.getMaterial() == Material.WATER || state.getMaterial() == Material.LAVA;

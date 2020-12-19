@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:white_campfire",
+    "ve:orange_campfire",
+    "ve:magenta_campfire",
+    "ve:light_blue_campfire",
+    "ve:yellow_campfire",
+    "ve:lime_campfire",
+    "ve:pink_campfire",
+    "ve:gray_campfire",
+    "ve:light_gray_campfire",
+    "ve:cyan_campfire",
+    "ve:purple_campfire",
+    "ve:blue_campfire",
+    "ve:brown_campfire",
+    "ve:green_campfire",
+    "ve:red_campfire",
+    "ve:black_campfire"
+  ]
+}

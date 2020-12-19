@@ -9,7 +9,6 @@ import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.state.StateContainer.Builder;
@@ -68,36 +67,23 @@ public class VeColoredCampfireBlock extends CampfireBlock
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn,
             Hand handIn, BlockRayTraceResult hit)
     {
-        if (state.get(LIT))
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        if (isLit(state) && tileEntity instanceof VeColoredCampfireTileEntity)
         {
-            VeColoredCampfireTileEntity campfiretileentity = (VeColoredCampfireTileEntity) worldIn.getTileEntity(pos);
-            ItemStack itemstack = playerIn.getHeldItem(handIn);
-            Optional<CampfireCookingRecipe> optional = campfiretileentity.findMatchingRecipe(itemstack);
+            VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
+            ItemStack itemStack = playerIn.getHeldItem(handIn);
+            Optional<CampfireCookingRecipe> optional = campfireTileEntity.findMatchingRecipe(itemStack);
 
             if (optional.isPresent())
             {
-                if (!worldIn.isRemote && campfiretileentity.addItem(
-                        playerIn.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime()))
+                if (!worldIn.isRemote && campfireTileEntity.addItem(
+                        playerIn.abilities.isCreativeMode ? itemStack.copy() : itemStack, optional.get().getCookTime()))
                 {
                     playerIn.addStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ActionResultType.SUCCESS;
                 }
                 return ActionResultType.CONSUME;
-            }
-        }
-        else
-        {
-            ItemStack heldItem = playerIn.getHeldItem(handIn);
-
-            if (!state.get(WATERLOGGED) && heldItem.getItem() == Items.FLINT_AND_STEEL)
-            {
-                heldItem.damageItem(1, playerIn, (player) ->
-                {
-                    player.sendBreakAnimation(handIn);
-                });
-                worldIn.setBlockState(pos, state.with(LIT, true));
-                playerIn.addStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return ActionResultType.SUCCESS;
             }
         }
         return ActionResultType.PASS;
@@ -111,11 +97,11 @@ public class VeColoredCampfireBlock extends CampfireBlock
     {
         if (state.getBlock() != newState.getBlock())
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof VeColoredCampfireTileEntity)
+            if (tileEntity instanceof VeColoredCampfireTileEntity)
             {
-                VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileentity;
+                VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
                 InventoryHelper.dropItems(worldIn, pos, campfireTileEntity.getInventory());
             }
             super.onReplaced(state, worldIn, pos, newState, isMoving);
