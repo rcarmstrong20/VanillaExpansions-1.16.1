@@ -1,5 +1,7 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
+import java.util.Random;
+
 import com.mojang.serialization.Codec;
 
 import net.minecraft.util.Rotation;
@@ -12,22 +14,25 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.feature.structure.JigsawStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class VeNetherCabinStructure extends Structure<VillageConfig>
+public class VeNetherCabinStructure extends JigsawStructure
 {
+    public static final int y = new Random().nextInt(25);
+
     public VeNetherCabinStructure(Codec<VillageConfig> codec)
     {
-        super(codec);
+        super(codec, 0, true, false);
     }
 
     @Override
-    protected boolean func_230363_a_(ChunkGenerator p_230363_1_, BiomeProvider p_230363_2_, long p_230363_3_,
-            SharedSeedRandom sharedSeedRandom, int p_230363_6_, int p_230363_7_, Biome p_230363_8_,
-            ChunkPos p_230363_9_, VillageConfig p_230363_10_)
+    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider biomeProvider, long p_230363_3_,
+            SharedSeedRandom sharedSeedRandom, int p_230363_6_, int p_230363_7_, Biome biome, ChunkPos pos,
+            VillageConfig config)
     {
         return sharedSeedRandom.nextInt(5) >= 2;
     }
@@ -62,6 +67,9 @@ public class VeNetherCabinStructure extends Structure<VillageConfig>
             Rotation rotation = Rotation.randomRotation(this.rand);
 
             VeNetherCabinPieces.init(templateManager, blockPos, rotation, this.components, structureConfig);
+
+            this.components.forEach(piece -> piece.offset(0, 1, 0));
+            this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
 
             this.recalculateStructureSize();
         }

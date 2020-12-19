@@ -3,8 +3,9 @@ package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -111,25 +112,21 @@ public class VeNetherCabinPieces
         protected void handleDataMarker(String function, BlockPos pos, IServerWorld world, Random rand,
                 MutableBoundingBox boundingBox)
         {
-            if ("taiga_cabin_chest".equals(function))
+            switch (function)
             {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
-            }
-            else if ("forest_cabin_chest".equals(function))
-            {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
-            }
-            else if ("cabin_flowers".equals(function))
-            {
-                world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
+                case "crimson_cabin_chest":
+                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
+                            new ResourceLocation(VanillaExpansions.MOD_ID, "chests/crimson_cabin"));
+                default:
+                    break;
             }
         }
 
         /**
-         * Here is the magic place where blocks are added to the world Actually most of
-         * that is handled by the super method, for template structure pieces But
+         * Note: This is a new create method for 1.16.
+         *
+         * Here is the magic place where blocks are added to the world. Actually most of
+         * that is handled by the super method, for template structure pieces. But
          * something that can be done here is setting the y-level of the structure.
          */
         @Override
@@ -137,41 +134,58 @@ public class VeNetherCabinPieces
                 ChunkGenerator chunkGenerator, Random random, MutableBoundingBox boundingBox, ChunkPos chunkPos,
                 BlockPos blockPos)
         {
-            BlockPos pos = this.findHeight(seedReader, blockPos);
+            // Calculate the height for the cabin and generate the structure.
+            int sizeX = this.template.transformedSize(this.rotation).getX();
+            int sizeZ = this.template.transformedSize(this.rotation).getZ();
+            BlockPos structureSize = this.templatePosition.add(sizeX - 1, 0, sizeZ - 1);
+            boolean foundBlock = false;
+            Block atBlock;
+            Block underBlock;
 
-            this.templatePosition = pos;
+            while (this.templatePosition.getY() <= 128)
+            {
+                for (BlockPos pos : BlockPos.getAllInBoxMutable(this.templatePosition, structureSize))
+                {
+                    atBlock = seedReader.getBlockState(pos).getBlock();
+                    underBlock = seedReader.getBlockState(pos.down()).getBlock();
 
-            return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
-                    blockPos); // New method for create
-        }
+                    if (atBlock == Blocks.AIR && underBlock != Blocks.AIR)
+                    {
+                        foundBlock = true;
+                        break;
+                    }
+                    else
+                    {
+                        pos = pos.up();
+                    }
+                }
 
-        private BlockPos findHeight(ISeedReader seedReader, BlockPos pos)
-        {
+                if (foundBlock)
+                {
+                    break;
+                }
+                else
+                {
+                    this.templatePosition = this.templatePosition.up();
+                }
+            }
 
-            // BlockPos structureSize =
-            // this.templatePosition.add(this.template.getSize().getX() - 1, 0,
-            // this.template.getSize().getZ() - 1);
+            if (this.templatePosition.getY() == 128)
+            {
+                VanillaExpansions.LOGGER.info("Spawned nether cabin on the roof.");
+                return false; // Spawned on the roof of the nether since a suitable y was not found.
+            }
+            else
+            {
+                VanillaExpansions.LOGGER.info("Generated at x: " + this.templatePosition.getX() + ", y: "
+                        + this.templatePosition.getY() + ", z: " + this.templatePosition.getZ() + "."); // The location
+                                                                                                        // of the
+                                                                                                        // new spawned
+                                                                                                        // cabin.
 
-            /*
-             * for (BlockPos pos : BlockPos.getAllInBoxMutable(this.templatePosition,
-             * structureSize)) { if (seedReader.getBlockState(pos).getBlock() != Blocks.AIR)
-             * { if (pos.getY() >= 128) // 128 is the height the ceiling in the nether. {
-             * return pos; } pos = pos.up(); } System.out.println("Found at " + pos.getY());
-             * return pos; }
-             */
-
-            return templatePosition;
-
-            /*
-             * while (seedReader.getBlockState(pos).getBlock() != Blocks.AIR) { if
-             * (pos.getY() >= 128) // 128 is the height the ceiling in the nether. { return
-             * pos; } pos = pos.up(); }
-             */
-
-            /*
-             * System.out.println( "Found height at " + pos.getY() + " " +
-             * seedReader.getBlockState(pos).getBlock().getRegistryName()); return pos;
-             */
+                return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
+                        blockPos); // New method for create
+            }
         }
     }
 }
