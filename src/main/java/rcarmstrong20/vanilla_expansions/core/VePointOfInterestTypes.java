@@ -20,7 +20,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VePointOfInterestTypes
 {
-    private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
+    private static final List<PointOfInterestType> POI_TYPES = new ArrayList<>();
 
     public static PointOfInterestType lumberjack = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
 
@@ -38,7 +38,7 @@ public class VePointOfInterestTypes
     private static PointOfInterestType register(String name, PointOfInterestType pointOfInterest)
     {
         pointOfInterest.setRegistryName(VanillaExpansions.MOD_ID, name);
-        POINT_OF_INTEREST_TYPES.add(pointOfInterest);
+        POI_TYPES.add(pointOfInterest);
         return pointOfInterest;
     }
 
@@ -50,7 +50,7 @@ public class VePointOfInterestTypes
         {
             Method func_221052_a = ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "func_221052_a",
                     PointOfInterestType.class);
-            POINT_OF_INTEREST_TYPES.forEach(poi ->
+            POI_TYPES.forEach(poi ->
             {
                 try
                 {
@@ -66,6 +66,10 @@ public class VePointOfInterestTypes
         {
             e.printStackTrace();
         }
+
+        // We always have to clear after registry to maintain a single instance of this
+        // object.
+        POI_TYPES.clear();
 
         VanillaExpansions.LOGGER.info("Point of Interests registered.");
     }
