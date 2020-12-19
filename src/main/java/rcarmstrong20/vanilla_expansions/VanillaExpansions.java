@@ -452,7 +452,7 @@ public class VanillaExpansions
      * @param pos   The position for the crop to harvest.
      * @param age   The age property for this crop.
      */
-    private void resetCrop(BlockState state, World world, BlockPos pos, IntegerProperty age)
+    private static void resetCrop(BlockState state, World world, BlockPos pos, IntegerProperty age)
     {
         Block.replaceBlock(state, Blocks.AIR.getDefaultState(), world, pos, 1); // Note: If the replacement block is
                                                                                 // anything but air the blocks don't
