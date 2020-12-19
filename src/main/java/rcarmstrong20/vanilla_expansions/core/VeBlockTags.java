@@ -8,6 +8,8 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeBlockTags
 {
+    public static ITag<Block> end_bone_mealable = VeBlockTags.makeWrapperTag("end_bone_mealable");
+    public static ITag<Block> end_bone_meal_plants = VeBlockTags.makeWrapperTag("end_bone_meal_plants");
     public static ITag<Block> overworld_plantable = VeBlockTags.makeWrapperTag("overworld_plantable");
     public static ITag<Block> nether_plantable = VeBlockTags.makeWrapperTag("nether_plantable");
     public static ITag<Block> end_plantable = VeBlockTags.makeWrapperTag("end_plantable");
