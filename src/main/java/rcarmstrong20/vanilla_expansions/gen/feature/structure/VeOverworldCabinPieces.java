@@ -3,10 +3,22 @@ package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BedBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.merchant.villager.VillagerData;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.villager.VillagerType;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.properties.BedPart;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -59,7 +71,7 @@ public class VeOverworldCabinPieces
         public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos,
                 Rotation rotation)
         {
-            super(VeStructurePieceTypes.cabinPiece, 0);
+            super(VeStructurePieceTypes.overworldCabinPiece, 0);
             this.templateResource = templateResource;
             this.templatePosition = pos;
             this.rotation = rotation;
@@ -72,7 +84,7 @@ public class VeOverworldCabinPieces
          */
         public VePiece(TemplateManager templateManager, CompoundNBT nbt)
         {
-            super(VeStructurePieceTypes.cabinPiece, nbt);
+            super(VeStructurePieceTypes.overworldCabinPiece, nbt);
             this.templateResource = new ResourceLocation(nbt.getString("Template"));
             this.rotation = Rotation.valueOf(nbt.getString("Rot"));
             setupTemplate(templateManager);
@@ -113,21 +125,87 @@ public class VeOverworldCabinPieces
         protected void handleDataMarker(String function, BlockPos pos, IServerWorld world, Random rand,
                 MutableBoundingBox boundingBox)
         {
+            ResourceLocation taigaCabinPath = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin");
+            ResourceLocation forestCabinPath = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin");
+
             switch (function)
             {
-                case "taiga_cabin_chest":
-                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                            new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
+                case "TaigaChest":
+                    LockableLootTileEntity.setLootTable(world, rand, pos.down(), taigaCabinPath);
                     break;
-                case "forest_cabin_chest":
-                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                            new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
+                case "ForestChest":
+                    LockableLootTileEntity.setLootTable(world, rand, pos.down(), forestCabinPath);
                     break;
-                case "cabin_flowers":
+                case "FlowerPot":
                     world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
                     break;
+                case "Bed":
+                    randomizeBedColor(world, pos, rand);
+                    break;
+                case "TaigaVillager":
+                    spawnVillager(world, pos, VillagerType.TAIGA);
+                    break;
+                case "ForestVillager":
+                    spawnVillager(world, pos, VillagerType.PLAINS);
                 default:
                     break;
+            }
+        }
+
+        /**
+         * Spawns a villager located at a data structure block within the cabin.
+         *
+         * @param world
+         * @param pos
+         * @param type
+         */
+        private void spawnVillager(IServerWorld world, BlockPos pos, VillagerType type)
+        {
+            VillagerEntity villagerEntity = EntityType.VILLAGER.create(world.getWorld());
+            villagerEntity.enablePersistence();
+            villagerEntity.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
+            villagerEntity.setVillagerData(new VillagerData(type, villagerEntity.getVillagerData().getProfession(), 0));
+            villagerEntity.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.STRUCTURE,
+                    (ILivingEntityData) null, (CompoundNBT) null);
+            world.func_242417_l(villagerEntity); // spawn the villager.
+        }
+
+        /**
+         * Randomizes the bed's color using the bed's direction within the cabin's
+         * template. Places the bed from a data structure block above the bed's foot.
+         *
+         * @param world
+         * @param pos
+         * @param random
+         */
+        private void randomizeBedColor(IServerWorld world, BlockPos pos, Random random)
+        {
+            BlockState state = world.getBlockState(pos.down());
+
+            if (state.getBlock() instanceof BedBlock)
+            {
+                Direction facing = state.get(BedBlock.HORIZONTAL_FACING);
+                BlockState bed = BlockTags.BEDS.getRandomElement(random).getDefaultState();
+
+                // Place foot
+                world.setBlockState(pos.down(), bed.with(BedBlock.HORIZONTAL_FACING, facing), 1);
+
+                // Place head
+                world.setBlockState(pos.down().offset(facing),
+                        bed.with(BedBlock.HORIZONTAL_FACING, facing).with(BedBlock.PART, BedPart.HEAD), 1);
+            }
+        }
+
+        @Override
+        protected void randomlyPlaceBlock(ISeedReader worldIn, MutableBoundingBox boundingboxIn, Random rand,
+                float chance, int x, int y, int z, BlockState blockstateIn)
+        {
+            Block block = worldIn.getBlockState(new BlockPos(x, y, z)).getBlock();
+
+            if (block == Blocks.COBBLESTONE)
+            {
+                super.randomlyPlaceBlock(worldIn, boundingboxIn, rand, chance, x, y, z,
+                        Blocks.MOSSY_COBBLESTONE.getDefaultState());
             }
         }
 
@@ -156,21 +234,70 @@ public class VeOverworldCabinPieces
                 // in one piece.
                 if (seedReader.getBlockState(pos.down()).getBlock() != Blocks.AIR)
                 {
-                    break;
+                    this.templatePosition = new BlockPos(this.templatePosition.getX(), height,
+                            this.templatePosition.getZ());
+
+                    if (seedReader.getFluidState(templatePosition.down()).getFluid() == Fluids.EMPTY)
+                    {
+                        // Add filler blocks underneath so the cabin isn't floating. This part is not
+                        // efficient.
+                        for (BlockPos fillPos : BlockPos.getAllInBoxMutable(this.templatePosition, structureSize))
+                        {
+                            switch (rotation)
+                            {
+                                case CLOCKWISE_180:
+                                    fillBlocks(seedReader, fillPos.add(-sizeX + 1, -1, -sizeZ + 1),
+                                            this.templatePosition.getY());
+                                    break;
+                                case CLOCKWISE_90:
+                                    fillBlocks(seedReader, fillPos.add(-sizeX + 1, -1, 0),
+                                            this.templatePosition.getY());
+                                    break;
+                                case COUNTERCLOCKWISE_90:
+                                    fillBlocks(seedReader, fillPos.add(0, -1, -sizeZ + 1),
+                                            this.templatePosition.getY());
+                                    break;
+                                default:
+                                    fillBlocks(seedReader, fillPos.add(0, -1, 0), this.templatePosition.getY());
+                                    break;
+                            }
+                        }
+                        return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox,
+                                chunkPos, blockPos); // New method for create.
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
+            return false;
+        }
 
-            this.templatePosition = new BlockPos(this.templatePosition.getX(), height, this.templatePosition.getZ());
+        /**
+         * A helper method that replaces grass and air with dirt.
+         *
+         * @param seedReader
+         * @param pos        The position that the block is at.
+         */
+        private boolean fillBlocks(ISeedReader seedReader, BlockPos pos, int underStructureY)
+        {
+            Block block = seedReader.getBlockState(pos).getBlock();
 
-            if (seedReader.getFluidState(templatePosition.down()).isEmpty())
+            if (pos.getY() <= underStructureY)
             {
-                return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
-                        blockPos); // New method for create
+                if (block == Blocks.DIRT && (pos.getY() + 1) == underStructureY)
+                {
+                    seedReader.setBlockState(pos, Blocks.GRASS_BLOCK.getDefaultState(), 4);
+                    return true;
+                }
+                else if (block == Blocks.AIR)
+                {
+                    seedReader.setBlockState(pos, Blocks.DIRT.getDefaultState(), 4);
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

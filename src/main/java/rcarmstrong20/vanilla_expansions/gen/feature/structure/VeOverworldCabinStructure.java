@@ -61,20 +61,20 @@ public class VeOverworldCabinStructure extends JigsawStructure
          * piece)
          */
         @Override
-        public void func_230364_a_(DynamicRegistries dynamicRegistry, ChunkGenerator generator,
-                TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, VillageConfig structureConfig)
+        public void func_230364_a_(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator,
+                TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, VillageConfig villageConfig)
         {
             int x = (chunkX << 4) + 7;
             int z = (chunkZ << 4) + 7;
             BlockPos blockPos = new BlockPos(x, 0, z);
             Rotation rotation = Rotation.randomRotation(rand);
 
-            VeOverworldCabinPieces.init(templateManager, blockPos, rotation, this.components, structureConfig);
+            VeOverworldCabinPieces.init(templateManager, blockPos, rotation, this.components, villageConfig);
 
             // Move the piece up 1 and the bounding box down 1 to match align with most
             // land.
-            this.components.forEach(piece -> piece.offset(0, 1, 0));
-            this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
+            // this.components.forEach(piece -> piece.offset(0, 1, 0));
+            // this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
 
             this.recalculateStructureSize();
         }
