@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinStructure;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinStructure;
 
@@ -17,28 +17,30 @@ public class VeStructure
 {
     public static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 
-    public static Structure<VillageConfig> overworldCabin = registerVillageStructure("overworld_cabin",
-            new VeOverworldCabinStructure(VillageConfig.field_236533_a_));
-    public static Structure<VillageConfig> netherCabin = registerVillageStructure("nether_cabin",
-            new VeNetherCabinStructure(VillageConfig.field_236533_a_));
+    public static Structure<VeCabinConfig> overworldCabin = registerCabinStructure("overworld_cabin",
+            new VeOverworldCabinStructure(VeCabinConfig.cabinConfig));
+    public static Structure<VeCabinConfig> netherCabin = registerCabinStructure("nether_cabin",
+            new VeNetherCabinStructure(VeCabinConfig.cabinConfig));
 
     /**
-     * Helper method for registering all structures
+     * @param name           The name of the structure.
+     * @param cabinStructure An instance of a new Structure<VeCabinConfig>.
+     * @return The new structure.
      */
-    private static Structure<VillageConfig> registerVillageStructure(String name, Structure<VillageConfig> structure)
+    private static Structure<VeCabinConfig> registerCabinStructure(String name, Structure<VeCabinConfig> cabinStructure)
     {
         VanillaExpansions.LOGGER.info("Structures registered.");
 
-        structure.setRegistryName(VanillaExpansions.MOD_ID, name);
-        STRUCTURES.add(structure);
-        return structure;
+        cabinStructure.setRegistryName(VanillaExpansions.MOD_ID, name);
+        STRUCTURES.add(cabinStructure);
+        return cabinStructure;
     }
 
     @SubscribeEvent
     public static void registerStructures(final Register<Structure<?>> event)
     {
         register(event, STRUCTURES);
-        VanillaExpansions.LOGGER.info("Structure registered.");
+        VanillaExpansions.LOGGER.info("Structures registered.");
     }
 
     /**
