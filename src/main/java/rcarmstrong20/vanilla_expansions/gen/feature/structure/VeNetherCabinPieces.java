@@ -1,7 +1,10 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -19,12 +22,16 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.template.AlwaysTrueRuleTest;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.RandomBlockMatchRuleTest;
+import net.minecraft.world.gen.feature.template.RuleEntry;
+import net.minecraft.world.gen.feature.template.RuleStructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
@@ -37,10 +44,9 @@ import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 public class VeNetherCabinPieces
 {
     public static void init(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> list,
-            VillageConfig config)
+            VeCabinConfig config)
     {
-        list.add(new VeNetherCabinPieces.VePiece(templateManager, config.func_242810_c().get().getName(), pos,
-                rotation));
+        list.add(new VeNetherCabinPieces.VePiece(templateManager, config.getTemplateLocation(), pos, rotation));
     }
 
     // Features
@@ -58,7 +64,7 @@ public class VeNetherCabinPieces
         public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos,
                 Rotation rotation)
         {
-            super(VeStructurePieceTypes.cabinPiece, 0);
+            super(VeStructurePieceTypes.netherCabinPiece, 0);
             this.templateResource = templateResource;
             this.templatePosition = pos;
             this.rotation = rotation;
@@ -71,7 +77,7 @@ public class VeNetherCabinPieces
          */
         public VePiece(TemplateManager templateManager, CompoundNBT nbt)
         {
-            super(VeStructurePieceTypes.cabinPiece, nbt);
+            super(VeStructurePieceTypes.netherCabinPiece, nbt);
             this.templateResource = new ResourceLocation(nbt.getString("Template"));
             this.rotation = Rotation.valueOf(nbt.getString("Rot"));
             setupTemplate(templateManager);
@@ -85,7 +91,10 @@ public class VeNetherCabinPieces
             Template template = templateManager.getTemplateDefaulted(this.templateResource);
             PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
                     .setMirror(Mirror.NONE).setCenterOffset(new BlockPos(0, 0, 0))
-                    .addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
+                    .addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK)
+                    .addProcessor(new RuleStructureProcessor(ImmutableList.of(new RuleEntry(
+                            new RandomBlockMatchRuleTest(Blocks.NETHER_BRICKS, 0.2F), AlwaysTrueRuleTest.INSTANCE,
+                            VeBlocks.crimsonChytridNetherBricks.getDefaultState()))));
             this.setup(template, this.templatePosition, placementsettings);
         }
 
@@ -135,57 +144,34 @@ public class VeNetherCabinPieces
                 BlockPos blockPos)
         {
             // Calculate the height for the cabin and generate the structure.
-            int sizeX = this.template.transformedSize(this.rotation).getX();
-            int sizeZ = this.template.transformedSize(this.rotation).getZ();
-            BlockPos structureSize = this.templatePosition.add(sizeX - 1, 0, sizeZ - 1);
-            boolean foundBlock = false;
-            Block atBlock;
-            Block underBlock;
+            int x = this.templatePosition.getX();
+            int z = this.templatePosition.getZ();
+            int y = findGroundHeight(seedReader, new BlockPos(x, 0, z));
 
-            while (this.templatePosition.getY() <= 128)
+            this.templatePosition = new BlockPos(x, y, z);
+
+            return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
+                    blockPos);
+        }
+
+        private int findGroundHeight(ISeedReader seedReader, BlockPos pos)
+        {
+            List<Block> groundBlocks = Arrays.asList(Blocks.NETHERRACK, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_HYPHAE,
+                    Blocks.LAVA);
+            int y = 128;
+
+            while (pos.getY() != 128)
             {
-                for (BlockPos pos : BlockPos.getAllInBoxMutable(this.templatePosition, structureSize))
+                Block atBlock = seedReader.getBlockState(pos).getBlock();
+                Block aboveBlock = seedReader.getBlockState(pos.up()).getBlock();
+
+                if (groundBlocks.contains(atBlock) && aboveBlock == Blocks.AIR)
                 {
-                    atBlock = seedReader.getBlockState(pos).getBlock();
-                    underBlock = seedReader.getBlockState(pos.down()).getBlock();
-
-                    if (atBlock == Blocks.AIR && underBlock != Blocks.AIR)
-                    {
-                        foundBlock = true;
-                        break;
-                    }
-                    else
-                    {
-                        pos = pos.up();
-                    }
+                    y = pos.getY();
                 }
-
-                if (foundBlock)
-                {
-                    break;
-                }
-                else
-                {
-                    this.templatePosition = this.templatePosition.up();
-                }
+                pos = pos.up();
             }
-
-            if (this.templatePosition.getY() == 128)
-            {
-                VanillaExpansions.LOGGER.info("Spawned nether cabin on the roof.");
-                return false; // Spawned on the roof of the nether since a suitable y was not found.
-            }
-            else
-            {
-                VanillaExpansions.LOGGER.info("Generated at x: " + this.templatePosition.getX() + ", y: "
-                        + this.templatePosition.getY() + ", z: " + this.templatePosition.getZ() + "."); // The location
-                                                                                                        // of the
-                                                                                                        // new spawned
-                                                                                                        // cabin.
-
-                return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
-                        blockPos); // New method for create
-            }
+            return y;
         }
     }
 }
