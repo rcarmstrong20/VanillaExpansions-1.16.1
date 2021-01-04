@@ -59,7 +59,6 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -516,7 +515,7 @@ public class VanillaExpansions
             }
 
             addSpacing(serverWorld, VeStructure.overworldCabin, 15, 10, 724628428);
-            addSpacing(serverWorld, VeStructure.netherCabin, 15, 10, 487422842);
+            addSpacing(serverWorld, VeStructure.netherCabin, 10, 5, 487422842);
         }
     }
 
@@ -699,39 +698,6 @@ public class VanillaExpansions
             boolean enable)
     {
         addStructure(event, Arrays.asList(biome), structureFeature, enable);
-    }
-
-    /**
-     * When the player interacts with another entity in any way this event is called
-     *
-     * @param event An instance of the PlayerInteractEvent.EntityInteractSpecific.
-     */
-    @SubscribeEvent
-    public void onEntityInteract(final PlayerInteractEvent.EntityInteractSpecific event)
-    {
-        World world = event.getWorld();
-
-        // Controls white rabbit to killer rabbit conversion and the other way around.
-        if (!world.isRemote && event.getTarget() instanceof RabbitEntity)
-        {
-            RabbitEntity rabbit = (RabbitEntity) event.getTarget();
-            ItemStack itemStack = event.getItemStack();
-
-            if (rabbit.getRabbitType() == 1 || rabbit.getRabbitType() == 99)
-            {
-                if (itemStack.getItem() == Items.NAME_TAG && itemStack.hasDisplayName())
-                {
-                    if ("The Killer Bunny".equals(itemStack.getDisplayName().getUnformattedComponentText()))
-                    {
-                        rabbit.setRabbitType(99);
-                    }
-                    else
-                    {
-                        rabbit.setRabbitType(1);
-                    }
-                }
-            }
-        }
     }
 
     /**
