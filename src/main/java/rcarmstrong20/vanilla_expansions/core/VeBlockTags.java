@@ -16,6 +16,7 @@ public class VeBlockTags
     public static ITag<Block> overworld_pottable = VeBlockTags.makeWrapperTag("overworld_pottable");
     public static ITag<Block> nether_pottable = VeBlockTags.makeWrapperTag("nether_pottable");
     public static ITag<Block> end_pottable = VeBlockTags.makeWrapperTag("end_pottable");
+    public static ITag<Block> singleCrops = VeBlockTags.makeWrapperTag("single_crops");
 
     /**
      * @param name The name of the tag.
