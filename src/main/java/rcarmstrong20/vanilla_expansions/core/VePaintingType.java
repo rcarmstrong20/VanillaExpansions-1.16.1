@@ -9,6 +9,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every painting type instance that vanilla
+ *         expansions has.
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VePaintingType
 {

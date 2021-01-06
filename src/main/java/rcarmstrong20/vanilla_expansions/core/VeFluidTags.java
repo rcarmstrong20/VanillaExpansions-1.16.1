@@ -6,6 +6,13 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every fluid tag instance that vanilla expansions
+ *         has.
+ */
 public class VeFluidTags
 {
     public static ITag<Fluid> darkMatter = makeWrapperTag("dark_matter");

@@ -12,6 +12,13 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinStructure;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinStructure;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every structure instance that vanilla expansions
+ *         has.
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructure
 {

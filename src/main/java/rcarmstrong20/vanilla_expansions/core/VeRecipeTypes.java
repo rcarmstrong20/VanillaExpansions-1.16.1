@@ -7,6 +7,13 @@ import net.minecraft.util.registry.Registry;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every recipe type instance that vanilla
+ *         expansions has.
+ */
 public class VeRecipeTypes
 {
     public static IRecipeType<VeWoodcuttingRecipe> woodcutting = register("woodcutting");

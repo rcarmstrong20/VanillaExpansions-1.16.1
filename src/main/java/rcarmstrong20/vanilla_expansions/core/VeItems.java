@@ -33,6 +33,14 @@ import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
 import rcarmstrong20.vanilla_expansions.item.VeSwordItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every item instance that vanilla expansions has.
+ * 
+ *         Note: all item names must be lower case or forge will crash the game.
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
 {

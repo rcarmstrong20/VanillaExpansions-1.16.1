@@ -10,15 +10,22 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
- * A class for holding all the villager instances.
  *
  * @author Ryan
  *
+ *         A class for holding every villager type instance that vanilla
+ *         expansions has.
  */
 public class VeVillagerType
 {
     public static VillagerType crimson = register("crimson");
 
+    /**
+     * A helper method for automatically registering every new villager types.
+     *
+     * @param name The name of the new villager type.
+     * @return A new registered villager type.
+     */
     private static VillagerType register(String name)
     {
         Constructor<VillagerType> constructor = ObfuscationReflectionHelper.findConstructor(VillagerType.class,
@@ -33,7 +40,7 @@ public class VeVillagerType
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
             e.printStackTrace();
-            return null;
+            return VillagerType.PLAINS;
         }
     }
 }

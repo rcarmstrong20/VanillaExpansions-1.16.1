@@ -25,9 +25,11 @@ import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.config.VeOreDataGenConfig;
 
 /**
- * A class used to store the feature configurations.
  *
  * @author Ryan
+ *
+ *         A class for holding every feature configuration instance that vanilla
+ *         expansions has.
  *
  */
 public class VeConfiguredFeatures

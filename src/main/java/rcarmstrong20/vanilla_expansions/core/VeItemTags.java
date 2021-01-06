@@ -6,6 +6,13 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every item tag instance that vanilla expansions
+ *         has.
+ */
 public class VeItemTags
 {
     public static ITag<Item> packet_seeds = VeItemTags.makeWrapperTag("packet_seeds");

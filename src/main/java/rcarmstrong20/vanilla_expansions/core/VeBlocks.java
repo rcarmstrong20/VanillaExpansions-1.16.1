@@ -75,6 +75,15 @@ import rcarmstrong20.vanilla_expansions.block.VeZombieDemonPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeZombiePigmanPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeZombiePlushBlock;
 
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every block instance that vanilla expansions has.
+ * 
+ *         Note: all block names must be lower case or forge will crash the
+ *         game.
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeBlocks
 {

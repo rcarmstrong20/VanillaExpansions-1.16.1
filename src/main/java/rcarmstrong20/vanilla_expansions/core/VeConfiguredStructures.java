@@ -4,11 +4,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 
-@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+/**
+ *
+ * @author Ryan
+ *
+ *         A class for holding every configured structure instance that vanilla
+ *         expansions has.
+ */
 public class VeConfiguredStructures
 {
     public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin", VeStructure.overworldCabin
@@ -22,7 +27,7 @@ public class VeConfiguredStructures
 
     /**
      * A helper method for automatically registering every new configured structure
-     * features.
+     * feature.
      *
      * @param name      The name of this configured structure.
      * @param structure An instance of a new configured structure.
