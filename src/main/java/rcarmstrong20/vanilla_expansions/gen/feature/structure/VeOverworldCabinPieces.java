@@ -3,20 +3,11 @@ package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.merchant.villager.VillagerData;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.villager.VillagerType;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.properties.BedPart;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -37,6 +28,7 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
+import rcarmstrong20.vanilla_expansions.util.VeStructureUtil;
 
 /**
  * Pieces are where the structure is actually added to the world, a structure
@@ -142,60 +134,16 @@ public class VeOverworldCabinPieces
                     world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
                     break;
                 case "Bed":
-                    randomizeBedColor(world, pos, rand);
+                    VeStructureUtil.randomizeBedColor(world, pos, rand);
                     break;
                 case "TaigaVillager":
-                    spawnVillager(world, pos, VillagerType.TAIGA);
+                    VeStructureUtil.spawnVillager(world, pos, VillagerType.TAIGA);
                     break;
                 case "ForestVillager":
-                    spawnVillager(world, pos, VillagerType.PLAINS);
+                    VeStructureUtil.spawnVillager(world, pos, VillagerType.PLAINS);
                     break;
                 default:
                     break;
-            }
-        }
-
-        /**
-         * Spawns a villager located at a data structure block within the cabin.
-         *
-         * @param world
-         * @param pos
-         * @param type
-         */
-        private void spawnVillager(IServerWorld world, BlockPos pos, VillagerType type)
-        {
-            VillagerEntity villagerEntity = EntityType.VILLAGER.create(world.getWorld());
-            villagerEntity.enablePersistence();
-            villagerEntity.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
-            villagerEntity.setVillagerData(new VillagerData(type, villagerEntity.getVillagerData().getProfession(), 0));
-            villagerEntity.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.STRUCTURE,
-                    (ILivingEntityData) null, (CompoundNBT) null);
-            world.func_242417_l(villagerEntity); // spawn the villager.
-        }
-
-        /**
-         * Randomizes the bed's color using the bed's direction within the cabin's
-         * template. Places the bed from a data structure block above the bed's foot.
-         *
-         * @param world
-         * @param pos
-         * @param random
-         */
-        private void randomizeBedColor(IServerWorld world, BlockPos pos, Random random)
-        {
-            BlockState state = world.getBlockState(pos.down());
-
-            if (state.getBlock() instanceof BedBlock)
-            {
-                Direction facing = state.get(BedBlock.HORIZONTAL_FACING);
-                BlockState bed = BlockTags.BEDS.getRandomElement(random).getDefaultState();
-
-                // Place foot
-                world.setBlockState(pos.down(), bed.with(BedBlock.HORIZONTAL_FACING, facing), 1);
-
-                // Place head
-                world.setBlockState(pos.down().offset(facing),
-                        bed.with(BedBlock.HORIZONTAL_FACING, facing).with(BedBlock.PART, BedPart.HEAD), 1);
             }
         }
 
