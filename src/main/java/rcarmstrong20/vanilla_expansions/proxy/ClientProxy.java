@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy
      */
     private void registerRenders()
     {
-        // cutout renders
+        // Cutout renders
 
         RenderTypeLookup.setRenderLayer(VeBlocks.redGlass, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.redGlassPane, RenderType.getCutout());
