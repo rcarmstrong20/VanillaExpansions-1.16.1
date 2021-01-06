@@ -3,7 +3,6 @@ package rcarmstrong20.vanilla_expansions.proxy;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
@@ -12,8 +11,6 @@ import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCam
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
 import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
-import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
-import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 
 public class ClientProxy extends CommonProxy
 {
@@ -22,7 +19,6 @@ public class ClientProxy extends CommonProxy
     {
         super.onSetupClient();
         VeBlockAndItemColors.registerColorHandlers();
-        this.registerTrades();
         this.registerScreenFactories();
         this.registerTileEntityRenderers();
         this.registerRenders();
@@ -47,17 +43,6 @@ public class ClientProxy extends CommonProxy
                 VeColoredCampfireTileEntityRenderer::new);
 
         VanillaExpansions.LOGGER.info("Registered tile entity renderers.");
-    }
-
-    /**
-     * Add the new trade lists to the vanilla trade list along with the
-     * corresponding profession for registry.
-     */
-    private void registerTrades()
-    {
-        VillagerTrades.VILLAGER_DEFAULT_TRADES.put(VeVillagerProfessions.lumberjack, VeVillagerTrades.lumberjackTrades);
-
-        VanillaExpansions.LOGGER.info("Registered villager trades.");
     }
 
     /**

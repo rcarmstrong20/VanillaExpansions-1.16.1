@@ -9,6 +9,7 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 
 import net.minecraft.block.BeetrootBlock;
@@ -23,6 +24,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -60,6 +63,7 @@ import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -89,6 +93,8 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeStructure;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
@@ -201,13 +207,37 @@ public class VanillaExpansions
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void addTrades(VillagerTradesEvent event)
+    {
+        addTrade(event, VeVillagerProfessions.lumberjack, VeVillagerTrades.lumberjackTrades);
+    }
+
+    /**
+     * Adds a trade to the game for a specific profession.
+     *
+     * @param event
+     * @param profession The profession to populate with trades.
+     * @param trades     The trade list.
+     */
+    private static void addTrade(VillagerTradesEvent event, VillagerProfession profession,
+            ImmutableMap<Integer, List<ITrade>> trades)
+    {
+        for (int i = 1; i <= trades.size(); i++)
+        {
+            if (event.getType().equals(profession))
+            {
+                event.getTrades().put(i, trades.get(i));
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event)
     {
-        // Totem of the guardian.
         Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
                 .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400).build();
 
-        // Totem of the brute
         Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
                 .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).build();
 
@@ -404,14 +434,14 @@ public class VanillaExpansions
             {
                 if (worldState.getBlock() instanceof BeetrootBlock)
                 {
-                    if (worldState.get(beetrootAge) == getMaxAge(beetrootAge))
+                    if (worldState.get(beetrootAge).equals(getMaxAge(beetrootAge)))
                     {
                         resetCrop(worldState, world, pos, beetrootAge);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
                 }
-                else if (worldState.get(cropsAge) == getMaxAge(cropsAge))
+                else if (worldState.get(cropsAge).equals(getMaxAge(cropsAge)))
                 {
                     resetCrop(worldState, world, pos, cropsAge);
                     event.setResult(Result.ALLOW);
@@ -420,7 +450,7 @@ public class VanillaExpansions
             }
             else if (worldState.getBlock() instanceof NetherWartBlock)
             {
-                if (worldState.get(netherWartAge) == getMaxAge(netherWartAge))
+                if (worldState.get(netherWartAge).equals(getMaxAge(netherWartAge)))
                 {
                     resetCrop(worldState, world, pos, netherWartAge);
                     event.setResult(Result.ALLOW);
