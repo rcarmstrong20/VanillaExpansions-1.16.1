@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -31,8 +32,11 @@ import net.minecraft.world.gen.feature.template.RuleStructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerType;
+import rcarmstrong20.vanilla_expansions.util.VeStructureUtil;
 
 /**
  * Pieces are where the structure is actually added to the world, a structure
@@ -123,9 +127,19 @@ public class VeNetherCabinPieces
         {
             switch (function)
             {
-                case "crimson_cabin_chest":
+                case "CrimsonChest":
                     LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                             new ResourceLocation(VanillaExpansions.MOD_ID, "chests/crimson_cabin"));
+                    break;
+                case "FlowerPot":
+                    world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
+                    break;
+                case "OverworldPot":
+                    VeStructureUtil.setOverworldCrop(world, VeBlockTags.singleCrops.getRandomElement(rand), pos);
+                    break;
+                case "CrimsonVillager":
+                    VeStructureUtil.spawnVillager(world, pos, VeVillagerType.crimson);
+                    break;
                 default:
                     break;
             }
