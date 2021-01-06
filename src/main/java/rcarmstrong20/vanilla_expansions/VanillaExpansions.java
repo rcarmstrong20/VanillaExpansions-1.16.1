@@ -92,7 +92,6 @@ import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeStructure;
-import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
@@ -141,9 +140,6 @@ public class VanillaExpansions
     private void setup(final FMLCommonSetupEvent event)
     {
         VanillaExpansions.LOGGER.info("setup method registered");
-        VeConfiguredFeatures.register();
-        VeConfiguredStructures.register();
-        VeStructurePieceTypes.register();
         PROXY.onSetupCommon();
     }
 

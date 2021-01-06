@@ -1,8 +1,5 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.block.BlockState;
@@ -35,8 +32,6 @@ import rcarmstrong20.vanilla_expansions.config.VeOreDataGenConfig;
  */
 public class VeConfiguredFeatures
 {
-    public static final Map<String, ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = new HashMap<>();
-
     public static final ConfiguredFeature<?, ?> NETHER_SMOKY_QUARTZ_ORE = register("nether_smoky_quartz_ore",
             Feature.ORE
                     .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
@@ -81,33 +76,22 @@ public class VeConfiguredFeatures
                     .withPlacement(Features.Placements.VEGETATION_PLACEMENT)
                     .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4));
 
-    public static void register()
-    {
-        Registry<ConfiguredFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_FEATURE;
-
-        CONFIGURED_FEATURES.forEach((name, feature) -> Registry.register(registry,
-                new ResourceLocation(VanillaExpansions.MOD_ID, name), feature));
-        CONFIGURED_FEATURES.clear();
-
-        VanillaExpansions.LOGGER.info("Configured features registered.");
-    }
-
     /**
+     * A helper method for automatically registering every new configured feature.
+     *
      * @param name           The name of this configured feature.
      * @param structurePiece An instance of a new configured feature.
-     * @return The instance of this configured feature.
+     * @return A new registered configured feature.
      */
     private static ConfiguredFeature<?, ?> register(String name, ConfiguredFeature<?, ?> feature)
     {
-        if (!CONFIGURED_FEATURES.containsKey(name))
-        {
-            CONFIGURED_FEATURES.put(name, feature);
-        }
-        return feature;
+        Registry<ConfiguredFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_FEATURE;
+
+        return Registry.register(registry, new ResourceLocation(VanillaExpansions.MOD_ID, name), feature);
     }
 
     /**
-     * A sub-class used to store some of the more complex feature config.
+     * A sub-class used to store some of the more complex feature configurations.
      *
      * @author Ryan
      *
