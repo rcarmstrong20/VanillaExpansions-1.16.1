@@ -12,6 +12,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
+/**
+ * A utility class that rotates bounding boxes to simplify the process.
+ *
+ * @author Ryan
+ *
+ */
 public class VeCollisionUtil
 {
     private static final double CENTER = 0.5;
