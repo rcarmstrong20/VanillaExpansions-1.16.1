@@ -756,7 +756,7 @@ public class VanillaExpansions
 
         // Used to add functionality for growing snapdragons on end stone when using
         // bone meal.
-        if (VeBlockTags.end_bone_mealable.contains(event.getBlock().getBlock()))
+        if (VeBlockTags.endBoneMealable.contains(event.getBlock().getBlock()))
         {
             if (!world.isRemote) // Only place the snapdragon blocks server side.
             {
@@ -769,11 +769,11 @@ public class VanillaExpansions
                         blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2,
                                 random.nextInt(3) - 1);
 
-                        if (VeBlockTags.end_bone_mealable.contains(world.getBlockState(blockpos.down()).getBlock())
+                        if (VeBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.down()).getBlock())
                                 && isAir(world.getBlockState(blockpos)))
                         {
                             world.setBlockState(blockpos,
-                                    VeBlockTags.end_bone_meal_plants.getRandomElement(random).getDefaultState());
+                                    VeBlockTags.endBoneMealPlants.getRandomElement(random).getDefaultState());
                         }
                     }
                 }

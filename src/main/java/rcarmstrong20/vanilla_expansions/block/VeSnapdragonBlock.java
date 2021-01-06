@@ -76,11 +76,11 @@ public class VeSnapdragonBlock extends FlowerBlock
 
         if (block instanceof VePlantingPotBlock)
         {
-            return VeBlockTags.end_plantable.contains(block) && VeBlockTags.end_pottable.contains(this.getBlock());
+            return VeBlockTags.endPlantable.contains(block) && VeBlockTags.endPottable.contains(this.getBlock());
         }
         else
         {
-            return VeBlockTags.end_plantable.contains(block);
+            return VeBlockTags.endPlantable.contains(block);
         }
     }
 
