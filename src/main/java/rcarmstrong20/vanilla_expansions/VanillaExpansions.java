@@ -23,11 +23,18 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.merchant.villager.VillagerData;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.villager.VillagerType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,6 +53,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -61,6 +69,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -94,6 +103,7 @@ import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeStructure;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerType;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
@@ -115,6 +125,7 @@ public class VanillaExpansions
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     public static int lastMinuteGathered = LocalDateTime.now().getMinute();
     public static boolean onCooldown = false;
+    public static boolean isNormalSpawn = false;
 
     public VanillaExpansions()
     {
@@ -226,6 +237,87 @@ public class VanillaExpansions
                 event.getTrades().put(i, trades.get(i));
             }
         }
+    }
+    /*
+     * @SubscribeEvent public void onLivingSpawn(LivingSpawnEvent.SpecialSpawn
+     * event) { LivingEntity entity = event.getEntityLiving(); SpawnReason reason =
+     * event.getSpawnReason();
+     *
+     * if (reason.equals(SpawnReason.STRUCTURE) ||
+     * reason.equals(SpawnReason.MOB_SUMMONED)) { event.setResult(Result.DEFAULT); }
+     *
+     * addVillagerBiomeSpawnType(entity, VeVillagerType.crimson, "crimson_forest");
+     * addVillagerBiomeSpawnType(entity, VeVillagerType.warped, "warped_forest"); }
+     */
+
+    @SubscribeEvent
+    public void onLivingSpawn(LivingSpawnEvent.SpecialSpawn event)
+    {
+        SpawnReason reason = event.getSpawnReason();
+
+        if (reason.equals(SpawnReason.STRUCTURE) || reason.equals(SpawnReason.MOB_SUMMONED))
+        {
+            isNormalSpawn = true;
+            VanillaExpansions.LOGGER.info("used normal spawn");
+            event.setResult(Result.DEFAULT);
+        }
+    }
+
+    @SubscribeEvent
+    public void onSpawn(LivingSpawnEvent event)
+    {
+        LivingEntity entity = event.getEntityLiving();
+
+        if (!isNormalSpawn)
+        {
+            addVillagerBiomeSpawnType(entity, VeVillagerType.crimson, "crimson_forest");
+            addVillagerBiomeSpawnType(entity, VeVillagerType.warped, "warped_forest");
+        }
+        isNormalSpawn = false;
+    }
+
+    /**
+     * Adds a new biome specific villager type spawn.
+     *
+     * @param entity The entity spawned.
+     * @param type   The villager type for these biomes.
+     * @param biomes The biomes that this villager spawns in.
+     * @return true if the villager type was set, otherwise false.
+     */
+    private static boolean addVillagerBiomeSpawnType(LivingEntity entity, VillagerType type, String... biomes)
+    {
+        VillagerData data = new VillagerData(type, VillagerProfession.NONE, 0);
+        ResourceLocation spawnBiome = entity.getEntityWorld().getBiome(entity.getPosition()).getRegistryName();
+
+        for (String biome : biomes)
+        {
+            if (spawnBiome.equals(new ResourceLocation(biome)))
+            {
+                if (entity instanceof VillagerEntity)
+                {
+                    VillagerEntity villagerEntity = (VillagerEntity) entity;
+
+                    if (villagerEntity.getVillagerData().getType().equals(VillagerType.PLAINS))
+                    {
+                        villagerEntity.setVillagerData(data);
+                        entity = villagerEntity;
+                        return true;
+                    }
+                }
+                else if (entity instanceof ZombieVillagerEntity)
+                {
+                    ZombieVillagerEntity zombieVillagerEntity = (ZombieVillagerEntity) entity;
+
+                    if (zombieVillagerEntity.getVillagerData().getType().equals(VillagerType.PLAINS))
+                    {
+                        zombieVillagerEntity.setVillagerData(data);
+                        entity = zombieVillagerEntity;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @SubscribeEvent
@@ -601,6 +693,26 @@ public class VanillaExpansions
                 VeFeatureGenConfig.enableForestCabinSpawns.get());
         addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin,
                 VeFeatureGenConfig.enableCrimsonCabinSpawns.get());
+        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, "crimson_forest", "warped_forest");
+    }
+
+    /**
+     * Adds a new spawner for monsters that allows these monsters to spawn in the
+     * world.
+     *
+     * @param event  An instance of the biome loading event.
+     * @param entity The entity to use in the spawner.
+     * @param biomes The biomes that this entity can spawn in.
+     */
+    private static void addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, String... biomes)
+    {
+        for (String biome : biomes)
+        {
+            if (event.getName().equals(new ResourceLocation(biome)))
+            {
+                event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new Spawners(entity, 2, 4, 6));
+            }
+        }
     }
 
     /**
