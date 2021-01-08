@@ -3,6 +3,7 @@ package rcarmstrong20.vanilla_expansions.core;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinPieces;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinPieces;
@@ -14,6 +15,7 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinPi
  *         A class for holding every structure piece instance that vanilla
  *         expansions has.
  */
+@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
     public static IStructurePieceType overworldCabinPiece = register("overworld_cabin_piece",
