@@ -18,29 +18,34 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  */
 public class VeVillagerType
 {
+    // private static final Map<VillagerType, RegistryKey<Biome>> VILLAGER_DATA =
+    // new HashMap<>();
+    public static final Constructor<VillagerType> CONSTRUCTOR = ObfuscationReflectionHelper
+            .findConstructor(VillagerType.class, String.class);
+
     public static VillagerType crimson = register("crimson");
+    public static VillagerType warped = register("warped");
 
     /**
-     * A helper method for automatically registering every new villager types.
+     * A helper method for automatically registering and adding every new villager
+     * type to the byBiome map, which is used when spawning villagers in different
+     * biomes.
      *
      * @param name The name of the new villager type.
      * @return A new registered villager type.
      */
     private static VillagerType register(String name)
     {
-        Constructor<VillagerType> constructor = ObfuscationReflectionHelper.findConstructor(VillagerType.class,
-                String.class);
         String id = VanillaExpansions.MOD_ID;
-
         try
         {
             return Registry.register(Registry.VILLAGER_TYPE, new ResourceLocation(id, name),
-                    constructor.newInstance(id + ":" + name));
+                    CONSTRUCTOR.newInstance(id + ":" + name));
         }
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
             e.printStackTrace();
-            return VillagerType.PLAINS;
         }
+        return VillagerType.PLAINS;
     }
 }
