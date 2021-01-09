@@ -1,20 +1,13 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -29,17 +22,12 @@ public class VePointOfInterestTypes
 {
     private static final List<PointOfInterestType> POI_TYPES = new ArrayList<>();
 
-    public static PointOfInterestType lumberjack = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
+    public static PointOfInterestType lumberjack = register("lumberjack", VeBlocks.woodcutter, 1, 1);
 
-    private static PointOfInterestType register(String name, Set<BlockState> blockState, int maxFreeTicketsIn,
-            int p_221051_4_)
+    private static PointOfInterestType register(String nameIn, Block blockIn, int maxFreeTicketsIn, int validRangeIn)
     {
-        return register(name, new PointOfInterestType(name, blockState, maxFreeTicketsIn, p_221051_4_));
-    }
-
-    private static Set<BlockState> getAllStates(Block block)
-    {
-        return ImmutableSet.copyOf(block.getStateContainer().getValidStates());
+        return register(nameIn, new PointOfInterestType(nameIn, PointOfInterestType.getAllStates(blockIn),
+                maxFreeTicketsIn, validRangeIn));
     }
 
     private static PointOfInterestType register(String name, PointOfInterestType pointOfInterest)
@@ -52,30 +40,7 @@ public class VePointOfInterestTypes
     @SubscribeEvent
     public static void registerPointOfInterestTypes(final RegistryEvent.Register<PointOfInterestType> event)
     {
-        // A work around for forge's broken point of interest system.
-        try
-        {
-            Method func_221052_a = ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "func_221052_a",
-                    PointOfInterestType.class);
-            POI_TYPES.forEach(poi ->
-            {
-                try
-                {
-                    func_221052_a.invoke(null, poi);
-                }
-                catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-                {
-                    e.printStackTrace();
-                }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        // We always have to clear after registry to maintain a single instance of this
-        // object.
+        POI_TYPES.forEach(poi -> event.getRegistry().register(poi));
         POI_TYPES.clear();
 
         VanillaExpansions.LOGGER.info("Point of Interests registered.");
