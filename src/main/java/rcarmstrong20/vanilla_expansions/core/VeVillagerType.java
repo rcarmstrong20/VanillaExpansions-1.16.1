@@ -18,8 +18,6 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  */
 public class VeVillagerType
 {
-    // private static final Map<VillagerType, RegistryKey<Biome>> VILLAGER_DATA =
-    // new HashMap<>();
     public static final Constructor<VillagerType> CONSTRUCTOR = ObfuscationReflectionHelper
             .findConstructor(VillagerType.class, String.class);
 

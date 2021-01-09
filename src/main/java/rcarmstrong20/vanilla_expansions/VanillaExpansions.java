@@ -1,5 +1,6 @@
 package rcarmstrong20.vanilla_expansions;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -26,12 +27,8 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.merchant.villager.VillagerData;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
-import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.villager.VillagerType;
@@ -46,6 +43,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -53,6 +51,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
@@ -69,7 +68,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -81,6 +79,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -93,6 +92,7 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUnderDarkMatt
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
+import rcarmstrong20.vanilla_expansions.config.VeEntityDataConfig;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
@@ -125,7 +125,12 @@ public class VanillaExpansions
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     public static int lastMinuteGathered = LocalDateTime.now().getMinute();
     public static boolean onCooldown = false;
-    public static boolean isNormalSpawn = false;
+    /**
+     * This field is a mapping that represents which biome each villager type can
+     * spawn in.
+     */
+    public static final Field BY_BIOME_FIELD = ObfuscationReflectionHelper.findField(VillagerType.class,
+            "field_221180_h");
 
     public VanillaExpansions()
     {
@@ -213,11 +218,30 @@ public class VanillaExpansions
         event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
     }
 
+    @SuppressWarnings("unchecked") // This is for byBiome, we need this because we don't know what the original
+                                   // field type is.
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void addTrades(VillagerTradesEvent event)
     {
         addTrade(event, VeVillagerProfessions.lumberjack, VeVillagerTrades.lumberjackTrades);
+
+        Map<RegistryKey<Biome>, VillagerType> byBiome;
+        try
+        {
+            BY_BIOME_FIELD.setAccessible(true);
+
+            byBiome = (Map<RegistryKey<Biome>, VillagerType>) BY_BIOME_FIELD.get(VillagerType.class);
+
+            byBiome.put(Biomes.CRIMSON_FOREST, VeVillagerType.crimson);
+            byBiome.put(Biomes.WARPED_FOREST, VeVillagerType.warped);
+
+            BY_BIOME_FIELD.setAccessible(false);
+        }
+        catch (IllegalArgumentException | IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -237,87 +261,6 @@ public class VanillaExpansions
                 event.getTrades().put(i, trades.get(i));
             }
         }
-    }
-    /*
-     * @SubscribeEvent public void onLivingSpawn(LivingSpawnEvent.SpecialSpawn
-     * event) { LivingEntity entity = event.getEntityLiving(); SpawnReason reason =
-     * event.getSpawnReason();
-     *
-     * if (reason.equals(SpawnReason.STRUCTURE) ||
-     * reason.equals(SpawnReason.MOB_SUMMONED)) { event.setResult(Result.DEFAULT); }
-     *
-     * addVillagerBiomeSpawnType(entity, VeVillagerType.crimson, "crimson_forest");
-     * addVillagerBiomeSpawnType(entity, VeVillagerType.warped, "warped_forest"); }
-     */
-
-    @SubscribeEvent
-    public void onLivingSpawn(LivingSpawnEvent.SpecialSpawn event)
-    {
-        SpawnReason reason = event.getSpawnReason();
-
-        if (reason.equals(SpawnReason.STRUCTURE) || reason.equals(SpawnReason.MOB_SUMMONED))
-        {
-            isNormalSpawn = true;
-            VanillaExpansions.LOGGER.info("used normal spawn");
-            event.setResult(Result.DEFAULT);
-        }
-    }
-
-    @SubscribeEvent
-    public void onSpawn(LivingSpawnEvent event)
-    {
-        LivingEntity entity = event.getEntityLiving();
-
-        if (!isNormalSpawn)
-        {
-            addVillagerBiomeSpawnType(entity, VeVillagerType.crimson, "crimson_forest");
-            addVillagerBiomeSpawnType(entity, VeVillagerType.warped, "warped_forest");
-        }
-        isNormalSpawn = false;
-    }
-
-    /**
-     * Adds a new biome specific villager type spawn.
-     *
-     * @param entity The entity spawned.
-     * @param type   The villager type for these biomes.
-     * @param biomes The biomes that this villager spawns in.
-     * @return true if the villager type was set, otherwise false.
-     */
-    private static boolean addVillagerBiomeSpawnType(LivingEntity entity, VillagerType type, String... biomes)
-    {
-        VillagerData data = new VillagerData(type, VillagerProfession.NONE, 0);
-        ResourceLocation spawnBiome = entity.getEntityWorld().getBiome(entity.getPosition()).getRegistryName();
-
-        for (String biome : biomes)
-        {
-            if (spawnBiome.equals(new ResourceLocation(biome)))
-            {
-                if (entity instanceof VillagerEntity)
-                {
-                    VillagerEntity villagerEntity = (VillagerEntity) entity;
-
-                    if (villagerEntity.getVillagerData().getType().equals(VillagerType.PLAINS))
-                    {
-                        villagerEntity.setVillagerData(data);
-                        entity = villagerEntity;
-                        return true;
-                    }
-                }
-                else if (entity instanceof ZombieVillagerEntity)
-                {
-                    ZombieVillagerEntity zombieVillagerEntity = (ZombieVillagerEntity) entity;
-
-                    if (zombieVillagerEntity.getVillagerData().getType().equals(VillagerType.PLAINS))
-                    {
-                        zombieVillagerEntity.setVillagerData(data);
-                        entity = zombieVillagerEntity;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     @SubscribeEvent
@@ -662,55 +605,74 @@ public class VanillaExpansions
         List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
         List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
                 "tall_birch_forest", "tall_birch_hills");
+        boolean netherSmokyQuartzFlag = VeFeatureGenConfig.VeNetherConfig.enableNetherSmokyQuartzOreSpawns.get();
+        boolean netherRubyFlag = VeFeatureGenConfig.VeNetherConfig.enableNetherRubyOreSpawns.get();
+        boolean blueberryBushFlag = VeFeatureGenConfig.VeOverworldConfig.enableBlueberryBushSpawns.get();
+        boolean cranberryBushFlag = VeFeatureGenConfig.VeOverworldConfig.enableCranberryBushSpawns.get();
+        boolean witchesCradleFlag = VeFeatureGenConfig.VeOverworldConfig.enableWitchsCradleSpawns.get();
+        boolean darkMatterLakeFlag = VeFeatureGenConfig.VeEndConfig.enableDarkMatterLakeSpawns.get();
+        boolean snapdragonAndEnderGrassFlag = VeFeatureGenConfig.VeEndConfig.enableSnapdragonAndEnderGrassSpawns.get();
+        boolean hugePurpleMushroomFlag = VeFeatureGenConfig.VeOverworldConfig.enableHugePurpleMushroomSpawns.get();
+        boolean taigaCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableTaigaCabinSpawns.get();
+        boolean forestCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableForestCabinSpawns.get();
+        boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
+        boolean zombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
+        int zombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.zombieVillagerSpawnWeight.get();
+        int zombieVillagerMinSize = VeEntityDataConfig.MinimumSpawnSizeConfig.zombieVillagerMinSpawnSize.get();
+        int zombieVillagerMaxSize = VeEntityDataConfig.MaximumSpawnSizeConfig.zombieVillagerMaxSpawnSize.get();
 
         addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE,
-                VeFeatureGenConfig.enableNetherSmokyQuartzOreSpawns.get());
+                netherSmokyQuartzFlag);
         addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
-                VeFeatureGenConfig.enableNetherRubyOreSpawns.get());
+                netherRubyFlag);
         addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED,
-                VeFeatureGenConfig.enableBlueberryBushSpawns.get());
+                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED, blueberryBushFlag);
         addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableBlueberryBushSpawns.get());
+                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE, blueberryBushFlag);
         addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED,
-                VeFeatureGenConfig.enableCranberryBushSpawns.get());
+                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED, cranberryBushFlag);
         addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE, VeFeatureGenConfig.enableCranberryBushSpawns.get());
+                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE, cranberryBushFlag);
         addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
+                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED, witchesCradleFlag);
         addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE, VeFeatureGenConfig.enableWitchsCradleSpawns.get());
-        addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE,
-                VeFeatureGenConfig.enableVoidLakeSpawns.get());
+                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE, witchesCradleFlag);
+        addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
         addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
-                VeFeatureGenConfig.enableSnapdragonAndEnderGrassSpawns.get());
+                snapdragonAndEnderGrassFlag);
         addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM,
-                VeFeatureGenConfig.enableHugePurpleMushroomSpawns.get());
-        addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin,
-                VeFeatureGenConfig.enableTaigaCabinSpawns.get());
-        addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin,
-                VeFeatureGenConfig.enableForestCabinSpawns.get());
-        addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin,
-                VeFeatureGenConfig.enableCrimsonCabinSpawns.get());
-        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, "crimson_forest", "warped_forest");
+                hugePurpleMushroomFlag);
+        addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
+        addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin, forestCabinFlag);
+        addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
+        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, zombieVillagerWeight, zombieVillagerMinSize,
+                zombieVillagerMaxSize, zombieVillagerFlag, "crimson_forest", "warped_forest");
     }
 
     /**
      * Adds a new spawner for monsters that allows these monsters to spawn in the
      * world.
      *
-     * @param event  An instance of the biome loading event.
-     * @param entity The entity to use in the spawner.
-     * @param biomes The biomes that this entity can spawn in.
+     * @param event    An instance of the biome loading event.
+     * @param entity   The entity to use in the spawner.
+     * @param weight   How likely the mob is to spawn. A higher weight equals a
+     *                 higher spawn rate.
+     * @param minCount The minimum number of spawns.
+     * @param maxCount The maximum number of spawns.
+     * @param biomes   The biomes that this entity can spawn in.
      */
-    private static void addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, String... biomes)
+    private static void addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, int weight, int minCount,
+            int maxCount, boolean enable, String... biomes)
     {
-        for (String biome : biomes)
+        if (enable)
         {
-            if (event.getName().equals(new ResourceLocation(biome)))
+            for (String biome : biomes)
             {
-                event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new Spawners(entity, 2, 4, 6));
+                if (event.getName().equals(new ResourceLocation(biome)))
+                {
+                    event.getSpawns().getSpawner(EntityClassification.MONSTER)
+                            .add(new Spawners(entity, weight, minCount, maxCount));
+                }
             }
         }
     }
@@ -769,7 +731,7 @@ public class VanillaExpansions
         {
             for (String biome : biomes)
             {
-                if (event.getName().equals(new ResourceLocation("minecraft:" + biome)))
+                if (event.getName().equals(new ResourceLocation(biome)))
                 {
                     event.getGeneration().getFeatures(decoration).add(() -> feature);
                 }
@@ -815,7 +777,7 @@ public class VanillaExpansions
         {
             for (String biome : biomes)
             {
-                if (event.getName().equals(new ResourceLocation("minecraft:" + biome)))
+                if (event.getName().equals(new ResourceLocation(biome)))
                 {
                     event.getGeneration().getStructures().add(() -> structureFeature);
                 }
@@ -848,7 +810,7 @@ public class VanillaExpansions
     {
         LivingEntity entity = event.getEntityLiving();
 
-        if (VeEntityConfig.enableSaveTheBunnies.get() && entity instanceof RabbitEntity)
+        if (VeEntityConfig.VeOverworldConfig.enableSaveTheBunnies.get() && entity instanceof RabbitEntity)
         {
             event.setCanceled(true);
         }
