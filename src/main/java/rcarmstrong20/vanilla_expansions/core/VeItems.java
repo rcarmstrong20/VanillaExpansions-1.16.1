@@ -5,32 +5,20 @@ import java.util.List;
 
 import com.google.common.base.Suppliers;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.BucketItem;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.enums.VeArmorMaterial;
-import rcarmstrong20.vanilla_expansions.enums.VeItemTier;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
 import rcarmstrong20.vanilla_expansions.item.VeFoods;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
 import rcarmstrong20.vanilla_expansions.item.VeMixedSeedPacketItem;
-import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
-import rcarmstrong20.vanilla_expansions.item.VeShovelItem;
 import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
-import rcarmstrong20.vanilla_expansions.item.VeSwordItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 
 /**
@@ -38,7 +26,7 @@ import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
  * @author Ryan
  *
  *         A class for holding every item instance that vanilla expansions has.
- * 
+ *
  *         Note: all item names must be lower case or forge will crash the game.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -46,53 +34,14 @@ public class VeItems
 {
     // Item Property Presets
 
-    public static final Item.Properties VE_ITEMS = new Item.Properties().group(VanillaExpansions.VE_GROUP);
-    public static final Item.Properties VE_SINGLE_ITEMS = new Item.Properties().maxStackSize(1)
-            .group(VanillaExpansions.VE_GROUP);
-    public static final Item.Properties VE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
-            .group(VanillaExpansions.VE_GROUP);
-    public static final Item.Properties VE_RARE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
+    private static final Item.Properties VE_ITEMS = new Item.Properties().group(VanillaExpansions.VE_GROUP);
+    private static final Item.Properties VE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
             .group(VanillaExpansions.VE_GROUP);
 
     private static final List<Item> ITEMS = new ArrayList<>();
 
     // Vanilla Expansions Items
     public static Item ruby = register("ruby", new Item(VE_ITEMS));
-    public static Item rubyAxe = register("ruby_axe", new AxeItem(VeItemTier.RUBY, 5.0F, -2.8F,
-            new Item.Properties().addToolType(ToolType.AXE, 4).group(VanillaExpansions.VE_GROUP)));
-    public static Item rubyPickaxe = register("ruby_pickaxe", new VePickaxeItem(VeItemTier.RUBY, 1,
-            new Item.Properties().addToolType(ToolType.PICKAXE, 4).group(VanillaExpansions.VE_GROUP)));
-    public static Item rubyShovel = register("ruby_shovel", new VeShovelItem(VeItemTier.RUBY, 1.5F,
-            new Item.Properties().addToolType(ToolType.SHOVEL, 4).group(VanillaExpansions.VE_GROUP)));
-    public static Item rubySword = register("ruby_sword", new VeSwordItem(VeItemTier.RUBY, 3, VE_SINGLE_ITEMS));
-    public static Item rubyHoe = register("ruby_hoe", new HoeItem(VeItemTier.RUBY, -4, 1, VE_SINGLE_ITEMS));
-    public static Item rubyHelmet = register("ruby_helmet",
-            new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.HEAD, VE_SINGLE_ITEMS));
-    public static Item rubyChestplate = register("ruby_chestplate",
-            new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.CHEST, VE_SINGLE_ITEMS));
-    public static Item rubyLeggings = register("ruby_leggings",
-            new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.LEGS, VE_SINGLE_ITEMS));
-    public static Item rubyBoots = register("ruby_boots",
-            new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.FEET, VE_SINGLE_ITEMS));
-    public static Item rubyHorseArmor = register("ruby_horse_armor", 12, "ruby");
-    public static Item emeraldAxe = register("emerald_axe", new AxeItem(VeItemTier.EMERALD, 6.0F, -3.0F,
-            new Item.Properties().addToolType(ToolType.AXE, 2).group(VanillaExpansions.VE_GROUP)));
-    public static Item emeraldPickaxe = register("emerald_pickaxe", new VePickaxeItem(VeItemTier.EMERALD, 1,
-            new Item.Properties().addToolType(ToolType.PICKAXE, 2).group(VanillaExpansions.VE_GROUP)));
-    public static Item emeraldShovel = register("emerald_shovel", new VeShovelItem(VeItemTier.EMERALD, 2,
-            new Item.Properties().addToolType(ToolType.SHOVEL, 2).group(VanillaExpansions.VE_GROUP)));
-    public static Item emeraldSword = register("emerald_sword",
-            new VeSwordItem(VeItemTier.EMERALD, 4, VE_SINGLE_ITEMS));
-    public static Item emeraldHoe = register("emerald_hoe", new HoeItem(VeItemTier.EMERALD, -2, 0, VE_SINGLE_ITEMS));
-    public static Item emeraldHelmet = register("emerald_helmet",
-            new ArmorItem(VeArmorMaterial.EMERALD, EquipmentSlotType.HEAD, VE_SINGLE_ITEMS));
-    public static Item emeraldChestplate = register("emerald_chestplate",
-            new ArmorItem(VeArmorMaterial.EMERALD, EquipmentSlotType.CHEST, VE_SINGLE_ITEMS));
-    public static Item emeraldLeggings = register("emerald_leggings",
-            new ArmorItem(VeArmorMaterial.EMERALD, EquipmentSlotType.LEGS, VE_SINGLE_ITEMS));
-    public static Item emeraldBoots = register("emerald_boots",
-            new ArmorItem(VeArmorMaterial.EMERALD, EquipmentSlotType.FEET, VE_SINGLE_ITEMS));
-    public static Item emeraldHorseArmor = register("emerald_horse_armor", 8, "emerald");
     public static Item bokChoySeeds = register("bok_choy_seeds", new BlockNamedItem(VeBlocks.bokChoy, VE_ITEMS));
     public static Item bokChoy = register("bok_choy", new Item(VE_ITEMS));
     public static Item garlic = register("garlic", new BlockNamedItem(VeBlocks.garlic, VE_ITEMS));
@@ -149,21 +98,6 @@ public class VeItems
     public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(VE_16_STACK_ITEMS));
 
     /**
-     * @param name          The horse armor name for the item.
-     * @param strength      The strength level for the horse armor.
-     * @param armorMaterial The armor material name.
-     * @return A new horse armor item.
-     */
-    private static Item register(String name, int strength, String armorMaterial)
-    {
-        Item item = new HorseArmorItem(strength, new ResourceLocation(VanillaExpansions.MOD_ID,
-                "textures/entity/horse/armor/horse_armor_" + armorMaterial + ".png"), VE_SINGLE_ITEMS);
-        item.setRegistryName(VanillaExpansions.MOD_ID, name);
-        ITEMS.add(item);
-        return item;
-    }
-
-    /**
      * @param name The name for the item.
      * @param item A new instance of the item class for this item.
      * @return A new item.
@@ -176,7 +110,7 @@ public class VeItems
     }
 
     /*
-     * Register the Items to the game
+     * Register the Items to the game.
      */
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
