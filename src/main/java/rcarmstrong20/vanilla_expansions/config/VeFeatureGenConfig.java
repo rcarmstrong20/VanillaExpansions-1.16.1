@@ -5,82 +5,124 @@ import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 
 public class VeFeatureGenConfig
 {
-    // Overworld
-    public static BooleanValue enableBlueberryBushSpawns;
-    public static BooleanValue enableCranberryBushSpawns;
-    public static BooleanValue enableWitchsCradleSpawns;
-    public static BooleanValue enableHugePurpleMushroomSpawns;
-    public static BooleanValue enableTaigaCabinSpawns;
-    public static BooleanValue enableForestCabinSpawns;
-
-    // Nether
-    public static BooleanValue enableNetherSmokyQuartzOreSpawns;
-    public static BooleanValue enableNetherRubyOreSpawns;
-    public static BooleanValue enableCrimsonCabinSpawns;
-
-    // End
-    public static BooleanValue enableVoidLakeSpawns;
-    public static BooleanValue enableSnapdragonAndEnderGrassSpawns;
-
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
-        server.comment("Vanilla Expansions Feature Configuration").push("ve_feature_config"); // Enter feature config
+        server.comment("Vanilla Expansions Feature Configuration").push("ve_feature_config"); // Enter feature config.
 
-        server.comment("Overworld Configuration").push("ve_overworld_config"); // Enter overworld sub-category
+        VeFeatureGenConfig.VeOverworldConfig.init(server, client);
+        VeFeatureGenConfig.VeNetherConfig.init(server, client);
+        VeFeatureGenConfig.VeEndConfig.init(server, client);
 
-        enableBlueberryBushSpawns = server.comment(compileBooleanSpawnComment("blueberry bushes"))
-                .translation("ve.configBushes.enableBlueberryBushSpawns").worldRestart()
-                .define("enable_blueberry_bush_spawns", true);
+        server.pop();
+    }
 
-        enableCranberryBushSpawns = server.comment(compileBooleanSpawnComment("cranberry bushes"))
-                .translation("ve.configBushes.enableCranberryBushSpawns").worldRestart()
-                .define("enable_cranberry_bush_spawns", true);
+    /**
+     *
+     * @author Ryan
+     *
+     *         A sub-class that holds all the configurations for the overworld
+     *         dimension.
+     */
+    public static class VeOverworldConfig
+    {
+        public static BooleanValue enableBlueberryBushSpawns;
+        public static BooleanValue enableCranberryBushSpawns;
+        public static BooleanValue enableWitchsCradleSpawns;
+        public static BooleanValue enableHugePurpleMushroomSpawns;
+        public static BooleanValue enableTaigaCabinSpawns;
+        public static BooleanValue enableForestCabinSpawns;
 
-        enableWitchsCradleSpawns = server.comment(compileBooleanSpawnComment("witch's cradles"))
-                .translation("ve.configBushes.enableWitchsCradleSpawns").worldRestart()
-                .define("enable_witchs_cradle_spawns", true);
+        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        {
+            server.comment("Overworld Configuration").push("ve_overworld_config");
 
-        enableHugePurpleMushroomSpawns = server.comment(compileBooleanSpawnComment("big purple mushrooms"))
-                .translation("ve.configMushroom.enableBigPurpleMushroomSpawns").worldRestart()
-                .define("enable_big_purple_mushroom_spawns", true);
+            enableBlueberryBushSpawns = server.comment(compileBooleanSpawnComment("blueberry bushes"))
+                    .translation("ve.configBushes.enableBlueberryBushSpawns").worldRestart()
+                    .define("enable_blueberry_bush_spawns", true);
 
-        enableTaigaCabinSpawns = server.comment(compileBooleanSpawnComment("taiga cabins"))
-                .translation("ve.configStructure.enableTaigaCabinSpawns").worldRestart()
-                .define("enable_taiga_cabin_spawns", true);
+            enableCranberryBushSpawns = server.comment(compileBooleanSpawnComment("cranberry bushes"))
+                    .translation("ve.configBushes.enableCranberryBushSpawns").worldRestart()
+                    .define("enable_cranberry_bush_spawns", true);
 
-        enableForestCabinSpawns = server.comment(compileBooleanSpawnComment("forest cabins"))
-                .translation("ve.configStructure.enableForestCabinSpawns").worldRestart()
-                .define("enable_forest_cabin_spawns", true);
+            enableWitchsCradleSpawns = server.comment(compileBooleanSpawnComment("witch's cradles"))
+                    .translation("ve.configBushes.enableWitchsCradleSpawns").worldRestart()
+                    .define("enable_witchs_cradle_spawns", true);
 
-        server.pop(); // Exit overworld sub-category
+            enableHugePurpleMushroomSpawns = server.comment(compileBooleanSpawnComment("big purple mushrooms"))
+                    .translation("ve.configMushroom.enableBigPurpleMushroomSpawns").worldRestart()
+                    .define("enable_big_purple_mushroom_spawns", true);
 
-        server.comment("Nether Configuration").push("ve_nether_config"); // Enter nether sub-category
+            enableTaigaCabinSpawns = server.comment(compileBooleanSpawnComment("taiga cabins"))
+                    .translation("ve.configStructure.enableTaigaCabinSpawns").worldRestart()
+                    .define("enable_taiga_cabin_spawns", true);
 
-        enableNetherSmokyQuartzOreSpawns = server.comment(compileBooleanSpawnComment("nether smoky quartz ores"))
-                .translation("ve.configNetherOre.enableNetherSmokyQuartzOreSpawns").worldRestart()
-                .define("enable_nether_smoky_quartz_ore_spawns", true);
+            enableForestCabinSpawns = server.comment(compileBooleanSpawnComment("forest cabins"))
+                    .translation("ve.configStructure.enableForestCabinSpawns").worldRestart()
+                    .define("enable_forest_cabin_spawns", true);
 
-        enableNetherRubyOreSpawns = server.comment(compileBooleanSpawnComment("nether ruby ores"))
-                .translation("ve.configNetherOre.enableNetherRubyOreSpawns").worldRestart()
-                .define("enable_nether_ruby_ore_spawns", true);
+            server.pop();
+        }
+    }
 
-        enableCrimsonCabinSpawns = server.comment(compileBooleanSpawnComment("crimson cabins"))
-                .translation("ve.configStructure.enableCrimsonCabinSpawns").worldRestart()
-                .define("enable_crimson_cabin_spawns", true);
+    /**
+     *
+     * @author Ryan
+     *
+     *         A sub-class that holds all the configurations for the nether
+     *         dimension.
+     */
+    public static class VeNetherConfig
+    {
+        public static BooleanValue enableNetherSmokyQuartzOreSpawns;
+        public static BooleanValue enableNetherRubyOreSpawns;
+        public static BooleanValue enableCrimsonCabinSpawns;
 
-        server.pop(); // Exit nether sub-category
+        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        {
+            server.comment("Nether Configuration").push("ve_nether_config");
 
-        server.comment("End Configuration").push("ve_end_config"); // Enter end sub-category
+            enableNetherSmokyQuartzOreSpawns = server.comment(compileBooleanSpawnComment("nether smoky quartz ores"))
+                    .translation("ve.configNetherOre.enableNetherSmokyQuartzOreSpawns").worldRestart()
+                    .define("enable_nether_smoky_quartz_ore_spawns", true);
 
-        enableVoidLakeSpawns = server.comment(compileBooleanSpawnComment("void lakes"))
-                .translation("ve.configLake.enableVoidLakeSpawns").worldRestart()
-                .define("enable_void_lake_spawns", true);
+            enableNetherRubyOreSpawns = server.comment(compileBooleanSpawnComment("nether ruby ores"))
+                    .translation("ve.configNetherOre.enableNetherRubyOreSpawns").worldRestart()
+                    .define("enable_nether_ruby_ore_spawns", true);
 
-        enableSnapdragonAndEnderGrassSpawns = server.comment(compileBooleanSpawnComment("snapdragons and ender grass"))
-                .translation("ve.configLake.enableSnapdragonAndEnderGrassSpawns").worldRestart()
-                .define("enable_snapdragon_and_ender_grass_spawns", true);
+            enableCrimsonCabinSpawns = server.comment(compileBooleanSpawnComment("crimson cabins"))
+                    .translation("ve.configStructure.enableCrimsonCabinSpawns").worldRestart()
+                    .define("enable_crimson_cabin_spawns", true);
 
-        server.pop(2); // Exit end and feature config category's
+            server.pop();
+        }
+    }
+
+    /**
+     *
+     * @author Ryan
+     *
+     *         A sub-class that holds all the configurations for the end dimension.
+     */
+    public static class VeEndConfig
+    {
+        public static BooleanValue enableDarkMatterLakeSpawns;
+        public static BooleanValue enableSnapdragonAndEnderGrassSpawns;
+
+        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        {
+            server.comment("End Configuration").push("ve_end_config");
+
+            enableDarkMatterLakeSpawns = server.comment(compileBooleanSpawnComment("dark matter lakes"))
+                    .translation("ve.configLake.enableDarkMatterLakeSpawns").worldRestart()
+                    .define("enable_dark_matter_lake_spawns", true);
+
+            enableSnapdragonAndEnderGrassSpawns = server
+                    .comment(compileBooleanSpawnComment("snapdragons and ender grass"))
+                    .translation("ve.configLake.enableSnapdragonAndEnderGrassSpawns").worldRestart()
+                    .define("enable_snapdragon_and_ender_grass_spawns", true);
+
+            server.pop();
+        }
     }
 
     public static String compileBooleanSpawnComment(String name)

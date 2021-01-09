@@ -12,7 +12,7 @@ public class VeOreDataGenConfig
 
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
-        server.comment("Vanilla Expansions Ores Configuration").push("ve_ore_data_gen_config");
+        server.comment("Vanilla Expansions Ore Data Configuration").push("ve_ore_data_config");
 
         server.comment("Vein Size Configuration").push("ve_vein_size");
 
