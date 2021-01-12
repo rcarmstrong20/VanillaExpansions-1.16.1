@@ -36,8 +36,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -65,7 +63,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
@@ -457,44 +454,47 @@ public class VanillaExpansions
         IntegerProperty netherWartAge = NetherWartBlock.AGE;
         IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
         IntegerProperty cocoaAge = CocoaBlock.AGE;
+        boolean flag = VeCropConfig.VeHarvestConfig.enableSmartHarvest.get();
 
         if (!event.getWorld().isRemote())
         {
-            if (VeCropConfig.enableSmartHarvest.get() && worldState.getBlock() instanceof CropsBlock
-                    && itemStack.getItem() != Items.BONE_MEAL)
+            if (flag)
             {
-                if (worldState.getBlock() instanceof BeetrootBlock)
+                if (worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
                 {
-                    if (worldState.get(beetrootAge).equals(getMaxAge(beetrootAge)))
+                    if (worldState.getBlock() instanceof BeetrootBlock)
                     {
-                        resetCrop(worldState, world, pos, beetrootAge);
+                        if (worldState.get(beetrootAge).equals(getMaxAge(beetrootAge)))
+                        {
+                            resetCrop(worldState, world, pos, beetrootAge);
+                            event.setResult(Result.ALLOW);
+                            event.setCanceled(true);
+                        }
+                    }
+                    else if (worldState.get(cropsAge).equals(getMaxAge(cropsAge)))
+                    {
+                        resetCrop(worldState, world, pos, cropsAge);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
                 }
-                else if (worldState.get(cropsAge).equals(getMaxAge(cropsAge)))
+                else if (worldState.getBlock() instanceof NetherWartBlock)
                 {
-                    resetCrop(worldState, world, pos, cropsAge);
-                    event.setResult(Result.ALLOW);
-                    event.setCanceled(true);
+                    if (worldState.get(netherWartAge).equals(getMaxAge(netherWartAge)))
+                    {
+                        resetCrop(worldState, world, pos, netherWartAge);
+                        event.setResult(Result.ALLOW);
+                        event.setCanceled(true);
+                    }
                 }
-            }
-            else if (worldState.getBlock() instanceof NetherWartBlock)
-            {
-                if (worldState.get(netherWartAge).equals(getMaxAge(netherWartAge)))
+                else if (worldState.getBlock() instanceof CocoaBlock)
                 {
-                    resetCrop(worldState, world, pos, netherWartAge);
-                    event.setResult(Result.ALLOW);
-                    event.setCanceled(true);
-                }
-            }
-            else if (worldState.getBlock() instanceof CocoaBlock)
-            {
-                if (worldState.get(cocoaAge) == getMaxAge(cocoaAge))
-                {
-                    resetCrop(worldState, world, pos, cocoaAge);
-                    event.setResult(Result.ALLOW);
-                    event.setCanceled(true);
+                    if (worldState.get(cocoaAge) == getMaxAge(cocoaAge))
+                    {
+                        resetCrop(worldState, world, pos, cocoaAge);
+                        event.setResult(Result.ALLOW);
+                        event.setCanceled(true);
+                    }
                 }
             }
             else
@@ -528,37 +528,6 @@ public class VanillaExpansions
     private int getMaxAge(IntegerProperty age)
     {
         return age.getAllowedValues().size() - 1;
-    }
-
-    /**
-     * Called when the vanilla loot tables load.
-     *
-     * @param event A new instance of the LootTableLoadEvent.
-     */
-    @SubscribeEvent
-    public void onLootLoad(final LootTableLoadEvent event)
-    {
-        addPoolToTable(event, "jungle_temple");
-        addPoolToTable(event, "desert_pyramid");
-        addPoolToTable(event, "nether_bridge");
-    }
-
-    /**
-     * A helper method that adds a new pool to a vanilla table.
-     *
-     * @param event    An instance of the current loot table event.
-     * @param lootName The name of the loot table that should be added to.
-     */
-    private static void addPoolToTable(LootTableLoadEvent event, String lootName)
-    {
-        String lootPath = "chests/" + lootName;
-        ResourceLocation modLocation = new ResourceLocation(VanillaExpansions.MOD_ID, lootPath);
-        ResourceLocation vanillaLocation = new ResourceLocation(lootPath);
-
-        if (event.getName().equals(vanillaLocation))
-        {
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(modLocation)).build());
-        }
     }
 
     @SubscribeEvent
@@ -616,37 +585,38 @@ public class VanillaExpansions
         boolean taigaCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableTaigaCabinSpawns.get();
         boolean forestCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableForestCabinSpawns.get();
         boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
-        boolean zombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
-        int zombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.zombieVillagerSpawnWeight.get();
-        int zombieVillagerMinSize = VeEntityDataConfig.MinimumSpawnSizeConfig.zombieVillagerMinSpawnSize.get();
-        int zombieVillagerMaxSize = VeEntityDataConfig.MaximumSpawnSizeConfig.zombieVillagerMaxSpawnSize.get();
+        boolean netherZombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
+        int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
+        int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
+        int netherZombieVillagerMaxSize = VeEntityDataConfig.MaxSpawnSizeConfig.netherZombieVillagerMaxSpawnSize.get();
+        ConfiguredFeature<?, ?> sparseBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
+        ConfiguredFeature<?, ?> decoratedBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
+        ConfiguredFeature<?, ?> sparseCranberries = VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE;
+        ConfiguredFeature<?, ?> decoratedCranberries = VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED;
+        ConfiguredFeature<?, ?> sparseWitchsCradle = VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE;
+        ConfiguredFeature<?, ?> decoratedWitchsCradle = VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED;
+        Decoration ores = Decoration.UNDERGROUND_ORES;
+        Decoration vegetal = Decoration.VEGETAL_DECORATION;
+        Decoration lakes = Decoration.LAKES;
+        Category nether = Category.NETHER;
+        Category forest = Category.FOREST;
+        Category swamp = Category.SWAMP;
+        Category taiga = Category.TAIGA;
 
-        addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE,
-                netherSmokyQuartzFlag);
-        addFeature(event, Category.NETHER, Decoration.UNDERGROUND_ORES, VeConfiguredFeatures.NETHER_RUBY_ORE,
-                netherRubyFlag);
-        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED, blueberryBushFlag);
-        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE, blueberryBushFlag);
-        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED, cranberryBushFlag);
-        addFeature(event, Category.FOREST, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE, cranberryBushFlag);
-        addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED, witchesCradleFlag);
-        addFeature(event, Category.SWAMP, Decoration.VEGETAL_DECORATION,
-                VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE, witchesCradleFlag);
-        addFeature(event, endCityBiomes, Decoration.LAKES, VeConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
-        addFeature(event, endCityBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
+        addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, netherSmokyQuartzFlag);
+        addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_RUBY_ORE, netherRubyFlag);
+        addBushFeature(event, forest, sparseBlueberries, decoratedBlueberries, blueberryBushFlag);
+        addBushFeature(event, forest, sparseCranberries, decoratedCranberries, cranberryBushFlag);
+        addBushFeature(event, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
+        addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM, hugePurpleMushroomFlag);
+        addFeature(event, endCityBiomes, vegetal, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                 snapdragonAndEnderGrassFlag);
-        addFeature(event, darkForestBiomes, Decoration.VEGETAL_DECORATION, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM,
-                hugePurpleMushroomFlag);
-        addStructure(event, Category.TAIGA, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
+        addFeature(event, endCityBiomes, lakes, VeConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
+        addStructure(event, taiga, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin, forestCabinFlag);
         addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
-        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, zombieVillagerWeight, zombieVillagerMinSize,
-                zombieVillagerMaxSize, zombieVillagerFlag, "crimson_forest", "warped_forest");
+        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, netherZombieVillagerWeight, netherZombieVillagerMinSize,
+                netherZombieVillagerMaxSize, netherZombieVillagerFlag, "crimson_forest", "warped_forest");
     }
 
     /**
@@ -675,6 +645,26 @@ public class VanillaExpansions
                 }
             }
         }
+    }
+
+    /**
+     * A helper method for adding bush features.
+     *
+     * @param event            The biome loading event to use.
+     * @param category         The category of biomes to add this feature to.
+     * @param decorationType   The decoration category that this feature belongs to.
+     * @param featureSparse    The sparse bush feature to add.
+     * @param featureDecorated The decorated bush feature to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this feature.
+     */
+    private static void addBushFeature(BiomeLoadingEvent event, Biome.Category category,
+            ConfiguredFeature<?, ?> featureSparse, ConfiguredFeature<?, ?> featureDecorated, boolean enable)
+    {
+        Decoration vegetalDecoration = Decoration.VEGETAL_DECORATION;
+
+        addFeature(event, category, vegetalDecoration, featureSparse, enable);
+        addFeature(event, category, vegetalDecoration, featureDecorated, enable);
     }
 
     /**
