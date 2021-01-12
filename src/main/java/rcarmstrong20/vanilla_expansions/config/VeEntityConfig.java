@@ -9,8 +9,8 @@ public class VeEntityConfig
     {
         server.comment("Vanilla Expansions Entity Configuration").push("ve_entity_config");
 
-        VeOverworldConfig.init(server, client);
-        VeNetherConfig.init(server, client);
+        VeOverworldConfig.init(server);
+        VeNetherConfig.init(server);
 
         server.pop();
     }
@@ -26,7 +26,7 @@ public class VeEntityConfig
     {
         public static BooleanValue enableSaveTheBunnies;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Overworld Configuration").push("ve_overworld_config");
 
@@ -49,9 +49,9 @@ public class VeEntityConfig
     {
         public static BooleanValue enableZombieVillagersSpawns;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
-            server.comment("Nether Configuration").push("ve_nether_config"); // Enter nether sub-category.
+            server.comment("Nether Configuration").push("ve_nether_config");
 
             enableZombieVillagersSpawns = server.comment("When enabled zombie villagers will spawn in the nether.")
                     .translation("ve_entity_config.ve_nether_config.enable_zombie_villager_spawns").worldRestart()

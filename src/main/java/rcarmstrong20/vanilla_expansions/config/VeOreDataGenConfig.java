@@ -14,38 +14,67 @@ public class VeOreDataGenConfig
     {
         server.comment("Vanilla Expansions Ore Data Configuration").push("ve_ore_data_config");
 
-        server.comment("Vein Size Configuration").push("ve_vein_size");
-
-        netherSmokyQuartzOreVeinSize = server.comment(compileVeinSizeComment("nether smoky quartz ore", "14"))
-                .translation("ve.configNetherOre.netherSmokyQuartzOreVeinSize").worldRestart()
-                .defineInRange("nether_smoky_quartz_ore_vein_size", 14, 0, 17);
-
-        netherRubyOreVeinSize = server.comment(compileVeinSizeComment("nether ruby ore", "3"))
-                .translation("ve.configNetherOre.netherRubyOreVeinSize").worldRestart()
-                .defineInRange("nether_ruby_ore_vein_size", 3, 0, 17);
+        VeVeinSizeConfig.init(server);
+        VeSpreadConfig.init(server);
 
         server.pop();
-
-        server.comment("Spread Configuration").push("ve_ore_spread");
-
-        netherSmokyQuartzOreSpread = server.comment(compileSpreadComment("nether smoky quartz ore", "16"))
-                .translation("ve.configNetherOre.netherSmokyQuartzOreVeinSize").worldRestart()
-                .defineInRange("nether_smoky_quartz_ore_vein_size", 16, 2, 20);
-
-        netherRubyOreSpread = server.comment(compileSpreadComment("nether ruby ore", "7"))
-                .translation("ve.configNetherOre.netherRubyOreVeinSize").worldRestart()
-                .defineInRange("nether_ruby_ore_vein_size", 7, 2, 20);
-
-        server.pop(2);
     }
 
-    private static String compileVeinSizeComment(String name, String defaultValue)
+    private static class VeVeinSizeConfig
     {
-        return "Sets vein size for " + name + ". (Default: " + defaultValue + ")";
+        public static void init(ForgeConfigSpec.Builder server)
+        {
+            server.comment("Vein Size Configuration").push("ve_vein_size");
+
+            netherSmokyQuartzOreVeinSize = server.comment(compileVeinSizeComment("nether smoky quartz ore", "14"))
+                    .translation("ve_ore_data.ve_vein_size.nether_smoky_quartz_ore_vein_size").worldRestart()
+                    .defineInRange("nether_smoky_quartz_ore_vein_size", 14, 0, 17);
+
+            netherRubyOreVeinSize = server.comment(compileVeinSizeComment("nether ruby ore", "3"))
+                    .translation("ve_ore_data.ve_vein_size.nether_ruby_ore_vein_size").worldRestart()
+                    .defineInRange("nether_ruby_ore_vein_size", 3, 0, 17);
+
+            server.pop();
+        }
+
+        /**
+         *
+         * @param name         The name of this ore.
+         * @param defaultValue
+         * @return A new string with the name and default value inserted.
+         */
+        private static String compileVeinSizeComment(String name, String defaultValue)
+        {
+            return "Sets vein size for " + name + ". (Default: " + defaultValue + ")";
+        }
     }
 
-    private static String compileSpreadComment(String name, String defaultValue)
+    private static class VeSpreadConfig
     {
-        return "Sets how spread out the ore blocks are when spawned for " + name + ". (Default: " + defaultValue + ")";
+        public static void init(ForgeConfigSpec.Builder server)
+        {
+            server.comment("Spread Configuration").push("ve_ore_spread");
+
+            netherSmokyQuartzOreSpread = server.comment(compileSpreadComment("nether smoky quartz ore", "16"))
+                    .translation("ve_ore_data.ve_ore_spread.nether_smoky_quartz_ore_spread").worldRestart()
+                    .defineInRange("nether_smoky_quartz_ore_spread", 16, 2, 20);
+
+            netherRubyOreSpread = server.comment(compileSpreadComment("nether ruby ore", "7"))
+                    .translation("ve_ore_data.ve_ore_spread.nether_ruby_ore_spread").worldRestart()
+                    .defineInRange("nether_ruby_ore_spread", 7, 2, 20);
+
+            server.pop();
+        }
+
+        /**
+         *
+         * @param name         The name of this ore.
+         * @param defaultValue
+         * @return A new string with the name and default value inserted.
+         */
+        private static String compileSpreadComment(String name, String defaultValue)
+        {
+            return "Sets how spread out the ores are when spawned for " + name + ". (Default: " + defaultValue + ")";
+        }
     }
 }

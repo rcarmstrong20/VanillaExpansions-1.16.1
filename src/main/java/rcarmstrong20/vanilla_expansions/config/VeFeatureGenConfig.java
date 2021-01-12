@@ -7,11 +7,11 @@ public class VeFeatureGenConfig
 {
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
-        server.comment("Vanilla Expansions Feature Configuration").push("ve_feature_config"); // Enter feature config.
+        server.comment("Vanilla Expansions Feature Configuration").push("ve_feature_config");
 
-        VeFeatureGenConfig.VeOverworldConfig.init(server, client);
-        VeFeatureGenConfig.VeNetherConfig.init(server, client);
-        VeFeatureGenConfig.VeEndConfig.init(server, client);
+        VeFeatureGenConfig.VeOverworldConfig.init(server);
+        VeFeatureGenConfig.VeNetherConfig.init(server);
+        VeFeatureGenConfig.VeEndConfig.init(server);
 
         server.pop();
     }
@@ -32,7 +32,7 @@ public class VeFeatureGenConfig
         public static BooleanValue enableTaigaCabinSpawns;
         public static BooleanValue enableForestCabinSpawns;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Overworld Configuration").push("ve_overworld_config");
 
@@ -77,7 +77,7 @@ public class VeFeatureGenConfig
         public static BooleanValue enableNetherRubyOreSpawns;
         public static BooleanValue enableCrimsonCabinSpawns;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Nether Configuration").push("ve_nether_config");
 
@@ -108,7 +108,7 @@ public class VeFeatureGenConfig
         public static BooleanValue enableDarkMatterLakeSpawns;
         public static BooleanValue enableSnapdragonAndEnderGrassSpawns;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("End Configuration").push("ve_end_config");
 

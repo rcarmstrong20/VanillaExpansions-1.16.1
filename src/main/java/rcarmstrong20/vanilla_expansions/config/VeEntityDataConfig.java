@@ -10,83 +10,91 @@ public class VeEntityDataConfig
     {
         server.comment("Vanilla Expansions Entity Data Configuration").push("ve_entity_data_config");
 
-        SpawnWeightConfig.init(server, client);
-        MinimumSpawnSizeConfig.init(server, client);
-        MaximumSpawnSizeConfig.init(server, client);
+        SpawnWeightConfig.init(server);
+        MinSpawnSizeConfig.init(server);
+        MaxSpawnSizeConfig.init(server);
 
         server.pop();
     }
 
     public static class SpawnWeightConfig
     {
-        public static IntValue zombieVillagerSpawnWeight;
+        public static IntValue netherZombieVillagerSpawnWeight;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Spawn Weight Configuration").push("ve_spawn_weight");
 
-            server.comment("Nether Configuration").push("ve_nether_config");
+            netherZombieVillagerSpawnWeight = server.comment(compileSpawnWeightComment("nether zombie villager", "1"))
+                    .translation("ve_entity_data_config.spawn_weight.nether_zombie_villager_spawn_weight")
+                    .worldRestart().defineInRange("nether_zombie_villager_spawn_weight", 1, 1, 100);
 
-            zombieVillagerSpawnWeight = server.comment(compileSpawnWeightComment("villager zombie", "1"))
-                    .translation("ve_entity_data_config.spawn_weight.zombie_villager").worldRestart()
-                    .defineInRange("zombie_villager_spawn_weight", 1, 1, 100);
-
-            server.pop(2);
+            server.pop();
         }
-    }
 
-    public static class MinimumSpawnSizeConfig
-    {
-        public static IntValue zombieVillagerMinSpawnSize;
-
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        /**
+         *
+         * @param name         The name of this mob.
+         * @param defaultValue
+         * @return A new string with the name and default value.
+         */
+        private static String compileSpawnWeightComment(String name, String defaultValue)
         {
-            server.comment("Minimum Spawn Size Configuration").push("ve_min_spawn_size");
-
-            server.comment("Nether Configuration").push("ve_nether_config");
-
-            zombieVillagerMinSpawnSize = server.comment(compileMinSpawnComment("villager zombie", "2"))
-                    .translation("ve_entity_data_config.min_spawn_size.zombie_villager").worldRestart()
-                    .defineInRange("zombie_villager_min_spawn_size", 2, 1, 200);
-
-            server.pop(2);
+            return "Sets spawn weight for the " + name + " mob. (Default: " + defaultValue + ")";
         }
     }
 
-    public static class MaximumSpawnSizeConfig
+    public static class MinSpawnSizeConfig
     {
-        public static IntValue zombieVillagerMaxSpawnSize;
+        public static IntValue netherZombieVillagerMinSpawnSize;
 
-        public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
+        public static void init(ForgeConfigSpec.Builder server)
         {
-            server.comment("Maximum Spawn Size Configuration").push("ve_max_spawn_size");
+            server.comment("Min Spawn Count Config").push("ve_min_spawn_count");
 
-            server.comment("Nether Configuration").push("ve_nether_config");
+            netherZombieVillagerMinSpawnSize = server.comment(compileMinSpawnComment("nether zombie villager", "2"))
+                    .translation("ve_entity_data.ve_min_spawn_size.nether_zombie_villager_min_spawn_count")
+                    .worldRestart().defineInRange("nether_zombie_villager_min_spawn_count", 2, 1, 200);
 
-            zombieVillagerMaxSpawnSize = server.comment(compileMaxSpawnComment("villager zombie", "4"))
-                    .translation("ve_entity_data_config.max_spawn_size.zombie_villager").worldRestart()
-                    .defineInRange("zombie_villager_max_spawn_size", 4, 1, 200);
+            server.pop();
+        }
 
-            server.pop(2);
+        /**
+         *
+         * @param name         The name of this mob.
+         * @param defaultValue
+         * @return A new string with the name and default value.
+         */
+        private static String compileMinSpawnComment(String name, String defaultValue)
+        {
+            return "The minimum number of " + name + "s that can spawn at once. (Default: " + defaultValue + ")";
         }
     }
 
-    private static String compileSpawnWeightComment(String name, String defaultValue)
+    public static class MaxSpawnSizeConfig
     {
-        return "Sets spawn weight for the " + name + " mob. (Default: " + defaultValue + ")";
-    }
+        public static IntValue netherZombieVillagerMaxSpawnSize;
 
-    private static String compileMinSpawnComment(String name, String defaultValue)
-    {
-        return "Sets spawn the minimum spawn size for the " + name
-                + " mob. This must be less than the maximum spawn size or there will be bugs. (Default: " + defaultValue
-                + ")";
-    }
+        public static void init(ForgeConfigSpec.Builder server)
+        {
+            server.comment("Max Spawn Count Config").push("ve_max_spawn_count");
 
-    private static String compileMaxSpawnComment(String name, String defaultValue)
-    {
-        return "Sets spawn the maximum spawn size for the " + name
-                + " mob. This must be more than the minimum spawn size or there will be bugs. (Default: " + defaultValue
-                + ")";
+            netherZombieVillagerMaxSpawnSize = server.comment(compileMaxSpawnComment("nether zombie villager", "4"))
+                    .translation("ve_entity_data_config.max_spawn_count.zombie_villager_nether_max_spawn_count")
+                    .worldRestart().defineInRange("nether_zombie_villager_max_spawn_count", 4, 1, 200);
+
+            server.pop();
+        }
+
+        /**
+         *
+         * @param name         The name of this mob.
+         * @param defaultValue
+         * @return A new string with the name and default value.
+         */
+        private static String compileMaxSpawnComment(String name, String defaultValue)
+        {
+            return "The maximum number of " + name + "s that can spawn at once. (Default: " + defaultValue + ")";
+        }
     }
 }
