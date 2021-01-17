@@ -3,6 +3,7 @@ package rcarmstrong20.vanilla_expansions.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,23 +25,35 @@ public class VeStructure
 {
     public static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 
-    public static Structure<VeCabinConfig> overworldCabin = registerCabinStructure("overworld_cabin",
+    public static Structure<VeCabinConfig> overworldCabin = registerStructure("overworld_cabin",
             new VeOverworldCabinStructure(VeCabinConfig.cabinConfig));
-    public static Structure<VeCabinConfig> netherCabin = registerCabinStructure("nether_cabin",
+    public static Structure<VeCabinConfig> netherCabin = registerStructure("nether_cabin",
             new VeNetherCabinStructure(VeCabinConfig.cabinConfig));
 
     /**
+     * Register a new cabin structure.
+     *
      * @param name           The name of the structure.
-     * @param cabinStructure An instance of a new Structure<VeCabinConfig>.
-     * @return The new structure.
+     * @param cabinStructure An instance of a new Structure<C extends
+     *                       IFeatureConfig>.
+     * @return The new cabin structure.
      */
-    private static Structure<VeCabinConfig> registerCabinStructure(String name, Structure<VeCabinConfig> cabinStructure)
+
+    /**
+     * Add and set the registry name for the new structure.
+     *
+     * @param <C>       The feature config for the structure.
+     * @param name      The name of the structure.
+     * @param structure An instance of a new structure.
+     * @return The new Structure.
+     */
+    private static <C extends IFeatureConfig> Structure<C> registerStructure(String name, Structure<C> structure)
     {
         VanillaExpansions.LOGGER.info("Structures registered.");
 
-        cabinStructure.setRegistryName(VanillaExpansions.MOD_ID, name);
-        STRUCTURES.add(cabinStructure);
-        return cabinStructure;
+        structure.setRegistryName(VanillaExpansions.MOD_ID, name);
+        STRUCTURES.add(structure);
+        return structure;
     }
 
     @SubscribeEvent
