@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "ve:block/lime_torch"
+    }
+  }
+}
