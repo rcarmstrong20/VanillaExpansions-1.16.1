@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "colored_lantern",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:gray_dye"
+    },
+    {
+      "item": "minecraft:lantern"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:gray_lantern"
+  }
+}
