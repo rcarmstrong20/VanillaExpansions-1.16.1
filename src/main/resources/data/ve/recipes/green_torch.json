@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "colored_torch",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:green_dye"
+    },
+    {
+      "item": "minecraft:torch"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:green_torch"
+  }
+}
