@@ -10,6 +10,7 @@ import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -173,6 +174,9 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
     {
         Random random = new Random();
+
+        if (!(entity instanceof PlayerEntity) && entity.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005))
+            return;
 
         if (entity instanceof ItemEntity)
         {
