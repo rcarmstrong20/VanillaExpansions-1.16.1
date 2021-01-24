@@ -9,16 +9,20 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.block.LanternBlock;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallBlock;
+import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -80,7 +84,7 @@ import rcarmstrong20.vanilla_expansions.block.VeZombiePlushBlock;
  * @author Ryan
  *
  *         A class for holding every block instance that vanilla expansions has.
- * 
+ *
  *         Note: all block names must be lower case or forge will crash the
  *         game.
  */
@@ -447,6 +451,156 @@ public class VeBlocks
             new VeColoredCampfireBlock(VeParticleTypes.redSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
     public static Block blackCampfire = register("black_campfire", true,
             new VeColoredCampfireBlock(VeParticleTypes.blackSpark, AbstractBlock.Properties.from(Blocks.CAMPFIRE)));
+    public static Block whiteLantern = register("white_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block orangeLantern = register("orange_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block magentaLantern = register("magenta_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block lightBlueLantern = register("light_blue_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block yellowLantern = register("yellow_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block limeLantern = register("lime_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block pinkLantern = register("pink_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block grayLantern = register("gray_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block lightGrayLantern = register("light_gray_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block cyanLantern = register("cyan_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block purpleLantern = register("purple_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block blueLantern = register("blue_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block brownLantern = register("brown_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block greenLantern = register("green_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block redLantern = register("red_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block blackLantern = register("black_lantern", true,
+            new LanternBlock(AbstractBlock.Properties.from(Blocks.LANTERN)));
+    public static Block whiteTorch = register("white_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.whiteFlame));
+    public static Block orangeTorch = register("orange_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.orangeFlame));
+    public static Block magentaTorch = register("magenta_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.magentaFlame));
+    public static Block lightBlueTorch = register("light_blue_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.lightBlueFlame));
+    public static Block yellowTorch = register("yellow_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.yellowFlame));
+    public static Block limeTorch = register("lime_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.limeFlame));
+    public static Block pinkTorch = register("pink_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.pinkFlame));
+    public static Block grayTorch = register("gray_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.grayFlame));
+    public static Block lightGrayTorch = register("light_gray_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.lightGrayFlame));
+    public static Block cyanTorch = register("cyan_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.cyanFlame));
+    public static Block purpleTorch = register("purple_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.purpleFlame));
+    public static Block blueTorch = register("blue_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.blueFlame));
+    public static Block brownTorch = register("brown_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.brownFlame));
+    public static Block greenTorch = register("green_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.greenFlame));
+    public static Block redTorch = register("red_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.redFlame));
+    public static Block blackTorch = register("black_torch", false,
+            new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.blackFlame));
+    public static Block whiteWallTorch = register("white_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.whiteTorch), VeParticleTypes.whiteFlame));
+    public static Block orangeWallTorch = register("orange_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.orangeTorch), VeParticleTypes.orangeFlame));
+    public static Block magentaWallTorch = register("magenta_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.magentaTorch), VeParticleTypes.magentaFlame));
+    public static Block lightBlueWallTorch = register("light_blue_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.lightBlueTorch), VeParticleTypes.lightBlueFlame));
+    public static Block yellowWallTorch = register("yellow_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.yellowTorch), VeParticleTypes.yellowFlame));
+    public static Block limeWallTorch = register("lime_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.limeTorch), VeParticleTypes.limeFlame));
+    public static Block pinkWallTorch = register("pink_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.pinkTorch), VeParticleTypes.pinkFlame));
+    public static Block grayWallTorch = register("gray_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.grayTorch), VeParticleTypes.grayFlame));
+    public static Block lightGrayWallTorch = register("light_gray_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.lightGrayTorch), VeParticleTypes.lightGrayFlame));
+    public static Block cyanWallTorch = register("cyan_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.cyanTorch), VeParticleTypes.cyanFlame));
+    public static Block purpleWallTorch = register("purple_wall_torch", false,
+            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.purpleTorch), VeParticleTypes.purpleFlame));
+    public static Block blueWallTorch = register("blue_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.blueTorch), VeParticleTypes.blueFlame));
+    public static Block brownWallTorch = register("brown_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.brownTorch), VeParticleTypes.brownFlame));
+    public static Block greenWallTorch = register("green_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.greenTorch), VeParticleTypes.greenFlame));
+    public static Block redWallTorch = register("red_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.redTorch), VeParticleTypes.redFlame));
+    public static Block blackWallTorch = register("black_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
+            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
+            {
+                return 14;
+            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.blackTorch), VeParticleTypes.blackFlame));
     public static Block witchsCradle = register("witchs_cradle", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.SWEET_BERRY_BUSH)));
     public static Block darkMatter = register("dark_matter", false,
@@ -524,9 +678,9 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
 
     /**
-     * Used to register a block with default item properties.
+     * Used to register a block with a item that has a custom stack size.
      *
-     * @param name         The name of the block.
+     * @param name         The name of the block and block item.
      * @param hasItem      If this block has an item.
      * @param block        A new block object.
      * @param maxStackSize The block item max stack size.
@@ -552,21 +706,22 @@ public class VeBlocks
     }
 
     /**
-     * Helper method for registering all blocks and block items.
+     * Helper method for registering all default blocks and block items.
      */
-    private static Block register(String name, boolean hasItem, Block block, Item.Properties properties)
+    private static Block register(String name, boolean hasItem, Block block, Properties properties)
     {
         String id = VanillaExpansions.MOD_ID;
 
         if (hasItem)
         {
-            Item item = new BlockItem(block, properties);
+            BlockItem item = new BlockItem(block, properties);
             item.setRegistryName(id, name);
             ITEMS.add(item);
         }
 
         block.setRegistryName(id, name);
         BLOCKS.add(block);
+
         return block;
     }
 
