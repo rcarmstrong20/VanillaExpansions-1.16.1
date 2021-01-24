@@ -10,6 +10,7 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
+import net.minecraft.item.WallOrFloorItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -96,6 +97,38 @@ public class VeItems
     public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(VE_16_STACK_ITEMS));
     public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(VE_16_STACK_ITEMS));
     public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(VE_16_STACK_ITEMS));
+    public static Item whiteTorch = register("white_torch",
+            new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, VE_ITEMS));
+    public static Item orangeTorch = register("orange_torch",
+            new WallOrFloorItem(VeBlocks.orangeTorch, VeBlocks.orangeWallTorch, VE_ITEMS));
+    public static Item magentaTorch = register("magenta_torch",
+            new WallOrFloorItem(VeBlocks.magentaTorch, VeBlocks.magentaWallTorch, VE_ITEMS));
+    public static Item lightBlueTorch = register("light_blue_torch",
+            new WallOrFloorItem(VeBlocks.lightBlueTorch, VeBlocks.lightBlueWallTorch, VE_ITEMS));
+    public static Item yellowTorch = register("yellow_torch",
+            new WallOrFloorItem(VeBlocks.yellowTorch, VeBlocks.yellowWallTorch, VE_ITEMS));
+    public static Item limeTorch = register("lime_torch",
+            new WallOrFloorItem(VeBlocks.limeTorch, VeBlocks.limeWallTorch, VE_ITEMS));
+    public static Item pinkTorch = register("pink_torch",
+            new WallOrFloorItem(VeBlocks.pinkTorch, VeBlocks.pinkWallTorch, VE_ITEMS));
+    public static Item grayTorch = register("gray_torch",
+            new WallOrFloorItem(VeBlocks.grayTorch, VeBlocks.grayWallTorch, VE_ITEMS));
+    public static Item lightGrayTorch = register("light_gray_torch",
+            new WallOrFloorItem(VeBlocks.lightGrayTorch, VeBlocks.lightGrayWallTorch, VE_ITEMS));
+    public static Item cyanTorch = register("cyan_torch",
+            new WallOrFloorItem(VeBlocks.cyanTorch, VeBlocks.cyanWallTorch, VE_ITEMS));
+    public static Item purpleTorch = register("purple_torch",
+            new WallOrFloorItem(VeBlocks.purpleTorch, VeBlocks.purpleWallTorch, VE_ITEMS));
+    public static Item blueTorch = register("blue_torch",
+            new WallOrFloorItem(VeBlocks.blueTorch, VeBlocks.blueWallTorch, VE_ITEMS));
+    public static Item brownTorch = register("brown_torch",
+            new WallOrFloorItem(VeBlocks.brownTorch, VeBlocks.brownWallTorch, VE_ITEMS));
+    public static Item greenTorch = register("green_torch",
+            new WallOrFloorItem(VeBlocks.greenTorch, VeBlocks.greenWallTorch, VE_ITEMS));
+    public static Item redTorch = register("red_torch",
+            new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, VE_ITEMS));
+    public static Item blackTorch = register("black_torch",
+            new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, VE_ITEMS));
 
     /**
      * @param name The name for the item.
