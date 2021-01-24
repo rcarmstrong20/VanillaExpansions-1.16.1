@@ -67,7 +67,7 @@ public class VeStructure
      * A helper method that registers and adds them to the name structure bimap
      * which is used in the locate command.
      *
-     * @param event         The registry event to use.
+     * @param event         The registry structure event to use.
      * @param structureList The list of structures to register.
      */
     private static void register(Register<Structure<?>> event, List<Structure<?>> structureList)
