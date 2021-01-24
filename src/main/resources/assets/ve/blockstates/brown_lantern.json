@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "hanging=false":
+    {
+      "model": "ve:block/brown_lantern"
+    },
+    "hanging=true":
+    {
+      "model": "ve:block/brown_lantern_hanging"
+    }
+  }
+}
