@@ -22,7 +22,9 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaParticle;
+import net.minecraft.client.particle.ParticleManager.IParticleMetaFactory;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -37,6 +39,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
@@ -173,50 +176,72 @@ public class VanillaExpansions
      *
      * @param event Called during particle factory registry.
      */
-    @SuppressWarnings("resource")
     @OnlyIn(Dist.CLIENT)
     private void onRegisterParticle(ParticleFactoryRegisterEvent event)
     {
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.drippingDarkMatter,
-                VeDripParticle.VeDrippingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.fallingDarkMatter,
-                VeDripParticle.VeFallingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landingDarkMatter,
-                VeDripParticle.VeLandingVoidFactory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.underDarkMatter,
-                VeUnderDarkMatterParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.whiteSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.orangeSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.magentaSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lightBlueSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.yellowSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.limeSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.pinkSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.graySpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.lightGraySpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.cyanSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.purpleSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blueSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.brownSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.greenSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.redSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.blackSpark, LavaParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.totemOfTheGuardian,
-                VeTotemOfTheGuardianParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(VeParticleTypes.totemOfTheBrute,
-                VeTotemOfTheBruteParticle.Factory::new);
+        registerFactory(VeParticleTypes.drippingDarkMatter, VeDripParticle.VeDrippingVoidFactory::new);
+        registerFactory(VeParticleTypes.fallingDarkMatter, VeDripParticle.VeFallingVoidFactory::new);
+        registerFactory(VeParticleTypes.landingDarkMatter, VeDripParticle.VeLandingVoidFactory::new);
+        registerFactory(VeParticleTypes.underDarkMatter, VeUnderDarkMatterParticle.Factory::new);
+        registerFactory(VeParticleTypes.whiteSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.orangeSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.magentaSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.lightBlueSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.yellowSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.limeSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.pinkSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.graySpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.lightGraySpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.cyanSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.purpleSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.blueSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.brownSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.greenSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.redSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.blackSpark, LavaParticle.Factory::new);
+        registerFactory(VeParticleTypes.whiteFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.orangeFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.magentaFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.lightBlueFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.yellowFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.limeFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.pinkFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.grayFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.lightGrayFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.cyanFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.purpleFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.blueFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.brownFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.greenFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.redFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.blackFlame, FlameParticle.Factory::new);
+        registerFactory(VeParticleTypes.totemOfTheGuardian, VeTotemOfTheGuardianParticle.Factory::new);
+        registerFactory(VeParticleTypes.totemOfTheBrute, VeTotemOfTheBruteParticle.Factory::new);
+    }
+
+    /**
+     * A helper method for registering particle factories that is a lot cleaner than
+     * the vanilla path.
+     *
+     * @param particleIn        The particle.
+     * @param particleFactoryIn The factory.
+     */
+    @SuppressWarnings("resource")
+    private static void registerFactory(ParticleType<BasicParticleType> particleIn,
+            IParticleMetaFactory<BasicParticleType> particleFactoryIn)
+    {
+        Minecraft.getInstance().particles.registerFactory(particleIn, particleFactoryIn);
     }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void onClientPlayer(PlayerTickEvent event)
+    public void onClientPlayerTick(PlayerTickEvent event)
     {
         // Push the player when in flowing dark matter.
         event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
     }
 
-    @SuppressWarnings("unchecked") // This is for byBiome, we need this because we don't know what the original
-                                   // field type is.
+    @SuppressWarnings("unchecked") // Needed for the byBiome field.
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void addTrades(VillagerTradesEvent event)
