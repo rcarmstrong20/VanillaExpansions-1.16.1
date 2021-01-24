@@ -43,6 +43,23 @@ public class VeParticleTypes
     public static BasicParticleType greenSpark = register("green_spark", false);
     public static BasicParticleType redSpark = register("red_spark", false);
     public static BasicParticleType blackSpark = register("black_spark", false);
+    public static BasicParticleType whiteFlame = register("white_flame", false);
+    public static BasicParticleType orangeFlame = register("orange_flame", false);
+    public static BasicParticleType magentaFlame = register("magenta_flame", false);
+    public static BasicParticleType lightBlueFlame = register("light_blue_flame", false);
+    public static BasicParticleType yellowFlame = register("yellow_flame", false);
+    public static BasicParticleType limeFlame = register("lime_flame", false);
+    public static BasicParticleType pinkFlame = register("pink_flame", false);
+    public static BasicParticleType grayFlame = register("gray_flame", false);
+    public static BasicParticleType lightGrayFlame = register("light_gray_flame", false);
+    public static BasicParticleType cyanFlame = register("cyan_flame", false);
+    public static BasicParticleType purpleFlame = register("purple_flame", false);
+    public static BasicParticleType blueFlame = register("blue_flame", false);
+    public static BasicParticleType brownFlame = register("brown_flame", false);
+    public static BasicParticleType greenFlame = register("green_flame", false);
+    public static BasicParticleType redFlame = register("red_flame", false);
+    public static BasicParticleType blackFlame = register("black_flame", false);
+
     public static BasicParticleType totemOfTheGuardian = register("totem_of_the_guardian", false);
     public static BasicParticleType totemOfTheBrute = register("totem_of_the_brute", false);
 
