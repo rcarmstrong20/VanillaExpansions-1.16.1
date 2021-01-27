@@ -42,11 +42,4 @@ public class VeConfig
         config.setConfig(file);
     }
 
-    /**
-     * Returns the inputed string with the minecraft id.
-     */
-    public static String getMinecraftPrefix(String name)
-    {
-        return "minecraft:" + name;
-    }
 }
