@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
 	{
-        "layer0": "ve:item/quinoa_cerceal"
+        "layer0": "ve:item/pudding"
     }
 }

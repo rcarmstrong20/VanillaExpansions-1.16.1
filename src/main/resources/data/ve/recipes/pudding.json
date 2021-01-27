@@ -9,17 +9,14 @@
 	  "item": "minecraft:milk_bucket"
 	},
 	{
-	  "item": "ve:quinoa"
+	  "item": "minecraft:sugar"
 	},
 	{
-	  "item": "ve:cranberries"
-	},
-	{
-	  "item": "ve:blueberries"
+	  "item": "minecraft:egg"
 	}
   ],
   "result":
   {
-    "item": "ve:quinoa_cerceal"
+    "item": "ve:pudding"
   }
 }
