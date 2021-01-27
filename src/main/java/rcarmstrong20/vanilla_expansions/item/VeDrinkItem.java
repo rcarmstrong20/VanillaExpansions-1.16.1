@@ -7,30 +7,38 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public class VeDrinkItem extends Item
 {
+    private Item returnItem;
+
     public VeDrinkItem(Properties properties)
     {
         super(properties);
+        this.returnItem = Items.GLASS_BOTTLE;
+    }
+
+    public VeDrinkItem(Properties properties, Item returnItemIn)
+    {
+        super(properties);
+        this.returnItem = returnItemIn;
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving)
+    public ItemStack onItemUseFinish(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn)
     {
-        if (entityLiving instanceof PlayerEntity)
+        if (livingEntityIn instanceof PlayerEntity)
         {
-            if (this == VeItems.bloodVial)
+            PlayerEntity playerEntity = (PlayerEntity) livingEntityIn;
+            boolean flag = playerEntity.isCreative();
+
+            if (!flag)
             {
-                ((PlayerEntity) entityLiving).addItemStackToInventory(new ItemStack(VeItems.glassVial));
-            }
-            else
-            {
-                ((PlayerEntity) entityLiving).addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+                playerEntity.addItemStackToInventory(new ItemStack(returnItem, 1));
+                return super.onItemUseFinish(stackIn, worldIn, livingEntityIn);
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return stackIn;
     }
 
     @Override
