@@ -49,7 +49,6 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
         {
             this.addParticles();
         }
-
         else if (!inventory.isEmpty())
         {
             if (flag)
@@ -137,6 +136,7 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
                 }
             }
         }
+
     }
 
     /**
