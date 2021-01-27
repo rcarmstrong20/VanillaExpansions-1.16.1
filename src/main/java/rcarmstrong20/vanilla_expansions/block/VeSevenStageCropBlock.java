@@ -28,10 +28,6 @@ public class VeSevenStageCropBlock extends CropsBlock
         {
             return VeItems.bokChoySeeds;
         }
-        else if (block == VeBlocks.quinoa)
-        {
-            return VeItems.quinoa;
-        }
         return Items.WHEAT_SEEDS;
     }
 
