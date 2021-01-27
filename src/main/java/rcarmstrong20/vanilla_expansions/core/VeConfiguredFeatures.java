@@ -38,14 +38,16 @@ public class VeConfiguredFeatures
             Feature.ORE
                     .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
                             VeConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE,
-                            VeOreDataGenConfig.netherSmokyQuartzOreVeinSize.get()))
+                            VeOreDataGenConfig.VeVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
                     .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
-                    .func_242731_b(VeOreDataGenConfig.netherSmokyQuartzOreSpread.get()));
+                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.netherSmokyQuartzOreSpread.get()));
     public static final ConfiguredFeature<?, ?> NETHER_RUBY_ORE = register("nether_ruby_ore",
-            Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
-                    VeConfiguredFeatures.States.NETHER_RUBY_ORE, VeOreDataGenConfig.netherRubyOreVeinSize.get()))
+            Feature.ORE
+                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
+                            VeConfiguredFeatures.States.NETHER_RUBY_ORE,
+                            VeOreDataGenConfig.VeVeinSizeConfig.netherRubyOreVeinSize.get()))
                     .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
-                    .func_242731_b(VeOreDataGenConfig.netherRubyOreSpread.get()));
+                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.netherRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
             .withConfiguration(VeConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",

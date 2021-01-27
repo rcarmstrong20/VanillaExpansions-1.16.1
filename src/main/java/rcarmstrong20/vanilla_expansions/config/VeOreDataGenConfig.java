@@ -5,11 +5,6 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 public class VeOreDataGenConfig
 {
-    public static IntValue netherSmokyQuartzOreVeinSize;
-    public static IntValue netherRubyOreVeinSize;
-    public static IntValue netherSmokyQuartzOreSpread;
-    public static IntValue netherRubyOreSpread;
-
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
         server.comment("Vanilla Expansions Ore Data Configuration").push("ve_ore_data_config");
@@ -20,8 +15,11 @@ public class VeOreDataGenConfig
         server.pop();
     }
 
-    private static class VeVeinSizeConfig
+    public static class VeVeinSizeConfig
     {
+        public static IntValue netherSmokyQuartzOreVeinSize;
+        public static IntValue netherRubyOreVeinSize;
+
         public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Vein Size Configuration").push("ve_vein_size");
@@ -49,8 +47,11 @@ public class VeOreDataGenConfig
         }
     }
 
-    private static class VeSpreadConfig
+    public static class VeSpreadConfig
     {
+        public static IntValue netherSmokyQuartzOreSpread;
+        public static IntValue netherRubyOreSpread;
+
         public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Spread Configuration").push("ve_ore_spread");
