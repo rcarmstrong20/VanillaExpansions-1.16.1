@@ -3,7 +3,7 @@
   "ingredients":
   [
     {
-      "item": "ve:noodle_bowl"
+      "item": "minecraft:bowl"
     },
 	{
 	  "item": "ve:cooked_noodles"
