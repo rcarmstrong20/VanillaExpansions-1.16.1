@@ -7,9 +7,10 @@ import com.google.common.base.Suppliers;
 
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.BucketItem;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
 import net.minecraft.item.WallOrFloorItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,55 +34,53 @@ import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
 {
-    // Item Property Presets
-
     private static final Item.Properties VE_ITEMS = new Item.Properties().group(VanillaExpansions.VE_GROUP);
     private static final Item.Properties VE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
             .group(VanillaExpansions.VE_GROUP);
 
     private static final List<Item> ITEMS = new ArrayList<>();
 
-    // Vanilla Expansions Items
     public static Item ruby = register("ruby", new Item(VE_ITEMS));
     public static Item bokChoySeeds = register("bok_choy_seeds", new BlockNamedItem(VeBlocks.bokChoy, VE_ITEMS));
-    public static Item bokChoy = register("bok_choy", new Item(VE_ITEMS));
-    public static Item garlic = register("garlic", new BlockNamedItem(VeBlocks.garlic, VE_ITEMS));
-    public static Item greenOnion = register("green_onion", new BlockNamedItem(VeBlocks.greenOnions, VE_ITEMS));
-    public static Item quinoa = register("quinoa", new BlockNamedItem(VeBlocks.quinoa, VE_ITEMS));
-    public static Item blueberries = register("blueberries", new BlockNamedItem(VeBlocks.blueberryBush,
-            new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.BLUEBERRIES)));
-    public static Item cranberries = register("cranberries", new BlockNamedItem(VeBlocks.cranberryBush,
-            new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.CRANBERRIES)));
+    public static Item bokChoy = register("bok_choy", new Item(buildProperties(VeFoods.bokChoy)));
+    public static Item garlic = register("garlic",
+            new BlockNamedItem(VeBlocks.garlic, buildProperties(VeFoods.garlic)));
+    public static Item greenOnion = register("green_onion",
+            new BlockNamedItem(VeBlocks.greenOnions, buildProperties(VeFoods.greenOnion)));
+    public static Item blueberries = register("blueberries",
+            new BlockNamedItem(VeBlocks.blueberryBush, buildProperties(VeFoods.blueberries)));
+    public static Item cranberries = register("cranberries",
+            new BlockNamedItem(VeBlocks.cranberryBush, buildProperties(VeFoods.cranberries)));
     public static Item cranberrySauce = register("cranberry_sauce",
             new VeDrinkItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16)
-                    .group(VanillaExpansions.VE_GROUP).food(VeFoods.CRANBERRY_SAUCE)));
+                    .group(VanillaExpansions.VE_GROUP).food(VeFoods.cranberrySauce)));
     public static Item noodles = register("noodles", new Item(VE_ITEMS));
-    public static Item cookedNoodles = register("cooked_noodles", new Item(VE_ITEMS));
+    public static Item cookedNoodles = register("cooked_noodles", new Item(buildProperties(VeFoods.cookedNoodles)));
     public static Item noodleSoup = register("noodle_soup", new VeSoupItem(new Item.Properties()
-            .containerItem(Items.BOWL).maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.NOODLE_SOUP)));
-    public static Item noodleBowl = register("noodle_bowl", new Item(VE_ITEMS));
-    public static Item quinoaCerceal = register("quinoa_cerceal", new SoupItem(new Item.Properties().maxStackSize(1)
-            .containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP).food(VeFoods.QUINOA_CERCEAL)));
+            .containerItem(Items.BOWL).maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.noodleSoup)));
+    public static Item pudding = register("pudding", new VeSoupItem(
+            new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.pudding)));
+    public static Item berryPudding = register("berry_pudding", new VeSoupItem(
+            new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.berryPudding)));
     public static Item smokyQuartz = register("smoky_quartz", new Item(VE_ITEMS));
-    public static Item darkMatterBucket = register("dark_matter_bucket",
-            new BucketItem(Suppliers.ofInstance(VeFluids.darkMatter), new Item.Properties().containerItem(Items.BUCKET)
-                    .maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.DARK_MATTER_BUCKET)));
+    public static Item darkMatterBucket = register("dark_matter_bucket", new BucketItem(
+            Suppliers.ofInstance(VeFluids.darkMatter),
+            new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(VanillaExpansions.VE_GROUP)));
     public static Item caramelApple = register("caramel_apple", new VeSoupItem(new Item.Properties().maxStackSize(1)
-            .containerItem(Items.STICK).group(VanillaExpansions.VE_GROUP).food(VeFoods.CARAMEL_APPLE)));
+            .containerItem(Items.STICK).group(VanillaExpansions.VE_GROUP).food(VeFoods.caramelApple), Items.STICK));
     public static Item caramel = register("caramel", new Item(VE_ITEMS));
-    public static Item spruceCone = register("spruce_cone",
-            new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.SPRUCE_CONE)));
-    public static Item forestsBounty = register("forests_bounty", new SoupItem(new Item.Properties()
-            .containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP).maxStackSize(1).food(VeFoods.FORESTS_BOUNTY)));
+    public static Item spruceCone = register("spruce_cone", new Item(buildProperties(VeFoods.spruceCone)));
+    public static Item forestsBounty = register("forests_bounty", new VeSoupItem(new Item.Properties()
+            .containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP).maxStackSize(1).food(VeFoods.forestsBounty)));
     public static Item witchsCradleBranch = register("witchs_cradle_branch", new BlockNamedItem(VeBlocks.witchsCradle,
-            new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.WITCHS_CRADLE_BRANCH)));
+            new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.witchsCradleBranch)));
     public static Item witchsCradleSoup = register("witchs_cradle_soup",
             new VeSoupItem(new Item.Properties().containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP)
-                    .maxStackSize(1).food(VeFoods.WITCHS_CRADLE_SOUP)));
+                    .maxStackSize(1).food(VeFoods.witchsCradleSoup)));
     public static Item glassVial = register("glass_vial", new VeGlassVialItem(VE_ITEMS));
     public static Item bloodVial = register("blood_vial",
             new VeDrinkItem(new Item.Properties().containerItem(VeItems.glassVial).group(VanillaExpansions.VE_GROUP)
-                    .maxStackSize(16).food(VeFoods.BLOOD_VIAL)));
+                    .maxStackSize(16).food(VeFoods.bloodVile), VeItems.glassVial));
     public static Item mixedSeedPacket = register("mixed_seed_packet",
             new VeMixedSeedPacketItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
     public static Item blankTotem = register("blank_totem", new Item(VE_16_STACK_ITEMS));
@@ -129,6 +128,17 @@ public class VeItems
             new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, VE_ITEMS));
     public static Item blackTorch = register("black_torch",
             new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, VE_ITEMS));
+
+    /**
+     * A helper method that builds properties for a food item.
+     *
+     * @param foodIn The stats of this food.
+     * @return The properties for this item.
+     */
+    private static Properties buildProperties(Food foodIn)
+    {
+        return new Item.Properties().group(VanillaExpansions.VE_GROUP).food(foodIn);
+    }
 
     /**
      * @param name The name for the item.
