@@ -109,11 +109,9 @@ import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
 /**
+ * The main mod class.
  *
  * @author Ryan
- *
- *         The main mod class.
- *
  */
 @Mod("ve")
 public class VanillaExpansions
@@ -125,6 +123,7 @@ public class VanillaExpansions
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     public static int lastMinuteGathered = LocalDateTime.now().getMinute();
     public static boolean onCooldown = false;
+
     /**
      * This field is a mapping that represents which biome each villager type can
      * spawn in.

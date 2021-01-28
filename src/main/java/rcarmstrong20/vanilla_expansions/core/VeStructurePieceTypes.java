@@ -9,11 +9,10 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinPiece
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinPieces;
 
 /**
+ * A class for holding every structure piece instance that vanilla expansions
+ * has.
  *
  * @author Ryan
- *
- *         A class for holding every structure piece instance that vanilla
- *         expansions has.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes

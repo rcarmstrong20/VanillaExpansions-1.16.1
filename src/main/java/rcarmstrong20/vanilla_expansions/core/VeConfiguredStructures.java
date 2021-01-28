@@ -8,11 +8,10 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 
 /**
+ * A class for holding every configured structure instance that vanilla
+ * expansions has.
  *
  * @author Ryan
- *
- *         A class for holding every configured structure instance that vanilla
- *         expansions has.
  */
 public class VeConfiguredStructures
 {

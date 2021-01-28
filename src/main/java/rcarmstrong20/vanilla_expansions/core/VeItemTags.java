@@ -7,11 +7,9 @@ import net.minecraft.util.ResourceLocation;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
+ * A class for holding every item tag instance that vanilla expansions has.
  *
  * @author Ryan
- *
- *         A class for holding every item tag instance that vanilla expansions
- *         has.
  */
 public class VeItemTags
 {

@@ -8,11 +8,9 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 /**
+ * A class for holding every recipe type instance that vanilla expansions has.
  *
  * @author Ryan
- *
- *         A class for holding every recipe type instance that vanilla
- *         expansions has.
  */
 public class VeRecipeTypes
 {

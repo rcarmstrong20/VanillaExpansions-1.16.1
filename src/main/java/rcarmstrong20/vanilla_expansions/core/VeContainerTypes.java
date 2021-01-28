@@ -13,11 +13,10 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 
 /**
- *
+ * A class for holding every container type instance that vanilla expansions
+ * has.
+ * 
  * @author Ryan
- *
- *         A class for holding every container type instance that vanilla
- *         expansions has.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeContainerTypes

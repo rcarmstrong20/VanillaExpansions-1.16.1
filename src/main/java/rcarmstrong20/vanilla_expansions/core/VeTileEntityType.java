@@ -13,11 +13,10 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
 
 /**
+ * A class for holding every tile entity type instance that vanilla expansions
+ * has.
  *
  * @author Ryan
- *
- *         A class for holding every tile entity type instance that vanilla
- *         expansions has.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeTileEntityType

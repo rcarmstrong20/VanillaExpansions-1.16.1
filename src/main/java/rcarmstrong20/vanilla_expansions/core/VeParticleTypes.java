@@ -12,11 +12,9 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
+ * A class for holding every particle type instance that vanilla expansions has.
  *
  * @author Ryan
- *
- *         A class for holding every particle type instance that vanilla
- *         expansions has.
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeParticleTypes

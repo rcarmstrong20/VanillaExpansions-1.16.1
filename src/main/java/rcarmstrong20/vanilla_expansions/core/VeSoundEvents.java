@@ -11,11 +11,9 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
+ * A class for holding every sound event instance that vanilla expansions has.
  *
  * @author Ryan
- *
- *         A class for holding every sound event instance that vanilla
- *         expansions has.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeSoundEvents

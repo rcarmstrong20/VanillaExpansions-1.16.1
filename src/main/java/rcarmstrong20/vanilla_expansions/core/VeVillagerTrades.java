@@ -13,11 +13,10 @@ import net.minecraft.item.Items;
 import net.minecraftforge.common.BasicTrade;
 
 /**
- *
+ * A class for holding and creating every villager trade instance that vanilla
+ * expansions has.
+ * 
  * @author Ryan
- *
- *         A class for holding and creating every villager trade instance that
- *         vanilla expansions has.
  */
 public class VeVillagerTrades
 {
