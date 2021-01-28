@@ -25,23 +25,20 @@ import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 
 /**
  *
+ * A class for holding every item instance that vanilla expansions has.
+ *
+ * Note: all item names must be lower case or forge will crash the game.
+ *
  * @author Ryan
- *
- *         A class for holding every item instance that vanilla expansions has.
- *
- *         Note: all item names must be lower case or forge will crash the game.
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
 {
-    private static final Item.Properties VE_ITEMS = new Item.Properties().group(VanillaExpansions.VE_GROUP);
-    private static final Item.Properties VE_16_STACK_ITEMS = new Item.Properties().maxStackSize(16)
-            .group(VanillaExpansions.VE_GROUP);
-
     private static final List<Item> ITEMS = new ArrayList<>();
 
-    public static Item ruby = register("ruby", new Item(VE_ITEMS));
-    public static Item bokChoySeeds = register("bok_choy_seeds", new BlockNamedItem(VeBlocks.bokChoy, VE_ITEMS));
+    public static Item ruby = register("ruby", new Item(buildProperties()));
+    public static Item bokChoySeeds = register("bok_choy_seeds",
+            new BlockNamedItem(VeBlocks.bokChoy, buildProperties()));
     public static Item bokChoy = register("bok_choy", new Item(buildProperties(VeFoods.bokChoy)));
     public static Item garlic = register("garlic",
             new BlockNamedItem(VeBlocks.garlic, buildProperties(VeFoods.garlic)));
@@ -52,92 +49,120 @@ public class VeItems
     public static Item cranberries = register("cranberries",
             new BlockNamedItem(VeBlocks.cranberryBush, buildProperties(VeFoods.cranberries)));
     public static Item cranberrySauce = register("cranberry_sauce",
-            new VeDrinkItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16)
-                    .group(VanillaExpansions.VE_GROUP).food(VeFoods.cranberrySauce)));
-    public static Item noodles = register("noodles", new Item(VE_ITEMS));
+            new VeDrinkItem(buildProperties(VeFoods.cranberrySauce, 16)));
+    public static Item noodles = register("noodles", new Item(buildProperties()));
     public static Item cookedNoodles = register("cooked_noodles", new Item(buildProperties(VeFoods.cookedNoodles)));
-    public static Item noodleSoup = register("noodle_soup", new VeSoupItem(new Item.Properties()
-            .containerItem(Items.BOWL).maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.noodleSoup)));
-    public static Item pudding = register("pudding", new VeSoupItem(
-            new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.pudding)));
-    public static Item berryPudding = register("berry_pudding", new VeSoupItem(
-            new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.berryPudding)));
-    public static Item smokyQuartz = register("smoky_quartz", new Item(VE_ITEMS));
-    public static Item darkMatterBucket = register("dark_matter_bucket", new BucketItem(
-            Suppliers.ofInstance(VeFluids.darkMatter),
-            new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(VanillaExpansions.VE_GROUP)));
-    public static Item caramelApple = register("caramel_apple", new VeSoupItem(new Item.Properties().maxStackSize(1)
-            .containerItem(Items.STICK).group(VanillaExpansions.VE_GROUP).food(VeFoods.caramelApple), Items.STICK));
-    public static Item caramel = register("caramel", new Item(VE_ITEMS));
+    public static Item noodleSoup = register("noodle_soup", new VeSoupItem(buildProperties(VeFoods.noodleSoup, 1)));
+    public static Item pudding = register("pudding", new VeSoupItem(buildProperties(VeFoods.pudding, 1)));
+    public static Item berryPudding = register("berry_pudding",
+            new VeSoupItem(buildProperties(VeFoods.berryPudding, 1)));
+    public static Item smokyQuartz = register("smoky_quartz", new Item(buildProperties()));
+    public static Item darkMatterBucket = register("dark_matter_bucket",
+            new BucketItem(Suppliers.ofInstance(VeFluids.darkMatter), buildProperties(1)));
+    public static Item caramelApple = register("caramel_apple",
+            new VeSoupItem(buildProperties(VeFoods.caramelApple, 1), Items.STICK));
+    public static Item caramel = register("caramel", new Item(buildProperties()));
     public static Item spruceCone = register("spruce_cone", new Item(buildProperties(VeFoods.spruceCone)));
-    public static Item forestsBounty = register("forests_bounty", new VeSoupItem(new Item.Properties()
-            .containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP).maxStackSize(1).food(VeFoods.forestsBounty)));
-    public static Item witchsCradleBranch = register("witchs_cradle_branch", new BlockNamedItem(VeBlocks.witchsCradle,
-            new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.witchsCradleBranch)));
+    public static Item forestsBounty = register("forests_bounty",
+            new VeSoupItem(buildProperties(VeFoods.forestsBounty, 1)));
+    public static Item witchsCradleBranch = register("witchs_cradle_branch",
+            new BlockNamedItem(VeBlocks.witchsCradle, buildProperties(VeFoods.witchsCradleBranch)));
     public static Item witchsCradleSoup = register("witchs_cradle_soup",
-            new VeSoupItem(new Item.Properties().containerItem(Items.BOWL).group(VanillaExpansions.VE_GROUP)
-                    .maxStackSize(1).food(VeFoods.witchsCradleSoup)));
-    public static Item glassVial = register("glass_vial", new VeGlassVialItem(VE_ITEMS));
+            new VeSoupItem(buildProperties(VeFoods.witchsCradleSoup, 1)));
+    public static Item glassVial = register("glass_vial", new VeGlassVialItem(buildProperties()));
     public static Item bloodVial = register("blood_vial",
-            new VeDrinkItem(new Item.Properties().containerItem(VeItems.glassVial).group(VanillaExpansions.VE_GROUP)
-                    .maxStackSize(16).food(VeFoods.bloodVile), VeItems.glassVial));
-    public static Item mixedSeedPacket = register("mixed_seed_packet",
-            new VeMixedSeedPacketItem(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
-    public static Item blankTotem = register("blank_totem", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(VE_16_STACK_ITEMS));
+            new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
+    public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
+    public static Item blankTotem = register("blank_totem", new Item(buildProperties(16)));
+    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(buildProperties(16)));
+    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(buildProperties(16)));
+    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(buildProperties(16)));
     public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
-            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 0));
+            new VeTotemOfTheFortunateItem(buildProperties(16), 0));
     public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
-            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 1));
+            new VeTotemOfTheFortunateItem(buildProperties(16), 1));
     public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii",
-            new VeTotemOfTheFortunateItem(VE_16_STACK_ITEMS, 2));
-    public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(VE_16_STACK_ITEMS));
-    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(VE_16_STACK_ITEMS));
+            new VeTotemOfTheFortunateItem(buildProperties(16), 2));
+    public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(buildProperties(16)));
+    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(buildProperties(16)));
+    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(buildProperties(16)));
     public static Item whiteTorch = register("white_torch",
-            new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, buildProperties()));
     public static Item orangeTorch = register("orange_torch",
-            new WallOrFloorItem(VeBlocks.orangeTorch, VeBlocks.orangeWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.orangeTorch, VeBlocks.orangeWallTorch, buildProperties()));
     public static Item magentaTorch = register("magenta_torch",
-            new WallOrFloorItem(VeBlocks.magentaTorch, VeBlocks.magentaWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.magentaTorch, VeBlocks.magentaWallTorch, buildProperties()));
     public static Item lightBlueTorch = register("light_blue_torch",
-            new WallOrFloorItem(VeBlocks.lightBlueTorch, VeBlocks.lightBlueWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.lightBlueTorch, VeBlocks.lightBlueWallTorch, buildProperties()));
     public static Item yellowTorch = register("yellow_torch",
-            new WallOrFloorItem(VeBlocks.yellowTorch, VeBlocks.yellowWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.yellowTorch, VeBlocks.yellowWallTorch, buildProperties()));
     public static Item limeTorch = register("lime_torch",
-            new WallOrFloorItem(VeBlocks.limeTorch, VeBlocks.limeWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.limeTorch, VeBlocks.limeWallTorch, buildProperties()));
     public static Item pinkTorch = register("pink_torch",
-            new WallOrFloorItem(VeBlocks.pinkTorch, VeBlocks.pinkWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.pinkTorch, VeBlocks.pinkWallTorch, buildProperties()));
     public static Item grayTorch = register("gray_torch",
-            new WallOrFloorItem(VeBlocks.grayTorch, VeBlocks.grayWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.grayTorch, VeBlocks.grayWallTorch, buildProperties()));
     public static Item lightGrayTorch = register("light_gray_torch",
-            new WallOrFloorItem(VeBlocks.lightGrayTorch, VeBlocks.lightGrayWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.lightGrayTorch, VeBlocks.lightGrayWallTorch, buildProperties()));
     public static Item cyanTorch = register("cyan_torch",
-            new WallOrFloorItem(VeBlocks.cyanTorch, VeBlocks.cyanWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.cyanTorch, VeBlocks.cyanWallTorch, buildProperties()));
     public static Item purpleTorch = register("purple_torch",
-            new WallOrFloorItem(VeBlocks.purpleTorch, VeBlocks.purpleWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.purpleTorch, VeBlocks.purpleWallTorch, buildProperties()));
     public static Item blueTorch = register("blue_torch",
-            new WallOrFloorItem(VeBlocks.blueTorch, VeBlocks.blueWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.blueTorch, VeBlocks.blueWallTorch, buildProperties()));
     public static Item brownTorch = register("brown_torch",
-            new WallOrFloorItem(VeBlocks.brownTorch, VeBlocks.brownWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.brownTorch, VeBlocks.brownWallTorch, buildProperties()));
     public static Item greenTorch = register("green_torch",
-            new WallOrFloorItem(VeBlocks.greenTorch, VeBlocks.greenWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.greenTorch, VeBlocks.greenWallTorch, buildProperties()));
     public static Item redTorch = register("red_torch",
-            new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, buildProperties()));
     public static Item blackTorch = register("black_torch",
-            new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, VE_ITEMS));
+            new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, buildProperties()));
+
+    /**
+     * A helper method that builds default properties for a item.
+     *
+     * @return The properties for this item.
+     */
+    private static Properties buildProperties()
+    {
+        return new Item.Properties().group(VanillaExpansions.VE_GROUP);
+    }
+
+    /**
+     * A helper method that builds properties for a item with a custom max stack
+     * size.
+     *
+     * @param maxStackSizeIn The max stack size for this item.
+     * @return The properties for this item.
+     */
+    private static Properties buildProperties(int maxStackSizeIn)
+    {
+        return new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(maxStackSizeIn);
+    }
 
     /**
      * A helper method that builds properties for a food item.
      *
-     * @param foodIn The stats of this food.
+     * @param foodIn The stats of this food item.
      * @return The properties for this item.
      */
     private static Properties buildProperties(Food foodIn)
     {
         return new Item.Properties().group(VanillaExpansions.VE_GROUP).food(foodIn);
+    }
+
+    /**
+     * A helper method that builds properties for a food item with a custom stack
+     * size.
+     *
+     * @param foodIn         The stats for this food item.
+     * @param maxStackSizeIn The max stack size for this item.
+     * @return The properties for this item.
+     */
+    private static Properties buildProperties(Food foodIn, int maxStackSizeIn)
+    {
+        return new Item.Properties().group(VanillaExpansions.VE_GROUP).food(foodIn).maxStackSize(maxStackSizeIn);
     }
 
     /**
