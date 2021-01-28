@@ -41,6 +41,9 @@ public class VeMixedSeedPacketItem extends Item
         {
             return ActionResult.resultPass(heldStack);
         }
-        return ActionResult.resultConsume(new ItemStack(heldStack.getItem(), heldStack.getCount() - 1));
+        else
+        {
+            return ActionResult.resultConsume(new ItemStack(heldStack.getItem(), heldStack.getCount() - 1));
+        }
     }
 }
