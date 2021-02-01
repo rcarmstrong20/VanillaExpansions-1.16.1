@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeBlazePlushBlock extends VePlushBlock
 {
@@ -43,9 +43,9 @@ public class VeBlazePlushBlock extends VePlushBlock
     protected static final VoxelShape BLAZE_NORTH_SHAPE = VoxelShapes.or(BLAZE_NORTH_HEAD_SHAPE, BLAZE_NORTH_LEGS_SHAPE,
             BLAZE_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, BLAZE_NORTH_SHAPE);
 
     public VeBlazePlushBlock(Properties properties)
     {

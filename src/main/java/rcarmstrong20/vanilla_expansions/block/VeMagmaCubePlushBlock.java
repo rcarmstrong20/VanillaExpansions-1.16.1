@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeMagmaCubePlushBlock extends VeTallPlushBlock
 {
@@ -23,9 +23,9 @@ public class VeMagmaCubePlushBlock extends VeTallPlushBlock
             BOTTOM_NORTH_RIGHT_EYE_SHAPE);
     protected static final VoxelShape BOTTOM_NORTH_SHAPE = VoxelShapes.or(BOTTOM_BODY_SHAPE, BOTTOM_NORTH_EYES_SHAPES);
 
-    protected static final VoxelShape BOTTOM_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, BOTTOM_NORTH_SHAPE);
-    protected static final VoxelShape BOTTOM_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, BOTTOM_NORTH_SHAPE);
-    protected static final VoxelShape BOTTOM_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, BOTTOM_NORTH_SHAPE);
 
     // Middle Magma Cube Bounding Box
 
@@ -39,9 +39,9 @@ public class VeMagmaCubePlushBlock extends VeTallPlushBlock
     protected static final VoxelShape MIDDLE_NORTH_SHAPE = VoxelShapes.or(MIDDLE_BODY_SHAPE, MIDDLE_NORTH_EYES_SHAPE,
             BOTTOM_NORTH_SHAPE);
 
-    protected static final VoxelShape MIDDLE_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, MIDDLE_NORTH_SHAPE);
-    protected static final VoxelShape MIDDLE_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, MIDDLE_NORTH_SHAPE);
-    protected static final VoxelShape MIDDLE_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, MIDDLE_NORTH_SHAPE);
 
     // Top Magma Cube Bounding Box
 
@@ -54,9 +54,9 @@ public class VeMagmaCubePlushBlock extends VeTallPlushBlock
             TOP_NORTH_RIGHT_EYE_SHAPE);
     protected static final VoxelShape TOP_NORTH_SHAPE = VoxelShapes.or(TOP_BODY_SHAPE, TOP_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape TOP_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, TOP_NORTH_SHAPE);
-    protected static final VoxelShape TOP_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, TOP_NORTH_SHAPE);
-    protected static final VoxelShape TOP_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, TOP_NORTH_SHAPE);
 
     public VeMagmaCubePlushBlock(Properties properties)
     {

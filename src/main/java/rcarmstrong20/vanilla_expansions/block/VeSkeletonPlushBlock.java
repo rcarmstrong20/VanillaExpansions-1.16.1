@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeSkeletonPlushBlock extends VePlushBlock
 {
@@ -74,9 +74,9 @@ public class VeSkeletonPlushBlock extends VePlushBlock
             SKELETON_NORTH_LEGS_SHAPE, SKELETON_NORTH_ARMS_SHAPE, SKELETON_NORTH_BOW_SHAPE, SKELETON_NORTH_EYES_SHAPE,
             SKELETON_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape SKELETON_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SKELETON_NORTH_SHAPE);
-    protected static final VoxelShape SKELETON_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SKELETON_NORTH_SHAPE);
-    protected static final VoxelShape SKELETON_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, SKELETON_NORTH_SHAPE);
 
     public VeSkeletonPlushBlock(Properties properties)
     {

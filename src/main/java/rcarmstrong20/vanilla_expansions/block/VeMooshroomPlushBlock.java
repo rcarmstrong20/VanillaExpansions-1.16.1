@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeMooshroomPlushBlock extends VeCowPlushBlock
 {
@@ -46,9 +46,9 @@ public class VeMooshroomPlushBlock extends VeCowPlushBlock
     protected static final VoxelShape MOOSHROOM_NORTH_SHAPE = VoxelShapes.or(MOOSHROOM_NORTH_HEAD_MUSHROOM_SHAPE,
             MOOSHROOM_NORTH_BODY1_MUSHROOM_SHAPE, MOOSHROOM_NORTH_BODY2_MUSHROOM_SHAPE, COW_NORTH_SHAPE);
 
-    protected static final VoxelShape MOOSHROOM_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, MOOSHROOM_NORTH_SHAPE);
-    protected static final VoxelShape MOOSHROOM_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, MOOSHROOM_NORTH_SHAPE);
-    protected static final VoxelShape MOOSHROOM_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, MOOSHROOM_NORTH_SHAPE);
+    protected static final VoxelShape MOOSHROOM_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, MOOSHROOM_NORTH_SHAPE);
+    protected static final VoxelShape MOOSHROOM_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, MOOSHROOM_NORTH_SHAPE);
+    protected static final VoxelShape MOOSHROOM_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, MOOSHROOM_NORTH_SHAPE);
 
     public VeMooshroomPlushBlock(Properties properties)
     {

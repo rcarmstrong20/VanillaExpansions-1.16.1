@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeEndermitePlushBlock extends VePlushBlock
 {
@@ -24,9 +24,9 @@ public class VeEndermitePlushBlock extends VePlushBlock
     protected static final VoxelShape ENDERMITE_NORTH_SHAPE = VoxelShapes.or(ENDERMITE_NORTH_FRONT_SHAPE,
             ENDERMITE_NORTH_MIDDLE_SHAPE, ENDERMITE_NORTH_BACK1_SHAPE, ENDERMITE_NORTH_BACK2_SHAPE);
 
-    protected static final VoxelShape ENDERMITE_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, ENDERMITE_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMITE_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, ENDERMITE_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMITE_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, ENDERMITE_NORTH_SHAPE);
 
     public VeEndermitePlushBlock(Properties properties)
     {

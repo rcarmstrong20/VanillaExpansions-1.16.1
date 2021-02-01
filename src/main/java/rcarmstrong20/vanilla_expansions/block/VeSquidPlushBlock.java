@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeSquidPlushBlock extends VePlushBlock
 {
@@ -53,9 +53,9 @@ public class VeSquidPlushBlock extends VePlushBlock
     protected static final VoxelShape SQUID_NORTH_SHAPE = VoxelShapes.or(SQUID_BODY_SHAPE, SQUID_MOUTH_SHAPE,
             SQUID_LEGS_SHAPE, SQUID_TEETH_SHAPE, SQUID_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape SQUID_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SQUID_NORTH_SHAPE);
-    protected static final VoxelShape SQUID_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SQUID_NORTH_SHAPE);
-    protected static final VoxelShape SQUID_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, SQUID_NORTH_SHAPE);
 
     public VeSquidPlushBlock(Properties properties)
     {

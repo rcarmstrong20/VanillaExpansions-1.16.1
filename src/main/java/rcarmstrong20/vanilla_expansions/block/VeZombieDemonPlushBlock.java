@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeZombieDemonPlushBlock extends VeZombiePlushBlock
 {
@@ -28,11 +28,11 @@ public class VeZombieDemonPlushBlock extends VeZombiePlushBlock
     protected static final VoxelShape ZOMBIE_DEMON_NORTH_SHAPE = VoxelShapes.or(ZOMBIE_DEMON_NORTH_HORNS_SHAPE,
             ZOMBIE_NORTH_SHAPE);
 
-    protected static final VoxelShape ZOMBIE_DEMON_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y,
+    protected static final VoxelShape ZOMBIE_DEMON_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
             ZOMBIE_DEMON_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_DEMON_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y,
+    protected static final VoxelShape ZOMBIE_DEMON_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y,
             ZOMBIE_DEMON_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_DEMON_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y,
+    protected static final VoxelShape ZOMBIE_DEMON_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y,
             ZOMBIE_DEMON_NORTH_SHAPE);
 
     public VeZombieDemonPlushBlock(Properties properties)

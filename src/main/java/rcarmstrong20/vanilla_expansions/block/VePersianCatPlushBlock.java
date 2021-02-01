@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VePersianCatPlushBlock extends VeCatPlushBlock
 {
@@ -18,9 +18,9 @@ public class VePersianCatPlushBlock extends VeCatPlushBlock
     protected static final VoxelShape PERSIAN_NORTH_SHAPE = VoxelShapes.or(CAT_NORTH_BODY_SHAPE,
             PERSIAN_NORTH_NOSE_SHAPE);
 
-    protected static final VoxelShape PERSIAN_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, PERSIAN_NORTH_SHAPE);
-    protected static final VoxelShape PERSIAN_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, PERSIAN_NORTH_SHAPE);
-    protected static final VoxelShape PERSIAN_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, PERSIAN_NORTH_SHAPE);
+    protected static final VoxelShape PERSIAN_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, PERSIAN_NORTH_SHAPE);
+    protected static final VoxelShape PERSIAN_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PERSIAN_NORTH_SHAPE);
+    protected static final VoxelShape PERSIAN_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PERSIAN_NORTH_SHAPE);
 
     public VePersianCatPlushBlock(Properties properties)
     {

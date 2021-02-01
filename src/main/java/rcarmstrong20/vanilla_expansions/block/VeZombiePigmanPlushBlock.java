@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeZombiePigmanPlushBlock extends VeZombiePlushBlock
 {
@@ -60,11 +60,11 @@ public class VeZombiePigmanPlushBlock extends VeZombiePlushBlock
             ZOMBIE_PIGMAN_NORTH_HEAD_PIECES_SHAPE, ZOMBIE_PIGMAN_NORTH_RIBCAGE_SHAPE, ZOMBIE_PIGMAN_NORTH_STRAP_SHAPE,
             ZOMBIE_NORTH_BODY_SHAPE);
 
-    protected static final VoxelShape ZOMBIE_PIGMAN_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y,
+    protected static final VoxelShape ZOMBIE_PIGMAN_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
             ZOMBIE_PIGMAN_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_PIGMAN_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y,
+    protected static final VoxelShape ZOMBIE_PIGMAN_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y,
             ZOMBIE_PIGMAN_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_PIGMAN_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y,
+    protected static final VoxelShape ZOMBIE_PIGMAN_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y,
             ZOMBIE_PIGMAN_NORTH_SHAPE);
 
     public VeZombiePigmanPlushBlock(Properties properties)

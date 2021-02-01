@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeGhastPlushBlock extends VePlushBlock
 {
@@ -99,9 +99,9 @@ public class VeGhastPlushBlock extends VePlushBlock
             GHAST_NORTH_MIDDLE_TENTACLES_SHAPES, GHAST_NORTH_LEFT_TENTACLES_SHAPES, GHAST_NORTH_BODY_SHAPE,
             GHAST_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape GHAST_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, GHAST_NORTH_SHAPE);
 
     public VeGhastPlushBlock(Properties properties)
     {

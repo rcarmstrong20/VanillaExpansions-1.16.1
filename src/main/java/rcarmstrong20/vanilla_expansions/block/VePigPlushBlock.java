@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VePigPlushBlock extends VePlushBlock
 {
@@ -52,9 +52,9 @@ public class VePigPlushBlock extends VePlushBlock
     protected static final VoxelShape PIG_NORTH_SHAPE = VoxelShapes.or(PIG_NORTH_BODY_SHAPE, PIG_NORTH_HEAD_SHAPE,
             PIG_NORTH_LEGS_SHAPE, PIG_NORTH_TAIL_SHAPE, PIG_NORTH_EYES_SHAPE, PIG_NORTH_SNOUT_SHAPE);
 
-    protected static final VoxelShape PIG_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, PIG_NORTH_SHAPE);
-    protected static final VoxelShape PIG_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, PIG_NORTH_SHAPE);
-    protected static final VoxelShape PIG_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, PIG_NORTH_SHAPE);
+    protected static final VoxelShape PIG_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, PIG_NORTH_SHAPE);
+    protected static final VoxelShape PIG_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PIG_NORTH_SHAPE);
+    protected static final VoxelShape PIG_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PIG_NORTH_SHAPE);
 
     public VePigPlushBlock(Properties properties)
     {

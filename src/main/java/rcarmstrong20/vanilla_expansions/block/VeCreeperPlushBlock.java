@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeCreeperPlushBlock extends VePlushBlock
 {
@@ -43,9 +43,9 @@ public class VeCreeperPlushBlock extends VePlushBlock
     protected static final VoxelShape CREEPER_NORTH_SHAPE = VoxelShapes.or(CREEPER_NORTH_HEAD_SHAPE,
             CREEPER_NORTH_TORSO_SHAPE, CREEPER_NORTH_FEET_SHAPE, CREEPER_NORTH_EYES_SHAPE, CREEPER_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape CREEPER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, CREEPER_NORTH_SHAPE);
-    protected static final VoxelShape CREEPER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, CREEPER_NORTH_SHAPE);
-    protected static final VoxelShape CREEPER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, CREEPER_NORTH_SHAPE);
 
     public VeCreeperPlushBlock(Properties properties)
     {

@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeSpiderPlushBlock extends VePlushBlock
 {
@@ -92,9 +92,9 @@ public class VeSpiderPlushBlock extends VePlushBlock
             SPIDER_NORTH_HEAD_SHAPE, SPIDER_NORTH_EYES_SHAPE, SPIDER_NORTH_EYEBROWS_SHAPE, SPIDER_NORTH_FANGS_SHAPE,
             SPIDER_NORTH_RIGHT_LEGS_SHAPE, SPIDER_NORTH_LEFT_LEGS_SHAPE);
 
-    protected static final VoxelShape SPIDER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SPIDER_NORTH_SHAPE);
-    protected static final VoxelShape SPIDER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SPIDER_NORTH_SHAPE);
-    protected static final VoxelShape SPIDER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, SPIDER_NORTH_SHAPE);
 
     public VeSpiderPlushBlock(Properties properties)
     {

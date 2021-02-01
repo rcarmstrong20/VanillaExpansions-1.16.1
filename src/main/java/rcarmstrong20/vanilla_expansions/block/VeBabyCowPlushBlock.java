@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeBabyCowPlushBlock extends VePlushBlock
 {
@@ -42,9 +42,9 @@ public class VeBabyCowPlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_FACE_SHAPE, NORTH_HORNS_SHAPE,
             NORTH_LEGS_SHAPE, NORTH_BODY_SHAPE, NORTH_HEAD_SHAPE, NORTH_UTTER_SHAPE);
 
-    protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
     public VeBabyCowPlushBlock(Properties properties)
     {
