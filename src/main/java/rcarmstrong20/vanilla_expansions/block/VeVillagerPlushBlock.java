@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
+import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
 
 public class VeVillagerPlushBlock extends VePlushBlock
 {
@@ -70,12 +70,20 @@ public class VeVillagerPlushBlock extends VePlushBlock
                 return defineShapes(state, Swamp.NORTH_SHAPE, Swamp.SOUTH_SHAPE, Swamp.WEST_SHAPE, Swamp.EAST_SHAPE);
             case 6:
                 return defineShapes(state, Taiga.NORTH_SHAPE, Taiga.SOUTH_SHAPE, Taiga.WEST_SHAPE, Taiga.EAST_SHAPE);
+            case 7:
+                return defineShapes(state, Nether.NORTH_SHAPE, Nether.SOUTH_SHAPE, Nether.WEST_SHAPE,
+                        Nether.EAST_SHAPE);
             default:
                 return VoxelShapes.fullCube();
         }
     }
 
-    private static class Plains
+    /**
+     * A sub-class that holds bounding box data for the plains variant.
+     *
+     * @author Ryan
+     */
+    protected static class Plains
     {
         protected static final VoxelShape NORTH_COAT_BASE_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 6.0D, 11.5D, 9.0D,
                 11.0D);
@@ -91,12 +99,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
 
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Desert
+    /**
+     * A sub-class that holds bounding box data for the desert variant.
+     *
+     * @author Ryan
+     */
+    protected static class Desert
     {
         protected static final VoxelShape NORTH_COAT_RIP1_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 6.0D, 5.0D, 3.0D,
                 7.0D);
@@ -120,12 +133,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE,
                 NORTH_HAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Jungle
+    /**
+     * A sub-class that holds bounding box data for the jungle variant.
+     *
+     * @author Ryan
+     */
+    protected static class Jungle
     {
         protected static final VoxelShape NORTH_COAT_BASE_SHAPE = Block.makeCuboidShape(4.5D, 1.0D, 6.0D, 11.5D, 9.0D,
                 11.0D);
@@ -173,12 +191,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_VINE_BELT_SHAPE,
                 NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Savanna
+    /**
+     * A sub-class that holds bounding box data for the savanna variant.
+     *
+     * @author Ryan
+     */
+    protected static class Savanna
     {
         protected static final VoxelShape NORTH_HEAD_BAND_SHAPE = Block.makeCuboidShape(5.0D, 13.5D, 5.0D, 11.0D, 14.0D,
                 12.0D);
@@ -188,12 +211,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, Plains.NORTH_COAT_BASE_SHAPE,
                 NORTH_HEAD_BAND_SHAPE, NORTH_APRON_BAND_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Snow
+    /**
+     * A sub-class that holds bounding box data for the snow variant.
+     *
+     * @author Ryan
+     */
+    protected static class Snow
     {
         protected static final VoxelShape NORTH_SWEATER_BASE_SHAPE = Block.makeCuboidShape(4.5D, 1.5D, 6.0D, 12.0D,
                 9.0D, 11.0D);
@@ -217,12 +245,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_SWEATER_SHAPE,
                 NORTH_HAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Swamp
+    /**
+     * A sub-class that holds bounding box data for the swamp variant.
+     *
+     * @author Ryan
+     */
+    protected static class Swamp
     {
         protected static final VoxelShape NORTH_HAT_TOP_SHAPE = Block.makeCuboidShape(5.0D, 14.5D, 5.0D, 11.0D, 15.5D,
                 12.0D);
@@ -246,12 +279,17 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_HAT_SHAPE,
                 NORTH_APRON_SHAPE, Plains.NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
-    private static class Taiga
+    /**
+     * A sub-class that holds bounding box data for the taiga variant.
+     *
+     * @author Ryan
+     */
+    protected static class Taiga
     {
         protected static final VoxelShape NORTH_COAT_NECK3_SHAPE = Block.makeCuboidShape(7.5D, 7.5D, 6.0D, 8.5D, 8.0D,
                 7.0D);
@@ -274,8 +312,44 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE,
                 NORTH_BELT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
+    }
+
+    /**
+     * A sub-class that holds bounding box data for the warped and crimson variants.
+     *
+     * @author Ryan
+     */
+    protected static class Nether
+    {
+        protected static final VoxelShape NORTH_BOTTOM_RIM = Block.makeCuboidShape(6.0, 2.0, 6.0, 10.0, 4.0, 10.0);
+
+        protected static final VoxelShape NORTH_FRONT_LEFT_RIP = Block.makeCuboidShape(8.5, 2.0, 6.0, 9.5, 3.0, 7.0);
+        protected static final VoxelShape NORTH_FRONT_RIGHT_RIP = Block.makeCuboidShape(6.5, 2.0, 6.0, 7.5, 3.0, 7.0);
+
+        protected static final VoxelShape NORTH_LEFT_BIG_RIP = Block.makeCuboidShape(4.5, 2.0, 8.0, 5.0, 3.0, 9.0);
+        protected static final VoxelShape NORTH_MIDDLE_BIG_RIP = Block.makeCuboidShape(4.5, 2.0, 9.0, 5.0, 4.5, 9.5);
+        protected static final VoxelShape NORTH_RIGHT_BIG_RIP = Block.makeCuboidShape(4.5, 2.0, 9.5, 5.0, 2.5, 10.5);
+
+        protected static final VoxelShape NORTH_FRONT_BEAD = Block.makeCuboidShape(10.0, 3.0, 5.5, 11.0, 4.0, 6.0);
+        protected static final VoxelShape NORTH_BACK_BEAD = Block.makeCuboidShape(8.0, 3.0, 11.0, 9.0, 4.0, 11.5);
+        protected static final VoxelShape NORTH_LEFT_BEAD = Block.makeCuboidShape(11.5, 3.0, 8.0, 12.0, 4.0, 9.0);
+        protected static final VoxelShape NORTH_RIGHT_BEAD = Block.makeCuboidShape(4.0, 3.0, 6.5, 5.0, 4.0, 7.5);
+
+        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(Plains.NORTH_COAT_BASE_SHAPE,
+                Plains.NORTH_COAT_NECK1_SHAPE, Plains.NORTH_COAT_NECK2_SHAPE, NORTH_FRONT_LEFT_RIP,
+                NORTH_FRONT_RIGHT_RIP, NORTH_LEFT_BIG_RIP, NORTH_MIDDLE_BIG_RIP, NORTH_RIGHT_BIG_RIP);
+
+        protected static final VoxelShape NORTH_BEADS_SHAPE = VoxelShapes.or(NORTH_FRONT_BEAD, NORTH_BACK_BEAD,
+                NORTH_LEFT_BEAD, NORTH_RIGHT_BEAD);
+
+        protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_COAT_SHAPE, NORTH_BEADS_SHAPE,
+                Savanna.NORTH_APRON_BAND_SHAPE, NORTH_BODY_SHAPE);
+
+        protected static final VoxelShape SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 }
