@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IServerWorld;
 
 /**
- * A utility class that holds a few helper methods for adding things to
+ * A utility class that holds a few helper methods for adding stuff to
  * structures.
  *
  * @author Ryan
