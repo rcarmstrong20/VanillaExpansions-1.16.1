@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:gray_lantern"
+    ]
+  },
+  "criteria":
+  {
+    "has_lantern":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:lantern"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:gray_lantern"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_lantern",
+      "has_the_recipe"
+    ]
+  ]
+}

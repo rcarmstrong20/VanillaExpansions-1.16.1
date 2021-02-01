@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:blue_torch"
+    ]
+  },
+  "criteria":
+  {
+    "has_torch":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:torch"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:blue_torch"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_torch",
+      "has_the_recipe"
+    ]
+  ]
+}
