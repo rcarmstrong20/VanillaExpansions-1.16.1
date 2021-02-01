@@ -1,7 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures":
-	{
-        "crop": "ve:block/quinoa_stage1"
-    }
-}
