@@ -234,6 +234,10 @@ public class VeBlocks
             new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 5));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
             new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 6));
+    public static Block crimsonVillagerPlush = register("crimson_villager_plush", true,
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL), 7));
+    public static Block warpedVillagerPlush = register("warped_villager_plush", true,
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL), 7));
     public static Block witchPlush = register("witch_plush", true,
             new VeWitchPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
     public static Block wolfPlush = register("wolf_plush", true,
