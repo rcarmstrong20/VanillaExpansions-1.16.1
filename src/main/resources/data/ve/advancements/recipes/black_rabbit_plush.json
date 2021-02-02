@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:black_rabbit_plush"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_rabbit":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "item": "minecraft:rabbit"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:black_rabbit_plush"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_rabbit",
       "has_the_recipe"
     ]
   ]

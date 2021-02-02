@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:bee_plush"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_honey_bottle":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "item": "minecraft:honey_bottle"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:bee_plush"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_honey_bottle",
       "has_the_recipe"
     ]
   ]

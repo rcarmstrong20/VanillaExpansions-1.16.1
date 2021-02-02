@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:berry_pudding"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_pudding":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "item": "ve:pudding"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:berry_pudding"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_pudding",
       "has_the_recipe"
     ]
   ]

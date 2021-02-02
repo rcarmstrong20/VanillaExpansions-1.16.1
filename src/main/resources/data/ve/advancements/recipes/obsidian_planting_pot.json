@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:obsidian_planting_pot"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_end_stone":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "item": "minecraft:end_stone"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:obsidian_planting_pot"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_end_stone",
       "has_the_recipe"
     ]
   ]

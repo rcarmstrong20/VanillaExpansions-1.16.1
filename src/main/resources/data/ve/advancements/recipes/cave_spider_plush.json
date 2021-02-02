@@ -9,7 +9,7 @@
   },
   "criteria":
   {
-    "has_spider_eye":
+    "has_string":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:spider_eye"
+            "item": "minecraft:string"
           }
         ]
       }
@@ -34,7 +34,7 @@
   "requirements":
   [
     [
-      "has_spider_eye",
+      "has_string",
       "has_the_recipe"
     ]
   ]

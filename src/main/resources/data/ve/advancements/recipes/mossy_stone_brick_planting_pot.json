@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:mossy_stone_brick_planting_pot"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:mossy_stone_brick_planting_pot"
       }
     }
   },

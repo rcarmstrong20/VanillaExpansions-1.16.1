@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:jungle_planting_pot"
+      "ve:mixed_seed_packet"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_seeds":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "tag": "ve:seeds"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:jungle_planting_pot"
+        "recipe": "ve:mixed_seed_packet"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_seeds",
       "has_the_recipe"
     ]
   ]
