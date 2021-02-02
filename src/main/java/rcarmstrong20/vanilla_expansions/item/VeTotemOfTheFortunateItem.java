@@ -25,14 +25,12 @@ public class VeTotemOfTheFortunateItem extends Item
     {
         player.addPotionEffect(new EffectInstance(Effects.LUCK, 1400, amplifier));
         player.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
+        ItemStack stack = player.getHeldItem(hand);
 
-        return ActionResult.resultSuccess(
-                new ItemStack(player.getHeldItem(hand).getItem(), (player.getHeldItem(hand).getCount() - 1)));
+        if (!player.isCreative())
+        {
+            stack.shrink(1);
+        }
+        return ActionResult.resultSuccess(stack);
     }
-    /*
-     * private ActionResult<ItemStack> useTotem() { if() { return
-     * ActionResult.resultSuccess(); } else if() { return
-     * ActionResult.resultSuccess(); } else { return ActionResult.resultPass(type);
-     * } }
-     */
 }

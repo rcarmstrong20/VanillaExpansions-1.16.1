@@ -73,19 +73,22 @@ public class VeItems
     public static Item bloodVial = register("blood_vial",
             new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
     public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
-    public static Item blankTotem = register("blank_totem", new Item(buildProperties(16)));
     public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(buildProperties(16)));
     public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(buildProperties(16)));
     public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(buildProperties(16)));
+    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv", new Item(buildProperties(16)));
     public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
             new VeTotemOfTheFortunateItem(buildProperties(16), 0));
     public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
             new VeTotemOfTheFortunateItem(buildProperties(16), 1));
     public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii",
             new VeTotemOfTheFortunateItem(buildProperties(16), 2));
+    public static Item totemOfTheFortunateIV = register("totem_of_the_fortunate_iv",
+            new VeTotemOfTheFortunateItem(buildProperties(16), 3));
     public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(buildProperties(16)));
     public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(buildProperties(16)));
     public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(buildProperties(16)));
+    public static Item totemOfTheBruteIV = register("totem_of_the_brute_iv", new Item(buildProperties(16)));
     public static Item whiteTorch = register("white_torch",
             new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, buildProperties()));
     public static Item orangeTorch = register("orange_torch",

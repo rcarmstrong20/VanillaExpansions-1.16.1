@@ -288,10 +288,12 @@ public class VanillaExpansions
     public void onPlayerTick(PlayerTickEvent event)
     {
         Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
-                .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400).build();
+                .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400)
+                .put(VeItems.totemOfTheGuardianIV, 4800).build();
 
         Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
-                .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).build();
+                .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).put(VeItems.totemOfTheBruteIV, 3)
+                .build();
 
         if (event.player instanceof ServerPlayerEntity)
         {
