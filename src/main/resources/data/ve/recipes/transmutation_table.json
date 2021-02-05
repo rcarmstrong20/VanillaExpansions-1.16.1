@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BBB",
+    "BRB",
+    "BRB"
+  ],
+  "key":
+  {
+	"B":
+	{
+	  "item": "minecraft:polished_basalt"
+	},
+	"R":
+	{
+	  "item": "ve:ruby"
+	}
+  },
+  "result":
+  {
+    "item": "ve:transmutation_table"
+  }
+}

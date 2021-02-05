@@ -70,6 +70,7 @@ import rcarmstrong20.vanilla_expansions.block.VeSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSpiderPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSquidPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
+import rcarmstrong20.vanilla_expansions.block.VeTransmutationTableBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
 import rcarmstrong20.vanilla_expansions.block.VeVillagerPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWitchPlushBlock;
@@ -678,6 +679,8 @@ public class VeBlocks
             new StairsBlock(() -> Blocks.END_STONE.getDefaultState(), AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block smoothEndStoneWall = register("smooth_end_stone_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
+    public static Block transmutationTable = register("transmutation_table", true,
+            new VeTransmutationTableBlock(AbstractBlock.Properties.from(Blocks.STONE)));
 
     /**
      * Used to register a block with a item that has a custom stack size.

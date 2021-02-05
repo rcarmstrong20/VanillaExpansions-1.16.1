@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "ve:block/transmutation_table_side",
+    "north": "ve:block/transmutation_table_side",
+    "south": "ve:block/transmutation_table_side",
+    "east": "ve:block/transmutation_table_side",
+    "west": "ve:block/transmutation_table_side",
+    "up": "ve:block/transmutation_table_top",
+    "down": "ve:block/transmutation_table_bottom"
+  }
+}
