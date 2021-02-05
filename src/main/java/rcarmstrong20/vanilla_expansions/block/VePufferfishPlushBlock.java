@@ -6,11 +6,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
+import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -58,10 +57,8 @@ public class VePufferfishPlushBlock extends VePlushBlock
 
     protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
             PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y,
-            PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y,
-            PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
 
     // Pufferfish 1 Bounding Boxes
 
@@ -86,10 +83,8 @@ public class VePufferfishPlushBlock extends VePlushBlock
 
     protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
             PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y,
-            PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y,
-            PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
 
     // Pufferfish 2 Bounding Boxes
 
@@ -114,10 +109,8 @@ public class VePufferfishPlushBlock extends VePlushBlock
 
     protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
             PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y,
-            PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y,
-            PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
 
     public VePufferfishPlushBlock(Properties properties)
     {
@@ -138,7 +131,8 @@ public class VePufferfishPlushBlock extends VePlushBlock
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
                     0.8F + world.rand.nextFloat() * 0.4F);
             world.setBlockState(pos, state.with(PUFFED, Integer.valueOf(puffed_property + 1)), 3);
-        } else
+        }
+        else
         {
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
                     0.8F + world.rand.nextFloat() * 0.4F);
@@ -153,45 +147,20 @@ public class VePufferfishPlushBlock extends VePlushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        return VePufferfishPlushBlock.defineShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE,
-                PUFFERFISH_2_NORTH_SHAPE, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE, PUFFERFISH_2_SOUTH_SHAPE,
-                PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE, PUFFERFISH_2_WEST_SHAPE, PUFFERFISH_0_EAST_SHAPE,
-                PUFFERFISH_1_EAST_SHAPE, PUFFERFISH_2_EAST_SHAPE);
-    }
-
-    /**
-     * A helper method that collects every shape for the pufferfish block.
-     * 
-     * @param state           The current state this block is in.
-     * @param northPuffShape0 North shape with puff level 0.
-     * @param northPuffShape1 North shape with puff level 1.
-     * @param northPuffShape2 North shape with puff level 2.
-     * @param southPuffShape0 South shape with puff level 0.
-     * @param southPuffShape1 South shape with puff level 1.
-     * @param southPuffShape2 South shape with puff level 2.
-     * @param westPuffShape0  West shape with puff level 0.
-     * @param westPuffShape1  West shape with puff level 1.
-     * @param westPuffShape2  West shape with puff level 2.
-     * @param eastPuffShape0  East shape with puff level 0.
-     * @param eastPuffShape1  East shape with puff level 1.
-     * @param eastPuffShape2  East shape with puff level 2.
-     * @return The appropriate shape for the current state.
-     */
-    private static VoxelShape defineShapes(BlockState state, VoxelShape northPuffShape0, VoxelShape northPuffShape1,
-            VoxelShape northPuffShape2, VoxelShape southPuffShape0, VoxelShape southPuffShape1,
-            VoxelShape southPuffShape2, VoxelShape westPuffShape0, VoxelShape westPuffShape1, VoxelShape westPuffShape2,
-            VoxelShape eastPuffShape0, VoxelShape eastPuffShape1, VoxelShape eastPuffShape2)
-    {
-        switch ((Direction) state.get(HORIZONTAL_FACING))
+        switch (state.get(HORIZONTAL_FACING))
         {
             case NORTH:
-                return getPuffedShapes(state, northPuffShape0, northPuffShape1, northPuffShape2);
+                return getPuffedShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE,
+                        PUFFERFISH_2_NORTH_SHAPE);
             case SOUTH:
-                return getPuffedShapes(state, southPuffShape0, southPuffShape1, southPuffShape2);
+                return getPuffedShapes(state, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE,
+                        PUFFERFISH_2_SOUTH_SHAPE);
             case WEST:
-                return getPuffedShapes(state, westPuffShape0, westPuffShape1, westPuffShape2);
+                return getPuffedShapes(state, PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE,
+                        PUFFERFISH_2_WEST_SHAPE);
             default:
-                return getPuffedShapes(state, eastPuffShape0, eastPuffShape1, eastPuffShape2);
+                return getPuffedShapes(state, PUFFERFISH_0_EAST_SHAPE, PUFFERFISH_1_EAST_SHAPE,
+                        PUFFERFISH_2_EAST_SHAPE);
         }
     }
 
@@ -205,7 +174,7 @@ public class VePufferfishPlushBlock extends VePlushBlock
     private static VoxelShape getPuffedShapes(BlockState state, VoxelShape puffShape0, VoxelShape puffShape1,
             VoxelShape puffShape2)
     {
-        switch ((int) state.get(PUFFED))
+        switch (state.get(PUFFED))
         {
             case 0:
                 return puffShape0;
