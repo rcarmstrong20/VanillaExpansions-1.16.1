@@ -9,15 +9,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -41,6 +42,12 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             world.getPendingFluidTicks().scheduleTick(pos, state.getFluidState().getFluid(),
                     this.getFluid().getTickRate(world));
         }
+    }
+
+    @Override
+    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
+    {
+        return false;
     }
 
     /**
@@ -164,7 +171,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return world.getFluidState(pos.up()).isTagged(VeFluidTags.darkMatter) && entity.getMotion().getY() != 0.0;
+        return world.getFluidState(pos).isTagged(VeFluidTags.darkMatter);
     }
 
     /**
@@ -177,40 +184,25 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
 
         if (!(entity instanceof PlayerEntity) && entity.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005))
             return;
-
-        if (entity instanceof ItemEntity)
-        {
-            // Make items float on dark matter with firework particles.
-            if (random.nextInt(10) == 0)
-            {
-                world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
-                        entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-            }
-
-            entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D);
-        }
-        else
-        {
-            double xMot = entity.getMotion().getX();
-            double yMot = entity.getMotion().getY();
-            double zMot = entity.getMotion().getZ();
-
-            if ((entity.getPosY() - entity.prevPosY) > 0.0
-                    && world.getBlockState(pos.up()) != this.getBlock().getDefaultState())
-            {
-                entity.addVelocity(0.0, 0.05, 0.0);
-            }
-            else
-            {
-                entity.setMotion(xMot / 200000, yMot / 200000, zMot / 200000);
-            }
-
-            if (random.nextInt(10) == 0)
-            {
-                world.addParticle(ParticleTypes.FIREWORK, entity.getPosXRandom(random.nextFloat()),
-                        entity.getPosY() + random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-            }
-            entity.fallDistance = 0;
-        }
+        /*
+         * if (entity instanceof ItemEntity) { // Make items float on dark matter with
+         * firework particles. if (random.nextInt(10) == 0) {
+         * world.addParticle(ParticleTypes.FIREWORK,
+         * entity.getPosXRandom(random.nextFloat()), entity.getPosY() +
+         * random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
+         * } entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D); }
+         * else { double xMot = entity.getMotion().getX(); double yMot =
+         * entity.getMotion().getY(); double zMot = entity.getMotion().getZ();
+         *
+         * if ((entity.getPosY() - entity.prevPosY) > 0.0 &&
+         * world.getBlockState(pos.up()) != this.getBlock().getDefaultState()) {
+         * entity.addVelocity(0.0, 0.05, 0.0); } else { entity.setMotion(xMot / 200000,
+         * yMot / 200000, zMot / 200000); }
+         *
+         * if (random.nextInt(10) == 0) { world.addParticle(ParticleTypes.FIREWORK,
+         * entity.getPosXRandom(random.nextFloat()), entity.getPosY() +
+         * random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
+         * } entity.fallDistance = 0; }
+         */
     }
 }
