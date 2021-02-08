@@ -233,11 +233,35 @@ public class VanillaExpansions
     }
 
     @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
     public void onClientPlayerTick(PlayerTickEvent event)
     {
+        LivingEntity player = event.player;
+
         // Push the player when in flowing dark matter.
-        event.player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+        player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+
+        // if (player.areEyesInFluid(VeFluidTags.darkMatter))
+        {
+            // player.setMotion(player.getMotion().add(0.0D, 0.3D, 0.0D));
+
+            /*
+             * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
+             *
+             * Vector3d vector3d1 = player.getMotion(); player.setMotion(vector3d1.add(0.0D,
+             * (d3 - vector3d1.y) * d4, 0.0D));
+             */
+            /*
+             * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
+             * if (d3 <= 0.0D || player.getMotion().getY() > 0 || !player.world
+             * .getBlockState(new BlockPos(player.getPosX(), player.getPosY() + 1.0D - 0.1D,
+             * player.getPosZ())) .getFluidState().isEmpty()) {
+             *
+             * }
+             */
+            // VanillaExpansions.LOGGER.info("Swimming");
+        }
+
+        // VanillaExpansions.LOGGER.info("Swimming");
     }
 
     @SuppressWarnings("unchecked") // Needed for the byBiome field.
