@@ -9,11 +9,11 @@ import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
@@ -156,7 +156,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
                         && this.container.enchantItem(this.minecraft.player, l))
                 {
                     Minecraft.getInstance().getSoundHandler()
-                            .play(SimpleSound.master(VeSoundEvents.uiWoodcutterTakeResult, 1.0F));
+                            .play(SimpleSound.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));
                     this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
                     return true;
                 }
