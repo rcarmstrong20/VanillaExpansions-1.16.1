@@ -680,7 +680,8 @@ public class VeBlocks
     public static Block smoothEndStoneWall = register("smooth_end_stone_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block transmutationTable = register("transmutation_table", true,
-            new VeTransmutationTableBlock(AbstractBlock.Properties.from(Blocks.STONE)));
+            new VeTransmutationTableBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
+                    .hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 7).sound(SoundType.STONE)));
 
     /**
      * Used to register a block with a item that has a custom stack size.
