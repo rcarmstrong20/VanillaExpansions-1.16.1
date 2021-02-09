@@ -18,7 +18,7 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 modId="ve" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="1.0.0.0" #mandatory
- # A display name for the mod
+# A display name for the mod
 displayName="Vanilla Expansions" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="http://myurl.me/" #optional
@@ -27,11 +27,12 @@ displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="ve.png" #optional
 # A text field displayed in the mod UI
+credits="All sounds used in this mod are licensed under creative commons 0 from https://freesound.org" #optional
+# A text field displayed in the mod UI
 authors="rcarmstrong20 and JinxyCatt" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 A mod that is designed to improve upon vanilla Minecraft by adding a variety of new vanilla style additions.
-My goal is to have this mod feel like a new vanilla update.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.ve]] #optional
