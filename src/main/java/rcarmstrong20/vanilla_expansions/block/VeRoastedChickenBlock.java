@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
-public class VeTurkeyBlock extends VeFoodBlock
+public class VeRoastedChickenBlock extends VeFoodBlock
 {
     protected static final VoxelShape PLATE_TOP_1_AABB = Block.makeCuboidShape(0.0D, 1.0D, 0.0D, 1.0D, 2.0D, 16.0D);
     protected static final VoxelShape PLATE_TOP_2_AABB = Block.makeCuboidShape(0.0D, 1.0D, 0.0D, 16.0D, 2.0D, 1.0D);
@@ -35,7 +35,7 @@ public class VeTurkeyBlock extends VeFoodBlock
             VoxelShapes.or(TURKEY_AABB[4], PLATE_AABB), VoxelShapes.or(TURKEY_AABB[5], PLATE_AABB),
             VoxelShapes.or(TURKEY_AABB[6], PLATE_AABB) };
 
-    public VeTurkeyBlock(int foodLevel, float foodSaturation, Properties properties)
+    public VeRoastedChickenBlock(int foodLevel, float foodSaturation, Properties properties)
     {
         super(foodLevel, foodSaturation, properties);
     }
