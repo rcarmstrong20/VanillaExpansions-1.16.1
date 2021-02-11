@@ -2,8 +2,8 @@
   "replace": false,
   "values":
   [
-    "ve:nether_brick_planting_pot",
-    "ve:warped_planting_pot",
-	"ve:crimson_planting_pot"
+    "ve:netherrack_planter_box",
+    "ve:warped_planter_box",
+	"ve:crimson_planter_box"
   ]
 }

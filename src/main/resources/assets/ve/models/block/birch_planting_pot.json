@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_overworld_planting_pot",
-    "textures":
-	{
-		"pillar": "block/birch_log",
-        "material": "block/birch_planks"
-    }
-}

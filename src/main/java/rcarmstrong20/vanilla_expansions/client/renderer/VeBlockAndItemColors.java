@@ -44,21 +44,18 @@ public class VeBlockAndItemColors
             return -1;
         };
 
+        // Use the water color of the biome or the default water color.
+        @SuppressWarnings("unused")
         final IBlockColor waterColorHandler = (state, blockAccess, pos, tintIndex) ->
         {
             if (blockAccess != null && pos != null && tintIndex == 1)
             {
-                // Get the water color from the current biome
                 return BiomeColors.getWaterColor(blockAccess, pos);
             }
             return -1;
         };
 
         blockColors.register(grassColorHandler, VeBlocks.endermanPlush);
-        blockColors.register(waterColorHandler, VeBlocks.stoneBrickPlantingPot, VeBlocks.oakPlantingPot,
-                VeBlocks.sprucePlantingPot, VeBlocks.birchPlantingPot, VeBlocks.junglePlantingPot,
-                VeBlocks.darkOakPlantingPot, VeBlocks.acaciaPlantingPot, VeBlocks.mossyStoneBrickPlantingPot,
-                VeBlocks.crackedStoneBrickPlantingPot);
     }
 
     public static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors)

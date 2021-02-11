@@ -1,0 +1,9 @@
+{
+    "parent": "ve:block/template_planter_box",
+    "textures":
+	{
+		"material": "block/oak_planks",
+        "log": "block/oak_log",
+		"soil": "block/farmland_moist"
+    }
+}

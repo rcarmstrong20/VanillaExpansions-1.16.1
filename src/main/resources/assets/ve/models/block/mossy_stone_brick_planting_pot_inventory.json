@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_overworld_planting_pot_inventory",
-    "textures":
-	{
-		"material": "block/mossy_stone_bricks",
-		"pillar": "block/mossy_cobblestone"
-    }
-}

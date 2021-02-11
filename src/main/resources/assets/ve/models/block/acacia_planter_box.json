@@ -1,0 +1,9 @@
+{
+    "parent": "ve:block/template_planter_box",
+    "textures":
+	{
+		"material": "block/acacia_planks",
+        "log": "block/acacia_log",
+		"soil": "block/farmland_moist"
+    }
+}

@@ -1,0 +1,37 @@
+{
+	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "#material",
+		"material": "#material",
+		"soil": "#soil"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box2",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 3, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#material" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#material" },
+				"north": { "uv": [ 0, 13, 16, 16 ], "texture": "#material" },
+				"south": { "uv": [ 0, 13, 16, 16 ], "texture": "#material" },
+				"west": { "uv": [ 0, 13, 16, 16 ], "texture": "#material" },
+				"east": { "uv": [ 0, 13, 16, 16 ], "texture": "#material" }
+			}
+		},
+		{
+			"__comment": "Box10",
+			"from": [ 0, 3, 0 ],
+			"to": [ 16, 15, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#material" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#soil" },
+				"north": { "uv": [ 0, 1, 16, 13 ], "texture": "#material" },
+				"south": { "uv": [ 0, 1, 16, 13 ], "texture": "#material" },
+				"west": { "uv": [ 0, 1, 16, 13 ], "texture": "#material" },
+				"east": { "uv": [ 0, 1, 16, 13 ], "texture": "#material" }
+			}
+		}
+	]
+}

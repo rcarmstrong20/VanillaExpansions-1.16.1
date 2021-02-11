@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_planter_box_two_sides",
+    "textures":
+	{
+		"material": "block/netherrack",
+		"soil": "block/soul_soil"
+    }
+}

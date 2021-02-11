@@ -2,14 +2,14 @@
   "replace": false,
   "values":
   [
-    "ve:stone_brick_planting_pot",
-    "ve:mossy_stone_brick_planting_pot",
-    "ve:cracked_stone_brick_planting_pot",
-	"ve:oak_planting_pot",
-	"ve:spruce_planting_pot",
-	"ve:birch_planting_pot",
-	"ve:jungle_planting_pot",
-	"ve:acacia_planting_pot",
-	"ve:dark_oak_planting_pot"
+    "ve:stone_planter_box",
+    "ve:mossy_cobblestone_planter_box",
+    "ve:cobblestone_planter_box",
+	"ve:oak_planter_box",
+	"ve:spruce_planter_box",
+	"ve:birch_planter_box",
+	"ve:jungle_planter_box",
+	"ve:acacia_planter_box",
+	"ve:dark_oak_planter_box"
   ]
 }

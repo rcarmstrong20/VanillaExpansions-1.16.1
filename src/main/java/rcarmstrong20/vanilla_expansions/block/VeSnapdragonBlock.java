@@ -74,7 +74,7 @@ public class VeSnapdragonBlock extends FlowerBlock
     {
         Block block = world.getBlockState(pos.down()).getBlock();
 
-        if (block instanceof VePlantingPotBlock)
+        if (block instanceof VePlanterBoxBlock)
         {
             return VeBlockTags.endPlantable.contains(block) && VeBlockTags.endPottable.contains(this.getBlock());
         }

@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_overworld_planting_pot_inventory",
-    "textures":
-	{
-		"pillar": "block/jungle_log",
-        "material": "block/jungle_planks"
-    }
-}

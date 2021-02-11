@@ -55,11 +55,12 @@ import rcarmstrong20.vanilla_expansions.block.VeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
 import rcarmstrong20.vanilla_expansions.block.VePersianCatPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePigPlushBlock;
-import rcarmstrong20.vanilla_expansions.block.VePlantingPotBlock;
+import rcarmstrong20.vanilla_expansions.block.VePlanterBoxBlock;
 import rcarmstrong20.vanilla_expansions.block.VePottedSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VePufferfishPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePurpleHugeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeRabbitPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeRoastedChickenBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSevenStageCropBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSheepPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSilverfishPlushBlock;
@@ -71,7 +72,6 @@ import rcarmstrong20.vanilla_expansions.block.VeSpiderPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSquidPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTransmutationTableBlock;
-import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
 import rcarmstrong20.vanilla_expansions.block.VeVillagerPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWitchPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWolfPlushBlock;
@@ -308,32 +308,32 @@ public class VeBlocks
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block quinoa = register("quinoa", false,
             new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block stoneBrickPlantingPot = register("stone_brick_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
-    public static Block mossyStoneBrickPlantingPot = register("mossy_stone_brick_planting_pot", true,
-            new VePlantingPotBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICKS)));
-    public static Block crackedStoneBrickPlantingPot = register("cracked_stone_brick_planting_pot", true,
-            new VePlantingPotBlock(Block.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
-    public static Block oakPlantingPot = register("oak_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
-    public static Block sprucePlantingPot = register("spruce_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
-    public static Block birchPlantingPot = register("birch_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
-    public static Block junglePlantingPot = register("jungle_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.JUNGLE_PLANKS)));
-    public static Block acaciaPlantingPot = register("acacia_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.ACACIA_PLANKS)));
-    public static Block darkOakPlantingPot = register("dark_oak_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
-    public static Block netherBrickPlantingPot = register("nether_brick_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
-    public static Block warpedPlantingPot = register("warped_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
-    public static Block crimsonPlantingPot = register("crimson_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
-    public static Block obsidianPlantingPot = register("obsidian_planting_pot", true,
-            new VePlantingPotBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
+    public static Block stonePlanterBox = register("stone_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
+    public static Block mossyCobblestonePlanterBox = register("mossy_cobblestone_planter_box", true,
+            new VePlanterBoxBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICKS)));
+    public static Block cobblestonePlanterBox = register("cobblestone_planter_box", true,
+            new VePlanterBoxBlock(Block.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
+    public static Block oakPlanterBox = register("oak_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
+    public static Block sprucePlanterBox = register("spruce_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.SPRUCE_PLANKS)));
+    public static Block birchPlanterBox = register("birch_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.BIRCH_PLANKS)));
+    public static Block junglePlanterBox = register("jungle_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.JUNGLE_PLANKS)));
+    public static Block acaciaPlanterBox = register("acacia_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.ACACIA_PLANKS)));
+    public static Block darkOakPlanterBox = register("dark_oak_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.DARK_OAK_PLANKS)));
+    public static Block netherrackPlanterBox = register("netherrack_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS)));
+    public static Block warpedPlanterBox = register("warped_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.WARPED_PLANKS)));
+    public static Block crimsonPlanterBox = register("crimson_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.CRIMSON_PLANKS)));
+    public static Block obsidianPlanterBox = register("obsidian_planter_box", true,
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block oakWall = register("oak_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
     public static Block spruceWall = register("spruce_wall", true,
@@ -411,7 +411,7 @@ public class VeBlocks
     public static Block packedSnowSlab = register("packed_snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
     public static Block roasted_chicken = register("roasted_chicken", true,
-            new VeTurkeyBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN)
+            new VeRoastedChickenBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN)
                     .hardnessAndResistance(0.5F).sound(SoundType.SNOW)),
             1);
     public static Block glassOfDarkness = register("glass_of_darkness", true,
@@ -681,7 +681,10 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
     public static Block transmutationTable = register("transmutation_table", true,
             new VeTransmutationTableBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
-                    .hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 7).sound(SoundType.STONE)));
+                    .hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) ->
+                    {
+                        return 7;
+                    }).sound(SoundType.STONE)));
 
     /**
      * Used to register a block with a item that has a custom stack size.

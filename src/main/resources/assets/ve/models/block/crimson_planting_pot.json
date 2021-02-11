@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_nether_planting_pot",
-    "textures":
-	{
-        "material": "block/crimson_planks",
-		"pillar" : "block/crimson_stem"
-    }
-}
