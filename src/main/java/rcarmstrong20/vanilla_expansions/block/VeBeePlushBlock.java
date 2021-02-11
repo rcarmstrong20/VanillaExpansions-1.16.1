@@ -61,9 +61,9 @@ public class VeBeePlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_LEFT_WING_END_SHAPE = Block.makeCuboidShape(10.0D, 6.0D, 9.0D, 13.5D, 7.0D,
             10.0D);
 
-    protected static final VoxelShape NORTH_RIGHT_MAIN_WING_SHAPE = VePlushBlock
+    protected static final VoxelShape NORTH_RIGHT_MAIN_WING_SHAPE = VeShapeUtil
             .cutShape(NORTH_RIGHT_WING_MAIN_OUTSIDE_SHAPE, NORTH_RIGHT_WING_MAIN_INSIDE_SHAPE);
-    protected static final VoxelShape NORTH_LEFT_MAIN_WING_SHAPE = VePlushBlock
+    protected static final VoxelShape NORTH_LEFT_MAIN_WING_SHAPE = VeShapeUtil
             .cutShape(NORTH_LEFT_WING_MAIN_OUTSIDE_SHAPE, NORTH_LEFT_WING_MAIN_INSIDE_SHAPE);
 
     protected static final VoxelShape NORTH_EYES_SHAPE = VoxelShapes.or(NORTH_RIGHT_EYE_SHAPE, NORTH_LEFT_EYE_SHAPE);

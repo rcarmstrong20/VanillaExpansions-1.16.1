@@ -58,7 +58,7 @@ public class VeGuardianPlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_TAIL_TIP3_END_BOTTOM_SHAPE = Block.makeCuboidShape(7.5D, 3.0D, 15.0D, 8.5D,
             4.0D, 15.5D);
 
-    protected static final VoxelShape NORTH_BODY3_SHAPE = VePlushBlock.cutShape(NORTH_BODY3_SOLID_SHAPE,
+    protected static final VoxelShape NORTH_BODY3_SHAPE = VeShapeUtil.cutShape(NORTH_BODY3_SOLID_SHAPE,
             NORTH_EYE_HOLE_SHAPE);
 
     protected static final VoxelShape NORTH_HORNS_SHAPE = VoxelShapes.or(NORTH_LEFT_HORN1_SHAPE, NORTH_LEFT_HORN2_SHAPE,

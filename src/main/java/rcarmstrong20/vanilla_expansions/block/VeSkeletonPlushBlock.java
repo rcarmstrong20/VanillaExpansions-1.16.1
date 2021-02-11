@@ -47,13 +47,13 @@ public class VeSkeletonPlushBlock extends VePlushBlock
     protected static final VoxelShape SKELETON_NORTH_MOUTH_BOTTOM_SHAPE = Block.makeCuboidShape(6.0D, 10.0D, 5.5D,
             10.0D, 11.0D, 6.0D);
 
-    protected static final VoxelShape SKELETON_NORTH_SKULL_SHAPE = VePlushBlock
+    protected static final VoxelShape SKELETON_NORTH_SKULL_SHAPE = VeShapeUtil
             .cutShape(SKELETON_NORTH_SKULL_OUTSIDE_SHAPE, SKELETON_NORTH_SKULL_INSIDE_SHAPE);
 
-    protected static final VoxelShape SKELETON_NORTH_RIB_TOP_SHAPE = VePlushBlock
+    protected static final VoxelShape SKELETON_NORTH_RIB_TOP_SHAPE = VeShapeUtil
             .cutShape(SKELETON_NORTH_RIB_TOP_SOLID_SHAPE, SKELETON_NORTH_RIB_TOP_HOLE_SHAPE);
 
-    protected static final VoxelShape SKELETON_NORTH_RIB_BOTTOM_SHAPE = VePlushBlock.cutShape(
+    protected static final VoxelShape SKELETON_NORTH_RIB_BOTTOM_SHAPE = VeShapeUtil.cutShape(
             SKELETON_NORTH_RIB_BOTTOM_SOLID_SHAPE, SKELETON_NORTH_RIB_BOTTOM_LEFT_HOLE_SHAPE,
             SKELETON_NORTH_RIB_BOTTOM_RIGHT_HOLE_SHAPE);
 

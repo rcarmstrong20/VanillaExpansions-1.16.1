@@ -94,7 +94,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_COAT_OPENING_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 6.0D, 8.5D, 6.0D,
                 7.0D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VeShapeUtil.cutShape(NORTH_COAT_BASE_SHAPE,
                 NORTH_COAT_NECK1_SHAPE, NORTH_COAT_NECK2_SHAPE, NORTH_COAT_OPENING_SHAPE);
 
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE);
@@ -124,7 +124,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_HAT_BRIM_SHAPE = Block.makeCuboidShape(4.5D, 13.0D, 4.5D, 11.5D, 14.0D,
                 12.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(Plains.NORTH_COAT_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VeShapeUtil.cutShape(Plains.NORTH_COAT_SHAPE,
                 NORTH_COAT_RIP1_SHAPE, NORTH_COAT_RIP2_SHAPE, NORTH_COAT_RIP3_SHAPE);
 
         protected static final VoxelShape NORTH_HAT_SHAPE = VoxelShapes.or(NORTH_HAT_COTTEN_PUFF_SHAPE,
@@ -176,13 +176,13 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_VINE_BELT_TOP_SHAPE = Block.makeCuboidShape(4.0D, 5.5D, 7.0D, 4.5D,
                 6.5D, 10.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VeShapeUtil.cutShape(NORTH_COAT_BASE_SHAPE,
                 Plains.NORTH_COAT_NECK1_SHAPE, Plains.NORTH_COAT_NECK2_SHAPE, NORTH_LEFT_HOLE_SHAPE,
                 NORTH_FRONT_HOLE1_SHAPE, NORTH_FRONT_HOLE2_SHAPE, NORTH_FRONT_HOLE3_SHAPE, NORTH_FRONT_HOLE4_SHAPE,
                 NORTH_FRONT_HOLE5_SHAPE, NORTH_FRONT_HOLE6_SHAPE, NORTH_BACK_HOLE1_SHAPE, NORTH_BACK_HOLE2_SHAPE,
                 NORTH_BACK_HOLE3_SHAPE, NORTH_BACK_HOLE4_SHAPE);
 
-        protected static final VoxelShape NORTH_VINE_BELT_BOTTOM_SHAPE = VePlushBlock
+        protected static final VoxelShape NORTH_VINE_BELT_BOTTOM_SHAPE = VeShapeUtil
                 .cutShape(NORTH_VINE_BELT_BOTTOM_BASE_SHAPE, NORTH_VINE_BELT_BOTTOM_HOLE_SHAPE);
 
         protected static final VoxelShape NORTH_VINE_BELT_SHAPE = VoxelShapes.or(NORTH_VINE_BELT_BOTTOM_SHAPE,
@@ -238,7 +238,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_HAT_SHAPE = Block.makeCuboidShape(5.0D, 13.0D, 5.0D, 11.0D, 15.5D,
                 12.0D);
 
-        protected static final VoxelShape NORTH_SWEATER_SHAPE = VePlushBlock.cutShape(NORTH_SWEATER_BASE_SHAPE,
+        protected static final VoxelShape NORTH_SWEATER_SHAPE = VeShapeUtil.cutShape(NORTH_SWEATER_BASE_SHAPE,
                 NORTH_SWEATER_NECK1_SHAPE, NORTH_SWEATER_NECK2_SHAPE, NORTH_SWEATER_HOLE_FRONT_BOTTOM_SHAPE,
                 NORTH_SWEATER_HOLE_FRONT_TOP_SHAPE, NORTH_SWEATER_HOLE_SIDE_SHAPE);
 
@@ -302,7 +302,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_BELT_BUCKLE_SHAPE = Block.makeCuboidShape(7.0D, 3.5D, 5.0D, 9.0D, 4.5D,
                 5.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(Plains.NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VeShapeUtil.cutShape(Plains.NORTH_COAT_BASE_SHAPE,
                 Snow.NORTH_SWEATER_NECK1_SHAPE, Snow.NORTH_SWEATER_NECK2_SHAPE, NORTH_COAT_NECK3_SHAPE,
                 NORTH_COAT_BOTTOM1_SHAPE, NORTH_COAT_BOTTOM2_SHAPE);
 
@@ -338,7 +338,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_LEFT_BEAD = Block.makeCuboidShape(11.5, 3.0, 8.0, 12.0, 4.0, 9.0);
         protected static final VoxelShape NORTH_RIGHT_BEAD = Block.makeCuboidShape(4.0, 3.0, 6.5, 5.0, 4.0, 7.5);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VePlushBlock.cutShape(Plains.NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VeShapeUtil.cutShape(Plains.NORTH_COAT_BASE_SHAPE,
                 Plains.NORTH_COAT_NECK1_SHAPE, Plains.NORTH_COAT_NECK2_SHAPE, NORTH_FRONT_LEFT_RIP,
                 NORTH_FRONT_RIGHT_RIP, NORTH_LEFT_BIG_RIP, NORTH_MIDDLE_BIG_RIP, NORTH_RIGHT_BIG_RIP);
 
