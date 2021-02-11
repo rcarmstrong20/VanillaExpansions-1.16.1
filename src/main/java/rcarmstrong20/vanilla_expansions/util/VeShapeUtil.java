@@ -10,6 +10,7 @@ import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
@@ -24,6 +25,19 @@ public class VeShapeUtil
     private static final double NINETY_DEGREES = Math.toRadians(90);
     private static final double ONE_HUNDRED_EIGHTY_DEGREES = Math.toRadians(180);
     private static final double TWO_HUNDRED_SEVENTY_DEGREES = Math.toRadians(270);
+
+    /**
+     * Use the second argument's shapes to cut smaller shapes into the first
+     * argument's shape and return the new shape.
+     */
+    public static VoxelShape cutShape(VoxelShape shape, VoxelShape... cutShapes)
+    {
+        for (int i = 0; i < cutShapes.length; i++)
+        {
+            shape = VoxelShapes.combineAndSimplify(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
+        }
+        return shape;
+    }
 
     /**
      * @param axis   The axis to rotate the shapes on.

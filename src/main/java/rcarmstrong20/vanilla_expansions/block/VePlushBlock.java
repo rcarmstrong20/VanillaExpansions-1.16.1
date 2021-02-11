@@ -12,9 +12,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IWorld;
 
 /**
@@ -85,18 +83,5 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
             default:
                 return eastShape;
         }
-    }
-
-    /**
-     * Use the second parameter's shapes to cut smaller shapes into the first
-     * parameter's shape and return the new shape.
-     */
-    protected static VoxelShape cutShape(VoxelShape shape, VoxelShape... cutShapes)
-    {
-        for (int i = 0; i < cutShapes.length; i++)
-        {
-            shape = VoxelShapes.combineAndSimplify(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
-        }
-        return shape;
     }
 }
