@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:oak_planting_pot"
+          "name": "ve:cobblestone_planter_box"
         }
       ],
       "conditions":

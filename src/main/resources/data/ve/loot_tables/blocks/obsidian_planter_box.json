@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:cracked_stone_brick_planting_pot"
+          "name": "ve:obsidian_planter_box"
         }
       ],
       "conditions":

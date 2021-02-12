@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:dark_oak_planting_pot"
+          "name": "ve:warped_planter_box"
         }
       ],
       "conditions":

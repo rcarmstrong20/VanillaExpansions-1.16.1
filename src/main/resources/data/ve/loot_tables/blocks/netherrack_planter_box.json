@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:spruce_planting_pot"
+          "name": "ve:netherrack_planter_box"
         }
       ],
       "conditions":

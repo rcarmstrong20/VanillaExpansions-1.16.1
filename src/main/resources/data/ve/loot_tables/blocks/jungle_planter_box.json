@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:birch_planting_pot"
+          "name": "ve:jungle_planter_box"
         }
       ],
       "conditions":

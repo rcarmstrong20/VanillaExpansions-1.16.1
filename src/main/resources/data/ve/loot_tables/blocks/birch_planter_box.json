@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:warped_planting_pot"
+          "name": "ve:birch_planter_box"
         }
       ],
       "conditions":

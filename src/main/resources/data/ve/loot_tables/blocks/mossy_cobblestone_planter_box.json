@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:crimson_planting_pot"
+          "name": "ve:mossy_cobblestone_planter_box"
         }
       ],
       "conditions":

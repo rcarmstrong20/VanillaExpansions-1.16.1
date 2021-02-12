@@ -8,7 +8,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "name": "ve:acacia_planting_pot"
+          "name": "ve:dark_oak_planter_box"
         }
       ],
       "conditions":
