@@ -62,7 +62,6 @@ public class ClientProxy extends CommonProxy
         RenderTypeLookup.setRenderLayer(VeBlocks.warpedLadder, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.crimsonLadder, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.ironLadder, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VeBlocks.modernDoor, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.purpleMushroom, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.woodcutter, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.whiteCampfire, RenderType.getCutout());

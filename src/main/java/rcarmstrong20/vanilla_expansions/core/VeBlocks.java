@@ -65,7 +65,6 @@ import rcarmstrong20.vanilla_expansions.block.VeSevenStageCropBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSheepPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSilverfishPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSkeletonPlushBlock;
-import rcarmstrong20.vanilla_expansions.block.VeSlimDoorBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSlimePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSpiderPlushBlock;
@@ -383,8 +382,6 @@ public class VeBlocks
     public static Block ironLadder = register("iron_ladder", true,
             new LadderBlock(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
                     .hardnessAndResistance(0.4F, 5.0F).sound(SoundType.METAL).notSolid()));
-    public static Block modernDoor = register("modern_door", true, new VeSlimDoorBlock(AbstractBlock.Properties
-            .create(Material.ANVIL, MaterialColor.IRON).hardnessAndResistance(5.0F).sound(SoundType.METAL)));
     public static Block dirtSlab = register("dirt_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.DIRT)));
     public static Block dirtStairs = register("dirt_stairs", true,
