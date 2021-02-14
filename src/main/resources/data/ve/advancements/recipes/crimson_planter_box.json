@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:nether_planting_pot"
+      "ve:crimson_planter_box"
     ]
   },
   "criteria":
   {
-    "has_nether_brick":
+    "has_soul_soil":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:nether_brick"
+            "tag": "minecraft:soul_fire_base_blocks"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:nether_planting_pot"
+        "recipe": "ve:crimson_planter_box"
       }
     }
   },
   "requirements":
   [
     [
-      "has_nether_brick",
+      "has_soul_soil",
       "has_the_recipe"
     ]
   ]

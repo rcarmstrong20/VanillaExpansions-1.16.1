@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:spruce_planting_pot"
+      "ve:acacia_planter_box"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:spruce_planting_pot"
+        "recipe": "ve:acacia_planter_box"
       }
     }
   },

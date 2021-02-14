@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:warped_planting_pot"
+      "ve:oak_planter_box"
     ]
   },
   "criteria":
   {
-    "has_soul_soil":
+    "has_dirt":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:soul_soil"
+            "item": "minecraft:dirt"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:warped_planting_pot"
+        "recipe": "ve:oak_planter_box"
       }
     }
   },
   "requirements":
   [
     [
-      "has_soul_soil",
+      "has_dirt",
       "has_the_recipe"
     ]
   ]

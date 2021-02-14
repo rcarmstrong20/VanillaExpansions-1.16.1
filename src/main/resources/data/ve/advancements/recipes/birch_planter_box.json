@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:birch_planting_pot"
+      "ve:birch_planter_box"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:birch_planting_pot"
+        "recipe": "ve:birch_planter_box"
       }
     }
   },

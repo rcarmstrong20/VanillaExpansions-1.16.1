@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:oak_planting_pot"
+      "ve:dark_oak_planter_box"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:oak_planting_pot"
+        "recipe": "ve:dark_oak_planter_box"
       }
     }
   },

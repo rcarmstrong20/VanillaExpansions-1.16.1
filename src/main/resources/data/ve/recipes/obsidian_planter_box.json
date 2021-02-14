@@ -2,9 +2,9 @@
   "type": "crafting_shaped",
   "pattern":
   [
+    "# #",
     "#E#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
@@ -15,14 +15,10 @@
 	"E":
 	{
 	  "item": "minecraft:end_stone"
-	},
-	"B":
-	{
-	  "item": "ve:dark_matter_bucket"
 	}
   },
   "result":
   {
-    "item": "ve:obsidian_planting_pot"
+    "item": "ve:obsidian_planter_box"
   }
 }

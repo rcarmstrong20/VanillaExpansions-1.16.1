@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:cracked_stone_brick_planting_pot"
+      "ve:cobblestone_planter_box"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:cracked_stone_brick_planting_pot"
+        "recipe": "ve:cobblestone_planter_box"
       }
     }
   },

@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:acacia_planting_pot"
+      "ve:netherrack_planter_box"
     ]
   },
   "criteria":
   {
-    "has_dirt":
+    "has_soul_soil":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:dirt"
+            "tag": "minecraft:soul_fire_base_blocks"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:acacia_planting_pot"
+        "recipe": "ve:netherrack_planter_box"
       }
     }
   },
   "requirements":
   [
     [
-      "has_dirt",
+      "has_soul_soil",
       "has_the_recipe"
     ]
   ]

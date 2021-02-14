@@ -1,11 +1,11 @@
 {
   "type": "crafting_shaped",
-  "group": "overworld_planting_pot",
+  "group": "overworld_planter_box",
   "pattern":
   [
+    "#B#",
     "#D#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
@@ -24,6 +24,6 @@
   },
   "result":
   {
-    "item": "ve:jungle_planting_pot"
+    "item": "ve:jungle_planter_box"
   }
 }

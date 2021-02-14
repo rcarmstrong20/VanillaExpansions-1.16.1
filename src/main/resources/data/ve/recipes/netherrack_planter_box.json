@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "nether_planter_box",
+  "pattern":
+  [
+    "# #",
+    "#S#",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:netherrack"
+    },
+	"S":
+	{
+	  "tag": "minecraft:soul_fire_base_blocks"
+	}
+  },
+  "result":
+  {
+    "item": "ve:netherrack_planter_box"
+  }
+}

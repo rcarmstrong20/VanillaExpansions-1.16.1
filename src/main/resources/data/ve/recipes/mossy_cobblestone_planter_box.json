@@ -1,17 +1,17 @@
 {
   "type": "crafting_shaped",
-  "group": "overworld_stone_planting_pot",
+  "group": "overworld_stone_planter_box",
   "pattern":
   [
+    "#B#",
     "#D#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "minecraft:cracked_stone_bricks"
+      "item": "minecraft:mossy_cobblestone"
     },
 	"D":
 	{
@@ -24,6 +24,6 @@
   },
   "result":
   {
-    "item": "ve:cracked_stone_brick_planting_pot"
+    "item": "ve:mossy_cobblestone_planter_box"
   }
 }

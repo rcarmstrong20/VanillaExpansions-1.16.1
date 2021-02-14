@@ -4,7 +4,7 @@
   {
     "recipes":
 	[
-      "ve:stone_brick_planting_pot"
+      "ve:stone_planter_box"
     ]
   },
   "criteria":
@@ -27,7 +27,7 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:stone_brick_planting_pot"
+        "recipe": "ve:stone_planter_box"
       }
     }
   },

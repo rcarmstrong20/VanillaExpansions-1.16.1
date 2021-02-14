@@ -1,11 +1,11 @@
 {
   "type": "crafting_shaped",
-  "group": "nether_planting_pot",
+  "group": "nether_planter_box",
   "pattern":
   [
+    "# #",
     "#S#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
@@ -16,14 +16,10 @@
 	"S":
 	{
 	  "tag": "minecraft:soul_fire_base_blocks"
-	},
-	"B":
-	{
-	  "item": "minecraft:lava_bucket"
 	}
   },
   "result":
   {
-    "item": "ve:warped_planting_pot"
+    "item": "ve:warped_planter_box"
   }
 }

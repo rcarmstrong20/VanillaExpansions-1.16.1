@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:obsidian_planting_pot"
+      "ve:warped_planter_box"
     ]
   },
   "criteria":
   {
-    "has_end_stone":
+    "has_soul_soil":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:end_stone"
+            "tag": "minecraft:soul_fire_base_blocks"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:obsidian_planting_pot"
+        "recipe": "ve:warped_planter_box"
       }
     }
   },
   "requirements":
   [
     [
-      "has_end_stone",
+      "has_soul_soil",
       "has_the_recipe"
     ]
   ]

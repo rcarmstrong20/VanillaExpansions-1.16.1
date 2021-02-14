@@ -1,17 +1,17 @@
 {
   "type": "crafting_shaped",
-  "group": "overworld_stone_planting_pot",
+  "group": "overworld_planter_box",
   "pattern":
   [
+    "#B#",
     "#D#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "minecraft:stone_bricks"
+      "item": "minecraft:birch_planks"
     },
 	"D":
 	{
@@ -24,6 +24,6 @@
   },
   "result":
   {
-    "item": "ve:stone_brick_planting_pot"
+    "item": "ve:birch_planter_box"
   }
 }

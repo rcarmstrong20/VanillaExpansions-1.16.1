@@ -1,17 +1,17 @@
 {
   "type": "crafting_shaped",
-  "group": "overworld_planting_pot",
+  "group": "overworld_planter_box",
   "pattern":
   [
+    "#B#",
     "#D#",
-    "###",
-    " B "
+    "###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "minecraft:acacia_planks"
+      "item": "minecraft:spruce_planks"
     },
 	"D":
 	{
@@ -24,6 +24,6 @@
   },
   "result":
   {
-    "item": "ve:acacia_planting_pot"
+    "item": "ve:spruce_planter_box"
   }
 }

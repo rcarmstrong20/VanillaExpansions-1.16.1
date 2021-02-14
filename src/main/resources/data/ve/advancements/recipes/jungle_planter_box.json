@@ -4,12 +4,12 @@
   {
     "recipes":
 	[
-      "ve:end_planting_pot"
+      "ve:jungle_planter_box"
     ]
   },
   "criteria":
   {
-    "has_end_stone":
+    "has_dirt":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "minecraft:end_stone"
+            "item": "minecraft:dirt"
           }
         ]
       }
@@ -27,14 +27,14 @@
       "trigger": "minecraft:recipe_unlocked",
       "conditions":
 	  {
-        "recipe": "ve:end_planting_pot"
+        "recipe": "ve:jungle_planter_box"
       }
     }
   },
   "requirements":
   [
     [
-      "has_end_stone",
+      "has_dirt",
       "has_the_recipe"
     ]
   ]
