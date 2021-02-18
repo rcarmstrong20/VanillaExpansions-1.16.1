@@ -240,6 +240,8 @@ public class VanillaExpansions
         // Push the player when in flowing dark matter.
         player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
 
+        // player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(-0.001);
+
         // if (player.areEyesInFluid(VeFluidTags.darkMatter))
         {
             // player.setMotion(player.getMotion().add(0.0D, 0.3D, 0.0D));
@@ -624,6 +626,7 @@ public class VanillaExpansions
         List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
         List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
                 "tall_birch_forest", "tall_birch_hills");
+
         boolean netherSmokyQuartzFlag = VeFeatureGenConfig.VeNetherConfig.enableNetherSmokyQuartzOreSpawns.get();
         boolean netherRubyFlag = VeFeatureGenConfig.VeNetherConfig.enableNetherRubyOreSpawns.get();
         boolean blueberryBushFlag = VeFeatureGenConfig.VeOverworldConfig.enableBlueberryBushSpawns.get();
@@ -636,15 +639,18 @@ public class VanillaExpansions
         boolean forestCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableForestCabinSpawns.get();
         boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
         boolean netherZombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
+
         int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
         int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
         int netherZombieVillagerMaxSize = VeEntityDataConfig.MaxSpawnSizeConfig.netherZombieVillagerMaxSpawnSize.get();
+
         ConfiguredFeature<?, ?> sparseBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
         ConfiguredFeature<?, ?> decoratedBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
         ConfiguredFeature<?, ?> sparseCranberries = VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE;
         ConfiguredFeature<?, ?> decoratedCranberries = VeConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED;
         ConfiguredFeature<?, ?> sparseWitchsCradle = VeConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE;
         ConfiguredFeature<?, ?> decoratedWitchsCradle = VeConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED;
+
         Decoration ores = Decoration.UNDERGROUND_ORES;
         Decoration vegetal = Decoration.VEGETAL_DECORATION;
         Decoration lakes = Decoration.LAKES;
@@ -665,6 +671,7 @@ public class VanillaExpansions
         addStructure(event, taiga, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin, forestCabinFlag);
         addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
+
         addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, netherZombieVillagerWeight, netherZombieVillagerMinSize,
                 netherZombieVillagerMaxSize, netherZombieVillagerFlag, "crimson_forest", "warped_forest");
     }
