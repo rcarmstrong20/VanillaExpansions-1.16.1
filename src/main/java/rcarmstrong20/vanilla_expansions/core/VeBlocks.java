@@ -29,6 +29,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.block.IcicleBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBabyCowPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBabyMooshroomPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBatPlushBlock;
@@ -682,6 +683,8 @@ public class VeBlocks
                     {
                         return 7;
                     }).sound(SoundType.STONE)));
+    public static Block icicle = register("icicle", true,
+            new IcicleBlock(AbstractBlock.Properties.from(Blocks.BLUE_ICE).doesNotBlockMovement()));
 
     /**
      * Used to register a block with a item that has a custom stack size.
