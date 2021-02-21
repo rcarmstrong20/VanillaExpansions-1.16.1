@@ -60,9 +60,9 @@ public class VeOreDataGenConfig
                     .translation("ve_ore_data.ve_ore_spread.nether_smoky_quartz_ore_spread").worldRestart()
                     .defineInRange("nether_smoky_quartz_ore_spread", 16, 2, 20);
 
-            netherRubyOreSpread = server.comment(compileSpreadComment("nether ruby ore", "7"))
+            netherRubyOreSpread = server.comment(compileSpreadComment("nether ruby ore", "16"))
                     .translation("ve_ore_data.ve_ore_spread.nether_ruby_ore_spread").worldRestart()
-                    .defineInRange("nether_ruby_ore_spread", 7, 2, 20);
+                    .defineInRange("nether_ruby_ore_spread", 16, 2, 20);
 
             server.pop();
         }
