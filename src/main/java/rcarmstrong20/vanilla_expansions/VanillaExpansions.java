@@ -48,10 +48,12 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.FlatChunkGenerator;
@@ -67,6 +69,7 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -231,40 +234,34 @@ public class VanillaExpansions
     {
         Minecraft.getInstance().particles.registerFactory(particleIn, particleFactoryIn);
     }
+    /*
+     * @SubscribeEvent public void onPlayerTick(PlayerTickEvent event) {
+     *
+     *
+     * // player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(-0.001);
+     *
+     * // if (player.areEyesInFluid(VeFluidTags.darkMatter)) { //
+     * player.setMotion(player.getMotion().add(0.0D, 0.3D, 0.0D));
+     *
+     * /* double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D :
+     * 0.06D;
+     *
+     * Vector3d vector3d1 = player.getMotion(); player.setMotion(vector3d1.add(0.0D,
+     * (d3 - vector3d1.y) * d4, 0.0D));
+     */
+    /*
+     * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
+     * if (d3 <= 0.0D || player.getMotion().getY() > 0 || !player.world
+     * .getBlockState(new BlockPos(player.getPosX(), player.getPosY() + 1.0D - 0.1D,
+     * player.getPosZ())) .getFluidState().isEmpty()) {
+     *
+     * }
+     */
+    // VanillaExpansions.LOGGER.info("Swimming");
+    // }
 
-    @SubscribeEvent
-    public void onClientPlayerTick(PlayerTickEvent event)
-    {
-        LivingEntity player = event.player;
-
-        // Push the player when in flowing dark matter.
-        player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
-
-        // player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(-0.001);
-
-        // if (player.areEyesInFluid(VeFluidTags.darkMatter))
-        {
-            // player.setMotion(player.getMotion().add(0.0D, 0.3D, 0.0D));
-
-            /*
-             * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
-             *
-             * Vector3d vector3d1 = player.getMotion(); player.setMotion(vector3d1.add(0.0D,
-             * (d3 - vector3d1.y) * d4, 0.0D));
-             */
-            /*
-             * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
-             * if (d3 <= 0.0D || player.getMotion().getY() > 0 || !player.world
-             * .getBlockState(new BlockPos(player.getPosX(), player.getPosY() + 1.0D - 0.1D,
-             * player.getPosZ())) .getFluidState().isEmpty()) {
-             *
-             * }
-             */
-            // VanillaExpansions.LOGGER.info("Swimming");
-        }
-
-        // VanillaExpansions.LOGGER.info("Swimming");
-    }
+    // VanillaExpansions.LOGGER.info("Swimming");
+    // }
 
     @SuppressWarnings("unchecked") // Needed for the byBiome field.
     @SubscribeEvent
@@ -311,6 +308,44 @@ public class VanillaExpansions
     }
 
     @SubscribeEvent
+    public void onEntityJump(LivingJumpEvent event)
+    {
+        LivingEntity livingEntity = event.getEntityLiving();
+        World world = livingEntity.getEntityWorld();
+        FluidState fluidState = world
+                .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(), livingEntity.getPosZ()));
+        Vector3d motion = livingEntity.getMotion();
+
+        if (fluidState.isTagged(VeFluidTags.darkMatter))
+        {
+            livingEntity.addVelocity(0, 2.0, 0);
+            // livingEntity.setAIMoveSpeed(0.005F);
+            // VanillaExpansions.LOGGER.info("Entity Jumped");
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingEntityFall(LivingFallEvent event)
+    {
+        LivingEntity livingEntity = event.getEntityLiving();
+        /*
+         * World world = livingEntity.getEntityWorld(); FluidState fluidState = world
+         * .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(),
+         * livingEntity.getPosZ())); Vector3d motion = livingEntity.getMotion();
+         *
+         * if (fluidState.isTagged(VeFluidTags.darkMatter)) {
+         * livingEntity.setMotion(motion.getX(), motion.getY() + 2, motion.getZ());
+         * VanillaExpansions.LOGGER.info("Entity is falling"); }
+         */
+
+        // Cancels rabbit fall damage.
+        if (VeEntityConfig.VeOverworldConfig.enableSaveTheBunnies.get() && livingEntity instanceof RabbitEntity)
+        {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event)
     {
         Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
@@ -342,6 +377,29 @@ public class VanillaExpansions
                 removeFromOffHand(serverPlayer);
             }
         }
+
+        LivingEntity player = event.player;
+
+        // Push the player when in flowing dark matter.
+        player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+
+        World world = player.getEntityWorld();
+        FluidState fluidState = world.getFluidState(new BlockPos(player.getPosX(), player.getPosY(), player.getPosZ()));
+        Vector3d motion = player.getMotion();
+        Vector3d motion2 = player.getMotion();
+        // double height1 = player.getPosY();
+
+        // VanillaExpansions.LOGGER.info(motion2.getY() + motion.getY());
+
+        // VanillaExpansions.LOGGER.info(height1 + " and " + prevY);
+
+        // When the player is standing the motion of second - first =
+        // -0.1568000030517578.
+        /*
+         * if (fluidState.isTagged(VeFluidTags.darkMatter) && height1 - prevY < 0) { //
+         * player.addVelocity(0, motion.getY() * 0.005, 0); //prevY = height1;
+         * //VanillaExpansions.LOGGER.info("Falling height is " + (prevY - height1)); }
+         */
     }
 
     private void removeFromMainHand(ServerPlayerEntity player)
@@ -654,10 +712,14 @@ public class VanillaExpansions
         Decoration ores = Decoration.UNDERGROUND_ORES;
         Decoration vegetal = Decoration.VEGETAL_DECORATION;
         Decoration lakes = Decoration.LAKES;
+
         Category nether = Category.NETHER;
         Category forest = Category.FOREST;
         Category swamp = Category.SWAMP;
         Category taiga = Category.TAIGA;
+
+        RainType rain = RainType.RAIN;
+        RainType snow = RainType.SNOW;
 
         addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, netherSmokyQuartzFlag);
         addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_RUBY_ORE, netherRubyFlag);
@@ -668,7 +730,9 @@ public class VanillaExpansions
         addFeature(event, endCityBiomes, vegetal, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                 snapdragonAndEnderGrassFlag);
         addFeature(event, endCityBiomes, lakes, VeConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
-        addStructure(event, taiga, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
+
+        addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
+        addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
         addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin, forestCabinFlag);
         addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
 
@@ -787,6 +851,25 @@ public class VanillaExpansions
     }
 
     /**
+     * Adds a new structure to a category of biomes with the rain type provided.
+     *
+     * @param event            The biome loading event to use.
+     * @param category         The category of biomes to add this structure to.
+     * @param rainType         The rain type of the biomes to spawn in.
+     * @param structureFeature The structure to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this structure.
+     */
+    private static void addStructure(BiomeLoadingEvent event, Category category, RainType rainType,
+            StructureFeature<?, ?> structureFeature, boolean enable)
+    {
+        if (event.getClimate().precipitation == rainType)
+        {
+            addStructure(event, category, structureFeature, enable);
+        }
+    }
+
+    /**
      * Adds a new structure to a category of biomes.
      *
      * @param event            The biome loading event to use.
@@ -845,22 +928,6 @@ public class VanillaExpansions
             boolean enable)
     {
         addStructure(event, Arrays.asList(biome), structureFeature, enable);
-    }
-
-    /**
-     * Called when a living entity is falling.
-     *
-     * @param event An instance of the LivingFallEvent.
-     */
-    @SubscribeEvent
-    public void onEntityFall(final LivingFallEvent event)
-    {
-        LivingEntity entity = event.getEntityLiving();
-
-        if (VeEntityConfig.VeOverworldConfig.enableSaveTheBunnies.get() && entity instanceof RabbitEntity)
-        {
-            event.setCanceled(true);
-        }
     }
 
     /**

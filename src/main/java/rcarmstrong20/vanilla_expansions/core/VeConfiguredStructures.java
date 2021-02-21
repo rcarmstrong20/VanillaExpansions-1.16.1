@@ -17,6 +17,9 @@ public class VeConfiguredStructures
 {
     public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin", VeStructure.overworldCabin
             .withConfiguration(new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin"))));
+    public static StructureFeature<?, ?> configuredIcyTaigaCabin = register("icy_taiga_cabin",
+            VeStructure.overworldCabin.withConfiguration(
+                    new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/icy_taiga_cabin"))));
     public static StructureFeature<?, ?> configuredForestCabin = register("forest_cabin",
             VeStructure.overworldCabin.withConfiguration(
                     new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/forest_cabin"))));
