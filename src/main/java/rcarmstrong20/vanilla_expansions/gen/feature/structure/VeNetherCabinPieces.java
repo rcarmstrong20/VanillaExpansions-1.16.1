@@ -134,7 +134,7 @@ public class VeNetherCabinPieces
                 case "FlowerPot":
                     world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
                     break;
-                case "OverworldPot":
+                case "OverworldBoxCrop":
                     VeStructureUtil.setOverworldCrop(world, VeBlockTags.singleCrops.getRandomElement(rand), pos);
                     break;
                 case "CrimsonVillager":
