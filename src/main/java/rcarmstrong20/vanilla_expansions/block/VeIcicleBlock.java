@@ -4,20 +4,32 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class IcicleBlock extends FallingBlock
+public class VeIcicleBlock extends FallingBlock
 {
-    public IcicleBlock(Properties properties)
+    private static final VoxelShape ICICLE_SHAPE = Block.makeCuboidShape(4.0, 2.0, 4.0, 12.0, 16.0, 12.0);
+
+    public VeIcicleBlock(Properties properties)
     {
         super(properties);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+    {
+        return ICICLE_SHAPE;
     }
 
     @Override
@@ -91,5 +103,11 @@ public class IcicleBlock extends FallingBlock
         Block.replaceBlock(this.getBlock().getDefaultState(), Blocks.AIR.getDefaultState(), worldIn, pos, 1);
 
         System.out.println(blocksFallen * fallMult);
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+    {
+        entityIn.attackEntityFrom(DamageSource.GENERIC, 0.5F);
     }
 }
