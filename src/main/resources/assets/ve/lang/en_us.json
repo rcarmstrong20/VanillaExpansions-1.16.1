@@ -244,7 +244,9 @@
   "block.ve.smooth_end_stone_slab": "Smooth End Stone Slab",
   "block.ve.smooth_end_stone_stairs": "Smooth End Stone Stairs",
   "block.ve.smooth_end_stone_wall": "Smooth End Stone Wall",
-
+  "block.ve.transmutation_table": "Transmutation Table",
+  "block.ve.icicle": "Icicle",
+  
   "container.woodcutter": "Woodcutter", 
 
   "item.ve.ruby": "Nether Ruby",
