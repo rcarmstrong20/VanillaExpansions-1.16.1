@@ -68,8 +68,13 @@ public class VeConfiguredFeatures
             "patch_witchs_cradle_decorated",
             PATCH_WITCHS_CRADLE.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
     public static final ConfiguredFeature<?, ?> HUGE_PURPLE_MUSHROOM = register("huge_purple_mushroom",
-            Feature.HUGE_RED_MUSHROOM.withConfiguration(VeConfiguredFeatures.Configs.BIG_PURPLE_MUSHROOM_CONFIG)
-                    .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1));
+            Feature.HUGE_RED_MUSHROOM.withConfiguration(VeConfiguredFeatures.Configs.BIG_PURPLE_MUSHROOM_CONFIG));
+    public static final ConfiguredFeature<?, ?> HUGE_PURPLE_MUSHROOM_WG = register("huge_purple_mushroom_wg",
+            HUGE_PURPLE_MUSHROOM.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1));
+    public static final ConfiguredFeature<?, ?> PATCH_PURPLE_MUSHROOM = register("patch_purple_mushroom",
+            Feature.RANDOM_PATCH.withConfiguration(VeConfiguredFeatures.Configs.PURPLE_MUSHROOM_CONFIG));
+    public static final ConfiguredFeature<?, ?> PURPLE_MUSHROOM_DARK_FOREST = register("purple_mushroom_normal",
+            PATCH_PURPLE_MUSHROOM.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
     public static final ConfiguredFeature<?, ?> DARK_MATTER_LAKE = register("dark_matter_lake",
             Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VeConfiguredFeatures.States.DARK_MATTER))
                     .withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))));
@@ -119,8 +124,11 @@ public class VeConfiguredFeatures
                         .tries(64).whitelist(ImmutableSet.of(VeConfiguredFeatures.States.GRASS_BLOCK.getBlock()))
                         .func_227317_b_().build();
         public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(
-                new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM_BLOCK),
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM_BLOCK_DOWN),
                 new SimpleBlockStateProvider(VeConfiguredFeatures.States.MUSHROOM_STEM), 2);
+        public static final BlockClusterFeatureConfig PURPLE_MUSHROOM_CONFIG = new BlockClusterFeatureConfig.Builder(
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM), SimpleBlockPlacer.PLACER)
+                        .tries(64).func_227317_b_().build();
     }
 
     /**
@@ -136,7 +144,8 @@ public class VeConfiguredFeatures
         protected static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
         protected static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();
         protected static final BlockState ENDER_GRASS = VeBlocks.enderGrass.getDefaultState();
-        protected static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purpleMushroomBlock.getDefaultState()
+        protected static final BlockState PURPLE_MUSHROOM = VeBlocks.purpleMushroom.getDefaultState();
+        protected static final BlockState PURPLE_MUSHROOM_BLOCK_DOWN = VeBlocks.purpleMushroomBlock.getDefaultState()
                 .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
         protected static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState()
                 .with(HugeMushroomBlock.UP, Boolean.valueOf(false))

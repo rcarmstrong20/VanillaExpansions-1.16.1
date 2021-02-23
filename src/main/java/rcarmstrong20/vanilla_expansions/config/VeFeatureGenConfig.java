@@ -17,11 +17,9 @@ public class VeFeatureGenConfig
     }
 
     /**
+     * A sub-class that holds all the configurations for the overworld dimension.
      *
      * @author Ryan
-     *
-     *         A sub-class that holds all the configurations for the overworld
-     *         dimension.
      */
     public static class VeOverworldConfig
     {
@@ -31,6 +29,7 @@ public class VeFeatureGenConfig
         public static BooleanValue enableHugePurpleMushroomSpawns;
         public static BooleanValue enableTaigaCabinSpawns;
         public static BooleanValue enableForestCabinSpawns;
+        public static BooleanValue enablePurpleMushroomSpawns;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
@@ -59,6 +58,10 @@ public class VeFeatureGenConfig
             enableForestCabinSpawns = server.comment(compileBooleanSpawnComment("forest cabins"))
                     .translation("ve.configStructure.enableForestCabinSpawns").worldRestart()
                     .define("enable_forest_cabin_spawns", true);
+
+            enablePurpleMushroomSpawns = server.comment(compileBooleanSpawnComment("purple mushrooms"))
+                    .translation("ve.configMushroom.enablePurpleMushroomSpawns").worldRestart()
+                    .define("enable_purple_mushroom_spawns", true);
 
             server.pop();
         }

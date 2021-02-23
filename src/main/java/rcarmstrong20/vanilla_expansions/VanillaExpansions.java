@@ -697,6 +697,7 @@ public class VanillaExpansions
         boolean forestCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableForestCabinSpawns.get();
         boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
         boolean netherZombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
+        boolean purpleMushroomFlag = VeFeatureGenConfig.VeOverworldConfig.enablePurpleMushroomSpawns.get();
 
         int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
         int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
@@ -726,10 +727,13 @@ public class VanillaExpansions
         addBushFeature(event, forest, sparseBlueberries, decoratedBlueberries, blueberryBushFlag);
         addBushFeature(event, forest, sparseCranberries, decoratedCranberries, cranberryBushFlag);
         addBushFeature(event, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
-        addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM, hugePurpleMushroomFlag);
         addFeature(event, endCityBiomes, vegetal, VeConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                 snapdragonAndEnderGrassFlag);
         addFeature(event, endCityBiomes, lakes, VeConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
+        addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM_WG,
+                hugePurpleMushroomFlag);
+        addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
+                purpleMushroomFlag);
 
         addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
