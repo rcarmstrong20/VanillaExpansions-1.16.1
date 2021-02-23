@@ -48,22 +48,10 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
         entityIn.fallDistance = 0;
     }
 
-    /**
-     * Allows a block to override the standard EntityLivingBase.updateFallState
-     * particles, this is a server side method that spawns particles with
-     * WorldServer.spawnParticle.
-     *
-     * @param worldserver       The current Server World
-     * @param pos               The position of the block.
-     * @param state2            The state at the specific world/pos
-     * @param entity            The entity that hit landed on the block
-     * @param numberOfParticles That vanilla world have spawned
-     * @return True to prevent vanilla landing particles from spawning
-     */
     @Override
     public boolean addLandingEffects(BlockState state1, ServerWorld worldserver, BlockPos pos, BlockState state2,
             LivingEntity entity, int numberOfParticles)
     {
-        return true;
+        return true; // True to prevent vanilla landing particles from spawning.
     }
 }
