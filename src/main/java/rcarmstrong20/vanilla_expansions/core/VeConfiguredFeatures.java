@@ -18,6 +18,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
@@ -39,13 +40,13 @@ public class VeConfiguredFeatures
                             VeOreDataGenConfig.VeVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
                     .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
                     .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.netherSmokyQuartzOreSpread.get()));
-    public static final ConfiguredFeature<?, ?> NETHER_RUBY_ORE = register("nether_ruby_ore",
+    public static final ConfiguredFeature<?, ?> BLACKSTONE_RUBY_ORE = register("blackstone_ruby_ore",
             Feature.ORE
-                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
+                    .withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.BLACKSTONE),
                             VeConfiguredFeatures.States.NETHER_RUBY_ORE,
-                            VeOreDataGenConfig.VeVeinSizeConfig.netherRubyOreVeinSize.get()))
+                            VeOreDataGenConfig.VeVeinSizeConfig.blackstoneRubyOreVeinSize.get()))
                     .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
-                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.netherRubyOreSpread.get()));
+                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.blackstoneRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
             .withConfiguration(VeConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",

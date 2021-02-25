@@ -723,7 +723,7 @@ public class VanillaExpansions
         RainType snow = RainType.SNOW;
 
         addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, netherSmokyQuartzFlag);
-        addFeature(event, nether, ores, VeConfiguredFeatures.NETHER_RUBY_ORE, netherRubyFlag);
+        addFeature(event, nether, ores, VeConfiguredFeatures.BLACKSTONE_RUBY_ORE, netherRubyFlag);
         addBushFeature(event, forest, sparseBlueberries, decoratedBlueberries, blueberryBushFlag);
         addBushFeature(event, forest, sparseCranberries, decoratedCranberries, cranberryBushFlag);
         addBushFeature(event, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);

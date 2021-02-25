@@ -251,8 +251,8 @@ public class VeBlocks
             new VeZombiePigmanPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
     public static Block pufferfishPlush = register("pufferfish_plush", true,
             new VePufferfishPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block rubyOre = register("nether_ruby_ore", true,
-            new VeOreBlock(AbstractBlock.Properties.from(Blocks.DIAMOND_ORE)));
+    public static Block rubyOre = register("blackstone_ruby_ore", true, new VeOreBlock(AbstractBlock.Properties
+            .create(Material.ROCK, MaterialColor.BLACK).setRequiresTool().hardnessAndResistance(2.0F, 6.0F)));
     public static Block rubyBlock = register("ruby_block", true, new Block(AbstractBlock.Properties
             .create(Material.IRON, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.STONE)));
     public static Block smokyQuartzOre = register("nether_smoky_quartz_ore", true,
