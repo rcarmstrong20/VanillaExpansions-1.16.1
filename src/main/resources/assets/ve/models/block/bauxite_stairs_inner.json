@@ -1,0 +1,9 @@
+{
+    "parent": "block/inner_stairs",
+    "textures":
+	{
+        "bottom": "ve:block/bauxite",
+        "top": "ve:block/bauxite",
+        "side": "ve:block/bauxite"
+    }
+}
