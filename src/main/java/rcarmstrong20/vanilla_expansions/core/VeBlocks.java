@@ -1,8 +1,5 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -25,9 +22,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.block.VeBabyCowPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBabyMooshroomPlushBlock;
@@ -90,8 +87,10 @@ import rcarmstrong20.vanilla_expansions.block.VeZombiePlushBlock;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeBlocks
 {
-    private static final List<Block> BLOCKS = new ArrayList<>();
-    private static final List<Item> ITEMS = new ArrayList<>();
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+            VanillaExpansions.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
+            VanillaExpansions.MOD_ID);
 
     public static Block batPlush = register("bat_plush", true,
             new VeBatPlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
@@ -260,6 +259,8 @@ public class VeBlocks
     public static Block smokyQuartzBlock = register("smoky_quartz_block", true,
             new Block(AbstractBlock.Properties.from(Blocks.QUARTZ_BLOCK)));
     public static Block chiseledSmokyQuartzBlock = register("chiseled_smoky_quartz_block", true,
+            new Block(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
+    public static Block smokyQuartzBricks = register("smoky_quartz_bricks", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
     public static Block smokyQuartzPillar = register("smoky_quartz_pillar", true,
             new RotatedPillarBlock(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
@@ -614,26 +615,30 @@ public class VeBlocks
             new FenceGateBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
     public static Block bambooWall = register("bamboo_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
-    public static Block snowflakeObsidian = register("snowflake_obsidian", true,
-            new Block(AbstractBlock.Properties.from(Blocks.OBSIDIAN)));
-    public static Block nephilite = register("nephilite", true, new Block(
-            AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
-    public static Block nephiliteSlab = register("nephilite_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteStairs = register("nephilite_stairs", true, new StairsBlock(
-            () -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteWall = register("nephilite_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteBricks = register("nephilite_bricks", true,
-            new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteBrickSlab = register("nephilite_brick_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteBrickStairs = register("nephilite_brick_stairs", true, new StairsBlock(
-            () -> VeBlocks.nephilite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block nephiliteBrickWall = register("nephilite_brick_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.nephilite)));
-    public static Block chiseledNephiliteBricks = register("chiseled_nephilite_bricks", true,
-            new Block(AbstractBlock.Properties.from(VeBlocks.nephilite)));
+    public static Block bauxite = register("bauxite", true, new Block(AbstractBlock.Properties
+            .create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
+    public static Block bauxiteSlab = register("bauxite_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteStairs = register("bauxite_stairs", true, new StairsBlock(
+            () -> VeBlocks.sodalite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteWall = register("bauxite_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block sodalite = register("sodalite", true, new Block(AbstractBlock.Properties
+            .create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.4F).sound(SoundType.STONE)));
+    public static Block sodaliteSlab = register("sodalite_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteStairs = register("sodalite_stairs", true, new StairsBlock(
+            () -> VeBlocks.sodalite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteWall = register("sodalite_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteBricks = register("sodalite_bricks", true,
+            new Block(AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteBrickSlab = register("sodalite_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteBrickStairs = register("sodalite_brick_stairs", true, new StairsBlock(
+            () -> VeBlocks.sodalite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block sodaliteBrickWall = register("sodalite_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
     public static Block snowSlab = register("snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
     public static Block snowStairs = register("snow_stairs", true,
@@ -715,40 +720,17 @@ public class VeBlocks
     }
 
     /**
-     * Helper method for registering all default blocks and block items.
+     * Helper method for adding all blocks and block items to the registry list.
      */
     private static Block register(String name, boolean hasItem, Block block, Properties properties)
     {
-        String id = VanillaExpansions.MOD_ID;
-
         if (hasItem)
         {
             BlockItem item = new BlockItem(block, properties);
-            item.setRegistryName(id, name);
-            ITEMS.add(item);
+            ITEMS.register(name, () -> item);
         }
-
-        block.setRegistryName(id, name);
-        BLOCKS.add(block);
+        BLOCKS.register(name, () -> block);
 
         return block;
-    }
-
-    @SubscribeEvent
-    public static void registerBlocks(final RegistryEvent.Register<Block> event)
-    {
-        BLOCKS.forEach(block -> event.getRegistry().register(block));
-        BLOCKS.clear();
-
-        VanillaExpansions.LOGGER.info("Blocks registered.");
-    }
-
-    @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event)
-    {
-        ITEMS.forEach(item -> event.getRegistry().register(item));
-        ITEMS.clear();
-
-        VanillaExpansions.LOGGER.info("Block Items registered.");
     }
 }
