@@ -70,11 +70,11 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         {
             if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.snowflakeObsidian, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VeBlocks.bauxite, Blocks.END_STONE);
             }
             else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.WATER))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.nephilite, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VeBlocks.sodalite, Blocks.END_STONE);
             }
         }
         return true; // This method needs to always return true to keep flowing functionality intact.
@@ -91,7 +91,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
      * @return true when this method generates a block.
      */
     private boolean generateBlocks(World world, BlockPos pos, Direction foundDirection, Block sourceBlock,
-            Block otherBlock)
+            Block flowingBlock)
     {
         if (foundDirection == Direction.UP)
         {
@@ -102,7 +102,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             }
             else
             {
-                placeBlockAt(world, pos, otherBlock);
+                placeBlockAt(world, pos, flowingBlock);
                 return true;
             }
         }
@@ -115,7 +115,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             }
             else
             {
-                placeBlockAtOffset(world, pos, foundDirection, otherBlock);
+                placeBlockAtOffset(world, pos, foundDirection, flowingBlock);
                 return true;
             }
         }
@@ -171,7 +171,8 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return world.getFluidState(pos).isTagged(VeFluidTags.darkMatter);
+        return world.getFluidState(pos).isTagged(VeFluidTags.darkMatter)
+                && (entity.getMotion().y > 0 || entity.getMotion().y < 0);
     }
 
     /**
