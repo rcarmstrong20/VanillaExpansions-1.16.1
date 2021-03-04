@@ -1,13 +1,10 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.village.PointOfInterestType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -19,7 +16,8 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VePointOfInterestTypes
 {
-    private static final List<PointOfInterestType> POI_TYPES = new ArrayList<>();
+    public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister
+            .create(ForgeRegistries.POI_TYPES, VanillaExpansions.MOD_ID);
 
     public static PointOfInterestType lumberjack = register("lumberjack", VeBlocks.woodcutter, 1, 1);
 
@@ -31,17 +29,7 @@ public class VePointOfInterestTypes
 
     private static PointOfInterestType register(String name, PointOfInterestType pointOfInterest)
     {
-        pointOfInterest.setRegistryName(VanillaExpansions.MOD_ID, name);
-        POI_TYPES.add(pointOfInterest);
+        POI_TYPES.register(name, () -> pointOfInterest);
         return pointOfInterest;
-    }
-
-    @SubscribeEvent
-    public static void registerPointOfInterestTypes(final RegistryEvent.Register<PointOfInterestType> event)
-    {
-        POI_TYPES.forEach(poi -> event.getRegistry().register(poi));
-        POI_TYPES.clear();
-
-        VanillaExpansions.LOGGER.info("Point of Interests registered.");
     }
 }

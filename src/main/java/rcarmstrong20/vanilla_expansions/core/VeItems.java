@@ -1,8 +1,5 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Suppliers;
 
 import net.minecraft.item.BlockNamedItem;
@@ -12,9 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.item.Items;
 import net.minecraft.item.WallOrFloorItem;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
 import rcarmstrong20.vanilla_expansions.item.VeFoods;
@@ -34,7 +31,8 @@ import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
 {
-    private static final List<Item> ITEMS = new ArrayList<>();
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
+            VanillaExpansions.MOD_ID);
 
     public static Item ruby = register("ruby", new Item(buildProperties()));
     public static Item bokChoySeeds = register("bok_choy_seeds",
@@ -175,20 +173,7 @@ public class VeItems
      */
     private static Item register(String name, Item item)
     {
-        item.setRegistryName(VanillaExpansions.MOD_ID, name);
-        ITEMS.add(item);
+        ITEMS.register(name, () -> item);
         return item;
-    }
-
-    /*
-     * Register the Items to the game.
-     */
-    @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event)
-    {
-        ITEMS.forEach(item -> event.getRegistry().register(item));
-        ITEMS.clear();
-
-        VanillaExpansions.LOGGER.info("Items registered.");
     }
 }

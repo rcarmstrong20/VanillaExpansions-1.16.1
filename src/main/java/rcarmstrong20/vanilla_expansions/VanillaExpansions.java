@@ -78,6 +78,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -98,12 +99,20 @@ import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityDataConfig;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
+import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredStructures;
+import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
+import rcarmstrong20.vanilla_expansions.core.VeFluids;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VePaintingType;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
+import rcarmstrong20.vanilla_expansions.core.VePointOfInterestTypes;
+import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
+import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.core.VeStructure;
+import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerType;
@@ -134,9 +143,26 @@ public class VanillaExpansions
     public static final Field BY_BIOME_FIELD = ObfuscationReflectionHelper.findField(VillagerType.class,
             "field_221180_h");
 
+    /**
+     * This is where everything is registered to the game.
+     */
     public VanillaExpansions()
     {
         modInstance = this;
+
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        VeBlocks.BLOCKS.register(bus);
+        VeBlocks.ITEMS.register(bus);
+        VeItems.ITEMS.register(bus);
+        VeContainerTypes.CONTAINERS.register(bus);
+        VeFluids.FLUIDS.register(bus);
+        VePaintingType.PAINTING_TYPES.register(bus);
+        VeParticleTypes.PARTICLES.register(bus);
+        VePointOfInterestTypes.POI_TYPES.register(bus);
+        VeRecipeSerializers.RECIPES.register(bus);
+        VeSoundEvents.SOUNDS.register(bus);
+        VeTileEntityType.TILE_ENTITY_TYPES.register(bus);
+        VeVillagerProfessions.VILLAGER_PROFESSIONS.register(bus);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegistries);
@@ -318,7 +344,7 @@ public class VanillaExpansions
 
         if (fluidState.isTagged(VeFluidTags.darkMatter))
         {
-            livingEntity.addVelocity(0, 2.0, 0);
+            // livingEntity.addVelocity(0, 2.0, 0);
             // livingEntity.setAIMoveSpeed(0.005F);
             // VanillaExpansions.LOGGER.info("Entity Jumped");
         }

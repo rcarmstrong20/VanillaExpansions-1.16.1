@@ -1,13 +1,10 @@
 package rcarmstrong20.vanilla_expansions.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -18,7 +15,8 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeSoundEvents
 {
-    private static final List<SoundEvent> SOUNDS = new ArrayList<>();
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,
+            VanillaExpansions.MOD_ID);
 
     public static SoundEvent blockMushroomBounce = register("block.mushroom_bounce");
     public static SoundEvent blockDarkMatterAmbient = register("block.dark_matter_ambient");
@@ -33,17 +31,7 @@ public class VeSoundEvents
     {
         ResourceLocation location = new ResourceLocation(VanillaExpansions.MOD_ID, name);
         SoundEvent event = new SoundEvent(location);
-        event.setRegistryName(location);
-        SOUNDS.add(event);
+        SOUNDS.register(name, () -> event);
         return event;
-    }
-
-    @SubscribeEvent
-    public static void registerSounds(final RegistryEvent.Register<SoundEvent> event)
-    {
-        SOUNDS.forEach(soundEvent -> event.getRegistry().register(soundEvent));
-        SOUNDS.clear();
-
-        VanillaExpansions.LOGGER.info("Sound events registered.");
     }
 }
