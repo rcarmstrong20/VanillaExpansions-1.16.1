@@ -29,15 +29,6 @@ public class VeStructure
             new VeNetherCabinStructure(VeCabinConfig.cabinConfig));
 
     /**
-     * Register a new cabin structure.
-     *
-     * @param name           The name of the structure.
-     * @param cabinStructure An instance of a new Structure<C extends
-     *                       IFeatureConfig>.
-     * @return The new cabin structure.
-     */
-
-    /**
      * Add and set the registry name for the new structure.
      *
      * @param <C>       The feature config for the structure.
@@ -47,8 +38,6 @@ public class VeStructure
      */
     private static <C extends IFeatureConfig> Structure<C> registerStructure(String name, Structure<C> structure)
     {
-        VanillaExpansions.LOGGER.info("Structures registered.");
-
         structure.setRegistryName(VanillaExpansions.MOD_ID, name);
         STRUCTURES.add(structure);
         return structure;
@@ -58,12 +47,11 @@ public class VeStructure
     public static void registerStructures(final Register<Structure<?>> event)
     {
         register(event, STRUCTURES);
-        VanillaExpansions.LOGGER.info("Structures registered.");
     }
 
     /**
      * A helper method that registers and adds them to the name structure bimap
-     * which is used in the locate command.
+     * which is used in the locate command. Structures need a special registry.
      *
      * @param event         The registry structure event to use.
      * @param structureList The list of structures to register.
