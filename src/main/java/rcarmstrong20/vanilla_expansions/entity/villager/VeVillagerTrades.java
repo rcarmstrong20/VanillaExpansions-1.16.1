@@ -1,4 +1,4 @@
-package rcarmstrong20.vanilla_expansions.core;
+package rcarmstrong20.vanilla_expansions.entity.villager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +11,12 @@ import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.BasicTrade;
+import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 /**
  * A class for holding and creating every villager trade instance that vanilla
  * expansions has.
- * 
+ *
  * @author Ryan
  */
 public class VeVillagerTrades

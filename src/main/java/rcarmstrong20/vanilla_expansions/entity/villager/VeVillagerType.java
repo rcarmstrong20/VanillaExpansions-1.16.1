@@ -1,4 +1,4 @@
-package rcarmstrong20.vanilla_expansions.core;
+package rcarmstrong20.vanilla_expansions.entity.villager;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
