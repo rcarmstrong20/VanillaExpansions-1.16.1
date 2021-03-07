@@ -35,7 +35,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
-import rcarmstrong20.vanilla_expansions.core.VeVillagerType;
+import rcarmstrong20.vanilla_expansions.entity.villager.VeVillagerType;
 import rcarmstrong20.vanilla_expansions.util.VeStructureUtil;
 
 /**
