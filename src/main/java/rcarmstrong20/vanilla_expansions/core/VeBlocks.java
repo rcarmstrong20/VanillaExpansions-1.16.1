@@ -619,8 +619,8 @@ public class VeBlocks
             .create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
     public static Block bauxiteSlab = register("bauxite_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
-    public static Block bauxiteStairs = register("bauxite_stairs", true, new StairsBlock(
-            () -> VeBlocks.sodalite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteStairs = register("bauxite_stairs", true,
+            new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block bauxiteWall = register("bauxite_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block sodalite = register("sodalite", true, new Block(AbstractBlock.Properties
@@ -632,6 +632,8 @@ public class VeBlocks
     public static Block sodaliteWall = register("sodalite_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
     public static Block sodaliteBricks = register("sodalite_bricks", true,
+            new Block(AbstractBlock.Properties.from(VeBlocks.sodalite)));
+    public static Block chiseledSodaliteBricks = register("chiseled_sodalite_bricks", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.sodalite)));
     public static Block sodaliteBrickSlab = register("sodalite_brick_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
