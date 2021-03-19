@@ -151,6 +151,7 @@ public class VanillaExpansions
         modInstance = this;
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
         VeBlocks.BLOCKS.register(bus);
         VeBlocks.ITEMS.register(bus);
         VeItems.ITEMS.register(bus);
@@ -164,9 +165,9 @@ public class VanillaExpansions
         VeTileEntityType.TILE_ENTITY_TYPES.register(bus);
         VeVillagerProfessions.VILLAGER_PROFESSIONS.register(bus);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegistries);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegisterParticle);
+        bus.addListener(this::setup);
+        bus.addListener(this::clientRegistries);
+        bus.addListener(this::onRegisterParticle);
         ModLoadingContext.get().registerConfig(Type.SERVER, VeConfig.SERVER_CONFIG);
         ModLoadingContext.get().registerConfig(Type.CLIENT, VeConfig.CLIENT_CONFIG);
 
