@@ -623,6 +623,9 @@ public class VeBlocks
             new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block bauxiteWall = register("bauxite_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteBricks = register("bauxite_bricks", true, new Block(AbstractBlock.Properties
+            .create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
+
     public static Block sodalite = register("sodalite", true, new Block(AbstractBlock.Properties
             .create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.4F).sound(SoundType.STONE)));
     public static Block sodaliteSlab = register("sodalite_slab", true,
