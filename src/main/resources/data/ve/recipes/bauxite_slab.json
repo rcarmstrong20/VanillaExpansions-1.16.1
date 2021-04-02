@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "ve:bauxite"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "ve:bauxite_slab",
+    "count": 6
+  }
+}
