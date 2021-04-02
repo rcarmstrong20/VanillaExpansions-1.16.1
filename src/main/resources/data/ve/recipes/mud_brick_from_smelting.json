@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+    "item": "ve:mud_ball"
+  },
+  "result": "ve:mud_brick",
+  "experience": 0.3,
+  "cookingtime": 200
+}
