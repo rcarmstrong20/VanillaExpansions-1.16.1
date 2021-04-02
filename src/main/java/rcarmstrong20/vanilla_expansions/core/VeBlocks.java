@@ -307,8 +307,6 @@ public class VeBlocks
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block greenOnions = register("green_onions", false,
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
-    public static Block quinoa = register("quinoa", false,
-            new VeSevenStageCropBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block stonePlanterBox = register("stone_planter_box", true,
             new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
     public static Block mossyCobblestonePlanterBox = register("mossy_cobblestone_planter_box", true,
@@ -625,7 +623,12 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block bauxiteBricks = register("bauxite_bricks", true, new Block(AbstractBlock.Properties
             .create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
-
+    public static Block bauxiteBrickSlab = register("bauxite_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteBrickStairs = register("bauxite_brick_stairs", true,
+            new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block bauxiteBrickWall = register("bauxite_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block sodalite = register("sodalite", true, new Block(AbstractBlock.Properties
             .create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.4F).sound(SoundType.STONE)));
     public static Block sodaliteSlab = register("sodalite_slab", true,
@@ -707,6 +710,15 @@ public class VeBlocks
                     }).sound(SoundType.STONE)));
     public static Block icicle = register("icicle", true,
             new VeIcicleBlock(AbstractBlock.Properties.from(Blocks.BLUE_ICE).doesNotBlockMovement()));
+    public static Block mud = register("mud", true, new Block(AbstractBlock.Properties.from(Blocks.DIRT)));
+    public static Block mudBricks = register("mud_bricks", true, new Block(AbstractBlock.Properties
+            .create(Material.ROCK, MaterialColor.DIRT).setRequiresTool().hardnessAndResistance(1.0F, 2.0F)));
+    public static Block mudBrickSlab = register("mud_brick_slab", true,
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block mudBrickStairs = register("mud_brick_stairs", true,
+            new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
+    public static Block mudBrickWall = register("mud_brick_wall", true,
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
 
     /**
      * Used to register a block with a item that has a custom stack size.
