@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "ve:sodalite"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "ve:sodalite_stairs",
+    "count": 4
+  }
+}
