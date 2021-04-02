@@ -32,6 +32,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.entity.passive.RabbitEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.villager.VillagerType;
 import net.minecraft.fluid.FluidState;
@@ -75,6 +76,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -197,6 +199,25 @@ public class VanillaExpansions
     {
         VanillaExpansions.LOGGER.info("client method registered");
         PROXY.onSetupClient();
+    }
+
+    @SubscribeEvent
+    public void onBlockBroken(BlockEvent.BreakEvent event)
+    {
+        Block block = event.getState().getBlock();
+        PlayerEntity player = event.getPlayer();
+        ItemStack stack = player.getHeldItem(player.getActiveHand());
+
+        if (block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
+        {
+            Random random = new Random();
+
+            // 5% chance to drop by default
+            if (random.nextFloat() <= (5 / 100))
+            {
+                Block.spawnAsEntity((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 1));
+            }
+        }
     }
 
     /**
