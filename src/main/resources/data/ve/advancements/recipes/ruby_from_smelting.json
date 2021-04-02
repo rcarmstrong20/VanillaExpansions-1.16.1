@@ -9,7 +9,7 @@
   },
   "criteria":
   {
-    "has_nether_ruby_ore":
+    "has_blackstone_ruby_ore":
 	{
       "trigger": "minecraft:inventory_changed",
       "conditions":
@@ -17,7 +17,7 @@
         "items":
 		[
           {
-            "item": "ve:nether_ruby_ore"
+            "item": "ve:blackstone_ruby_ore"
           }
         ]
       }
@@ -34,7 +34,7 @@
   "requirements":
   [
     [
-      "has_nether_ruby_ore",
+      "has_blackstone_ruby_ore",
       "has_the_recipe"
     ]
   ]
