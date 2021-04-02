@@ -119,6 +119,8 @@ public class VeItems
             new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, buildProperties()));
     public static Item blackTorch = register("black_torch",
             new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, buildProperties()));
+    public static Item mudBall = register("mud_ball", new Item(buildProperties()));
+    public static Item mudBrick = register("mud_brick", new Item(buildProperties()));
 
     /**
      * A helper method that builds default properties for a item.
