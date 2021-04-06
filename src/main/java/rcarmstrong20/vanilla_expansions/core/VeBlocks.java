@@ -76,6 +76,7 @@ import rcarmstrong20.vanilla_expansions.block.VeWoodcutterBlock;
 import rcarmstrong20.vanilla_expansions.block.VeZombieDemonPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeZombiePigmanPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeZombiePlushBlock;
+import rcarmstrong20.vanilla_expansions.enums.MaterialType;
 
 /**
  * A class for holding every block instance that vanilla expansions has.
@@ -92,172 +93,173 @@ public class VeBlocks
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
             VanillaExpansions.MOD_ID);
 
-    public static Block batPlush = register("bat_plush", true,
-            new VeBatPlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
-    public static Block blazePlush = register("blaze_plush", true,
-            new VeBlazePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block caveSpiderPlush = register("cave_spider_plush", true,
-            new VeCaveSpiderPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
-    public static Block chickenPlush = register("chicken_plush", true,
-            new VeChickenPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
-    public static Block cowPlush = register("cow_plush", true,
-            new VeCowPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+    public static Block batPlush = register("bat_plush", true, new VeBatPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.GRAY, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block blazePlush = register("blaze_plush", true, new VeBlazePlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.YELLOW, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block caveSpiderPlush = register("cave_spider_plush", true, new VeCaveSpiderPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.CYAN, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block chickenPlush = register("chicken_plush", true, new VeChickenPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.WOOL, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block cowPlush = register("cow_plush", true, new VeCowPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.BROWN, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block babyCowPlush = register("baby_cow_plush", true,
-            new VeBabyCowPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static Block creeperPlush = register("creeper_plush", true,
-            new VeCreeperPlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
-    public static Block endermanPlush = register("enderman_plush", true,
-            new VeEndermanPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block endermitePlush = register("endermite_plush", true,
-            new VeEndermitePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeBabyCowPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
+    public static Block creeperPlush = register("creeper_plush", true, new VeCreeperPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.GREEN, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block endermanPlush = register("enderman_plush", true, new VeEndermanPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.BLACK, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block endermitePlush = register("endermite_plush", true, new VeEndermitePlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.PURPLE, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block ghastPlush = register("ghast_plush", true,
-            new VeGhastPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeGhastPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block guardianPlush = register("guardian_plush", true,
-            new VeGuardianPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
+            new VeGuardianPlushBlock(AbstractBlock.Properties.from(VeBlocks.caveSpiderPlush)));
     public static Block whiteHorsePlush = register("white_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block grayHorsePlush = register("gray_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
-    public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(VeBlocks.batPlush)));
+    public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true, new VeHorsePlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.LIGHT_GRAY, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block brownHorsePlush = register("brown_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block blackHorsePlush = register("black_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
     public static Block purpleHorsePlush = register("purple_horse_plush", true,
-            new VeHorsePlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block magmaCubePlush = register("magma_cube_plush", true,
-            new VeMagmaCubePlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeHorsePlushBlock(AbstractBlock.Properties.from(VeBlocks.endermitePlush)));
+    public static Block magmaCubePlush = register("magma_cube_plush", true, new VeMagmaCubePlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.RED, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block redMooshroomPlush = register("red_mooshroom_plush", true,
-            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(VeBlocks.magmaCubePlush)));
     public static Block babyRedMooshroomPlush = register("baby_red_mooshroom_plush", true,
-            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(VeBlocks.magmaCubePlush)));
     public static Block brownMooshroomPlush = register("brown_mooshroom_plush", true,
-            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeMooshroomPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block babyBrownMooshroomPlush = register("baby_brown_mooshroom_plush", true,
-            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeBabyMooshroomPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block ocelotPlush = register("ocelot_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
     public static Block tabbyCatPlush = register("tabby_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block tuxedoCatPlush = register("tuxedo_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block redCatPlush = register("red_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
+    public static Block redCatPlush = register("red_cat_plush", true, new VeCatPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.ADOBE, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block siameseCatPlush = register("siamese_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block britishShorthairCatPlush = register("british_shorthair_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.lightGrayHorsePlush)));
     public static Block calicoCatPlush = register("calico_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block persianCatPlush = register("persian_cat_plush", true,
-            new VePersianCatPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VePersianCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
     public static Block ragdollCatPlush = register("ragdoll_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block whiteCatPlush = register("white_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block jellieCatPlush = register("jellie_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block blackCatPlush = register("black_cat_plush", true,
-            new VeCatPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
-    public static Block pigPlush = register("pig_plush", true,
-            new VePigPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VeCatPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
+    public static Block pigPlush = register("pig_plush", true, new VePigPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.PINK, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block brownRabbitPlush = register("brown_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block whiteRabbitPlush = register("white_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block blackRabbitPlush = register("black_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
     public static Block whiteSplotchedRabbitPlush = register("white_splotched_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block goldRabbitPlush = register("gold_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
     public static Block toastRabbitPlush = register("toast_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block saltRabbitPlush = register("salt_rabbit_plush", true,
-            new VeRabbitPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeRabbitPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block whiteSheepPlush = register("white_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block orangeSheepPlush = register("orange_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL)));
-    public static Block magentaSheepPlush = register("magenta_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.MAGENTA_WOOL)));
-    public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_BLUE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.redCatPlush)));
+    public static Block magentaSheepPlush = register("magenta_sheep_plush", true, new VeSheepPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.MAGENTA, SoundType.CLOTH).hardnessAndResistance(0.2F)));
+    public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true, new VeSheepPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.LIGHT_BLUE, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block yellowSheepPlush = register("yellow_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
-    public static Block limeSheepPlush = register("lime_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
+    public static Block limeSheepPlush = register("lime_sheep_plush", true, new VeSheepPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.LIME, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block pinkSheepPlush = register("pink_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.pigPlush)));
     public static Block graySheepPlush = register("gray_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.GRAY_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.batPlush)));
     public static Block lightGraySheepPlush = register("light_gray_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.lightGrayHorsePlush)));
     public static Block cyanSheepPlush = register("cyan_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.CYAN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.caveSpiderPlush)));
     public static Block purpleSheepPlush = register("purple_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
-    public static Block blueSheepPlush = register("blue_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermitePlush)));
+    public static Block blueSheepPlush = register("blue_sheep_plush", true, new VeSheepPlushBlock(
+            buildProperties(MaterialType.WOOL, MaterialColor.BLUE, SoundType.CLOTH).hardnessAndResistance(0.2F)));
     public static Block brownSheepPlush = register("brown_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush)));
     public static Block greenSheepPlush = register("green_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.creeperPlush)));
     public static Block redSheepPlush = register("red_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.RED_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.magmaCubePlush)));
     public static Block blackSheepPlush = register("black_sheep_plush", true,
-            new VeSheepPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeSheepPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
     public static Block silverfishPlush = register("silverfish_plush", true,
-            new VeSilverfishPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSilverfishPlushBlock(AbstractBlock.Properties.from(VeBlocks.lightGrayHorsePlush)));
     public static Block skeletonPlush = register("skeleton_plush", true,
-            new VeSkeletonPlushBlock(AbstractBlock.Properties.from(Blocks.LIGHT_GRAY_WOOL)));
+            new VeSkeletonPlushBlock(AbstractBlock.Properties.from(VeBlocks.lightGrayHorsePlush)));
     public static Block slimePlush = register("slime_plush", true,
-            new VeSlimePlushBlock(AbstractBlock.Properties.from(Blocks.LIME_WOOL)));
+            new VeSlimePlushBlock(AbstractBlock.Properties.from(VeBlocks.limeSheepPlush)));
     public static Block spiderPlush = register("spider_plush", true,
-            new VeSpiderPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeSpiderPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
     public static Block squidPlush = register("squid_plush", true,
-            new VeSquidPlushBlock(AbstractBlock.Properties.from(Blocks.BLUE_WOOL)));
+            new VeSquidPlushBlock(AbstractBlock.Properties.from(VeBlocks.blueSheepPlush)));
     public static Block beePlush = register("bee_plush", true,
-            new VeBeePlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VeBeePlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
     public static Block plainsVillagerPlush = register("plains_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 0));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush), 0));
     public static Block desertVillagerPlush = register("desert_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.ORANGE_WOOL), 1));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.redCatPlush), 1));
     public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL), 2));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush), 2));
     public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 3));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush), 3));
     public static Block snowVillagerPlush = register("snow_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 4));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush), 4));
     public static Block swampVillagerPlush = register("swamp_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 5));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush), 5));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL), 6));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.cowPlush), 6));
     public static Block crimsonVillagerPlush = register("crimson_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL), 7));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush), 7));
     public static Block warpedVillagerPlush = register("warped_villager_plush", true,
-            new VeVillagerPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL), 7));
+            new VeVillagerPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush), 7));
     public static Block witchPlush = register("witch_plush", true,
-            new VeWitchPlushBlock(AbstractBlock.Properties.from(Blocks.PURPLE_WOOL)));
+            new VeWitchPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermitePlush)));
     public static Block wolfPlush = register("wolf_plush", true,
-            new VeWolfPlushBlock(AbstractBlock.Properties.from(Blocks.WHITE_WOOL)));
+            new VeWolfPlushBlock(AbstractBlock.Properties.from(VeBlocks.chickenPlush)));
     public static Block zombiePlush = register("zombie_plush", true,
-            new VeZombiePlushBlock(AbstractBlock.Properties.from(Blocks.GREEN_WOOL)));
+            new VeZombiePlushBlock(AbstractBlock.Properties.from(VeBlocks.creeperPlush)));
     public static Block zombieDemonPlush = register("zombie_demon_plush", true,
-            new VeZombieDemonPlushBlock(AbstractBlock.Properties.from(Blocks.BLACK_WOOL)));
+            new VeZombieDemonPlushBlock(AbstractBlock.Properties.from(VeBlocks.endermanPlush)));
     public static Block zombiePigmanPlush = register("zombie_pigman_plush", true,
-            new VeZombiePigmanPlushBlock(AbstractBlock.Properties.from(Blocks.PINK_WOOL)));
+            new VeZombiePigmanPlushBlock(AbstractBlock.Properties.from(VeBlocks.pigPlush)));
     public static Block pufferfishPlush = register("pufferfish_plush", true,
-            new VePufferfishPlushBlock(AbstractBlock.Properties.from(Blocks.YELLOW_WOOL)));
+            new VePufferfishPlushBlock(AbstractBlock.Properties.from(VeBlocks.blazePlush)));
     public static Block rubyOre = register("blackstone_ruby_ore", true, new VeOreBlock(AbstractBlock.Properties
             .create(Material.ROCK, MaterialColor.BLACK).setRequiresTool().hardnessAndResistance(2.0F, 6.0F)));
     public static Block rubyBlock = register("ruby_block", true, new Block(AbstractBlock.Properties
             .create(Material.IRON, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.STONE)));
     public static Block smokyQuartzOre = register("nether_smoky_quartz_ore", true,
-            new VeOreBlock(AbstractBlock.Properties.from(Blocks.NETHER_QUARTZ_ORE)));
+            new VeOreBlock(buildProperties(MaterialType.ROCK, MaterialColor.NETHERRACK, SoundType.NETHER_ORE)
+                    .hardnessAndResistance(3.0F, 3.0F)));
     public static Block smokyQuartzBlock = register("smoky_quartz_block", true,
-            new Block(AbstractBlock.Properties.from(Blocks.QUARTZ_BLOCK)));
+            new Block(buildProperties(MaterialType.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.8F)));
     public static Block chiseledSmokyQuartzBlock = register("chiseled_smoky_quartz_block", true,
             new Block(AbstractBlock.Properties.from(VeBlocks.smokyQuartzBlock)));
     public static Block smokyQuartzBricks = register("smoky_quartz_bricks", true,
@@ -308,11 +310,11 @@ public class VeBlocks
     public static Block greenOnions = register("green_onions", false,
             new VeThreeStageCropsBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block stonePlanterBox = register("stone_planter_box", true,
-            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.STONE_BRICKS)));
+            new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.STONE)));
     public static Block mossyCobblestonePlanterBox = register("mossy_cobblestone_planter_box", true,
-            new VePlanterBoxBlock(Block.Properties.from(Blocks.MOSSY_STONE_BRICKS)));
+            new VePlanterBoxBlock(Block.Properties.from(Blocks.MOSSY_COBBLESTONE)));
     public static Block cobblestonePlanterBox = register("cobblestone_planter_box", true,
-            new VePlanterBoxBlock(Block.Properties.from(Blocks.CRACKED_STONE_BRICKS)));
+            new VePlanterBoxBlock(Block.Properties.from(Blocks.COBBLESTONE)));
     public static Block oakPlanterBox = register("oak_planter_box", true,
             new VePlanterBoxBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
     public static Block sprucePlanterBox = register("spruce_planter_box", true,
@@ -399,10 +401,8 @@ public class VeBlocks
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.snowBricks)));
     public static Block snowBrickWall = register("snow_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.snowBricks)));
-    public static Block packedSnowBlock = register("packed_snow_block", true,
-            new Block(
-                    AbstractBlock.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW).hardnessAndResistance(0.4F)
-                            .harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW).slipperiness(0.98F)));
+    public static Block packedSnowBlock = register("packed_snow_block", true, new Block(
+            buildProperties(MaterialType.SNOW_BLOCK, SoundType.SNOW).hardnessAndResistance(0.4F).slipperiness(0.98F)));
     public static Block packedSnowStairs = register("packed_snow_stairs", true, new StairsBlock(
             () -> VeBlocks.packedSnowBlock.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
     public static Block packedSnowSlab = register("packed_snow_slab", true,
@@ -596,11 +596,12 @@ public class VeBlocks
             {
                 return 14;
             }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.redTorch), VeParticleTypes.redFlame));
-    public static Block blackWallTorch = register("black_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.blackTorch), VeParticleTypes.blackFlame));
+    public static Block blackWallTorch = register("black_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().lootFrom(() -> VeBlocks.blackTorch).setLightLevel((state) ->
+                    {
+                        return 14;
+                    }), VeParticleTypes.blackFlame));
     public static Block witchsCradle = register("witchs_cradle", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.SWEET_BERRY_BUSH)));
     public static Block darkMatter = register("dark_matter", false,
@@ -608,11 +609,10 @@ public class VeBlocks
                     AbstractBlock.Properties.create(Material.WATER, MaterialColor.BLACK).doesNotBlockMovement()
                             .hardnessAndResistance(100.0F).noDrops()));
     public static Block bambooFence = register("bamboo_fence", true,
-            new FenceBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
+            new FenceBlock(buildProperties(MaterialType.BAMBOO, MaterialColor.FOLIAGE, SoundType.BAMBOO)
+                    .hardnessAndResistance(1.0F).notSolid()));
     public static Block bambooFenceGate = register("bamboo_fence_gate", true,
-            new FenceGateBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
-    public static Block bambooWall = register("bamboo_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.BAMBOO)));
+            new FenceGateBlock(AbstractBlock.Properties.from(VeBlocks.bambooFence)));
     public static Block bauxite = register("bauxite", true, new Block(AbstractBlock.Properties
             .create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
     public static Block bauxiteSlab = register("bauxite_slab", true,
@@ -629,8 +629,8 @@ public class VeBlocks
             new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
     public static Block bauxiteBrickWall = register("bauxite_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
-    public static Block sodalite = register("sodalite", true, new Block(AbstractBlock.Properties
-            .create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.4F).sound(SoundType.STONE)));
+    public static Block sodalite = register("sodalite", true,
+            new Block(buildProperties(MaterialType.ROCK, MaterialColor.BLACK).hardnessAndResistance(0.4F)));
     public static Block sodaliteSlab = register("sodalite_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
     public static Block sodaliteStairs = register("sodalite_stairs", true, new StairsBlock(
@@ -648,12 +648,11 @@ public class VeBlocks
     public static Block sodaliteBrickWall = register("sodalite_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.sodalite)));
     public static Block snowSlab = register("snow_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
-    public static Block snowStairs = register("snow_stairs", true,
-            new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(),
-                    AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
+            new SlabBlock(buildProperties(MaterialType.SNOW_BLOCK, SoundType.SNOW).hardnessAndResistance(0.2F)));
+    public static Block snowStairs = register("snow_stairs", true, new StairsBlock(
+            () -> Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.snowSlab)));
     public static Block snowWall = register("snow_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.snowSlab)));
     public static Block warpedChytridNetherBricks = register("warped_chytrid_nether_bricks", true,
             new Block(AbstractBlock.Properties.from(Blocks.NETHER_BRICKS).setLightLevel((state) ->
             {
@@ -688,37 +687,173 @@ public class VeBlocks
             {
                 return 3;
             })));
-    public static Block snapdragon = register("snapdragon", true, new VeSnapdragonBlock(Effects.LUCK, 8,
-            AbstractBlock.Properties.from(Blocks.POPPY).setLightLevel((state) -> 4)));
+    public static Block snapdragon = register("snapdragon", true,
+            new VeSnapdragonBlock(Effects.LUCK, 8, AbstractBlock.Properties.from(Blocks.POPPY).setLightLevel((state) ->
+            {
+                return 4;
+            })));
     public static Block pottedSnapdragon = register("potted_snapdragon", false, new VePottedSnapdragonBlock(
-            VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).setLightLevel((state) -> 4)));
+            VeBlocks.snapdragon, AbstractBlock.Properties.from(Blocks.POTTED_POPPY).setLightLevel((state) ->
+            {
+                return 4;
+            })));
     public static Block enderGrass = register("ender_grass", true,
-            new VeEnderGrassBlock(Block.Properties.from(Blocks.GRASS).setLightLevel((state) -> 4)));
-    public static Block smoothEndStone = register("smooth_end_stone", true,
-            new Block(AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smoothEndStoneSlab = register("smooth_end_stone_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smoothEndStoneStairs = register("smooth_end_stone_stairs", true,
-            new StairsBlock(() -> Blocks.END_STONE.getDefaultState(), AbstractBlock.Properties.from(Blocks.END_STONE)));
-    public static Block smoothEndStoneWall = register("smooth_end_stone_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(Blocks.END_STONE)));
+            new VeEnderGrassBlock(Block.Properties.from(Blocks.GRASS).setLightLevel((state) ->
+            {
+                return 4;
+            })));
     public static Block transmutationTable = register("transmutation_table", true,
-            new VeTransmutationTableBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
+            new VeTransmutationTableBlock(buildProperties(MaterialType.ROCK, SoundType.STONE)
                     .hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) ->
                     {
                         return 7;
-                    }).sound(SoundType.STONE)));
-    public static Block icicle = register("icicle", true,
-            new VeIcicleBlock(AbstractBlock.Properties.from(Blocks.BLUE_ICE).doesNotBlockMovement()));
-    public static Block mud = register("mud", true, new Block(AbstractBlock.Properties.from(Blocks.DIRT)));
-    public static Block mudBricks = register("mud_bricks", true, new Block(AbstractBlock.Properties
-            .create(Material.ROCK, MaterialColor.DIRT).setRequiresTool().hardnessAndResistance(1.0F, 2.0F)));
+                    })));
+    public static Block icicle = register("icicle", true, new VeIcicleBlock(
+            buildProperties(MaterialType.ICE, SoundType.GLASS).hardnessAndResistance(0.2F).doesNotBlockMovement()));
+    public static Block mud = register("mud", true, new Block(
+            buildProperties(MaterialType.EARTH, MaterialColor.DIRT, SoundType.GROUND).hardnessAndResistance(0.5F)));
+    public static Block mudBricks = register("mud_bricks", true,
+            new Block(buildProperties(MaterialType.EARTH, MaterialColor.DIRT, SoundType.GROUND)
+                    .hardnessAndResistance(1.0F, 2.0F)));
     public static Block mudBrickSlab = register("mud_brick_slab", true,
-            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
-    public static Block mudBrickStairs = register("mud_brick_stairs", true,
-            new StairsBlock(() -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.bauxite)));
+            new SlabBlock(AbstractBlock.Properties.from(VeBlocks.mudBricks)));
+    public static Block mudBrickStairs = register("mud_brick_stairs", true, new StairsBlock(
+            () -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.mudBricks)));
     public static Block mudBrickWall = register("mud_brick_wall", true,
-            new WallBlock(AbstractBlock.Properties.from(VeBlocks.bauxite)));
+            new WallBlock(AbstractBlock.Properties.from(VeBlocks.mudBricks)));
+
+    /**
+     * Build a property set with default sound and a custom material and map color.
+     *
+     * @param materialIn      The material of this block.
+     * @param materialColorIn The map color of this block.
+     * @return A base property set for this block.
+     */
+    private static AbstractBlock.Properties buildProperties(MaterialType materialIn, MaterialColor materialColorIn)
+    {
+        return buildProperties(materialIn, materialColorIn, SoundType.STONE);
+    }
+
+    /**
+     * Build a property set with default sound, and material, and a custom map
+     * color.
+     *
+     * @param materialIn The material of this block.
+     * @return A base property set for this block.
+     */
+    @SuppressWarnings("unused")
+    private static AbstractBlock.Properties buildProperties(MaterialType materialIn)
+    {
+        return buildProperties(materialIn, materialIn.getMaterial().getColor(), SoundType.STONE);
+    }
+
+    /**
+     * Build a property set with a custom sound, and material, and a default map
+     * color.
+     *
+     * @param materialIn The material of this block.
+     * @param soundIn    The sound of this block.
+     * @return A base property set for this block.
+     */
+    private static AbstractBlock.Properties buildProperties(MaterialType materialIn, SoundType soundIn)
+    {
+        return buildProperties(materialIn, materialIn.getMaterial().getColor(), soundIn);
+    }
+
+    /**
+     * Sets the appropriate harvest tool for the block according to its material.
+     *
+     * @param materialIn      The material of this block.
+     * @param materialColorIn The map color of this block.
+     * @param soundIn         The sound of this block.
+     * @return A base property set for this block.
+     */
+    private static AbstractBlock.Properties buildProperties(MaterialType materialIn, MaterialColor materialColorIn,
+            SoundType soundIn)
+    {
+        AbstractBlock.Properties properties = AbstractBlock.Properties.create(materialIn.getMaterial(), materialColorIn)
+                .sound(soundIn);
+
+        switch (materialIn)
+        {
+            case ANVIL:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case CORAL:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case GOURD:
+                properties.harvestTool(ToolType.AXE);
+                break;
+            case ICE:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case IRON:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case PACKED_ICE:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case PISTON:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case ROCK:
+                setPickaxeHarvestTool(properties, true);
+                break;
+            case SHULKER:
+                setPickaxeHarvestTool(properties, false);
+                break;
+            case CLAY:
+                setShovelHarvestTool(properties, false);
+                break;
+            case EARTH:
+                setShovelHarvestTool(properties, false);
+                break;
+            case LEAVES:
+                properties.harvestTool(ToolType.HOE);
+                break;
+            case NETHER_WOOD:
+                properties.harvestTool(ToolType.AXE);
+                break;
+            case SAND:
+                setShovelHarvestTool(properties, false);
+                break;
+            case SNOW:
+                setShovelHarvestTool(properties, true);
+                break;
+            case SNOW_BLOCK:
+                setShovelHarvestTool(properties, true);
+                break;
+            case WOOD:
+                properties.harvestTool(ToolType.AXE);
+                break;
+            default:
+                break;
+        }
+        return properties;
+    }
+
+    private static void setPickaxeHarvestTool(AbstractBlock.Properties properties, boolean needsPick)
+    {
+        setHarvestTool(properties, ToolType.PICKAXE, needsPick);
+    }
+
+    private static void setShovelHarvestTool(AbstractBlock.Properties properties, boolean needsShovel)
+    {
+        setHarvestTool(properties, ToolType.SHOVEL, needsShovel);
+    }
+
+    private static void setHarvestTool(AbstractBlock.Properties properties, ToolType tool, boolean needsTool)
+    {
+        if (needsTool)
+        {
+            properties.harvestTool(tool).setRequiresTool();
+        }
+        else
+        {
+            properties.harvestTool(tool);
+        }
+    }
 
     /**
      * Used to register a block with a item that has a custom stack size.
