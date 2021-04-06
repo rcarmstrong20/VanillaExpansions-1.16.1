@@ -3,41 +3,46 @@
 	[
         {   "apply":
 			[
-				{"model": "ve:block/bamboo1_fence_post"},
-				{"model": "ve:block/bamboo2_fence_post"},
-				{"model": "ve:block/bamboo3_fence_post"}
+				{"model": "ve:block/bamboo_fence_post1"},
+				{"model": "ve:block/bamboo_fence_post2"},
+				{"model": "ve:block/bamboo_fence_post3"},
+				{"model": "ve:block/bamboo_fence_post4"}
 			]
 		},
         {   "when": { "north": "true" },
             "apply": 
 			[
-				{ "model": "ve:block/bamboo1_fence_side" },
-				{ "model": "ve:block/bamboo2_fence_side" },
-				{ "model": "ve:block/bamboo3_fence_side" }
+				{ "model": "ve:block/bamboo_fence_side4" },
+				{ "model": "ve:block/bamboo_fence_side3" },
+				{ "model": "ve:block/bamboo_fence_side2" },
+				{ "model": "ve:block/bamboo_fence_side1" }
 			]
         },
         {   "when": { "east": "true" },
             "apply":
 			[
-				{ "model": "ve:block/bamboo1_fence_side", "y": 90 },
-				{ "model": "ve:block/bamboo2_fence_side", "y": 90 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 90 }
+				{ "model": "ve:block/bamboo_fence_side3", "y": 90 },
+				{ "model": "ve:block/bamboo_fence_side2", "y": 90 },
+				{ "model": "ve:block/bamboo_fence_side4", "y": 90 },
+				{ "model": "ve:block/bamboo_fence_side1", "y": 90 }
 			]
         },
         {   "when": { "south": "true" },
             "apply":
 			[
-				{ "model": "ve:block/bamboo1_fence_side", "y": 180 },
-				{ "model": "ve:block/bamboo2_fence_side", "y": 180 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 180 }
+				{ "model": "ve:block/bamboo_fence_side3", "y": 180 },
+				{ "model": "ve:block/bamboo_fence_side1", "y": 180 },
+				{ "model": "ve:block/bamboo_fence_side4", "y": 180 },
+				{ "model": "ve:block/bamboo_fence_side2", "y": 180 }
 			]
         },
         {   "when": { "west": "true" },
             "apply":
 			[
-				{ "model": "ve:block/bamboo1_fence_side", "y": 270 },
-				{ "model": "ve:block/bamboo2_fence_side", "y": 270 },
-				{ "model": "ve:block/bamboo3_fence_side", "y": 270 }
+				{ "model": "ve:block/bamboo_fence_side3", "y": 270 },
+				{ "model": "ve:block/bamboo_fence_side2", "y": 270 },
+				{ "model": "ve:block/bamboo_fence_side1", "y": 270 },
+				{ "model": "ve:block/bamboo_fence_side4", "y": 270 }
 			]
         }
     ]
