@@ -100,9 +100,7 @@ public class VeIcicleBlock extends FallingBlock
             player.attackEntityFrom(DamageSource.GENERIC, blocksFallen * fallMult);
         }
 
-        Block.replaceBlock(this.getBlock().getDefaultState(), Blocks.AIR.getDefaultState(), worldIn, pos, 1);
-
-        System.out.println(blocksFallen * fallMult);
+        worldIn.destroyBlock(pos, false);
     }
 
     @Override
