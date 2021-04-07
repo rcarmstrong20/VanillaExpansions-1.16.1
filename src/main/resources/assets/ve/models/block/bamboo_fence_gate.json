@@ -4,7 +4,7 @@
 	"textures": {
 		"particle": "ve:block/dried_bamboo_stalk",
 		"virticle": "ve:block/dried_bamboo_stalk",
-		"texture": "ve:block/bamboo_horizontal_posts"
+		"horizontal": "ve:block/dried_bamboo_horizontal_stalk"
 	},
 	"elements": [ 	 
 		{
@@ -40,8 +40,8 @@
 			"faces": {
 				"down": { "uv": [ 6, 8.5, 9, 0 ], "texture": "#virticle", "rotation": 270 },
 				"up": { "uv": [ 6, 0, 9, 8 ], "texture": "#virticle", "rotation": 90 },
-				"north": { "uv": [ 0, 11, 8, 14 ], "texture": "#texture" },
-				"south": { "uv": [ 8.5, 11, 0, 14 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 11, 8, 14 ], "texture": "#horizontal" },
+				"south": { "uv": [ 8.5, 11, 0, 14 ], "texture": "#horizontal" },
 				"west": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" },
 				"east": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" }
 			}
@@ -79,8 +79,8 @@
 			"faces": {
 				"down": { "uv": [ 6, 16, 9, 8 ], "texture": "#virticle", "rotation": 270 },
 				"up": { "uv": [ 6, 8, 9, 16 ], "texture": "#virticle", "rotation": 90 },
-				"north": { "uv": [ 8, 11, 16, 14 ], "texture": "#texture" },
-				"south": { "uv": [ 16, 11, 8, 14 ], "texture": "#texture" },
+				"north": { "uv": [ 8, 11, 16, 14 ], "texture": "#horizontal" },
+				"south": { "uv": [ 16, 11, 8, 14 ], "texture": "#horizontal" },
 				"west": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" },
 				"east": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" }
 			}
@@ -92,8 +92,8 @@
 			"faces": {
 				"down": { "uv": [ 0, 8, 3, 0 ], "texture": "#virticle", "rotation": 270 },
 				"up": { "uv": [ 0, 0, 3, 8 ], "texture": "#virticle", "rotation": 90 },
-				"north": { "uv": [ 0, 5, 8, 8 ], "texture": "#texture" },
-				"south": { "uv": [ 8, 5, 0, 8 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 5, 8, 8 ], "texture": "#horizontal" },
+				"south": { "uv": [ 8, 5, 0, 8 ], "texture": "#horizontal" },
 				"west": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" },
 				"east": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" }
 			}
@@ -105,8 +105,8 @@
 			"faces": {
 				"down": { "uv": [ 9, 16, 12, 5 ], "texture": "#virticle", "rotation": 270 },
 				"up": { "uv": [ 9, 5, 12, 16 ], "texture": "#virticle", "rotation": 90 },
-				"north": { "uv": [ 8, 5, 16, 8 ], "texture": "#texture" },
-				"south": { "uv": [ 16, 5, 8, 8 ], "texture": "#texture" },
+				"north": { "uv": [ 8, 5, 16, 8 ], "texture": "#horizontal" },
+				"south": { "uv": [ 16, 5, 8, 8 ], "texture": "#horizontal" },
 				"west": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" },
 				"east": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" }
 			}
