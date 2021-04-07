@@ -1,5 +1,6 @@
 package rcarmstrong20.vanilla_expansions.core;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.block.BlockState;
@@ -16,8 +17,10 @@ import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
@@ -83,6 +86,17 @@ public class VeConfiguredFeatures
             Feature.FLOWER.withConfiguration(VeConfiguredFeatures.Configs.SNAPDRAGON_AND_GRASS_CONFIG)
                     .withPlacement(Features.Placements.VEGETATION_PLACEMENT)
                     .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4));
+
+    public static final ConfiguredFeature<?, ?> DISK_MUD = register("disk_mud", Feature.DISK
+            .withConfiguration(
+                    new SphereReplaceConfig(VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(2, 1), 1,
+                            ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD)))
+            .square().withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+    public static final ConfiguredFeature<?, ?> DISK_MUD_SWAMP = register("disk_mud", Feature.DISK
+            .withConfiguration(
+                    new SphereReplaceConfig(VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(3, 2), 1,
+                            ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD)))
+            .square().withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
 
     /**
      * A helper method for automatically registering every new configured feature.
@@ -159,5 +173,7 @@ public class VeConfiguredFeatures
                 .with(VeBerryBushBlock.AGE, 3);
         protected static final BlockState CRANBERRY_BUSH = VeBlocks.cranberryBush.getDefaultState()
                 .with(VeBerryBushBlock.AGE, 3);
+        protected static final BlockState MUD = VeBlocks.mud.getDefaultState();
+        protected static final BlockState DIRT = Blocks.DIRT.getDefaultState();
     }
 }

@@ -782,6 +782,8 @@ public class VanillaExpansions
                 hugePurpleMushroomFlag);
         addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
                 purpleMushroomFlag);
+        addFeature(event, Category.RIVER, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_MUD, true);
+        addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_MUD_SWAMP, true);
 
         addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
