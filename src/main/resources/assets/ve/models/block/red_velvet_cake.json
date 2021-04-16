@@ -1,0 +1,9 @@
+{
+    "parent": "ve:block/template_cake",
+    "textures":
+	{
+		"side": "ve:block/red_velvet_cake_side",
+		"bottom": "ve:block/red_velvet_cake_bottom",
+		"top": "ve:block/red_velvet_cake_top"
+    }
+}
