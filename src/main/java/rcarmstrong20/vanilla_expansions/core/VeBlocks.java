@@ -2,7 +2,9 @@ package rcarmstrong20.vanilla_expansions.core;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CakeBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LadderBlock;
@@ -17,10 +19,13 @@ import net.minecraft.block.WallBlock;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +38,7 @@ import rcarmstrong20.vanilla_expansions.block.VeBeePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeBlazePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeCatPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeCattailBlock;
 import rcarmstrong20.vanilla_expansions.block.VeCaveSpiderPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeChickenPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
@@ -58,7 +64,6 @@ import rcarmstrong20.vanilla_expansions.block.VePottedSnapdragonBlock;
 import rcarmstrong20.vanilla_expansions.block.VePufferfishPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VePurpleHugeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeRabbitPlushBlock;
-import rcarmstrong20.vanilla_expansions.block.VeRoastedChickenBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSevenStageCropBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSheepPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeSilverfishPlushBlock;
@@ -296,9 +301,11 @@ public class VeBlocks
     public static Block stoneWall = register("stone_wall", true,
             new WallBlock(AbstractBlock.Properties.from(Blocks.STONE)));
     public static Block redGlass = register("red_glass", true,
-            new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
+            new VeGlassBlock(buildProperties(MaterialType.GLASS, SoundType.GLASS).hardnessAndResistance(0.3F).notSolid()
+                    .setAllowsSpawn(VeBlocks::neverAllowSpawn).setOpaque(VeBlocks::isntSolid)
+                    .setSuffocates(VeBlocks::isntSolid).setBlocksVision(VeBlocks::isntSolid)));
     public static Block redGlassPane = register("red_glass_pane", true,
-            new PaneBlock(AbstractBlock.Properties.from(Blocks.GLASS_PANE)));
+            new PaneBlock(AbstractBlock.Properties.from(VeBlocks.redGlass)));
     public static Block blueberryBush = register("blueberry_bush", false,
             new VeBerryBushBlock(AbstractBlock.Properties.from(Blocks.WHEAT)));
     public static Block cranberryBush = register("cranberry_bush", false,
@@ -407,12 +414,8 @@ public class VeBlocks
             () -> VeBlocks.packedSnowBlock.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
     public static Block packedSnowSlab = register("packed_snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.from(VeBlocks.packedSnowBlock)));
-    public static Block roasted_chicken = register("roasted_chicken", true,
-            new VeRoastedChickenBlock(3, 0.5F, AbstractBlock.Properties.create(Material.CAKE, MaterialColor.BROWN)
-                    .hardnessAndResistance(0.5F).sound(SoundType.SNOW)),
-            1);
     public static Block glassOfDarkness = register("glass_of_darkness", true,
-            new VeGlassBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
+            new VeGlassBlock(AbstractBlock.Properties.from(VeBlocks.redGlass)));
     public static Block purpleMushroom = register("purple_mushroom", true,
             new VeMushroomBlock(AbstractBlock.Properties.from(Blocks.RED_MUSHROOM)));
     public static Block purpleMushroomBlock = register("purple_mushroom_block", true,
@@ -515,87 +518,96 @@ public class VeBlocks
             new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.redFlame));
     public static Block blackTorch = register("black_torch", false,
             new TorchBlock(AbstractBlock.Properties.from(Blocks.TORCH), VeParticleTypes.blackFlame));
-    public static Block whiteWallTorch = register("white_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.whiteTorch), VeParticleTypes.whiteFlame));
+    public static Block whiteWallTorch = register("white_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.whiteTorch), VeParticleTypes.whiteFlame));
     public static Block orangeWallTorch = register("orange_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.orangeTorch), VeParticleTypes.orangeFlame));
+                    }).lootFrom(() -> VeBlocks.orangeTorch), VeParticleTypes.orangeFlame));
     public static Block magentaWallTorch = register("magenta_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.magentaTorch), VeParticleTypes.magentaFlame));
+                    }).lootFrom(() -> VeBlocks.magentaTorch), VeParticleTypes.magentaFlame));
     public static Block lightBlueWallTorch = register("light_blue_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.lightBlueTorch), VeParticleTypes.lightBlueFlame));
+                    }).lootFrom(() -> VeBlocks.lightBlueTorch), VeParticleTypes.lightBlueFlame));
     public static Block yellowWallTorch = register("yellow_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.yellowTorch), VeParticleTypes.yellowFlame));
-    public static Block limeWallTorch = register("lime_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.limeTorch), VeParticleTypes.limeFlame));
-    public static Block pinkWallTorch = register("pink_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.pinkTorch), VeParticleTypes.pinkFlame));
-    public static Block grayWallTorch = register("gray_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.grayTorch), VeParticleTypes.grayFlame));
+                    }).lootFrom(() -> VeBlocks.yellowTorch), VeParticleTypes.yellowFlame));
+    public static Block limeWallTorch = register("lime_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.limeTorch), VeParticleTypes.limeFlame));
+    public static Block pinkWallTorch = register("pink_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.pinkTorch), VeParticleTypes.pinkFlame));
+    public static Block grayWallTorch = register("gray_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.grayTorch), VeParticleTypes.grayFlame));
     public static Block lightGrayWallTorch = register("light_gray_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.lightGrayTorch), VeParticleTypes.lightGrayFlame));
-    public static Block cyanWallTorch = register("cyan_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.cyanTorch), VeParticleTypes.cyanFlame));
+                    }).lootFrom(() -> VeBlocks.lightGrayTorch), VeParticleTypes.lightGrayFlame));
+    public static Block cyanWallTorch = register("cyan_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.cyanTorch), VeParticleTypes.cyanFlame));
     public static Block purpleWallTorch = register("purple_wall_torch", false,
-            new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement()
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().setLightLevel((state) ->
                     {
                         return 14;
-                    }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.purpleTorch), VeParticleTypes.purpleFlame));
-    public static Block blueWallTorch = register("blue_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.blueTorch), VeParticleTypes.blueFlame));
-    public static Block brownWallTorch = register("brown_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.brownTorch), VeParticleTypes.brownFlame));
-    public static Block greenWallTorch = register("green_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.greenTorch), VeParticleTypes.greenFlame));
-    public static Block redWallTorch = register("red_wall_torch", false, new WallTorchBlock(AbstractBlock.Properties
-            .create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) ->
-            {
-                return 14;
-            }).sound(SoundType.WOOD).lootFrom(() -> VeBlocks.redTorch), VeParticleTypes.redFlame));
+                    }).lootFrom(() -> VeBlocks.purpleTorch), VeParticleTypes.purpleFlame));
+    public static Block blueWallTorch = register("blue_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.blueTorch), VeParticleTypes.blueFlame));
+    public static Block brownWallTorch = register("brown_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.brownTorch), VeParticleTypes.brownFlame));
+    public static Block greenWallTorch = register("green_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.greenTorch), VeParticleTypes.greenFlame));
+    public static Block redWallTorch = register("red_wall_torch", false,
+            new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().setLightLevel((state) ->
+                    {
+                        return 14;
+                    }).lootFrom(() -> VeBlocks.redTorch), VeParticleTypes.redFlame));
     public static Block blackWallTorch = register("black_wall_torch", false,
             new WallTorchBlock(buildProperties(MaterialType.MISCELLANEOUS, SoundType.WOOD).doesNotBlockMovement()
                     .zeroHardnessAndResistance().lootFrom(() -> VeBlocks.blackTorch).setLightLevel((state) ->
@@ -721,6 +733,22 @@ public class VeBlocks
             () -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.mudBricks)));
     public static Block mudBrickWall = register("mud_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.mudBricks)));
+    public static Block cattail = register("cattail", true, new VeCattailBlock(
+            buildProperties(MaterialType.PLANTS).zeroHardnessAndResistance().doesNotBlockMovement().notSolid()));
+    public static Block chocolateCake = register("chocolate_cake", true,
+            new CakeBlock(AbstractBlock.Properties.from(Blocks.CAKE)), 1);
+    public static Block redVelvetCake = register("red_velvet_cake", true,
+            new CakeBlock(AbstractBlock.Properties.from(Blocks.CAKE)), 1);
+
+    private static boolean neverAllowSpawn(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity)
+    {
+        return false;
+    }
+
+    private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos)
+    {
+        return false;
+    }
 
     /**
      * Build a property set with default sound and a custom material and map color.
@@ -741,7 +769,6 @@ public class VeBlocks
      * @param materialIn The material of this block.
      * @return A base property set for this block.
      */
-    @SuppressWarnings("unused")
     private static AbstractBlock.Properties buildProperties(MaterialType materialIn)
     {
         return buildProperties(materialIn, materialIn.getMaterial().getColor(), SoundType.STONE);
@@ -827,6 +854,8 @@ public class VeBlocks
             case WOOD:
                 properties.harvestTool(ToolType.AXE);
                 break;
+            case GLASS:
+                setPickaxeHarvestTool(properties, false);
             default:
                 break;
         }
