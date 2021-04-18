@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:chocolate_cake"
+    ]
+  },
+  "criteria":
+  {
+    "has_cocoa_beans":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:cocoa_beans"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:chocolate_cake"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cocoa_beans",
+      "has_the_recipe"
+    ]
+  ]
+}
