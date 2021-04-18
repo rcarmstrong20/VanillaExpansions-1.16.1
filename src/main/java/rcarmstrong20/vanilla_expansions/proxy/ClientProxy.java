@@ -138,6 +138,7 @@ public class ClientProxy extends CommonProxy
         RenderTypeLookup.setRenderLayer(VeBlocks.pottedSnapdragon, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.enderGrass, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VeBlocks.icicle, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VeBlocks.cattail, RenderType.getCutout());
 
         // Cut out mipped renders
 

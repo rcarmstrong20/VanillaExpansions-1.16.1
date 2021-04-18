@@ -20,6 +20,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -87,16 +88,15 @@ public class VeConfiguredFeatures
                     .withPlacement(Features.Placements.VEGETATION_PLACEMENT)
                     .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4));
 
-    public static final ConfiguredFeature<?, ?> DISK_MUD = register("disk_mud", Feature.DISK
-            .withConfiguration(
-                    new SphereReplaceConfig(VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(2, 1), 1,
-                            ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD)))
-            .square().withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
-    public static final ConfiguredFeature<?, ?> DISK_MUD_SWAMP = register("disk_mud", Feature.DISK
-            .withConfiguration(
-                    new SphereReplaceConfig(VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(3, 2), 1,
-                            ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD)))
-            .square().withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+    public static final ConfiguredFeature<?, ?> DISK_RIVER_MUD = register("disk_mud",
+            Feature.DISK.withConfiguration(Configs.MUD_RIVER_CONFIG).square()
+                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+    public static final ConfiguredFeature<?, ?> DISK_SWAMP_MUD = register("disk_mud",
+            Feature.DISK.withConfiguration(Configs.MUD_SWAMP_CONFIG).square()
+                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+    public static final ConfiguredFeature<?, ?> CATTAIL_SWAMP = register("cattail_swamp",
+            VeFeature.CATTAIL.withConfiguration(new ProbabilityConfig(0.6F)).func_242731_b(32)
+                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
 
     /**
      * A helper method for automatically registering every new configured feature.
@@ -144,6 +144,12 @@ public class VeConfiguredFeatures
         public static final BlockClusterFeatureConfig PURPLE_MUSHROOM_CONFIG = new BlockClusterFeatureConfig.Builder(
                 new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM), SimpleBlockPlacer.PLACER)
                         .tries(64).func_227317_b_().build();
+        public static final SphereReplaceConfig MUD_SWAMP_CONFIG = new SphereReplaceConfig(
+                VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(3, 2), 1,
+                ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD));
+        public static final SphereReplaceConfig MUD_RIVER_CONFIG = new SphereReplaceConfig(
+                VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(2, 1), 1,
+                ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD));
     }
 
     /**
@@ -175,5 +181,8 @@ public class VeConfiguredFeatures
                 .with(VeBerryBushBlock.AGE, 3);
         protected static final BlockState MUD = VeBlocks.mud.getDefaultState();
         protected static final BlockState DIRT = Blocks.DIRT.getDefaultState();
+        protected static final BlockState CATTAIL = VeBlocks.smokyQuartzBlock.getDefaultState();
+        protected static final BlockState WATER_BLOCK = Blocks.WATER.getDefaultState();
+        protected static final BlockState AIR = Blocks.AIR.getDefaultState();
     }
 }

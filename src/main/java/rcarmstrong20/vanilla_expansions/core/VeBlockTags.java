@@ -22,6 +22,8 @@ public class VeBlockTags
     public static ITag<Block> netherPottable = VeBlockTags.makeWrapperTag("nether_pottable");
     public static ITag<Block> endPottable = VeBlockTags.makeWrapperTag("end_pottable");
     public static ITag<Block> singleCrops = VeBlockTags.makeWrapperTag("single_crops");
+    public static ITag<Block> cattailLandSoil = VeBlockTags.makeWrapperTag("cattail_land_soil");
+    public static ITag<Block> cattailWaterSoil = VeBlockTags.makeWrapperTag("cattail_water_soil");
 
     /**
      * @param name The name of the tag.

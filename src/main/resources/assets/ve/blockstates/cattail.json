@@ -1,0 +1,7 @@
+{
+    "variants":
+	{
+		"half=lower": { "model": "ve:block/cattail_bottom" },
+		"half=upper": { "model": "ve:block/cattail_top" }
+    }
+}
