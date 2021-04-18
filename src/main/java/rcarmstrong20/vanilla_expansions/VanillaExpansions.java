@@ -105,6 +105,7 @@ import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
 import rcarmstrong20.vanilla_expansions.core.VeConfiguredStructures;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
+import rcarmstrong20.vanilla_expansions.core.VeFeature;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeFluids;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
@@ -166,6 +167,7 @@ public class VanillaExpansions
         VeSoundEvents.SOUNDS.register(bus);
         VeTileEntityType.TILE_ENTITY_TYPES.register(bus);
         VeVillagerProfessions.VILLAGER_PROFESSIONS.register(bus);
+        VeFeature.FEATURES.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::clientRegistries);
@@ -746,6 +748,8 @@ public class VanillaExpansions
         boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
         boolean netherZombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
         boolean purpleMushroomFlag = VeFeatureGenConfig.VeOverworldConfig.enablePurpleMushroomSpawns.get();
+        boolean swampMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableSwampMudSpawns.get();
+        boolean riverMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableRiverMudSpawns.get();
 
         int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
         int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
@@ -782,8 +786,11 @@ public class VanillaExpansions
                 hugePurpleMushroomFlag);
         addFeature(event, darkForestBiomes, vegetal, VeConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
                 purpleMushroomFlag);
-        addFeature(event, Category.RIVER, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_MUD, true);
-        addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_MUD_SWAMP, true);
+        addFeature(event, Category.RIVER, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_RIVER_MUD,
+                riverMudFlag);
+        addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_SWAMP_MUD,
+                swampMudFlag);
+        addFeature(event, Category.SWAMP, vegetal, VeConfiguredFeatures.CATTAIL_SWAMP, true);
 
         addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
