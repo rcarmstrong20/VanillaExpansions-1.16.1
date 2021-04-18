@@ -30,38 +30,48 @@ public class VeFeatureGenConfig
         public static BooleanValue enableTaigaCabinSpawns;
         public static BooleanValue enableForestCabinSpawns;
         public static BooleanValue enablePurpleMushroomSpawns;
+        public static BooleanValue enableSwampMudSpawns;
+        public static BooleanValue enableRiverMudSpawns;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
             server.comment("Overworld Configuration").push("ve_overworld_config");
 
             enableBlueberryBushSpawns = server.comment(compileBooleanSpawnComment("blueberry bushes"))
-                    .translation("ve.configBushes.enableBlueberryBushSpawns").worldRestart()
+                    .translation("ve.featureConfig.enableBlueberryBushSpawns").worldRestart()
                     .define("enable_blueberry_bush_spawns", true);
 
             enableCranberryBushSpawns = server.comment(compileBooleanSpawnComment("cranberry bushes"))
-                    .translation("ve.configBushes.enableCranberryBushSpawns").worldRestart()
+                    .translation("ve.featureConfig.enableCranberryBushSpawns").worldRestart()
                     .define("enable_cranberry_bush_spawns", true);
 
             enableWitchsCradleSpawns = server.comment(compileBooleanSpawnComment("witch's cradles"))
-                    .translation("ve.configBushes.enableWitchsCradleSpawns").worldRestart()
+                    .translation("ve.featureConfig.enableWitchsCradleSpawns").worldRestart()
                     .define("enable_witchs_cradle_spawns", true);
 
             enableHugePurpleMushroomSpawns = server.comment(compileBooleanSpawnComment("big purple mushrooms"))
-                    .translation("ve.configMushroom.enableBigPurpleMushroomSpawns").worldRestart()
+                    .translation("ve.featureConfig.enableBigPurpleMushroomSpawns").worldRestart()
                     .define("enable_big_purple_mushroom_spawns", true);
 
             enableTaigaCabinSpawns = server.comment(compileBooleanSpawnComment("taiga cabins"))
-                    .translation("ve.configStructure.enableTaigaCabinSpawns").worldRestart()
+                    .translation("ve.structureConfig.enableTaigaCabinSpawns").worldRestart()
                     .define("enable_taiga_cabin_spawns", true);
 
             enableForestCabinSpawns = server.comment(compileBooleanSpawnComment("forest cabins"))
-                    .translation("ve.configStructure.enableForestCabinSpawns").worldRestart()
+                    .translation("ve.structureConfig.enableForestCabinSpawns").worldRestart()
                     .define("enable_forest_cabin_spawns", true);
 
             enablePurpleMushroomSpawns = server.comment(compileBooleanSpawnComment("purple mushrooms"))
-                    .translation("ve.configMushroom.enablePurpleMushroomSpawns").worldRestart()
+                    .translation("ve.featureConfig.enablePurpleMushroomSpawns").worldRestart()
                     .define("enable_purple_mushroom_spawns", true);
+
+            enableSwampMudSpawns = server.comment(compileBooleanSpawnComment("swamp mud"))
+                    .translation("ve.configFeature.enableSwampMudSpawns").worldRestart()
+                    .define("enable_swamp_mud_spawns", true);
+
+            enableRiverMudSpawns = server.comment(compileBooleanSpawnComment("river mud"))
+                    .translation("ve.configFeature.enableRiverMudSpawns").worldRestart()
+                    .define("enable_river_mud_spawns", true);
 
             server.pop();
         }
