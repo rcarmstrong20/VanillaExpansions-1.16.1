@@ -733,7 +733,7 @@ public class VeBlocks
             () -> VeBlocks.bauxite.getDefaultState(), AbstractBlock.Properties.from(VeBlocks.mudBricks)));
     public static Block mudBrickWall = register("mud_brick_wall", true,
             new WallBlock(AbstractBlock.Properties.from(VeBlocks.mudBricks)));
-    public static Block cattail = register("cattail", true, new VeCattailBlock(
+    public static Block cattail = register("cattail", false, new VeCattailBlock(
             buildProperties(MaterialType.PLANTS).zeroHardnessAndResistance().doesNotBlockMovement().notSolid()));
     public static Block chocolateCake = register("chocolate_cake", true,
             new CakeBlock(AbstractBlock.Properties.from(Blocks.CAKE)), 1);

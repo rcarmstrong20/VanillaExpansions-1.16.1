@@ -23,6 +23,7 @@ public class VeFoods
     public static Food cranberrySauce = new Food.Builder().hunger(5).saturation(0.6F).build();
     public static Food spruceCone = new Food.Builder().hunger(2).saturation(0.3F).build();
     public static Food forestsBounty = buildStew(5);
+    public static Food greenCattail = new Food.Builder().hunger(4).saturation(0.5F).build();
 
     private static Food buildStew(int hunger)
     {

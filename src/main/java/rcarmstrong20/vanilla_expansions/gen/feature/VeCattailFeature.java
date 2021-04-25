@@ -34,7 +34,7 @@ public class VeCattailFeature extends Feature<ProbabilityConfig>
         BlockPos blockpos = new BlockPos(pos.getX() + i, k, pos.getZ() + j);
         if (reader.getBlockState(blockpos).isIn(Blocks.WATER))
         {
-            BlockState state = VeBlocks.cattail.getDefaultState();
+            BlockState state = VeBlocks.cattail.getDefaultState().with(VeCattailBlock.AGE, 3);
             if (state.isValidPosition(reader, blockpos))
             {
                 BlockState stateTop = state.with(VeCattailBlock.HALF, DoubleBlockHalf.UPPER);

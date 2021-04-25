@@ -121,6 +121,9 @@ public class VeItems
             new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, buildProperties()));
     public static Item mudBall = register("mud_ball", new Item(buildProperties()));
     public static Item mudBrick = register("mud_brick", new Item(buildProperties()));
+    public static Item brownCattail = register("brown_cattail",
+            new BlockNamedItem(VeBlocks.cattail, buildProperties()));
+    public static Item greenCattail = register("green_cattail", new Item(buildProperties(VeFoods.greenCattail)));
 
     /**
      * A helper method that builds default properties for a item.

@@ -15,7 +15,7 @@ public class VeFeature
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,
             VanillaExpansions.MOD_ID);
 
-    public static final VeCattailFeature CATTAIL = (VeCattailFeature) register("seagrass",
+    public static final VeCattailFeature CATTAIL = (VeCattailFeature) register("cattail",
             new VeCattailFeature(ProbabilityConfig.CODEC));
 
     private static <C extends IFeatureConfig> Feature<?> register(String name, Feature<C> feature)

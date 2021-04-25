@@ -2,6 +2,6 @@
     "parent": "block/cross",
     "textures":
 	{
-        "cross": "ve:block/cattail_top"
+        "cross": "ve:block/cattail_top_stage2"
     }
 }
