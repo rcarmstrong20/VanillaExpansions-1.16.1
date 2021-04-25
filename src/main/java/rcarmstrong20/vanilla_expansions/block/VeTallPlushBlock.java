@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -92,19 +93,37 @@ public class VeTallPlushBlock extends VePlushBlock
         {
             if (state.get(HALF) == DoubleBlockHalf.UPPER)
             {
-                world.destroyBlock(pos.down(), false);
+                this.breakOtherBlock(world, pos.down(), player);
             }
             else if (state.get(HALF) == DoubleBlockHalf.LOWER)
             {
-                world.destroyBlock(pos.up(), false);
+                this.breakOtherBlock(world, pos.up(), player);
             }
         }
         world.destroyBlock(pos, Boolean.valueOf(!player.isCreative()));
     }
 
     /**
-     * Creates a list of properties that this block can have.
+     * A helper method that breaks the half that the player has not broken.
+     *
+     * @param world
+     * @param otherPos The pos for the other half.
+     * @param player   The player breaking the block.
      */
+    protected void breakOtherBlock(World world, BlockPos otherPos, PlayerEntity player)
+    {
+        if (world.getBlockState(otherPos).get(WATERLOGGED))
+        {
+            world.setBlockState(otherPos, Blocks.WATER.getDefaultState(), 35);
+        }
+        else
+        {
+            world.setBlockState(otherPos, Blocks.AIR.getDefaultState(), 35);
+        }
+
+        world.playEvent(player, 2001, otherPos, Block.getStateId(world.getBlockState(otherPos)));
+    }
+
     @Override
     protected void fillStateContainer(Builder<Block, BlockState> builder)
     {
