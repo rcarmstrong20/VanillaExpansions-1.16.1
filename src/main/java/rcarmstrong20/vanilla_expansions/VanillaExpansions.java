@@ -215,7 +215,7 @@ public class VanillaExpansions
             Random random = new Random();
 
             // 5% chance to drop by default
-            if (random.nextFloat() <= (5 / 100))
+            if (random.nextFloat() <= (VeCropConfig.VeBlockConfig.spruceConePercent.get() / 100))
             {
                 Block.spawnAsEntity((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 1));
             }
@@ -614,7 +614,7 @@ public class VanillaExpansions
         IntegerProperty netherWartAge = NetherWartBlock.AGE;
         IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
         IntegerProperty cocoaAge = CocoaBlock.AGE;
-        boolean flag = VeCropConfig.VeHarvestConfig.enableSmartHarvest.get();
+        boolean flag = VeCropConfig.VeBlockConfig.enableSmartHarvest.get();
 
         if (!event.getWorld().isRemote())
         {

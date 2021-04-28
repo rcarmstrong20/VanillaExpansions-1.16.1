@@ -2,30 +2,33 @@ package rcarmstrong20.vanilla_expansions.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 public class VeCropConfig
 {
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
-        server.comment("Vanilla Expansions Crops Configuration").push("ve_crop_config");
+        server.comment("Vanilla Expansions Block Configuration").push("ve_block_config");
 
-        VeHarvestConfig.init(server);
+        VeBlockConfig.init(server);
 
         server.pop();
     }
 
-    public static class VeHarvestConfig
+    public static class VeBlockConfig
     {
         public static BooleanValue enableSmartHarvest;
+        public static IntValue spruceConePercent;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
-            server.comment("Crop Harvest Configuration").push("ve_harvest");
-
             enableSmartHarvest = server
                     .comment("When true crops can be harvested and re-planted simply by right-clicking the crop.")
-                    .translation("ve_crop_config.ve_harvest.enable_smart_harvest").worldRestart()
+                    .translation("ve_block_config.enable_smart_harvest").worldRestart()
                     .define("enable_smart_harvest", true);
+
+            spruceConePercent = server.comment("The chance that a spruce cone will drop from spruce leaves.")
+                    .translation("ve_block_config.spruce_cone_percent").defineInRange("spruce_cone_percent", 5, 0, 100);
 
             server.pop();
         }
