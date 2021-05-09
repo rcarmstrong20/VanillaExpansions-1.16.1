@@ -6,35 +6,42 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
 public class VeSnapdragonBlock extends FlowerBlock
 {
+    // Prevents teleport spam.
+    boolean teleportNextTick = false;
+
     public VeSnapdragonBlock(Effect effect, int effectDuration, Properties properties)
     {
         super(effect, effectDuration, properties);
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
+    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
         return isValidBlock(worldIn, pos);
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos)
     {
         return isValidBlock(worldIn, pos);
     }
@@ -46,12 +53,6 @@ public class VeSnapdragonBlock extends FlowerBlock
         return isValidBlock(world, pos);
     }
 
-    /**
-     * Called periodically clientside on blocks near the player to show effects
-     * (like furnace fire particles). Note that this method is unrelated to
-     * {@link randomTick} and {@link #needsRandomTick}, and will always be called
-     * regardless of whether the block can receive random update ticks
-     */
     @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -63,6 +64,18 @@ public class VeSnapdragonBlock extends FlowerBlock
         super.animateTick(stateIn, worldIn, pos, rand);
     }
 
+    @Override
+    public void tick(BlockState p_225534_1_, ServerWorld p_225534_2_, BlockPos p_225534_3_, Random p_225534_4_)
+    {
+        teleportNextTick = false;
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState p_149653_1_)
+    {
+        return teleportNextTick;
+    }
+
     /**
      * A helper method used for checking that the plant placement is valid.
      *
@@ -72,7 +85,7 @@ public class VeSnapdragonBlock extends FlowerBlock
      */
     private boolean isValidBlock(IBlockReader world, BlockPos pos)
     {
-        Block block = world.getBlockState(pos.down()).getBlock();
+        Block block = world.getBlockState(pos.below()).getBlock();
 
         if (block instanceof VePlanterBoxBlock)
         {
@@ -84,38 +97,39 @@ public class VeSnapdragonBlock extends FlowerBlock
         }
     }
 
-    /**
-     * Called when an entity collides with this block.
-     */
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
+    public void entityInside(BlockState state, World world, BlockPos pos, Entity entity)
     {
-        if (!world.isRemote && entity instanceof PlayerEntity)
+        if (entity instanceof LivingEntity)
         {
-            PlayerEntity playerEntity = (PlayerEntity) entity;
+            LivingEntity livingEntity = (LivingEntity) entity;
 
-            double x = playerEntity.getPosX();
-            double y = playerEntity.getPosY();
-            double z = playerEntity.getPosZ();
-
-            if (!playerEntity.isSneaking() && playerEntity.getMotion().getY() == 0.0D)
+            if (!world.isClientSide() && !teleportNextTick && !livingEntity.isCrouching()
+                    && entity.getDeltaMovement().y() == 0.0D)
             {
+                double d0 = livingEntity.getX();
+                double d1 = livingEntity.getY();
+                double d2 = livingEntity.getZ();
+
                 for (int i = 0; i < 16; ++i)
                 {
-                    double newX = playerEntity.getPosX() + (playerEntity.getRNG().nextDouble() - 0.5D) * 16.0D;
-                    double newY = MathHelper.clamp(playerEntity.getPosY() + (playerEntity.getRNG().nextInt(16) - 8),
-                            0.0D, world.func_234938_ad_() - 1);
-                    double newZ = playerEntity.getPosZ() + (playerEntity.getRNG().nextDouble() - 0.5D) * 16.0D;
-                    if (playerEntity.isPassenger())
+                    double d3 = livingEntity.getX() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
+                    double d4 = MathHelper.clamp(livingEntity.getY() + (livingEntity.getRandom().nextInt(16) - 8), 0.0D,
+                            world.getHeight() - 1);
+                    double d5 = livingEntity.getZ() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
+
+                    if (livingEntity.isPassenger())
                     {
-                        playerEntity.stopRiding();
+                        livingEntity.stopRiding();
                     }
 
-                    if (playerEntity.attemptTeleport(newX, newY, newZ, true))
+                    if (livingEntity.randomTeleport(d3, d4, d5, true))
                     {
-                        world.playSound((PlayerEntity) null, x, y, z, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT,
-                                SoundCategory.PLAYERS, 1.0F, 1.0F);
-                        playerEntity.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+                        SoundEvent soundevent = livingEntity instanceof FoxEntity ? SoundEvents.FOX_TELEPORT
+                                : SoundEvents.CHORUS_FRUIT_TELEPORT;
+                        world.playSound((PlayerEntity) null, d0, d1, d2, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        livingEntity.playSound(soundevent, 1.0F, 1.0F);
+                        teleportNextTick = true; // Since the player has teleported setNextTick to true
                         break;
                     }
                 }
