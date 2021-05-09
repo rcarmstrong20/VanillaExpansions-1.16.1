@@ -57,6 +57,7 @@ public class VeParticleTypes
 
     public static BasicParticleType totemOfTheGuardian = register("totem_of_the_guardian", false);
     public static BasicParticleType totemOfTheBrute = register("totem_of_the_brute", false);
+    public static BasicParticleType totemOfTheFortunate = register("totem_of_the_fortunate", false);
 
     /**
      * @param name       The name of this particle.
