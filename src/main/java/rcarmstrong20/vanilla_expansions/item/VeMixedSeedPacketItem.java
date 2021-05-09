@@ -19,31 +19,31 @@ public class VeMixedSeedPacketItem extends Item
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
         Random random = new Random();
-        ItemStack heldStack = player.getHeldItem(hand);
+        ItemStack heldStack = player.getItemInHand(hand);
 
-        if (!world.isRemote())
+        if (!world.isClientSide())
         {
             for (int i = 0; i <= 2; i++)
             {
                 Item randomSeed = VeItemTags.packet_seeds.getRandomElement(random);
                 int randomCount = random.nextInt(i + 1) + 1;
 
-                player.addItemStackToInventory(new ItemStack(randomSeed, randomCount));
+                player.addItem(new ItemStack(randomSeed, randomCount));
             }
         }
 
-        player.playSound(SoundEvents.BLOCK_BAMBOO_STEP, 1.0F, 1.0F);
+        player.playSound(SoundEvents.BAMBOO_STEP, 1.0F, 1.0F);
 
         if (player.isCreative())
         {
-            return ActionResult.resultPass(heldStack);
+            return ActionResult.pass(heldStack);
         }
         else
         {
-            return ActionResult.resultConsume(new ItemStack(heldStack.getItem(), heldStack.getCount() - 1));
+            return ActionResult.consume(new ItemStack(heldStack.getItem(), heldStack.getCount() - 1));
         }
     }
 }

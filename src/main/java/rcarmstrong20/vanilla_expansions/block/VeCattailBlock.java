@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
-import net.minecraft.block.IGrowable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -32,40 +31,40 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
-public class VeCattailBlock extends BushBlock implements IGrowable
+public class VeCattailBlock extends BushBlock
 {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public VeCattailBlock(Properties properties)
     {
         super(properties);
-        this.setDefaultState(
-                this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false));
+        this.registerDefaultState(
+                this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader world, BlockPos pos)
+    protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos)
     {
         return canSupportCattail(world, pos);
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+    public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
     {
-        if (state.get(HALF) != DoubleBlockHalf.UPPER)
+        if (state.getValue(HALF) != DoubleBlockHalf.UPPER)
         {
             return canSupportCattail(world, pos);
         }
         else
         {
-            BlockState blockstate = world.getBlockState(pos.down());
+            BlockState blockstate = world.getBlockState(pos.below());
             if (state.getBlock() != this)
             {
                 return canSupportCattail(world, pos);
             }
-            return blockstate.isIn(this) && blockstate.get(HALF) == DoubleBlockHalf.LOWER;
+            return blockstate.is(this) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
     }
 
@@ -85,7 +84,7 @@ public class VeCattailBlock extends BushBlock implements IGrowable
      */
     private boolean canSupportCattail(IBlockReader world, BlockPos pos)
     {
-        Block block = world.getBlockState(pos.down()).getBlock();
+        Block block = world.getBlockState(pos.below()).getBlock();
 
         return VeBlockTags.cattailLandSoil.contains(block) || VeBlockTags.cattailWaterSoil.contains(block);
     }
@@ -93,19 +92,19 @@ public class VeCattailBlock extends BushBlock implements IGrowable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        BlockPos blockpos = context.getPos();
-        World world = context.getWorld();
+        BlockPos blockpos = context.getClickedPos();
+        World world = context.getPlayer().getCommandSenderWorld();
         FluidState fluidstate = world.getFluidState(blockpos);
-        FluidState topFluidstate = world.getFluidState(blockpos.up());
-        Block block = world.getBlockState(blockpos.down()).getBlock();
+        FluidState topFluidstate = world.getFluidState(blockpos.above());
+        Block block = world.getBlockState(blockpos.below()).getBlock();
 
         if (VeBlockTags.cattailLandSoil.contains(block))
         {
-            return this.getDefaultState().with(WATERLOGGED, isWater(fluidstate));
+            return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
         }
-        else if (fluidstate.isTagged(FluidTags.WATER) && !topFluidstate.isTagged(FluidTags.WATER))
+        else if (fluidstate.is(FluidTags.WATER) && !topFluidstate.is(FluidTags.WATER))
         {
-            return this.getDefaultState().with(WATERLOGGED, isWater(fluidstate));
+            return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
         }
         else
         {
@@ -119,29 +118,19 @@ public class VeCattailBlock extends BushBlock implements IGrowable
      */
     protected boolean isWater(FluidState fluidState)
     {
-        return Boolean.valueOf(fluidState.getFluid() == Fluids.WATER);
+        return Boolean.valueOf(fluidState.getType() == Fluids.WATER);
     }
 
     @Override
     public FluidState getFluidState(BlockState state)
     {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
 
-    /**
-     * Creates a list of properties that this block can have.
-     */
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
     {
-        super.fillStateContainer(builder);
         builder.add(HALF, WATERLOGGED, AGE);
-    }
-
-    @Override
-    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient)
-    {
-        return canCattailGrow(worldIn, state, pos);
     }
 
     /**
@@ -152,24 +141,15 @@ public class VeCattailBlock extends BushBlock implements IGrowable
      * @param pos     The cattails position.
      * @return Whether or not this cattail can grow.
      */
-    public boolean canCattailGrow(IBlockReader worldIn, BlockState state, BlockPos pos)
+    private boolean canCattailGrow(IBlockReader worldIn, BlockState state, BlockPos pos)
     {
-        BlockState stateTop = worldIn.getBlockState(pos.up());
+        BlockState stateTop = worldIn.getBlockState(pos.above());
 
         return !isMaxAge(state)
-                && (isAir(stateTop) || (stateTop.hasProperty(HALF) && stateTop.get(HALF).equals(DoubleBlockHalf.UPPER)))
+                && (isAir(stateTop)
+                        || (stateTop.hasProperty(HALF) && stateTop.getValue(HALF).equals(DoubleBlockHalf.UPPER)))
                 && stateTop.getBlock() != Blocks.WATER;
     }
-
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
-    {
-        return false;
-    }
-
-    @Override
-    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
-    {}
 
     /**
      * A helper method used to place cattails.
@@ -183,7 +163,7 @@ public class VeCattailBlock extends BushBlock implements IGrowable
     {
         FluidState fluid = worldIn.getFluidState(pos);
 
-        worldIn.setBlockState(pos, this.withAge(i).with(HALF, half).with(WATERLOGGED, isWater(fluid)), 2);
+        worldIn.setBlock(pos, this.withAge(i).setValue(HALF, half).setValue(WATERLOGGED, isWater(fluid)), 2);
     }
 
     @Override
@@ -192,22 +172,22 @@ public class VeCattailBlock extends BushBlock implements IGrowable
         if (!worldIn.isAreaLoaded(pos, 1))
             return;
 
-        if (canCattailGrow(worldIn, state, pos) && worldIn.getLightSubtracted(pos, 0) >= 9)
+        if (canCattailGrow(worldIn, state, pos) && worldIn.getRawBrightness(pos, 0) >= 9)
         {
             int i = this.getAge(state);
             if (i < this.getMaxAge())
             {
-                float f = getGrowthChance(this, worldIn, pos);
+                float f = getGrowthSpeed(this, worldIn, pos);
                 if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0))
                 {
-                    if (Block.hasSolidSideOnTop(worldIn, pos.down()))
+                    if (Block.canSupportRigidBlock(worldIn, pos.below()))
                     {
                         this.placeCattail(worldIn, pos, i + 1, DoubleBlockHalf.LOWER);
-                        this.placeCattail(worldIn, pos.up(), i + 1, DoubleBlockHalf.UPPER);
+                        this.placeCattail(worldIn, pos.above(), i + 1, DoubleBlockHalf.UPPER);
                     }
                     else
                     {
-                        pos = pos.down();
+                        pos = pos.below();
                     }
                     ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                 }
@@ -223,21 +203,21 @@ public class VeCattailBlock extends BushBlock implements IGrowable
      * @param pos     The position for the plant.
      * @return The growth chance.
      */
-    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos)
+    protected static float getGrowthSpeed(Block blockIn, IBlockReader worldIn, BlockPos pos)
     {
         float f = 1.0F;
-        BlockPos blockpos = pos.down();
+        BlockPos blockpos = pos.below();
 
         for (int i = -1; i <= 1; ++i)
         {
             for (int j = -1; j <= 1; ++j)
             {
                 float f1 = 0.0F;
-                BlockState blockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
-                if (blockstate.canSustainPlant(worldIn, blockpos.add(i, 0, j), Direction.UP, (IPlantable) blockIn))
+                BlockState blockstate = worldIn.getBlockState(blockpos.offset(i, 0, j));
+                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), Direction.UP, (IPlantable) blockIn))
                 {
                     f1 = 1.0F;
-                    if (worldIn.getFluidState(pos.add(i, 0, j)).isTagged(FluidTags.WATER))
+                    if (worldIn.getFluidState(pos.offset(i, 0, j)).is(FluidTags.WATER))
                     {
                         f1 = 3.0F;
                     }
@@ -280,14 +260,21 @@ public class VeCattailBlock extends BushBlock implements IGrowable
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
+    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
     {
-        if (!worldIn.isRemote && state.get(HALF) == DoubleBlockHalf.UPPER)
+        if (!worldIn.isClientSide())
         {
-            worldIn.destroyBlock(pos.down(), !player.isCreative());
+            if (state.getValue(HALF) == DoubleBlockHalf.UPPER)
+            {
+                worldIn.destroyBlock(pos.below(), !player.isCreative());
+            }
+            else
+            {
+                worldIn.destroyBlock(pos.above(), !player.isCreative());
+            }
         }
 
-        super.onBlockHarvested(worldIn, pos, state, player);
+        super.playerWillDestroy(worldIn, pos, state, player);
     }
 
     @Override
@@ -298,21 +285,21 @@ public class VeCattailBlock extends BushBlock implements IGrowable
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public long getPositionRandom(BlockState state, BlockPos pos)
+    public long getSeed(BlockState state, BlockPos pos)
     {
-        return MathHelper.getCoordinateRandom(pos.getX(),
-                pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+        return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(),
+                pos.getZ());
     }
 
     @Override
-    public boolean ticksRandomly(BlockState state)
+    public boolean isRandomlyTicking(BlockState state)
     {
         return !this.isMaxAge(state);
     }
 
     protected int getAge(BlockState state)
     {
-        return state.get(AGE);
+        return state.getValue(AGE);
     }
 
     protected int getMaxAge()
@@ -322,11 +309,11 @@ public class VeCattailBlock extends BushBlock implements IGrowable
 
     public BlockState withAge(int age)
     {
-        return this.getDefaultState().with(AGE, Integer.valueOf(age));
+        return this.defaultBlockState().setValue(AGE, Integer.valueOf(age));
     }
 
     protected boolean isMaxAge(BlockState state)
     {
-        return state.get(AGE) >= this.getMaxAge();
+        return state.getValue(AGE) >= this.getMaxAge();
     }
 }

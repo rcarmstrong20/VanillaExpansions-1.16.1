@@ -27,8 +27,7 @@ public class VeGlassVialItem extends Item
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target,
-            Hand hand)
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
         if (stack.getItem() == VeItems.glassVial)
         {
@@ -37,10 +36,10 @@ public class VeGlassVialItem extends Item
             {
                 MobEntity animalTarget = (MobEntity) target;
 
-                if (animalTarget.attackEntityFrom(DamageSource.GENERIC, 1))
+                if (animalTarget.hurt(DamageSource.GENERIC, 1))
                 {
-                    playerIn.addItemStackToInventory(new ItemStack(VeItems.bloodVial));
-                    animalTarget.playSound(SoundEvents.ITEM_BOTTLE_FILL, 1.0F, 1.0F);
+                    playerIn.addItem(new ItemStack(VeItems.bloodVial));
+                    animalTarget.playSound(SoundEvents.BOTTLE_FILL, 1.0F, 1.0F);
                     stack.shrink(1);
                     return ActionResultType.CONSUME;
                 }

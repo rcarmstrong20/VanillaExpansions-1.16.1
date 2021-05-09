@@ -18,32 +18,30 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
-import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
+import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
 
 public class VePufferfishPlushBlock extends VePlushBlock
 {
-    public static final IntegerProperty PUFFED = VeBlockStateProperties.PUFFED_0_2;
+    public static final IntegerProperty PUFFED = VeBlockStateProperties.PUFFED_2;
 
     // Pufferfish 0 Bounding Boxes
 
-    protected static final VoxelShape PUFFERFISH_0_NORTH_BODY_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 3.0D, 11.0D,
-            4.0D, 11.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(7.0D, 2.0D, 2.5D, 9.0D,
-            3.0D, 3.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_FIN_SHAPE = Block.makeCuboidShape(4.0D, 1.0D, 3.0D, 5.0D,
-            2.0D, 8.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_FIN_SHAPE = Block.makeCuboidShape(11.0D, 1.0D, 3.0D,
-            12.0D, 2.0D, 8.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(5.0D, 4.0D, 3.0D, 6.5D,
-            5.5D, 4.5D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.5D, 4.0D, 3.0D, 11.0D,
-            5.5D, 4.5D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_MIDDLE_SHAPE = Block.makeCuboidShape(6.0D, 1.0D, 11.0D,
-            10.0D, 2.0D, 13.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_RIGHT_SHAPE = Block.makeCuboidShape(6.0D, 1.0D, 13.0D,
-            7.0D, 2.0D, 14.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_LEFT_SHAPE = Block.makeCuboidShape(9.0D, 1.0D, 13.0D,
-            10.0D, 2.0D, 14.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_BODY_SHAPE = Block.box(5.0D, 0.0D, 3.0D, 11.0D, 4.0D, 11.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_MOUTH_SHAPE = Block.box(7.0D, 2.0D, 2.5D, 9.0D, 3.0D, 3.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_FIN_SHAPE = Block.box(4.0D, 1.0D, 3.0D, 5.0D, 2.0D,
+            8.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_FIN_SHAPE = Block.box(11.0D, 1.0D, 3.0D, 12.0D, 2.0D,
+            8.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 4.0D, 3.0D, 6.5D, 5.5D,
+            4.5D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_EYE_SHAPE = Block.box(9.5D, 4.0D, 3.0D, 11.0D, 5.5D,
+            4.5D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_MIDDLE_SHAPE = Block.box(6.0D, 1.0D, 11.0D, 10.0D, 2.0D,
+            13.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_RIGHT_SHAPE = Block.box(6.0D, 1.0D, 13.0D, 7.0D, 2.0D,
+            14.0D);
+    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_LEFT_SHAPE = Block.box(9.0D, 1.0D, 13.0D, 10.0D, 2.0D,
+            14.0D);
     protected static final VoxelShape PUFFERFISH_0_NORTH_FINS_SHAPE = VoxelShapes.or(PUFFERFISH_0_NORTH_RIGHT_FIN_SHAPE,
             PUFFERFISH_0_NORTH_LEFT_FIN_SHAPE);
     protected static final VoxelShape PUFFERFISH_0_NORTH_EYES_SHAPE = VoxelShapes.or(PUFFERFISH_0_NORTH_RIGHT_EYE_SHAPE,
@@ -55,25 +53,22 @@ public class VePufferfishPlushBlock extends VePlushBlock
             PUFFERFISH_0_NORTH_MOUTH_SHAPE, PUFFERFISH_0_NORTH_FINS_SHAPE, PUFFERFISH_0_NORTH_EYES_SHAPE,
             PUFFERFISH_0_NORTH_TAIL_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
-            PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
 
     // Pufferfish 1 Bounding Boxes
 
-    protected static final VoxelShape PUFFERFISH_1_NORTH_BODY_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 3.0D, 12.0D,
-            8.0D, 11.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_FIN_SHAPE = Block.makeCuboidShape(2.0D, 5.0D, 4.0D, 4.0D,
-            6.0D, 9.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_FIN_SHAPE = Block.makeCuboidShape(12.0D, 5.0D, 4.0D,
-            14.0D, 6.0D, 9.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 2.5D, 8.5D,
-            3.0D, 3.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(5.0D, 4.0D, 2.5D, 6.5D,
-            5.5D, 3.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.5D, 4.0D, 2.5D, 11.0D,
-            5.5D, 3.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_BODY_SHAPE = Block.box(4.0D, 0.0D, 3.0D, 12.0D, 8.0D, 11.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_FIN_SHAPE = Block.box(2.0D, 5.0D, 4.0D, 4.0D, 6.0D,
+            9.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_FIN_SHAPE = Block.box(12.0D, 5.0D, 4.0D, 14.0D, 6.0D,
+            9.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_MOUTH_SHAPE = Block.box(7.5D, 2.0D, 2.5D, 8.5D, 3.0D, 3.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 4.0D, 2.5D, 6.5D, 5.5D,
+            3.0D);
+    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_EYE_SHAPE = Block.box(9.5D, 4.0D, 2.5D, 11.0D, 5.5D,
+            3.0D);
     protected static final VoxelShape PUFFERFISH_1_NORTH_FINS_SHAPE = VoxelShapes.or(PUFFERFISH_1_NORTH_RIGHT_FIN_SHAPE,
             PUFFERFISH_1_NORTH_LEFT_FIN_SHAPE);
     protected static final VoxelShape PUFFERFISH_1_NORTH_EYES_SHAPE = VoxelShapes.or(PUFFERFISH_1_NORTH_RIGHT_EYE_SHAPE,
@@ -81,25 +76,22 @@ public class VePufferfishPlushBlock extends VePlushBlock
     protected static final VoxelShape PUFFERFISH_1_NORTH_SHAPE = VoxelShapes.or(PUFFERFISH_1_NORTH_BODY_SHAPE,
             PUFFERFISH_1_NORTH_MOUTH_SHAPE, PUFFERFISH_1_NORTH_FINS_SHAPE, PUFFERFISH_1_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
-            PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
 
     // Pufferfish 2 Bounding Boxes
 
-    protected static final VoxelShape PUFFERFISH_2_NORTH_BODY_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 2.0D, 13.0D,
-            9.0D, 12.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE = Block.makeCuboidShape(1.0D, 6.0D, 4.0D, 3.0D,
-            7.0D, 9.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE = Block.makeCuboidShape(13.0D, 6.0D, 4.0D,
-            15.0D, 7.0D, 9.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(6.5D, 3.0D, 1.5D, 9.5D,
-            4.0D, 2.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(4.0D, 5.0D, 1.5D, 7.0D,
-            6.5D, 2.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.0D, 5.0D, 1.5D, 12.0D,
-            6.5D, 2.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_BODY_SHAPE = Block.box(3.0D, 0.0D, 2.0D, 13.0D, 9.0D, 12.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE = Block.box(1.0D, 6.0D, 4.0D, 3.0D, 7.0D,
+            9.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE = Block.box(13.0D, 6.0D, 4.0D, 15.0D, 7.0D,
+            9.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_MOUTH_SHAPE = Block.box(6.5D, 3.0D, 1.5D, 9.5D, 4.0D, 2.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE = Block.box(4.0D, 5.0D, 1.5D, 7.0D, 6.5D,
+            2.0D);
+    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE = Block.box(9.0D, 5.0D, 1.5D, 12.0D, 6.5D,
+            2.0D);
     protected static final VoxelShape PUFFERFISH_2_NORTH_FINS_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE,
             PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE);
     protected static final VoxelShape PUFFERFISH_2_NORTH_EYES_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE,
@@ -107,10 +99,9 @@ public class VePufferfishPlushBlock extends VePlushBlock
     protected static final VoxelShape PUFFERFISH_2_NORTH_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_BODY_SHAPE,
             PUFFERFISH_2_NORTH_MOUTH_SHAPE, PUFFERFISH_2_NORTH_FINS_SHAPE, PUFFERFISH_2_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y,
-            PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
 
     public VePufferfishPlushBlock(Properties properties)
     {
@@ -121,22 +112,22 @@ public class VePufferfishPlushBlock extends VePlushBlock
      * Called when the player right-clicks a block.
      */
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
-            Hand hand, BlockRayTraceResult rayTrace)
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+            BlockRayTraceResult rayTrace)
     {
-        int puffed_property = state.get(PUFFED);
+        int puffed_property = state.getValue(PUFFED);
 
         if (puffed_property < 2)
         {
-            world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
-                    0.8F + world.rand.nextFloat() * 0.4F);
-            world.setBlockState(pos, state.with(PUFFED, Integer.valueOf(puffed_property + 1)), 3);
+            world.playSound(null, pos, SoundEvents.PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
+                    0.8F + world.random.nextFloat() * 0.4F);
+            world.setBlock(pos, state.setValue(PUFFED, Integer.valueOf(puffed_property + 1)), 3);
         }
         else
         {
-            world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
-                    0.8F + world.rand.nextFloat() * 0.4F);
-            world.setBlockState(pos, state.with(PUFFED, 0), 3);
+            world.playSound(null, pos, SoundEvents.PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
+                    0.8F + world.random.nextFloat() * 0.4F);
+            world.setBlock(pos, state.setValue(PUFFED, 0), 3);
         }
         return ActionResultType.SUCCESS;
     }
@@ -147,7 +138,7 @@ public class VePufferfishPlushBlock extends VePlushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        switch (state.get(HORIZONTAL_FACING))
+        switch (state.getValue(FACING))
         {
             case NORTH:
                 return getPuffedShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE,
@@ -174,7 +165,7 @@ public class VePufferfishPlushBlock extends VePlushBlock
     private static VoxelShape getPuffedShapes(BlockState state, VoxelShape puffShape0, VoxelShape puffShape1,
             VoxelShape puffShape2)
     {
-        switch (state.get(PUFFED))
+        switch (state.getValue(PUFFED))
         {
             case 0:
                 return puffShape0;
@@ -189,8 +180,8 @@ public class VePufferfishPlushBlock extends VePlushBlock
      * Creates a list of properties that this block can have.
      */
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING, WATERLOGGED, PUFFED);
+        builder.add(FACING, WATERLOGGED, PUFFED);
     }
 }

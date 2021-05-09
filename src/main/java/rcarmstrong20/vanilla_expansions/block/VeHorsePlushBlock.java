@@ -8,80 +8,57 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
+import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
 
 public class VeHorsePlushBlock extends VePlushBlock
 {
-    protected static final VoxelShape HORSE_NORTH_BODY_SHAPE = Block.makeCuboidShape(4.5D, 4.5D, 5.0D, 11.5D, 10.5D,
-            13.0D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_LEG_PUFF_SHAPE = Block.makeCuboidShape(10.0D, 4.0D, 4.5D,
-            12.0D, 9.0D, 6.5D);
-    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_LEG_PUFF_SHAPE = Block.makeCuboidShape(10.0D, 4.0D, 11.5D,
-            12.0D, 9.0D, 13.5D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_LEG_PUFF_SHAPE = Block.makeCuboidShape(4.0D, 4.0D, 4.5D,
-            6.0D, 9.0D, 6.5D);
-    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_LEG_PUFF_SHAPE = Block.makeCuboidShape(4.0D, 4.0D, 11.5D,
-            6.0D, 9.0D, 13.5D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_LEG_MIDDLE_SHAPE = Block.makeCuboidShape(10.5D, 2.0D, 5.0D,
-            11.5D, 4.0D, 6.0D);
-    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_LEG_MIDDLE_SHAPE = Block.makeCuboidShape(10.5D, 2.0D, 12.0D,
-            11.5D, 4.0D, 13.0D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_LEG_MIDDLE_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 5.0D,
-            5.5D, 4.0D, 6.0D);
-    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_LEG_MIDDLE_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 12.0D,
-            5.5D, 4.0D, 13.0D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_HOOF_SHAPE = Block.makeCuboidShape(10.0D, 0.0D, 4.5D,
-            12.0D, 2.0D, 6.5D);
-    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_HOOF_SHAPE = Block.makeCuboidShape(10.0D, 0.0D, 11.5D,
-            12.0D, 2.0D, 13.5D);
-    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_HOOF_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.5D, 6.0D,
-            2.0D, 6.5D);
-    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_HOOF_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 11.5D, 6.0D,
-            2.0D, 13.5D);
-    protected static final VoxelShape HORSE_NORTH_TAIL1_SHAPE = Block.makeCuboidShape(7.5D, 8.0D, 13.0D, 9.0D, 10.5D,
-            13.5D);
-    protected static final VoxelShape HORSE_NORTH_TAIL2_SHAPE = Block.makeCuboidShape(7.0D, 5.0D, 12.5D, 9.5D, 9.0D,
-            15.0D);
-    protected static final VoxelShape HORSE_NORTH_TAIL3_SHAPE = Block.makeCuboidShape(7.5D, 3.5D, 14.0D, 9.0D, 5.5D,
-            15.5D);
-    protected static final VoxelShape HORSE_NORTH_TAIL4_SHAPE = Block.makeCuboidShape(7.5D, 2.5D, 14.0D, 8.0D, 3.5D,
-            14.5D);
-    protected static final VoxelShape HORSE_NORTH_TAIL5_SHAPE = Block.makeCuboidShape(8.0D, 3.0D, 15.0D, 9.0D, 3.5D,
-            15.5D);
-    protected static final VoxelShape HORSE_NORTH_TAIL6_SHAPE = Block.makeCuboidShape(8.0D, 2.5D, 15.0D, 8.5D, 3.0D,
-            15.5D);
-    protected static final VoxelShape HORSE_NORTH_MANE1_SHAPE = Block.makeCuboidShape(6.5D, 10.5D, 7.0D, 9.0D, 11.5D,
-            9.5D);
-    protected static final VoxelShape HORSE_NORTH_MANE2_SHAPE = Block.makeCuboidShape(6.5D, 11.5D, 6.0D, 9.0D, 12.5D,
-            8.5D);
-    protected static final VoxelShape HORSE_NORTH_MANE3_SHAPE = Block.makeCuboidShape(6.5D, 12.5D, 5.0D, 9.0D, 13.5D,
-            7.5D);
-    protected static final VoxelShape HORSE_NORTH_MANE4_SHAPE = Block.makeCuboidShape(6.5D, 13.5D, 4.0D, 9.0D, 14.5D,
+    protected static final VoxelShape HORSE_NORTH_BODY_SHAPE = Block.box(4.5D, 4.5D, 5.0D, 11.5D, 10.5D, 13.0D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_LEG_PUFF_SHAPE = Block.box(10.0D, 4.0D, 4.5D, 12.0D, 9.0D,
             6.5D);
-    protected static final VoxelShape HORSE_NORTH_MANE5_SHAPE = Block.makeCuboidShape(6.5D, 14.5D, 3.0D, 9.0D, 15.5D,
-            5.5D);
-    protected static final VoxelShape HORSE_NORTH_NECK1_SHAPE = Block.makeCuboidShape(6.0D, 10.0D, 4.0D, 9.5D, 12.5D,
-            7.0D);
-    protected static final VoxelShape HORSE_NORTH_NECK2_SHAPE = Block.makeCuboidShape(6.0D, 10.0D, 7.0D, 9.5D, 11.5D,
-            8.0D);
-    protected static final VoxelShape HORSE_NORTH_HEAD_FRONT1_SHAPE = Block.makeCuboidShape(5.5D, 10.5D, 1.0D, 10.0D,
-            12.5D, 2.0D);
-    protected static final VoxelShape HORSE_NORTH_HEAD_FRONT2_SHAPE = Block.makeCuboidShape(5.5D, 10.0D, 2.0D, 10.0D,
-            13.0D, 4.0D);
-    protected static final VoxelShape HORSE_NORTH_HEAD_MIDDLE_SHAPE = Block.makeCuboidShape(5.5D, 9.5D, 3.0D, 10.0D,
-            14.5D, 5.0D);
-    protected static final VoxelShape HORSE_NORTH_HEAD_BACK1_SHAPE = Block.makeCuboidShape(5.5D, 11.5D, 5.5D, 10.0D,
-            13.0D, 6.5D);
-    protected static final VoxelShape HORSE_NORTH_HEAD_BACK2_SHAPE = Block.makeCuboidShape(5.5D, 10.0D, 5.0D, 10.0D,
-            13.5D, 5.5D);
-    protected static final VoxelShape HORSE_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(5.0D, 11.3D, 3.0D, 5.5D,
-            12.7D, 4.5D);
-    protected static final VoxelShape HORSE_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(10.0D, 11.3D, 3.0D, 10.5D,
-            12.7D, 4.5D);
-    protected static final VoxelShape HORSE_NORTH_RIGHT_EAR_SHAPE = Block.makeCuboidShape(6.0D, 13.0D, 1.5D, 7.5D,
-            15.0D, 3.5D);
-    protected static final VoxelShape HORSE_NORTH_LEFT_EAR_SHAPE = Block.makeCuboidShape(8.0D, 13.0D, 1.5D, 9.5D, 15.0D,
-            3.5D);
+    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_LEG_PUFF_SHAPE = Block.box(10.0D, 4.0D, 11.5D, 12.0D, 9.0D,
+            13.5D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_LEG_PUFF_SHAPE = Block.box(4.0D, 4.0D, 4.5D, 6.0D, 9.0D,
+            6.5D);
+    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_LEG_PUFF_SHAPE = Block.box(4.0D, 4.0D, 11.5D, 6.0D, 9.0D,
+            13.5D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_LEG_MIDDLE_SHAPE = Block.box(10.5D, 2.0D, 5.0D, 11.5D,
+            4.0D, 6.0D);
+    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_LEG_MIDDLE_SHAPE = Block.box(10.5D, 2.0D, 12.0D, 11.5D,
+            4.0D, 13.0D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_LEG_MIDDLE_SHAPE = Block.box(4.5D, 2.0D, 5.0D, 5.5D, 4.0D,
+            6.0D);
+    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_LEG_MIDDLE_SHAPE = Block.box(4.5D, 2.0D, 12.0D, 5.5D, 4.0D,
+            13.0D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_HOOF_SHAPE = Block.box(10.0D, 0.0D, 4.5D, 12.0D, 2.0D,
+            6.5D);
+    protected static final VoxelShape HORSE_NORTH_BACK_LEFT_HOOF_SHAPE = Block.box(10.0D, 0.0D, 11.5D, 12.0D, 2.0D,
+            13.5D);
+    protected static final VoxelShape HORSE_NORTH_FRONT_RIGHT_HOOF_SHAPE = Block.box(4.0D, 0.0D, 4.5D, 6.0D, 2.0D,
+            6.5D);
+    protected static final VoxelShape HORSE_NORTH_BACK_RIGHT_HOOF_SHAPE = Block.box(4.0D, 0.0D, 11.5D, 6.0D, 2.0D,
+            13.5D);
+    protected static final VoxelShape HORSE_NORTH_TAIL1_SHAPE = Block.box(7.5D, 8.0D, 13.0D, 9.0D, 10.5D, 13.5D);
+    protected static final VoxelShape HORSE_NORTH_TAIL2_SHAPE = Block.box(7.0D, 5.0D, 12.5D, 9.5D, 9.0D, 15.0D);
+    protected static final VoxelShape HORSE_NORTH_TAIL3_SHAPE = Block.box(7.5D, 3.5D, 14.0D, 9.0D, 5.5D, 15.5D);
+    protected static final VoxelShape HORSE_NORTH_TAIL4_SHAPE = Block.box(7.5D, 2.5D, 14.0D, 8.0D, 3.5D, 14.5D);
+    protected static final VoxelShape HORSE_NORTH_TAIL5_SHAPE = Block.box(8.0D, 3.0D, 15.0D, 9.0D, 3.5D, 15.5D);
+    protected static final VoxelShape HORSE_NORTH_TAIL6_SHAPE = Block.box(8.0D, 2.5D, 15.0D, 8.5D, 3.0D, 15.5D);
+    protected static final VoxelShape HORSE_NORTH_MANE1_SHAPE = Block.box(6.5D, 10.5D, 7.0D, 9.0D, 11.5D, 9.5D);
+    protected static final VoxelShape HORSE_NORTH_MANE2_SHAPE = Block.box(6.5D, 11.5D, 6.0D, 9.0D, 12.5D, 8.5D);
+    protected static final VoxelShape HORSE_NORTH_MANE3_SHAPE = Block.box(6.5D, 12.5D, 5.0D, 9.0D, 13.5D, 7.5D);
+    protected static final VoxelShape HORSE_NORTH_MANE4_SHAPE = Block.box(6.5D, 13.5D, 4.0D, 9.0D, 14.5D, 6.5D);
+    protected static final VoxelShape HORSE_NORTH_MANE5_SHAPE = Block.box(6.5D, 14.5D, 3.0D, 9.0D, 15.5D, 5.5D);
+    protected static final VoxelShape HORSE_NORTH_NECK1_SHAPE = Block.box(6.0D, 10.0D, 4.0D, 9.5D, 12.5D, 7.0D);
+    protected static final VoxelShape HORSE_NORTH_NECK2_SHAPE = Block.box(6.0D, 10.0D, 7.0D, 9.5D, 11.5D, 8.0D);
+    protected static final VoxelShape HORSE_NORTH_HEAD_FRONT1_SHAPE = Block.box(5.5D, 10.5D, 1.0D, 10.0D, 12.5D, 2.0D);
+    protected static final VoxelShape HORSE_NORTH_HEAD_FRONT2_SHAPE = Block.box(5.5D, 10.0D, 2.0D, 10.0D, 13.0D, 4.0D);
+    protected static final VoxelShape HORSE_NORTH_HEAD_MIDDLE_SHAPE = Block.box(5.5D, 9.5D, 3.0D, 10.0D, 14.5D, 5.0D);
+    protected static final VoxelShape HORSE_NORTH_HEAD_BACK1_SHAPE = Block.box(5.5D, 11.5D, 5.5D, 10.0D, 13.0D, 6.5D);
+    protected static final VoxelShape HORSE_NORTH_HEAD_BACK2_SHAPE = Block.box(5.5D, 10.0D, 5.0D, 10.0D, 13.5D, 5.5D);
+    protected static final VoxelShape HORSE_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 11.3D, 3.0D, 5.5D, 12.7D, 4.5D);
+    protected static final VoxelShape HORSE_NORTH_LEFT_EYE_SHAPE = Block.box(10.0D, 11.3D, 3.0D, 10.5D, 12.7D, 4.5D);
+    protected static final VoxelShape HORSE_NORTH_RIGHT_EAR_SHAPE = Block.box(6.0D, 13.0D, 1.5D, 7.5D, 15.0D, 3.5D);
+    protected static final VoxelShape HORSE_NORTH_LEFT_EAR_SHAPE = Block.box(8.0D, 13.0D, 1.5D, 9.5D, 15.0D, 3.5D);
 
     protected static final VoxelShape HORSE_NORTH_EARS_SHAPE = VoxelShapes.or(HORSE_NORTH_RIGHT_EAR_SHAPE,
             HORSE_NORTH_LEFT_EAR_SHAPE);
@@ -121,9 +98,9 @@ public class VeHorsePlushBlock extends VePlushBlock
             HORSE_NORTH_NECK_SHAPE, HORSE_NORTH_MANE_SHAPE, HORSE_NORTH_HEAD_SHAPE, HORSE_NORTH_LEGS_SHAPE,
             HORSE_NORTH_EYES_SHAPE, HORSE_NORTH_EARS_SHAPE);
 
-    protected static final VoxelShape HORSE_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, HORSE_NORTH_SHAPE);
-    protected static final VoxelShape HORSE_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, HORSE_NORTH_SHAPE);
-    protected static final VoxelShape HORSE_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, HORSE_NORTH_SHAPE);
 
     public VeHorsePlushBlock(Properties properties)
     {

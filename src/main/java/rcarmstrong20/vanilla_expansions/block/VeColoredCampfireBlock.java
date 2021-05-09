@@ -40,12 +40,12 @@ public class VeColoredCampfireBlock extends CampfireBlock
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        if (stateIn.get(LIT))
+        if (stateIn.getValue(LIT))
         {
             if (rand.nextInt(10) == 0)
             {
-                worldIn.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                        SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(),
+                worldIn.playLocalSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+                        SoundEvents.CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(),
                         rand.nextFloat() * 0.7F + 0.6F, false);
             }
 
@@ -63,24 +63,25 @@ public class VeColoredCampfireBlock extends CampfireBlock
     /**
      * Called when the player right-clicks a block.
      */
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn,
-            Hand handIn, BlockRayTraceResult hit)
-    {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-        if (isLit(state) && tileEntity instanceof VeColoredCampfireTileEntity)
+    @Override
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn,
+            BlockRayTraceResult hit)
+    {
+        TileEntity tileEntity = worldIn.getBlockEntity(pos);
+
+        if (tileEntity instanceof VeColoredCampfireTileEntity)
         {
             VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
-            ItemStack itemStack = playerIn.getHeldItem(handIn);
-            Optional<CampfireCookingRecipe> optional = campfireTileEntity.findMatchingRecipe(itemStack);
+            ItemStack itemStack = playerIn.getItemInHand(handIn);
+            Optional<CampfireCookingRecipe> optional = campfireTileEntity.getCookableRecipe(itemStack);
 
             if (optional.isPresent())
             {
-                if (!worldIn.isRemote && campfireTileEntity.addItem(
-                        playerIn.abilities.isCreativeMode ? itemStack.copy() : itemStack, optional.get().getCookTime()))
+                if (!worldIn.isClientSide() && campfireTileEntity.placeFood(
+                        playerIn.abilities.instabuild ? itemStack.copy() : itemStack, optional.get().getCookingTime()))
                 {
-                    playerIn.addStat(Stats.INTERACT_WITH_CAMPFIRE);
+                    playerIn.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ActionResultType.SUCCESS;
                 }
                 return ActionResultType.CONSUME;
@@ -93,32 +94,29 @@ public class VeColoredCampfireBlock extends CampfireBlock
      * Called when the player right-clicks this block with a new block.
      */
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
     {
         if (state.getBlock() != newState.getBlock())
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
 
             if (tileEntity instanceof VeColoredCampfireTileEntity)
             {
                 VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
-                InventoryHelper.dropItems(worldIn, pos, campfireTileEntity.getInventory());
+                InventoryHelper.dropContents(worldIn, pos, campfireTileEntity.getItems());
             }
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public TileEntity createNewTileEntity(IBlockReader world)
+    public TileEntity newBlockEntity(IBlockReader world)
     {
         return new VeColoredCampfireTileEntity();
     }
 
-    /**
-     * Creates a list of properties that this block can have.
-     */
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
     {
         builder.add(LIT, SIGNAL_FIRE, WATERLOGGED, FACING);
     }

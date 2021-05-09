@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
@@ -19,19 +18,12 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
     }
 
     /**
-     * Called when an Entity lands on this Block. This method *must* update motionY
-     * because the entity will not do that on its own.
-     */
-    @Override
-    public void onLanded(IBlockReader world, Entity entity)
-    {}
-
-    /**
      * Block's chance to react to a living entity falling on it.
      */
     @Override
-    public void onFallenUpon(World world, BlockPos pos, Entity entityIn, float fallDistance)
+    public void fallOn(World world, BlockPos pos, Entity entityIn, float fallDistance)
     {
+
         float strength = 2.0F;
         float height = entityIn.fallDistance * strength;
         if (height > 0 && !entityIn.isCrouching())
@@ -40,10 +32,11 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
             {
                 height = 100;
             }
-            entityIn.setMotion(entityIn.getMotion().mul(1.0, 0.0, 1.0));
-            entityIn.addVelocity(0, Math.sqrt(0.22 * (height + 0.25F)), 0);
+
+            entityIn.setDeltaMovement(entityIn.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+            entityIn.lerpMotion(0, Math.sqrt(0.22 * (height + 0.25F)), 0);
             world.playSound(null, pos, VeSoundEvents.blockMushroomBounce, SoundCategory.BLOCKS, 1.0F,
-                    0.8F + world.rand.nextFloat() * 0.4F);
+                    0.8F + world.random.nextFloat() * 0.4F);
         }
         entityIn.fallDistance = 0;
     }

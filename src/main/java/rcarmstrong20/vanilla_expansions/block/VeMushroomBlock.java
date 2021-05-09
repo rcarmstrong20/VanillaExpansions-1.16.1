@@ -19,7 +19,7 @@ public class VeMushroomBlock extends MushroomBlock
     }
 
     @Override
-    public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand)
+    public boolean growMushroom(ServerWorld world, BlockPos pos, BlockState state, Random rand)
     {
         world.removeBlock(pos, false);
         ConfiguredFeature<?, ?> hugeMushroom = Features.HUGE_RED_MUSHROOM;
@@ -29,13 +29,13 @@ public class VeMushroomBlock extends MushroomBlock
             hugeMushroom = VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM;
         }
 
-        if (hugeMushroom.generate(world, world.getChunkProvider().getChunkGenerator(), rand, pos))
+        if (hugeMushroom.place(world, world.getChunkSource().getGenerator(), rand, pos))
         {
             return true;
         }
         else
         {
-            world.setBlockState(pos, state, 3);
+            world.setBlock(pos, state, 3);
             return false;
         }
     }

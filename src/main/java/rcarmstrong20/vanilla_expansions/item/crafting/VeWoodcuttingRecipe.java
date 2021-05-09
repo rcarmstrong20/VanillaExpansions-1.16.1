@@ -10,12 +10,9 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
@@ -25,9 +22,9 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
 {
     protected final Ingredient ingredient;
     protected final ItemStack result;
+    protected final ResourceLocation id;
     private final IRecipeType<?> type;
     private final IRecipeSerializer<?> serializer;
-    protected final ResourceLocation id;
     protected final String group;
 
     public VeWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
@@ -43,59 +40,37 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     @Override
     public boolean matches(IInventory inv, World worldIn)
     {
-        return this.ingredient.test(inv.getStackInSlot(0));
+        return this.ingredient.test(inv.getItem(0));
     }
 
     @Override
-    public ItemStack getIcon()
+    public ItemStack getToastSymbol()
     {
         return new ItemStack(VeBlocks.woodcutter);
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv)
+    public ItemStack assemble(IInventory p_77572_1_)
     {
         return this.result.copy();
     }
 
     @Override
-    public ItemStack getRecipeOutput()
+    public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_)
+    {
+        return true;
+    }
+
+    @Override
+    public ItemStack getResultItem()
     {
         return this.result;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients()
-    {
-        NonNullList<Ingredient> list = NonNullList.create();
-        list.add(this.ingredient);
-        return list;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public boolean canFit(int width, int height)
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isDynamic()
-    {
-        return true;
     }
 
     @Override
     public ResourceLocation getId()
     {
         return this.id;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public String getGroup()
-    {
-        return this.group;
     }
 
     @Override
@@ -110,56 +85,57 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
         return this.type;
     }
 
-    public static class Serializer<T extends VeWoodcuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>>
-            implements IRecipeSerializer<T>
+    public static class Serializer<R extends VeWoodcuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>>
+            implements IRecipeSerializer<R>
     {
-        final IRecipeFactory<T> factory;
+        final IRecipeFactory<R> factory;
 
-        public Serializer(IRecipeFactory<T> factory)
+        public Serializer(IRecipeFactory<R> factory)
         {
             this.factory = factory;
         }
 
-        @Override
         @SuppressWarnings("deprecation")
-        public T read(ResourceLocation recipeId, JsonObject json)
+        @Override
+        public R fromJson(ResourceLocation recipeId, JsonObject json)
         {
-            String s = JSONUtils.getString(json, "group", "");
+            String s = JSONUtils.getAsString(json, "group", "");
             Ingredient ingredient;
-            if (JSONUtils.isJsonArray(json, "ingredient"))
+            if (JSONUtils.isArrayNode(json, "ingredient"))
             {
-                ingredient = Ingredient.deserialize(JSONUtils.getJsonArray(json, "ingredient"));
-            } else
+                ingredient = Ingredient.fromJson(JSONUtils.getAsJsonArray(json, "ingredient"));
+            }
+            else
             {
-                ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
+                ingredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ingredient"));
             }
 
-            String s1 = JSONUtils.getString(json, "result");
-            int i = JSONUtils.getInt(json, "count");
-            ItemStack itemstack = new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(s1)), i);
+            String s1 = JSONUtils.getAsString(json, "result");
+            int i = JSONUtils.getAsInt(json, "count");
+            ItemStack itemstack = new ItemStack(Registry.ITEM.get(new ResourceLocation(s1)), i);
             return this.factory.create(recipeId, s, ingredient, itemstack);
         }
 
         @Override
-        public T read(ResourceLocation recipeId, PacketBuffer buffer)
+        public R fromNetwork(ResourceLocation recipeId, PacketBuffer buffer)
         {
-            String s = buffer.readString(32767);
-            Ingredient ingredient = Ingredient.read(buffer);
-            ItemStack itemstack = buffer.readItemStack();
+            String s = buffer.readUtf(32767);
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
+            ItemStack itemstack = buffer.readItem();
             return this.factory.create(recipeId, s, ingredient, itemstack);
         }
 
         @Override
-        public void write(PacketBuffer buffer, T recipe)
+        public void toNetwork(PacketBuffer buffer, R recipe)
         {
-            buffer.writeString(recipe.group);
-            recipe.ingredient.write(buffer);
-            buffer.writeItemStack(recipe.result);
+            buffer.writeUtf(recipe.group);
+            recipe.ingredient.toNetwork(buffer);
+            buffer.writeItem(recipe.result);
         }
 
-        public interface IRecipeFactory<T extends VeWoodcuttingRecipe>
+        public interface IRecipeFactory<R extends VeWoodcuttingRecipe>
         {
-            T create(ResourceLocation id, String group, Ingredient ingredient, ItemStack result);
+            R create(ResourceLocation p_create_1_, String p_create_2_, Ingredient p_create_3_, ItemStack p_create_4_);
         }
     }
 }

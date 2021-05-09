@@ -37,7 +37,7 @@ public class VeBlockAndItemColors
             {
                 if (blockAccess != null && pos != null)
                 {
-                    return BiomeColors.getGrassColor(blockAccess, pos);
+                    return BiomeColors.getAverageGrassColor(blockAccess, pos);
                 }
                 return GrassColors.get(0.5D, 1.0D);
             }
@@ -50,7 +50,7 @@ public class VeBlockAndItemColors
         {
             if (blockAccess != null && pos != null && tintIndex == 1)
             {
-                return BiomeColors.getWaterColor(blockAccess, pos);
+                return BiomeColors.getAverageWaterColor(blockAccess, pos);
             }
             return -1;
         };
@@ -63,7 +63,7 @@ public class VeBlockAndItemColors
         // Use the Block's color for the ItemBlock
         final IItemColor itemBlockColorHandler = (stack, tintIndex) ->
         {
-            final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
+            final BlockState state = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
 
             return blockColors.getColor(state, null, null, tintIndex);
         };

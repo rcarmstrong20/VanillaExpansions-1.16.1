@@ -20,11 +20,11 @@ public class VeSevenStageCropBlock extends CropsBlock
      * Called when the player pick-block's this crop.
      */
     @Override
-    protected IItemProvider getSeedsItem()
+    protected IItemProvider getBaseSeedId()
     {
         Block block = this.getBlock();
 
-        if (block == VeBlocks.bokChoy)
+        if (block.equals(VeBlocks.bokChoy))
         {
             return VeItems.bokChoySeeds;
         }
@@ -35,7 +35,7 @@ public class VeSevenStageCropBlock extends CropsBlock
      * Creates a list of properties that this block can have.
      */
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
     {
         builder.add(this.getAgeProperty());
     }

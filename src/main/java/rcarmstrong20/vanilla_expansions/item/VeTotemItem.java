@@ -16,13 +16,13 @@ public class VeTotemItem extends Item
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
-        ItemStack stack = player.getActiveItemStack();
+        ItemStack stack = player.getMainHandItem();
 
         this.damageItem(stack, 1, player, (entity) ->
         {
-            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+            entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
         });
 
         /*
@@ -32,6 +32,6 @@ public class VeTotemItem extends Item
 
         // System.out.println("Damage totem");
 
-        return super.onItemRightClick(world, player, hand);
+        return super.use(world, player, hand);
     }
 }

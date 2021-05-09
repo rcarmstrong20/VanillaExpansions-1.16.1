@@ -21,7 +21,7 @@ public class VeRecipeTypes
      * @param Name The name for the recipe type.
      * @return New recipe type.
      */
-    static <T extends IRecipe<?>> IRecipeType<T> register(String name)
+    public static <T extends IRecipe<?>> IRecipeType<T> register(String name)
     {
         return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(VanillaExpansions.MOD_ID, name),
                 new IRecipeType<T>()

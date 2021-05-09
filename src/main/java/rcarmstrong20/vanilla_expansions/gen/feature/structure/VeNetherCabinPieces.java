@@ -92,13 +92,13 @@ public class VeNetherCabinPieces
          */
         private void setupTemplate(TemplateManager templateManager)
         {
-            Template template = templateManager.getTemplateDefaulted(this.templateResource);
+            Template template = templateManager.get(this.templateResource);
             PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
-                    .setMirror(Mirror.NONE).setCenterOffset(new BlockPos(0, 0, 0))
+                    .setMirror(Mirror.NONE).setRotationPivot(new BlockPos(0, 0, 0))
                     .addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK)
                     .addProcessor(new RuleStructureProcessor(ImmutableList.of(new RuleEntry(
                             new RandomBlockMatchRuleTest(Blocks.NETHER_BRICKS, 0.2F), AlwaysTrueRuleTest.INSTANCE,
-                            VeBlocks.crimsonChytridNetherBricks.getDefaultState()))));
+                            VeBlocks.crimsonChytridNetherBricks.defaultBlockState()))));
             this.setup(template, this.templatePosition, placementsettings);
         }
 
@@ -107,9 +107,9 @@ public class VeNetherCabinPieces
          * this is what vanilla uses
          */
         @Override
-        protected void readAdditional(CompoundNBT nbt)
+        protected void addAdditionalSaveData(CompoundNBT nbt)
         {
-            super.readAdditional(nbt);
+            super.addAdditionalSaveData(nbt);
             nbt.putString("Template", this.templateResource.toString());
             nbt.putString("Rot", this.rotation.name());
         }
@@ -128,11 +128,11 @@ public class VeNetherCabinPieces
             switch (function)
             {
                 case "CrimsonChest":
-                    LockableLootTileEntity.setLootTable(world, rand, pos.down(),
+                    LockableLootTileEntity.setLootTable(world, rand, pos.below(),
                             new ResourceLocation(VanillaExpansions.MOD_ID, "chests/crimson_cabin"));
                     break;
                 case "FlowerPot":
-                    world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
+                    world.setBlock(pos.below(), BlockTags.FLOWER_POTS.getRandomElement(rand).defaultBlockState(), 3);
                     break;
                 case "OverworldBoxCrop":
                     VeStructureUtil.setOverworldCrop(world, VeBlockTags.singleCrops.getRandomElement(rand), pos);
@@ -146,14 +146,12 @@ public class VeNetherCabinPieces
         }
 
         /**
-         * Note: This is a new create method for 1.16.
-         *
          * Here is the magic place where blocks are added to the world. Actually most of
          * that is handled by the super method, for template structure pieces. But
          * something that can be done here is setting the y-level of the structure.
          */
         @Override
-        public boolean func_230383_a_(ISeedReader seedReader, StructureManager structureManager,
+        public boolean postProcess(ISeedReader seedReader, StructureManager structureManager,
                 ChunkGenerator chunkGenerator, Random random, MutableBoundingBox boundingBox, ChunkPos chunkPos,
                 BlockPos blockPos)
         {
@@ -164,7 +162,7 @@ public class VeNetherCabinPieces
 
             this.templatePosition = new BlockPos(x, y, z);
 
-            return super.func_230383_a_(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
+            return super.postProcess(seedReader, structureManager, chunkGenerator, random, boundingBox, chunkPos,
                     blockPos);
         }
 
@@ -177,13 +175,13 @@ public class VeNetherCabinPieces
             while (pos.getY() != 128)
             {
                 Block atBlock = seedReader.getBlockState(pos).getBlock();
-                Block aboveBlock = seedReader.getBlockState(pos.up()).getBlock();
+                Block aboveBlock = seedReader.getBlockState(pos.above()).getBlock();
 
                 if (groundBlocks.contains(atBlock) && aboveBlock == Blocks.AIR)
                 {
                     y = pos.getY();
                 }
-                pos = pos.up();
+                pos = pos.above();
             }
             return y;
         }

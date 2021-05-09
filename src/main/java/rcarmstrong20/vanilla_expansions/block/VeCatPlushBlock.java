@@ -8,55 +8,34 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
+import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
 
 public class VeCatPlushBlock extends VePlushBlock
 {
-    protected static final VoxelShape CAT_NORTH_FRONT_RIGHT_LEG_SHAPE = Block.makeCuboidShape(9.0D, 0.0D, 7.5D, 10.0D,
-            2.0D, 8.5D);
-    protected static final VoxelShape CAT_NORTH_FRONT_LEFT_LEG_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 7.5D, 7.0D,
-            2.0D, 8.5D);
-    protected static final VoxelShape CAT_NORTH_TORSO_SHAPE = Block.makeCuboidShape(5.5D, 2.0D, 6.0D, 10.5D, 6.0D,
-            11.5D);
-    protected static final VoxelShape CAT_NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.0D, 3.0D, 1.0D, 11.0D, 8.5D, 6.0D);
-    protected static final VoxelShape CAT_NORTH_RIGHT_EAR_SHAPE = Block.makeCuboidShape(9.0D, 8.5D, 4.0D, 10.0D, 9.5D,
-            6.0D);
-    protected static final VoxelShape CAT_NORTH_LEFT_EAR_SHAPE = Block.makeCuboidShape(6.0D, 8.5D, 4.0D, 7.0D, 9.5D,
-            6.0D);
-    protected static final VoxelShape CAT_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 6.0D, 0.5D, 10.5D, 7.0D,
-            1.0D);
-    protected static final VoxelShape CAT_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(5.5D, 6.0D, 0.5D, 7.5D, 7.0D,
-            1.0D);
-    protected static final VoxelShape CAT_NORTH_NOSE_SHAPE = Block.makeCuboidShape(6.5D, 3.5D, 0.0D, 9.5D, 5.5D, 1.0D);
-    protected static final VoxelShape CAT_NORTH_BACK_RIGHT_LEG_SHAPE = Block.makeCuboidShape(9.0D, 0.0D, 10.0D, 10.0D,
-            2.0D, 11.0D);
-    protected static final VoxelShape CAT_NORTH_BACK_LEFT_LEG_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 10.0D, 7.0D,
-            2.0D, 11.0D);
-    protected static final VoxelShape CAT_NORTH_PIECE_TAIL1_SHAPE = Block.makeCuboidShape(7.5D, 3.0D, 11.5D, 8.5D, 4.0D,
-            14.0D);
-    protected static final VoxelShape CAT_NORTH_PIECE_TAIL2_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 13.0D, 8.5D, 3.0D,
-            16.0D);
-
-    protected static final VoxelShape CAT_NORTH_LEGS_SHAPE = VoxelShapes.or(CAT_NORTH_FRONT_RIGHT_LEG_SHAPE,
-            CAT_NORTH_FRONT_LEFT_LEG_SHAPE, CAT_NORTH_BACK_RIGHT_LEG_SHAPE, CAT_NORTH_BACK_LEFT_LEG_SHAPE);
-
-    protected static final VoxelShape CAT_NORTH_TAIL_SHAPE = VoxelShapes.or(CAT_NORTH_PIECE_TAIL1_SHAPE,
-            CAT_NORTH_PIECE_TAIL2_SHAPE);
-
-    protected static final VoxelShape CAT_NORTH_EARS_SHAPE = VoxelShapes.or(CAT_NORTH_RIGHT_EAR_SHAPE,
-            CAT_NORTH_LEFT_EAR_SHAPE);
-
-    protected static final VoxelShape CAT_NORTH_EYES_SHAPE = VoxelShapes.or(CAT_NORTH_RIGHT_EYE_SHAPE,
-            CAT_NORTH_LEFT_EYE_SHAPE);
-
-    protected static final VoxelShape CAT_NORTH_BODY_SHAPE = VoxelShapes.or(CAT_NORTH_TORSO_SHAPE, CAT_NORTH_HEAD_SHAPE,
-            CAT_NORTH_LEGS_SHAPE, CAT_NORTH_TAIL_SHAPE, CAT_NORTH_EARS_SHAPE, CAT_NORTH_EYES_SHAPE);
-
-    protected static final VoxelShape CAT_NORTH_SHAPE = VoxelShapes.or(CAT_NORTH_BODY_SHAPE, CAT_NORTH_NOSE_SHAPE);
-
-    protected static final VoxelShape CAT_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, CAT_NORTH_SHAPE);
-    protected static final VoxelShape CAT_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, CAT_NORTH_SHAPE);
-    protected static final VoxelShape CAT_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, CAT_NORTH_SHAPE);
+    protected static final VoxelShape NORTH_FRONT_RIGHT_LEG = Block.box(9.0D, 0.0D, 7.5D, 10.0D, 2.0D, 8.5D);
+    protected static final VoxelShape NORTH_FRONT_LEFT_LEG = Block.box(6.0D, 0.0D, 7.5D, 7.0D, 2.0D, 8.5D);
+    protected static final VoxelShape NORTH_TORSO = Block.box(5.5D, 2.0D, 6.0D, 10.5D, 6.0D, 11.5D);
+    protected static final VoxelShape NORTH_HEAD = Block.box(5.0D, 3.0D, 1.0D, 11.0D, 8.5D, 6.0D);
+    protected static final VoxelShape NORTH_RIGHT_EAR = Block.box(9.0D, 8.5D, 4.0D, 10.0D, 9.5D, 6.0D);
+    protected static final VoxelShape NORTH_LEFT_EAR = Block.box(6.0D, 8.5D, 4.0D, 7.0D, 9.5D, 6.0D);
+    protected static final VoxelShape NORTH_RIGHT_EYE = Block.box(8.5D, 6.0D, 0.5D, 10.5D, 7.0D, 1.0D);
+    protected static final VoxelShape NORTH_LEFT_EYE = Block.box(5.5D, 6.0D, 0.5D, 7.5D, 7.0D, 1.0D);
+    protected static final VoxelShape NORTH_NOSE = Block.box(6.5D, 3.5D, 0.0D, 9.5D, 5.5D, 1.0D);
+    protected static final VoxelShape NORTH_BACK_RIGHT_LEG = Block.box(9.0D, 0.0D, 10.0D, 10.0D, 2.0D, 11.0D);
+    protected static final VoxelShape NORTH_BACK_LEFT_LEG = Block.box(6.0D, 0.0D, 10.0D, 7.0D, 2.0D, 11.0D);
+    protected static final VoxelShape NORTH_TAIL1_PIECE = Block.box(7.5D, 3.0D, 11.5D, 8.5D, 4.0D, 14.0D);
+    protected static final VoxelShape NORTH_TAIL2_PIECE = Block.box(7.5D, 2.0D, 13.0D, 8.5D, 3.0D, 16.0D);
+    protected static final VoxelShape NORTH_LEGS = VoxelShapes.or(NORTH_FRONT_RIGHT_LEG, NORTH_FRONT_LEFT_LEG,
+            NORTH_BACK_RIGHT_LEG, NORTH_BACK_LEFT_LEG);
+    protected static final VoxelShape NORTH_TAIL = VoxelShapes.or(NORTH_TAIL1_PIECE, NORTH_TAIL2_PIECE);
+    protected static final VoxelShape NORTH_EARS = VoxelShapes.or(NORTH_RIGHT_EAR, NORTH_LEFT_EAR);
+    protected static final VoxelShape NORTH_EYES = VoxelShapes.or(NORTH_RIGHT_EYE, NORTH_LEFT_EYE);
+    protected static final VoxelShape NORTH_BODY = VoxelShapes.or(NORTH_TORSO, NORTH_HEAD, NORTH_LEGS, NORTH_TAIL,
+            NORTH_EARS, NORTH_EYES);
+    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY, NORTH_NOSE);
+    protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
     public VeCatPlushBlock(Properties properties)
     {
@@ -66,6 +45,6 @@ public class VeCatPlushBlock extends VePlushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        return defineShapes(state, CAT_NORTH_SHAPE, CAT_SOUTH_SHAPE, CAT_WEST_SHAPE, CAT_EAST_SHAPE);
+        return defineShapes(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
     }
 }

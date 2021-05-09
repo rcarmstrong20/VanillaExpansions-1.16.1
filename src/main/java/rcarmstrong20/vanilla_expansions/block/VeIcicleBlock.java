@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class VeIcicleBlock extends FallingBlock
 {
-    private static final VoxelShape ICICLE_SHAPE = Block.makeCuboidShape(4.0, 2.0, 4.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape ICICLE_SHAPE = Block.box(4.0, 2.0, 4.0, 12.0, 16.0, 12.0);
 
     public VeIcicleBlock(Properties properties)
     {
@@ -33,53 +33,53 @@ public class VeIcicleBlock extends FallingBlock
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
+    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
     {
-        if (worldIn.getBlockState(pos.up()).isSolid())
+        if (worldIn.getBlockState(pos.above()).isCollisionShapeFullBlock(worldIn, pos))
         {
             return;
         }
         else
         {
-            super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+            super.onPlace(state, worldIn, pos, oldState, isMoving);
         }
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        World world = context.getWorld();
-        BlockPos pos = context.getPos();
+        World world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
 
         // Used to keep the player from placing icicle's without supporting blocks.
-        if (world.getBlockState(pos.up()).isSolid())
+        if (world.getBlockState(pos.above()).isCollisionShapeFullBlock(world, pos))
         {
             return super.getStateForPlacement(context);
         }
         else
         {
-            return world.getBlockState(pos);
+            return null;
         }
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
             BlockPos currentPos, BlockPos facingPos)
     {
         // In this case the icicle could be supported so do nothing.
-        if (worldIn.getBlockState(currentPos.up()).isSolid())
+        if (worldIn.getBlockState(currentPos.above()).isCollisionShapeFullBlock(worldIn, currentPos))
         {
             return stateIn;
         }
         // In this case the the icicle can't fall but isn't supported so harvest it.
-        else if (worldIn.getBlockState(currentPos.down()) != Blocks.AIR.getDefaultState())
+        else if (worldIn.getBlockState(currentPos.below()) != Blocks.AIR.defaultBlockState())
         {
-            return Blocks.AIR.getDefaultState();
+            return Blocks.AIR.defaultBlockState();
         }
         // If neither of the previous are true then make the icicle fall.
         else
         {
-            return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+            return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
         }
     }
 
@@ -87,25 +87,25 @@ public class VeIcicleBlock extends FallingBlock
      * Called when a falling block hits the ground.
      */
     @Override
-    public void onEndFalling(World worldIn, BlockPos pos, BlockState fallingState, BlockState hitState,
+    public void onLand(World worldIn, BlockPos pos, BlockState fallingState, BlockState hitState,
             FallingBlockEntity fallingBlock)
     {
-        PlayerEntity player = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 1.1, false);
-        float blocksFallen = fallingBlock.fallTime / 3;
-        float fallMult = blocksFallen / 10; // When the block has fallen more than 10 blocks the damage grows.
+        PlayerEntity player = worldIn.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 1.1, false);
+        float blocksFallen = fallingBlock.time / 3.0F;
+        float fallMult = blocksFallen / 10.0F; // When the block has fallen more than 10 blocks the damage grows.
 
         // Damages the player when underneath the icicle.
         if (player != null)
         {
-            player.attackEntityFrom(DamageSource.GENERIC, blocksFallen * fallMult);
+            player.hurt(DamageSource.GENERIC, blocksFallen * fallMult);
         }
 
         worldIn.destroyBlock(pos, false);
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
-        entityIn.attackEntityFrom(DamageSource.GENERIC, 0.5F);
+        entityIn.hurt(DamageSource.GENERIC, 0.5F);
     }
 }

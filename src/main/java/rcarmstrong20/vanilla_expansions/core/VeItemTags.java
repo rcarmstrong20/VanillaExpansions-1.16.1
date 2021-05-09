@@ -21,6 +21,6 @@ public class VeItemTags
      */
     private static ITag<Item> makeWrapperTag(String name)
     {
-        return ItemTags.getCollection().get(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ItemTags.createOptional(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

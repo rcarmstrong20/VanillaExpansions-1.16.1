@@ -8,28 +8,19 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeShapeUtil;
+import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
 
 public class VeZombiePlushBlock extends VePlushBlock
 {
-    protected static final VoxelShape ZOMBIE_NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.0D, 11.0D, 7.5D, 11.0D, 16.0D,
-            12.0D);
-    protected static final VoxelShape ZOMBIE_NORTH_TORSO_SHAPE = Block.makeCuboidShape(5.5D, 0.0D, 8.5D, 10.5D, 11.0D,
-            11.5D);
-    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_ARM_SHAPE = Block.makeCuboidShape(10.5D, 9.0D, 4.0D, 12.5D,
-            11.0D, 11.0D);
-    protected static final VoxelShape ZOMBIE_NORTH_LEFT_ARM_SHAPE = Block.makeCuboidShape(3.5D, 9.0D, 4.0D, 5.5D, 11.0D,
-            11.0D);
-    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(9.0D, 14.0D, 7.0D, 10.5D,
-            15.0D, 7.5D);
-    protected static final VoxelShape ZOMBIE_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(5.5D, 14.0D, 7.0D, 7.0D,
-            15.0D, 7.5D);
-    protected static final VoxelShape ZOMBIE_NORTH_MIDDLE_MOUTH_SHAPE = Block.makeCuboidShape(7.0D, 13.0D, 7.0D, 9.0D,
-            14.0D, 7.5D);
-    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_MOUTH_SHAPE = Block.makeCuboidShape(9.0D, 12.0D, 7.0D, 10.0D,
-            13.0D, 7.5D);
-    protected static final VoxelShape ZOMBIE_NORTH_LEFT_MOUTH_SHAPE = Block.makeCuboidShape(6.0D, 11.0D, 7.0D, 7.0D,
-            13.0D, 7.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_HEAD_SHAPE = Block.box(5.0D, 11.0D, 7.5D, 11.0D, 16.0D, 12.0D);
+    protected static final VoxelShape ZOMBIE_NORTH_TORSO_SHAPE = Block.box(5.5D, 0.0D, 8.5D, 10.5D, 11.0D, 11.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_ARM_SHAPE = Block.box(10.5D, 9.0D, 4.0D, 12.5D, 11.0D, 11.0D);
+    protected static final VoxelShape ZOMBIE_NORTH_LEFT_ARM_SHAPE = Block.box(3.5D, 9.0D, 4.0D, 5.5D, 11.0D, 11.0D);
+    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_EYE_SHAPE = Block.box(9.0D, 14.0D, 7.0D, 10.5D, 15.0D, 7.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_LEFT_EYE_SHAPE = Block.box(5.5D, 14.0D, 7.0D, 7.0D, 15.0D, 7.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_MIDDLE_MOUTH_SHAPE = Block.box(7.0D, 13.0D, 7.0D, 9.0D, 14.0D, 7.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_RIGHT_MOUTH_SHAPE = Block.box(9.0D, 12.0D, 7.0D, 10.0D, 13.0D, 7.5D);
+    protected static final VoxelShape ZOMBIE_NORTH_LEFT_MOUTH_SHAPE = Block.box(6.0D, 11.0D, 7.0D, 7.0D, 13.0D, 7.5D);
 
     protected static final VoxelShape ZOMBIE_NORTH_ARMS_SHAPE = VoxelShapes.or(ZOMBIE_NORTH_RIGHT_ARM_SHAPE,
             ZOMBIE_NORTH_LEFT_ARM_SHAPE);
@@ -46,9 +37,9 @@ public class VeZombiePlushBlock extends VePlushBlock
     protected static final VoxelShape ZOMBIE_NORTH_SHAPE = VoxelShapes.or(ZOMBIE_NORTH_BODY_SHAPE,
             ZOMBIE_NORTH_EYES_SHAPE, ZOMBIE_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape ZOMBIE_SOUTH_SHAPE = VeShapeUtil.rotate180(Axis.Y, ZOMBIE_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_WEST_SHAPE = VeShapeUtil.rotate270(Axis.Y, ZOMBIE_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_EAST_SHAPE = VeShapeUtil.rotate90(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, ZOMBIE_NORTH_SHAPE);
 
     public VeZombiePlushBlock(Properties properties)
     {

@@ -39,64 +39,60 @@ public class VeConfiguredFeatures
 {
     public static final ConfiguredFeature<?, ?> NETHER_SMOKY_QUARTZ_ORE = register("nether_smoky_quartz_ore",
             Feature.ORE
-                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
+                    .configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
                             VeConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE,
                             VeOreDataGenConfig.VeVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
-                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
-                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.netherSmokyQuartzOreSpread.get()));
+                    .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
+                    .count(VeOreDataGenConfig.VeSpreadConfig.netherSmokyQuartzOreSpread.get()));
     public static final ConfiguredFeature<?, ?> BLACKSTONE_RUBY_ORE = register("blackstone_ruby_ore",
             Feature.ORE
-                    .withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.BLACKSTONE),
+                    .configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.BLACKSTONE),
                             VeConfiguredFeatures.States.NETHER_RUBY_ORE,
                             VeOreDataGenConfig.VeVeinSizeConfig.blackstoneRubyOreVeinSize.get()))
-                    .withPlacement(Features.Placements.NETHER_SPRING_ORE_PLACEMENT).square()
-                    .func_242731_b(VeOreDataGenConfig.VeSpreadConfig.blackstoneRubyOreSpread.get()));
+                    .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
+                    .count(VeOreDataGenConfig.VeSpreadConfig.blackstoneRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
-            .withConfiguration(VeConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
+            .configured(VeConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",
-            PATCH_BLUEBERRY_BUSH.withPlacement(Features.Placements.PATCH_PLACEMENT));
+            PATCH_BLUEBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_DECORATED = register(
             "patch_blueberry_bush_decorated",
-            PATCH_BLUEBERRY_BUSH.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
+            PATCH_BLUEBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(12));
     protected static final ConfiguredFeature<?, ?> PATCH_CRANBERRY_BUSH = Feature.RANDOM_PATCH
-            .withConfiguration(VeConfiguredFeatures.Configs.CRANBERRY_BUSH_CONFIG);
+            .configured(VeConfiguredFeatures.Configs.CRANBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_CRANBERRY_BUSH_SPARSE = register("patch_cranberry_bush_sparse",
-            PATCH_CRANBERRY_BUSH.withPlacement(Features.Placements.PATCH_PLACEMENT));
+            PATCH_CRANBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
     public static final ConfiguredFeature<?, ?> PATCH_CRANBERRY_BUSH_DECORATED = register(
             "patch_cranberry_bush_decorated",
-            PATCH_CRANBERRY_BUSH.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
+            PATCH_CRANBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(12));
     protected static final ConfiguredFeature<?, ?> PATCH_WITCHS_CRADLE = Feature.RANDOM_PATCH
-            .withConfiguration(VeConfiguredFeatures.Configs.WITCHS_CRADLE_CONFIG);
+            .configured(VeConfiguredFeatures.Configs.WITCHS_CRADLE_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_WITCHS_CRADLE_SPARSE = register("patch_witchs_cradle_sparse",
-            PATCH_WITCHS_CRADLE.withPlacement(Features.Placements.PATCH_PLACEMENT));
+            PATCH_WITCHS_CRADLE.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
     public static final ConfiguredFeature<?, ?> PATCH_WITCHS_CRADLE_DECORATED = register(
             "patch_witchs_cradle_decorated",
-            PATCH_WITCHS_CRADLE.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
+            PATCH_WITCHS_CRADLE.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(12));
     public static final ConfiguredFeature<?, ?> HUGE_PURPLE_MUSHROOM = register("huge_purple_mushroom",
-            Feature.HUGE_RED_MUSHROOM.withConfiguration(VeConfiguredFeatures.Configs.BIG_PURPLE_MUSHROOM_CONFIG));
+            Feature.HUGE_RED_MUSHROOM.configured(VeConfiguredFeatures.Configs.BIG_PURPLE_MUSHROOM_CONFIG));
     public static final ConfiguredFeature<?, ?> HUGE_PURPLE_MUSHROOM_WG = register("huge_purple_mushroom_wg",
-            HUGE_PURPLE_MUSHROOM.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1));
+            HUGE_PURPLE_MUSHROOM.decorated(Features.Placements.HEIGHTMAP_WORLD_SURFACE).count(1));
     public static final ConfiguredFeature<?, ?> PATCH_PURPLE_MUSHROOM = register("patch_purple_mushroom",
-            Feature.RANDOM_PATCH.withConfiguration(VeConfiguredFeatures.Configs.PURPLE_MUSHROOM_CONFIG));
+            Feature.RANDOM_PATCH.configured(VeConfiguredFeatures.Configs.PURPLE_MUSHROOM_CONFIG));
     public static final ConfiguredFeature<?, ?> PURPLE_MUSHROOM_DARK_FOREST = register("purple_mushroom_normal",
-            PATCH_PURPLE_MUSHROOM.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(12));
+            PATCH_PURPLE_MUSHROOM.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(12));
     public static final ConfiguredFeature<?, ?> DARK_MATTER_LAKE = register("dark_matter_lake",
-            Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VeConfiguredFeatures.States.DARK_MATTER))
-                    .withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))));
+            Feature.LAKE.configured(new BlockStateFeatureConfig(VeConfiguredFeatures.States.DARK_MATTER))
+                    .decorated(Placement.WATER_LAKE.configured(new ChanceConfig(4))));
     public static final ConfiguredFeature<?, ?> SNAPDRAGON_AND_GRASS = register("snapdragon_and_grass",
-            Feature.FLOWER.withConfiguration(VeConfiguredFeatures.Configs.SNAPDRAGON_AND_GRASS_CONFIG)
-                    .withPlacement(Features.Placements.VEGETATION_PLACEMENT)
-                    .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4));
-
-    public static final ConfiguredFeature<?, ?> DISK_RIVER_MUD = register("disk_mud",
-            Feature.DISK.withConfiguration(Configs.MUD_RIVER_CONFIG).square()
-                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
-    public static final ConfiguredFeature<?, ?> DISK_SWAMP_MUD = register("disk_mud",
-            Feature.DISK.withConfiguration(Configs.MUD_SWAMP_CONFIG).square()
-                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+            Feature.FLOWER.configured(VeConfiguredFeatures.Configs.SNAPDRAGON_AND_GRASS_CONFIG)
+                    .decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP).count(4));
+    public static final ConfiguredFeature<?, ?> DISK_RIVER_MUD = register("disk_mud", Feature.DISK
+            .configured(Configs.MUD_RIVER_CONFIG).squared().decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
+    public static final ConfiguredFeature<?, ?> DISK_SWAMP_MUD = register("disk_mud", Feature.DISK
+            .configured(Configs.MUD_SWAMP_CONFIG).squared().decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
     public static final ConfiguredFeature<?, ?> CATTAIL_SWAMP = register("cattail_swamp",
-            VeFeature.CATTAIL.withConfiguration(new ProbabilityConfig(0.6F)).func_242731_b(32)
-                    .withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT));
+            VeFeature.CATTAIL.configured(new ProbabilityConfig(0.6F)).count(32)
+                    .decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
 
     /**
      * A helper method for automatically registering every new configured feature.
@@ -121,34 +117,34 @@ public class VeConfiguredFeatures
     public static final class Configs
     {
         public static final BlockClusterFeatureConfig BLUEBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-                new SimpleBlockStateProvider(VeConfiguredFeatures.States.BLUEBERRY_BUSH), SimpleBlockPlacer.PLACER))
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.BLUEBERRY_BUSH), SimpleBlockPlacer.INSTANCE))
                         .tries(64).whitelist(ImmutableSet.of(VeConfiguredFeatures.States.GRASS_BLOCK.getBlock()))
-                        .func_227317_b_().build();
+                        .noProjection().build();
         public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-                new SimpleBlockStateProvider(VeConfiguredFeatures.States.CRANBERRY_BUSH), SimpleBlockPlacer.PLACER))
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.CRANBERRY_BUSH), SimpleBlockPlacer.INSTANCE))
                         .tries(64).whitelist(ImmutableSet.of(VeConfiguredFeatures.States.GRASS_BLOCK.getBlock()))
-                        .func_227317_b_().build();
+                        .noProjection().build();
         public static final BlockClusterFeatureConfig SNAPDRAGON_AND_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(
-                (new WeightedBlockStateProvider()).addWeightedBlockstate(VeConfiguredFeatures.States.ENDER_GRASS, 2)
-                        .addWeightedBlockstate(VeConfiguredFeatures.States.SNAPDRAGON, 1),
-                SimpleBlockPlacer.PLACER)).tries(64)
-                        .whitelist(ImmutableSet.of(VeConfiguredFeatures.States.END_STONE.getBlock())).func_227317_b_()
+                (new WeightedBlockStateProvider()).add(VeConfiguredFeatures.States.ENDER_GRASS, 2)
+                        .add(VeConfiguredFeatures.States.SNAPDRAGON, 1),
+                SimpleBlockPlacer.INSTANCE)).tries(64)
+                        .whitelist(ImmutableSet.of(VeConfiguredFeatures.States.END_STONE.getBlock())).noProjection()
                         .build();
         public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(
-                new SimpleBlockStateProvider(VeConfiguredFeatures.States.WITCHS_CRADLE), SimpleBlockPlacer.PLACER))
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.WITCHS_CRADLE), SimpleBlockPlacer.INSTANCE))
                         .tries(64).whitelist(ImmutableSet.of(VeConfiguredFeatures.States.GRASS_BLOCK.getBlock()))
-                        .func_227317_b_().build();
+                        .noProjection().build();
         public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(
                 new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM_BLOCK_DOWN),
                 new SimpleBlockStateProvider(VeConfiguredFeatures.States.MUSHROOM_STEM), 2);
         public static final BlockClusterFeatureConfig PURPLE_MUSHROOM_CONFIG = new BlockClusterFeatureConfig.Builder(
-                new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM), SimpleBlockPlacer.PLACER)
-                        .tries(64).func_227317_b_().build();
+                new SimpleBlockStateProvider(VeConfiguredFeatures.States.PURPLE_MUSHROOM), SimpleBlockPlacer.INSTANCE)
+                        .tries(64).noProjection().build();
         public static final SphereReplaceConfig MUD_SWAMP_CONFIG = new SphereReplaceConfig(
-                VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(3, 2), 1,
+                VeConfiguredFeatures.States.MUD, FeatureSpread.of(3, 2), 1,
                 ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD));
         public static final SphereReplaceConfig MUD_RIVER_CONFIG = new SphereReplaceConfig(
-                VeConfiguredFeatures.States.MUD, FeatureSpread.func_242253_a(2, 1), 1,
+                VeConfiguredFeatures.States.MUD, FeatureSpread.of(2, 1), 1,
                 ImmutableList.of(VeConfiguredFeatures.States.DIRT, VeConfiguredFeatures.States.MUD));
     }
 
@@ -160,29 +156,29 @@ public class VeConfiguredFeatures
      */
     public static final class States
     {
-        protected static final BlockState DARK_MATTER = VeBlocks.darkMatter.getDefaultState();
-        protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
-        protected static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
-        protected static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();
-        protected static final BlockState ENDER_GRASS = VeBlocks.enderGrass.getDefaultState();
-        protected static final BlockState PURPLE_MUSHROOM = VeBlocks.purpleMushroom.getDefaultState();
-        protected static final BlockState PURPLE_MUSHROOM_BLOCK_DOWN = VeBlocks.purpleMushroomBlock.getDefaultState()
-                .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
-        protected static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState()
-                .with(HugeMushroomBlock.UP, Boolean.valueOf(false))
-                .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
-        protected static final BlockState WITCHS_CRADLE = VeBlocks.witchsCradle.getDefaultState()
-                .with(VeBerryBushBlock.AGE, 3);
-        protected static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smokyQuartzOre.getDefaultState();
-        protected static final BlockState NETHER_RUBY_ORE = VeBlocks.rubyOre.getDefaultState();
-        protected static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberryBush.getDefaultState()
-                .with(VeBerryBushBlock.AGE, 3);
-        protected static final BlockState CRANBERRY_BUSH = VeBlocks.cranberryBush.getDefaultState()
-                .with(VeBerryBushBlock.AGE, 3);
-        protected static final BlockState MUD = VeBlocks.mud.getDefaultState();
-        protected static final BlockState DIRT = Blocks.DIRT.getDefaultState();
-        protected static final BlockState CATTAIL = VeBlocks.smokyQuartzBlock.getDefaultState();
-        protected static final BlockState WATER_BLOCK = Blocks.WATER.getDefaultState();
-        protected static final BlockState AIR = Blocks.AIR.getDefaultState();
+        protected static final BlockState DARK_MATTER = VeBlocks.darkMatter.defaultBlockState();
+        protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
+        protected static final BlockState END_STONE = Blocks.END_STONE.defaultBlockState();
+        protected static final BlockState SNAPDRAGON = VeBlocks.snapdragon.defaultBlockState();
+        protected static final BlockState ENDER_GRASS = VeBlocks.enderGrass.defaultBlockState();
+        protected static final BlockState PURPLE_MUSHROOM = VeBlocks.purpleMushroom.defaultBlockState();
+        protected static final BlockState PURPLE_MUSHROOM_BLOCK_DOWN = VeBlocks.purpleMushroomBlock.defaultBlockState()
+                .setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
+        protected static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, Boolean.valueOf(false))
+                .setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
+        protected static final BlockState WITCHS_CRADLE = VeBlocks.witchsCradle.defaultBlockState()
+                .setValue(VeBerryBushBlock.AGE, 3);
+        protected static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smokyQuartzOre.defaultBlockState();
+        protected static final BlockState NETHER_RUBY_ORE = VeBlocks.rubyOre.defaultBlockState();
+        protected static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberryBush.defaultBlockState()
+                .setValue(VeBerryBushBlock.AGE, 3);
+        protected static final BlockState CRANBERRY_BUSH = VeBlocks.cranberryBush.defaultBlockState()
+                .setValue(VeBerryBushBlock.AGE, 3);
+        protected static final BlockState MUD = VeBlocks.mud.defaultBlockState();
+        protected static final BlockState DIRT = Blocks.DIRT.defaultBlockState();
+        protected static final BlockState CATTAIL = VeBlocks.smokyQuartzBlock.defaultBlockState();
+        protected static final BlockState WATER_BLOCK = Blocks.WATER.defaultBlockState();
+        protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
     }
 }

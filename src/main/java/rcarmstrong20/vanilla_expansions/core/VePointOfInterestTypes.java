@@ -21,9 +21,9 @@ public class VePointOfInterestTypes
 
     public static PointOfInterestType lumberjack = register("lumberjack", VeBlocks.woodcutter, 1, 1);
 
-    private static PointOfInterestType register(String nameIn, Block blockIn, int maxFreeTicketsIn, int validRangeIn)
+    private static PointOfInterestType register(String nameIn, Block block, int maxFreeTicketsIn, int validRangeIn)
     {
-        return register(nameIn, new PointOfInterestType(nameIn, PointOfInterestType.getAllStates(blockIn),
+        return register(nameIn, new PointOfInterestType(nameIn, PointOfInterestType.getBlockStates(block),
                 maxFreeTicketsIn, validRangeIn));
     }
 

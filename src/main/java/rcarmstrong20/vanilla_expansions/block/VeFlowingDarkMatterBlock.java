@@ -13,12 +13,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -35,19 +33,13 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving)
+    public void onPlace(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving)
     {
         if (reactWithNeighbors(world, pos))
         {
-            world.getPendingFluidTicks().scheduleTick(pos, state.getFluidState().getFluid(),
-                    this.getFluid().getTickRate(world));
+            world.getLiquidTicks().scheduleTick(pos, state.getFluidState().getType(),
+                    this.getFluid().getTickDelay(world));
         }
-    }
-
-    @Override
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
-    {
-        return false;
     }
 
     /**
@@ -59,8 +51,8 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     {
         if (reactWithNeighbors(world, pos))
         {
-            world.getPendingFluidTicks().scheduleTick(pos, state.getFluidState().getFluid(),
-                    this.getFluid().getTickRate(world));
+            world.getLiquidTicks().scheduleTick(pos, state.getFluidState().getType(),
+                    this.getFluid().getTickDelay(world));
         }
     }
 
@@ -68,11 +60,11 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     {
         for (Direction direction : Direction.values())
         {
-            if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+            if (world.getFluidState(pos.relative(direction)).is(FluidTags.LAVA))
             {
                 return generateBlocks(world, pos, direction, VeBlocks.bauxite, Blocks.END_STONE);
             }
-            else if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.WATER))
+            else if (world.getFluidState(pos.relative(direction)).is(FluidTags.WATER))
             {
                 return generateBlocks(world, pos, direction, VeBlocks.sodalite, Blocks.END_STONE);
             }
@@ -93,7 +85,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     private boolean generateBlocks(World world, BlockPos pos, Direction foundDirection, Block sourceBlock,
             Block flowingBlock)
     {
-        if (foundDirection == Direction.UP)
+        if (foundDirection.equals(Direction.UP))
         {
             if (world.getFluidState(pos).isSource())
             {
@@ -115,7 +107,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
             }
             else
             {
-                placeBlockAtOffset(world, pos, foundDirection, flowingBlock);
+                placeBlockAtRelativePos(world, pos, foundDirection, flowingBlock);
                 return true;
             }
         }
@@ -129,7 +121,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     private void placeBlockAt(World world, BlockPos pos, Block block)
     {
         this.triggerMixEffects(world, pos);
-        world.setBlockState(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, block.getDefaultState()));
+        world.setBlock(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(world, pos, pos, block.defaultBlockState()), 2);
     }
 
     /**
@@ -138,9 +130,9 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
      * @param direction The direction offset to place the block at.
      * @param block     The block to place.
      */
-    private void placeBlockAtOffset(World world, BlockPos pos, Direction direction, Block block)
+    private void placeBlockAtRelativePos(World world, BlockPos pos, Direction direction, Block block)
     {
-        placeBlockAt(world, pos.offset(direction), block);
+        placeBlockAt(world, pos.relative(direction), block);
     }
 
     /**
@@ -154,7 +146,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     {
         Random random = new Random();
 
-        spawnParticles(ParticleTypes.POOF, (ServerWorld) world, pos.up(), random);
+        spawnParticles(ParticleTypes.POOF, (ServerWorld) world, pos.above(), random);
         world.playSound(null, pos, VeSoundEvents.blockDarkMatterHardens, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
     }
@@ -165,25 +157,24 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         double y = pos.getY() + rand.nextDouble();
         double z = pos.getZ() + rand.nextDouble();
 
-        world.spawnParticle(particle, x, y, z, rand.nextInt(20) + 10, 0.0, 0.0, 0.0, 0.0);
+        world.sendParticles(particle, x, y, z, rand.nextInt(20) + 10, 0.0, 0.0, 0.0, 0.0);
     }
 
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return world.getFluidState(pos).isTagged(VeFluidTags.darkMatter)
-                && (entity.getMotion().y > 0 || entity.getMotion().y < 0);
+        return world.getFluidState(pos).is(VeFluidTags.darkMatter)
+                && (entity.getDeltaMovement().y > 0 || entity.getDeltaMovement().y < 0);
     }
 
     /**
      * Called when an entity collides with this block.
      */
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
+    public void entityInside(BlockState state, World world, BlockPos pos, Entity entity)
     {
-        Random random = new Random();
-
-        if (!(entity instanceof PlayerEntity) && entity.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005))
+        if (!(entity instanceof PlayerEntity)
+                && entity.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.005))
             return;
         /*
          * if (entity instanceof ItemEntity) { // Make items float on dark matter with

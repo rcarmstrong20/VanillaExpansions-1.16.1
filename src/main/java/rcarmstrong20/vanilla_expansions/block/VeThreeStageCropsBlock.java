@@ -15,16 +15,12 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 public class VeThreeStageCropsBlock extends BeetrootBlock
 {
     private static final VoxelShape[] ONION_SHAPE_BY_AGE = new VoxelShape[] {
-            Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
-            Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
-            Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
-            Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D) };
+            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
+            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D), Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D) };
 
     private static final VoxelShape[] GINGER_SHAPE_BY_AGE = new VoxelShape[] {
-            Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
+            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
 
     public VeThreeStageCropsBlock(Properties properties)
     {
@@ -39,11 +35,11 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
     {
         if (this == VeBlocks.greenOnions || this == VeBlocks.garlic)
         {
-            return ONION_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+            return ONION_SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
         }
         else
         {
-            return GINGER_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+            return GINGER_SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
         }
     }
 
@@ -51,7 +47,7 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
      * Returns the item when using pick block.
      */
     @Override
-    protected IItemProvider getSeedsItem()
+    protected IItemProvider getBaseSeedId()
     {
         if (this == VeBlocks.greenOnions)
         {

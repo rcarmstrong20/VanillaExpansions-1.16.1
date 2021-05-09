@@ -38,13 +38,13 @@ public class VeStructureUtil
      */
     public static void spawnVillager(IServerWorld world, BlockPos pos, VillagerType type)
     {
-        VillagerEntity villagerEntity = EntityType.VILLAGER.create(world.getWorld());
-        villagerEntity.enablePersistence();
-        villagerEntity.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
+        VillagerEntity villagerEntity = EntityType.VILLAGER.create(world.getLevel());
+        villagerEntity.setPersistenceRequired();
+        villagerEntity.moveTo(pos, 0.0F, 0.0F);
         villagerEntity.setVillagerData(new VillagerData(type, villagerEntity.getVillagerData().getProfession(), 0));
-        villagerEntity.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.STRUCTURE,
+        villagerEntity.finalizeSpawn(world, world.getCurrentDifficultyAt(pos), SpawnReason.STRUCTURE,
                 (ILivingEntityData) null, (CompoundNBT) null);
-        world.func_242417_l(villagerEntity); // spawn the villager.
+        world.addFreshEntity(villagerEntity); // spawn the villager.
     }
 
     /**
@@ -57,19 +57,19 @@ public class VeStructureUtil
      */
     public static void randomizeBedColor(IServerWorld world, BlockPos pos, Random random)
     {
-        BlockState state = world.getBlockState(pos.down());
+        BlockState state = world.getBlockState(pos.below());
 
         if (state.getBlock() instanceof BedBlock)
         {
-            Direction facing = state.get(BedBlock.HORIZONTAL_FACING);
-            BlockState bed = BlockTags.BEDS.getRandomElement(random).getDefaultState();
+            Direction facing = state.getValue(BedBlock.FACING);
+            BlockState bed = BlockTags.BEDS.getRandomElement(random).defaultBlockState();
 
             // Place foot
-            world.setBlockState(pos.down(), bed.with(BedBlock.HORIZONTAL_FACING, facing), 1);
+            world.setBlock(pos.below(), bed.setValue(BedBlock.FACING, facing), 1);
 
             // Place head
-            world.setBlockState(pos.down().offset(facing),
-                    bed.with(BedBlock.HORIZONTAL_FACING, facing).with(BedBlock.PART, BedPart.HEAD), 1);
+            world.setBlock(pos.below().relative(facing),
+                    bed.setValue(BedBlock.FACING, facing).setValue(BedBlock.PART, BedPart.HEAD), 1);
         }
     }
 
@@ -88,18 +88,18 @@ public class VeStructureUtil
         {
             if (block instanceof BeetrootBlock)
             {
-                world.setBlockState(pos, block.getDefaultState().with(BeetrootBlock.BEETROOT_AGE, 3), 3);
+                world.setBlock(pos, block.defaultBlockState().setValue(BeetrootBlock.AGE, 3), 3);
                 return true;
             }
             else
             {
-                world.setBlockState(pos, block.getDefaultState().with(CropsBlock.AGE, 7), 3);
+                world.setBlock(pos, block.defaultBlockState().setValue(CropsBlock.AGE, 7), 3);
                 return true;
             }
         }
         else
         {
-            world.setBlockState(pos, block.getDefaultState(), 3);
+            world.setBlock(pos, block.defaultBlockState(), 3);
             return false;
         }
     }

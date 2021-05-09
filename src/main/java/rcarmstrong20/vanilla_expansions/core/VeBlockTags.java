@@ -13,24 +13,25 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  */
 public class VeBlockTags
 {
-    public static ITag<Block> endBoneMealable = VeBlockTags.makeWrapperTag("end_bone_mealable");
-    public static ITag<Block> endBoneMealPlants = VeBlockTags.makeWrapperTag("end_bone_meal_plants");
-    public static ITag<Block> overworldPlantable = VeBlockTags.makeWrapperTag("overworld_plantable");
-    public static ITag<Block> netherPlantable = VeBlockTags.makeWrapperTag("nether_plantable");
-    public static ITag<Block> endPlantable = VeBlockTags.makeWrapperTag("end_plantable");
-    public static ITag<Block> overworldPottable = VeBlockTags.makeWrapperTag("overworld_pottable");
-    public static ITag<Block> netherPottable = VeBlockTags.makeWrapperTag("nether_pottable");
-    public static ITag<Block> endPottable = VeBlockTags.makeWrapperTag("end_pottable");
-    public static ITag<Block> singleCrops = VeBlockTags.makeWrapperTag("single_crops");
-    public static ITag<Block> cattailLandSoil = VeBlockTags.makeWrapperTag("cattail_land_soil");
-    public static ITag<Block> cattailWaterSoil = VeBlockTags.makeWrapperTag("cattail_water_soil");
+    public static ITag<Block> endBoneMealable = VeBlockTags.bind("end_bone_mealable");
+    public static ITag<Block> endBoneMealPlants = VeBlockTags.bind("end_bone_meal_plants");
+    public static ITag<Block> overworldPlantable = VeBlockTags.bind("overworld_plantable");
+    public static ITag<Block> netherPlantable = VeBlockTags.bind("nether_plantable");
+    public static ITag<Block> endPlantable = VeBlockTags.bind("end_plantable");
+    public static ITag<Block> overworldPottable = VeBlockTags.bind("overworld_pottable");
+    public static ITag<Block> netherPottable = VeBlockTags.bind("nether_pottable");
+    public static ITag<Block> endPottable = VeBlockTags.bind("end_pottable");
+    public static ITag<Block> singleCrops = VeBlockTags.bind("single_crops");
+    public static ITag<Block> cattailLandSoil = VeBlockTags.bind("cattail_land_soil");
+    public static ITag<Block> cattailWaterSoil = VeBlockTags.bind("cattail_water_soil");
+    public static ITag<Block> fertileSoil = VeBlockTags.bind("fertile_soil");
 
     /**
      * @param name The name of the tag.
      * @return The tag from the location or an empty tag if none exists.
      */
-    private static ITag<Block> makeWrapperTag(String name)
+    private static ITag<Block> bind(String name)
     {
-        return BlockTags.getCollection().get(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return BlockTags.createOptional(new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

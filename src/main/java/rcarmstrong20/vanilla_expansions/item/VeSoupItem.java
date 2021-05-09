@@ -24,9 +24,9 @@ public class VeSoupItem extends Item
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn)
+    public ItemStack finishUsingItem(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn)
     {
-        super.onItemUseFinish(stackIn, worldIn, livingEntityIn);
+        super.finishUsingItem(stackIn, worldIn, livingEntityIn);
         boolean flag = livingEntityIn instanceof PlayerEntity && ((PlayerEntity) livingEntityIn).isCreative();
 
         return flag ? stackIn : new ItemStack(this.returnItem);

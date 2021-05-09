@@ -18,12 +18,12 @@ public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
     private VeUnderDarkMatterParticle(ClientWorld world, double x, double y, double z)
     {
         super(world, x, y, z);
-        this.particleRed = 14.0F;
-        this.particleGreen = 14.0F;
-        this.particleBlue = 14.0F;
+        this.rCol = 14.0F;
+        this.gCol = 14.0F;
+        this.bCol = 14.0F;
         this.setSize(0.01F, 0.01F);
-        this.particleScale *= this.rand.nextFloat() * 0.6F + 0.2F;
-        this.maxAge = (int) (16.0D / (Math.random() * 0.8D + 0.2D));
+        this.quadSize *= this.random.nextFloat() * 0.6F + 0.2F;
+        this.lifetime = (int) (16.0D / (Math.random() * 0.8D + 0.2D));
     }
 
     @Override
@@ -35,19 +35,19 @@ public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
     @Override
     public void tick()
     {
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-        if (this.maxAge-- <= 0)
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.lifetime-- <= 0)
         {
-            this.setExpired();
+            this.remove();
         }
         else
         {
-            this.move(this.motionX, this.motionY, this.motionZ);
-            if (!this.world.getFluidState(new BlockPos(this.posX, this.posY, this.posZ)).isTagged(FluidTags.WATER))
+            this.move(this.xd, this.yd, this.zd);
+            if (!this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).is(FluidTags.WATER))
             {
-                this.setExpired();
+                this.remove();
             }
         }
     }
@@ -63,11 +63,11 @@ public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
         }
 
         @Override
-        public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z,
+        public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
             VeUnderDarkMatterParticle underDarkMatterParticle = new VeUnderDarkMatterParticle(worldIn, x, y, z);
-            underDarkMatterParticle.selectSpriteRandomly(this.spriteSet);
+            underDarkMatterParticle.pickSprite(this.spriteSet);
             return underDarkMatterParticle;
         }
     }

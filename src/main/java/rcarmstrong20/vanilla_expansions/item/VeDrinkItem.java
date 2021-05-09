@@ -25,7 +25,7 @@ public class VeDrinkItem extends Item
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn)
+    public ItemStack finishUsingItem(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn)
     {
         if (livingEntityIn instanceof PlayerEntity)
         {
@@ -34,15 +34,15 @@ public class VeDrinkItem extends Item
 
             if (!flag)
             {
-                playerEntity.addItemStackToInventory(new ItemStack(returnItem, 1));
-                return super.onItemUseFinish(stackIn, worldIn, livingEntityIn);
+                playerEntity.addItem(new ItemStack(returnItem, 1));
+                return super.finishUsingItem(stackIn, worldIn, livingEntityIn);
             }
         }
         return stackIn;
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack)
+    public UseAction getUseAnimation(ItemStack p_77661_1_)
     {
         return UseAction.DRINK;
     }

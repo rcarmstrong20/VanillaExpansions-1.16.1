@@ -19,14 +19,14 @@ import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 @OnlyIn(Dist.CLIENT)
 public class VeDripParticle extends SpriteTexturedParticle
 {
-    private final Fluid fluid;
+    private final Fluid type;
 
-    protected VeDripParticle(ClientWorld world, double x, double y, double z, Fluid fluid)
+    protected VeDripParticle(ClientWorld world, double x, double y, double z, Fluid typeIn)
     {
         super(world, x, y, z);
         this.setSize(0.01F, 0.01F);
-        this.particleGravity = 0.06F;
-        this.fluid = fluid;
+        this.gravity = 0.06F;
+        this.type = typeIn;
     }
 
     @Override
@@ -36,176 +36,179 @@ public class VeDripParticle extends SpriteTexturedParticle
     }
 
     @Override
+    protected int getLightColor(float f)
+    {
+        return 240;
+    }
+
+    @Override
     public void tick()
     {
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-        this.func_217576_g();
-        if (!this.isExpired)
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        this.preMoveUpdate();
+        if (!this.removed)
         {
-            this.motionY -= this.particleGravity;
-            this.move(this.motionX, this.motionY, this.motionZ);
-            this.func_217577_h();
-            if (!this.isExpired)
+            this.yd -= this.gravity;
+            this.move(this.xd, this.yd, this.zd);
+            this.postMoveUpdate();
+            if (!this.removed)
             {
-                this.motionX *= 0.98F;
-                this.motionY *= 0.98F;
-                this.motionZ *= 0.98F;
-                BlockPos blockpos = new BlockPos(this.posX, this.posY, this.posZ);
-                FluidState ifluidstate = this.world.getFluidState(blockpos);
-                if (ifluidstate.getFluid() == this.fluid
-                        && this.posY < blockpos.getY() + ifluidstate.getActualHeight(this.world, blockpos))
+                this.xd *= 0.98F;
+                this.yd *= 0.98F;
+                this.zd *= 0.98F;
+                BlockPos blockpos = new BlockPos(this.x, this.y, this.z);
+                FluidState fluidstate = this.level.getFluidState(blockpos);
+                if (fluidstate.getType() == this.type
+                        && this.y < blockpos.getY() + fluidstate.getHeight(this.level, blockpos))
                 {
-                    this.setExpired();
+                    this.remove();
                 }
             }
         }
     }
 
-    protected void func_217576_g()
+    protected void preMoveUpdate()
     {
-        if (this.maxAge-- <= 0)
+        if (this.lifetime-- <= 0)
         {
-            this.setExpired();
+            this.remove();
         }
     }
 
-    protected void func_217577_h()
+    protected void postMoveUpdate()
     {}
 
     @OnlyIn(Dist.CLIENT)
     static class VeDripping extends VeDripParticle
     {
-        private final IParticleData data;
+        private final IParticleData fallingParticle;
 
-        private VeDripping(ClientWorld world, double x, double y, double z, Fluid fluid, IParticleData data)
+        private VeDripping(ClientWorld world, double x, double y, double z, Fluid type, IParticleData fallingParticle)
         {
-            super(world, x, y, z, fluid);
-            this.data = data;
-            this.particleGravity *= 0.02F;
-            this.maxAge = 40;
+            super(world, x, y, z, type);
+            this.fallingParticle = fallingParticle;
+            this.gravity *= 0.02F;
+            this.lifetime = 40;
         }
 
         @Override
-        protected void func_217576_g()
+        protected void preMoveUpdate()
         {
-            if (this.maxAge-- <= 0)
+            if (this.lifetime-- <= 0)
             {
-                this.setExpired();
-                this.world.addParticle(this.data, this.posX, this.posY, this.posZ, this.motionX, this.motionY,
-                        this.motionZ);
+                this.remove();
+                this.level.addParticle(this.fallingParticle, this.x, this.y, this.z, this.xd, this.yd, this.zd);
             }
         }
 
         @Override
-        protected void func_217577_h()
+        protected void postMoveUpdate()
         {
-            this.motionX *= 0.02D;
-            this.motionY *= 0.02D;
-            this.motionZ *= 0.02D;
+            this.xd *= 0.02D;
+            this.yd *= 0.02D;
+            this.zd *= 0.02D;
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class VeDrippingVoidFactory implements IParticleFactory<BasicParticleType>
+    static class VeFalling extends VeDripParticle
     {
-        protected final IAnimatedSprite sprite;
+        protected final IParticleData landingParticle;
 
-        public VeDrippingVoidFactory(IAnimatedSprite sprite)
+        private VeFalling(ClientWorld world, double x, double y, double z, Fluid type, IParticleData landingParticle)
         {
-            this.sprite = sprite;
+            super(world, x, y, z, type);
+            this.landingParticle = landingParticle;
         }
 
         @Override
-        public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
-                double xSpeed, double ySpeed, double zSpeed)
-        {
-            VeDripping drip_particle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.darkMatter,
-                    VeParticleTypes.fallingDarkMatter);
-            drip_particle.particleGravity *= 0.01F;
-            drip_particle.maxAge = 100;
-            drip_particle.setColor(0.1F, 0.1F, 0.1F);
-            drip_particle.selectSpriteRandomly(this.sprite);
-            return drip_particle;
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    static class VeFallingLiquidParticle extends VeDripParticle
-    {
-        protected final IParticleData data;
-
-        private VeFallingLiquidParticle(ClientWorld world, double x, double y, double z, Fluid fluid,
-                IParticleData data)
-        {
-            super(world, x, y, z, fluid);
-            this.data = data;
-            this.maxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
-        }
-
-        @Override
-        protected void func_217577_h()
+        protected void postMoveUpdate()
         {
             if (this.onGround)
             {
-                this.setExpired();
-                this.world.addParticle(this.data, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+                this.remove();
+                this.level.addParticle(this.landingParticle, this.x, this.y, this.z, 0.0D, 0.0D, 0.0D);
             }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static class VeFallingVoidFactory implements IParticleFactory<BasicParticleType>
-    {
-        protected final IAnimatedSprite sprite;
-
-        public VeFallingVoidFactory(IAnimatedSprite sprite)
-        {
-            this.sprite = sprite;
-        }
-
-        @Override
-        public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
-                double xSpeed, double ySpeed, double zSpeed)
-        {
-            VeFallingLiquidParticle falling_particle = new VeDripParticle.VeFallingLiquidParticle(world, x, y, z,
-                    VeFluids.darkMatter, VeParticleTypes.landingDarkMatter);
-            falling_particle.setColor(0.1F, 0.1F, 0.1F);
-            falling_particle.selectSpriteRandomly(this.sprite);
-            return falling_particle;
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     static class VeLanding extends VeDripParticle
     {
-        private VeLanding(ClientWorld world, double x, double y, double z, Fluid fluid)
+        private VeLanding(ClientWorld world, double x, double y, double z, Fluid type)
         {
-            super(world, x, y, z, fluid);
-            this.maxAge = (int) (16.0D / (Math.random() * 0.8D + 0.2D));
+            super(world, x, y, z, type);
+            this.lifetime = (int) (16.0D / (Math.random() * 0.8D + 0.2D));
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class VeLandingVoidFactory implements IParticleFactory<BasicParticleType>
+    public static class VeDrippingDarkMatterFactory implements IParticleFactory<BasicParticleType>
     {
         protected final IAnimatedSprite sprite;
 
-        public VeLandingVoidFactory(IAnimatedSprite sprite)
+        public VeDrippingDarkMatterFactory(IAnimatedSprite spriteIn)
+        {
+            this.sprite = spriteIn;
+        }
+
+        @Override
+        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
+                double xSpeed, double ySpeed, double zSpeed)
+        {
+            VeDripping dripParticle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.darkMatter,
+                    VeParticleTypes.fallingDarkMatter);
+            dripParticle.gravity *= 0.01F;
+            dripParticle.lifetime = 100;
+            dripParticle.setColor(0.1F, 0.1F, 0.1F);
+            dripParticle.pickSprite(this.sprite);
+            return dripParticle;
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class VeFallingDarkMatterFactory implements IParticleFactory<BasicParticleType>
+    {
+        protected final IAnimatedSprite sprite;
+
+        public VeFallingDarkMatterFactory(IAnimatedSprite sprite)
         {
             this.sprite = sprite;
         }
 
         @Override
-        public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
+        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeLanding land_particle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.darkMatter);
-            land_particle.maxAge = (int) (128.0D / (Math.random() * 0.8D + 0.2D));
-            land_particle.setColor(0.1F, 0.1F, 0.1F);
-            land_particle.selectSpriteRandomly(this.sprite);
-            return land_particle;
+            VeFalling fallingParticle = new VeDripParticle.VeFalling(world, x, y, z, VeFluids.darkMatter,
+                    VeParticleTypes.landingDarkMatter);
+            fallingParticle.setColor(0.1F, 0.1F, 0.1F);
+            fallingParticle.pickSprite(this.sprite);
+            return fallingParticle;
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class VeLandingDarkMatterFactory implements IParticleFactory<BasicParticleType>
+    {
+        protected final IAnimatedSprite sprite;
+
+        public VeLandingDarkMatterFactory(IAnimatedSprite sprite)
+        {
+            this.sprite = sprite;
+        }
+
+        @Override
+        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
+                double xSpeed, double ySpeed, double zSpeed)
+        {
+            VeLanding landParticle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.darkMatter);
+            landParticle.lifetime = (int) (128.0D / (Math.random() * 0.8D + 0.2D));
+            landParticle.setColor(0.1F, 0.1F, 0.1F);
+            landParticle.pickSprite(this.sprite);
+            return landParticle;
         }
     }
 }

@@ -132,7 +132,7 @@ public class VeItems
      */
     private static Properties buildProperties()
     {
-        return new Item.Properties().group(VanillaExpansions.VE_GROUP);
+        return new Item.Properties().tab(VanillaExpansions.VE_GROUP);
     }
 
     /**
@@ -144,7 +144,7 @@ public class VeItems
      */
     private static Properties buildProperties(int maxStackSizeIn)
     {
-        return new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(maxStackSizeIn);
+        return new Item.Properties().tab(VanillaExpansions.VE_GROUP).stacksTo(maxStackSizeIn);
     }
 
     /**
@@ -155,7 +155,7 @@ public class VeItems
      */
     private static Properties buildProperties(Food foodIn)
     {
-        return new Item.Properties().group(VanillaExpansions.VE_GROUP).food(foodIn);
+        return new Item.Properties().tab(VanillaExpansions.VE_GROUP).food(foodIn);
     }
 
     /**
@@ -168,7 +168,7 @@ public class VeItems
      */
     private static Properties buildProperties(Food foodIn, int maxStackSizeIn)
     {
-        return new Item.Properties().group(VanillaExpansions.VE_GROUP).food(foodIn).maxStackSize(maxStackSizeIn);
+        return new Item.Properties().tab(VanillaExpansions.VE_GROUP).food(foodIn).stacksTo(maxStackSizeIn);
     }
 
     /**

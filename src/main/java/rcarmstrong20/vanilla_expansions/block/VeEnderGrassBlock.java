@@ -23,7 +23,7 @@ import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
  */
 public class VeEnderGrassBlock extends BushBlock
 {
-    protected static final VoxelShape ENDER_GRASS = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D);
+    protected static final VoxelShape ENDER_GRASS = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D);
 
     public VeEnderGrassBlock(Properties properties)
     {
@@ -31,13 +31,13 @@ public class VeEnderGrassBlock extends BushBlock
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
+    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
         return isValidBlock(worldIn, pos);
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos)
     {
         return isValidBlock(worldIn, pos);
     }
@@ -65,7 +65,7 @@ public class VeEnderGrassBlock extends BushBlock
      */
     private boolean isValidBlock(IBlockReader world, BlockPos pos)
     {
-        Block block = world.getBlockState(pos.down()).getBlock();
+        Block block = world.getBlockState(pos.below()).getBlock();
 
         if (block instanceof VePlanterBoxBlock)
         {

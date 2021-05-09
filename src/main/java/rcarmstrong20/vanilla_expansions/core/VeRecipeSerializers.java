@@ -17,7 +17,7 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeRecipeSerializers
 {
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
             .create(ForgeRegistries.RECIPE_SERIALIZERS, VanillaExpansions.MOD_ID);
 
     public static IRecipeSerializer<VeWoodcuttingRecipe> woodcutting = register("woodcutting",
@@ -31,7 +31,7 @@ public class VeRecipeSerializers
      */
     private static <S extends IRecipeSerializer<? extends IRecipe<?>>> S register(String name, S recipe)
     {
-        RECIPES.register(name, () -> recipe);
+        RECIPE_SERIALIZERS.register(name, () -> recipe);
         return recipe;
     }
 }

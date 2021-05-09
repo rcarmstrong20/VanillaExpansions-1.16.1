@@ -19,7 +19,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
  *
  * @author Ryan
  */
-public class VeShapeUtil
+public class VeBoxUtil
 {
     private static final double CENTER = 0.5;
     private static final double NINETY_DEGREES = Math.toRadians(90);
@@ -30,11 +30,11 @@ public class VeShapeUtil
      * Use the second argument's shapes to cut smaller shapes into the first
      * argument's shape and return the new shape.
      */
-    public static VoxelShape cutShape(VoxelShape shape, VoxelShape... cutShapes)
+    public static VoxelShape cutBox(VoxelShape shape, VoxelShape... cutShapes)
     {
         for (int i = 0; i < cutShapes.length; i++)
         {
-            shape = VoxelShapes.combineAndSimplify(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
+            shape = VoxelShapes.join(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
         }
         return shape;
     }
@@ -87,7 +87,7 @@ public class VeShapeUtil
     public static VoxelShape rotate(@Nullable Axis axis, double radians, VoxelShape shape)
     {
         VoxelShape rotatedShapes = VoxelShapes.empty();
-        List<AxisAlignedBB> list = shape.toBoundingBoxList();
+        List<AxisAlignedBB> list = shape.toAabbs();
         Pair<Double, Double> min;
         Pair<Double, Double> max;
         VoxelShape rotatedX;
@@ -102,7 +102,7 @@ public class VeShapeUtil
                     min = rotatePoint(box.minY, box.minZ, radians);
                     max = rotatePoint(box.maxY, box.maxZ, radians);
 
-                    rotatedX = VoxelShapes.create(box.minX, min.getFirst(), min.getSecond(), box.maxX, max.getFirst(),
+                    rotatedX = VoxelShapes.box(box.minX, min.getFirst(), min.getSecond(), box.maxX, max.getFirst(),
                             max.getSecond());
 
                     rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedX);
@@ -114,7 +114,7 @@ public class VeShapeUtil
                     min = rotatePoint(box.minX, box.minZ, radians);
                     max = rotatePoint(box.maxX, box.maxZ, radians);
 
-                    rotatedY = VoxelShapes.create(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
+                    rotatedY = VoxelShapes.box(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
                             max.getSecond());
 
                     rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedY);
@@ -126,7 +126,7 @@ public class VeShapeUtil
                     min = rotatePoint(box.minX, box.minY, radians);
                     max = rotatePoint(box.maxX, box.maxY, radians);
 
-                    rotatedZ = VoxelShapes.create(min.getFirst(), min.getSecond(), box.minZ, max.getFirst(),
+                    rotatedZ = VoxelShapes.box(min.getFirst(), min.getSecond(), box.minZ, max.getFirst(),
                             max.getSecond(), box.maxZ);
 
                     rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedZ);

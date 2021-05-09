@@ -10,10 +10,12 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 
 /**
  * A base class designed to help create basic plush blocks.
@@ -33,37 +35,40 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        BlockPos blockpos = context.getPos();
-        FluidState ifluidstate = context.getWorld().getFluidState(blockpos);
-        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
-                .with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+        BlockPos pos = context.getClickedPos();
+        World world = context.getLevel();
+        FluidState fluidstate = world.getFluidState(pos);
+        boolean flag = fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8;
+
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, flag);
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
             BlockPos currentPos, BlockPos facingPos)
     {
-        if (stateIn.get(WATERLOGGED))
+        if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
-        return facing.getAxis().isHorizontal() ? stateIn.with(HORIZONTAL_FACING, stateIn.get(HORIZONTAL_FACING))
-                : stateIn;
+
+        return facing.getAxis().isHorizontal() ? stateIn.setValue(FACING, stateIn.getValue(FACING)) : stateIn;
     }
 
     @Override
     public FluidState getFluidState(BlockState state)
     {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
 
     /**
      * Creates a list of properties that this block can have.
      */
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED);
     }
 
     /**
@@ -72,7 +77,7 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
     protected VoxelShape defineShapes(BlockState state, VoxelShape northShape, VoxelShape southShape,
             VoxelShape westShape, VoxelShape eastShape)
     {
-        switch (state.get(HORIZONTAL_FACING))
+        switch (state.getValue(FACING))
         {
             case NORTH:
                 return northShape;
