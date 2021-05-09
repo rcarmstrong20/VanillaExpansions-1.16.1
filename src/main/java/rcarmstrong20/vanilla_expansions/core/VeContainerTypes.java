@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.inventory.container.VeTransmutationTableContainer;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
 
 /**
@@ -21,6 +22,8 @@ public class VeContainerTypes
             .create(ForgeRegistries.CONTAINERS, VanillaExpansions.MOD_ID);
 
     public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
+    public static ContainerType<VeTransmutationTableContainer> transmutationTable = register("transmutation_table",
+            VeTransmutationTableContainer::new);
 
     /**
      * @param <T>
