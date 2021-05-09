@@ -31,37 +31,41 @@ import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 
 public class VeColoredCampfireTileEntity extends TileEntity implements IClearable, ITickableTileEntity
 {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
-    private int[] cookingTimes = new int[4];
-    private int[] cookingTotalTimes = new int[4];
+    private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
+    private int[] cookingProgress = new int[4];
+    private int[] cookingTime = new int[4];
 
     public VeColoredCampfireTileEntity()
     {
-        super(VeTileEntityType.colored_campfire);
+        super(VeTileEntityType.coloredCampfire);
     }
 
     @Override
     public void tick()
     {
-        boolean flag = this.getBlockState().get(VeColoredCampfireBlock.LIT);
+        boolean flag = this.getBlockState().getValue(VeColoredCampfireBlock.LIT);
+        boolean flag1 = this.level.isClientSide();
 
-        if (flag && this.world.isRemote)
-        {
-            this.addParticles();
-        }
-        else if (!inventory.isEmpty())
+        if (flag1)
         {
             if (flag)
             {
-                this.cookAndDrop();
+                this.makeParticles();
+            }
+        }
+        else
+        {
+            if (flag)
+            {
+                this.cook();
             }
             else
             {
-                for (int i = 0; i < this.inventory.size(); ++i)
+                for (int i = 0; i < this.items.size(); ++i)
                 {
-                    if (this.cookingTimes[i] > 0)
+                    if (this.cookingProgress[i] > 0)
                     {
-                        this.cookingTimes[i] = MathHelper.clamp(this.cookingTimes[i] - 2, 0, this.cookingTotalTimes[i]);
+                        this.cookingProgress[i] = MathHelper.clamp(this.cookingProgress[i] - 2, 0, this.cookingTime[i]);
                     }
                 }
             }
@@ -72,62 +76,61 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
      * Individually tracks the cooking of each item, then spawns the finished
      * product in-world and clears the corresponding held item.
      */
-    private void cookAndDrop()
+    private void cook()
     {
-        for (int i = 0; i < this.inventory.size(); ++i)
+        for (int i = 0; i < this.items.size(); ++i)
         {
-            ItemStack itemstack = this.inventory.get(i);
+            ItemStack itemstack = this.items.get(i);
+
             if (!itemstack.isEmpty())
             {
-                ++this.cookingTimes[i];
-                if (this.cookingTimes[i] >= this.cookingTotalTimes[i])
+                this.cookingProgress[i]++;
+                if (this.cookingProgress[i] >= this.cookingTime[i])
                 {
                     IInventory iinventory = new Inventory(itemstack);
-                    ItemStack itemstack1 = this.world.getRecipeManager()
-                            .getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((p_213979_1_) ->
+                    ItemStack itemstack1 = this.level.getRecipeManager()
+                            .getRecipeFor(IRecipeType.CAMPFIRE_COOKING, iinventory, this.level).map((recipe) ->
                             {
-                                return p_213979_1_.getCraftingResult(iinventory);
+                                return recipe.assemble(iinventory);
                             }).orElse(itemstack);
-
-                    BlockPos blockpos = this.getPos();
-                    InventoryHelper.spawnItemStack(this.world, blockpos.getX(), blockpos.getY(), blockpos.getZ(),
+                    BlockPos blockpos = this.getBlockPos();
+                    InventoryHelper.dropItemStack(this.level, blockpos.getX(), blockpos.getY(), blockpos.getZ(),
                             itemstack1);
-                    this.inventory.set(i, ItemStack.EMPTY);
-                    this.inventoryChanged();
+                    this.items.set(i, ItemStack.EMPTY);
+                    this.markUpdated();
                 }
             }
         }
     }
 
-    private void addParticles()
+    private void makeParticles()
     {
-        World world = this.getWorld();
+        World world = this.getLevel();
         if (world != null)
         {
-            BlockPos blockpos = this.getPos();
-            Random random = world.rand;
+            BlockPos blockpos = this.getBlockPos();
+            Random random = world.random;
             if (random.nextFloat() < 0.11F)
             {
                 for (int i = 0; i < random.nextInt(2) + 2; ++i)
                 {
-                    CampfireBlock.spawnSmokeParticles(world, blockpos,
-                            this.getBlockState().get(CampfireBlock.SIGNAL_FIRE), false);
+                    CampfireBlock.makeParticles(world, blockpos,
+                            this.getBlockState().getValue(CampfireBlock.SIGNAL_FIRE), false);
                 }
             }
 
-            int l = this.getBlockState().get(CampfireBlock.FACING).getHorizontalIndex();
+            int l = this.getBlockState().getValue(CampfireBlock.FACING).get2DDataValue();
 
-            for (int j = 0; j < this.inventory.size(); ++j)
+            for (int j = 0; j < this.items.size(); ++j)
             {
-                if (!this.inventory.get(j).isEmpty() && random.nextFloat() < 0.2F)
+                if (!this.items.get(j).isEmpty() && random.nextFloat() < 0.2F)
                 {
-                    Direction direction = Direction.byHorizontalIndex(Math.floorMod(j + l, 4));
-
-                    double d0 = blockpos.getX() + 0.5D - direction.getXOffset() * 0.3125F
-                            + direction.rotateY().getXOffset() * 0.3125F;
+                    Direction direction = Direction.from2DDataValue(Math.floorMod(j + l, 4));
+                    double d0 = blockpos.getX() + 0.5D - direction.getStepX() * 0.3125F
+                            + direction.getClockWise().getStepX() * 0.3125F;
                     double d1 = blockpos.getY() + 0.5D;
-                    double d2 = blockpos.getZ() + 0.5D - direction.getZOffset() * 0.3125F
-                            + direction.rotateY().getZOffset() * 0.3125F;
+                    double d2 = blockpos.getZ() + 0.5D - direction.getStepZ() * 0.3125F
+                            + direction.getClockWise().getStepZ() * 0.3125F;
 
                     for (int k = 0; k < 4; ++k)
                     {
@@ -136,51 +139,49 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
                 }
             }
         }
-
     }
 
     /**
      * Returns a NonNullList<ItemStack> of items currently held in the colored
      * campfire.
      */
-    public NonNullList<ItemStack> getInventory()
+    public NonNullList<ItemStack> getItems()
     {
-        return this.inventory;
+        return this.items;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound)
+    public void load(BlockState state, CompoundNBT compound)
     {
-        super.read(state, compound);
-        this.inventory.clear();
-        ItemStackHelper.loadAllItems(compound, this.inventory);
+        super.load(state, compound);
+        this.items.clear();
+        ItemStackHelper.loadAllItems(compound, this.items);
         if (compound.contains("CookingTimes", 11))
         {
             int[] aint = compound.getIntArray("CookingTimes");
-            System.arraycopy(aint, 0, this.cookingTimes, 0, Math.min(this.cookingTotalTimes.length, aint.length));
+            System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
         }
 
         if (compound.contains("CookingTotalTimes", 11))
         {
             int[] aint1 = compound.getIntArray("CookingTotalTimes");
-            System.arraycopy(aint1, 0, this.cookingTotalTimes, 0,
-                    Math.min(this.cookingTotalTimes.length, aint1.length));
+            System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound)
+    public CompoundNBT save(CompoundNBT compound)
     {
-        this.writeItems(compound);
-        compound.putIntArray("CookingTimes", this.cookingTimes);
-        compound.putIntArray("CookingTotalTimes", this.cookingTotalTimes);
+        this.saveMetadataAndItems(compound);
+        compound.putIntArray("CookingTimes", this.cookingProgress);
+        compound.putIntArray("CookingTotalTimes", this.cookingTime);
         return compound;
     }
 
-    private CompoundNBT writeItems(CompoundNBT compound)
+    private CompoundNBT saveMetadataAndItems(CompoundNBT compound)
     {
-        super.write(compound);
-        ItemStackHelper.saveAllItems(compound, this.inventory, true);
+        super.save(compound);
+        ItemStackHelper.saveAllItems(compound, this.items, true);
         return compound;
     }
 
@@ -188,65 +189,67 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
     @Nullable
     public SUpdateTileEntityPacket getUpdatePacket()
     {
-        return new SUpdateTileEntityPacket(this.getPos(), 1, this.getUpdateTag());
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
-    {
-        CompoundNBT compound = pkt.getNbtCompound();
-        this.read(this.getBlockState(), compound);
+        return new SUpdateTileEntityPacket(this.worldPosition, 13, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag()
     {
-        return this.writeItems(new CompoundNBT());
+        return this.saveMetadataAndItems(new CompoundNBT());
     }
 
-    public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn)
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
     {
-        return this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty()
-                : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn),
-                        this.world);
+        CompoundNBT compound = pkt.getTag();
+        this.load(this.getBlockState(), compound);
     }
 
-    public boolean addItem(ItemStack stack, int cookTime)
+    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemstackIn)
     {
-        for (int i = 0; i < this.inventory.size(); ++i)
+        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty()
+                : this.level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemstackIn),
+                        this.level);
+    }
+
+    public boolean placeFood(ItemStack itemstackIn, int cookTimeIn)
+    {
+        for (int i = 0; i < this.items.size(); ++i)
         {
-            ItemStack itemstack = this.inventory.get(i);
+            ItemStack itemstack = this.items.get(i);
             if (itemstack.isEmpty())
             {
-                this.cookingTotalTimes[i] = cookTime;
-                this.cookingTimes[i] = 0;
-                this.inventory.set(i, stack.split(1));
-                this.inventoryChanged();
-
+                this.cookingTime[i] = cookTimeIn;
+                this.cookingProgress[i] = 0;
+                this.items.set(i, itemstackIn.split(1));
+                this.markUpdated();
                 return true;
             }
         }
         return false;
     }
 
-    private void inventoryChanged()
+    private void markUpdated()
     {
-        this.markDirty();
-        this.getWorld().notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
     }
 
     @Override
-    public void clear()
+    public void clearContent()
     {
-        this.inventory.clear();
+        this.items.clear();
     }
 
-    public void dropAllItems()
+    public void dowse()
     {
-        if (!this.getWorld().isRemote())
+        if (this.level != null)
         {
-            InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
+            if (!this.level.isClientSide())
+            {
+                InventoryHelper.dropContents(this.level, this.getBlockPos(), this.getItems());
+            }
+            this.markUpdated();
         }
-        this.inventoryChanged();
     }
 }
