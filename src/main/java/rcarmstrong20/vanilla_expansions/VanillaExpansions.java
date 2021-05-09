@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
 
 import net.minecraft.block.BeetrootBlock;
 import net.minecraft.block.Block;
@@ -136,13 +135,11 @@ public class VanillaExpansions
     public static final String MOD_ID = "ve";
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-    public static final Map<Item, Integer> TOTEM_GUARDIAN_MAP = (new Builder<Item, Integer>())
-            .put(VeItems.totemOfTheGuardianI, 600).put(VeItems.totemOfTheGuardianII, 1200)
-            .put(VeItems.totemOfTheGuardianIII, 2400).put(VeItems.totemOfTheGuardianIV, 4800).build();
-
-    public static final Map<Item, Integer> TOTEM_BRUTE_MAP = (new Builder<Item, Integer>())
-            .put(VeItems.totemOfTheBruteI, 0).put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2)
-            .put(VeItems.totemOfTheBruteIV, 3).build();
+    public static final ImmutableMap<Item, Integer> TOTEM_GUARDIAN_MAP = ImmutableMap.of(VeItems.totemOfTheGuardianI,
+            600, VeItems.totemOfTheGuardianII, 1200, VeItems.totemOfTheGuardianIII, 2400, VeItems.totemOfTheGuardianIV,
+            4800);
+    public static final ImmutableMap<Item, Integer> TOTEM_BRUTE_MAP = ImmutableMap.of(VeItems.totemOfTheBruteI, 0,
+            VeItems.totemOfTheBruteII, 1, VeItems.totemOfTheBruteIII, 2, VeItems.totemOfTheBruteIV, 3);
 
     /**
      * This field is a mapping that represents which biome each villager type can
