@@ -20,12 +20,12 @@ public class VeTileEntityType
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister
             .create(ForgeRegistries.TILE_ENTITIES, VanillaExpansions.MOD_ID);
 
-    public static TileEntityType<VeColoredCampfireTileEntity> colored_campfire = register("colored_campfire",
-            TileEntityType.Builder.create(VeColoredCampfireTileEntity::new, VeBlocks.whiteCampfire,
-                    VeBlocks.orangeCampfire, VeBlocks.magentaCampfire, VeBlocks.lightBlueCampfire,
-                    VeBlocks.yellowCampfire, VeBlocks.limeCampfire, VeBlocks.pinkCampfire, VeBlocks.grayCampfire,
-                    VeBlocks.lightGrayCampfire, VeBlocks.cyanCampfire, VeBlocks.purpleCampfire, VeBlocks.blueCampfire,
-                    VeBlocks.brownCampfire, VeBlocks.greenCampfire, VeBlocks.redCampfire, VeBlocks.blackCampfire));
+    public static TileEntityType<VeColoredCampfireTileEntity> coloredCampfire = register("colored_campfire",
+            TileEntityType.Builder.of(VeColoredCampfireTileEntity::new, VeBlocks.whiteCampfire, VeBlocks.orangeCampfire,
+                    VeBlocks.magentaCampfire, VeBlocks.lightBlueCampfire, VeBlocks.yellowCampfire,
+                    VeBlocks.limeCampfire, VeBlocks.pinkCampfire, VeBlocks.grayCampfire, VeBlocks.lightGrayCampfire,
+                    VeBlocks.cyanCampfire, VeBlocks.purpleCampfire, VeBlocks.blueCampfire, VeBlocks.brownCampfire,
+                    VeBlocks.greenCampfire, VeBlocks.redCampfire, VeBlocks.blackCampfire));
 
     private static <T extends TileEntity> TileEntityType<T> register(String name, TileEntityType.Builder<T> builder)
     {
