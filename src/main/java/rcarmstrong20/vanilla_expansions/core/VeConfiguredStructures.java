@@ -4,8 +4,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructurePieces;
 
 /**
  * A class for holding every configured structure instance that vanilla
@@ -13,19 +16,27 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
  *
  * @author Ryan
  */
+
+@Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeConfiguredStructures
 {
-    public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin", VeStructure.overworldCabin
-            .withConfiguration(new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin"))));
+    public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin",
+            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            {
+                return VeCabinStructurePieces.TAIGA_START;
+            }, 10)));
     public static StructureFeature<?, ?> configuredIcyTaigaCabin = register("icy_taiga_cabin",
-            VeStructure.overworldCabin.withConfiguration(
-                    new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/icy_taiga_cabin"))));
+            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            {
+                return VeCabinStructurePieces.ICY_TAIGA_START;
+            }, 10)));
     public static StructureFeature<?, ?> configuredForestCabin = register("forest_cabin",
-            VeStructure.overworldCabin.withConfiguration(
-                    new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/forest_cabin"))));
-    public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin",
-            VeStructure.netherCabin.withConfiguration(
-                    new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"))));
+            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            {
+                return VeCabinStructurePieces.FOREST_START;
+            }, 10)));
+    public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin", VeStructure.netherCabin
+            .configured(new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"))));
 
     /**
      * A helper method for automatically registering every new configured structure
@@ -39,6 +50,6 @@ public class VeConfiguredStructures
     {
         Registry<StructureFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE;
 
-        return Registry.register(registry, new ResourceLocation(VanillaExpansions.MOD_ID, name), structure);
+        return WorldGenRegistries.register(registry, new ResourceLocation(VanillaExpansions.MOD_ID, name), structure);
     }
 }
