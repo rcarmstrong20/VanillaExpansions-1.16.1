@@ -1,7 +1,6 @@
 package rcarmstrong20.vanilla_expansions;
 
 import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,8 @@ import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.client.particle.ParticleManager.IParticleMetaFactory;
 import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -44,13 +45,13 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -68,9 +69,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -92,8 +93,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
-import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeTotemOfTheBruteParticle;
-import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeTotemOfTheGuardianParticle;
+import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeTotemParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUnderDarkMatterParticle;
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
@@ -136,8 +136,13 @@ public class VanillaExpansions
     public static final String MOD_ID = "ve";
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-    public static int lastMinuteGathered = LocalDateTime.now().getMinute();
-    public static boolean onCooldown = false;
+    public static final Map<Item, Integer> TOTEM_GUARDIAN_MAP = (new Builder<Item, Integer>())
+            .put(VeItems.totemOfTheGuardianI, 600).put(VeItems.totemOfTheGuardianII, 1200)
+            .put(VeItems.totemOfTheGuardianIII, 2400).put(VeItems.totemOfTheGuardianIV, 4800).build();
+
+    public static final Map<Item, Integer> TOTEM_BRUTE_MAP = (new Builder<Item, Integer>())
+            .put(VeItems.totemOfTheBruteI, 0).put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2)
+            .put(VeItems.totemOfTheBruteIV, 3).build();
 
     /**
      * This field is a mapping that represents which biome each villager type can
@@ -163,11 +168,12 @@ public class VanillaExpansions
         VePaintingType.PAINTING_TYPES.register(bus);
         VeParticleTypes.PARTICLES.register(bus);
         VePointOfInterestTypes.POI_TYPES.register(bus);
-        VeRecipeSerializers.RECIPES.register(bus);
+        VeRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
         VeSoundEvents.SOUNDS.register(bus);
         VeTileEntityType.TILE_ENTITY_TYPES.register(bus);
         VeVillagerProfessions.VILLAGER_PROFESSIONS.register(bus);
         VeFeature.FEATURES.register(bus);
+        VeStructure.STRUCTURES.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::clientRegistries);
@@ -208,16 +214,26 @@ public class VanillaExpansions
     {
         Block block = event.getState().getBlock();
         PlayerEntity player = event.getPlayer();
-        ItemStack stack = player.getHeldItem(player.getActiveHand());
+        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
 
-        if (block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
+        if (!player.isCreative() && block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
         {
             Random random = new Random();
+            int chance = VeCropConfig.VeBlockConfig.spruceConePercent.get();
+            float chose = random.nextFloat();
 
             // 5% chance to drop by default
-            if (random.nextFloat() <= (VeCropConfig.VeBlockConfig.spruceConePercent.get() / 100))
+            if (chose <= (chance / 100.0))
             {
-                Block.spawnAsEntity((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 1));
+                Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 1));
+            }
+            else
+            {
+                if (EnchantmentHelper.getEnchantments(stack).get(Enchantments.BLOCK_FORTUNE) != null
+                        && chose <= (chance / 100.0) * 4.0)
+                {
+                    Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 2));
+                }
             }
         }
     }
@@ -231,9 +247,9 @@ public class VanillaExpansions
     @OnlyIn(Dist.CLIENT)
     private void onRegisterParticle(ParticleFactoryRegisterEvent event)
     {
-        registerFactory(VeParticleTypes.drippingDarkMatter, VeDripParticle.VeDrippingVoidFactory::new);
-        registerFactory(VeParticleTypes.fallingDarkMatter, VeDripParticle.VeFallingVoidFactory::new);
-        registerFactory(VeParticleTypes.landingDarkMatter, VeDripParticle.VeLandingVoidFactory::new);
+        registerFactory(VeParticleTypes.drippingDarkMatter, VeDripParticle.VeDrippingDarkMatterFactory::new);
+        registerFactory(VeParticleTypes.fallingDarkMatter, VeDripParticle.VeFallingDarkMatterFactory::new);
+        registerFactory(VeParticleTypes.landingDarkMatter, VeDripParticle.VeLandingDarkMatterFactory::new);
         registerFactory(VeParticleTypes.underDarkMatter, VeUnderDarkMatterParticle.Factory::new);
         registerFactory(VeParticleTypes.whiteSpark, LavaParticle.Factory::new);
         registerFactory(VeParticleTypes.orangeSpark, LavaParticle.Factory::new);
@@ -267,8 +283,9 @@ public class VanillaExpansions
         registerFactory(VeParticleTypes.greenFlame, FlameParticle.Factory::new);
         registerFactory(VeParticleTypes.redFlame, FlameParticle.Factory::new);
         registerFactory(VeParticleTypes.blackFlame, FlameParticle.Factory::new);
-        registerFactory(VeParticleTypes.totemOfTheGuardian, VeTotemOfTheGuardianParticle.Factory::new);
-        registerFactory(VeParticleTypes.totemOfTheBrute, VeTotemOfTheBruteParticle.Factory::new);
+        registerFactory(VeParticleTypes.totemOfTheGuardian, VeTotemParticle.VeTotemOfTheGuardianFactory::new);
+        registerFactory(VeParticleTypes.totemOfTheBrute, VeTotemParticle.VeTotemOfTheBruteFactory::new);
+        registerFactory(VeParticleTypes.totemOfTheFortunate, VeTotemParticle.VeTotemOfTheFortunateFactory::new);
     }
 
     /**
@@ -282,7 +299,7 @@ public class VanillaExpansions
     private static void registerFactory(ParticleType<BasicParticleType> particleIn,
             IParticleMetaFactory<BasicParticleType> particleFactoryIn)
     {
-        Minecraft.getInstance().particles.registerFactory(particleIn, particleFactoryIn);
+        Minecraft.getInstance().particleEngine.register(particleIn, particleFactoryIn);
     }
     /*
      * @SubscribeEvent public void onPlayerTick(PlayerTickEvent event) {
@@ -357,22 +374,17 @@ public class VanillaExpansions
         }
     }
 
-    @SubscribeEvent
-    public void onEntityJump(LivingJumpEvent event)
-    {
-        LivingEntity livingEntity = event.getEntityLiving();
-        World world = livingEntity.getEntityWorld();
-        FluidState fluidState = world
-                .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(), livingEntity.getPosZ()));
-        Vector3d motion = livingEntity.getMotion();
-
-        if (fluidState.isTagged(VeFluidTags.darkMatter))
-        {
-            // livingEntity.addVelocity(0, 2.0, 0);
-            // livingEntity.setAIMoveSpeed(0.005F);
-            // VanillaExpansions.LOGGER.info("Entity Jumped");
-        }
-    }
+    /*
+     * @SubscribeEvent public void onEntityJump(LivingJumpEvent event) {
+     * LivingEntity livingEntity = event.getEntityLiving(); World world =
+     * livingEntity.getCommandSenderWorld(); FluidState fluidState = world
+     * .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(),
+     * livingEntity.getPosZ())); Vector3d motion = livingEntity;
+     *
+     * if (fluidState.isTagged(VeFluidTags.darkMatter)) { //
+     * livingEntity.addVelocity(0, 2.0, 0); // livingEntity.setAIMoveSpeed(0.005F);
+     * // VanillaExpansions.LOGGER.info("Entity Jumped"); } }
+     */
 
     @SubscribeEvent
     public void onLivingEntityFall(LivingFallEvent event)
@@ -398,31 +410,23 @@ public class VanillaExpansions
     @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event)
     {
-        Map<Item, Integer> totemGuardianMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheGuardianI, 600)
-                .put(VeItems.totemOfTheGuardianII, 1200).put(VeItems.totemOfTheGuardianIII, 2400)
-                .put(VeItems.totemOfTheGuardianIV, 4800).build();
-
-        Map<Item, Integer> totemBruteMap = (new Builder<Item, Integer>()).put(VeItems.totemOfTheBruteI, 0)
-                .put(VeItems.totemOfTheBruteII, 1).put(VeItems.totemOfTheBruteIII, 2).put(VeItems.totemOfTheBruteIV, 3)
-                .build();
-
         if (event.player instanceof ServerPlayerEntity)
         {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) event.player;
 
-            if (activateTotemOfTheBrute(totemBruteMap, Hand.MAIN_HAND, serverPlayer))
+            if (activateTotemOfTheBrute(TOTEM_BRUTE_MAP, Hand.MAIN_HAND, serverPlayer))
             {
                 removeFromMainHand(serverPlayer);
             }
-            else if (activateTotemOfTheBrute(totemBruteMap, Hand.OFF_HAND, serverPlayer))
+            else if (activateTotemOfTheBrute(TOTEM_BRUTE_MAP, Hand.OFF_HAND, serverPlayer))
             {
                 removeFromOffHand(serverPlayer);
             }
-            else if (activateTotemOfTheGuardian(totemGuardianMap, Hand.MAIN_HAND, serverPlayer))
+            else if (activateTotemOfTheGuardian(TOTEM_GUARDIAN_MAP, Hand.MAIN_HAND, serverPlayer))
             {
                 removeFromMainHand(serverPlayer);
             }
-            else if (activateTotemOfTheGuardian(totemGuardianMap, Hand.OFF_HAND, serverPlayer))
+            else if (activateTotemOfTheGuardian(TOTEM_GUARDIAN_MAP, Hand.OFF_HAND, serverPlayer))
             {
                 removeFromOffHand(serverPlayer);
             }
@@ -431,12 +435,13 @@ public class VanillaExpansions
         LivingEntity player = event.player;
 
         // Push the player when in flowing dark matter.
-        player.handleFluidAcceleration(VeFluidTags.darkMatter, 0.005);
+        player.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.005);
 
-        World world = player.getEntityWorld();
-        FluidState fluidState = world.getFluidState(new BlockPos(player.getPosX(), player.getPosY(), player.getPosZ()));
-        Vector3d motion = player.getMotion();
-        Vector3d motion2 = player.getMotion();
+        // World world = player.getEntityWorld();
+        // FluidState fluidState = world.getFluidState(new BlockPos(player.getPosX(),
+        // player.getPosY(), player.getPosZ()));
+        // Vector3d motion = player.getMotion();
+        // Vector3d motion2 = player.getMotion();
         // double height1 = player.getPosY();
 
         // VanillaExpansions.LOGGER.info(motion2.getY() + motion.getY());
@@ -454,17 +459,17 @@ public class VanillaExpansions
 
     private void removeFromMainHand(ServerPlayerEntity player)
     {
-        removeFromStack(player, player.getHeldItem(Hand.MAIN_HAND), Hand.MAIN_HAND);
+        removeFromStack(player, player.getItemInHand(Hand.MAIN_HAND), Hand.MAIN_HAND);
     }
 
     private void removeFromOffHand(ServerPlayerEntity player)
     {
-        removeFromStack(player, player.getHeldItem(Hand.OFF_HAND), Hand.OFF_HAND);
+        removeFromStack(player, player.getItemInHand(Hand.OFF_HAND), Hand.OFF_HAND);
     }
 
-    private void removeFromStack(ServerPlayerEntity player, ItemStack heldStack, Hand hand)
+    private void removeFromStack(PlayerEntity player, ItemStack heldStack, Hand hand)
     {
-        player.setHeldItem(hand, new ItemStack(heldStack.getItem(), (heldStack.getCount() - 1)));
+        player.setItemInHand(hand, new ItemStack(heldStack.getItem(), (heldStack.getCount() - 1)));
     }
 
     /**
@@ -478,37 +483,27 @@ public class VanillaExpansions
     private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
         Random rand = new Random();
-        ItemStack heldStack = player.getHeldItem(hand);
+        ItemStack heldStack = player.getItemInHand(hand);
         float halfHealth = player.getMaxHealth() / 2;
-        int currentMinute = LocalDateTime.now().getMinute();
 
-        if (!onCooldown && player.getHealth() <= halfHealth && itemToPowerLvl.containsKey(heldStack.getItem()))
+        if (!(player.getCooldowns().isOnCooldown(VeItems.totemOfTheBruteI)) && player.getHealth() <= halfHealth
+                && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            setOnCooldown(true);
+            // Give every brute totem a cooldown of 30 seconds.
+            for (Item totem : itemToPowerLvl.keySet())
+            {
+                player.getCooldowns().addCooldown(totem, 900);
+            }
 
-            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 600, itemToPowerLvl.get(heldStack.getItem())));
-            player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 600, 1));
+            player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, itemToPowerLvl.get(heldStack.getItem())));
+            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 2));
             spawnParticles(VeParticleTypes.totemOfTheBrute, player, rand);
-            VanillaExpansions.LOGGER.info("Used brute totem");
             return true;
-        }
-        else if (onCooldown && (currentMinute - lastMinuteGathered) >= 4)
-        {
-            setOnCooldown(false);
-            player.sendStatusMessage(ITextComponent
-                    .getTextComponentOrEmpty("\u00A72" + "<Totem Of The Brute> The totem's cooldown is over."), false);
-            lastMinuteGathered = currentMinute;
-            return false;
         }
         else
         {
             return false;
         }
-    }
-
-    public static void setOnCooldown(boolean onCooldown)
-    {
-        VanillaExpansions.onCooldown = onCooldown;
     }
 
     /**
@@ -521,17 +516,15 @@ public class VanillaExpansions
      */
     private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
-        Random rand = new Random();
-        ItemStack heldStack = player.getHeldItem(hand);
-        int maxAir = player.getMaxAir();
+        ItemStack heldStack = player.getItemInHand(hand);
+        int maxAir = player.getMaxAirSupply();
 
-        if (player.getAir() == 0 && itemToPowerLvl.containsKey(heldStack.getItem()))
+        if (player.getAirSupply() == 0 && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            player.addPotionEffect(
-                    new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
-            player.setAir(maxAir);
+            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
+            player.setAirSupply(maxAir);
 
-            spawnParticles(VeParticleTypes.totemOfTheGuardian, player, rand);
+            spawnParticles(VeParticleTypes.totemOfTheGuardian, player, player.getRandom());
             return true;
         }
         else
@@ -544,17 +537,17 @@ public class VanillaExpansions
     {
         int max = rand.nextInt(15) + 15;
 
-        serverPlayer.playSound(SoundEvents.ITEM_TOTEM_USE, 20000, 10000);
+        serverPlayer.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
 
         for (int i = 0; i <= max; i++)
         {
             int count = rand.nextInt(5) + 5;
-            double x = serverPlayer.getPosXRandom(2.0);
-            double y = serverPlayer.getPosYRandom();
-            double z = serverPlayer.getPosZRandom(2.0);
+            double x = serverPlayer.getRandomX(2.0);
+            double y = serverPlayer.getRandomY();
+            double z = serverPlayer.getRandomZ(2.0);
 
-            serverPlayer.getServerWorld().spawnParticle(serverPlayer, particle, true, x, y, z, count, 0.0, 1.0, 0.0,
-                    0.0);
+            serverPlayer.getServer().overworld().sendParticles(serverPlayer, particle, true, x, y, z, count, 0.0, 1.0,
+                    0.0, 0.0);
         }
     }
 
@@ -568,11 +561,11 @@ public class VanillaExpansions
     public void onFogColor(EntityViewRenderEvent.FogColors event)
     {
         ActiveRenderInfo info = event.getInfo();
-        FluidState state = info.getFluidState();
+        FluidState state = info.getFluidInCamera();
 
         float black = 0.0F;
 
-        if (state.getFluid() instanceof VeDarkMatterFluid)
+        if (state.getType() instanceof VeDarkMatterFluid)
         {
             event.setRed(black);
             event.setGreen(black);
@@ -590,12 +583,87 @@ public class VanillaExpansions
     public void onFogDensity(EntityViewRenderEvent.FogDensity event)
     {
         ActiveRenderInfo info = event.getInfo();
-        FluidState state = info.getFluidState();
-        if (state.getFluid() instanceof VeDarkMatterFluid)
+        FluidState state = info.getFluidInCamera();
+        if (state.getType() instanceof VeDarkMatterFluid)
         {
             event.setDensity(0.5F);
             event.setCanceled(true);
         }
+    }
+
+    @SubscribeEvent
+    public void onRandomTick(BlockEvent.CropGrowEvent.Pre event)
+    {
+        Random random = new Random();
+        Block crop = event.getState().getBlock();
+        Block soil = event.getWorld().getBlockState(event.getPos().below()).getBlock();
+
+        if (VeBlockTags.fertileSoil.contains(soil) && (crop instanceof CropsBlock || crop instanceof BeetrootBlock))
+        {
+            float f = getGrowthChance(crop, event.getWorld(), event.getPos());
+
+            event.setResult(random.nextInt((int) (25.0F / f) + 1) == 0 ? Result.ALLOW : Result.DENY);
+        }
+        else
+        {
+            event.setResult(Result.DEFAULT);
+        }
+    }
+
+    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos)
+    {
+        float f = 1.0F;
+        BlockPos blockpos = pos.below();
+
+        for (int i = -1; i <= 1; ++i)
+        {
+            for (int j = -1; j <= 1; ++j)
+            {
+                float f1 = 0.0F;
+                BlockState blockstate = worldIn.getBlockState(blockpos.offset(i, 0, j));
+                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), Direction.UP, (IPlantable) blockIn))
+                {
+                    f1 = 1.0F;
+                    if (blockstate.is(VeBlockTags.fertileSoil))
+                    {
+                        pos.offset(i, 0, j);
+                        f1 = 3.0F;
+                    }
+                }
+
+                if (i != 0 || j != 0)
+                {
+                    f1 /= 4.0F;
+                }
+
+                f += f1;
+            }
+        }
+
+        BlockPos northPos = pos.north();
+        BlockPos southPos = pos.south();
+        BlockPos westPos = pos.west();
+        BlockPos eastpos = pos.east();
+        boolean flag = blockIn.equals(worldIn.getBlockState(westPos).getBlock())
+                || blockIn.equals(worldIn.getBlockState(eastpos).getBlock());
+        boolean flag1 = blockIn.equals(worldIn.getBlockState(northPos).getBlock())
+                || blockIn.equals(worldIn.getBlockState(southPos).getBlock());
+        if (flag && flag1)
+        {
+            f /= 2.0F;
+        }
+        else
+        {
+            boolean flag2 = blockIn == worldIn.getBlockState(westPos.north()).getBlock()
+                    || blockIn == worldIn.getBlockState(eastpos.north()).getBlock()
+                    || blockIn == worldIn.getBlockState(eastpos.south()).getBlock()
+                    || blockIn == worldIn.getBlockState(westPos.south()).getBlock();
+            if (flag2)
+            {
+                f /= 2.0F;
+            }
+        }
+        return f;
     }
 
     /**
@@ -608,50 +676,58 @@ public class VanillaExpansions
     {
         BlockPos pos = event.getPos();
         World world = event.getWorld();
-        BlockState worldState = event.getWorld().getBlockState(pos);
+        BlockState state = event.getWorld().getBlockState(pos);
         ItemStack itemStack = event.getItemStack();
+        PlayerEntity player = event.getPlayer();
         IntegerProperty cropsAge = CropsBlock.AGE;
         IntegerProperty netherWartAge = NetherWartBlock.AGE;
-        IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
+        IntegerProperty beetrootAge = BeetrootBlock.AGE;
         IntegerProperty cocoaAge = CocoaBlock.AGE;
         boolean flag = VeCropConfig.VeBlockConfig.enableSmartHarvest.get();
 
-        if (!event.getWorld().isRemote())
+        if (!event.getWorld().isClientSide())
         {
+            if (itemStack.getItem() == VeBlocks.snapdragon.asItem() && state.getBlock() == Blocks.FLOWER_POT)
+            {
+                removeFromStack(player, itemStack, player.getUsedItemHand());
+                world.setBlock(pos, VeBlocks.pottedSnapdragon.defaultBlockState(), 3);
+                player.swing(Hand.MAIN_HAND, true);
+                event.setCanceled(true);
+            }
             if (flag)
             {
-                if (worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+                if (state.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
                 {
-                    if (worldState.getBlock() instanceof BeetrootBlock)
+                    if (state.getBlock() instanceof BeetrootBlock)
                     {
-                        if (worldState.get(beetrootAge).equals(getMaxAge(beetrootAge)))
+                        if (state.getValue(beetrootAge).equals(getMaxAge(beetrootAge)))
                         {
-                            resetCrop(worldState, world, pos, beetrootAge);
+                            resetCrop(state, world, pos, player, beetrootAge);
                             event.setResult(Result.ALLOW);
                             event.setCanceled(true);
                         }
                     }
-                    else if (worldState.get(cropsAge).equals(getMaxAge(cropsAge)))
+                    else if (state.getValue(cropsAge).equals(getMaxAge(cropsAge)))
                     {
-                        resetCrop(worldState, world, pos, cropsAge);
+                        resetCrop(state, world, pos, player, cropsAge);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
                 }
-                else if (worldState.getBlock() instanceof NetherWartBlock)
+                else if (state.getBlock() instanceof NetherWartBlock)
                 {
-                    if (worldState.get(netherWartAge).equals(getMaxAge(netherWartAge)))
+                    if (state.getValue(netherWartAge).equals(getMaxAge(netherWartAge)))
                     {
-                        resetCrop(worldState, world, pos, netherWartAge);
+                        resetCrop(state, world, pos, player, netherWartAge);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
                 }
-                else if (worldState.getBlock() instanceof CocoaBlock)
+                else if (state.getBlock() instanceof CocoaBlock)
                 {
-                    if (worldState.get(cocoaAge) == getMaxAge(cocoaAge))
+                    if (state.getValue(cocoaAge) == getMaxAge(cocoaAge))
                     {
-                        resetCrop(worldState, world, pos, cocoaAge);
+                        resetCrop(state, world, pos, player, cocoaAge);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
@@ -672,13 +748,11 @@ public class VanillaExpansions
      * @param pos   The position for the crop to harvest.
      * @param age   The age property for this crop.
      */
-    private static void resetCrop(BlockState state, World world, BlockPos pos, IntegerProperty age)
+    private static void resetCrop(BlockState state, World world, BlockPos pos, PlayerEntity player, IntegerProperty age)
     {
-        Block.replaceBlock(state, Blocks.AIR.getDefaultState(), world, pos, 1); // Note: If the replacement block is
-                                                                                // anything but air the blocks don't
-                                                                                // drop and play their appropriate
-                                                                                // sound.
-        world.setBlockState(pos, state.with(age, 0));
+        Block.updateOrDestroy(state, Blocks.AIR.defaultBlockState(), world, pos, 1);
+        world.setBlock(pos, state.setValue(age, 0), 2);
+        player.swing(Hand.MAIN_HAND, true);
     }
 
     /**
@@ -687,7 +761,7 @@ public class VanillaExpansions
      */
     private int getMaxAge(IntegerProperty age)
     {
-        return age.getAllowedValues().size() - 1;
+        return age.getPossibleValues().size() - 1;
     }
 
     @SubscribeEvent
@@ -698,8 +772,8 @@ public class VanillaExpansions
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
 
             // Don't add structures to superflat worlds.
-            if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator
-                    && serverWorld.getDimensionKey().equals(World.OVERWORLD))
+            if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator
+                    && serverWorld.dimension().equals(World.OVERWORLD))
             {
                 return;
             }
@@ -723,7 +797,7 @@ public class VanillaExpansions
     private static void addSpacing(ServerWorld serverWorld, Structure<?> structure, int maxChunkSeperation,
             int minChunkSeperation, int structureSeed)
     {
-        serverWorld.getChunkProvider().getChunkGenerator().func_235957_b_().func_236195_a_().put(structure,
+        serverWorld.getChunkSource().getGenerator().getSettings().structureConfig().put(structure,
                 new StructureSeparationSettings(maxChunkSeperation, minChunkSeperation, structureSeed));
     }
 
@@ -750,6 +824,7 @@ public class VanillaExpansions
         boolean purpleMushroomFlag = VeFeatureGenConfig.VeOverworldConfig.enablePurpleMushroomSpawns.get();
         boolean swampMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableSwampMudSpawns.get();
         boolean riverMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableRiverMudSpawns.get();
+        boolean cattailFlag = VeFeatureGenConfig.VeOverworldConfig.enableCattailSpawns.get();
 
         int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
         int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
@@ -790,7 +865,7 @@ public class VanillaExpansions
                 riverMudFlag);
         addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_SWAMP_MUD,
                 swampMudFlag);
-        addFeature(event, Category.SWAMP, vegetal, VeConfiguredFeatures.CATTAIL_SWAMP, true);
+        addFeature(event, Category.SWAMP, vegetal, VeConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
 
         addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
@@ -1007,7 +1082,7 @@ public class VanillaExpansions
         // bone meal.
         if (VeBlockTags.endBoneMealable.contains(event.getBlock().getBlock()))
         {
-            if (!world.isRemote) // Only place the snapdragon blocks server side.
+            if (!world.isClientSide()) // Only place the snapdragon blocks server side.
             {
                 for (int i = 0; i < 128; ++i)
                 {
@@ -1015,14 +1090,14 @@ public class VanillaExpansions
 
                     for (int j = 0; j < i / 16; ++j)
                     {
-                        blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2,
-                                random.nextInt(3) - 1);
+                        blockpos = blockpos.offset(random.nextInt(3) - 1,
+                                (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
 
-                        if (VeBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.down()).getBlock())
+                        if (VeBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.below()).getBlock())
                                 && isAir(world.getBlockState(blockpos)))
                         {
-                            world.setBlockState(blockpos,
-                                    VeBlockTags.endBoneMealPlants.getRandomElement(random).getDefaultState());
+                            world.setBlock(blockpos,
+                                    VeBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 1);
                         }
                     }
                 }
