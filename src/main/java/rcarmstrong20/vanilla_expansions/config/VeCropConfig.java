@@ -29,8 +29,6 @@ public class VeCropConfig
 
             spruceConePercent = server.comment("The chance that a spruce cone will drop from spruce leaves.")
                     .translation("ve_block_config.spruce_cone_percent").defineInRange("spruce_cone_percent", 5, 0, 100);
-
-            server.pop();
         }
     }
 }
