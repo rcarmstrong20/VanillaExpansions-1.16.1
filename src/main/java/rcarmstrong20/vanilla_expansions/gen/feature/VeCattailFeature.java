@@ -23,8 +23,10 @@ public class VeCattailFeature extends Feature<ProbabilityConfig>
         super(codec);
     }
 
+    // SeaGrassFeature
+
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos,
+    public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos,
             ProbabilityConfig config)
     {
         boolean flag = false;
@@ -32,19 +34,18 @@ public class VeCattailFeature extends Feature<ProbabilityConfig>
         int j = rand.nextInt(8) - rand.nextInt(8);
         int k = reader.getHeight(Heightmap.Type.OCEAN_FLOOR, pos.getX() + i, pos.getZ() + j);
         BlockPos blockpos = new BlockPos(pos.getX() + i, k, pos.getZ() + j);
-        if (reader.getBlockState(blockpos).isIn(Blocks.WATER))
+        if (reader.getBlockState(blockpos).is(Blocks.WATER))
         {
-            BlockState state = VeBlocks.cattail.getDefaultState().with(VeCattailBlock.AGE, 3);
-            if (state.isValidPosition(reader, blockpos))
+            BlockState state = VeBlocks.cattail.defaultBlockState().setValue(VeCattailBlock.AGE, 3);
+            if (state.canSurvive(reader, blockpos))
             {
-                BlockState stateTop = state.with(VeCattailBlock.HALF, DoubleBlockHalf.UPPER);
-                BlockState stateBottom = state.with(VeCattailBlock.WATERLOGGED, true);
-                BlockPos blockpos1 = blockpos.up();
-                if (reader.getBlockState(blockpos1).isIn(Blocks.AIR)
-                        && reader.getBlockState(blockpos).isIn(Blocks.WATER))
+                BlockState stateTop = state.setValue(VeCattailBlock.HALF, DoubleBlockHalf.UPPER);
+                BlockState stateBottom = state.setValue(VeCattailBlock.WATERLOGGED, true);
+                BlockPos blockpos1 = blockpos.above();
+                if (reader.getBlockState(blockpos1).is(Blocks.AIR) && reader.getBlockState(blockpos).is(Blocks.WATER))
                 {
-                    reader.setBlockState(blockpos, stateBottom, 2);
-                    reader.setBlockState(blockpos1, stateTop, 2);
+                    reader.setBlock(blockpos, stateBottom, 2);
+                    reader.setBlock(blockpos1, stateTop, 2);
                 }
 
                 flag = true;
