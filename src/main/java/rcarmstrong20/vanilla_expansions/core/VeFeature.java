@@ -20,7 +20,7 @@ public class VeFeature
 
     private static <C extends IFeatureConfig> Feature<?> register(String name, Feature<C> feature)
     {
+        FEATURES.register(name, () -> feature);
         return feature;
     }
-
 }
