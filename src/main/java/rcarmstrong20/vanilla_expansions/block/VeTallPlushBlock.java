@@ -1,15 +1,11 @@
 package rcarmstrong20.vanilla_expansions.block;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -36,68 +32,67 @@ public class VeTallPlushBlock extends VePlushBlock
     public VeTallPlushBlock(Properties properties)
     {
         super(properties);
-        this.setDefaultState(
-                this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(PLUSH_STACK_SIZE, 1));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER)
+                .setValue(PLUSH_STACK_SIZE, 1).setValue(WATERLOGGED, false));
     }
 
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+    public void placeTop(World world, BlockPos pos, BlockState state)
     {
-        BlockPos posUp = pos.up();
-        FluidState fluidState = world.getFluidState(posUp);
-        boolean flag = fluidState.isTagged(FluidTags.WATER) && fluidState.getLevel() == 8;
+        FluidState fluidstate = world.getFluidState(pos);
+        boolean flag = fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8;
 
-        if (state.get(PLUSH_STACK_SIZE) == 3)
+        if (state.getValue(PLUSH_STACK_SIZE).equals(2))
         {
-            world.setBlockState(posUp, state.with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, flag), 3);
+            world.setBlock(pos, state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(PLUSH_STACK_SIZE, 3)
+                    .setValue(WATERLOGGED, flag), 3);
         }
     }
 
     @Override
-    @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        BlockState blockstate = context.getWorld().getBlockState(context.getPos());
+        BlockPos pos = context.getClickedPos();
+        World world = context.getLevel();
+        BlockState blockstate = world.getBlockState(pos);
+
         if (blockstate.getBlock() == this)
         {
-            return blockstate.with(PLUSH_STACK_SIZE,
-                    Integer.valueOf(Math.min(3, blockstate.get(PLUSH_STACK_SIZE) + 1)));
+            placeTop(world, pos.above(), blockstate);
+
+            return blockstate.setValue(PLUSH_STACK_SIZE, Math.min(3, blockstate.getValue(PLUSH_STACK_SIZE) + 1));
         }
         else
         {
-            FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-            boolean flag = fluidstate.isTagged(FluidTags.WATER) && fluidstate.getLevel() == 8;
-
-            return super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(flag));
+            return super.getStateForPlacement(context);
         }
     }
 
     @Override
-    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext)
+    public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext)
     {
-        BlockPos pos = useContext.getPos().up();
-        BlockState worldState = useContext.getWorld().getBlockState(pos);
+        BlockPos pos = useContext.getClickedPos().above();
+        BlockState worldState = useContext.getLevel().getBlockState(pos);
 
-        if (useContext.getItem().getItem() == this.asItem())
+        if (useContext.getItemInHand().getItem() == this.asItem())
         {
-            return state.get(PLUSH_STACK_SIZE) < 3
+            return state.getValue(PLUSH_STACK_SIZE) < 3
                     && (VanillaExpansions.isAir(worldState) || VanillaExpansions.isLiquid(worldState)) ? true : false;
         }
         return false;
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player)
+    public void playerWillDestroy(World world, BlockPos pos, BlockState state, PlayerEntity player)
     {
-        if (state.get(PLUSH_STACK_SIZE) == 3)
+        if (state.getValue(PLUSH_STACK_SIZE) == 3)
         {
-            if (state.get(HALF) == DoubleBlockHalf.UPPER)
+            if (state.getValue(HALF) == DoubleBlockHalf.UPPER)
             {
-                this.breakOtherBlock(world, pos.down(), player);
+                this.breakOtherBlock(world, pos.below(), player);
             }
-            else if (state.get(HALF) == DoubleBlockHalf.LOWER)
+            else if (state.getValue(HALF) == DoubleBlockHalf.LOWER)
             {
-                this.breakOtherBlock(world, pos.up(), player);
+                this.breakOtherBlock(world, pos.above(), player);
             }
         }
         world.destroyBlock(pos, Boolean.valueOf(!player.isCreative()));
@@ -112,22 +107,22 @@ public class VeTallPlushBlock extends VePlushBlock
      */
     protected void breakOtherBlock(World world, BlockPos otherPos, PlayerEntity player)
     {
-        if (world.getBlockState(otherPos).get(WATERLOGGED))
+        if (world.getFluidState(otherPos).is(FluidTags.WATER))
         {
-            world.setBlockState(otherPos, Blocks.WATER.getDefaultState(), 35);
+            world.setBlock(otherPos, Blocks.WATER.defaultBlockState(), 35);
         }
         else
         {
-            world.setBlockState(otherPos, Blocks.AIR.getDefaultState(), 35);
+            world.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
         }
 
-        world.playEvent(player, 2001, otherPos, Block.getStateId(world.getBlockState(otherPos)));
+        world.levelEvent(player, 2001, otherPos, Block.getId(world.getBlockState(otherPos)));
     }
 
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING, WATERLOGGED, PLUSH_STACK_SIZE, HALF);
+        builder.add(FACING, WATERLOGGED, PLUSH_STACK_SIZE, HALF);
     }
 
     /**
@@ -140,14 +135,14 @@ public class VeTallPlushBlock extends VePlushBlock
     protected VoxelShape getStackSizeShapes(BlockState state, VoxelShape stackSizeShapeBottom,
             VoxelShape stackSizeShapeMiddle, VoxelShape stackSizeShapeTop)
     {
-        switch (state.get(PLUSH_STACK_SIZE))
+        switch (state.getValue(PLUSH_STACK_SIZE))
         {
             case 1:
                 return stackSizeShapeBottom;
             case 2:
                 return stackSizeShapeMiddle;
             default:
-                return state.get(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop : stackSizeShapeMiddle;
+                return state.getValue(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop : stackSizeShapeMiddle;
         }
     }
 }
