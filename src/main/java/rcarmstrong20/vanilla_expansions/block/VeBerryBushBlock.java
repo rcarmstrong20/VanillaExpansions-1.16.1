@@ -117,16 +117,21 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     @Override
     public void entityInside(BlockState state, World world, BlockPos pos, Entity entityIn)
     {
-        if (this.getBlock() == VeBlocks.witchsCradle)
+        if (entityIn instanceof LivingEntity)
         {
-            super.entityInside(state, world, pos, entityIn);
-        }
-        else
-        {
-            if (entityIn instanceof LivingEntity && entityIn.getType() != EntityType.FOX
-                    && entityIn.getType() != EntityType.BEE)
+            if (this.getBlock() == VeBlocks.witchsCradle)
             {
-                entityIn.makeStuckInBlock(state, new Vector3d(0.8F, 0.75D, 0.8F));
+                if (entityIn.getType() != EntityType.SLIME)
+                {
+                    super.entityInside(state, world, pos, entityIn);
+                }
+            }
+            else
+            {
+                if (entityIn.getType() != EntityType.FOX && entityIn.getType() != EntityType.BEE)
+                {
+                    entityIn.makeStuckInBlock(state, new Vector3d(0.8F, 0.75D, 0.8F));
+                }
             }
         }
     }
