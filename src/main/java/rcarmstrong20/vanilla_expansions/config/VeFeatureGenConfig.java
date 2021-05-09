@@ -32,6 +32,7 @@ public class VeFeatureGenConfig
         public static BooleanValue enablePurpleMushroomSpawns;
         public static BooleanValue enableSwampMudSpawns;
         public static BooleanValue enableRiverMudSpawns;
+        public static BooleanValue enableCattailSpawns;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
@@ -72,6 +73,10 @@ public class VeFeatureGenConfig
             enableRiverMudSpawns = server.comment(compileBooleanSpawnComment("river mud"))
                     .translation("ve.configFeature.enableRiverMudSpawns").worldRestart()
                     .define("enable_river_mud_spawns", true);
+
+            enableCattailSpawns = server.comment(compileBooleanSpawnComment("cattails"))
+                    .translation("ve.configFeature.enableCattailSpawns").worldRestart()
+                    .define("enable_cattail_spawns", true);
 
             server.pop();
         }
