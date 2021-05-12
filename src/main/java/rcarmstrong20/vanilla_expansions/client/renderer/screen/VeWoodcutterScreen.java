@@ -81,9 +81,6 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
         }
     }
 
-    /**
-     * Draw the background for the screen.
-     */
     private void renderButtons(MatrixStack matrixStack, int mouseX, int mouseY, int left, int top,
             int recipeIndexOffsetMax)
     {
