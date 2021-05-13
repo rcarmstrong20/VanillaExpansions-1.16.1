@@ -249,7 +249,8 @@
   "block.ve.chocolate_cake": "Chocolate Cake",
   "block.ve.red_velvet_cake": "Red Velvet Cake",
   
-  "container.woodcutter": "Woodcutter", 
+  "container.woodcutter": "Woodcutter",
+  "container.transmutation_table": "Transmutation Table",
 
   "item.ve.ruby": "Nether Ruby",
   "item.ve.bok_choy_seeds": "Bok Choy Seeds",
@@ -293,6 +294,9 @@
   "item.ve.mud_brick": "Mud Brick",
   "item.ve.brown_cattail": "Brown Cattail",
   "item.ve.green_cattail": "Green Cattail",
+  "item.ve.ocean_essence": "Ocean Essence",
+  "item.ve.rage_essence": "Rage Essence",
+  "item.ve.luck_essence": "Luck Essence",
   
   "advancements.ve.story.root.title": "Vanilla expansions",
   "advancements.ve.story.root.description": "A mod designed to enhance vanilla gameplay",
