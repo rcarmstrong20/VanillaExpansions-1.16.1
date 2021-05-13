@@ -124,6 +124,9 @@ public class VeItems
     public static Item brownCattail = register("brown_cattail",
             new BlockNamedItem(VeBlocks.cattail, buildProperties()));
     public static Item greenCattail = register("green_cattail", new Item(buildProperties(VeFoods.greenCattail)));
+    public static Item oceanEssence = register("ocean_essence", new Item(buildProperties()));
+    public static Item rageEssence = register("rage_essence", new Item(buildProperties()));
+    public static Item luckEssence = register("luck_essence", new Item(buildProperties()));
 
     /**
      * A helper method that builds default properties for a item.
