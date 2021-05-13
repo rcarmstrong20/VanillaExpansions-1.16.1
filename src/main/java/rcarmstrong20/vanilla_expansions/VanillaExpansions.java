@@ -298,34 +298,6 @@ public class VanillaExpansions
     {
         Minecraft.getInstance().particleEngine.register(particleIn, particleFactoryIn);
     }
-    /*
-     * @SubscribeEvent public void onPlayerTick(PlayerTickEvent event) {
-     *
-     *
-     * // player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(-0.001);
-     *
-     * // if (player.areEyesInFluid(VeFluidTags.darkMatter)) { //
-     * player.setMotion(player.getMotion().add(0.0D, 0.3D, 0.0D));
-     *
-     * /* double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D :
-     * 0.06D;
-     *
-     * Vector3d vector3d1 = player.getMotion(); player.setMotion(vector3d1.add(0.0D,
-     * (d3 - vector3d1.y) * d4, 0.0D));
-     */
-    /*
-     * double d3 = player.getLookVec().y; double d4 = d3 < -0.2D ? 0.085D : 0.06D;
-     * if (d3 <= 0.0D || player.getMotion().getY() > 0 || !player.world
-     * .getBlockState(new BlockPos(player.getPosX(), player.getPosY() + 1.0D - 0.1D,
-     * player.getPosZ())) .getFluidState().isEmpty()) {
-     *
-     * }
-     */
-    // VanillaExpansions.LOGGER.info("Swimming");
-    // }
-
-    // VanillaExpansions.LOGGER.info("Swimming");
-    // }
 
     @SuppressWarnings("unchecked") // Needed for the byBiome field.
     @SubscribeEvent
@@ -371,31 +343,10 @@ public class VanillaExpansions
         }
     }
 
-    /*
-     * @SubscribeEvent public void onEntityJump(LivingJumpEvent event) {
-     * LivingEntity livingEntity = event.getEntityLiving(); World world =
-     * livingEntity.getCommandSenderWorld(); FluidState fluidState = world
-     * .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(),
-     * livingEntity.getPosZ())); Vector3d motion = livingEntity;
-     *
-     * if (fluidState.isTagged(VeFluidTags.darkMatter)) { //
-     * livingEntity.addVelocity(0, 2.0, 0); // livingEntity.setAIMoveSpeed(0.005F);
-     * // VanillaExpansions.LOGGER.info("Entity Jumped"); } }
-     */
-
     @SubscribeEvent
     public void onLivingEntityFall(LivingFallEvent event)
     {
         LivingEntity livingEntity = event.getEntityLiving();
-        /*
-         * World world = livingEntity.getEntityWorld(); FluidState fluidState = world
-         * .getFluidState(new BlockPos(livingEntity.getPosX(), livingEntity.getPosY(),
-         * livingEntity.getPosZ())); Vector3d motion = livingEntity.getMotion();
-         *
-         * if (fluidState.isTagged(VeFluidTags.darkMatter)) {
-         * livingEntity.setMotion(motion.getX(), motion.getY() + 2, motion.getZ());
-         * VanillaExpansions.LOGGER.info("Entity is falling"); }
-         */
 
         // Cancels rabbit fall damage.
         if (VeEntityConfig.VeOverworldConfig.enableSaveTheBunnies.get() && livingEntity instanceof RabbitEntity)
@@ -407,7 +358,9 @@ public class VanillaExpansions
     @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event)
     {
-        if (event.player instanceof ServerPlayerEntity)
+        PlayerEntity player = event.player;
+
+        if (event.side.isServer() && player instanceof ServerPlayerEntity)
         {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) event.player;
 
@@ -429,29 +382,8 @@ public class VanillaExpansions
             }
         }
 
-        LivingEntity player = event.player;
-
         // Push the player when in flowing dark matter.
         player.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.005);
-
-        // World world = player.getEntityWorld();
-        // FluidState fluidState = world.getFluidState(new BlockPos(player.getPosX(),
-        // player.getPosY(), player.getPosZ()));
-        // Vector3d motion = player.getMotion();
-        // Vector3d motion2 = player.getMotion();
-        // double height1 = player.getPosY();
-
-        // VanillaExpansions.LOGGER.info(motion2.getY() + motion.getY());
-
-        // VanillaExpansions.LOGGER.info(height1 + " and " + prevY);
-
-        // When the player is standing the motion of second - first =
-        // -0.1568000030517578.
-        /*
-         * if (fluidState.isTagged(VeFluidTags.darkMatter) && height1 - prevY < 0) { //
-         * player.addVelocity(0, motion.getY() * 0.005, 0); //prevY = height1;
-         * //VanillaExpansions.LOGGER.info("Falling height is " + (prevY - height1)); }
-         */
     }
 
     private void removeFromMainHand(ServerPlayerEntity player)
@@ -473,13 +405,12 @@ public class VanillaExpansions
      * Trigger the brute totem's power.
      *
      * @param itemToPowerLvl A map that associates the item with an amplifier level.
-     * @param hand           The player's hand which is holding the item.
+     * @param hand           The player's hand holding the item.
      * @param player         The player using this item.
-     * @return true if this method successfully enacts an action.
+     * @return true if the totem was used.
      */
     private boolean activateTotemOfTheBrute(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
-        Random rand = new Random();
         ItemStack heldStack = player.getItemInHand(hand);
         float halfHealth = player.getMaxHealth() / 2;
 
@@ -494,22 +425,19 @@ public class VanillaExpansions
 
             player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, itemToPowerLvl.get(heldStack.getItem())));
             player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 2));
-            spawnParticles(VeParticleTypes.totemOfTheBrute, player, rand);
+            spawnParticles(VeParticleTypes.totemOfTheBrute, player);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     /**
      * Trigger the guardian totem's power.
      *
      * @param itemToPowerLvl A map that associates the item with a time duration.
-     * @param hand           The player's hand which is holding the item.
+     * @param hand           The player's hand holding the item.
      * @param player         The player using this item.
-     * @return true if this method successfully enacts an action.
+     * @return true if the totem was used.
      */
     private boolean activateTotemOfTheGuardian(Map<Item, Integer> itemToPowerLvl, Hand hand, ServerPlayerEntity player)
     {
@@ -521,7 +449,7 @@ public class VanillaExpansions
             player.addEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
             player.setAirSupply(maxAir);
 
-            spawnParticles(VeParticleTypes.totemOfTheGuardian, player, player.getRandom());
+            spawnParticles(VeParticleTypes.totemOfTheGuardian, player);
             return true;
         }
         else
@@ -530,15 +458,16 @@ public class VanillaExpansions
         }
     }
 
-    private void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer, Random rand)
+    private void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer)
     {
-        int max = rand.nextInt(15) + 15;
+        Random random = serverPlayer.getRandom();
+        int max = random.nextInt(15) + 15;
 
         serverPlayer.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
 
         for (int i = 0; i <= max; i++)
         {
-            int count = rand.nextInt(5) + 5;
+            int count = random.nextInt(5) + 5;
             double x = serverPlayer.getRandomX(2.0);
             double y = serverPlayer.getRandomY();
             double z = serverPlayer.getRandomZ(2.0);
@@ -548,11 +477,6 @@ public class VanillaExpansions
         }
     }
 
-    /**
-     * Makes the fog black when the player is in a dark matter block.
-     *
-     * @param event An instance of the FogColors class.
-     */
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onFogColor(EntityViewRenderEvent.FogColors event)
@@ -562,6 +486,7 @@ public class VanillaExpansions
 
         float black = 0.0F;
 
+        // Makes the fog black when the player is inside dark matter.
         if (state.getType() instanceof VeDarkMatterFluid)
         {
             event.setRed(black);
@@ -570,17 +495,14 @@ public class VanillaExpansions
         }
     }
 
-    /**
-     * Controls the density of the fog color when in a dark matter block.
-     *
-     * @param event An instance of the FogDensity class.
-     */
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onFogDensity(EntityViewRenderEvent.FogDensity event)
     {
         ActiveRenderInfo info = event.getInfo();
         FluidState state = info.getFluidInCamera();
+
+        // Density of the fog when in dark matter.
         if (state.getType() instanceof VeDarkMatterFluid)
         {
             event.setDensity(0.5F);
@@ -695,7 +617,7 @@ public class VanillaExpansions
             {
                 if (state.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
                 {
-                    if (state.getBlock() instanceof BeetrootBlock)
+                    if (state.hasProperty(beetrootAge))
                     {
                         if (state.getValue(beetrootAge).equals(getMaxAge(beetrootAge)))
                         {
