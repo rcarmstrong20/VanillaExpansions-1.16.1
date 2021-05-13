@@ -1,6 +1,7 @@
 package rcarmstrong20.vanilla_expansions.inventory.container;
 
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.collect.Lists;
 
@@ -72,11 +73,13 @@ public class VeWoodcutterContainer extends Container
             }
 
             @Override
-            public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack)
+            public ItemStack onTake(PlayerEntity player, ItemStack stack)
             {
-                stack.onCraftedBy(thePlayer.level, thePlayer, stack.getCount());
-                VeWoodcutterContainer.this.resultContainer.awardUsedRecipes(thePlayer);
+                stack.onCraftedBy(player.level, player, stack.getCount());
+                VeWoodcutterContainer.this.resultContainer.awardUsedRecipes(player);
                 ItemStack itemstack = VeWoodcutterContainer.this.inputSlot.remove(1);
+                Random random = player.getRandom();
+
                 if (!itemstack.isEmpty())
                 {
                     VeWoodcutterContainer.this.setupResultSlot();
@@ -88,11 +91,11 @@ public class VeWoodcutterContainer extends Container
                     if (VeWoodcutterContainer.this.lastSoundTime != l)
                     {
                         level.playSound((PlayerEntity) null, pos, VeSoundEvents.uiWoodcutterTakeResult,
-                                SoundCategory.BLOCKS, 1.0F, 1.0F);
+                                SoundCategory.BLOCKS, 1.0F + random.nextFloat(), 1.0F + random.nextFloat());
                         VeWoodcutterContainer.this.lastSoundTime = l;
                     }
                 });
-                return super.onTake(thePlayer, stack);
+                return super.onTake(player, stack);
             }
         });
 
@@ -138,7 +141,7 @@ public class VeWoodcutterContainer extends Container
     public void slotsChanged(IInventory inventoryIn)
     {
         ItemStack itemstack = this.inputSlot.getItem();
-        if (itemstack.getItem() != this.input.getItem())
+        if (itemstack.getItem() != input.getItem())
         {
             this.input = itemstack.copy();
             this.setupRecipeList(inventoryIn, itemstack);

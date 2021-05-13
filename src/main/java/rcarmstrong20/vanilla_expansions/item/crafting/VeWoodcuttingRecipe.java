@@ -11,8 +11,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
@@ -50,13 +50,13 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public ItemStack assemble(IInventory p_77572_1_)
+    public ItemStack assemble(IInventory inv)
     {
         return this.result.copy();
     }
 
     @Override
-    public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_)
+    public boolean canCraftInDimensions(int height, int width)
     {
         return true;
     }
@@ -95,7 +95,6 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
             this.factory = factory;
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         public R fromJson(ResourceLocation recipeId, JsonObject json)
         {
@@ -112,7 +111,7 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
 
             String s1 = JSONUtils.getAsString(json, "result");
             int i = JSONUtils.getAsInt(json, "count");
-            ItemStack itemstack = new ItemStack(Registry.ITEM.get(new ResourceLocation(s1)), i);
+            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s1)), i);
             return this.factory.create(recipeId, s, ingredient, itemstack);
         }
 
