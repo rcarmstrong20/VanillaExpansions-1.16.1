@@ -1,0 +1,19 @@
+{
+  "type": "ve:transmutation",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+	{
+	  "item": "ve:ocean_essence"
+	},
+	{
+	  "item": "ve:ruby"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:totem_of_the_guardian_ii"
+  }
+}

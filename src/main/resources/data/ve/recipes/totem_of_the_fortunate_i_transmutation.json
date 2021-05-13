@@ -1,0 +1,19 @@
+{
+  "type": "ve:transmutation",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:coal"
+    },
+	{
+	  "item": "ve:luck_essence"
+	},
+	{
+	  "item": "ve:ruby"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:totem_of_the_fortunate_i"
+  }
+}
