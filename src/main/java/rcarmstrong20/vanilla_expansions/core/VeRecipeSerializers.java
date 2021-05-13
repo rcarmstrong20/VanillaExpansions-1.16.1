@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.item.crafting.VeTransmutationRecipe;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 /**
@@ -22,6 +23,8 @@ public class VeRecipeSerializers
 
     public static IRecipeSerializer<VeWoodcuttingRecipe> woodcutting = register("woodcutting",
             new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
+    public static IRecipeSerializer<VeTransmutationRecipe> transmutation = register("transmutation",
+            new VeTransmutationRecipe.Serializer());
 
     /**
      * @param <S>

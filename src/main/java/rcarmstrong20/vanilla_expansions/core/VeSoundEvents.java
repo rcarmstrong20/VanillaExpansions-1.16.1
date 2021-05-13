@@ -22,6 +22,7 @@ public class VeSoundEvents
     public static SoundEvent blockDarkMatterAmbient = register("block.dark_matter_ambient");
     public static SoundEvent blockDarkMatterHardens = register("block.dark_matter_hardens");
     public static SoundEvent uiWoodcutterTakeResult = register("ui.woodcutter.take_result");
+    public static SoundEvent uiTransmutationTableTakeResult = register("ui.transmutation_table.take_result");
 
     /**
      * @param name The name for the sound event.

@@ -5,6 +5,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.item.crafting.VeTransmutationRecipe;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 /**
@@ -15,6 +16,7 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 public class VeRecipeTypes
 {
     public static IRecipeType<VeWoodcuttingRecipe> woodcutting = register("woodcutting");
+    public static IRecipeType<VeTransmutationRecipe> transmutation = register("transmutation");
 
     /**
      * @param <T>
