@@ -37,10 +37,10 @@ public class VePurpleHugeMushroomBlock extends HugeMushroomBlock
         {
             Vector3d vector3d = entityIn.getDeltaMovement();
 
-            // Set a maximum height of 100.
-            if (height >= 100)
+            // Set a maximum height of 50.
+            if (height >= 50)
             {
-                height = 100;
+                height = 50;
             }
 
             // Update the entities motion and play the bounce sound.
