@@ -18,7 +18,9 @@ import rcarmstrong20.vanilla_expansions.item.VeFoods;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
 import rcarmstrong20.vanilla_expansions.item.VeMixedSeedPacketItem;
 import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
+import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheBruteItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
+import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheGuardianItem;
 
 /**
  *
@@ -71,10 +73,14 @@ public class VeItems
     public static Item bloodVial = register("blood_vial",
             new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
     public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
-    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i", new Item(buildProperties(16)));
-    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii", new Item(buildProperties(16)));
-    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii", new Item(buildProperties(16)));
-    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv", new Item(buildProperties(16)));
+    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i",
+            new VeTotemOfTheGuardianItem(buildProperties(16), 241));
+    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii",
+            new VeTotemOfTheGuardianItem(buildProperties(16), 481));
+    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii",
+            new VeTotemOfTheGuardianItem(buildProperties(16), 721));
+    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv",
+            new VeTotemOfTheGuardianItem(buildProperties(16), 961));
     public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
             new VeTotemOfTheFortunateItem(buildProperties(16), 0));
     public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
@@ -83,10 +89,14 @@ public class VeItems
             new VeTotemOfTheFortunateItem(buildProperties(16), 2));
     public static Item totemOfTheFortunateIV = register("totem_of_the_fortunate_iv",
             new VeTotemOfTheFortunateItem(buildProperties(16), 3));
-    public static Item totemOfTheBruteI = register("totem_of_the_brute_i", new Item(buildProperties(16)));
-    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii", new Item(buildProperties(16)));
-    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii", new Item(buildProperties(16)));
-    public static Item totemOfTheBruteIV = register("totem_of_the_brute_iv", new Item(buildProperties(16)));
+    public static Item totemOfTheBruteI = register("totem_of_the_brute_i",
+            new VeTotemOfTheBruteItem(buildProperties(16), 0));
+    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii",
+            new VeTotemOfTheBruteItem(buildProperties(16), 1));
+    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii",
+            new VeTotemOfTheBruteItem(buildProperties(16), 2));
+    public static Item totemOfTheBruteIV = register("totem_of_the_brute_iv",
+            new VeTotemOfTheBruteItem(buildProperties(16), 3));
     public static Item whiteTorch = register("white_torch",
             new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, buildProperties()));
     public static Item orangeTorch = register("orange_torch",

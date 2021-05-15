@@ -136,8 +136,8 @@ public class VanillaExpansions
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     public static final ImmutableMap<Item, Integer> TOTEM_GUARDIAN_MAP = ImmutableMap.of(VeItems.totemOfTheGuardianI,
-            600, VeItems.totemOfTheGuardianII, 1200, VeItems.totemOfTheGuardianIII, 2400, VeItems.totemOfTheGuardianIV,
-            4800);
+            241, VeItems.totemOfTheGuardianII, 481, VeItems.totemOfTheGuardianIII, 721, VeItems.totemOfTheGuardianIV,
+            961);
     public static final ImmutableMap<Item, Integer> TOTEM_BRUTE_MAP = ImmutableMap.of(VeItems.totemOfTheBruteI, 0,
             VeItems.totemOfTheBruteII, 1, VeItems.totemOfTheBruteIII, 2, VeItems.totemOfTheBruteIV, 3);
 
@@ -329,7 +329,7 @@ public class VanillaExpansions
      *
      * @param event
      * @param profession The profession to populate with trades.
-     * @param trades     The trade list.
+     * @param trades     The trade map containing the tier and the associated trade.
      */
     private static void addTrade(VillagerTradesEvent event, VillagerProfession profession,
             ImmutableMap<Integer, List<ITrade>> trades)
@@ -446,16 +446,13 @@ public class VanillaExpansions
 
         if (player.getAirSupply() == 0 && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem())));
+            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem()) * 10));
             player.setAirSupply(maxAir);
 
             spawnParticles(VeParticleTypes.totemOfTheGuardian, player);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     private void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer)
