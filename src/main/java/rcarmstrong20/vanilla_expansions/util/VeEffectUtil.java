@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectUtils;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -32,22 +31,22 @@ public class VeEffectUtil
             textcomponent = new TranslationTextComponent("potion.withDuration", textcomponent,
                     EffectUtils.formatDuration(effectinstance, 1));
 
-            text.add(textcomponent.withStyle(Effects.LUCK.getCategory().getTooltipFormatting()));
+            text.add(textcomponent.withStyle(effectinstance.getEffect().getCategory().getTooltipFormatting()));
         }
         /*
          * text.add(StringTextComponent.EMPTY); text.add(new
          * TranslationTextComponent("potion.whenDrank").withStyle(TextFormatting.
          * DARK_PURPLE));
-         * 
+         *
          * for (EffectInstance effectinstance : effects) { IFormattableTextComponent
          * textcomponent2 = new
          * TranslationTextComponent(effectinstance.getDescriptionId()); double percent =
          * (1 + effectinstance.getAmplifier()) * 20;
-         * 
+         *
          * textcomponent2 = new TranslationTextComponent( "+" +
          * ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(percent) +
          * "% ").append(textcomponent2);
-         * 
+         *
          * text.add(textcomponent2.withStyle(TextFormatting.BLUE)); }
          */
     }
