@@ -20,15 +20,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
 public class VeSnapdragonBlock extends FlowerBlock
 {
-    // Prevents teleport spam.
-    boolean teleportNextTick = false;
-
     public VeSnapdragonBlock(Effect effect, int effectDuration, Properties properties)
     {
         super(effect, effectDuration, properties);
@@ -64,18 +60,6 @@ public class VeSnapdragonBlock extends FlowerBlock
         super.animateTick(stateIn, worldIn, pos, rand);
     }
 
-    @Override
-    public void tick(BlockState p_225534_1_, ServerWorld p_225534_2_, BlockPos p_225534_3_, Random p_225534_4_)
-    {
-        teleportNextTick = false;
-    }
-
-    @Override
-    public boolean isRandomlyTicking(BlockState p_149653_1_)
-    {
-        return teleportNextTick;
-    }
-
     /**
      * A helper method used for checking that the plant placement is valid.
      *
@@ -104,8 +88,7 @@ public class VeSnapdragonBlock extends FlowerBlock
         {
             LivingEntity livingEntity = (LivingEntity) entity;
 
-            if (!world.isClientSide() && !teleportNextTick && !livingEntity.isCrouching()
-                    && entity.getDeltaMovement().y() == 0.0D)
+            if (!world.isClientSide() && !livingEntity.isCrouching() && entity.getDeltaMovement().y() == 0.0D)
             {
                 double d0 = livingEntity.getX();
                 double d1 = livingEntity.getY();
@@ -129,7 +112,6 @@ public class VeSnapdragonBlock extends FlowerBlock
                                 : SoundEvents.CHORUS_FRUIT_TELEPORT;
                         world.playSound((PlayerEntity) null, d0, d1, d2, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
                         livingEntity.playSound(soundevent, 1.0F, 1.0F);
-                        teleportNextTick = true; // Since the player has teleported setNextTick to true
                         break;
                     }
                 }
