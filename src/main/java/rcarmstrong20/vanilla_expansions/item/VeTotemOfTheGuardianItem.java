@@ -40,7 +40,7 @@ public class VeTotemOfTheGuardianItem extends Item
         VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance), text);
 
         text.add(StringTextComponent.EMPTY);
-        text.add(new TranslationTextComponent("totem.useWhen").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("totem.consumeWhen").withStyle(TextFormatting.DARK_PURPLE));
         text.add(new TranslationTextComponent("totem.drownRequirement").withStyle(TextFormatting.BLUE));
         text.add(new TranslationTextComponent("totem.holdRequirement").withStyle(TextFormatting.BLUE));
     }
