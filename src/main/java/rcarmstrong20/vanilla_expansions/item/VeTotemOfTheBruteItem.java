@@ -35,12 +35,12 @@ public class VeTotemOfTheBruteItem extends Item
         super.appendHoverText(stack, world, text, flag);
 
         EffectInstance strengthInstance = new EffectInstance(Effects.DAMAGE_BOOST, 600, amplifier);
-        EffectInstance resistanceInstance = new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 2);
+        EffectInstance resistanceInstance = new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 1);
 
         VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(strengthInstance, resistanceInstance), text);
 
         text.add(StringTextComponent.EMPTY);
-        text.add(new TranslationTextComponent("totem.useWhen").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("totem.consumeWhen").withStyle(TextFormatting.DARK_PURPLE));
         text.add(new TranslationTextComponent("totem.healthRequirement").withStyle(TextFormatting.BLUE));
         text.add(new TranslationTextComponent("totem.holdRequirement").withStyle(TextFormatting.BLUE));
     }
