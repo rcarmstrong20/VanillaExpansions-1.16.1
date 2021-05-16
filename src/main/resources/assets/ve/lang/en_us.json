@@ -309,10 +309,10 @@
   
   "itemGroup.ve": "Vanilla Expansions Mod",
   
-  "totem.useWhen": "Use Requirements:",
+  "totem.consumeWhen": "Auto-Consume When:",
   "totem.healthRequirement": "50% Or Less Health",
   "totem.drownRequirement": "Run Out of Air",
-  "totem.holdRequirement": "Holding The Totem",
+  "totem.holdRequirement": "In hand",
   
   "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
   
