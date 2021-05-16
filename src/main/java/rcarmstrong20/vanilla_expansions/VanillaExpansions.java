@@ -424,7 +424,7 @@ public class VanillaExpansions
             }
 
             player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, itemToPowerLvl.get(heldStack.getItem())));
-            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 2));
+            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 1));
             spawnParticles(VeParticleTypes.totemOfTheBrute, player);
             return true;
         }
