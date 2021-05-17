@@ -7,7 +7,6 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructurePieces;
 
 /**
@@ -35,8 +34,11 @@ public class VeConfiguredStructures
             {
                 return VeCabinStructurePieces.FOREST_START;
             }, 10)));
-    public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin", VeStructure.netherCabin
-            .configured(new VeCabinConfig(new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"))));
+    public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin",
+            VeStructure.netherCabin.configured(new VillageConfig(() ->
+            {
+                return VeCabinStructurePieces.CRIMSON_START;
+            }, 10)));
 
     /**
      * A helper method for automatically registering every new configured structure

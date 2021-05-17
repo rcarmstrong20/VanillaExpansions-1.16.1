@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinConfig;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeNetherCabinStructure;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeOverworldCabinStructure;
 
@@ -24,8 +23,8 @@ public class VeStructure
 
     public static Structure<VillageConfig> overworldCabin = register("overworld_cabin",
             new VeOverworldCabinStructure(VillageConfig.CODEC));
-    public static Structure<VeCabinConfig> netherCabin = register("nether_cabin",
-            new VeNetherCabinStructure(VeCabinConfig.cabinConfig));
+    public static Structure<VillageConfig> netherCabin = register("nether_cabin",
+            new VeNetherCabinStructure(VillageConfig.CODEC));
 
     /**
      * Add this structure to the registry list.
