@@ -29,4 +29,10 @@ public class VeCabinStructurePieces
             ImmutableList
                     .of(Pair.of(JigsawPiece.single("ve:cabin/forest_cabin", ProcessorLists.MOSSIFY_70_PERCENT), 1)),
             PlacementBehaviour.RIGID));
+
+    public static final JigsawPattern CRIMSON_START = JigsawPatternRegistry.register(new JigsawPattern(
+            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"), new ResourceLocation("empty"),
+            ImmutableList.of(Pair
+                    .of(JigsawPiece.single("ve:cabin/crimson_cabin", VeProcessorLists.CRIMSON_MOSSIFY_70_PERCENT), 1)),
+            PlacementBehaviour.RIGID));
 }
