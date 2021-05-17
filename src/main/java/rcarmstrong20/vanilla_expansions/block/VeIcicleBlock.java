@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class VeIcicleBlock extends FallingBlock
 {
-    private static final VoxelShape ICICLE_SHAPE = Block.box(4.0, 2.0, 4.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape ICICLE_SHAPE = Block.box(4.0, 1.0, 4.0, 12.0, 16.0, 12.0);
 
     public VeIcicleBlock(Properties properties)
     {
