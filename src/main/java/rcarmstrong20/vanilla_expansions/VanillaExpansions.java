@@ -121,6 +121,7 @@ import rcarmstrong20.vanilla_expansions.entity.villager.VeVillagerType;
 import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
+import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
 
 /**
  * The main mod class.
@@ -136,8 +137,8 @@ public class VanillaExpansions
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     public static final ImmutableMap<Item, Integer> TOTEM_GUARDIAN_MAP = ImmutableMap.of(VeItems.totemOfTheGuardianI,
-            241, VeItems.totemOfTheGuardianII, 481, VeItems.totemOfTheGuardianIII, 721, VeItems.totemOfTheGuardianIV,
-            961);
+            120, VeItems.totemOfTheGuardianII, 240, VeItems.totemOfTheGuardianIII, 360, VeItems.totemOfTheGuardianIV,
+            480);
     public static final ImmutableMap<Item, Integer> TOTEM_BRUTE_MAP = ImmutableMap.of(VeItems.totemOfTheBruteI, 0,
             VeItems.totemOfTheBruteII, 1, VeItems.totemOfTheBruteIII, 2, VeItems.totemOfTheBruteIV, 3);
 
@@ -299,7 +300,7 @@ public class VanillaExpansions
         Minecraft.getInstance().particleEngine.register(particleIn, particleFactoryIn);
     }
 
-    @SuppressWarnings("unchecked") // Needed for the byBiome field.
+    @SuppressWarnings("unchecked") // Needed for BY_BIOME_FIELD.
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void addTrades(VillagerTradesEvent event)
@@ -417,14 +418,16 @@ public class VanillaExpansions
         if (!(player.getCooldowns().isOnCooldown(VeItems.totemOfTheBruteI)) && player.getHealth() <= halfHealth
                 && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            // Give every brute totem a cooldown of 30 seconds.
             for (Item totem : itemToPowerLvl.keySet())
             {
-                player.getCooldowns().addCooldown(totem, 900);
+                player.getCooldowns().addCooldown(totem, VeTimeUtil.convertSecsToTicks(60));
             }
 
-            player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, itemToPowerLvl.get(heldStack.getItem())));
-            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 1));
+            int effectTicks = VeTimeUtil.convertSecsToTicks(30);
+
+            player.addEffect(
+                    new EffectInstance(Effects.DAMAGE_BOOST, effectTicks, itemToPowerLvl.get(heldStack.getItem())));
+            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, effectTicks, 1));
             spawnParticles(VeParticleTypes.totemOfTheBrute, player);
             return true;
         }
@@ -446,7 +449,11 @@ public class VanillaExpansions
 
         if (player.getAirSupply() == 0 && itemToPowerLvl.containsKey(heldStack.getItem()))
         {
-            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, itemToPowerLvl.get(heldStack.getItem()) * 10));
+            int waterBreathingTicks = VeTimeUtil.convertSecsToTicks(itemToPowerLvl.get(heldStack.getItem()));
+            int nightVisionTicks = waterBreathingTicks / 2;
+
+            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, waterBreathingTicks));
+            player.addEffect(new EffectInstance(Effects.NIGHT_VISION, nightVisionTicks));
             player.setAirSupply(maxAir);
 
             spawnParticles(VeParticleTypes.totemOfTheGuardian, player);
@@ -455,7 +462,7 @@ public class VanillaExpansions
         return false;
     }
 
-    private void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer)
+    private static void spawnParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer)
     {
         Random random = serverPlayer.getRandom();
         int max = random.nextInt(15) + 15;
@@ -526,7 +533,7 @@ public class VanillaExpansions
         }
     }
 
-    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos)
+    private static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos)
     {
         float f = 1.0F;
         BlockPos blockpos = pos.below();
@@ -612,7 +619,7 @@ public class VanillaExpansions
             }
             if (flag)
             {
-                if (state.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+                if (itemStack.getItem() != Items.BONE_MEAL)
                 {
                     if (state.hasProperty(beetrootAge))
                     {
@@ -623,14 +630,17 @@ public class VanillaExpansions
                             event.setCanceled(true);
                         }
                     }
-                    else if (state.getValue(cropsAge).equals(getMaxAge(cropsAge)))
+                    else if (state.hasProperty(cropsAge))
                     {
-                        resetCrop(state, world, pos, player, cropsAge);
-                        event.setResult(Result.ALLOW);
-                        event.setCanceled(true);
+                        if (state.getValue(cropsAge).equals(getMaxAge(cropsAge)))
+                        {
+                            resetCrop(state, world, pos, player, cropsAge);
+                            event.setResult(Result.ALLOW);
+                            event.setCanceled(true);
+                        }
                     }
                 }
-                else if (state.getBlock() instanceof NetherWartBlock)
+                else if (state.hasProperty(netherWartAge))
                 {
                     if (state.getValue(netherWartAge).equals(getMaxAge(netherWartAge)))
                     {
@@ -639,7 +649,7 @@ public class VanillaExpansions
                         event.setCanceled(true);
                     }
                 }
-                else if (state.getBlock() instanceof CocoaBlock)
+                else if (state.hasProperty(cocoaAge))
                 {
                     if (state.getValue(cocoaAge) == getMaxAge(cocoaAge))
                     {
