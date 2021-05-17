@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import rcarmstrong20.vanilla_expansions.util.VeEffectUtil;
+import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
 
 public class VeTotemOfTheGuardianItem extends Item
 {
@@ -33,11 +34,12 @@ public class VeTotemOfTheGuardianItem extends Item
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> text, ITooltipFlag flag)
     {
         super.appendHoverText(stack, world, text, flag);
-        int secDuration = duration * 10; // 120 is 1 minute
+        int waterBreathingTicks = VeTimeUtil.convertSecsToTicks(duration);
+        int nightVisionTicks = waterBreathingTicks / 2;
+        EffectInstance waterBreathingInstance = new EffectInstance(Effects.WATER_BREATHING, waterBreathingTicks);
+        EffectInstance nightVisionInstance = new EffectInstance(Effects.NIGHT_VISION, nightVisionTicks);
 
-        EffectInstance waterBreathingInstance = new EffectInstance(Effects.WATER_BREATHING, secDuration);
-
-        VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance), text);
+        VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance, nightVisionInstance), text);
 
         text.add(StringTextComponent.EMPTY);
         text.add(new TranslationTextComponent("totem.consumeWhen").withStyle(TextFormatting.DARK_PURPLE));
