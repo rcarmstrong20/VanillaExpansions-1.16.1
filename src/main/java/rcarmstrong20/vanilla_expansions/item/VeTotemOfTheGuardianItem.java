@@ -34,16 +34,16 @@ public class VeTotemOfTheGuardianItem extends Item
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> text, ITooltipFlag flag)
     {
         super.appendHoverText(stack, world, text, flag);
-        int waterBreathingTicks = VeTimeUtil.convertSecsToTicks(duration);
-        int nightVisionTicks = waterBreathingTicks / 2;
-        EffectInstance waterBreathingInstance = new EffectInstance(Effects.WATER_BREATHING, waterBreathingTicks);
-        EffectInstance nightVisionInstance = new EffectInstance(Effects.NIGHT_VISION, nightVisionTicks);
+
+        int effectTicks = VeTimeUtil.convertSecsToTicks(duration);
+        EffectInstance waterBreathingInstance = new EffectInstance(Effects.WATER_BREATHING, effectTicks);
+        EffectInstance nightVisionInstance = new EffectInstance(Effects.NIGHT_VISION, effectTicks);
 
         VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance, nightVisionInstance), text);
 
         text.add(StringTextComponent.EMPTY);
-        text.add(new TranslationTextComponent("totem.consumeWhen").withStyle(TextFormatting.DARK_PURPLE));
-        text.add(new TranslationTextComponent("totem.drownRequirement").withStyle(TextFormatting.BLUE));
-        text.add(new TranslationTextComponent("totem.holdRequirement").withStyle(TextFormatting.BLUE));
+        text.add(new TranslationTextComponent("guardianTotem.useDescLine1").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("guardianTotem.useDescLine2").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("guardianTotem.useDescLine3").withStyle(TextFormatting.DARK_PURPLE));
     }
 }

@@ -40,8 +40,8 @@ public class VeTotemOfTheBruteItem extends Item
         VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(strengthInstance, resistanceInstance), text);
 
         text.add(StringTextComponent.EMPTY);
-        text.add(new TranslationTextComponent("totem.consumeWhen").withStyle(TextFormatting.DARK_PURPLE));
-        text.add(new TranslationTextComponent("totem.healthRequirement").withStyle(TextFormatting.BLUE));
-        text.add(new TranslationTextComponent("totem.holdRequirement").withStyle(TextFormatting.BLUE));
+        text.add(new TranslationTextComponent("bruteTotem.useDescLine1").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("bruteTotem.useDescLine2").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("bruteTotem.useDescLine3").withStyle(TextFormatting.DARK_PURPLE));
     }
 }

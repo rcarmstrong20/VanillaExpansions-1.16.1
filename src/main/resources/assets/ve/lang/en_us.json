@@ -309,10 +309,12 @@
   
   "itemGroup.ve": "Vanilla Expansions Mod",
   
-  "totem.consumeWhen": "Auto-Consume When:",
-  "totem.healthRequirement": "50% Or Less Health",
-  "totem.drownRequirement": "Run Out of Air",
-  "totem.holdRequirement": "In hand",
+  "bruteTotem.useDescLine1": "When the fight seems dire.",
+  "bruteTotem.useDescLine2": "Use this totem to awaken",
+  "bruteTotem.useDescLine3": "your inner fire.",
+  "guardianTotem.useDescLine1": "",
+  "guardianTotem.useDescLine2": "",
+  "guardianTotem.useDescLine3": "",
   
   "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
   
