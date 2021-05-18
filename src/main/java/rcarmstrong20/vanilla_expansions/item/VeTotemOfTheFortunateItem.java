@@ -20,6 +20,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.util.VeEffectUtil;
+import rcarmstrong20.vanilla_expansions.util.VeParticleUtil;
+import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
 
 public class VeTotemOfTheFortunateItem extends Item
 {
@@ -37,7 +39,6 @@ public class VeTotemOfTheFortunateItem extends Item
         player.addEffect(new EffectInstance(Effects.LUCK, 2410, amplifier)); // 2410 is a 2:00 duration
         player.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
         ItemStack stack = player.getItemInHand(hand);
-        int max = random.nextInt(15) + 15;
 
         if (!player.isCreative())
         {
@@ -46,18 +47,7 @@ public class VeTotemOfTheFortunateItem extends Item
 
         if (player instanceof ServerPlayerEntity)
         {
-            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-
-            for (int i = 0; i <= max; i++)
-            {
-                int count = random.nextInt(5) + 5;
-                double x = serverPlayer.getRandomX(2.0);
-                double y = serverPlayer.getRandomY();
-                double z = serverPlayer.getRandomZ(2.0);
-
-                serverPlayer.getServer().overworld().sendParticles(serverPlayer, VeParticleTypes.totemOfTheFortunate,
-                        true, x, y, z, count, 0.0, 1.0, 0.0, 0.0);
-            }
+            VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheFortunate, (ServerPlayerEntity) player);
         }
         return ActionResult.success(stack);
     }
@@ -68,7 +58,7 @@ public class VeTotemOfTheFortunateItem extends Item
     {
         super.appendHoverText(stack, world, text, flag);
 
-        EffectInstance luckInstance = new EffectInstance(Effects.LUCK, 2410, amplifier); // 2410 is a 2:00 duration
+        EffectInstance luckInstance = new EffectInstance(Effects.LUCK, VeTimeUtil.convertSecsToTicks(120), amplifier);
 
         VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(luckInstance), text);
     }
