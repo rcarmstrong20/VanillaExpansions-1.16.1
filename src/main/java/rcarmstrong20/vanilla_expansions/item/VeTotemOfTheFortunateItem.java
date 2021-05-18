@@ -36,7 +36,7 @@ public class VeTotemOfTheFortunateItem extends Item
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
-        player.addEffect(new EffectInstance(Effects.LUCK, 2410, amplifier)); // 2410 is a 2:00 duration
+        player.addEffect(new EffectInstance(Effects.LUCK, VeTimeUtil.convertSecsToTicks(120), amplifier));
         player.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
         ItemStack stack = player.getItemInHand(hand);
 

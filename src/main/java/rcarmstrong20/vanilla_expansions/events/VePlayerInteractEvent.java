@@ -1,11 +1,14 @@
 package rcarmstrong20.vanilla_expansions.events;
 
+import java.util.Hashtable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
@@ -18,9 +21,15 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
 
 public class VePlayerInteractEvent
 {
+    public static final Hashtable<Item, Integer> TOTEM_FORTUNATE_TABLE = complileTotemTable(
+            VeItems.totemOfTheFortunateI, VeItems.totemOfTheFortunateII, VeItems.totemOfTheFortunateIII,
+            VeItems.totemOfTheFortunateIV);
+
     /**
      * Controls right-click crop harvesting and snapdragon potting.
      *
@@ -110,5 +119,35 @@ public class VePlayerInteractEvent
         Block.updateOrDestroy(state, Blocks.AIR.defaultBlockState(), world, pos, 1);
         world.setBlock(pos, state.setValue(age, 0), 2);
         player.swing(Hand.MAIN_HAND, true);
+    }
+
+    @SubscribeEvent
+    public void onRightClickBlock(final PlayerInteractEvent.RightClickItem event)
+    {
+        Item item = event.getItemStack().getItem();
+        PlayerEntity player = event.getPlayer();
+
+        if (!player.getCooldowns().isOnCooldown(item) && TOTEM_FORTUNATE_TABLE.containsKey(item))
+        {
+            for (Item totem : TOTEM_FORTUNATE_TABLE.keySet())
+            {
+                player.getCooldowns().addCooldown(totem, VeTimeUtil.convertSecsToTicks(120));
+            }
+        }
+    }
+
+    /**
+     * A helper method that constructs a hash table with 4 items.
+     */
+    private static Hashtable<Item, Integer> complileTotemTable(Item item0, Item item1, Item item2, Item item3)
+    {
+        Hashtable<Item, Integer> hashtable = new Hashtable<>(4);
+
+        hashtable.put(item0, 0);
+        hashtable.put(item1, 0);
+        hashtable.put(item2, 0);
+        hashtable.put(item3, 0);
+
+        return hashtable;
     }
 }
