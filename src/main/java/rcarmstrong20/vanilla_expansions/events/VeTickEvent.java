@@ -19,9 +19,9 @@ import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
 
 public class VeTickEvent
 {
-    public static final HashMap<Item, Integer> TOTEM_GUARDIAN_MAP = complileHashMap(VeItems.totemOfTheGuardianI, 120,
-            VeItems.totemOfTheGuardianII, 240, VeItems.totemOfTheGuardianIII, 360, VeItems.totemOfTheGuardianIV, 480);
-    public static final HashMap<Item, Integer> TOTEM_BRUTE_MAP = complileHashMap(VeItems.totemOfTheBruteI, 0,
+    public static final HashMap<Item, Integer> TOTEM_GUARDIAN_MAP = complileTotemMap(VeItems.totemOfTheGuardianI, 240,
+            VeItems.totemOfTheGuardianII, 360, VeItems.totemOfTheGuardianIII, 480, VeItems.totemOfTheGuardianIV, 600);
+    public static final HashMap<Item, Integer> TOTEM_BRUTE_MAP = complileTotemMap(VeItems.totemOfTheBruteI, 0,
             VeItems.totemOfTheBruteII, 1, VeItems.totemOfTheBruteIII, 2, VeItems.totemOfTheBruteIV, 3);
 
     @SubscribeEvent
@@ -57,15 +57,18 @@ public class VeTickEvent
         player.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.005);
     }
 
-    private static HashMap<Item, Integer> complileHashMap(Item item0, int integer0, Item item1, int integer1,
-            Item item2, int integer2, Item item3, int integer3)
+    /**
+     * A helper method that constructs a hash map with 4 item, integer pairs.
+     */
+    private static HashMap<Item, Integer> complileTotemMap(Item item0, int int0, Item item1, int int1, Item item2,
+            int int2, Item item3, int int3)
     {
-        HashMap<Item, Integer> hashMap = new HashMap<>();
+        HashMap<Item, Integer> hashMap = new HashMap<>(4);
 
-        hashMap.put(item0, integer0);
-        hashMap.put(item1, integer1);
-        hashMap.put(item2, integer2);
-        hashMap.put(item3, integer3);
+        hashMap.put(item0, int0);
+        hashMap.put(item1, int1);
+        hashMap.put(item2, int2);
+        hashMap.put(item3, int3);
 
         return hashMap;
     }
@@ -84,7 +87,7 @@ public class VeTickEvent
         float halfHealth = player.getMaxHealth() / 2;
 
         if (itemToPowerLvl.containsKey(heldStack.getItem()) && player.getHealth() <= halfHealth
-                && !(player.getCooldowns().isOnCooldown(VeItems.totemOfTheBruteI)))
+                && !(player.getCooldowns().isOnCooldown(heldStack.getItem())))
         {
             for (Item totem : itemToPowerLvl.keySet())
             {
@@ -96,6 +99,7 @@ public class VeTickEvent
             player.addEffect(
                     new EffectInstance(Effects.DAMAGE_BOOST, effectTicks, itemToPowerLvl.get(heldStack.getItem())));
             player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, effectTicks, 1));
+
             VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheBrute, player);
             return true;
         }
@@ -116,13 +120,15 @@ public class VeTickEvent
         ItemStack heldStack = player.getItemInHand(hand);
         int maxAir = player.getMaxAirSupply();
 
-        if (itemToPowerLvl.containsKey(heldStack.getItem()) && player.getAirSupply() == 0)
+        if (itemToPowerLvl.containsKey(heldStack.getItem()) && player.getAirSupply() == 0
+                && !(player.getCooldowns().isOnCooldown(heldStack.getItem())))
         {
-            int waterBreathingTicks = VeTimeUtil.convertSecsToTicks(itemToPowerLvl.get(heldStack.getItem()));
-            int nightVisionTicks = waterBreathingTicks / 2;
+            int ticks = VeTimeUtil.convertSecsToTicks(itemToPowerLvl.get(heldStack.getItem()));
 
-            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, waterBreathingTicks));
-            player.addEffect(new EffectInstance(Effects.NIGHT_VISION, nightVisionTicks));
+            player.getCooldowns().addCooldown(heldStack.getItem(), ticks);
+
+            player.addEffect(new EffectInstance(Effects.WATER_BREATHING, ticks));
+            player.addEffect(new EffectInstance(Effects.NIGHT_VISION, ticks));
             player.setAirSupply(maxAir);
 
             VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheGuardian, player);

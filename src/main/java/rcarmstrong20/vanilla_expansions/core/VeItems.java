@@ -74,13 +74,13 @@ public class VeItems
             new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
     public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
     public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i",
-            new VeTotemOfTheGuardianItem(buildProperties(16), 120));
-    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii",
             new VeTotemOfTheGuardianItem(buildProperties(16), 240));
-    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii",
+    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii",
             new VeTotemOfTheGuardianItem(buildProperties(16), 360));
-    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv",
+    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii",
             new VeTotemOfTheGuardianItem(buildProperties(16), 480));
+    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv",
+            new VeTotemOfTheGuardianItem(buildProperties(16), 600));
     public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
             new VeTotemOfTheFortunateItem(buildProperties(16), 0));
     public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
