@@ -15,7 +15,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
 
 /**
@@ -68,15 +67,15 @@ public class VeTallPlushBlock extends VePlushBlock
     }
 
     @Override
-    public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext)
+    public boolean canBeReplaced(BlockState stateIn, BlockItemUseContext useContext)
     {
         BlockPos pos = useContext.getClickedPos().above();
-        BlockState worldState = useContext.getLevel().getBlockState(pos);
+        BlockState state = useContext.getLevel().getBlockState(pos);
+        int size = stateIn.getValue(PLUSH_STACK_SIZE);
 
         if (useContext.getItemInHand().getItem() == this.asItem())
         {
-            return state.getValue(PLUSH_STACK_SIZE) < 3
-                    && (VanillaExpansions.isAir(worldState) || VanillaExpansions.isLiquid(worldState)) ? true : false;
+            return size < 2 || size < 3 && state.getMaterial().isReplaceable() ? true : false;
         }
         return false;
     }
