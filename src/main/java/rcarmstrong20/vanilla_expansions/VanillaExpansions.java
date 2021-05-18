@@ -97,7 +97,6 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUnderDarkMatt
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
-import rcarmstrong20.vanilla_expansions.config.VeEntityDataConfig;
 import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
@@ -746,15 +745,10 @@ public class VanillaExpansions
         boolean taigaCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableTaigaCabinSpawns.get();
         boolean forestCabinFlag = VeFeatureGenConfig.VeOverworldConfig.enableForestCabinSpawns.get();
         boolean crimsonCabinFlag = VeFeatureGenConfig.VeNetherConfig.enableCrimsonCabinSpawns.get();
-        boolean netherZombieVillagerFlag = VeEntityConfig.VeNetherConfig.enableZombieVillagersSpawns.get();
         boolean purpleMushroomFlag = VeFeatureGenConfig.VeOverworldConfig.enablePurpleMushroomSpawns.get();
         boolean swampMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableSwampMudSpawns.get();
         boolean riverMudFlag = VeFeatureGenConfig.VeOverworldConfig.enableRiverMudSpawns.get();
         boolean cattailFlag = VeFeatureGenConfig.VeOverworldConfig.enableCattailSpawns.get();
-
-        int netherZombieVillagerWeight = VeEntityDataConfig.SpawnWeightConfig.netherZombieVillagerSpawnWeight.get();
-        int netherZombieVillagerMinSize = VeEntityDataConfig.MinSpawnSizeConfig.netherZombieVillagerMinSpawnSize.get();
-        int netherZombieVillagerMaxSize = VeEntityDataConfig.MaxSpawnSizeConfig.netherZombieVillagerMaxSpawnSize.get();
 
         ConfiguredFeature<?, ?> sparseBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
         ConfiguredFeature<?, ?> decoratedBlueberries = VeConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
@@ -797,9 +791,6 @@ public class VanillaExpansions
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
         addStructure(event, forestCabinBiomes, VeConfiguredStructures.configuredForestCabin, forestCabinFlag);
         addStructure(event, "crimson_forest", VeConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
-
-        addMonsterSpawner(event, EntityType.ZOMBIE_VILLAGER, netherZombieVillagerWeight, netherZombieVillagerMinSize,
-                netherZombieVillagerMaxSize, netherZombieVillagerFlag, "crimson_forest", "warped_forest");
     }
 
     /**

@@ -25,7 +25,6 @@ public class VeConfig
         VeCropConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VeFeatureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VeEntityConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VeEntityDataConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
 
         SERVER_CONFIG = SERVER_BUILDER.build();
         CLIENT_CONFIG = CLIENT_BUILDER.build();
