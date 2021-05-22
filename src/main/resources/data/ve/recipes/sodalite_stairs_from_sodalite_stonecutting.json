@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:sodalite"
+  },
+  "result": "ve:sodalite_stairs",
+  "count": 1
+}
