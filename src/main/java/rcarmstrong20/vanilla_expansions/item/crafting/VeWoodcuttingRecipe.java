@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -77,6 +78,15 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     public IRecipeSerializer<?> getSerializer()
     {
         return this.serializer;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients()
+    {
+        NonNullList<Ingredient> list = NonNullList.create();
+        list.add(this.ingredient);
+
+        return list;
     }
 
     @Override

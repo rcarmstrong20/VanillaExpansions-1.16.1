@@ -101,6 +101,12 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
     }
 
     @Override
+    public NonNullList<Ingredient> getIngredients()
+    {
+        return this.ingredients;
+    }
+
+    @Override
     public IRecipeType<?> getType()
     {
         return this.type;
