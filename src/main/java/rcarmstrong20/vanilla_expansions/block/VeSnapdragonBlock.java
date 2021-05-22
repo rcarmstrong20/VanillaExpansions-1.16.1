@@ -20,6 +20,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
@@ -50,14 +52,14 @@ public class VeSnapdragonBlock extends FlowerBlock
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random random)
     {
-        double x = (double) pos.getX() + rand.nextFloat();
-        double y = (double) pos.getY() + rand.nextFloat();
-        double z = (double) pos.getZ() + rand.nextFloat();
+        double x = (double) pos.getX() + random.nextFloat();
+        double y = (double) pos.getY() + random.nextFloat();
+        double z = (double) pos.getZ() + random.nextFloat();
 
         worldIn.addParticle(ParticleTypes.PORTAL, x, y, z, 0.0D, 0.0D, 0.0D);
-        super.animateTick(stateIn, worldIn, pos, rand);
     }
 
     /**
