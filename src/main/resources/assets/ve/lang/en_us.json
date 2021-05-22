@@ -316,6 +316,9 @@
   "guardianTotem.useDescLine2": "",
   "guardianTotem.useDescLine3": "",
   
+  "gui.jei.ve.category.woodcutter": "Woodcutter",
+  "gui.jei.ve.category.transmutationTable": "Transmutation Table",
+  
   "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
   
   "block.minecraft.ladder": "Oak Ladder"
