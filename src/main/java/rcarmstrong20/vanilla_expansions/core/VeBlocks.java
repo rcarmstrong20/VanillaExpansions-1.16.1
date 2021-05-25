@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CakeBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.GlassBlock;
 import net.minecraft.block.LanternBlock;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.block.RotatedPillarBlock;
@@ -48,7 +49,7 @@ import rcarmstrong20.vanilla_expansions.block.VeEndermanPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEndermitePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingDarkMatterBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGhastPlushBlock;
-import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
+import rcarmstrong20.vanilla_expansions.block.VeGlassOfDarknessBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGuardianPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeHorsePlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeIcicleBlock;
@@ -299,9 +300,8 @@ public class VeBlocks
             new WallBlock(AbstractBlock.Properties.copy(Blocks.SMOOTH_QUARTZ)));
     public static Block stoneWall = register("stone_wall", true,
             new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
-    public static Block redGlass = register("red_glass", true,
-            new VeGlassBlock(buildProperties(MaterialType.GLASS, SoundType.GLASS).strength(0.3F).noOcclusion()
-                    .isValidSpawn(VeBlocks::never)));
+    public static Block redGlass = register("red_glass", true, new GlassBlock(
+            buildProperties(MaterialType.GLASS).strength(0.3F).noOcclusion().isValidSpawn(VeBlocks::never)));
     public static Block redGlassPane = register("red_glass_pane", true,
             new PaneBlock(AbstractBlock.Properties.copy(VeBlocks.redGlass)));
     public static Block blueberryBush = register("blueberry_bush", false,
@@ -413,7 +413,7 @@ public class VeBlocks
     public static Block packedSnowSlab = register("packed_snow_slab", true,
             new SlabBlock(AbstractBlock.Properties.copy(VeBlocks.packedSnowBlock)));
     public static Block glassOfDarkness = register("glass_of_darkness", true,
-            new VeGlassBlock(AbstractBlock.Properties.copy(VeBlocks.redGlass)));
+            new VeGlassOfDarknessBlock(AbstractBlock.Properties.copy(VeBlocks.redGlass)));
     public static Block purpleMushroom = register("purple_mushroom", true,
             new VeMushroomBlock(AbstractBlock.Properties.copy(Blocks.RED_MUSHROOM)));
     public static Block purpleMushroomBlock = register("purple_mushroom_block", true,
@@ -697,6 +697,21 @@ public class VeBlocks
             new CakeBlock(AbstractBlock.Properties.copy(Blocks.CAKE)), 1);
     public static Block redVelvetCake = register("red_velvet_cake", true,
             new CakeBlock(AbstractBlock.Properties.copy(Blocks.CAKE)), 1);
+    public static Block marble = register("marble", true, new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block marbleSlab = register("marble_slab", true,
+            new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block marbleStairs = register("marble_stairs", true,
+            new StairsBlock(() -> VeBlocks.marble.defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block marbleWall = register("marble_wall", true,
+            new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block polished_marble = register("polished_marble", true,
+            new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block polishedMarbleSlab = register("polished_marble_slab", true,
+            new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block polishedMarbleStairs = register("polished_marble_stairs", true,
+            new StairsBlock(() -> VeBlocks.marble.defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block polishedMarbleWall = register("polished_marble_wall", true,
+            new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
 
     private static boolean never(BlockState stateIn, IBlockReader readerIn, BlockPos posIn, EntityType<?> entityTypeIn)
     {

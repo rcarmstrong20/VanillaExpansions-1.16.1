@@ -1,0 +1,9 @@
+{
+    "parent": "block/stairs",
+    "textures":
+	{
+        "bottom": "ve:block/polished_marble",
+        "top": "ve:block/polished_marble",
+        "side": "ve:block/polished_marble"
+    }
+}
