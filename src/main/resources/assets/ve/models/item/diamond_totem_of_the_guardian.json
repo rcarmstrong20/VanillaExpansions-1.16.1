@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures":
+	{
+        "layer0": "ve:item/diamond_totem",
+		"layer1": "ve:item/guardian_eye_overlay"
+    }
+}
