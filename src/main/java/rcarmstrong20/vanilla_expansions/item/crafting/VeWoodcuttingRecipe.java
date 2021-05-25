@@ -83,10 +83,7 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     @Override
     public NonNullList<Ingredient> getIngredients()
     {
-        NonNullList<Ingredient> list = NonNullList.create();
-        list.add(this.ingredient);
-
-        return list;
+        return NonNullList.withSize(1, this.ingredient);
     }
 
     @Override
