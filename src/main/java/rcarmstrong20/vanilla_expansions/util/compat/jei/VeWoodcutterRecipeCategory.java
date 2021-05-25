@@ -1,5 +1,6 @@
 package rcarmstrong20.vanilla_expansions.util.compat.jei;
 
+import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +17,9 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 public class VeWoodcutterRecipeCategory implements IRecipeCategory<VeWoodcuttingRecipe>
 {
+    public static final ResourceLocation VANILLA_BG_LOCATION = new ResourceLocation(ModIds.JEI_ID,
+            "textures/gui/gui_vanilla.png");
+
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
 
@@ -28,7 +32,7 @@ public class VeWoodcutterRecipeCategory implements IRecipeCategory<VeWoodcutting
 
     public VeWoodcutterRecipeCategory(IGuiHelper guiHelper)
     {
-        ResourceLocation location = VeConstants.RECIPE_GUI_VANILLA;
+        ResourceLocation location = VANILLA_BG_LOCATION;
         background = guiHelper.createDrawable(location, 0, 220, width, height);
         icon = guiHelper.createDrawableIngredient(new ItemStack(VeBlocks.woodcutter));
         localizedName = new TranslationTextComponent("gui.jei.ve.category.woodcutter");
