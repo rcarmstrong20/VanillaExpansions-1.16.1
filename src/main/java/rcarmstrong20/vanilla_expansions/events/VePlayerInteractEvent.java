@@ -1,6 +1,7 @@
 package rcarmstrong20.vanilla_expansions.events;
 
-import java.util.Hashtable;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,15 +22,11 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
+import rcarmstrong20.vanilla_expansions.util.VeTotemMaps;
 
 public class VePlayerInteractEvent
 {
-    public static final Hashtable<Item, Integer> TOTEM_FORTUNATE_TABLE = complileTotemTable(
-            VeItems.totemOfTheFortunateI, VeItems.totemOfTheFortunateII, VeItems.totemOfTheFortunateIII,
-            VeItems.totemOfTheFortunateIV);
-
     /**
      * Controls right-click crop harvesting and snapdragon potting.
      *
@@ -122,32 +119,24 @@ public class VePlayerInteractEvent
     }
 
     @SubscribeEvent
-    public void onRightClickBlock(final PlayerInteractEvent.RightClickItem event)
+    public void onRightClickItem(final PlayerInteractEvent.RightClickItem event)
     {
         Item item = event.getItemStack().getItem();
         PlayerEntity player = event.getPlayer();
 
-        if (!player.getCooldowns().isOnCooldown(item) && TOTEM_FORTUNATE_TABLE.containsKey(item))
-        {
-            for (Item totem : TOTEM_FORTUNATE_TABLE.keySet())
-            {
-                player.getCooldowns().addCooldown(totem, VeTimeUtil.convertSecsToTicks(120));
-            }
-        }
+        addTotemCooldown(player, item, VeTotemMaps.FORTUNATE_TOTEM_MAP);
+        addTotemCooldown(player, item, VeTotemMaps.BRUTE_TOTEM_MAP);
+        addTotemCooldown(player, item, VeTotemMaps.TOTEM_GUARDIAN_MAP);
     }
 
-    /**
-     * A helper method that constructs a hash table with 4 items.
-     */
-    private static Hashtable<Item, Integer> complileTotemTable(Item item0, Item item1, Item item2, Item item3)
+    private static void addTotemCooldown(PlayerEntity player, Item item, Map<Item, Integer> totemCooldownMap)
     {
-        Hashtable<Item, Integer> hashtable = new Hashtable<>(4);
-
-        hashtable.put(item0, 0);
-        hashtable.put(item1, 0);
-        hashtable.put(item2, 0);
-        hashtable.put(item3, 0);
-
-        return hashtable;
+        if (!player.getCooldowns().isOnCooldown(item) && totemCooldownMap.containsKey(item))
+        {
+            for (Entry<Item, Integer> totem : totemCooldownMap.entrySet())
+            {
+                player.getCooldowns().addCooldown(totem.getKey(), VeTimeUtil.convertSecsToTicks(totem.getValue()));
+            }
+        }
     }
 }
