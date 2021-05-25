@@ -11,25 +11,24 @@ public class VeParticleUtil
     /**
      * Spawn particles around the player.
      *
-     * @param particle     The type of particle to spawn.
-     * @param serverPlayer
+     * @param particle The type of particle to spawn.
+     * @param player
      */
-    public static void spawnTotemParticles(BasicParticleType particle, ServerPlayerEntity serverPlayer)
+    public static void spawnTotemParticles(BasicParticleType particle, ServerPlayerEntity player)
     {
-        Random random = serverPlayer.getRandom();
+        Random random = player.getRandom();
         int max = random.nextInt(15) + 15;
 
-        serverPlayer.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
+        player.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
 
         for (int i = 0; i <= max; i++)
         {
             int count = random.nextInt(5) + 5;
-            double x = serverPlayer.getRandomX(2.0);
-            double y = serverPlayer.getRandomY();
-            double z = serverPlayer.getRandomZ(2.0);
+            double x = player.getRandomX(2.0);
+            double y = player.getRandomY();
+            double z = player.getRandomZ(2.0);
 
-            serverPlayer.getServer().overworld().sendParticles(serverPlayer, particle, true, x, y, z, count, 0.0, 1.0,
-                    0.0, 0.0);
+            player.getServer().overworld().sendParticles(player, particle, true, x, y, z, count, 0.0, 1.0, 0.0, 0.0);
         }
     }
 }
