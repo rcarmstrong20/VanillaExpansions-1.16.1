@@ -9,7 +9,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -62,11 +61,11 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         {
             if (world.getFluidState(pos.relative(direction)).is(FluidTags.LAVA))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.bauxite, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VeBlocks.bauxite, Blocks.END_STONE, Blocks.END_STONE);
             }
             else if (world.getFluidState(pos.relative(direction)).is(FluidTags.WATER))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.sodalite, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VeBlocks.sodalite, Blocks.BLUE_ICE, Blocks.END_STONE);
             }
         }
         return true; // This method needs to always return true to keep flowing functionality intact.
@@ -78,18 +77,23 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
      * @param world
      * @param pos
      * @param foundDirection The direction where the fluid is located.
-     * @param sourceBlock    The block to generate when converting a source block.
-     * @param otherBlock     The block to generate when converting a flowing block.
-     * @return true when this method generates a block.
+     * @param sourceMatter   The block to place when converting a dark matter source
+     *                       block.
+     * @param sourceOther    The block to place when converting a lava or water
+     *                       source block.
+     * @param flowingBlock   The block to place when converting a flowing block.
+     * @return true when this method places a block.
      */
-    private boolean generateBlocks(World world, BlockPos pos, Direction foundDirection, Block sourceBlock,
-            Block flowingBlock)
+    private boolean generateBlocks(World world, BlockPos pos, Direction foundDirection, Block sourceMatter,
+            Block sourceOther, Block flowingBlock)
     {
+        BlockPos belowPos = pos.below();
+
         if (foundDirection.equals(Direction.UP))
         {
             if (world.getFluidState(pos).isSource())
             {
-                placeBlockAt(world, pos, sourceBlock);
+                placeBlockAt(world, pos, sourceMatter);
                 return true;
             }
             else
@@ -100,9 +104,9 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         }
         else
         {
-            if (world.getFluidState(pos).isSource())
+            if (world.getFluidState(belowPos).isSource())
             {
-                placeBlockAt(world, pos, sourceBlock);
+                placeBlockAt(world, belowPos, sourceOther);
                 return true;
             }
             else
@@ -173,28 +177,6 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     @Override
     public void entityInside(BlockState state, World world, BlockPos pos, Entity entity)
     {
-        if (!(entity instanceof PlayerEntity)
-                && entity.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.005))
-            return;
-        /*
-         * if (entity instanceof ItemEntity) { // Make items float on dark matter with
-         * firework particles. if (random.nextInt(10) == 0) {
-         * world.addParticle(ParticleTypes.FIREWORK,
-         * entity.getPosXRandom(random.nextFloat()), entity.getPosY() +
-         * random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-         * } entity.setMotion(0.0D, (entity.getMotion().getY() + 0.1D) / 2, 0.0D); }
-         * else { double xMot = entity.getMotion().getX(); double yMot =
-         * entity.getMotion().getY(); double zMot = entity.getMotion().getZ();
-         *
-         * if ((entity.getPosY() - entity.prevPosY) > 0.0 &&
-         * world.getBlockState(pos.up()) != this.getBlock().getDefaultState()) {
-         * entity.addVelocity(0.0, 0.05, 0.0); } else { entity.setMotion(xMot / 200000,
-         * yMot / 200000, zMot / 200000); }
-         *
-         * if (random.nextInt(10) == 0) { world.addParticle(ParticleTypes.FIREWORK,
-         * entity.getPosXRandom(random.nextFloat()), entity.getPosY() +
-         * random.nextFloat(), entity.getPosZRandom(random.nextFloat()), 0.0, 0.0, 0.0);
-         * } entity.fallDistance = 0; }
-         */
+        entity.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.007D);
     }
 }
