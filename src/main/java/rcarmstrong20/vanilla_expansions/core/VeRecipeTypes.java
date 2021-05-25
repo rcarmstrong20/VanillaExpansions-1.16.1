@@ -31,7 +31,7 @@ public class VeRecipeTypes
                     @Override
                     public String toString()
                     {
-                        return name;
+                        return VanillaExpansions.MOD_ID + ":" + name;
                     }
                 });
     }

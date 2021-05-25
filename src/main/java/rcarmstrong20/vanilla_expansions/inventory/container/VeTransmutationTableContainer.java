@@ -200,64 +200,81 @@ public class VeTransmutationTableContainer extends Container
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index)
+    public ItemStack quickMoveStack(PlayerEntity player, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
+
         if (slot != null && slot.hasItem())
         {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index == 1)
+
+            // Move the stack from the output slot.
+            if (index == 3)
             {
-                item.onCraftedBy(itemstack1, playerIn.level, playerIn);
-                if (!this.moveItemStackTo(itemstack1, 2, 38, true))
+                item.onCraftedBy(itemstack1, player.level, player);
+
+                // The moveItemStackTo method takes four arguments
+                // (itemStack, startSlot, finalContainerIndex, reverseOrder)
+                if (!this.moveItemStackTo(itemstack1, 4, 40, true))
                 {
                     return ItemStack.EMPTY;
                 }
-
                 slot.onQuickCraft(itemstack1, itemstack);
             }
-            else if (index == 0)
+            // Move the stack from the input slots.
+            else if (index == 0 || index == 1 || index == 2)
             {
-                if (!this.moveItemStackTo(itemstack1, 2, 38, false))
+                if (!this.moveItemStackTo(itemstack1, 4, 40, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
+            // Move the stack into the input slots.
             else if (this.level.getRecipeManager()
-                    .getRecipeFor(VeRecipeTypes.woodcutting, new Inventory(itemstack1), this.level).isPresent())
+                    .getRecipeFor(VeRecipeTypes.transmutation, new Inventory(itemstack1), this.level).isPresent())
             {
-                if (!this.moveItemStackTo(itemstack1, 0, 1, false))
+                if (itemstack1.getItem().equals(VeItems.ruby) && this.moveItemStackTo(itemstack1, 2, 3, false))
+                {
+                    return ItemStack.EMPTY;
+                }
+                if (this.moveItemStackTo(itemstack1, 0, 1, false))
+                {
+                    return ItemStack.EMPTY;
+                }
+                if (this.moveItemStackTo(itemstack1, 1, 2, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= 2 && index < 29)
+            // Move the stack around the inventory.
+            else if (index >= 4 && index < 31)
             {
-                if (!this.moveItemStackTo(itemstack1, 29, 38, false))
+                if (!this.moveItemStackTo(itemstack1, 31, 40, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= 29 && index < 38 && !this.moveItemStackTo(itemstack1, 2, 29, false))
+            else if (index >= 31 && index < 40 && !this.moveItemStackTo(itemstack1, 4, 31, false))
             {
                 return ItemStack.EMPTY;
             }
 
+            // The stack moved.
             if (itemstack1.isEmpty())
             {
                 slot.set(ItemStack.EMPTY);
             }
-
+            // The stack didn't move.
             slot.setChanged();
             if (itemstack1.getCount() == itemstack.getCount())
             {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, itemstack1);
+            slot.onTake(player, itemstack1);
             this.broadcastChanges();
         }
         return itemstack;

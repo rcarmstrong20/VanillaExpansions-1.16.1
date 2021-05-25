@@ -67,12 +67,12 @@ public class VeVillagerTradesEvent
     private static void addTrade(VillagerTradesEvent event, VillagerProfession profession,
             ImmutableMap<Integer, List<ITrade>> trades)
     {
-        for (int i = 1; i <= trades.size(); i++)
+        int i = 1; // The index for each profession level.
+
+        while (event.getType().equals(profession) && i <= trades.size())
         {
-            if (event.getType().equals(profession))
-            {
-                event.getTrades().put(i, trades.get(i));
-            }
+            event.getTrades().put(i, trades.get(i));
+            i++;
         }
     }
 }

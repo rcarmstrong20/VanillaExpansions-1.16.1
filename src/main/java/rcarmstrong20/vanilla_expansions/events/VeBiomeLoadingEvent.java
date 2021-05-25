@@ -82,6 +82,7 @@ public class VeBiomeLoadingEvent
         addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VeConfiguredFeatures.DISK_SWAMP_MUD,
                 swampMudFlag);
         addFeature(event, Category.SWAMP, vegetal, VeConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
+        addFeature(event, Category.EXTREME_HILLS, ores, VeConfiguredFeatures.ORE_MARBLE, true);
 
         addStructure(event, taiga, rain, VeConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
         addStructure(event, taiga, snow, VeConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
@@ -151,7 +152,7 @@ public class VeBiomeLoadingEvent
     private static void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
             ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        if (event.getCategory() == category && enable)
+        if (event.getCategory().equals(category) && enable)
         {
             event.getGeneration().getFeatures(decorationType).add(() -> feature);
         }
@@ -182,7 +183,7 @@ public class VeBiomeLoadingEvent
      * @param biomes     The biome names to add the feature to.
      * @param decoration The decoration category that this feature belongs to.
      * @param feature    The feature to add.
-     * @param enable     A boolean from the config used to enable and disable this
+     * @param enable     A boolean from the config used to enable and disable the
      *                   feature.
      */
     private static void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,

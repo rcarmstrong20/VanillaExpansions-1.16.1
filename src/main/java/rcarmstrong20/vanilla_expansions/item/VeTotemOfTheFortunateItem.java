@@ -36,9 +36,10 @@ public class VeTotemOfTheFortunateItem extends Item
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
+        ItemStack stack = player.getItemInHand(hand);
+
         player.addEffect(new EffectInstance(Effects.LUCK, VeTimeUtil.convertSecsToTicks(120), amplifier));
         player.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
-        ItemStack stack = player.getItemInHand(hand);
 
         if (!player.isCreative())
         {
@@ -49,6 +50,7 @@ public class VeTotemOfTheFortunateItem extends Item
         {
             VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheFortunate, (ServerPlayerEntity) player);
         }
+
         return ActionResult.success(stack);
     }
 

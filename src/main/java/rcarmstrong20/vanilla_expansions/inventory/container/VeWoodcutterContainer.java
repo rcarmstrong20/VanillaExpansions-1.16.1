@@ -203,6 +203,8 @@ public class VeWoodcutterContainer extends Container
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
+
+            // Move the stack from the output slot.
             if (index == 1)
             {
                 item.onCraftedBy(itemstack1, playerIn.level, playerIn);
@@ -213,6 +215,7 @@ public class VeWoodcutterContainer extends Container
 
                 slot.onQuickCraft(itemstack1, itemstack);
             }
+            // Move the stack from the input slot.
             else if (index == 0)
             {
                 if (!this.moveItemStackTo(itemstack1, 2, 38, false))
@@ -220,6 +223,7 @@ public class VeWoodcutterContainer extends Container
                     return ItemStack.EMPTY;
                 }
             }
+            // Move the stack to the input slot.
             else if (this.level.getRecipeManager()
                     .getRecipeFor(VeRecipeTypes.woodcutting, new Inventory(itemstack1), this.level).isPresent())
             {
@@ -228,6 +232,7 @@ public class VeWoodcutterContainer extends Container
                     return ItemStack.EMPTY;
                 }
             }
+            // Move the stack around the inventory.
             else if (index >= 2 && index < 29)
             {
                 if (!this.moveItemStackTo(itemstack1, 29, 38, false))
@@ -240,11 +245,13 @@ public class VeWoodcutterContainer extends Container
                 return ItemStack.EMPTY;
             }
 
+            // Moved the stack to a different slot.
             if (itemstack1.isEmpty())
             {
                 slot.set(ItemStack.EMPTY);
             }
 
+            // The stack stayed in the same slot.
             slot.setChanged();
             if (itemstack1.getCount() == itemstack.getCount())
             {
