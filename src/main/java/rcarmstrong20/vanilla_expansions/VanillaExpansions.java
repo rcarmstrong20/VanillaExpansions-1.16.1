@@ -46,7 +46,6 @@ import rcarmstrong20.vanilla_expansions.events.VeCropsGrowEvent;
 import rcarmstrong20.vanilla_expansions.events.VeLivingEvent;
 import rcarmstrong20.vanilla_expansions.events.VeLoadEvent;
 import rcarmstrong20.vanilla_expansions.events.VePlayerInteractEvent;
-import rcarmstrong20.vanilla_expansions.events.VeTickEvent;
 import rcarmstrong20.vanilla_expansions.events.VeViewRenderEvent;
 import rcarmstrong20.vanilla_expansions.events.VeVillagerTradesEvent;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
@@ -106,7 +105,6 @@ public class VanillaExpansions
         MinecraftForge.EVENT_BUS.register(new VeLivingEvent());
         MinecraftForge.EVENT_BUS.register(new VeLoadEvent());
         MinecraftForge.EVENT_BUS.register(new VePlayerInteractEvent());
-        MinecraftForge.EVENT_BUS.register(new VeTickEvent());
         MinecraftForge.EVENT_BUS.register(new VeViewRenderEvent());
         MinecraftForge.EVENT_BUS.register(new VeVillagerTradesEvent());
         MinecraftForge.EVENT_BUS.register(this);
