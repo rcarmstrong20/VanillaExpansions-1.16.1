@@ -21,6 +21,7 @@ import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheBruteItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
 import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheGuardianItem;
+import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheMinerItem;
 
 /**
  *
@@ -73,30 +74,38 @@ public class VeItems
     public static Item bloodVial = register("blood_vial",
             new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
     public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
-    public static Item totemOfTheGuardianI = register("totem_of_the_guardian_i",
+    public static Item coalTotemOfTheGuardian = register("coal_totem_of_the_guardian",
             new VeTotemOfTheGuardianItem(buildProperties(16), 240));
-    public static Item totemOfTheGuardianII = register("totem_of_the_guardian_ii",
+    public static Item ironTotemOfTheGuardian = register("iron_totem_of_the_guardian",
             new VeTotemOfTheGuardianItem(buildProperties(16), 360));
-    public static Item totemOfTheGuardianIII = register("totem_of_the_guardian_iii",
+    public static Item goldTotemOfTheGuardian = register("gold_totem_of_the_guardian",
             new VeTotemOfTheGuardianItem(buildProperties(16), 480));
-    public static Item totemOfTheGuardianIV = register("totem_of_the_guardian_iv",
+    public static Item diamondTotemOfTheGuardian = register("diamond_totem_of_the_guardian",
             new VeTotemOfTheGuardianItem(buildProperties(16), 600));
-    public static Item totemOfTheFortunateI = register("totem_of_the_fortunate_i",
+    public static Item coalTotemOfTheFortunate = register("coal_totem_of_the_fortunate",
             new VeTotemOfTheFortunateItem(buildProperties(16), 0));
-    public static Item totemOfTheFortunateII = register("totem_of_the_fortunate_ii",
+    public static Item ironTotemOfTheFortunate = register("iron_totem_of_the_fortunate",
             new VeTotemOfTheFortunateItem(buildProperties(16), 1));
-    public static Item totemOfTheFortunateIII = register("totem_of_the_fortunate_iii",
+    public static Item goldTotemOfTheFortunate = register("gold_totem_of_the_fortunate",
             new VeTotemOfTheFortunateItem(buildProperties(16), 2));
-    public static Item totemOfTheFortunateIV = register("totem_of_the_fortunate_iv",
+    public static Item diamondTotemOfTheFortunate = register("diamond_totem_of_the_fortunate",
             new VeTotemOfTheFortunateItem(buildProperties(16), 3));
-    public static Item totemOfTheBruteI = register("totem_of_the_brute_i",
+    public static Item coalTotemOfTheBrute = register("coal_totem_of_the_brute",
             new VeTotemOfTheBruteItem(buildProperties(16), 0));
-    public static Item totemOfTheBruteII = register("totem_of_the_brute_ii",
+    public static Item ironTotemOfTheBrute = register("iron_totem_of_the_brute",
             new VeTotemOfTheBruteItem(buildProperties(16), 1));
-    public static Item totemOfTheBruteIII = register("totem_of_the_brute_iii",
+    public static Item goldTotemOfTheBrute = register("gold_totem_of_the_brute",
             new VeTotemOfTheBruteItem(buildProperties(16), 2));
-    public static Item totemOfTheBruteIV = register("totem_of_the_brute_iv",
+    public static Item diamondTotemOfTheBrute = register("diamond_totem_of_the_brute",
             new VeTotemOfTheBruteItem(buildProperties(16), 3));
+    public static Item coalTotemOfTheMiner = register("coal_totem_of_the_miner",
+            new VeTotemOfTheMinerItem(buildProperties(16), 0));
+    public static Item ironTotemOfTheMiner = register("iron_totem_of_the_miner",
+            new VeTotemOfTheMinerItem(buildProperties(16), 1));
+    public static Item goldTotemOfTheMiner = register("gold_totem_of_the_miner",
+            new VeTotemOfTheMinerItem(buildProperties(16), 2));
+    public static Item diamondTotemOfTheMiner = register("diamond_totem_of_the_miner",
+            new VeTotemOfTheMinerItem(buildProperties(16), 3));
     public static Item whiteTorch = register("white_torch",
             new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, buildProperties()));
     public static Item orangeTorch = register("orange_torch",
@@ -137,6 +146,7 @@ public class VeItems
     public static Item oceanEssence = register("ocean_essence", new Item(buildProperties()));
     public static Item rageEssence = register("rage_essence", new Item(buildProperties()));
     public static Item luckEssence = register("luck_essence", new Item(buildProperties()));
+    public static Item stoneEssence = register("stone_essence", new Item(buildProperties()));
 
     /**
      * A helper method that builds default properties for a item.
