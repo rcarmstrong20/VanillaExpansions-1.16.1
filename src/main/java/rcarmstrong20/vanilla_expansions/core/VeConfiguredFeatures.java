@@ -93,6 +93,9 @@ public class VeConfiguredFeatures
     public static final ConfiguredFeature<?, ?> CATTAIL_SWAMP = register("cattail_swamp",
             VeFeature.CATTAIL.configured(new ProbabilityConfig(0.6F)).count(32)
                     .decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
+    public static final ConfiguredFeature<?, ?> ORE_MARBLE = register("ore_marble",
+            Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                    VeConfiguredFeatures.States.MARBLE, 33)).range(80).squared().count(10));
 
     /**
      * A helper method for automatically registering every new configured feature.
@@ -180,5 +183,6 @@ public class VeConfiguredFeatures
         protected static final BlockState CATTAIL = VeBlocks.smokyQuartzBlock.defaultBlockState();
         protected static final BlockState WATER_BLOCK = Blocks.WATER.defaultBlockState();
         protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
+        protected static final BlockState MARBLE = VeBlocks.marble.defaultBlockState();
     }
 }

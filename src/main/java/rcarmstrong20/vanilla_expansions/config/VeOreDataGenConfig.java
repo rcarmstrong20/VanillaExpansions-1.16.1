@@ -2,6 +2,7 @@ package rcarmstrong20.vanilla_expansions.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 public class VeOreDataGenConfig
 {
@@ -22,14 +23,16 @@ public class VeOreDataGenConfig
 
         public static void init(ForgeConfigSpec.Builder server)
         {
-            server.comment("Vein Size Configuration").push("ve_vein_size");
+            String modId = VanillaExpansions.MOD_ID;
+
+            server.comment("Vein Size Configuration").push(modId + "_vein_size");
 
             netherSmokyQuartzOreVeinSize = server.comment(compileVeinSizeComment("nether smoky quartz ore", "14"))
-                    .translation("ve_ore_data.ve_vein_size.nether_smoky_quartz_ore_vein_size").worldRestart()
+                    .translation(modId + "_ore_data.vein_size.nether_smoky_quartz_ore_vein_size").worldRestart()
                     .defineInRange("nether_smoky_quartz_ore_vein_size", 14, 0, 17);
 
             blackstoneRubyOreVeinSize = server.comment(compileVeinSizeComment("blackstone ruby ore", "5"))
-                    .translation("ve_ore_data.ve_vein_size.blackstone_ruby_ore_vein_size").worldRestart()
+                    .translation(modId + "_ore_data.vein_size.blackstone_ruby_ore_vein_size").worldRestart()
                     .defineInRange("blackstone_ruby_ore_vein_size", 5, 0, 17);
 
             server.pop();
@@ -54,14 +57,16 @@ public class VeOreDataGenConfig
 
         public static void init(ForgeConfigSpec.Builder server)
         {
+            String modId = VanillaExpansions.MOD_ID;
+
             server.comment("Spread Configuration").push("ve_ore_spread");
 
             netherSmokyQuartzOreSpread = server.comment(compileSpreadComment("nether smoky quartz ore", "16"))
-                    .translation("ve_ore_data.ve_ore_spread.nether_smoky_quartz_ore_spread").worldRestart()
+                    .translation(modId + "_ore_data.ore_spread.nether_smoky_quartz_ore_spread").worldRestart()
                     .defineInRange("nether_smoky_quartz_ore_spread", 16, 2, 20);
 
             blackstoneRubyOreSpread = server.comment(compileSpreadComment("blackstone ruby ore", "16"))
-                    .translation("ve_ore_data.ve_ore_spread.blackstone_ruby_ore_spread").worldRestart()
+                    .translation(modId + "_ore_data.ore_spread.blackstone_ruby_ore_spread").worldRestart()
                     .defineInRange("blackstone_ruby_ore_spread", 16, 2, 20);
 
             server.pop();
