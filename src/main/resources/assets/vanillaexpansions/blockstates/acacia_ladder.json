@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "vanillaexpansions:block/acacia_ladder" },
+        "facing=east":  { "model": "vanillaexpansions:block/acacia_ladder", "y": 90 },
+        "facing=south": { "model": "vanillaexpansions:block/acacia_ladder", "y": 180 },
+        "facing=west":  { "model": "vanillaexpansions:block/acacia_ladder", "y": 270 }
+    }
+}

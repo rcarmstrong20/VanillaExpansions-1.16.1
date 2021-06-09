@@ -1,0 +1,21 @@
+{
+    "variants":
+	{
+        "facing=north,plush_stack_size=1":            { "model": "vanillaexpansions:block/one_magma_cube_plush" },
+		"facing=north,plush_stack_size=2":            { "model": "vanillaexpansions:block/two_magma_cube_plushes" },
+		"facing=north,plush_stack_size=3,half=lower": { "model": "vanillaexpansions:block/two_magma_cube_plushes" },
+		"facing=north,plush_stack_size=3,half=upper": { "model": "vanillaexpansions:block/three_magma_cube_plushes" },
+        "facing=south,plush_stack_size=1":            { "model": "vanillaexpansions:block/one_magma_cube_plush", "y": 180 },
+		"facing=south,plush_stack_size=2":            { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 180 },
+		"facing=south,plush_stack_size=3,half=lower": { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 180 },
+		"facing=south,plush_stack_size=3,half=upper": { "model": "vanillaexpansions:block/three_magma_cube_plushes", "y": 180 },
+        "facing=west,plush_stack_size=1":             { "model": "vanillaexpansions:block/one_magma_cube_plush", "y": 270 },
+		"facing=west,plush_stack_size=2":             { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 270 },
+		"facing=west,plush_stack_size=3,half=lower":  { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 270 },
+		"facing=west,plush_stack_size=3,half=upper":  { "model": "vanillaexpansions:block/three_magma_cube_plushes", "y": 270 },
+        "facing=east,plush_stack_size=1":             { "model": "vanillaexpansions:block/one_magma_cube_plush", "y": 90 },
+		"facing=east,plush_stack_size=2":             { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 90 },
+		"facing=east,plush_stack_size=3,half=lower":  { "model": "vanillaexpansions:block/two_magma_cube_plushes", "y": 90 },
+		"facing=east,plush_stack_size=3,half=upper":  { "model": "vanillaexpansions:block/three_magma_cube_plushes", "y": 90 }
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:crimson_chytrid_nether_bricks"
+  },
+  "result": "vanillaexpansions:crimson_chytrid_nether_brick_stairs",
+  "count": 1
+}

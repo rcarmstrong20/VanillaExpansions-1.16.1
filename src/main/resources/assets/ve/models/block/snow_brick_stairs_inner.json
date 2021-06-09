@@ -1,9 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures":
-	{
-        "bottom": "ve:block/snow_bricks",
-        "top": "ve:block/snow_bricks",
-        "side": "ve:block/snow_bricks"
-    }
-}

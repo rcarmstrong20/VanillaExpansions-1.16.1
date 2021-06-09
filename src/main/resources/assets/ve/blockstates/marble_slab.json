@@ -1,8 +1,0 @@
-{
-    "variants":
-	{
-        "type=bottom": { "model": "ve:block/marble_slab" },
-        "type=top": { "model": "ve:block/marble_slab_top" },
-        "type=double": { "model": "ve:block/marble" }
-	}
-}

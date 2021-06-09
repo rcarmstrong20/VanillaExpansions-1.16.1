@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "TTT",
+    "GBG",
+    "CRC"
+  ],
+  "key":
+  {
+    "T":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"G":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"C":
+	{
+	  "item": "minecraft:red_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"R":
+	{
+	  "item": "minecraft:crimson_fungus"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:crimson_villager_plush"
+  }
+}

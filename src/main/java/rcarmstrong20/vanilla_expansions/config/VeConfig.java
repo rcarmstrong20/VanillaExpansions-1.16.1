@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Bus.MOD)
-public class VeConfig
+public class VEConfig
 {
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SERVER_CONFIG;
@@ -21,10 +21,11 @@ public class VeConfig
 
     static
     {
-        VeOreDataGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VeCropConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VeFeatureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VeEntityConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEOreDataGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEBlockConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEFeatureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEStructureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEEntityConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
 
         SERVER_CONFIG = SERVER_BUILDER.build();
         CLIENT_CONFIG = CLIENT_BUILDER.build();

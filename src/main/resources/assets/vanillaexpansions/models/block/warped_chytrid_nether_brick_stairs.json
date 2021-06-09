@@ -1,0 +1,9 @@
+{
+    "parent": "block/stairs",
+    "textures":
+	{
+        "bottom": "vanillaexpansions:block/warped_chytrid_nether_bricks",
+        "top": "vanillaexpansions:block/warped_chytrid_nether_bricks",
+        "side": "vanillaexpansions:block/warped_chytrid_nether_bricks"
+    }
+}

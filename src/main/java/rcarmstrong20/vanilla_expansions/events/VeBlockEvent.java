@@ -12,10 +12,10 @@ import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.config.VEBlockConfig;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
-public class VeBlockEvent
+public class VEBlockEvent
 {
     @SubscribeEvent
     public void onBlockBroken(BlockEvent.BreakEvent event)
@@ -27,20 +27,20 @@ public class VeBlockEvent
         if (!player.isCreative() && block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
         {
             Random random = new Random();
-            int chance = VeCropConfig.VeBlockConfig.spruceConePercent.get();
+            double chance = VEBlockConfig.spruceConePercent.get() / 100.0;
             float chose = random.nextFloat();
 
             // 5% chance to drop by default
-            if (chose <= (chance / 100.0))
+            if (chose <= chance)
             {
-                Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 1));
+                Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VEItems.spruceCone, 1));
             }
             else
             {
                 if (EnchantmentHelper.getEnchantments(stack).get(Enchantments.BLOCK_FORTUNE) != null
-                        && chose <= (chance / 100.0) * 4.0)
+                        && chose <= chance * 4.0)
                 {
-                    Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VeItems.spruceCone, 2));
+                    Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VEItems.spruceCone, 2));
                 }
             }
         }

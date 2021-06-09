@@ -21,19 +21,19 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeTypes;
-import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeTransmutationRecipe;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEContainerTypes;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
+import rcarmstrong20.vanilla_expansions.core.VERecipeTypes;
+import rcarmstrong20.vanilla_expansions.core.VESoundEvents;
+import rcarmstrong20.vanilla_expansions.item.crafting.VETransmutationRecipe;
 
-public class VeTransmutationTableContainer extends Container
+public class VETransmutationTableContainer extends Container
 {
     private IWorldPosCallable access;
     private IntReferenceHolder selectedRecipeIndex = IntReferenceHolder.standalone();
     private World level;
-    private List<VeTransmutationRecipe> recipes = Lists.newArrayList();
+    private List<VETransmutationRecipe> recipes = Lists.newArrayList();
     private long lastSoundTime;
     final Slot essenceInput;
     final Slot tierInput;
@@ -48,21 +48,21 @@ public class VeTransmutationTableContainer extends Container
         public void setChanged()
         {
             super.setChanged();
-            VeTransmutationTableContainer.this.slotsChanged(this);
-            VeTransmutationTableContainer.this.slotUpdateListener.run();
+            VETransmutationTableContainer.this.slotsChanged(this);
+            VETransmutationTableContainer.this.slotUpdateListener.run();
         }
     };
 
     private final CraftResultInventory resultContainer = new CraftResultInventory();
 
-    public VeTransmutationTableContainer(int windowIdIn, PlayerInventory playerInventoryIn)
+    public VETransmutationTableContainer(int windowIdIn, PlayerInventory playerInventoryIn)
     {
         this(windowIdIn, playerInventoryIn, IWorldPosCallable.NULL);
     }
 
-    public VeTransmutationTableContainer(int windowIdIn, PlayerInventory inventoryIn, final IWorldPosCallable accessIn)
+    public VETransmutationTableContainer(int windowIdIn, PlayerInventory inventoryIn, final IWorldPosCallable accessIn)
     {
-        super(VeContainerTypes.transmutationTable, windowIdIn);
+        super(VEContainerTypes.transmutationTable, windowIdIn);
         this.access = accessIn;
         this.level = inventoryIn.player.level;
 
@@ -73,7 +73,7 @@ public class VeTransmutationTableContainer extends Container
             @Override
             public boolean mayPlace(ItemStack stack)
             {
-                return stack.getItem().equals(VeItems.ruby);
+                return stack.getItem().equals(VEItems.ruby);
             }
         });
 
@@ -89,20 +89,20 @@ public class VeTransmutationTableContainer extends Container
             public ItemStack onTake(PlayerEntity player, ItemStack stack)
             {
                 stack.onCraftedBy(player.level, player, stack.getCount());
-                VeTransmutationTableContainer.this.resultContainer.awardUsedRecipes(player);
-                VeTransmutationTableContainer.this.essenceInput.remove(1);
-                VeTransmutationTableContainer.this.tierInput.remove(1);
-                VeTransmutationTableContainer.this.rubyInput.remove(1);
+                VETransmutationTableContainer.this.resultContainer.awardUsedRecipes(player);
+                VETransmutationTableContainer.this.essenceInput.remove(1);
+                VETransmutationTableContainer.this.tierInput.remove(1);
+                VETransmutationTableContainer.this.rubyInput.remove(1);
                 Random random = player.getRandom();
 
                 accessIn.execute((level, pos) ->
                 {
                     long l = level.getGameTime();
-                    if (VeTransmutationTableContainer.this.lastSoundTime != l)
+                    if (VETransmutationTableContainer.this.lastSoundTime != l)
                     {
-                        level.playSound((PlayerEntity) null, pos, VeSoundEvents.uiTransmutationTableTakeResult,
+                        level.playSound((PlayerEntity) null, pos, VESoundEvents.uiTransmutationTableTakeResult,
                                 SoundCategory.BLOCKS, 1.0F + random.nextFloat(), 1.0F + random.nextFloat());
-                        VeTransmutationTableContainer.this.lastSoundTime = l;
+                        VETransmutationTableContainer.this.lastSoundTime = l;
                     }
                 });
                 return super.onTake(player, stack);
@@ -130,13 +130,13 @@ public class VeTransmutationTableContainer extends Container
     @Override
     public boolean stillValid(PlayerEntity playerIn)
     {
-        return stillValid(this.access, playerIn, VeBlocks.transmutationTable);
+        return stillValid(this.access, playerIn, VEBlocks.transmutationTable);
     }
 
     @Override
     public ContainerType<?> getType()
     {
-        return VeContainerTypes.transmutationTable;
+        return VEContainerTypes.transmutationTable;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -149,7 +149,7 @@ public class VeTransmutationTableContainer extends Container
     {
         if (!this.recipes.isEmpty())
         {
-            VeTransmutationRecipe transmutationRecipe = this.recipes.get(this.selectedRecipeIndex.get());
+            VETransmutationRecipe transmutationRecipe = this.recipes.get(this.selectedRecipeIndex.get());
             this.resultContainer.setRecipeUsed(transmutationRecipe);
             this.resultSlot.set(transmutationRecipe.assemble(inputContainer));
         }
@@ -188,7 +188,7 @@ public class VeTransmutationTableContainer extends Container
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty())
         {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(VeRecipeTypes.transmutation, inventoryIn,
+            this.recipes = this.level.getRecipeManager().getRecipesFor(VERecipeTypes.transmutation, inventoryIn,
                     this.level);
         }
     }
@@ -234,9 +234,9 @@ public class VeTransmutationTableContainer extends Container
             }
             // Move the stack into the input slots.
             else if (this.level.getRecipeManager()
-                    .getRecipeFor(VeRecipeTypes.transmutation, new Inventory(itemstack1), this.level).isPresent())
+                    .getRecipeFor(VERecipeTypes.transmutation, new Inventory(itemstack1), this.level).isPresent())
             {
-                if (itemstack1.getItem().equals(VeItems.ruby) && this.moveItemStackTo(itemstack1, 2, 3, false))
+                if (itemstack1.getItem().equals(VEItems.ruby) && this.moveItemStackTo(itemstack1, 2, 3, false))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -292,7 +292,7 @@ public class VeTransmutationTableContainer extends Container
     }
 
     @OnlyIn(Dist.CLIENT)
-    public List<VeTransmutationRecipe> getRecipes()
+    public List<VETransmutationRecipe> getRecipes()
     {
         return this.recipes;
     }

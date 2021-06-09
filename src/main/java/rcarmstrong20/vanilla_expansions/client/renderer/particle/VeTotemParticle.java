@@ -10,9 +10,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VeTotemParticle extends SimpleAnimatedParticle
+public class VETotemParticle extends SimpleAnimatedParticle
 {
-    public VeTotemParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY,
+    public VETotemParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY,
             double motionZ, IAnimatedSprite spriteWithAge)
     {
         super(world, x, y, z, spriteWithAge, -0.05F);
@@ -25,7 +25,7 @@ public class VeTotemParticle extends SimpleAnimatedParticle
         this.setBaseAirFriction(0.6F);
     }
 
-    public static class VeTotemOfTheBruteParticle extends VeTotemParticle
+    public static class VeTotemOfTheBruteParticle extends VETotemParticle
     {
         public VeTotemOfTheBruteParticle(ClientWorld world, double x, double y, double z, double motionX,
                 double motionY, double motionZ, IAnimatedSprite spriteWithAge)
@@ -45,7 +45,7 @@ public class VeTotemParticle extends SimpleAnimatedParticle
         }
     }
 
-    public static class VeTotemOfTheGuardianParticle extends VeTotemParticle
+    public static class VeTotemOfTheGuardianParticle extends VETotemParticle
     {
         public VeTotemOfTheGuardianParticle(ClientWorld world, double x, double y, double z, double motionX,
                 double motionY, double motionZ, IAnimatedSprite spriteWithAge)
@@ -66,7 +66,7 @@ public class VeTotemParticle extends SimpleAnimatedParticle
         }
     }
 
-    public static class VeTotemOfTheFortunateParticle extends VeTotemParticle
+    public static class VeTotemOfTheFortunateParticle extends VETotemParticle
     {
         public VeTotemOfTheFortunateParticle(ClientWorld world, double x, double y, double z, double motionX,
                 double motionY, double motionZ, IAnimatedSprite spriteWithAge)

@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "minecraft:snow_block"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:snow_stairs",
+    "count": 4
+  }
+}

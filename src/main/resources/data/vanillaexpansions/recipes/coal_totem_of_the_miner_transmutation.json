@@ -1,0 +1,19 @@
+{
+  "type": "vanillaexpansions:transmutation",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:coal"
+    },
+	{
+	  "item": "vanillaexpansions:stone_essence"
+	},
+	{
+	  "item": "vanillaexpansions:ruby"
+	}
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:coal_totem_of_the_miner"
+  }
+}

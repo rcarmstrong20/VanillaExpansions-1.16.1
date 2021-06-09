@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:crimson_stems"
+  },
+  "result": "vanillaexpansions:crimson_wall",
+  "count": 1
+}

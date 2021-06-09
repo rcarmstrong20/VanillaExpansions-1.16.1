@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeVillagerPlushBlock extends VePlushBlock
+public class VEVillagerPlushBlock extends VEPlushBlock
 {
     private int type;
 
@@ -36,7 +36,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_BODY_SHAPE = VoxelShapes.or(NORTH_HEAD_SHAPE, NORTH_TORSO_SHAPE,
             NORTH_ARM_SHAPE, NORTH_FACE_SHAPE);
 
-    public VeVillagerPlushBlock(Properties properties, int type)
+    public VEVillagerPlushBlock(Properties properties, int type)
     {
         super(properties);
         this.type = type;
@@ -85,14 +85,14 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_COAT_NECK2_SHAPE = Block.box(6.5D, 6.0D, 6.0D, 9.5D, 8.0D, 7.0D);
         protected static final VoxelShape NORTH_COAT_OPENING_SHAPE = Block.box(7.5D, 2.0D, 6.0D, 8.5D, 6.0D, 7.0D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VeBoxUtil.cutBox(NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VEBoxBlockUtil.cutBox(NORTH_COAT_BASE_SHAPE,
                 NORTH_COAT_NECK1_SHAPE, NORTH_COAT_NECK2_SHAPE, NORTH_COAT_OPENING_SHAPE);
 
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -109,7 +109,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_HAT_MIDDLE_SHAPE = Block.box(5.0D, 13.0D, 5.0D, 11.0D, 15.5D, 12.0D);
         protected static final VoxelShape NORTH_HAT_BRIM_SHAPE = Block.box(4.5D, 13.0D, 4.5D, 11.5D, 14.0D, 12.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VeBoxUtil.cutBox(Plains.NORTH_COAT_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VEBoxBlockUtil.cutBox(Plains.NORTH_COAT_SHAPE,
                 NORTH_COAT_RIP1_SHAPE, NORTH_COAT_RIP2_SHAPE, NORTH_COAT_RIP3_SHAPE);
 
         protected static final VoxelShape NORTH_HAT_SHAPE = VoxelShapes.or(NORTH_HAT_COTTEN_PUFF_SHAPE,
@@ -118,9 +118,9 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE,
                 NORTH_HAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -148,13 +148,13 @@ public class VeVillagerPlushBlock extends VePlushBlock
                 9.5D);
         protected static final VoxelShape NORTH_VINE_BELT_TOP_SHAPE = Block.box(4.0D, 5.5D, 7.0D, 4.5D, 6.5D, 10.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VeBoxUtil.cutBox(NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VEBoxBlockUtil.cutBox(NORTH_COAT_BASE_SHAPE,
                 Plains.NORTH_COAT_NECK1_SHAPE, Plains.NORTH_COAT_NECK2_SHAPE, NORTH_LEFT_HOLE_SHAPE,
                 NORTH_FRONT_HOLE1_SHAPE, NORTH_FRONT_HOLE2_SHAPE, NORTH_FRONT_HOLE3_SHAPE, NORTH_FRONT_HOLE4_SHAPE,
                 NORTH_FRONT_HOLE5_SHAPE, NORTH_FRONT_HOLE6_SHAPE, NORTH_BACK_HOLE1_SHAPE, NORTH_BACK_HOLE2_SHAPE,
                 NORTH_BACK_HOLE3_SHAPE, NORTH_BACK_HOLE4_SHAPE);
 
-        protected static final VoxelShape NORTH_VINE_BELT_BOTTOM_SHAPE = VeBoxUtil
+        protected static final VoxelShape NORTH_VINE_BELT_BOTTOM_SHAPE = VEBoxBlockUtil
                 .cutBox(NORTH_VINE_BELT_BOTTOM_BASE_SHAPE, NORTH_VINE_BELT_BOTTOM_HOLE_SHAPE);
 
         protected static final VoxelShape NORTH_VINE_BELT_SHAPE = VoxelShapes.or(NORTH_VINE_BELT_BOTTOM_SHAPE,
@@ -163,9 +163,9 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_VINE_BELT_SHAPE,
                 NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -181,9 +181,9 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, Plains.NORTH_COAT_BASE_SHAPE,
                 NORTH_HEAD_BAND_SHAPE, NORTH_APRON_BAND_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -204,16 +204,16 @@ public class VeVillagerPlushBlock extends VePlushBlock
                 11.0D);
         protected static final VoxelShape NORTH_HAT_SHAPE = Block.box(5.0D, 13.0D, 5.0D, 11.0D, 15.5D, 12.0D);
 
-        protected static final VoxelShape NORTH_SWEATER_SHAPE = VeBoxUtil.cutBox(NORTH_SWEATER_BASE_SHAPE,
+        protected static final VoxelShape NORTH_SWEATER_SHAPE = VEBoxBlockUtil.cutBox(NORTH_SWEATER_BASE_SHAPE,
                 NORTH_SWEATER_NECK1_SHAPE, NORTH_SWEATER_NECK2_SHAPE, NORTH_SWEATER_HOLE_FRONT_BOTTOM_SHAPE,
                 NORTH_SWEATER_HOLE_FRONT_TOP_SHAPE, NORTH_SWEATER_HOLE_SIDE_SHAPE);
 
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_SWEATER_SHAPE,
                 NORTH_HAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -239,9 +239,9 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_HAT_SHAPE,
                 NORTH_APRON_SHAPE, Plains.NORTH_COAT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -257,7 +257,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_BELT_STRAP_SHAPE = Block.box(4.0D, 3.5D, 5.5D, 12.0D, 4.5D, 11.5D);
         protected static final VoxelShape NORTH_BELT_BUCKLE_SHAPE = Block.box(7.0D, 3.5D, 5.0D, 9.0D, 4.5D, 5.5D);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VeBoxUtil.cutBox(Plains.NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VEBoxBlockUtil.cutBox(Plains.NORTH_COAT_BASE_SHAPE,
                 Snow.NORTH_SWEATER_NECK1_SHAPE, Snow.NORTH_SWEATER_NECK2_SHAPE, NORTH_COAT_NECK3_SHAPE,
                 NORTH_COAT_BOTTOM1_SHAPE, NORTH_COAT_BOTTOM2_SHAPE);
 
@@ -267,9 +267,9 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY_SHAPE, NORTH_COAT_SHAPE,
                 NORTH_BELT_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 
     /**
@@ -293,7 +293,7 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_LEFT_BEAD = Block.box(11.5, 3.0, 8.0, 12.0, 4.0, 9.0);
         protected static final VoxelShape NORTH_RIGHT_BEAD = Block.box(4.0, 3.0, 6.5, 5.0, 4.0, 7.5);
 
-        protected static final VoxelShape NORTH_COAT_SHAPE = VeBoxUtil.cutBox(Plains.NORTH_COAT_BASE_SHAPE,
+        protected static final VoxelShape NORTH_COAT_SHAPE = VEBoxBlockUtil.cutBox(Plains.NORTH_COAT_BASE_SHAPE,
                 Plains.NORTH_COAT_NECK1_SHAPE, Plains.NORTH_COAT_NECK2_SHAPE, NORTH_FRONT_LEFT_RIP,
                 NORTH_FRONT_RIGHT_RIP, NORTH_LEFT_BIG_RIP, NORTH_MIDDLE_BIG_RIP, NORTH_RIGHT_BIG_RIP);
 
@@ -303,8 +303,8 @@ public class VeVillagerPlushBlock extends VePlushBlock
         protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_COAT_SHAPE, NORTH_BEADS_SHAPE,
                 Savanna.NORTH_APRON_BAND_SHAPE, NORTH_BODY_SHAPE);
 
-        protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-        protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+        protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
     }
 }

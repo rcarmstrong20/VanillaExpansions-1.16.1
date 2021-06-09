@@ -1,9 +1,0 @@
-{
-    "parent": "ve:block/template_planter_box",
-    "textures":
-	{
-        "material": "block/netherrack",
-		"log" : "block/nether_bricks",
-		"soil": "block/soul_soil"
-    }
-}

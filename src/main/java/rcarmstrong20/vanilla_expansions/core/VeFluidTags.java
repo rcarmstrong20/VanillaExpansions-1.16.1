@@ -1,9 +1,10 @@
 package rcarmstrong20.vanilla_expansions.core;
 
 import net.minecraft.fluid.Fluid;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeTagHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -11,9 +12,9 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  *
  * @author Ryan
  */
-public class VeFluidTags
+public class VEFluidTags
 {
-    public static ITag<Fluid> darkMatter = bind("dark_matter");
+    public static ITag<Fluid> darkMatter = VEFluidTags.bind("dark_matter");
 
     /**
      * @param name The name of the tag.
@@ -21,6 +22,7 @@ public class VeFluidTags
      */
     private static ITag<Fluid> bind(String name)
     {
-        return FluidTags.createOptional(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ForgeTagHandler.createOptionalTag(ForgeRegistries.FLUIDS,
+                new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

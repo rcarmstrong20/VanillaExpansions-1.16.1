@@ -13,22 +13,22 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
-import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
+import rcarmstrong20.vanilla_expansions.block.VEColoredCampfireBlock;
+import rcarmstrong20.vanilla_expansions.tile_entity.VEColoredCampfireTileEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class VeColoredCampfireTileEntityRenderer extends TileEntityRenderer<VeColoredCampfireTileEntity>
+public class VEColoredCampfireTileEntityRenderer extends TileEntityRenderer<VEColoredCampfireTileEntity>
 {
-    public VeColoredCampfireTileEntityRenderer(TileEntityRendererDispatcher dispatcher)
+    public VEColoredCampfireTileEntityRenderer(TileEntityRendererDispatcher dispatcher)
     {
         super(dispatcher);
     }
 
     @Override
-    public void render(VeColoredCampfireTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn,
+    public void render(VEColoredCampfireTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn,
             IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
     {
-        Direction direction = tileEntityIn.getBlockState().getValue(VeColoredCampfireBlock.FACING);
+        Direction direction = tileEntityIn.getBlockState().getValue(VEColoredCampfireBlock.FACING);
         NonNullList<ItemStack> nonnulllist = tileEntityIn.getItems();
 
         for (int i = 0; i < nonnulllist.size(); ++i)

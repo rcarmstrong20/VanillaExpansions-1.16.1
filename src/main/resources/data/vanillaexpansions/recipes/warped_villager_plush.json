@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "TTT",
+    "GBG",
+    "CRC"
+  ],
+  "key":
+  {
+    "T":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"G":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"C":
+	{
+	  "item": "minecraft:cyan_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"R":
+	{
+	  "item": "minecraft:warped_fungus"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:warped_villager_plush"
+  }
+}

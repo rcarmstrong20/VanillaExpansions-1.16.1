@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "item": "minecraft:twisting_vines"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:warped_chytrid_netherrack"
+  }
+}

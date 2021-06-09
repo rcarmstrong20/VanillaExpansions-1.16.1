@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "vanillaexpansions:block/smoky_quartz_slab" },
+        "type=top": { "model": "vanillaexpansions:block/smoky_quartz_slab_top" },
+        "type=double": { "model": "vanillaexpansions:block/smoky_quartz_block" }
+	}
+}

@@ -6,8 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeTransmutationTableContainer;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
+import rcarmstrong20.vanilla_expansions.inventory.container.VETransmutationTableContainer;
+import rcarmstrong20.vanilla_expansions.inventory.container.VEWoodcutterContainer;
 
 /**
  * A class for holding every container type instance that vanilla expansions
@@ -16,14 +16,14 @@ import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContaine
  * @author Ryan
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeContainerTypes
+public class VEContainerTypes
 {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister
             .create(ForgeRegistries.CONTAINERS, VanillaExpansions.MOD_ID);
 
-    public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
-    public static ContainerType<VeTransmutationTableContainer> transmutationTable = register("transmutation_table",
-            VeTransmutationTableContainer::new);
+    public static ContainerType<VEWoodcutterContainer> woodcutter = register("woodcutter", VEWoodcutterContainer::new);
+    public static ContainerType<VETransmutationTableContainer> transmutationTable = register("transmutation_table",
+            VETransmutationTableContainer::new);
 
     /**
      * @param <T>

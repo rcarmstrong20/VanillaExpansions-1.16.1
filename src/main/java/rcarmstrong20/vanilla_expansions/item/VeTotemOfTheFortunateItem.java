@@ -18,16 +18,17 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
-import rcarmstrong20.vanilla_expansions.util.VeEffectUtil;
-import rcarmstrong20.vanilla_expansions.util.VeParticleUtil;
-import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VEParticleTypes;
+import rcarmstrong20.vanilla_expansions.util.VEEffectUtil;
+import rcarmstrong20.vanilla_expansions.util.VEParticleUtil;
+import rcarmstrong20.vanilla_expansions.util.VETimeUtil;
 
-public class VeTotemOfTheFortunateItem extends Item
+public class VETotemOfTheFortunateItem extends Item
 {
     private int amplifier;
 
-    public VeTotemOfTheFortunateItem(Properties properties, int amplifier)
+    public VETotemOfTheFortunateItem(Properties properties, int amplifier)
     {
         super(properties);
         this.amplifier = amplifier;
@@ -38,7 +39,7 @@ public class VeTotemOfTheFortunateItem extends Item
     {
         ItemStack stack = player.getItemInHand(hand);
 
-        player.addEffect(new EffectInstance(Effects.LUCK, VeTimeUtil.convertSecsToTicks(120), amplifier));
+        player.addEffect(new EffectInstance(Effects.LUCK, VETimeUtil.convertSecsToTicks(120), amplifier));
         player.playSound(SoundEvents.TOTEM_USE, 20000, 10000);
 
         if (!player.isCreative())
@@ -48,9 +49,8 @@ public class VeTotemOfTheFortunateItem extends Item
 
         if (player instanceof ServerPlayerEntity)
         {
-            VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheFortunate, (ServerPlayerEntity) player);
+            VEParticleUtil.spawnTotemParticles(VEParticleTypes.totemOfTheFortunate, (ServerPlayerEntity) player);
         }
-
         return ActionResult.success(stack);
     }
 
@@ -58,10 +58,11 @@ public class VeTotemOfTheFortunateItem extends Item
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> text, ITooltipFlag flag)
     {
+        EffectInstance luckInstance = new EffectInstance(Effects.LUCK, VETimeUtil.convertSecsToTicks(120), amplifier);
+
         super.appendHoverText(stack, world, text, flag);
 
-        EffectInstance luckInstance = new EffectInstance(Effects.LUCK, VeTimeUtil.convertSecsToTicks(120), amplifier);
-
-        VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(luckInstance), text);
+        VEEffectUtil.addTotemEffectTooltip(ImmutableList.of(luckInstance), VanillaExpansions.FORTUNATE_TOTEM_MAP,
+                stack.getItem(), text);
     }
 }

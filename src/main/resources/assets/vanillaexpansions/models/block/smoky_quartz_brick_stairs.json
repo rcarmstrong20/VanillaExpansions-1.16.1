@@ -1,0 +1,9 @@
+{
+    "parent": "block/stairs",
+    "textures":
+	{
+        "bottom": "vanillaexpansions:block/smoky_quartz_bricks",
+        "top": "vanillaexpansions:block/smoky_quartz_bricks",
+        "side": "vanillaexpansions:block/smoky_quartz_bricks"
+    }
+}

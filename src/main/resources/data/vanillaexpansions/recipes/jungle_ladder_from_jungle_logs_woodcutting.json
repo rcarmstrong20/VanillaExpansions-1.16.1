@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:jungle_planks"
+  },
+  "result": "vanillaexpansions:jungle_ladder",
+  "count": 1
+}

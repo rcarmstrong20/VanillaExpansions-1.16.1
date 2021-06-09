@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "minecraft:spruce_logs"
+  },
+  "result": "minecraft:spruce_planks",
+  "count": 4
+}

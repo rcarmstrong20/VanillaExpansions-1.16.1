@@ -9,10 +9,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
-public class VeThreeStageCropsBlock extends BeetrootBlock
+public class VEThreeStageCropsBlock extends BeetrootBlock
 {
     private static final VoxelShape[] ONION_SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
@@ -22,7 +22,7 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
             Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
 
-    public VeThreeStageCropsBlock(Properties properties)
+    public VEThreeStageCropsBlock(Properties properties)
     {
         super(properties);
     }
@@ -33,7 +33,7 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        if (this == VeBlocks.greenOnions || this == VeBlocks.garlic)
+        if (this == VEBlocks.greenOnions || this == VEBlocks.garlic)
         {
             return ONION_SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
         }
@@ -49,13 +49,13 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
     @Override
     protected IItemProvider getBaseSeedId()
     {
-        if (this == VeBlocks.greenOnions)
+        if (this == VEBlocks.greenOnions)
         {
-            return VeItems.greenOnion;
+            return VEItems.greenOnion;
         }
-        else if (this == VeBlocks.garlic)
+        else if (this == VEBlocks.garlic)
         {
-            return VeItems.garlic;
+            return VEItems.garlic;
         }
         else
         {

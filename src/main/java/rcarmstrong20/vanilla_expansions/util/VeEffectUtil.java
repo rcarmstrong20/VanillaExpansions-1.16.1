@@ -1,14 +1,18 @@
 package rcarmstrong20.vanilla_expansions.util;
 
+import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectUtils;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class VeEffectUtil
+public class VEEffectUtil
 {
     /**
      * Adds the effect details for the effects provided.
@@ -16,7 +20,8 @@ public class VeEffectUtil
      * @param effects The effects to use.
      * @param text    The text to add to.
      */
-    public static void addTotemEffectTooltip(List<EffectInstance> effects, List<ITextComponent> text)
+    public static void addTotemEffectTooltip(List<EffectInstance> effects, HashMap<Item, Integer> map, Item item,
+            List<ITextComponent> text)
     {
         for (EffectInstance effectinstance : effects)
         {
@@ -33,6 +38,12 @@ public class VeEffectUtil
 
             text.add(textcomponent.withStyle(effectinstance.getEffect().getCategory().getTooltipFormatting()));
         }
+
+        String cooldown = "(" + StringUtils.formatTickDuration(VETimeUtil.convertSecsToTicks(map.get(item))) + ")";
+        IFormattableTextComponent cooldownText = new TranslationTextComponent("Cooldown ");
+
+        text.add(cooldownText.append(cooldown).withStyle(TextFormatting.BLUE));
+
         /*
          * text.add(StringTextComponent.EMPTY); text.add(new
          * TranslationTextComponent("potion.whenDrank").withStyle(TextFormatting.

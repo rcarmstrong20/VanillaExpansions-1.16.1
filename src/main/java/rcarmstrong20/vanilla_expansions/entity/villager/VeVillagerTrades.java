@@ -11,7 +11,7 @@ import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.BasicTrade;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
 /**
  * A class for holding and creating every villager trade instance that vanilla
@@ -19,11 +19,11 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
  *
  * @author Ryan
  */
-public class VeVillagerTrades
+public class VEVillagerTrades
 {
     public static ImmutableMap<Integer, List<ITrade>> lumberjackTrades = ImmutableMap.of(1,
             Arrays.asList(itemForEmerald(new ItemStack(Items.APPLE), 16, 2),
-                    itemForEmerald(new ItemStack(VeItems.spruceCone), 10, 2)),
+                    itemForEmerald(new ItemStack(VEItems.spruceCone), 10, 2)),
             2,
             Arrays.asList(new BasicTrade(2, new ItemStack(Items.GOLDEN_AXE), 6, 10, 0.02F),
                     new BasicTrade(3, new ItemStack(Items.IRON_AXE), 3, 15, 0.02F)),

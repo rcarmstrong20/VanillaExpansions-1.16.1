@@ -14,11 +14,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
+import rcarmstrong20.vanilla_expansions.inventory.container.VEWoodcutterContainer;
+import rcarmstrong20.vanilla_expansions.item.crafting.VEWoodcuttingRecipe;
 
 @OnlyIn(Dist.CLIENT)
-public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
+public class VEWoodcutterScreen extends ContainerScreen<VEWoodcutterContainer>
 {
     private static final ResourceLocation BG_LOCATION = new ResourceLocation("textures/gui/container/stonecutter.png");
     private float scrollOffs;
@@ -26,7 +26,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
     private int startIndex;
     private boolean displayRecipes;
 
-    public VeWoodcutterScreen(VeWoodcutterContainer menu, PlayerInventory playerInv, ITextComponent title)
+    public VEWoodcutterScreen(VEWoodcutterContainer menu, PlayerInventory playerInv, ITextComponent title)
     {
         super(menu, playerInv, title);
         menu.registerUpdateListener(this::containerChanged);
@@ -66,7 +66,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<VeWoodcuttingRecipe> list = this.menu.getRecipes();
+            List<VEWoodcuttingRecipe> list = this.menu.getRecipes();
 
             for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l)
             {
@@ -105,7 +105,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer>
 
     private void renderRecipes(int left, int top, int recipeIndexOffsetMax)
     {
-        List<VeWoodcuttingRecipe> list = this.menu.getRecipes();
+        List<VEWoodcuttingRecipe> list = this.menu.getRecipes();
 
         for (int i = this.startIndex; i < recipeIndexOffsetMax && i < this.menu.getNumRecipes(); ++i)
         {

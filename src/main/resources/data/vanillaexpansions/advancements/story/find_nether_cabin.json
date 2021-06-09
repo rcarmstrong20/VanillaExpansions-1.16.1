@@ -1,0 +1,42 @@
+{
+  "parent": "vanillaexpansions:story/root",
+  "display":
+  {
+    "icon":
+    {
+      "item": "vanillaexpansions:crimson_chytrid_nether_bricks"
+    },
+    "title":
+    {
+      "translate": "advancements.vanillaexpansions.story.find_nether_cabin.title"
+    },
+    "description":
+    {
+      "translate": "advancements.vanillaexpansions.story.find_nether_cabin.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria":
+  {
+    "nether_cabin":
+    {
+      "trigger": "minecraft:location",
+      "conditions":
+      {
+        "location":
+        {
+          "feature": "vanillaexpansions:nether_cabin"
+        }
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "nether_cabin"
+    ]
+  ]
+}

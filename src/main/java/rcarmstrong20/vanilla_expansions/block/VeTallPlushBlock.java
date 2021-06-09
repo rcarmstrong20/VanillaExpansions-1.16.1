@@ -15,7 +15,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
+import rcarmstrong20.vanilla_expansions.state.properties.VEBlockStateProperties;
 
 /**
  * A base class designed to help create tall plush blocks.
@@ -23,12 +23,12 @@ import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
  * @author Ryan
  *
  */
-public class VeTallPlushBlock extends VePlushBlock
+public class VETallPlushBlock extends VEPlushBlock
 {
-    public static final IntegerProperty PLUSH_STACK_SIZE = VeBlockStateProperties.PLUSH_STACK_SIZE_1_3;
+    public static final IntegerProperty PLUSH_STACK_SIZE = VEBlockStateProperties.PLUSH_STACK_SIZE_1_3;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public VeTallPlushBlock(Properties properties)
+    public VETallPlushBlock(Properties properties)
     {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER)

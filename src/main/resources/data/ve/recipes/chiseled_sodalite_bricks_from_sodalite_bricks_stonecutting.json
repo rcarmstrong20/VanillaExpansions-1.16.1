@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient":
-  {
-    "item": "ve:sodalite_bricks"
-  },
-  "result": "ve:chiseled_sodalite_bricks",
-  "count": 1
-}

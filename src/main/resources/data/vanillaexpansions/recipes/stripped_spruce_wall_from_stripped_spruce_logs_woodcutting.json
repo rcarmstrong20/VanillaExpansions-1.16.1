@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:stripped_spruce_logs"
+  },
+  "result": "vanillaexpansions:stripped_spruce_wall",
+  "count": 1
+}

@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:chiseled_smoky_quartz_block"
+      },
+      {
+        "item": "vanillaexpansions:smoky_quartz_block"
+      },
+      {
+        "item": "vanillaexpansions:smoky_quartz_pillar"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:smoky_quartz_slab",
+    "count": 6
+  }
+}

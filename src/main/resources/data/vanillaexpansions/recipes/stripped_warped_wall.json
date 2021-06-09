@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "stripped_wooden_wall",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "tag": "vanillaexpansions:stripped_warped_stems"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:stripped_warped_wall",
+	"count": 6
+  }
+}

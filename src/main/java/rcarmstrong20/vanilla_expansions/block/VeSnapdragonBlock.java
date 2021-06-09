@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,11 +24,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
-import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
+import rcarmstrong20.vanilla_expansions.core.VEBlockTags;
 
-public class VeSnapdragonBlock extends FlowerBlock
+public class VESnapdragonBlock extends FlowerBlock
 {
-    public VeSnapdragonBlock(Effect effect, int effectDuration, Properties properties)
+    public VESnapdragonBlock(Effect effect, int effectDuration, Properties properties)
     {
         super(effect, effectDuration, properties);
     }
@@ -73,20 +74,20 @@ public class VeSnapdragonBlock extends FlowerBlock
     {
         Block block = world.getBlockState(pos.below()).getBlock();
 
-        if (block instanceof VePlanterBoxBlock)
+        if (block instanceof VEPlanterBoxBlock)
         {
-            return VeBlockTags.endPlantable.contains(block) && VeBlockTags.endPottable.contains(this.getBlock());
+            return VEBlockTags.endBoxes.contains(block) && VEBlockTags.endBoxable.contains(this.getBlock());
         }
         else
         {
-            return VeBlockTags.endPlantable.contains(block);
+            return VEBlockTags.endPlantable.contains(block);
         }
     }
 
     @Override
     public void entityInside(BlockState state, World world, BlockPos pos, Entity entity)
     {
-        if (entity instanceof LivingEntity)
+        if (entity instanceof LivingEntity && entity.getType() != EntityType.BEE)
         {
             LivingEntity livingEntity = (LivingEntity) entity;
 

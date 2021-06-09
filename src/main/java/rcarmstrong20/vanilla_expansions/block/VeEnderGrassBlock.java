@@ -14,18 +14,18 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
+import rcarmstrong20.vanilla_expansions.core.VEBlockTags;
 
 /**
  *
  * @author Ryan
  *
  */
-public class VeEnderGrassBlock extends BushBlock
+public class VEEnderGrassBlock extends BushBlock
 {
     protected static final VoxelShape ENDER_GRASS = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D);
 
-    public VeEnderGrassBlock(Properties properties)
+    public VEEnderGrassBlock(Properties properties)
     {
         super(properties);
     }
@@ -67,13 +67,13 @@ public class VeEnderGrassBlock extends BushBlock
     {
         Block block = world.getBlockState(pos.below()).getBlock();
 
-        if (block instanceof VePlanterBoxBlock)
+        if (block instanceof VEPlanterBoxBlock)
         {
-            return VeBlockTags.endPlantable.contains(block) && VeBlockTags.endPottable.contains(this.getBlock());
+            return VEBlockTags.endBoxes.contains(block) && VEBlockTags.endBoxable.contains(this.getBlock());
         }
         else
         {
-            return VeBlockTags.endPlantable.contains(block);
+            return VEBlockTags.endPlantable.contains(block);
         }
     }
 

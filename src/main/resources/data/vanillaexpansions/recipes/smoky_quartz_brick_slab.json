@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:smoky_quartz_bricks"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:smoky_quartz_brick_slab",
+    "count": 6
+  }
+}

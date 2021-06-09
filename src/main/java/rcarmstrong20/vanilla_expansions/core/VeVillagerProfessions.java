@@ -17,13 +17,13 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  * @author Ryan
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeVillagerProfessions
+public class VEVillagerProfessions
 {
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = DeferredRegister
             .create(ForgeRegistries.PROFESSIONS, VanillaExpansions.MOD_ID);
 
-    public static VillagerProfession lumberjack = register("lumberjack", VePointOfInterestTypes.lumberjack,
-            VeSoundEvents.uiWoodcutterTakeResult);
+    public static VillagerProfession lumberjack = register("lumberjack", VEPointOfInterestTypes.lumberjack,
+            VESoundEvents.uiWoodcutterTakeResult);
 
     /**
      * @param name            The name for associated with the villager profession.

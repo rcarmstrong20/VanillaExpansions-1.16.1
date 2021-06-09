@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:marble"
+  },
+  "result": "vanillaexpansions:marble_wall",
+  "count": 1
+}

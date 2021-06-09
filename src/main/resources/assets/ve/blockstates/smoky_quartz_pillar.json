@@ -1,8 +1,0 @@
-{
-    "variants":
-	{
-        "axis=y": { "model": "ve:block/smoky_quartz_pillar" },
-        "axis=z": { "model": "ve:block/smoky_quartz_pillar", "x": 90 },
-        "axis=x": { "model": "ve:block/smoky_quartz_pillar", "x": 90, "y": 90 }
-    }
-}

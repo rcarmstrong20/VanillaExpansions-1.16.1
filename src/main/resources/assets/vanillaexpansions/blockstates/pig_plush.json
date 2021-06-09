@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "vanillaexpansions:block/pig_plush" },
+        "facing=south": { "model": "vanillaexpansions:block/pig_plush", "y": 180 },
+        "facing=west":  { "model": "vanillaexpansions:block/pig_plush", "y": 270 },
+        "facing=east":  { "model": "vanillaexpansions:block/pig_plush", "y": 90 }
+    }
+}

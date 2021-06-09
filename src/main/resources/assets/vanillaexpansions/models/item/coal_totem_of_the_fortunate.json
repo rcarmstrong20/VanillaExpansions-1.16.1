@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures":
+	{
+        "layer0": "vanillaexpansions:item/coal_totem",
+		"layer1": "vanillaexpansions:item/fortunate_eye_overlay"
+    }
+}

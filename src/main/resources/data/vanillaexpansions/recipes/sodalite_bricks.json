@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "##",
+    "##"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:sodalite"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:sodalite_bricks",
+    "count": 4
+  }
+}

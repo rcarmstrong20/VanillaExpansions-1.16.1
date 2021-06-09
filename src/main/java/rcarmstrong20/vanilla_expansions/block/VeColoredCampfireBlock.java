@@ -24,13 +24,13 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
+import rcarmstrong20.vanilla_expansions.tile_entity.VEColoredCampfireTileEntity;
 
-public class VeColoredCampfireBlock extends CampfireBlock
+public class VEColoredCampfireBlock extends CampfireBlock
 {
     private final IParticleData particle;
 
-    public VeColoredCampfireBlock(IParticleData particle, Properties properties)
+    public VEColoredCampfireBlock(IParticleData particle, Properties properties)
     {
         super(true, 1, properties);
         this.particle = particle;
@@ -70,9 +70,9 @@ public class VeColoredCampfireBlock extends CampfireBlock
     {
         TileEntity tileEntity = worldIn.getBlockEntity(pos);
 
-        if (tileEntity instanceof VeColoredCampfireTileEntity)
+        if (tileEntity instanceof VEColoredCampfireTileEntity)
         {
-            VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
+            VEColoredCampfireTileEntity campfireTileEntity = (VEColoredCampfireTileEntity) tileEntity;
             ItemStack itemStack = playerIn.getItemInHand(handIn);
             Optional<CampfireCookingRecipe> optional = campfireTileEntity.getCookableRecipe(itemStack);
 
@@ -100,9 +100,9 @@ public class VeColoredCampfireBlock extends CampfireBlock
         {
             TileEntity tileEntity = worldIn.getBlockEntity(pos);
 
-            if (tileEntity instanceof VeColoredCampfireTileEntity)
+            if (tileEntity instanceof VEColoredCampfireTileEntity)
             {
-                VeColoredCampfireTileEntity campfireTileEntity = (VeColoredCampfireTileEntity) tileEntity;
+                VEColoredCampfireTileEntity campfireTileEntity = (VEColoredCampfireTileEntity) tileEntity;
                 InventoryHelper.dropContents(worldIn, pos, campfireTileEntity.getItems());
             }
             super.onRemove(state, worldIn, pos, newState, isMoving);
@@ -112,7 +112,7 @@ public class VeColoredCampfireBlock extends CampfireBlock
     @Override
     public TileEntity newBlockEntity(IBlockReader world)
     {
-        return new VeColoredCampfireTileEntity();
+        return new VEColoredCampfireTileEntity();
     }
 
     @Override

@@ -1,8 +1,0 @@
-{
-    "parent": "block/template_glass_pane_noside_alt",
-    "textures":
-	{
-        "edge": "ve:block/red_glass_pane_top",
-        "pane": "ve:block/red_glass"
-    }
-}

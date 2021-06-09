@@ -1,0 +1,10 @@
+{
+  "type": "smelting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:blackstone_ruby_ore"
+  },
+  "result": "vanillaexpansions:ruby",
+  "experience": 1.5,
+  "cookingtime": 200
+}

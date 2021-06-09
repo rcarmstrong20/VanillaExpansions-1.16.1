@@ -13,7 +13,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  * @author Ryan
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeParticleTypes
+public class VEParticleTypes
 {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister
             .create(ForgeRegistries.PARTICLE_TYPES, VanillaExpansions.MOD_ID);

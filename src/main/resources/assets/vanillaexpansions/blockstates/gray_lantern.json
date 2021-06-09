@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "hanging=false":
+    {
+      "model": "vanillaexpansions:block/gray_lantern"
+    },
+    "hanging=true":
+    {
+      "model": "vanillaexpansions:block/gray_lantern_hanging"
+    }
+  }
+}

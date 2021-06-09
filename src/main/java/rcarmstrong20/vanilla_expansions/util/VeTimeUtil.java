@@ -1,6 +1,6 @@
 package rcarmstrong20.vanilla_expansions.util;
 
-public class VeTimeUtil
+public class VETimeUtil
 {
     /**
      * Converts seconds to Minecraft ticks.

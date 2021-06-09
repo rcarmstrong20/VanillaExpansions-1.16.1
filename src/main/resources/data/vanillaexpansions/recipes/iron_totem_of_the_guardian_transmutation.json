@@ -1,0 +1,19 @@
+{
+  "type": "vanillaexpansions:transmutation",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+	{
+	  "item": "vanillaexpansions:ocean_essence"
+	},
+	{
+	  "item": "vanillaexpansions:ruby"
+	}
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:iron_totem_of_the_guardian"
+  }
+}

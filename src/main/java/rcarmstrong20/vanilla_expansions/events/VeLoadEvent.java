@@ -7,9 +7,9 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.core.VeStructure;
+import rcarmstrong20.vanilla_expansions.core.VEStructures;
 
-public class VeLoadEvent
+public class VELoadEvent
 {
     @SubscribeEvent
     public void onLoad(final WorldEvent.Load event)
@@ -25,8 +25,8 @@ public class VeLoadEvent
                 return;
             }
 
-            addSpacing(serverWorld, VeStructure.overworldCabin, 15, 10, 724628428);
-            addSpacing(serverWorld, VeStructure.netherCabin, 10, 5, 487422842);
+            addSpacing(serverWorld, VEStructures.overworldCabin, 15, 10, 724628428);
+            addSpacing(serverWorld, VEStructures.netherCabin, 10, 5, 487422842);
         }
     }
 

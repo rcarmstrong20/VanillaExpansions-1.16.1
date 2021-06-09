@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "stripped_wooden_wall",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "tag": "vanillaexpansions:stripped_acacia_logs"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:stripped_acacia_wall",
+	"count": 6
+  }
+}

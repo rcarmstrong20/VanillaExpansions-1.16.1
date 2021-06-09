@@ -5,7 +5,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
-public class VeFoods
+public class VEFoods
 {
     public static Food garlic = new Food.Builder().nutrition(4).saturationMod(0.2F).build();
     public static Food greenOnion = new Food.Builder().nutrition(2).saturationMod(0.2F).build();

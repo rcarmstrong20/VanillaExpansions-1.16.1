@@ -22,14 +22,14 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeTransmutationTableContainer;
+import rcarmstrong20.vanilla_expansions.inventory.container.VETransmutationTableContainer;
 
-public class VeTransmutationTableBlock extends Block
+public class VETransmutationTableBlock extends Block
 {
     private static final TranslationTextComponent NAME = new TranslationTextComponent("container.transmutation_table");
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 
-    public VeTransmutationTableBlock(Properties properties)
+    public VETransmutationTableBlock(Properties properties)
     {
         super(properties);
     }
@@ -40,7 +40,7 @@ public class VeTransmutationTableBlock extends Block
     {
         return new SimpleNamedContainerProvider((windowId, playerInventory, p_220283_4_) ->
         {
-            return new VeTransmutationTableContainer(windowId, playerInventory, IWorldPosCallable.create(worldIn, pos));
+            return new VETransmutationTableContainer(windowId, playerInventory, IWorldPosCallable.create(worldIn, pos));
         }, NAME);
     }
 

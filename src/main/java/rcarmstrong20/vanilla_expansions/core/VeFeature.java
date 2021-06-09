@@ -7,16 +7,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.VeCattailFeature;
+import rcarmstrong20.vanilla_expansions.gen.feature.VECattailFeature;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeFeature
+public class VEFeature
 {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,
             VanillaExpansions.MOD_ID);
 
-    public static final VeCattailFeature CATTAIL = (VeCattailFeature) register("cattail",
-            new VeCattailFeature(ProbabilityConfig.CODEC));
+    public static final VECattailFeature CATTAIL = (VECattailFeature) register("cattail",
+            new VECattailFeature(ProbabilityConfig.CODEC));
 
     private static <C extends IFeatureConfig> Feature<?> register(String name, Feature<C> feature)
     {

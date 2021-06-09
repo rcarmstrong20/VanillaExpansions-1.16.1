@@ -1,0 +1,9 @@
+{
+    "parent": "block/slab",
+    "textures":
+	{
+        "bottom": "vanillaexpansions:block/polished_marble",
+        "top": "vanillaexpansions:block/polished_marble",
+        "side": "vanillaexpansions:block/polished_marble"
+    }
+}

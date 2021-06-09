@@ -1,0 +1,9 @@
+{
+    "parent": "vanillaexpansions:block/template_planter_box",
+    "textures":
+	{
+        "material": "block/obsidian",
+		"log" : "block/purpur_block",
+		"soil" : "block/end_stone"
+    }
+}

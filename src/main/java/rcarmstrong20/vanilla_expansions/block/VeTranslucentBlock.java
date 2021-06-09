@@ -8,9 +8,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class VeTranslucentBlock extends Block
+public class VETranslucentBlock extends Block
 {
-    public VeTranslucentBlock(Block.Properties properties)
+    public VETranslucentBlock(Block.Properties properties)
     {
         super(properties);
     }

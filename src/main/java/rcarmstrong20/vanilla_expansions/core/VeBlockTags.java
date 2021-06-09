@@ -1,9 +1,10 @@
 package rcarmstrong20.vanilla_expansions.core;
 
 import net.minecraft.block.Block;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeTagHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -11,20 +12,19 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  *
  * @author Ryan
  */
-public class VeBlockTags
+public class VEBlockTags
 {
-    public static ITag<Block> endBoneMealable = VeBlockTags.bind("end_bone_mealable");
-    public static ITag<Block> endBoneMealPlants = VeBlockTags.bind("end_bone_meal_plants");
-    public static ITag<Block> overworldPlantable = VeBlockTags.bind("overworld_plantable");
-    public static ITag<Block> netherPlantable = VeBlockTags.bind("nether_plantable");
-    public static ITag<Block> endPlantable = VeBlockTags.bind("end_plantable");
-    public static ITag<Block> overworldPottable = VeBlockTags.bind("overworld_pottable");
-    public static ITag<Block> netherPottable = VeBlockTags.bind("nether_pottable");
-    public static ITag<Block> endPottable = VeBlockTags.bind("end_pottable");
-    public static ITag<Block> singleCrops = VeBlockTags.bind("single_crops");
-    public static ITag<Block> cattailLandSoil = VeBlockTags.bind("cattail_land_soil");
-    public static ITag<Block> cattailWaterSoil = VeBlockTags.bind("cattail_water_soil");
-    public static ITag<Block> fertileSoil = VeBlockTags.bind("fertile_soil");
+    public static ITag<Block> endBoneMealable = VEBlockTags.bind("end_bone_mealable");
+    public static ITag<Block> endBoneMealPlants = VEBlockTags.bind("end_bone_meal_plants");
+    public static ITag<Block> overworldBoxes = VEBlockTags.bind("overworld_boxes");
+    public static ITag<Block> netherBoxes = VEBlockTags.bind("nether_boxes");
+    public static ITag<Block> endBoxes = VEBlockTags.bind("end_boxes");
+    public static ITag<Block> overworldBoxable = VEBlockTags.bind("overworld_boxable");
+    public static ITag<Block> netherBoxable = VEBlockTags.bind("nether_boxable");
+    public static ITag<Block> endBoxable = VEBlockTags.bind("end_boxable");
+    public static ITag<Block> cattailLandSoil = VEBlockTags.bind("cattail_land_soil");
+    public static ITag<Block> cattailWaterSoil = VEBlockTags.bind("cattail_water_soil");
+    public static ITag<Block> endPlantable = VEBlockTags.bind("end_plantable");
 
     /**
      * @param name The name of the tag.
@@ -32,6 +32,7 @@ public class VeBlockTags
      */
     private static ITag<Block> bind(String name)
     {
-        return BlockTags.createOptional(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ForgeTagHandler.createOptionalTag(ForgeRegistries.BLOCKS,
+                new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

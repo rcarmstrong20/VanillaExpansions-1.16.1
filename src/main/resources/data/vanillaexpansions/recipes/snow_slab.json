@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "##"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "minecraft:snow_block"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:snow_slab",
+    "count": 4
+  }
+}

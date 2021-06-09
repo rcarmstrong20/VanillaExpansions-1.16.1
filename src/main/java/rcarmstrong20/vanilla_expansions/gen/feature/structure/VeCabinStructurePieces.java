@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
 import net.minecraft.world.gen.feature.template.ProcessorLists;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
-public class VeCabinStructurePieces
+public class VECabinStructurePieces
 {
     public static final JigsawPattern TAIGA_START = JigsawPatternRegistry.register(new JigsawPattern(
             new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin"), new ResourceLocation("empty"),
@@ -34,6 +34,6 @@ public class VeCabinStructurePieces
     public static final JigsawPattern CRIMSON_START = JigsawPatternRegistry.register(new JigsawPattern(
             new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"), new ResourceLocation("empty"),
             ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":cabin/crimson_cabin",
-                    VeProcessorLists.CRIMSON_MOSSIFY_70_PERCENT), 1)),
+                    VEProcessorLists.CRIMSON_MOSSIFY_70_PERCENT), 1)),
             PlacementBehaviour.RIGID));
 }

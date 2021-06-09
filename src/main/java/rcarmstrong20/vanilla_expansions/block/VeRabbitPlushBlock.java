@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeRabbitPlushBlock extends VePlushBlock
+public class VERabbitPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape NORTH_RIGHT_EAR_SHAPE = Block.box(6.0D, 10.5D, 3.0D, 7.5D, 14.0D, 4.0D);
     protected static final VoxelShape NORTH_LEFT_EAR_SHAPE = Block.box(8.5D, 10.5D, 3.0D, 10.0D, 14.0D, 4.0D);
@@ -35,11 +35,11 @@ public class VeRabbitPlushBlock extends VePlushBlock
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_HEAD_SHAPE, NORTH_BODY_SHAPE, NORTH_TAIL_SHAPE,
             NORTH_NOSE_SHAPE, NORTH_EARS_SHAPE, NORTH_EYES_SHAPE, NORTH_LEGS_SHAPE);
 
-    protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
-    public VeRabbitPlushBlock(Properties properties)
+    public VERabbitPlushBlock(Properties properties)
     {
         super(properties);
     }

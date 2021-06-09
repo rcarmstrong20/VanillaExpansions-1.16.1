@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:packed_snow_block"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:packed_snow_stairs",
+	"count": 4
+  }
+}

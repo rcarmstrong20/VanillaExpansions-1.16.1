@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:warped_planks"
+  },
+  "result": "vanillaexpansions:warped_ladder",
+  "count": 1
+}

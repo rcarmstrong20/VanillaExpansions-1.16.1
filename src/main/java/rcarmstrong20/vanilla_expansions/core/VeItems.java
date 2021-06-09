@@ -13,140 +13,151 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
-import rcarmstrong20.vanilla_expansions.item.VeFoods;
-import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
-import rcarmstrong20.vanilla_expansions.item.VeMixedSeedPacketItem;
-import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
-import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheBruteItem;
-import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheFortunateItem;
-import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheGuardianItem;
-import rcarmstrong20.vanilla_expansions.item.VeTotemOfTheMinerItem;
+import rcarmstrong20.vanilla_expansions.item.VEDrinkItem;
+import rcarmstrong20.vanilla_expansions.item.VEFoods;
+import rcarmstrong20.vanilla_expansions.item.VEGlassVialItem;
+import rcarmstrong20.vanilla_expansions.item.VEMixedSeedPacketItem;
+import rcarmstrong20.vanilla_expansions.item.VESoupItem;
+import rcarmstrong20.vanilla_expansions.item.VETotemOfTheBruteItem;
+import rcarmstrong20.vanilla_expansions.item.VETotemOfTheFortunateItem;
+import rcarmstrong20.vanilla_expansions.item.VETotemOfTheGuardianItem;
+import rcarmstrong20.vanilla_expansions.item.VETotemOfTheMinerItem;
+import rcarmstrong20.vanilla_expansions.item.VETotemOfThePhantomItem;
 
 /**
  *
  * A class for holding every item instance that vanilla expansions has.
  *
- * Note: all item names must be lower case or forge will crash the game.
+ * Note: All item instance names must have lower case letters or forge will
+ * think the items belong to vanilla Minecraft and will give a warning.
  *
  * @author Ryan
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeItems
+public class VEItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
             VanillaExpansions.MOD_ID);
 
     public static Item ruby = register("ruby", new Item(buildProperties()));
     public static Item bokChoySeeds = register("bok_choy_seeds",
-            new BlockNamedItem(VeBlocks.bokChoy, buildProperties()));
-    public static Item bokChoy = register("bok_choy", new Item(buildProperties(VeFoods.bokChoy)));
+            new BlockNamedItem(VEBlocks.bokChoy, buildProperties()));
+    public static Item bokChoy = register("bok_choy", new Item(buildProperties(VEFoods.bokChoy)));
     public static Item garlic = register("garlic",
-            new BlockNamedItem(VeBlocks.garlic, buildProperties(VeFoods.garlic)));
+            new BlockNamedItem(VEBlocks.garlic, buildProperties(VEFoods.garlic)));
     public static Item greenOnion = register("green_onion",
-            new BlockNamedItem(VeBlocks.greenOnions, buildProperties(VeFoods.greenOnion)));
+            new BlockNamedItem(VEBlocks.greenOnions, buildProperties(VEFoods.greenOnion)));
     public static Item blueberries = register("blueberries",
-            new BlockNamedItem(VeBlocks.blueberryBush, buildProperties(VeFoods.blueberries)));
+            new BlockNamedItem(VEBlocks.blueberryBush, buildProperties(VEFoods.blueberries)));
     public static Item cranberries = register("cranberries",
-            new BlockNamedItem(VeBlocks.cranberryBush, buildProperties(VeFoods.cranberries)));
+            new BlockNamedItem(VEBlocks.cranberryBush, buildProperties(VEFoods.cranberries)));
     public static Item cranberrySauce = register("cranberry_sauce",
-            new VeDrinkItem(buildProperties(VeFoods.cranberrySauce, 16)));
+            new VEDrinkItem(buildProperties(VEFoods.cranberrySauce, 16)));
     public static Item noodles = register("noodles", new Item(buildProperties()));
-    public static Item cookedNoodles = register("cooked_noodles", new Item(buildProperties(VeFoods.cookedNoodles)));
-    public static Item noodleSoup = register("noodle_soup", new VeSoupItem(buildProperties(VeFoods.noodleSoup, 1)));
-    public static Item pudding = register("pudding", new VeSoupItem(buildProperties(VeFoods.pudding, 1)));
+    public static Item cookedNoodles = register("cooked_noodles", new Item(buildProperties(VEFoods.cookedNoodles)));
+    public static Item noodleSoup = register("noodle_soup", new VESoupItem(buildProperties(VEFoods.noodleSoup, 1)));
+    public static Item pudding = register("pudding", new VESoupItem(buildProperties(VEFoods.pudding, 1)));
     public static Item berryPudding = register("berry_pudding",
-            new VeSoupItem(buildProperties(VeFoods.berryPudding, 1)));
+            new VESoupItem(buildProperties(VEFoods.berryPudding, 1)));
     public static Item smokyQuartz = register("smoky_quartz", new Item(buildProperties()));
     public static Item darkMatterBucket = register("dark_matter_bucket",
-            new BucketItem(Suppliers.ofInstance(VeFluids.darkMatter), buildProperties(1)));
+            new BucketItem(Suppliers.ofInstance(VEFluids.darkMatter), buildProperties(1)));
     public static Item caramelApple = register("caramel_apple",
-            new VeSoupItem(buildProperties(VeFoods.caramelApple, 1), Items.STICK));
+            new VESoupItem(buildProperties(VEFoods.caramelApple, 1), Items.STICK));
     public static Item caramel = register("caramel", new Item(buildProperties()));
-    public static Item spruceCone = register("spruce_cone", new Item(buildProperties(VeFoods.spruceCone)));
+    public static Item spruceCone = register("spruce_cone", new Item(buildProperties(VEFoods.spruceCone)));
     public static Item forestsBounty = register("forests_bounty",
-            new VeSoupItem(buildProperties(VeFoods.forestsBounty, 1)));
+            new VESoupItem(buildProperties(VEFoods.forestsBounty, 1)));
     public static Item witchsCradleBranch = register("witchs_cradle_branch",
-            new BlockNamedItem(VeBlocks.witchsCradle, buildProperties(VeFoods.witchsCradleBranch)));
+            new BlockNamedItem(VEBlocks.witchsCradle, buildProperties(VEFoods.witchsCradleBranch)));
     public static Item witchsCradleSoup = register("witchs_cradle_soup",
-            new VeSoupItem(buildProperties(VeFoods.witchsCradleSoup, 1)));
-    public static Item glassVial = register("glass_vial", new VeGlassVialItem(buildProperties()));
+            new VESoupItem(buildProperties(VEFoods.witchsCradleSoup, 1)));
+    public static Item glassVial = register("glass_vial", new VEGlassVialItem(buildProperties()));
     public static Item bloodVial = register("blood_vial",
-            new VeDrinkItem(buildProperties(VeFoods.bloodVile, 1), VeItems.glassVial));
-    public static Item mixedSeedPacket = register("mixed_seed_packet", new VeMixedSeedPacketItem(buildProperties()));
-    public static Item coalTotemOfTheGuardian = register("coal_totem_of_the_guardian",
-            new VeTotemOfTheGuardianItem(buildProperties(16), 240));
-    public static Item ironTotemOfTheGuardian = register("iron_totem_of_the_guardian",
-            new VeTotemOfTheGuardianItem(buildProperties(16), 360));
-    public static Item goldTotemOfTheGuardian = register("gold_totem_of_the_guardian",
-            new VeTotemOfTheGuardianItem(buildProperties(16), 480));
-    public static Item diamondTotemOfTheGuardian = register("diamond_totem_of_the_guardian",
-            new VeTotemOfTheGuardianItem(buildProperties(16), 600));
-    public static Item coalTotemOfTheFortunate = register("coal_totem_of_the_fortunate",
-            new VeTotemOfTheFortunateItem(buildProperties(16), 0));
-    public static Item ironTotemOfTheFortunate = register("iron_totem_of_the_fortunate",
-            new VeTotemOfTheFortunateItem(buildProperties(16), 1));
-    public static Item goldTotemOfTheFortunate = register("gold_totem_of_the_fortunate",
-            new VeTotemOfTheFortunateItem(buildProperties(16), 2));
-    public static Item diamondTotemOfTheFortunate = register("diamond_totem_of_the_fortunate",
-            new VeTotemOfTheFortunateItem(buildProperties(16), 3));
-    public static Item coalTotemOfTheBrute = register("coal_totem_of_the_brute",
-            new VeTotemOfTheBruteItem(buildProperties(16), 0));
-    public static Item ironTotemOfTheBrute = register("iron_totem_of_the_brute",
-            new VeTotemOfTheBruteItem(buildProperties(16), 1));
-    public static Item goldTotemOfTheBrute = register("gold_totem_of_the_brute",
-            new VeTotemOfTheBruteItem(buildProperties(16), 2));
-    public static Item diamondTotemOfTheBrute = register("diamond_totem_of_the_brute",
-            new VeTotemOfTheBruteItem(buildProperties(16), 3));
-    public static Item coalTotemOfTheMiner = register("coal_totem_of_the_miner",
-            new VeTotemOfTheMinerItem(buildProperties(16), 0));
-    public static Item ironTotemOfTheMiner = register("iron_totem_of_the_miner",
-            new VeTotemOfTheMinerItem(buildProperties(16), 1));
-    public static Item goldTotemOfTheMiner = register("gold_totem_of_the_miner",
-            new VeTotemOfTheMinerItem(buildProperties(16), 2));
-    public static Item diamondTotemOfTheMiner = register("diamond_totem_of_the_miner",
-            new VeTotemOfTheMinerItem(buildProperties(16), 3));
+            new VEDrinkItem(buildProperties(VEFoods.bloodVile, 1), VEItems.glassVial));
+    public static Item mixedSeedPacket = register("mixed_seed_packet", new VEMixedSeedPacketItem(buildProperties()));
     public static Item whiteTorch = register("white_torch",
-            new WallOrFloorItem(VeBlocks.whiteTorch, VeBlocks.whiteWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.whiteTorch, VEBlocks.whiteWallTorch, buildProperties()));
     public static Item orangeTorch = register("orange_torch",
-            new WallOrFloorItem(VeBlocks.orangeTorch, VeBlocks.orangeWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.orangeTorch, VEBlocks.orangeWallTorch, buildProperties()));
     public static Item magentaTorch = register("magenta_torch",
-            new WallOrFloorItem(VeBlocks.magentaTorch, VeBlocks.magentaWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.magentaTorch, VEBlocks.magentaWallTorch, buildProperties()));
     public static Item lightBlueTorch = register("light_blue_torch",
-            new WallOrFloorItem(VeBlocks.lightBlueTorch, VeBlocks.lightBlueWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.lightBlueTorch, VEBlocks.lightBlueWallTorch, buildProperties()));
     public static Item yellowTorch = register("yellow_torch",
-            new WallOrFloorItem(VeBlocks.yellowTorch, VeBlocks.yellowWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.yellowTorch, VEBlocks.yellowWallTorch, buildProperties()));
     public static Item limeTorch = register("lime_torch",
-            new WallOrFloorItem(VeBlocks.limeTorch, VeBlocks.limeWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.limeTorch, VEBlocks.limeWallTorch, buildProperties()));
     public static Item pinkTorch = register("pink_torch",
-            new WallOrFloorItem(VeBlocks.pinkTorch, VeBlocks.pinkWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.pinkTorch, VEBlocks.pinkWallTorch, buildProperties()));
     public static Item grayTorch = register("gray_torch",
-            new WallOrFloorItem(VeBlocks.grayTorch, VeBlocks.grayWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.grayTorch, VEBlocks.grayWallTorch, buildProperties()));
     public static Item lightGrayTorch = register("light_gray_torch",
-            new WallOrFloorItem(VeBlocks.lightGrayTorch, VeBlocks.lightGrayWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.lightGrayTorch, VEBlocks.lightGrayWallTorch, buildProperties()));
     public static Item cyanTorch = register("cyan_torch",
-            new WallOrFloorItem(VeBlocks.cyanTorch, VeBlocks.cyanWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.cyanTorch, VEBlocks.cyanWallTorch, buildProperties()));
     public static Item purpleTorch = register("purple_torch",
-            new WallOrFloorItem(VeBlocks.purpleTorch, VeBlocks.purpleWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.purpleTorch, VEBlocks.purpleWallTorch, buildProperties()));
     public static Item blueTorch = register("blue_torch",
-            new WallOrFloorItem(VeBlocks.blueTorch, VeBlocks.blueWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.blueTorch, VEBlocks.blueWallTorch, buildProperties()));
     public static Item brownTorch = register("brown_torch",
-            new WallOrFloorItem(VeBlocks.brownTorch, VeBlocks.brownWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.brownTorch, VEBlocks.brownWallTorch, buildProperties()));
     public static Item greenTorch = register("green_torch",
-            new WallOrFloorItem(VeBlocks.greenTorch, VeBlocks.greenWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.greenTorch, VEBlocks.greenWallTorch, buildProperties()));
     public static Item redTorch = register("red_torch",
-            new WallOrFloorItem(VeBlocks.redTorch, VeBlocks.redWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.redTorch, VEBlocks.redWallTorch, buildProperties()));
     public static Item blackTorch = register("black_torch",
-            new WallOrFloorItem(VeBlocks.blackTorch, VeBlocks.blackWallTorch, buildProperties()));
+            new WallOrFloorItem(VEBlocks.blackTorch, VEBlocks.blackWallTorch, buildProperties()));
+    public static Item coalTotemOfTheGuardian = register("coal_totem_of_the_guardian",
+            new VETotemOfTheGuardianItem(buildProperties(16), 120));
+    public static Item ironTotemOfTheGuardian = register("iron_totem_of_the_guardian",
+            new VETotemOfTheGuardianItem(buildProperties(16), 240));
+    public static Item goldTotemOfTheGuardian = register("gold_totem_of_the_guardian",
+            new VETotemOfTheGuardianItem(buildProperties(16), 360));
+    public static Item diamondTotemOfTheGuardian = register("diamond_totem_of_the_guardian",
+            new VETotemOfTheGuardianItem(buildProperties(16), 480));
+    public static Item coalTotemOfTheFortunate = register("coal_totem_of_the_fortunate",
+            new VETotemOfTheFortunateItem(buildProperties(16), 0));
+    public static Item ironTotemOfTheFortunate = register("iron_totem_of_the_fortunate",
+            new VETotemOfTheFortunateItem(buildProperties(16), 1));
+    public static Item goldTotemOfTheFortunate = register("gold_totem_of_the_fortunate",
+            new VETotemOfTheFortunateItem(buildProperties(16), 2));
+    public static Item diamondTotemOfTheFortunate = register("diamond_totem_of_the_fortunate",
+            new VETotemOfTheFortunateItem(buildProperties(16), 3));
+    public static Item coalTotemOfTheBrute = register("coal_totem_of_the_brute",
+            new VETotemOfTheBruteItem(buildProperties(16), 0));
+    public static Item ironTotemOfTheBrute = register("iron_totem_of_the_brute",
+            new VETotemOfTheBruteItem(buildProperties(16), 1));
+    public static Item goldTotemOfTheBrute = register("gold_totem_of_the_brute",
+            new VETotemOfTheBruteItem(buildProperties(16), 2));
+    public static Item diamondTotemOfTheBrute = register("diamond_totem_of_the_brute",
+            new VETotemOfTheBruteItem(buildProperties(16), 3));
+    public static Item coalTotemOfTheMiner = register("coal_totem_of_the_miner",
+            new VETotemOfTheMinerItem(buildProperties(16), 0));
+    public static Item ironTotemOfTheMiner = register("iron_totem_of_the_miner",
+            new VETotemOfTheMinerItem(buildProperties(16), 1));
+    public static Item goldTotemOfTheMiner = register("gold_totem_of_the_miner",
+            new VETotemOfTheMinerItem(buildProperties(16), 2));
+    public static Item diamondTotemOfTheMiner = register("diamond_totem_of_the_miner",
+            new VETotemOfTheMinerItem(buildProperties(16), 3));
+    public static Item coalTotemOfThePhantom = register("coal_totem_of_the_phantom",
+            new VETotemOfThePhantomItem(buildProperties(16), 0));
+    public static Item ironTotemOfThePhantom = register("iron_totem_of_the_phantom",
+            new VETotemOfThePhantomItem(buildProperties(16), 1));
+    public static Item goldTotemOfThePhantom = register("gold_totem_of_the_phantom",
+            new VETotemOfThePhantomItem(buildProperties(16), 2));
+    public static Item diamondTotemOfThePhantom = register("diamond_totem_of_the_phantom",
+            new VETotemOfThePhantomItem(buildProperties(16), 3));
     public static Item mudBall = register("mud_ball", new Item(buildProperties()));
     public static Item mudBrick = register("mud_brick", new Item(buildProperties()));
     public static Item brownCattail = register("brown_cattail",
-            new BlockNamedItem(VeBlocks.cattail, buildProperties()));
-    public static Item greenCattail = register("green_cattail", new Item(buildProperties(VeFoods.greenCattail)));
+            new BlockNamedItem(VEBlocks.cattail, buildProperties()));
+    public static Item greenCattail = register("green_cattail", new Item(buildProperties(VEFoods.greenCattail)));
     public static Item oceanEssence = register("ocean_essence", new Item(buildProperties()));
     public static Item rageEssence = register("rage_essence", new Item(buildProperties()));
     public static Item luckEssence = register("luck_essence", new Item(buildProperties()));
     public static Item stoneEssence = register("stone_essence", new Item(buildProperties()));
+    public static Item midnightEssence = register("midnight_essence", new Item(buildProperties()));
 
     /**
      * A helper method that builds default properties for a item.

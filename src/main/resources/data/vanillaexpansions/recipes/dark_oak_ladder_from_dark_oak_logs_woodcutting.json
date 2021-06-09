@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:dark_oak_planks"
+  },
+  "result": "vanillaexpansions:dark_oak_ladder",
+  "count": 1
+}

@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:bowl"
+    },
+	{
+	  "item": "vanillaexpansions:cooked_noodles"
+	},
+	{
+      "item": "vanillaexpansions:garlic"
+    },
+	{
+	  "item": "vanillaexpansions:green_onion"
+	},
+	{
+	  "item": "vanillaexpansions:bok_choy"
+	}
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:noodle_soup"
+  }
+}

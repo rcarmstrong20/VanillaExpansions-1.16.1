@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeHorsePlushBlock extends VePlushBlock
+public class VEHorsePlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape HORSE_NORTH_BODY_SHAPE = Block.box(4.5D, 4.5D, 5.0D, 11.5D, 10.5D, 13.0D);
     protected static final VoxelShape HORSE_NORTH_FRONT_LEFT_LEG_PUFF_SHAPE = Block.box(10.0D, 4.0D, 4.5D, 12.0D, 9.0D,
@@ -98,11 +98,11 @@ public class VeHorsePlushBlock extends VePlushBlock
             HORSE_NORTH_NECK_SHAPE, HORSE_NORTH_MANE_SHAPE, HORSE_NORTH_HEAD_SHAPE, HORSE_NORTH_LEGS_SHAPE,
             HORSE_NORTH_EYES_SHAPE, HORSE_NORTH_EARS_SHAPE);
 
-    protected static final VoxelShape HORSE_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, HORSE_NORTH_SHAPE);
-    protected static final VoxelShape HORSE_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, HORSE_NORTH_SHAPE);
-    protected static final VoxelShape HORSE_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, HORSE_NORTH_SHAPE);
+    protected static final VoxelShape HORSE_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, HORSE_NORTH_SHAPE);
 
-    public VeHorsePlushBlock(Properties properties)
+    public VEHorsePlushBlock(Properties properties)
     {
         super(properties);
     }

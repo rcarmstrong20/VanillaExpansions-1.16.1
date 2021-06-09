@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "tag": "ve:spruce_logs"
-  },
-  "result": "ve:spruce_wall",
-  "count": 1
-}

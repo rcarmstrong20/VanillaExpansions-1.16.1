@@ -13,7 +13,7 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  * @author Ryan
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeSoundEvents
+public class VESoundEvents
 {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,
             VanillaExpansions.MOD_ID);

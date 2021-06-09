@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:polished_marble"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:polished_marble_wall",
+	"count": 6
+  }
+}

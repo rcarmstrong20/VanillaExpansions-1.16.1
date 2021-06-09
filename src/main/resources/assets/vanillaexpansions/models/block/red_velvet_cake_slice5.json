@@ -1,0 +1,10 @@
+{
+    "parent": "vanillaexpansions:block/template_cake_slice5",
+    "textures":
+	{
+		"side": "vanillaexpansions:block/red_velvet_cake_side",
+		"bottom": "vanillaexpansions:block/red_velvet_cake_bottom",
+		"top": "vanillaexpansions:block/red_velvet_cake_top",
+		"inside": "vanillaexpansions:block/red_velvet_cake_inner"
+    }
+}

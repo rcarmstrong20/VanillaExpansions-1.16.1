@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "glass_pane",
+  "pattern":
+  [
+    "###",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:red_glass"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:red_glass_pane",
+	"count": 16
+  }
+}

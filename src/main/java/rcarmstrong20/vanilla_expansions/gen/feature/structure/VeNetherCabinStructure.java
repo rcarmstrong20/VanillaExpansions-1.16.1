@@ -11,9 +11,9 @@ import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.structure.JigsawStructure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
-public class VeNetherCabinStructure extends JigsawStructure
+public class VENetherCabinStructure extends JigsawStructure
 {
-    public VeNetherCabinStructure(Codec<VillageConfig> config)
+    public VENetherCabinStructure(Codec<VillageConfig> config)
     {
         super(config, 33, false, false);
     }

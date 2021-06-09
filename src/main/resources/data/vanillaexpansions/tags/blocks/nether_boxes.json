@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values":
+  [
+    "vanillaexpansions:netherrack_planter_box",
+    "vanillaexpansions:warped_planter_box",
+	"vanillaexpansions:crimson_planter_box"
+  ]
+}

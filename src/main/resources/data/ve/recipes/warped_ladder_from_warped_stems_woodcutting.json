@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "item": "minecraft:warped_planks"
-  },
-  "result": "ve:warped_ladder",
-  "count": 1
-}

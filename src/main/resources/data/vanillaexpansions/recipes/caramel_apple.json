@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#S#",
+    "#A#",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:caramel"
+    },
+	"S":
+	{
+	  "item": "minecraft:stick"
+	},
+	"A":
+	{
+	  "item": "minecraft:apple"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:caramel_apple"
+  }
+}

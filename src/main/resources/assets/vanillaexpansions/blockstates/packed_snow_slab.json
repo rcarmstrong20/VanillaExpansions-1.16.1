@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "vanillaexpansions:block/packed_snow_slab" },
+        "type=top": { "model": "vanillaexpansions:block/packed_snow_slab_top" },
+        "type=double": { "model": "vanillaexpansions:block/packed_snow_block" }
+    }
+}

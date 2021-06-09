@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "vanillaexpansions:block/bauxite_slab" },
+        "type=top": { "model": "vanillaexpansions:block/bauxite_slab_top" },
+        "type=double": { "model": "vanillaexpansions:block/bauxite" }
+	}
+}

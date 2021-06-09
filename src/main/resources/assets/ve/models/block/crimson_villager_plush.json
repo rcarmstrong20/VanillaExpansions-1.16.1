@@ -1,7 +1,0 @@
-{
-    "parent": "ve:block/template_nether_villager_plush",
-    "textures":
-	{
-        "clothes": "block/red_wool"
-    }
-}

@@ -6,9 +6,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
-public class VeLadderBlock extends LadderBlock
+public class VELadderBlock extends LadderBlock
 {
-    public VeLadderBlock(Properties properties)
+    public VELadderBlock(Properties properties)
     {
         super(properties);
     }

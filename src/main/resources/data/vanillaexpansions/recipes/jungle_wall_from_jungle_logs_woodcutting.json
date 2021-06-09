@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:jungle_logs"
+  },
+  "result": "vanillaexpansions:jungle_wall",
+  "count": 1
+}

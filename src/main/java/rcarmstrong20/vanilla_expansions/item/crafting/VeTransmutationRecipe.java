@@ -21,11 +21,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeTypes;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VERecipeSerializers;
+import rcarmstrong20.vanilla_expansions.core.VERecipeTypes;
 
-public class VeTransmutationRecipe implements IRecipe<IInventory>
+public class VETransmutationRecipe implements IRecipe<IInventory>
 {
     protected final NonNullList<Ingredient> ingredients;
     protected final ItemStack result;
@@ -34,11 +34,11 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
     private final IRecipeSerializer<?> serializer;
     protected final String group;
 
-    public VeTransmutationRecipe(ResourceLocation id, String group, ItemStack result,
+    public VETransmutationRecipe(ResourceLocation id, String group, ItemStack result,
             NonNullList<Ingredient> ingredients)
     {
-        this.type = VeRecipeTypes.transmutation;
-        this.serializer = VeRecipeSerializers.transmutation;
+        this.type = VERecipeTypes.transmutation;
+        this.serializer = VERecipeSerializers.transmutation;
         this.id = id;
         this.group = group;
         this.result = result;
@@ -67,7 +67,7 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
     @Override
     public ItemStack getToastSymbol()
     {
-        return new ItemStack(VeBlocks.transmutationTable);
+        return new ItemStack(VEBlocks.transmutationTable);
     }
 
     @Override
@@ -113,10 +113,10 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
-            implements IRecipeSerializer<VeTransmutationRecipe>
+            implements IRecipeSerializer<VETransmutationRecipe>
     {
         @Override
-        public VeTransmutationRecipe fromJson(ResourceLocation recipeId, JsonObject json)
+        public VETransmutationRecipe fromJson(ResourceLocation recipeId, JsonObject json)
         {
             String group = JSONUtils.getAsString(json, "group", "");
             NonNullList<Ingredient> nonnulllist = itemsFromJson(JSONUtils.getAsJsonArray(json, "ingredients"));
@@ -131,7 +131,7 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
             else
             {
                 ItemStack itemstack = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
-                return new VeTransmutationRecipe(recipeId, group, itemstack, nonnulllist);
+                return new VETransmutationRecipe(recipeId, group, itemstack, nonnulllist);
             }
         }
 
@@ -151,7 +151,7 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
         }
 
         @Override
-        public VeTransmutationRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer)
+        public VETransmutationRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer)
         {
             String group = buffer.readUtf(32767);
             int i = buffer.readVarInt();
@@ -163,11 +163,11 @@ public class VeTransmutationRecipe implements IRecipe<IInventory>
             }
 
             ItemStack itemstack = buffer.readItem();
-            return new VeTransmutationRecipe(recipeId, group, itemstack, ingredients);
+            return new VETransmutationRecipe(recipeId, group, itemstack, ingredients);
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, VeTransmutationRecipe recipe)
+        public void toNetwork(PacketBuffer buffer, VETransmutationRecipe recipe)
         {
             buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.ingredients.size());

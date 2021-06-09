@@ -26,24 +26,24 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
-import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
+import rcarmstrong20.vanilla_expansions.block.VEColoredCampfireBlock;
+import rcarmstrong20.vanilla_expansions.core.VETileEntityTypes;
 
-public class VeColoredCampfireTileEntity extends TileEntity implements IClearable, ITickableTileEntity
+public class VEColoredCampfireTileEntity extends TileEntity implements IClearable, ITickableTileEntity
 {
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     private int[] cookingProgress = new int[4];
     private int[] cookingTime = new int[4];
 
-    public VeColoredCampfireTileEntity()
+    public VEColoredCampfireTileEntity()
     {
-        super(VeTileEntityType.coloredCampfire);
+        super(VETileEntityTypes.coloredCampfire);
     }
 
     @Override
     public void tick()
     {
-        boolean flag = this.getBlockState().getValue(VeColoredCampfireBlock.LIT);
+        boolean flag = this.getBlockState().getValue(VEColoredCampfireBlock.LIT);
         boolean flag1 = this.level.isClientSide();
 
         if (flag1)

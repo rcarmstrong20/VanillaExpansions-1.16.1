@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "# #",
+    "#E#",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:obsidian"
+    },
+	"E":
+	{
+	  "item": "minecraft:end_stone"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:obsidian_planter_box"
+  }
+}

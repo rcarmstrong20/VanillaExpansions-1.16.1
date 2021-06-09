@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:stripped_oak_logs"
+  },
+  "result": "vanillaexpansions:stripped_oak_wall",
+  "count": 1
+}

@@ -6,8 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeTransmutationRecipe;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
+import rcarmstrong20.vanilla_expansions.item.crafting.VETransmutationRecipe;
+import rcarmstrong20.vanilla_expansions.item.crafting.VEWoodcuttingRecipe;
 
 /**
  * A class for holding every recipe serializer instance that vanilla expansions
@@ -16,15 +16,15 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
  * @author Ryan
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeRecipeSerializers
+public class VERecipeSerializers
 {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
             .create(ForgeRegistries.RECIPE_SERIALIZERS, VanillaExpansions.MOD_ID);
 
-    public static IRecipeSerializer<VeWoodcuttingRecipe> woodcutting = register("woodcutting",
-            new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
-    public static IRecipeSerializer<VeTransmutationRecipe> transmutation = register("transmutation",
-            new VeTransmutationRecipe.Serializer());
+    public static IRecipeSerializer<VEWoodcuttingRecipe> woodcutting = register("woodcutting",
+            new VEWoodcuttingRecipe.Serializer<>(VEWoodcuttingRecipe::new));
+    public static IRecipeSerializer<VETransmutationRecipe> transmutation = register("transmutation",
+            new VETransmutationRecipe.Serializer());
 
     /**
      * @param <S>

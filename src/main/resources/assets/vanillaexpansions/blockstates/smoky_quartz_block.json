@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": { "model": "vanillaexpansions:block/smoky_quartz_block" }
+    }
+}

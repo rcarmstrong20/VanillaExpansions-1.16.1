@@ -6,11 +6,11 @@ import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
 
-public class VeOreBlock extends OreBlock
+public class VEOreBlock extends OreBlock
 {
-    public VeOreBlock(Block.Properties properties)
+    public VEOreBlock(Block.Properties properties)
     {
         super(properties);
     }
@@ -21,11 +21,11 @@ public class VeOreBlock extends OreBlock
         if (silktouch == 0)
         {
             int i = 0;
-            if (this == VeBlocks.rubyOre)
+            if (this == VEBlocks.rubyOre)
             {
                 i = MathHelper.nextInt(RANDOM, 4, 8);
             }
-            else if (this == VeBlocks.smokyQuartzOre)
+            else if (this == VEBlocks.smokyQuartzOre)
             {
                 i = MathHelper.nextInt(RANDOM, 2, 5);
             }

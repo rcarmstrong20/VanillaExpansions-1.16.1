@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "colored_torch",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:purple_dye"
+    },
+    {
+      "item": "minecraft:torch"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:purple_torch"
+  }
+}

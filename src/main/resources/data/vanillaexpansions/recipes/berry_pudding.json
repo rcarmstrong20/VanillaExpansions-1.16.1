@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "vanillaexpansions:pudding"
+    },
+	{
+	  "item": "vanillaexpansions:blueberries"
+	},
+	{
+	  "item": "vanillaexpansions:cranberries"
+	}
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:berry_pudding"
+  }
+}

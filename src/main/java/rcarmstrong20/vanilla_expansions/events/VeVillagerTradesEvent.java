@@ -17,11 +17,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
-import rcarmstrong20.vanilla_expansions.entity.villager.VeVillagerTrades;
-import rcarmstrong20.vanilla_expansions.entity.villager.VeVillagerType;
+import rcarmstrong20.vanilla_expansions.core.VEVillagerProfessions;
+import rcarmstrong20.vanilla_expansions.core.VEVillagerTypes;
+import rcarmstrong20.vanilla_expansions.entity.villager.VEVillagerTrades;
 
-public class VeVillagerTradesEvent
+public class VEVillagerTradesEvent
 {
     /**
      * This field is a mapping that represents which biome each villager type can
@@ -35,7 +35,7 @@ public class VeVillagerTradesEvent
     @OnlyIn(Dist.CLIENT)
     public void addTrades(VillagerTradesEvent event)
     {
-        addTrade(event, VeVillagerProfessions.lumberjack, VeVillagerTrades.lumberjackTrades);
+        addTrade(event, VEVillagerProfessions.lumberjack, VEVillagerTrades.lumberjackTrades);
 
         // Associate each villager type with the biomes after adding in the custom
         // trades.
@@ -46,8 +46,8 @@ public class VeVillagerTradesEvent
 
             byBiome = (Map<RegistryKey<Biome>, VillagerType>) BY_BIOME_FIELD.get(VillagerType.class);
 
-            byBiome.put(Biomes.CRIMSON_FOREST, VeVillagerType.crimson);
-            byBiome.put(Biomes.WARPED_FOREST, VeVillagerType.warped);
+            byBiome.put(Biomes.CRIMSON_FOREST, VEVillagerTypes.crimson);
+            byBiome.put(Biomes.WARPED_FOREST, VEVillagerTypes.warped);
 
             BY_BIOME_FIELD.setAccessible(false);
         }

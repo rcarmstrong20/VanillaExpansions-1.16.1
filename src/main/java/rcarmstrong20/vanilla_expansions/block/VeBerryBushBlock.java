@@ -23,14 +23,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.PlantType;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
-public class VeBerryBushBlock extends SweetBerryBushBlock
+public class VEBerryBushBlock extends SweetBerryBushBlock
 {
     private static final VoxelShape WITCHS_CRADLE_STAGE_0_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 9.0D, 14.0D);
 
-    public VeBerryBushBlock(Properties properties)
+    public VEBerryBushBlock(Properties properties)
     {
         super(properties);
     }
@@ -66,7 +66,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
     {
-        if (this.getBlock() == VeBlocks.witchsCradle && state.getValue(AGE) == 0)
+        if (this.getBlock() == VEBlocks.witchsCradle && state.getValue(AGE) == 0)
         {
             return WITCHS_CRADLE_STAGE_0_SHAPE;
         }
@@ -85,17 +85,17 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     {
         Block block = this.getBlock();
 
-        if (block.equals(VeBlocks.blueberryBush))
+        if (block.equals(VEBlocks.blueberryBush))
         {
-            return new ItemStack(VeItems.blueberries);
+            return new ItemStack(VEItems.blueberries);
         }
-        else if (block.equals(VeBlocks.cranberryBush))
+        else if (block.equals(VEBlocks.cranberryBush))
         {
-            return new ItemStack(VeItems.cranberries);
+            return new ItemStack(VEItems.cranberries);
         }
-        else if (block.equals(VeBlocks.witchsCradle))
+        else if (block.equals(VEBlocks.witchsCradle))
         {
-            return new ItemStack(VeItems.witchsCradleBranch);
+            return new ItemStack(VEItems.witchsCradleBranch);
         }
         else
         {
@@ -119,7 +119,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
     {
         if (entityIn instanceof LivingEntity)
         {
-            if (this.getBlock() == VeBlocks.witchsCradle)
+            if (this.getBlock() == VEBlocks.witchsCradle)
             {
                 if (entityIn.getType() != EntityType.SLIME)
                 {

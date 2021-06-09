@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient":
-  {
-    "item": "ve:bauxite"
-  },
-  "result": "ve:bauxite_stairs",
-  "count": 1
-}

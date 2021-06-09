@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "vanillaexpansions:block/marble_slab" },
+        "type=top": { "model": "vanillaexpansions:block/marble_slab_top" },
+        "type=double": { "model": "vanillaexpansions:block/marble" }
+	}
+}

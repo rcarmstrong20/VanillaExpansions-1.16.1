@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:snow_bricks"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:snow_brick_slab",
+	"count": 6
+  }
+}

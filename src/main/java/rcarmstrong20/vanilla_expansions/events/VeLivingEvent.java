@@ -4,9 +4,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
+import rcarmstrong20.vanilla_expansions.config.VEEntityConfig;
 
-public class VeLivingEvent
+public class VELivingEvent
 {
     @SubscribeEvent
     public void onLivingFall(LivingFallEvent event)
@@ -14,7 +14,7 @@ public class VeLivingEvent
         LivingEntity livingEntity = event.getEntityLiving();
 
         // Cancels rabbit fall damage.
-        if (VeEntityConfig.VeOverworldConfig.enableSaveTheBunnies.get() && livingEntity instanceof RabbitEntity)
+        if (VEEntityConfig.enableSaveTheBunnies.get() && livingEntity instanceof RabbitEntity)
         {
             event.setCanceled(true);
         }

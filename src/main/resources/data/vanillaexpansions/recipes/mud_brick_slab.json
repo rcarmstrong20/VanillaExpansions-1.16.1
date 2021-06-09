@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:mud_bricks"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:mud_brick_slab",
+    "count": 6
+  }
+}

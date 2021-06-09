@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "TTT",
+    "PBP",
+    "GVG"
+  ],
+  "key":
+  {
+    "T":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"P":
+	{
+	  "item": "minecraft:purple_wool"
+	},
+	"G":
+	{
+	  "item": "minecraft:green_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"V":
+	{
+	  "item": "minecraft:lily_pad"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:swamp_villager_plush"
+  }
+}

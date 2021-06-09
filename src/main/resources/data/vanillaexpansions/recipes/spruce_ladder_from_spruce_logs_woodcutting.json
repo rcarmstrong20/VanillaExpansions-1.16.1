@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:spruce_planks"
+  },
+  "result": "vanillaexpansions:spruce_ladder",
+  "count": 1
+}

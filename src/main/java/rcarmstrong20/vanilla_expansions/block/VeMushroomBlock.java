@@ -8,12 +8,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.server.ServerWorld;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeConfiguredFeatures;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEConfiguredFeatures;
 
-public class VeMushroomBlock extends MushroomBlock
+public class VEMushroomBlock extends MushroomBlock
 {
-    public VeMushroomBlock(Properties properties)
+    public VEMushroomBlock(Properties properties)
     {
         super(properties);
     }
@@ -24,9 +24,9 @@ public class VeMushroomBlock extends MushroomBlock
         world.removeBlock(pos, false);
         ConfiguredFeature<?, ?> hugeMushroom = Features.HUGE_RED_MUSHROOM;
 
-        if (this == VeBlocks.purpleMushroom)
+        if (this == VEBlocks.purpleMushroom)
         {
-            hugeMushroom = VeConfiguredFeatures.HUGE_PURPLE_MUSHROOM;
+            hugeMushroom = VEConfiguredFeatures.HUGE_PURPLE_MUSHROOM;
         }
 
         if (hugeMushroom.place(world, world.getChunkSource().getGenerator(), rand, pos))

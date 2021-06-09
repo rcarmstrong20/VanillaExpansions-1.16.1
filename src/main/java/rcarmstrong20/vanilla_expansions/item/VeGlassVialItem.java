@@ -14,14 +14,14 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
-public class VeGlassVialItem extends Item
+public class VEGlassVialItem extends Item
 {
     private static final List<EntityType<?>> ANIMALS_THAT_GIVE_BLOOD = Arrays.asList(EntityType.SHEEP,
             EntityType.CHICKEN, EntityType.COW, EntityType.RABBIT, EntityType.PIG, EntityType.MOOSHROOM);
 
-    public VeGlassVialItem(Properties properties)
+    public VEGlassVialItem(Properties properties)
     {
         super(properties);
     }
@@ -29,7 +29,7 @@ public class VeGlassVialItem extends Item
     @Override
     public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
-        if (stack.getItem() == VeItems.glassVial)
+        if (stack.getItem() == VEItems.glassVial)
         {
             if (target instanceof AnimalEntity && target.getHealth() > 0.0
                     && ANIMALS_THAT_GIVE_BLOOD.contains(target.getType()))
@@ -38,7 +38,7 @@ public class VeGlassVialItem extends Item
 
                 if (animalTarget.hurt(DamageSource.GENERIC, 1))
                 {
-                    playerIn.addItem(new ItemStack(VeItems.bloodVial));
+                    playerIn.addItem(new ItemStack(VEItems.bloodVial));
                     animalTarget.playSound(SoundEvents.BOTTLE_FILL, 1.0F, 1.0F);
                     stack.shrink(1);
                     return ActionResultType.CONSUME;

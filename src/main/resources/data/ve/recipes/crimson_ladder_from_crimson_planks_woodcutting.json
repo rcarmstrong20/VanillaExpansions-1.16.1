@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "item": "minecraft:crimson_planks"
-  },
-  "result": "ve:crimson_ladder",
-  "count": 1
-}

@@ -1,0 +1,7 @@
+{
+    "parent": "vanillaexpansions:block/template_ladder",
+    "textures":
+	{
+		"material": "vanillaexpansions:block/spruce_ladder"
+    }
+}

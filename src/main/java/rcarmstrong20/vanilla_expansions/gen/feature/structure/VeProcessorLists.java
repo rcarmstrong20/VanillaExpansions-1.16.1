@@ -13,20 +13,20 @@ import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.StructureProcessorList;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeProcessorLists
+public class VEProcessorLists
 {
     public static final StructureProcessorList CRIMSON_MOSSIFY_70_PERCENT = register("crimson_mossify_70_percent",
             ImmutableList.of(new RuleStructureProcessor(
                     ImmutableList.of(new RuleEntry(new RandomBlockMatchRuleTest(Blocks.NETHER_BRICKS, 0.7F),
-                            AlwaysTrueRuleTest.INSTANCE, VeBlocks.crimsonChytridNetherBricks.defaultBlockState())))));
+                            AlwaysTrueRuleTest.INSTANCE, VEBlocks.crimsonChytridNetherBricks.defaultBlockState())))));
 
     private static StructureProcessorList register(String name, ImmutableList<StructureProcessor> processor)
     {
-        ResourceLocation resourcelocation = new ResourceLocation(VanillaExpansions.MOD_ID, name);
+        ResourceLocation location = new ResourceLocation(VanillaExpansions.MOD_ID, name);
         StructureProcessorList structureprocessorlist = new StructureProcessorList(processor);
-        return WorldGenRegistries.register(WorldGenRegistries.PROCESSOR_LIST, resourcelocation, structureprocessorlist);
+        return WorldGenRegistries.register(WorldGenRegistries.PROCESSOR_LIST, location, structureprocessorlist);
     }
 }

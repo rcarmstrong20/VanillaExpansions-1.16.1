@@ -2,21 +2,21 @@
   "replace": false,
   "values":
   [
-    "ve:white_torch",
-    "ve:orange_torch",
-    "ve:magenta_torch",
-    "ve:light_blue_torch",
-    "ve:yellow_torch",
-    "ve:lime_torch",
-    "ve:pink_torch",
-    "ve:gray_torch",
-    "ve:light_gray_torch",
-    "ve:cyan_torch",
-    "ve:purple_torch",
-    "ve:blue_torch",
-    "ve:brown_torch",
-    "ve:green_torch",
-    "ve:red_torch",
-    "ve:black_torch"
+    "vanillaexpansions:white_torch",
+    "vanillaexpansions:orange_torch",
+    "vanillaexpansions:magenta_torch",
+    "vanillaexpansions:light_blue_torch",
+    "vanillaexpansions:yellow_torch",
+    "vanillaexpansions:lime_torch",
+    "vanillaexpansions:pink_torch",
+    "vanillaexpansions:gray_torch",
+    "vanillaexpansions:light_gray_torch",
+    "vanillaexpansions:cyan_torch",
+    "vanillaexpansions:purple_torch",
+    "vanillaexpansions:blue_torch",
+    "vanillaexpansions:brown_torch",
+    "vanillaexpansions:green_torch",
+    "vanillaexpansions:red_torch",
+    "vanillaexpansions:black_torch"
   ]
 }

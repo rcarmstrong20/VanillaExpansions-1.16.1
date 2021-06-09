@@ -13,15 +13,15 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeFluids;
-import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
+import rcarmstrong20.vanilla_expansions.core.VEFluids;
+import rcarmstrong20.vanilla_expansions.core.VEParticleTypes;
 
 @OnlyIn(Dist.CLIENT)
-public class VeDripParticle extends SpriteTexturedParticle
+public class VEDripParticle extends SpriteTexturedParticle
 {
     private final Fluid type;
 
-    protected VeDripParticle(ClientWorld world, double x, double y, double z, Fluid typeIn)
+    protected VEDripParticle(ClientWorld world, double x, double y, double z, Fluid typeIn)
     {
         super(world, x, y, z);
         this.setSize(0.01F, 0.01F);
@@ -81,7 +81,7 @@ public class VeDripParticle extends SpriteTexturedParticle
     {}
 
     @OnlyIn(Dist.CLIENT)
-    static class VeDripping extends VeDripParticle
+    static class VeDripping extends VEDripParticle
     {
         private final IParticleData fallingParticle;
 
@@ -113,7 +113,7 @@ public class VeDripParticle extends SpriteTexturedParticle
     }
 
     @OnlyIn(Dist.CLIENT)
-    static class VeFalling extends VeDripParticle
+    static class VeFalling extends VEDripParticle
     {
         protected final IParticleData landingParticle;
 
@@ -135,7 +135,7 @@ public class VeDripParticle extends SpriteTexturedParticle
     }
 
     @OnlyIn(Dist.CLIENT)
-    static class VeLanding extends VeDripParticle
+    static class VeLanding extends VEDripParticle
     {
         private VeLanding(ClientWorld world, double x, double y, double z, Fluid type)
         {
@@ -158,8 +158,8 @@ public class VeDripParticle extends SpriteTexturedParticle
         public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeDripping dripParticle = new VeDripParticle.VeDripping(world, x, y, z, VeFluids.darkMatter,
-                    VeParticleTypes.fallingDarkMatter);
+            VeDripping dripParticle = new VEDripParticle.VeDripping(world, x, y, z, VEFluids.darkMatter,
+                    VEParticleTypes.fallingDarkMatter);
             dripParticle.gravity *= 0.01F;
             dripParticle.lifetime = 100;
             dripParticle.setColor(0.1F, 0.1F, 0.1F);
@@ -182,8 +182,8 @@ public class VeDripParticle extends SpriteTexturedParticle
         public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeFalling fallingParticle = new VeDripParticle.VeFalling(world, x, y, z, VeFluids.darkMatter,
-                    VeParticleTypes.landingDarkMatter);
+            VeFalling fallingParticle = new VEDripParticle.VeFalling(world, x, y, z, VEFluids.darkMatter,
+                    VEParticleTypes.landingDarkMatter);
             fallingParticle.setColor(0.1F, 0.1F, 0.1F);
             fallingParticle.pickSprite(this.sprite);
             return fallingParticle;
@@ -204,7 +204,7 @@ public class VeDripParticle extends SpriteTexturedParticle
         public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeLanding landParticle = new VeDripParticle.VeLanding(world, x, y, z, VeFluids.darkMatter);
+            VeLanding landParticle = new VEDripParticle.VeLanding(world, x, y, z, VEFluids.darkMatter);
             landParticle.lifetime = (int) (128.0D / (Math.random() * 0.8D + 0.2D));
             landParticle.setColor(0.1F, 0.1F, 0.1F);
             landParticle.pickSprite(this.sprite);

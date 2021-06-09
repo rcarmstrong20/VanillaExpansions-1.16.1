@@ -10,11 +10,11 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class VePottedSnapdragonBlock extends FlowerPotBlock
+public class VEPottedSnapdragonBlock extends FlowerPotBlock
 {
 
     @SuppressWarnings("deprecation")
-    public VePottedSnapdragonBlock(Block flower, AbstractBlock.Properties properties)
+    public VEPottedSnapdragonBlock(Block flower, AbstractBlock.Properties properties)
     {
         super(flower, properties);
     }

@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeGhastPlushBlock extends VePlushBlock
+public class VEGhastPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape GHAST_NORTH_BODY_SHAPE = Block.box(3.0D, 6.0D, 3.0D, 13.0D, 15.5D, 13.0D);
     protected static final VoxelShape GHAST_NORTH_RIGHT_EYE_SHAPE = Block.box(3.5D, 13.0D, 2.5D, 6.5D, 14.0D, 3.0D);
@@ -95,11 +95,11 @@ public class VeGhastPlushBlock extends VePlushBlock
             GHAST_NORTH_MIDDLE_TENTACLES_SHAPES, GHAST_NORTH_LEFT_TENTACLES_SHAPES, GHAST_NORTH_BODY_SHAPE,
             GHAST_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape GHAST_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, GHAST_NORTH_SHAPE);
 
-    public VeGhastPlushBlock(Properties properties)
+    public VEGhastPlushBlock(Properties properties)
     {
         super(properties);
     }

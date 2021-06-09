@@ -2,38 +2,32 @@ package rcarmstrong20.vanilla_expansions.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
-public class VeOreDataGenConfig
+public class VEOreDataGenConfig
 {
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {
-        server.comment("Vanilla Expansions Ore Data Configuration").push("ve_ore_data_config");
+        server.comment("Ore Data Config").push("oreData");
 
-        VeVeinSizeConfig.init(server);
-        VeSpreadConfig.init(server);
+        VEVeinSizeConfig.init(server);
+        VESpreadConfig.init(server);
 
         server.pop();
     }
 
-    public static class VeVeinSizeConfig
+    public static class VEVeinSizeConfig
     {
         public static IntValue netherSmokyQuartzOreVeinSize;
         public static IntValue blackstoneRubyOreVeinSize;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
-            String modId = VanillaExpansions.MOD_ID;
-
-            server.comment("Vein Size Configuration").push(modId + "_vein_size");
+            server.comment("Vein Size Config").push("veinSize");
 
             netherSmokyQuartzOreVeinSize = server.comment(compileVeinSizeComment("nether smoky quartz ore", "14"))
-                    .translation(modId + "_ore_data.vein_size.nether_smoky_quartz_ore_vein_size").worldRestart()
-                    .defineInRange("nether_smoky_quartz_ore_vein_size", 14, 0, 17);
-
+                    .worldRestart().defineInRange("NetherSmokyQuartzOreVeinSize", 14, 0, 17);
             blackstoneRubyOreVeinSize = server.comment(compileVeinSizeComment("blackstone ruby ore", "5"))
-                    .translation(modId + "_ore_data.vein_size.blackstone_ruby_ore_vein_size").worldRestart()
-                    .defineInRange("blackstone_ruby_ore_vein_size", 5, 0, 17);
+                    .worldRestart().defineInRange("BlackstoneRubyOreVeinSize", 5, 0, 17);
 
             server.pop();
         }
@@ -50,24 +44,19 @@ public class VeOreDataGenConfig
         }
     }
 
-    public static class VeSpreadConfig
+    public static class VESpreadConfig
     {
         public static IntValue netherSmokyQuartzOreSpread;
         public static IntValue blackstoneRubyOreSpread;
 
         public static void init(ForgeConfigSpec.Builder server)
         {
-            String modId = VanillaExpansions.MOD_ID;
-
-            server.comment("Spread Configuration").push("ve_ore_spread");
+            server.comment("Spread Config").push("oreSpread");
 
             netherSmokyQuartzOreSpread = server.comment(compileSpreadComment("nether smoky quartz ore", "16"))
-                    .translation(modId + "_ore_data.ore_spread.nether_smoky_quartz_ore_spread").worldRestart()
-                    .defineInRange("nether_smoky_quartz_ore_spread", 16, 2, 20);
-
-            blackstoneRubyOreSpread = server.comment(compileSpreadComment("blackstone ruby ore", "16"))
-                    .translation(modId + "_ore_data.ore_spread.blackstone_ruby_ore_spread").worldRestart()
-                    .defineInRange("blackstone_ruby_ore_spread", 16, 2, 20);
+                    .worldRestart().defineInRange("NetherSmokyQuartzOreSpread", 16, 2, 20);
+            blackstoneRubyOreSpread = server.comment(compileSpreadComment("blackstone ruby ore", "16")).worldRestart()
+                    .defineInRange("BlackstoneRubyOreSpread", 16, 2, 20);
 
             server.pop();
         }

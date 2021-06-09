@@ -7,7 +7,7 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructurePieces;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.VECabinStructurePieces;
 
 /**
  * A class for holding every configured structure instance that vanilla
@@ -17,27 +17,27 @@ import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinStructurePi
  */
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VeConfiguredStructures
+public class VEConfiguredStructures
 {
     public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin",
-            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            VEStructures.overworldCabin.configured(new VillageConfig(() ->
             {
-                return VeCabinStructurePieces.TAIGA_START;
+                return VECabinStructurePieces.TAIGA_START;
             }, 10)));
     public static StructureFeature<?, ?> configuredIcyTaigaCabin = register("icy_taiga_cabin",
-            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            VEStructures.overworldCabin.configured(new VillageConfig(() ->
             {
-                return VeCabinStructurePieces.ICY_TAIGA_START;
+                return VECabinStructurePieces.ICY_TAIGA_START;
             }, 10)));
     public static StructureFeature<?, ?> configuredForestCabin = register("forest_cabin",
-            VeStructure.overworldCabin.configured(new VillageConfig(() ->
+            VEStructures.overworldCabin.configured(new VillageConfig(() ->
             {
-                return VeCabinStructurePieces.FOREST_START;
+                return VECabinStructurePieces.FOREST_START;
             }, 10)));
     public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin",
-            VeStructure.netherCabin.configured(new VillageConfig(() ->
+            VEStructures.netherCabin.configured(new VillageConfig(() ->
             {
-                return VeCabinStructurePieces.CRIMSON_START;
+                return VECabinStructurePieces.CRIMSON_START;
             }, 10)));
 
     /**

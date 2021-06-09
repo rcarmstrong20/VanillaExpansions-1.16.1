@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:marble"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:marble_stairs",
+	"count": 4
+  }
+}

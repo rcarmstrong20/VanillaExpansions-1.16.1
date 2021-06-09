@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeSheepPlushBlock extends VePlushBlock
+public class VESheepPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape SHEEP_NORTH_BACK_RIGHT_LEG_TUFF_SHAPE = Block.box(8.5D, 2.0D, 3.5D, 11.0D, 4.0D,
             6.0D);
@@ -48,11 +48,11 @@ public class VeSheepPlushBlock extends VePlushBlock
             SHEEP_NORTH_TORSO_SHAPE, SHEEP_NORTH_FOREHEAD_SHAPE, SHEEP_NORTH_EARS_SHAPE, SHEEP_NORTH_MOUTH_SHAPE,
             SHEEP_NORTH_LEG_TUFFS_SHAPE, SHEEP_NORTH_LEGS_SHAPE, SHEEP_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape SHEEP_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, SHEEP_NORTH_SHAPE);
-    protected static final VoxelShape SHEEP_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, SHEEP_NORTH_SHAPE);
-    protected static final VoxelShape SHEEP_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, SHEEP_NORTH_SHAPE);
 
-    public VeSheepPlushBlock(Properties properties)
+    public VESheepPlushBlock(Properties properties)
     {
         super(properties);
     }

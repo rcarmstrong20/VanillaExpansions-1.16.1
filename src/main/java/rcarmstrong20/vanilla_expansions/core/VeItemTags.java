@@ -2,8 +2,9 @@ package rcarmstrong20.vanilla_expansions.core;
 
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeTagHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
 /**
@@ -11,16 +12,17 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  *
  * @author Ryan
  */
-public class VeItemTags
+public class VEItemTags
 {
-    public static ITag<Item> packet_seeds = VeItemTags.makeWrapperTag("packet_seeds");
+    public static ITag<Item> packet_seeds = VEItemTags.bind("packet_seeds");
 
     /**
      * @param name The name of the tag.
      * @return The tag from the location or an empty tag if none exists.
      */
-    private static ITag<Item> makeWrapperTag(String name)
+    private static ITag<Item> bind(String name)
     {
-        return ItemTags.createOptional(new ResourceLocation(VanillaExpansions.MOD_ID, name));
+        return ForgeTagHandler.createOptionalTag(ForgeRegistries.ITEMS,
+                new ResourceLocation(VanillaExpansions.MOD_ID, name));
     }
 }

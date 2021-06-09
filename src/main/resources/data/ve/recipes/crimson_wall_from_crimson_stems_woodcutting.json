@@ -1,9 +1,0 @@
-{
-  "type": "ve:woodcutting",
-  "ingredient":
-  {
-    "tag": "ve:crimson_stems"
-  },
-  "result": "ve:crimson_wall",
-  "count": 1
-}

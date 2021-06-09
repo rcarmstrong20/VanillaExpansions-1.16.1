@@ -7,15 +7,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeTransmutationTableContainer;
+import rcarmstrong20.vanilla_expansions.inventory.container.VETransmutationTableContainer;
 
-public class VeTransmutationTableScreen extends ContainerScreen<VeTransmutationTableContainer>
+public class VETransmutationTableScreen extends ContainerScreen<VETransmutationTableContainer>
 {
     private static final ResourceLocation BG_LOCATION = new ResourceLocation(VanillaExpansions.MOD_ID,
             "textures/gui/container/transmutation_table.png");
     private static final int Y_OFFSET = 83;
 
-    public VeTransmutationTableScreen(VeTransmutationTableContainer screenContainer, PlayerInventory inv,
+    public VETransmutationTableScreen(VETransmutationTableContainer screenContainer, PlayerInventory inv,
             ITextComponent titleIn)
     {
         super(screenContainer, inv, titleIn);

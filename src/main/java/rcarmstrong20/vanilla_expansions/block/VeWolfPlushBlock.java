@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeWolfPlushBlock extends VePlushBlock
+public class VEWolfPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape WOLF_NORTH_HEAD_SHAPE = Block.box(5.0D, 2.0D, 4.0D, 11.0D, 8.5D, 8.0D);
     protected static final VoxelShape WOLF_NORTH_TORSO_SHAPE = Block.box(6.0D, 2.0D, 8.0D, 10.0D, 7.0D, 13.0D);
@@ -42,11 +42,11 @@ public class VeWolfPlushBlock extends VePlushBlock
             WOLF_NORTH_SNOUT_SHAPE, WOLF_NORTH_LEGS_SHAPE, WOLF_NORTH_EYES_SHAPE, WOLF_NORTH_EARS_SHAPE,
             WOLF_NORTH_TAIL_SHAPE);
 
-    protected static final VoxelShape WOLF_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, WOLF_NORTH_SHAPE);
-    protected static final VoxelShape WOLF_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, WOLF_NORTH_SHAPE);
-    protected static final VoxelShape WOLF_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, WOLF_NORTH_SHAPE);
 
-    public VeWolfPlushBlock(Properties properties)
+    public VEWolfPlushBlock(Properties properties)
     {
         super(properties);
     }

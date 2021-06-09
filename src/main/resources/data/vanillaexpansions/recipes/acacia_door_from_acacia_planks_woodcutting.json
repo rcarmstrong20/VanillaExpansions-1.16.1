@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:acacia_planks"
+  },
+  "result": "minecraft:acacia_door",
+  "count": 1
+}

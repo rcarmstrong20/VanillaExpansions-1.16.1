@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeEndermanPlushBlock extends VePlushBlock
+public class VEEndermanPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape ENDERMAN_NORTH_HEAD_SHAPE = Block.box(5.5D, 12.0D, 7.0D, 10.5D, 16.0D, 12.0D);
     protected static final VoxelShape ENDERMAN_NORTH_TORSO_SHAPE = Block.box(6.0D, 7.5D, 7.5D, 10.0D, 12.0D, 11.5D);
@@ -43,11 +43,11 @@ public class VeEndermanPlushBlock extends VePlushBlock
             ENDERMAN_NORTH_EYES_SHAPE, ENDERMAN_NORTH_LEGS_SHAPE, ENDERMAN_NORTH_ARMS_SHAPE,
             ENDERMAN_NORTH_GRASS_BLOCK_SHAPE);
 
-    protected static final VoxelShape ENDERMAN_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, ENDERMAN_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMAN_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, ENDERMAN_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMAN_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, ENDERMAN_NORTH_SHAPE);
 
-    public VeEndermanPlushBlock(Properties properties)
+    public VEEndermanPlushBlock(Properties properties)
     {
         super(properties);
     }

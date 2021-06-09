@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient":
-  {
-    "item": "ve:sodalite_bricks"
-  },
-  "result": "ve:sodalite_brick_wall",
-  "count": 1
-}

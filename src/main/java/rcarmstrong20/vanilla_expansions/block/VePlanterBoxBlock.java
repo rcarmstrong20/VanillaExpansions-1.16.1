@@ -16,10 +16,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rcarmstrong20.vanilla_expansions.core.VEBlockTags;
 
-public class VePlanterBoxBlock extends Block
+public class VEPlanterBoxBlock extends Block
 {
     public static final BooleanProperty NORTH = SixWayBlock.NORTH;
     public static final BooleanProperty SOUTH = SixWayBlock.SOUTH;
@@ -27,41 +27,41 @@ public class VePlanterBoxBlock extends Block
     public static final BooleanProperty EAST = SixWayBlock.EAST;
 
     private static final VoxelShape INSIDE_SINGLE_SHAPE = Block.box(3.0, 15.0, 3.0, 13.0, 16.0, 13.0);
-    private static final VoxelShape SINGLE_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(), INSIDE_SINGLE_SHAPE);
+    private static final VoxelShape SINGLE_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(), INSIDE_SINGLE_SHAPE);
 
     private static final VoxelShape INSIDE_MIDDLE_SHAPE = Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0);
-    private static final VoxelShape MIDDLE_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(), INSIDE_MIDDLE_SHAPE);
+    private static final VoxelShape MIDDLE_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(), INSIDE_MIDDLE_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_SHAPE = Block.box(3.0, 15.0, 0.0, 13.0, 16.0, 13.0);
-    private static final VoxelShape NORTH_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(), INSIDE_NORTH_SHAPE);
-    private static final VoxelShape SOUTH_BOX_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_BOX_SHAPE);
-    private static final VoxelShape WEST_BOX_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_BOX_SHAPE);
-    private static final VoxelShape EAST_BOX_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_BOX_SHAPE);
+    private static final VoxelShape NORTH_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(), INSIDE_NORTH_SHAPE);
+    private static final VoxelShape SOUTH_BOX_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_BOX_SHAPE);
+    private static final VoxelShape WEST_BOX_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_BOX_SHAPE);
+    private static final VoxelShape EAST_BOX_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_SOUTH_SHAPE = Block.box(3.0, 15.0, 0.0, 13.0, 16.0, 16.0);
-    private static final VoxelShape NORTH_SOUTH_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(),
+    private static final VoxelShape NORTH_SOUTH_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_SOUTH_SHAPE);
-    private static final VoxelShape EAST_WEST_BOX_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SOUTH_BOX_SHAPE);
+    private static final VoxelShape EAST_WEST_BOX_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SOUTH_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_EAST_SHAPE = Block.box(3.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-    private static final VoxelShape NORTH_EAST_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(),
+    private static final VoxelShape NORTH_EAST_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_EAST_SHAPE);
 
-    private static final VoxelShape SOUTH_WEST_BOX_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_EAST_BOX_SHAPE);
-    private static final VoxelShape NORTH_WEST_BOX_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_EAST_BOX_SHAPE);
-    private static final VoxelShape SOUTH_EAST_BOX_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_WEST_BOX_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_WEST_BOX_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_EAST_BOX_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_EAST_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_WEST_EAST_SHAPE = Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-    private static final VoxelShape NORTH_WEST_EAST_BOX_SHAPE = VeBoxUtil.cutBox(VoxelShapes.block(),
+    private static final VoxelShape NORTH_WEST_EAST_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_WEST_EAST_SHAPE);
 
-    private static final VoxelShape SOUTH_WEST_EAST_BOX_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_WEST_EAST_BOX_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
 
-    private static final VoxelShape NORTH_SOUTH_WEST_BOX_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_SOUTH_WEST_BOX_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
 
-    private static final VoxelShape NORTH_SOUTH_EAST_BOX_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_SOUTH_EAST_BOX_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_WEST_EAST_BOX_SHAPE);
 
-    public VePlanterBoxBlock(Properties properties)
+    public VEPlanterBoxBlock(Properties properties)
     {
         super(properties);
     }
@@ -195,12 +195,17 @@ public class VePlanterBoxBlock extends Block
     /**
      * A helper method used for checking that the plant placement is valid.
      */
-    private boolean isValid(Block soilBlock, Block plantBlock)
+    private static boolean isValid(Block soilBlock, Block plantBlock)
     {
-        return VeBlockTags.netherPlantable.contains(this.getBlock()) && VeBlockTags.netherPottable.contains(plantBlock)
-                || VeBlockTags.overworldPlantable.contains(this.getBlock())
-                        && VeBlockTags.overworldPottable.contains(plantBlock)
-                || VeBlockTags.endPlantable.contains(this.getBlock()) && VeBlockTags.endPottable.contains(plantBlock);
+        return VEBlockTags.netherBoxes.contains(soilBlock) && VEBlockTags.netherBoxable.contains(plantBlock)
+                || VEBlockTags.overworldBoxes.contains(soilBlock) && VEBlockTags.overworldBoxable.contains(plantBlock)
+                || VEBlockTags.endBoxes.contains(soilBlock) && VEBlockTags.endBoxable.contains(plantBlock);
+    }
+
+    @Override
+    public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos)
+    {
+        return true;
     }
 
     /**

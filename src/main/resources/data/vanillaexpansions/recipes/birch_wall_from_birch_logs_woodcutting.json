@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:birch_logs"
+  },
+  "result": "vanillaexpansions:birch_wall",
+  "count": 1
+}

@@ -1,0 +1,9 @@
+{
+    "parent": "block/stairs",
+    "textures":
+	{
+        "bottom": "vanillaexpansions:block/mud_bricks",
+        "top": "vanillaexpansions:block/mud_bricks",
+        "side": "vanillaexpansions:block/mud_bricks"
+    }
+}

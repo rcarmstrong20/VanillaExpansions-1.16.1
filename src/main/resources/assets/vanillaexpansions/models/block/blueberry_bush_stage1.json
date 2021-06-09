@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures":
+	{
+        "cross": "vanillaexpansions:block/blueberry_bush_stage1"
+    }
+}

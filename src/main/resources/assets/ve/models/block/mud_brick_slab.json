@@ -1,9 +1,0 @@
-{
-    "parent": "block/slab",
-    "textures":
-	{
-        "bottom": "ve:block/mud_bricks",
-        "top": "ve:block/mud_bricks",
-        "side": "ve:block/mud_bricks"
-    }
-}

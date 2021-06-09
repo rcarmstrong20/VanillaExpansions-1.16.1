@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:warped_stems"
+  },
+  "result": "vanillaexpansions:warped_wall",
+  "count": 1
+}

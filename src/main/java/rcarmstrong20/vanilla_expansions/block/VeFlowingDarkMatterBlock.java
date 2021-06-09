@@ -20,13 +20,13 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
-import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEFluidTags;
+import rcarmstrong20.vanilla_expansions.core.VESoundEvents;
 
-public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
+public class VEFlowingDarkMatterBlock extends FlowingFluidBlock
 {
-    public VeFlowingDarkMatterBlock(Supplier<? extends FlowingFluid> supplier, Properties builder)
+    public VEFlowingDarkMatterBlock(Supplier<? extends FlowingFluid> supplier, Properties builder)
     {
         super(supplier, builder);
     }
@@ -61,11 +61,11 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         {
             if (world.getFluidState(pos.relative(direction)).is(FluidTags.LAVA))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.bauxite, Blocks.END_STONE, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VEBlocks.bauxite, Blocks.END_STONE, Blocks.END_STONE);
             }
             else if (world.getFluidState(pos.relative(direction)).is(FluidTags.WATER))
             {
-                return generateBlocks(world, pos, direction, VeBlocks.sodalite, Blocks.BLUE_ICE, Blocks.END_STONE);
+                return generateBlocks(world, pos, direction, VEBlocks.sodalite, Blocks.BLUE_ICE, Blocks.END_STONE);
             }
         }
         return true; // This method needs to always return true to keep flowing functionality intact.
@@ -151,7 +151,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
         Random random = new Random();
 
         spawnParticles(ParticleTypes.POOF, (ServerWorld) world, pos.above(), random);
-        world.playSound(null, pos, VeSoundEvents.blockDarkMatterHardens, SoundCategory.BLOCKS,
+        world.playSound(null, pos, VESoundEvents.blockDarkMatterHardens, SoundCategory.BLOCKS,
                 random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
     }
 
@@ -167,7 +167,7 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
     {
-        return world.getFluidState(pos).is(VeFluidTags.darkMatter)
+        return world.getFluidState(pos).is(VEFluidTags.darkMatter)
                 && (entity.getDeltaMovement().y > 0 || entity.getDeltaMovement().y < 0);
     }
 
@@ -177,6 +177,6 @@ public class VeFlowingDarkMatterBlock extends FlowingFluidBlock
     @Override
     public void entityInside(BlockState state, World world, BlockPos pos, Entity entity)
     {
-        entity.updateFluidHeightAndDoFluidPushing(VeFluidTags.darkMatter, 0.007D);
+        entity.updateFluidHeightAndDoFluidPushing(VEFluidTags.darkMatter, 0.007D);
     }
 }

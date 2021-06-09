@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#",
+    "#"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:sodalite_brick_slab"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:chiseled_sodalite_bricks"
+  }
+}

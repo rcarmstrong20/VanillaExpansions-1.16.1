@@ -6,9 +6,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.fluid.VeDarkMatterFluid;
+import rcarmstrong20.vanilla_expansions.fluid.VEDarkMatterFluid;
 
-public class VeViewRenderEvent
+public class VEViewRenderEvent
 {
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
@@ -20,7 +20,7 @@ public class VeViewRenderEvent
         float black = 0.0F;
 
         // Makes the fog black when the player is inside dark matter.
-        if (state.getType() instanceof VeDarkMatterFluid)
+        if (state.getType() instanceof VEDarkMatterFluid)
         {
             event.setRed(black);
             event.setGreen(black);
@@ -36,7 +36,7 @@ public class VeViewRenderEvent
         FluidState state = info.getFluidInCamera();
 
         // Density of the fog when in dark matter.
-        if (state.getType() instanceof VeDarkMatterFluid)
+        if (state.getType() instanceof VEDarkMatterFluid)
         {
             event.setDensity(0.5F);
             event.setCanceled(true);

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_torch",
-  "textures":
-  {
-    "torch": "ve:block/green_torch"
-  }
-}

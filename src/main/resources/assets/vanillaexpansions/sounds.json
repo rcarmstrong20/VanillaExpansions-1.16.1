@@ -1,0 +1,7 @@
+{
+  "block.mushroom_bounce":              {"category": "blocks", "subtitle": "Mushroom bounces",               "sounds": [{"name": "vanillaexpansions:block/mushroom_bounce",              "stream": false}]},
+  "block.dark_matter_ambient":          {"category": "blocks", "subtitle": "Dark Matter speaks",             "sounds": [{"name": "vanillaexpansions:block/dark_matter_ambient",          "stream": true}]},
+  "block.dark_matter_hardens":          {"category": "blocks", "subtitle": "Dark Matter hardens",            "sounds": [{"name": "vanillaexpansions:block/dark_matter_hardens",          "stream": false}]},
+  "ui.woodcutter.take_result":          {"category": "blocks", "subtitle": "Woodcutter cuts",                "sounds": [{"name": "vanillaexpansions:ui/woodcutter/take_result",          "stream": false}]},
+  "ui.transmutation_table.take_result": {"category": "blocks", "subtitle": "Transmutation Table Transmutes", "sounds": [{"name": "vanillaexpansions:ui/transmutation_table/take_result", "stream": false}]}
+}

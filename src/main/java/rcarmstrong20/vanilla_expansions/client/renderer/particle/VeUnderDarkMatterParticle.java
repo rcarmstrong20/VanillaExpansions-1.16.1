@@ -13,9 +13,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
+public class VEUnderDarkMatterParticle extends SpriteTexturedParticle
 {
-    private VeUnderDarkMatterParticle(ClientWorld world, double x, double y, double z)
+    private VEUnderDarkMatterParticle(ClientWorld world, double x, double y, double z)
     {
         super(world, x, y, z);
         this.rCol = 14.0F;
@@ -66,7 +66,7 @@ public class VeUnderDarkMatterParticle extends SpriteTexturedParticle
         public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z,
                 double xSpeed, double ySpeed, double zSpeed)
         {
-            VeUnderDarkMatterParticle underDarkMatterParticle = new VeUnderDarkMatterParticle(worldIn, x, y, z);
+            VEUnderDarkMatterParticle underDarkMatterParticle = new VEUnderDarkMatterParticle(worldIn, x, y, z);
             underDarkMatterParticle.pickSprite(this.spriteSet);
             return underDarkMatterParticle;
         }

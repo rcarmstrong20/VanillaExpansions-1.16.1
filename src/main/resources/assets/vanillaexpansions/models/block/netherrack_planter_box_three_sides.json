@@ -1,0 +1,9 @@
+{
+    "parent": "vanillaexpansions:block/template_planter_box_three_sides",
+    "textures":
+	{
+		"material": "block/netherrack",
+        "log": "block/nether_bricks",
+		"soil": "block/soul_soil"
+    }
+}

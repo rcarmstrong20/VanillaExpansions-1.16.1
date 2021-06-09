@@ -15,11 +15,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeTypes;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VERecipeSerializers;
+import rcarmstrong20.vanilla_expansions.core.VERecipeTypes;
 
-public class VeWoodcuttingRecipe implements IRecipe<IInventory>
+public class VEWoodcuttingRecipe implements IRecipe<IInventory>
 {
     protected final Ingredient ingredient;
     protected final ItemStack result;
@@ -28,10 +28,10 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     private final IRecipeSerializer<?> serializer;
     protected final String group;
 
-    public VeWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
+    public VEWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
     {
-        this.type = VeRecipeTypes.woodcutting;
-        this.serializer = VeRecipeSerializers.woodcutting;
+        this.type = VERecipeTypes.woodcutting;
+        this.serializer = VERecipeSerializers.woodcutting;
         this.id = id;
         this.group = group;
         this.ingredient = ingredient;
@@ -47,7 +47,7 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
     @Override
     public ItemStack getToastSymbol()
     {
-        return new ItemStack(VeBlocks.woodcutter);
+        return new ItemStack(VEBlocks.woodcutter);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
         return this.type;
     }
 
-    public static class Serializer<R extends VeWoodcuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>>
+    public static class Serializer<R extends VEWoodcuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>>
             implements IRecipeSerializer<R>
     {
         final IRecipeFactory<R> factory;
@@ -139,7 +139,7 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
             buffer.writeItem(recipe.result);
         }
 
-        public interface IRecipeFactory<R extends VeWoodcuttingRecipe>
+        public interface IRecipeFactory<R extends VEWoodcuttingRecipe>
         {
             R create(ResourceLocation p_create_1_, String p_create_2_, Ingredient p_create_3_, ItemStack p_create_4_);
         }

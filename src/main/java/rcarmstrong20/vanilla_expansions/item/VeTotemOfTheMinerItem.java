@@ -20,17 +20,18 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
-import rcarmstrong20.vanilla_expansions.util.VeEffectUtil;
-import rcarmstrong20.vanilla_expansions.util.VeParticleUtil;
-import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VEParticleTypes;
+import rcarmstrong20.vanilla_expansions.util.VEEffectUtil;
+import rcarmstrong20.vanilla_expansions.util.VEParticleUtil;
+import rcarmstrong20.vanilla_expansions.util.VETimeUtil;
 
-public class VeTotemOfTheMinerItem extends Item
+public class VETotemOfTheMinerItem extends Item
 {
-    private int duration = VeTimeUtil.convertSecsToTicks(60);
+    private int duration = VETimeUtil.convertSecsToTicks(60);
     private int amplifier;
 
-    public VeTotemOfTheMinerItem(Properties properties, int amplifier)
+    public VETotemOfTheMinerItem(Properties properties, int amplifier)
     {
         super(properties);
         this.amplifier = amplifier;
@@ -51,21 +52,20 @@ public class VeTotemOfTheMinerItem extends Item
 
         if (player instanceof ServerPlayerEntity)
         {
-            VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheBrute, (ServerPlayerEntity) player);
+            VEParticleUtil.spawnTotemParticles(VEParticleTypes.totemOfTheBrute, (ServerPlayerEntity) player);
         }
-        return ActionResult.consume(stack);
+        return ActionResult.success(stack);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> text, ITooltipFlag flag)
     {
-        super.appendHoverText(stack, world, text, flag);
-
         EffectInstance strengthInstance = new EffectInstance(Effects.DIG_SPEED, duration, amplifier);
         EffectInstance resistanceInstance = new EffectInstance(Effects.NIGHT_VISION, duration);
 
-        VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(strengthInstance, resistanceInstance), text);
+        VEEffectUtil.addTotemEffectTooltip(ImmutableList.of(strengthInstance, resistanceInstance),
+                VanillaExpansions.MINER_TOTEM_MAP, stack.getItem(), text);
 
         text.add(StringTextComponent.EMPTY);
         text.add(new TranslationTextComponent("minerTotem.useDescLine1").withStyle(TextFormatting.DARK_PURPLE));

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient":
-  {
-    "item": "ve:warped_chytrid_nether_bricks"
-  },
-  "result": "ve:warped_chytrid_nether_brick_slab",
-  "count": 2
-}

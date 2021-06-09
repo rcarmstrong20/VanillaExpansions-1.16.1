@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
+import rcarmstrong20.vanilla_expansions.core.VEBlockTags;
 
-public class VeBonemealEvent
+public class VEBonemealEvent
 {
     /**
      * Called when the player attempts to use bone meal on a block.
@@ -27,7 +27,7 @@ public class VeBonemealEvent
 
         // Used to add functionality for growing snapdragons on end stone when using
         // bone meal.
-        if (VeBlockTags.endBoneMealable.contains(event.getBlock().getBlock()))
+        if (VEBlockTags.endBoneMealable.contains(event.getBlock().getBlock()))
         {
             if (!world.isClientSide()) // Only place the snapdragon blocks server side.
             {
@@ -40,11 +40,11 @@ public class VeBonemealEvent
                         blockpos = blockpos.offset(random.nextInt(3) - 1,
                                 (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
 
-                        if (VeBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.below()).getBlock())
+                        if (VEBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.below()).getBlock())
                                 && isAir(world.getBlockState(blockpos)))
                         {
                             world.setBlock(blockpos,
-                                    VeBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 1);
+                                    VEBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 1);
                         }
                     }
                 }

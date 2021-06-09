@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeBeePlushBlock extends VePlushBlock
+public class VEBeePlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape BODY = Block.box(4.5D, 0.0D, 2.0D, 11.5D, 6.0D, 14.0D);
     protected static final VoxelShape STINGER = Block.box(7.5D, 1.0D, 14.0D, 8.5D, 2.0D, 15.0D);
@@ -38,9 +38,9 @@ public class VeBeePlushBlock extends VePlushBlock
     protected static final VoxelShape LEFT_WING_MAIN_OUTSIDE = Block.box(9.0D, 6.0D, 5.0D, 13.5D, 7.0D, 9.0D);
     protected static final VoxelShape LEFT_WING_MAIN_INSIDE = Block.box(10.0D, 6.0D, 6.0D, 12.5D, 7.0D, 9.0D);
     protected static final VoxelShape LEFT_WING_END = Block.box(10.0D, 6.0D, 9.0D, 13.5D, 7.0D, 10.0D);
-    protected static final VoxelShape RIGHT_MAIN_WING = VeBoxUtil.cutBox(RIGHT_WING_MAIN_OUTSIDE,
+    protected static final VoxelShape RIGHT_MAIN_WING = VEBoxBlockUtil.cutBox(RIGHT_WING_MAIN_OUTSIDE,
             RIGHT_WING_MAIN_INSIDE);
-    protected static final VoxelShape LEFT_MAIN_WING = VeBoxUtil.cutBox(LEFT_WING_MAIN_OUTSIDE, LEFT_WING_MAIN_INSIDE);
+    protected static final VoxelShape LEFT_MAIN_WING = VEBoxBlockUtil.cutBox(LEFT_WING_MAIN_OUTSIDE, LEFT_WING_MAIN_INSIDE);
     protected static final VoxelShape EYES = VoxelShapes.or(RIGHT_EYE, LEFT_EYE);
     protected static final VoxelShape ANTENNAS = VoxelShapes.or(RIGHT_ANTENNA_BOTTOM, RIGHT_ANTENNA_TOP,
             LEFT_ANTENNA_BOTTOM, LEFT_ANTENNA_TOP);
@@ -52,11 +52,11 @@ public class VeBeePlushBlock extends VePlushBlock
     protected static final VoxelShape LEFT_WING = VoxelShapes.or(LEFT_MAIN_WING, LEFT_WING_END);
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(BODY, STINGER, EYES, ANTENNAS, RIGHT_LEGS, LEFT_LEGS,
             RIGHT_WING, LEFT_WING);
-    protected static final VoxelShape SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
-    public VeBeePlushBlock(Properties properties)
+    public VEBeePlushBlock(Properties properties)
     {
         super(properties);
     }

@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###",
+    "###",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:ruby"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:ruby_block"
+  }
+}

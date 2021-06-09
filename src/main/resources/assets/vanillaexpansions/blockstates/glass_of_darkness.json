@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "vanillaexpansions:block/glass_of_darkness"}
+    }
+}

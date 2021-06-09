@@ -1,0 +1,9 @@
+{
+    "parent": "vanillaexpansions:block/template_planter_box",
+    "textures":
+	{
+        "material": "block/mossy_cobblestone",
+		"log" : "block/mossy_stone_bricks",
+		"soil": "block/farmland_moist"
+    }
+}

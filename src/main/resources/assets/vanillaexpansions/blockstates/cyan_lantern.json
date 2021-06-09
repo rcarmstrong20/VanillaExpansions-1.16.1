@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "hanging=false":
+    {
+      "model": "vanillaexpansions:block/cyan_lantern"
+    },
+    "hanging=true":
+    {
+      "model": "vanillaexpansions:block/cyan_lantern_hanging"
+    }
+  }
+}

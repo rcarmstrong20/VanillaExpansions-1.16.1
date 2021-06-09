@@ -17,11 +17,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class VeIcicleBlock extends FallingBlock
+public class VEIcicleBlock extends FallingBlock
 {
     private static final VoxelShape ICICLE_SHAPE = Block.box(4.0, 1.0, 4.0, 12.0, 16.0, 12.0);
 
-    public VeIcicleBlock(Properties properties)
+    public VEIcicleBlock(Properties properties)
     {
         super(properties);
     }

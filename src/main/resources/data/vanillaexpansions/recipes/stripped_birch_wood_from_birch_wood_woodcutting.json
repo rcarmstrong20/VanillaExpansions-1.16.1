@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:birch_wood"
+  },
+  "result": "minecraft:stripped_birch_wood",
+  "count": 1
+}

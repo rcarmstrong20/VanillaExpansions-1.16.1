@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures":
+	{
+		"all": "vanillaexpansions:block/warped_chytrid_netherrack"
+    }
+}

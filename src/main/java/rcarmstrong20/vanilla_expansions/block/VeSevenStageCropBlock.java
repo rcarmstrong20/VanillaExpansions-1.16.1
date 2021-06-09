@@ -6,12 +6,12 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.util.IItemProvider;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEItems;
 
-public class VeSevenStageCropBlock extends CropsBlock
+public class VESevenStageCropBlock extends CropsBlock
 {
-    public VeSevenStageCropBlock(Block.Properties properties)
+    public VESevenStageCropBlock(Block.Properties properties)
     {
         super(properties);
     }
@@ -24,9 +24,9 @@ public class VeSevenStageCropBlock extends CropsBlock
     {
         Block block = this.getBlock();
 
-        if (block.equals(VeBlocks.bokChoy))
+        if (block.equals(VEBlocks.bokChoy))
         {
-            return VeItems.bokChoySeeds;
+            return VEItems.bokChoySeeds;
         }
         return Items.WHEAT_SEEDS;
     }

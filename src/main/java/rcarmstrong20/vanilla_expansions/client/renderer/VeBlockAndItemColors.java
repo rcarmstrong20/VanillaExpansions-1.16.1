@@ -11,14 +11,11 @@ import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
 
 @OnlyIn(Dist.CLIENT)
-public class VeBlockAndItemColors
+public class VEBlockAndItemColors
 {
-    /**
-     * Register the colour handlers.
-     */
     public static void registerColorHandlers()
     {
         final BlockColors blockColors = Minecraft.getInstance().getBlockColors();
@@ -55,10 +52,10 @@ public class VeBlockAndItemColors
             return -1;
         };
 
-        blockColors.register(grassColorHandler, VeBlocks.endermanPlush);
+        blockColors.register(grassColorHandler, VEBlocks.endermanPlush, VEBlocks.grassSlab);
     }
 
-    public static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors)
+    private static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors)
     {
         // Use the Block's color for the ItemBlock
         final IItemColor itemBlockColorHandler = (stack, tintIndex) ->
@@ -68,6 +65,6 @@ public class VeBlockAndItemColors
             return blockColors.getColor(state, null, null, tintIndex);
         };
 
-        itemColors.register(itemBlockColorHandler, VeBlocks.endermanPlush);
+        itemColors.register(itemBlockColorHandler, VEBlocks.endermanPlush, VEBlocks.grassSlab);
     }
 }

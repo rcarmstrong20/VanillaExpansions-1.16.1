@@ -9,11 +9,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.core.VeItemTags;
+import rcarmstrong20.vanilla_expansions.core.VEItemTags;
 
-public class VeMixedSeedPacketItem extends Item
+public class VEMixedSeedPacketItem extends Item
 {
-    public VeMixedSeedPacketItem(Properties properties)
+    public VEMixedSeedPacketItem(Properties properties)
     {
         super(properties);
     }
@@ -28,7 +28,7 @@ public class VeMixedSeedPacketItem extends Item
         {
             for (int i = 0; i <= 2; i++)
             {
-                Item randomSeed = VeItemTags.packet_seeds.getRandomElement(random);
+                Item randomSeed = VEItemTags.packet_seeds.getRandomElement(random);
                 int randomCount = random.nextInt(i + 1) + 1;
 
                 player.addItem(new ItemStack(randomSeed, randomCount));

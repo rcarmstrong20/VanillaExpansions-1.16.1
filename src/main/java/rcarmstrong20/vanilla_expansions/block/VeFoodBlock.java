@@ -12,12 +12,12 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class VeFoodBlock extends CakeBlock
+public class VEFoodBlock extends CakeBlock
 {
     private final int foodLevel;
     private final float foodSaturation;
 
-    public VeFoodBlock(int foodLevel, float foodSaturation, Block.Properties properties)
+    public VEFoodBlock(int foodLevel, float foodSaturation, Block.Properties properties)
     {
         super(properties);
         this.foodLevel = foodLevel;

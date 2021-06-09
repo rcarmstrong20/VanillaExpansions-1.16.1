@@ -29,15 +29,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
-import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
+import rcarmstrong20.vanilla_expansions.core.VEBlockTags;
 
-public class VeCattailBlock extends BushBlock
+public class VECattailBlock extends BushBlock
 {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
-    public VeCattailBlock(Properties properties)
+    public VECattailBlock(Properties properties)
     {
         super(properties);
         this.registerDefaultState(
@@ -86,7 +86,7 @@ public class VeCattailBlock extends BushBlock
     {
         Block block = world.getBlockState(pos.below()).getBlock();
 
-        return VeBlockTags.cattailLandSoil.contains(block) || VeBlockTags.cattailWaterSoil.contains(block);
+        return VEBlockTags.cattailLandSoil.contains(block) || VEBlockTags.cattailWaterSoil.contains(block);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class VeCattailBlock extends BushBlock
         FluidState topFluidstate = world.getFluidState(blockpos.above());
         Block block = world.getBlockState(blockpos.below()).getBlock();
 
-        if (VeBlockTags.cattailLandSoil.contains(block))
+        if (VEBlockTags.cattailLandSoil.contains(block))
         {
             return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
         }

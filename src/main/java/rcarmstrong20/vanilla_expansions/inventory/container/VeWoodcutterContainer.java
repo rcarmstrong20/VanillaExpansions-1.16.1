@@ -21,18 +21,18 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
-import rcarmstrong20.vanilla_expansions.core.VeRecipeTypes;
-import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.core.VEContainerTypes;
+import rcarmstrong20.vanilla_expansions.core.VERecipeTypes;
+import rcarmstrong20.vanilla_expansions.core.VESoundEvents;
+import rcarmstrong20.vanilla_expansions.item.crafting.VEWoodcuttingRecipe;
 
-public class VeWoodcutterContainer extends Container
+public class VEWoodcutterContainer extends Container
 {
     private IWorldPosCallable access;
     private IntReferenceHolder selectedRecipeIndex = IntReferenceHolder.standalone();
     private World level;
-    private List<VeWoodcuttingRecipe> recipes = Lists.newArrayList();
+    private List<VEWoodcuttingRecipe> recipes = Lists.newArrayList();
     private ItemStack input = ItemStack.EMPTY;
     private long lastSoundTime;
     final Slot inputSlot;
@@ -46,21 +46,21 @@ public class VeWoodcutterContainer extends Container
         public void setChanged()
         {
             super.setChanged();
-            VeWoodcutterContainer.this.slotsChanged(this);
-            VeWoodcutterContainer.this.slotUpdateListener.run();
+            VEWoodcutterContainer.this.slotsChanged(this);
+            VEWoodcutterContainer.this.slotUpdateListener.run();
         }
     };
 
     private final CraftResultInventory resultContainer = new CraftResultInventory();
 
-    public VeWoodcutterContainer(int windowIdIn, PlayerInventory playerInventoryIn)
+    public VEWoodcutterContainer(int windowIdIn, PlayerInventory playerInventoryIn)
     {
         this(windowIdIn, playerInventoryIn, IWorldPosCallable.NULL);
     }
 
-    public VeWoodcutterContainer(int windowIdIn, PlayerInventory inventoryIn, final IWorldPosCallable accessIn)
+    public VEWoodcutterContainer(int windowIdIn, PlayerInventory inventoryIn, final IWorldPosCallable accessIn)
     {
-        super(VeContainerTypes.woodcutter, windowIdIn);
+        super(VEContainerTypes.woodcutter, windowIdIn);
         this.access = accessIn;
         this.level = inventoryIn.player.level;
         this.inputSlot = this.addSlot(new Slot(this.inputInventory, 0, 20, 33));
@@ -76,23 +76,23 @@ public class VeWoodcutterContainer extends Container
             public ItemStack onTake(PlayerEntity player, ItemStack stack)
             {
                 stack.onCraftedBy(player.level, player, stack.getCount());
-                VeWoodcutterContainer.this.resultContainer.awardUsedRecipes(player);
-                ItemStack itemstack = VeWoodcutterContainer.this.inputSlot.remove(1);
+                VEWoodcutterContainer.this.resultContainer.awardUsedRecipes(player);
+                ItemStack itemstack = VEWoodcutterContainer.this.inputSlot.remove(1);
                 Random random = player.getRandom();
 
                 if (!itemstack.isEmpty())
                 {
-                    VeWoodcutterContainer.this.setupResultSlot();
+                    VEWoodcutterContainer.this.setupResultSlot();
                 }
 
                 accessIn.execute((level, pos) ->
                 {
                     long l = level.getGameTime();
-                    if (VeWoodcutterContainer.this.lastSoundTime != l)
+                    if (VEWoodcutterContainer.this.lastSoundTime != l)
                     {
-                        level.playSound((PlayerEntity) null, pos, VeSoundEvents.uiWoodcutterTakeResult,
+                        level.playSound((PlayerEntity) null, pos, VESoundEvents.uiWoodcutterTakeResult,
                                 SoundCategory.BLOCKS, 1.0F + random.nextFloat(), 1.0F + random.nextFloat());
-                        VeWoodcutterContainer.this.lastSoundTime = l;
+                        VEWoodcutterContainer.this.lastSoundTime = l;
                     }
                 });
                 return super.onTake(player, stack);
@@ -118,7 +118,7 @@ public class VeWoodcutterContainer extends Container
     @Override
     public boolean stillValid(PlayerEntity playerIn)
     {
-        return stillValid(this.access, playerIn, VeBlocks.woodcutter);
+        return stillValid(this.access, playerIn, VEBlocks.woodcutter);
     }
 
     @Override
@@ -155,7 +155,7 @@ public class VeWoodcutterContainer extends Container
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty())
         {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(VeRecipeTypes.woodcutting, inventoryIn,
+            this.recipes = this.level.getRecipeManager().getRecipesFor(VERecipeTypes.woodcutting, inventoryIn,
                     this.level);
         }
     }
@@ -164,7 +164,7 @@ public class VeWoodcutterContainer extends Container
     {
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get()))
         {
-            VeWoodcuttingRecipe woodcuttingRecipe = this.recipes.get(this.selectedRecipeIndex.get());
+            VEWoodcuttingRecipe woodcuttingRecipe = this.recipes.get(this.selectedRecipeIndex.get());
             this.resultContainer.setRecipeUsed(woodcuttingRecipe);
             this.resultSlot.set(woodcuttingRecipe.assemble(this.inputInventory));
         }
@@ -178,7 +178,7 @@ public class VeWoodcutterContainer extends Container
     @Override
     public ContainerType<?> getType()
     {
-        return VeContainerTypes.woodcutter;
+        return VEContainerTypes.woodcutter;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -225,7 +225,7 @@ public class VeWoodcutterContainer extends Container
             }
             // Move the stack to the input slot.
             else if (this.level.getRecipeManager()
-                    .getRecipeFor(VeRecipeTypes.woodcutting, new Inventory(itemstack1), this.level).isPresent())
+                    .getRecipeFor(VERecipeTypes.woodcutting, new Inventory(itemstack1), this.level).isPresent())
             {
                 if (!this.moveItemStackTo(itemstack1, 0, 1, false))
                 {
@@ -282,7 +282,7 @@ public class VeWoodcutterContainer extends Container
     }
 
     @OnlyIn(Dist.CLIENT)
-    public List<VeWoodcuttingRecipe> getRecipes()
+    public List<VEWoodcuttingRecipe> getRecipes()
     {
         return this.recipes;
     }

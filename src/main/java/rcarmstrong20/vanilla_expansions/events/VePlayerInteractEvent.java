@@ -1,6 +1,6 @@
 package rcarmstrong20.vanilla_expansions.events;
 
-import java.util.Map;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
@@ -20,12 +20,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
-import rcarmstrong20.vanilla_expansions.util.VeTotemMaps;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.config.VEBlockConfig;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
+import rcarmstrong20.vanilla_expansions.util.VETimeUtil;
 
-public class VePlayerInteractEvent
+public class VEPlayerInteractEvent
 {
     /**
      * Controls right-click crop harvesting and snapdragon potting.
@@ -37,20 +37,20 @@ public class VePlayerInteractEvent
     {
         BlockPos pos = event.getPos();
         World world = event.getWorld();
-        BlockState state = event.getWorld().getBlockState(pos);
+        BlockState state = world.getBlockState(pos);
         ItemStack itemStack = event.getItemStack();
         PlayerEntity player = event.getPlayer();
         IntegerProperty ageSeven = BlockStateProperties.AGE_7;
         IntegerProperty ageThree = BlockStateProperties.AGE_3;
         IntegerProperty ageTwo = BlockStateProperties.AGE_2;
-        boolean flag = VeCropConfig.VeBlockConfig.enableSmartHarvest.get();
+        boolean flag = VEBlockConfig.enableSmartHarvest.get();
 
         if (!event.getWorld().isClientSide())
         {
-            if (itemStack.getItem().equals(VeBlocks.snapdragon.asItem()) && state.getBlock() == Blocks.FLOWER_POT)
+            if (itemStack.getItem().equals(VEBlocks.snapdragon.asItem()) && state.getBlock() == Blocks.FLOWER_POT)
             {
                 itemStack.shrink(1);
-                world.setBlock(pos, VeBlocks.pottedSnapdragon.defaultBlockState(), 3);
+                world.setBlock(pos, VEBlocks.pottedSnapdragon.defaultBlockState(), 3);
                 player.swing(Hand.MAIN_HAND, true);
                 event.setCanceled(true);
             }
@@ -124,18 +124,20 @@ public class VePlayerInteractEvent
         Item item = event.getItemStack().getItem();
         PlayerEntity player = event.getPlayer();
 
-        addTotemCooldown(player, item, VeTotemMaps.FORTUNATE_TOTEM_MAP);
-        addTotemCooldown(player, item, VeTotemMaps.BRUTE_TOTEM_MAP);
-        addTotemCooldown(player, item, VeTotemMaps.TOTEM_GUARDIAN_MAP);
+        addTotemCooldown(player, item, VanillaExpansions.FORTUNATE_TOTEM_MAP);
+        addTotemCooldown(player, item, VanillaExpansions.BRUTE_TOTEM_MAP);
+        addTotemCooldown(player, item, VanillaExpansions.GUARDIAN_TOTEM_MAP);
+        addTotemCooldown(player, item, VanillaExpansions.MINER_TOTEM_MAP);
+        addTotemCooldown(player, item, VanillaExpansions.PHANTOM_TOTEM_MAP);
     }
 
-    private static void addTotemCooldown(PlayerEntity player, Item item, Map<Item, Integer> totemCooldownMap)
+    private static void addTotemCooldown(PlayerEntity player, Item item, HashMap<Item, Integer> totemCooldownMap)
     {
         if (!player.getCooldowns().isOnCooldown(item) && totemCooldownMap.containsKey(item))
         {
             for (Entry<Item, Integer> totem : totemCooldownMap.entrySet())
             {
-                player.getCooldowns().addCooldown(totem.getKey(), VeTimeUtil.convertSecsToTicks(totem.getValue()));
+                player.getCooldowns().addCooldown(totem.getKey(), VETimeUtil.convertSecsToTicks(totem.getValue()));
             }
         }
     }

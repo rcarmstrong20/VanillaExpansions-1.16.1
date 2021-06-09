@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeZombiePlushBlock extends VePlushBlock
+public class VEZombiePlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape ZOMBIE_NORTH_HEAD_SHAPE = Block.box(5.0D, 11.0D, 7.5D, 11.0D, 16.0D, 12.0D);
     protected static final VoxelShape ZOMBIE_NORTH_TORSO_SHAPE = Block.box(5.5D, 0.0D, 8.5D, 10.5D, 11.0D, 11.5D);
@@ -37,11 +37,11 @@ public class VeZombiePlushBlock extends VePlushBlock
     protected static final VoxelShape ZOMBIE_NORTH_SHAPE = VoxelShapes.or(ZOMBIE_NORTH_BODY_SHAPE,
             ZOMBIE_NORTH_EYES_SHAPE, ZOMBIE_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape ZOMBIE_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, ZOMBIE_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, ZOMBIE_NORTH_SHAPE);
-    protected static final VoxelShape ZOMBIE_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, ZOMBIE_NORTH_SHAPE);
+    protected static final VoxelShape ZOMBIE_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, ZOMBIE_NORTH_SHAPE);
 
-    public VeZombiePlushBlock(Properties properties)
+    public VEZombiePlushBlock(Properties properties)
     {
         super(properties);
     }

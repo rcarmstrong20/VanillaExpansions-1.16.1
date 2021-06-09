@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "stripped_wooden_wall",
+  "pattern":
+  [
+    "###",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "tag": "vanillaexpansions:stripped_jungle_logs"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:stripped_jungle_wall",
+	"count": 6
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence_gate",
+  "pattern":
+  [
+    "#X#",
+    "#X#"
+  ],
+  "key":
+  {
+    "#":
+    {
+      "item": "minecraft:string"
+    },
+    "X":
+    {
+      "item": "minecraft:bamboo"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:bamboo_fence_gate"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "vanillaexpansions:transmutation",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:diamond"
+    },
+	{
+	  "item": "vanillaexpansions:midnight_essence"
+	},
+	{
+	  "item": "vanillaexpansions:ruby"
+	}
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:diamond_totem_of_the_phantom"
+  }
+}

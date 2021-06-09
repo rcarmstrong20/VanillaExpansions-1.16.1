@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeSpiderPlushBlock extends VePlushBlock
+public class VESpiderPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape SPIDER_NORTH_BODY_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 5.5D, 14.0D);
     protected static final VoxelShape SPIDER_NORTH_HEAD_SHAPE = Block.box(5.5D, 0.0D, 1.5D, 10.5D, 4.5D, 5.0D);
@@ -83,11 +83,11 @@ public class VeSpiderPlushBlock extends VePlushBlock
             SPIDER_NORTH_HEAD_SHAPE, SPIDER_NORTH_EYES_SHAPE, SPIDER_NORTH_EYEBROWS_SHAPE, SPIDER_NORTH_FANGS_SHAPE,
             SPIDER_NORTH_RIGHT_LEGS_SHAPE, SPIDER_NORTH_LEFT_LEGS_SHAPE);
 
-    protected static final VoxelShape SPIDER_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, SPIDER_NORTH_SHAPE);
-    protected static final VoxelShape SPIDER_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, SPIDER_NORTH_SHAPE);
-    protected static final VoxelShape SPIDER_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, SPIDER_NORTH_SHAPE);
+    protected static final VoxelShape SPIDER_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, SPIDER_NORTH_SHAPE);
 
-    public VeSpiderPlushBlock(Properties properties)
+    public VESpiderPlushBlock(Properties properties)
     {
         super(properties);
     }

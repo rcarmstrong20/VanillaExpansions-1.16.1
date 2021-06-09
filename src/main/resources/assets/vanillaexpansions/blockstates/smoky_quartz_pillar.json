@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "axis=y": { "model": "vanillaexpansions:block/smoky_quartz_pillar" },
+        "axis=z": { "model": "vanillaexpansions:block/smoky_quartz_pillar", "x": 90 },
+        "axis=x": { "model": "vanillaexpansions:block/smoky_quartz_pillar", "x": 90, "y": 90 }
+    }
+}

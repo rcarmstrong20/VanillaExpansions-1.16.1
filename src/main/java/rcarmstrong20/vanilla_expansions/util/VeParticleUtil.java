@@ -6,7 +6,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.SoundEvents;
 
-public class VeParticleUtil
+public class VEParticleUtil
 {
     /**
      * Spawn particles around the player.

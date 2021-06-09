@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures":
+  {
+    "cross": "vanillaexpansions:block/ender_grass"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "group": "cat_plush",
+  "pattern":
+  [
+    "OOO",
+    "OFO",
+    "WGW"
+  ],
+  "key":
+  {
+    "O":
+	{
+      "item": "minecraft:orange_wool"
+    },
+	"G":
+	{
+      "item": "minecraft:green_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"F":
+	{
+	  "tag": "vanillaexpansions:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:red_cat_plush"
+  }
+}

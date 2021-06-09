@@ -1,0 +1,9 @@
+{
+    "parent": "vanillaexpansions:block/template_planter_box_three_sides",
+    "textures":
+	{
+		"material": "block/jungle_planks",
+        "log": "block/jungle_log",
+		"soil": "block/farmland_moist"
+    }
+}

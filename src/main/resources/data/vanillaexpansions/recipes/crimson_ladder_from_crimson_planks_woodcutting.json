@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:crimson_planks"
+  },
+  "result": "vanillaexpansions:crimson_ladder",
+  "count": 1
+}

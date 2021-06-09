@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values":
+  [
+    "vanillaexpansions:stone_planter_box",
+    "vanillaexpansions:mossy_cobblestone_planter_box",
+    "vanillaexpansions:cobblestone_planter_box",
+	"vanillaexpansions:oak_planter_box",
+	"vanillaexpansions:spruce_planter_box",
+	"vanillaexpansions:birch_planter_box",
+	"vanillaexpansions:jungle_planter_box",
+	"vanillaexpansions:acacia_planter_box",
+	"vanillaexpansions:dark_oak_planter_box"
+  ]
+}

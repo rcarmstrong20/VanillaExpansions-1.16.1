@@ -13,12 +13,12 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import rcarmstrong20.vanilla_expansions.block.VeCattailBlock;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.block.VECattailBlock;
+import rcarmstrong20.vanilla_expansions.core.VEBlocks;
 
-public class VeCattailFeature extends Feature<ProbabilityConfig>
+public class VECattailFeature extends Feature<ProbabilityConfig>
 {
-    public VeCattailFeature(Codec<ProbabilityConfig> codec)
+    public VECattailFeature(Codec<ProbabilityConfig> codec)
     {
         super(codec);
     }
@@ -36,11 +36,11 @@ public class VeCattailFeature extends Feature<ProbabilityConfig>
         BlockPos blockpos = new BlockPos(pos.getX() + i, k, pos.getZ() + j);
         if (reader.getBlockState(blockpos).is(Blocks.WATER))
         {
-            BlockState state = VeBlocks.cattail.defaultBlockState().setValue(VeCattailBlock.AGE, 3);
+            BlockState state = VEBlocks.cattail.defaultBlockState().setValue(VECattailBlock.AGE, 3);
             if (state.canSurvive(reader, blockpos))
             {
-                BlockState stateTop = state.setValue(VeCattailBlock.HALF, DoubleBlockHalf.UPPER);
-                BlockState stateBottom = state.setValue(VeCattailBlock.WATERLOGGED, true);
+                BlockState stateTop = state.setValue(VECattailBlock.HALF, DoubleBlockHalf.UPPER);
+                BlockState stateBottom = state.setValue(VECattailBlock.WATERLOGGED, true);
                 BlockPos blockpos1 = blockpos.above();
                 if (reader.getBlockState(blockpos1).is(Blocks.AIR) && reader.getBlockState(blockpos).is(Blocks.WATER))
                 {

@@ -1,0 +1,7 @@
+{
+    "parent": "block/template_wall_side",
+    "textures":
+	{
+        "wall": "vanillaexpansions:block/smoky_quartz_block_bottom"
+    }
+}

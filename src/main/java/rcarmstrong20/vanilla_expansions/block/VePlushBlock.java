@@ -23,11 +23,11 @@ import net.minecraft.world.World;
  * @author Ryan
  *
  */
-public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
+public class VEPlushBlock extends HorizontalBlock implements IWaterLoggable
 {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public VePlushBlock(Block.Properties properties)
+    public VEPlushBlock(Block.Properties properties)
     {
         super(properties);
     }

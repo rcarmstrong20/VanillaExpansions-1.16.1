@@ -1,9 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures":
-	{
-        "bottom": "ve:block/sodalite_bricks",
-        "top": "ve:block/sodalite_bricks",
-        "side": "ve:block/sodalite_bricks"
-    }
-}

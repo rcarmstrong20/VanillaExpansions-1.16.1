@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "tag": "vanillaexpansions:oak_logs"
+  },
+  "result": "vanillaexpansions:oak_wall",
+  "count": 1
+}

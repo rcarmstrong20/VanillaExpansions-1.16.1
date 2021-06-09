@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeBlazePlushBlock extends VePlushBlock
+public class VEBlazePlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape BLAZE_NORTH_HEAD_SHAPE = Block.box(5.5D, 8.0D, 5.5D, 10.5D, 13.0D, 10.5D);
     protected static final VoxelShape BLAZE_NORTH_WEST_BOTTOM_LEG_SHAPE = Block.box(4.5D, 1.0D, 4.5D, 5.5D, 7.0D, 5.5D);
@@ -36,11 +36,11 @@ public class VeBlazePlushBlock extends VePlushBlock
     protected static final VoxelShape BLAZE_NORTH_SHAPE = VoxelShapes.or(BLAZE_NORTH_HEAD_SHAPE, BLAZE_NORTH_LEGS_SHAPE,
             BLAZE_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, BLAZE_NORTH_SHAPE);
 
-    public VeBlazePlushBlock(Properties properties)
+    public VEBlazePlushBlock(Properties properties)
     {
         super(properties);
     }

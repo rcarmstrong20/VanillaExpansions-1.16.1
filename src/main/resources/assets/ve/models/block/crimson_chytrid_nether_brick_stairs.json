@@ -1,9 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures":
-	{
-        "bottom": "ve:block/crimson_chytrid_nether_bricks",
-        "top": "ve:block/crimson_chytrid_nether_bricks",
-        "side": "ve:block/crimson_chytrid_nether_bricks"
-    }
-}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:bauxite"
+  },
+  "result": "vanillaexpansions:bauxite_slab",
+  "count": 2
+}

@@ -8,9 +8,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VeSilverfishPlushBlock extends VePlushBlock
+public class VESilverfishPlushBlock extends VEPlushBlock
 {
     protected static final VoxelShape SILVERFISH_NORTH_HEAD_BODY_SHAPE = Block.box(6.5D, 0.0D, 1.0D, 9.5D, 2.5D, 2.0D);
     protected static final VoxelShape SILVERFISH_NORTH_FRONT_BODY_SHAPE = Block.box(6.0D, 0.0D, 2.0D, 10.0D, 3.0D,
@@ -103,11 +103,11 @@ public class VeSilverfishPlushBlock extends VePlushBlock
             SILVERFISH_NORTH_FRONT_TUFFS_SHAPE, SILVERFISH_NORTH_MIDDLE_TUFFS_SHAPE,
             SILVERFISH_NORTH_BACK2_TUFFS_SHAPE);
 
-    protected static final VoxelShape SILVERFISH_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, SILVERFISH_NORTH_SHAPE);
-    protected static final VoxelShape SILVERFISH_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, SILVERFISH_NORTH_SHAPE);
-    protected static final VoxelShape SILVERFISH_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, SILVERFISH_NORTH_SHAPE);
 
-    public VeSilverfishPlushBlock(Properties properties)
+    public VESilverfishPlushBlock(Properties properties)
     {
         super(properties);
     }

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": { "model": "vanillaexpansions:block/nether_smoky_quartz_ore" }
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:noodles"
+  },
+  "result": "vanillaexpansions:cooked_noodles",
+  "experience": 0.1,
+  "cookingtime": 200
+}

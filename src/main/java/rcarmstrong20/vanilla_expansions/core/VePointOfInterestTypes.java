@@ -14,12 +14,12 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
  * @author Ryan
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class VePointOfInterestTypes
+public class VEPointOfInterestTypes
 {
     public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister
             .create(ForgeRegistries.POI_TYPES, VanillaExpansions.MOD_ID);
 
-    public static PointOfInterestType lumberjack = register("lumberjack", VeBlocks.woodcutter, 1, 1);
+    public static PointOfInterestType lumberjack = register("lumberjack", VEBlocks.woodcutter, 1, 1);
 
     private static PointOfInterestType register(String nameIn, Block block, int maxFreeTicketsIn, int validRangeIn)
     {

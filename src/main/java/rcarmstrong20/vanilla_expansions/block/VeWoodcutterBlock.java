@@ -10,13 +10,13 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.inventory.container.VeWoodcutterContainer;
+import rcarmstrong20.vanilla_expansions.inventory.container.VEWoodcutterContainer;
 
-public class VeWoodcutterBlock extends StonecutterBlock
+public class VEWoodcutterBlock extends StonecutterBlock
 {
     private static final TranslationTextComponent NAME = new TranslationTextComponent("container.woodcutter");
 
-    public VeWoodcutterBlock(Properties properties)
+    public VEWoodcutterBlock(Properties properties)
     {
         super(properties);
     }
@@ -27,7 +27,7 @@ public class VeWoodcutterBlock extends StonecutterBlock
     {
         return new SimpleNamedContainerProvider((windowId, playerInventory, p_220283_4_) ->
         {
-            return new VeWoodcutterContainer(windowId, playerInventory, IWorldPosCallable.create(worldIn, pos));
+            return new VEWoodcutterContainer(windowId, playerInventory, IWorldPosCallable.create(worldIn, pos));
         }, NAME);
     }
 }

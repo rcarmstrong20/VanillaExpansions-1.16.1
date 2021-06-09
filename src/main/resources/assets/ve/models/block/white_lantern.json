@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_lantern",
-  "textures":
-  {
-    "lantern": "ve:block/white_lantern"
-  }
-}

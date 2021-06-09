@@ -17,12 +17,12 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
-import rcarmstrong20.vanilla_expansions.util.VeBoxUtil;
+import rcarmstrong20.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rcarmstrong20.vanilla_expansions.state.properties.VEBlockStateProperties;
 
-public class VePufferfishPlushBlock extends VePlushBlock
+public class VEPufferfishPlushBlock extends VEPlushBlock
 {
-    public static final IntegerProperty PUFFED = VeBlockStateProperties.PUFFED_2;
+    public static final IntegerProperty PUFFED = VEBlockStateProperties.PUFFED_2;
 
     // Pufferfish 0 Bounding Boxes
 
@@ -53,9 +53,9 @@ public class VePufferfishPlushBlock extends VePlushBlock
             PUFFERFISH_0_NORTH_MOUTH_SHAPE, PUFFERFISH_0_NORTH_FINS_SHAPE, PUFFERFISH_0_NORTH_EYES_SHAPE,
             PUFFERFISH_0_NORTH_TAIL_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, PUFFERFISH_0_NORTH_SHAPE);
 
     // Pufferfish 1 Bounding Boxes
 
@@ -76,9 +76,9 @@ public class VePufferfishPlushBlock extends VePlushBlock
     protected static final VoxelShape PUFFERFISH_1_NORTH_SHAPE = VoxelShapes.or(PUFFERFISH_1_NORTH_BODY_SHAPE,
             PUFFERFISH_1_NORTH_MOUTH_SHAPE, PUFFERFISH_1_NORTH_FINS_SHAPE, PUFFERFISH_1_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, PUFFERFISH_1_NORTH_SHAPE);
 
     // Pufferfish 2 Bounding Boxes
 
@@ -99,11 +99,11 @@ public class VePufferfishPlushBlock extends VePlushBlock
     protected static final VoxelShape PUFFERFISH_2_NORTH_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_BODY_SHAPE,
             PUFFERFISH_2_NORTH_MOUTH_SHAPE, PUFFERFISH_2_NORTH_FINS_SHAPE, PUFFERFISH_2_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VeBoxUtil.rotate180(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeBoxUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeBoxUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
 
-    public VePufferfishPlushBlock(Properties properties)
+    public VEPufferfishPlushBlock(Properties properties)
     {
         super(properties);
     }

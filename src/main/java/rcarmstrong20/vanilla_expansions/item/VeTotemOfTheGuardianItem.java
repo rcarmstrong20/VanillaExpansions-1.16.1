@@ -20,16 +20,17 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
-import rcarmstrong20.vanilla_expansions.util.VeEffectUtil;
-import rcarmstrong20.vanilla_expansions.util.VeParticleUtil;
-import rcarmstrong20.vanilla_expansions.util.VeTimeUtil;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.core.VEParticleTypes;
+import rcarmstrong20.vanilla_expansions.util.VEEffectUtil;
+import rcarmstrong20.vanilla_expansions.util.VEParticleUtil;
+import rcarmstrong20.vanilla_expansions.util.VETimeUtil;
 
-public class VeTotemOfTheGuardianItem extends Item
+public class VETotemOfTheGuardianItem extends Item
 {
     private int duration;
 
-    public VeTotemOfTheGuardianItem(Properties properties, int duration)
+    public VETotemOfTheGuardianItem(Properties properties, int duration)
     {
         super(properties);
         this.duration = duration;
@@ -39,7 +40,7 @@ public class VeTotemOfTheGuardianItem extends Item
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
         ItemStack stack = player.getItemInHand(hand);
-        int ticks = VeTimeUtil.convertSecsToTicks(duration);
+        int ticks = VETimeUtil.convertSecsToTicks(duration);
 
         player.addEffect(new EffectInstance(Effects.WATER_BREATHING, ticks));
         player.addEffect(new EffectInstance(Effects.NIGHT_VISION, ticks));
@@ -51,7 +52,7 @@ public class VeTotemOfTheGuardianItem extends Item
 
         if (player instanceof ServerPlayerEntity)
         {
-            VeParticleUtil.spawnTotemParticles(VeParticleTypes.totemOfTheGuardian, (ServerPlayerEntity) player);
+            VEParticleUtil.spawnTotemParticles(VEParticleTypes.totemOfTheGuardian, (ServerPlayerEntity) player);
         }
         return ActionResult.success(stack);
     }
@@ -60,13 +61,14 @@ public class VeTotemOfTheGuardianItem extends Item
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> text, ITooltipFlag flag)
     {
-        super.appendHoverText(stack, world, text, flag);
-
-        int effectTicks = VeTimeUtil.convertSecsToTicks(duration);
+        int effectTicks = VETimeUtil.convertSecsToTicks(duration);
         EffectInstance waterBreathingInstance = new EffectInstance(Effects.WATER_BREATHING, effectTicks);
         EffectInstance nightVisionInstance = new EffectInstance(Effects.NIGHT_VISION, effectTicks);
 
-        VeEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance, nightVisionInstance), text);
+        VEEffectUtil.addTotemEffectTooltip(ImmutableList.of(waterBreathingInstance, nightVisionInstance),
+                VanillaExpansions.GUARDIAN_TOTEM_MAP, stack.getItem(), text);
+
+        super.appendHoverText(stack, world, text, flag);
 
         text.add(StringTextComponent.EMPTY);
         text.add(new TranslationTextComponent("guardianTotem.useDescLine1").withStyle(TextFormatting.DARK_PURPLE));

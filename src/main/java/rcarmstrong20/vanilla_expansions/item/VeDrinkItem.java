@@ -8,17 +8,17 @@ import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.world.World;
 
-public class VeDrinkItem extends Item
+public class VEDrinkItem extends Item
 {
     private Item returnItem;
 
-    public VeDrinkItem(Properties properties)
+    public VEDrinkItem(Properties properties)
     {
         super(properties);
         this.returnItem = Items.GLASS_BOTTLE;
     }
 
-    public VeDrinkItem(Properties properties, Item returnItemIn)
+    public VEDrinkItem(Properties properties, Item returnItemIn)
     {
         super(properties);
         this.returnItem = returnItemIn;

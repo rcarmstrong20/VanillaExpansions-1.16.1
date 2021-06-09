@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+	"###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:warped_chytrid_nether_bricks"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:warped_chytrid_nether_brick_stairs",
+	"count": 4
+  }
+}

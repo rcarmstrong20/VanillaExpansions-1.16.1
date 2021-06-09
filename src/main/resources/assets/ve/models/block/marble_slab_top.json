@@ -1,9 +1,0 @@
-{
-    "parent": "block/slab_top",
-    "textures":
-	{
-        "bottom": "ve:block/marble",
-        "top": "ve:block/marble",
-        "side": "ve:block/marble"
-    }
-}

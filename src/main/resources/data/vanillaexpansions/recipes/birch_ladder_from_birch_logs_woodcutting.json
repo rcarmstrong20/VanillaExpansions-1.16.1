@@ -1,0 +1,9 @@
+{
+  "type": "vanillaexpansions:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:birch_planks"
+  },
+  "result": "vanillaexpansions:birch_ladder",
+  "count": 1
+}

@@ -7,17 +7,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 
-public class VeSoupItem extends Item
+public class VESoupItem extends Item
 {
     private Item returnItem;
 
-    public VeSoupItem(Properties properties)
+    public VESoupItem(Properties properties)
     {
         super(properties);
         this.returnItem = Items.BOWL;
     }
 
-    public VeSoupItem(Properties properties, Item returnItem)
+    public VESoupItem(Properties properties, Item returnItem)
     {
         super(properties);
         this.returnItem = returnItem;

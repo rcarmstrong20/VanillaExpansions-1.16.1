@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "overworld_planter_box",
+  "pattern":
+  [
+    "#B#",
+    "#D#",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:jungle_planks"
+    },
+	"D":
+	{
+	  "item": "minecraft:dirt"
+	},
+	"B":
+	{
+	  "item": "minecraft:water_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:jungle_planter_box"
+  }
+}
