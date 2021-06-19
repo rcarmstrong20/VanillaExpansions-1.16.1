@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_side",
-    "textures":
-	{
-        "wall": "block/crimson_stem"
-    }
+  "parent": "block/template_wall_side",
+  "textures":
+  {
+    "wall": "block/crimson_stem"
+  }
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_side_tall",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/smoky_quartz_block_top"
-    }
+  "parent": "block/template_wall_side_tall",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/smoky_quartz_block_top"
+  }
 }

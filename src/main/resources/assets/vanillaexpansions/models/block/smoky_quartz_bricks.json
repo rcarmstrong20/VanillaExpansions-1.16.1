@@ -1,7 +1,7 @@
 {
-    "parent": "minecraft:block/cube_all",
-    "textures":
-	{
-        "all": "vanillaexpansions:block/smoky_quartz_bricks"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures":
+  {
+    "all": "vanillaexpansions:block/smoky_quartz_bricks"
+  }
 }

@@ -1,7 +1,6 @@
 {
-    "textures":
-	{
-        "particle": "vanillaexpansions:block/dark_matter_still"
-    }
+  "textures":
+  {
+    "particle": "vanillaexpansions:block/dark_matter_still"
+  }
 }
-

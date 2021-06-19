@@ -1,7 +1,7 @@
 {
-    "parent": "block/cross",
-    "textures":
-	{
-        "cross": "vanillaexpansions:block/cattail_top_stage2"
-    }
+  "parent": "block/cross",
+  "textures":
+  {
+    "cross": "vanillaexpansions:block/cattail_top_stage2"
+  }
 }

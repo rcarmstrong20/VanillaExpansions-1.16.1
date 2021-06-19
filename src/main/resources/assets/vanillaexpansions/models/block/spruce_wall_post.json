@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_post",
-    "textures":
-	{
-        "wall": "block/spruce_log"
-    }
+  "parent": "block/template_wall_post",
+  "textures":
+  {
+    "wall": "block/spruce_log"
+  }
 }

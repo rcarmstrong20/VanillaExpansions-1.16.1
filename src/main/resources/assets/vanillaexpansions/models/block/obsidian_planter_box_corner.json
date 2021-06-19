@@ -1,9 +1,9 @@
 {
-    "parent": "vanillaexpansions:block/template_planter_box_corner",
-    "textures":
-	{
-		"material": "block/obsidian",
-        "log": "block/purpur_block",
-		"soil": "block/end_stone"
-    }
+  "parent": "vanillaexpansions:block/template_planter_box_corner",
+  "textures":
+  {
+    "material": "block/obsidian",
+    "log": "block/purpur_block",
+    "soil": "block/end_stone"
+  }
 }

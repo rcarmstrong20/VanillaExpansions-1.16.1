@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_side_tall",
-    "textures":
-	{
-        "wall": "block/stripped_oak_log"
-    }
+  "parent": "block/template_wall_side_tall",
+  "textures":
+  {
+    "wall": "block/stripped_oak_log"
+  }
 }

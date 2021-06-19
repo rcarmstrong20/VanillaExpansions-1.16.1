@@ -1,7 +1,7 @@
 {
-    "parent": "vanillaexpansions:block/template_nether_villager_plush",
-    "textures":
-	{
-        "clothes": "block/cyan_wool"
-    }
+  "parent": "vanillaexpansions:block/template_nether_villager_plush",
+  "textures":
+  {
+    "clothes": "block/cyan_wool"
+  }
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_side",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/polished_marble_bricks"
-    }
+  "parent": "block/template_wall_side",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/polished_marble_bricks"
+  }
 }

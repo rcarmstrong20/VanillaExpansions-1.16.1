@@ -1,9 +1,9 @@
 {
-    "parent": "vanillaexpansions:block/template_planter_box_corner",
-    "textures":
-	{
-		"material": "block/birch_planks",
-        "log": "block/birch_log",
-		"soil": "block/farmland_moist"
-    }
+  "parent": "vanillaexpansions:block/template_planter_box_corner",
+  "textures":
+  {
+    "material": "block/birch_planks",
+    "log": "block/birch_log",
+    "soil": "block/farmland_moist"
+  }
 }

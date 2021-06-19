@@ -1,9 +1,9 @@
 {
-    "parent": "block/slab_top",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/sodalite",
-        "top": "vanillaexpansions:block/sodalite",
-        "side": "vanillaexpansions:block/sodalite"
-    }
+  "parent": "block/slab_top",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/sodalite",
+    "top": "vanillaexpansions:block/sodalite",
+    "side": "vanillaexpansions:block/sodalite"
+  }
 }

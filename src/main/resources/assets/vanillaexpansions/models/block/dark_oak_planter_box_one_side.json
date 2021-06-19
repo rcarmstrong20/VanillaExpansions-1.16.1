@@ -1,8 +1,8 @@
 {
-    "parent": "vanillaexpansions:block/template_planter_box_one_side",
-    "textures":
-	{
-		"material": "block/dark_oak_planks",
-		"soil": "block/farmland_moist"
-    }
+  "parent": "vanillaexpansions:block/template_planter_box_one_side",
+  "textures":
+  {
+    "material": "block/dark_oak_planks",
+    "soil": "block/farmland_moist"
+  }
 }

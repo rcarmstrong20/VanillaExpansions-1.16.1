@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_wall_post",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/sodalite"
-    }
+  "parent": "block/template_wall_post",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/sodalite"
+  }
 }

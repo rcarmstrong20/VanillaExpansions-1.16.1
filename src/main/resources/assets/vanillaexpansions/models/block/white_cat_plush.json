@@ -1,10 +1,10 @@
 {
-    "parent": "vanillaexpansions:block/template_one_colored_cat_plush",
-    "textures":
-	{
-		"body_color": "block/white_wool",
-		"eye_color": "block/black_wool",
-		"eye_white_color1": "block/yellow_wool",
-		"eye_white_color2": "block/light_blue_wool"
-    }
+  "parent": "vanillaexpansions:block/template_one_colored_cat_plush",
+  "textures":
+  {
+    "body_color": "block/white_wool",
+    "eye_color": "block/black_wool",
+    "eye_white_color_one": "block/yellow_wool",
+    "eye_white_color_two": "block/light_blue_wool"
+  }
 }

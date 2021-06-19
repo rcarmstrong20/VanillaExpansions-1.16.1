@@ -1,7 +1,7 @@
 {
-    "parent": "block/wall_inventory",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/bauxite"
-    }
+  "parent": "block/wall_inventory",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/bauxite"
+  }
 }

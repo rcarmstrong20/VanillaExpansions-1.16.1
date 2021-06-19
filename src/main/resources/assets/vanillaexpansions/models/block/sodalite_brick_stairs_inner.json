@@ -1,9 +1,9 @@
 {
-    "parent": "block/inner_stairs",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/sodalite_bricks",
-        "top": "vanillaexpansions:block/sodalite_bricks",
-        "side": "vanillaexpansions:block/sodalite_bricks"
-    }
+  "parent": "block/inner_stairs",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/sodalite_bricks",
+    "top": "vanillaexpansions:block/sodalite_bricks",
+    "side": "vanillaexpansions:block/sodalite_bricks"
+  }
 }

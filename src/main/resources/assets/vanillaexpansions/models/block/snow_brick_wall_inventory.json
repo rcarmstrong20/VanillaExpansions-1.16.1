@@ -1,7 +1,7 @@
 {
-    "parent": "block/wall_inventory",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/snow_bricks"
-    }
+  "parent": "block/wall_inventory",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/snow_bricks"
+  }
 }

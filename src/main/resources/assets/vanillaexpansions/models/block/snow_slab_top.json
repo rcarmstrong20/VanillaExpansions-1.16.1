@@ -1,9 +1,9 @@
 {
-    "parent": "block/slab_top",
-    "textures":
-	{
-        "bottom": "block/snow",
-        "top": "block/snow",
-        "side": "block/snow"
-    }
+  "parent": "block/slab_top",
+  "textures":
+  {
+    "bottom": "block/snow",
+    "top": "block/snow",
+    "side": "block/snow"
+  }
 }

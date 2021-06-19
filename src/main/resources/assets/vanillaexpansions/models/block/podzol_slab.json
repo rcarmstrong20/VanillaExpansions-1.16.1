@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/slab",
+  "parent": "vanillaexpansions:block/upper_uv_slab",
   "textures":
   {
     "bottom": "minecraft:block/dirt",

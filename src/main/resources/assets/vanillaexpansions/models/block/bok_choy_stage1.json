@@ -1,7 +1,7 @@
 {
-    "parent": "block/crop",
-    "textures":
-	{
-        "crop": "vanillaexpansions:block/bok_choy_stage1"
-    }
+  "parent": "block/crop",
+  "textures":
+  {
+    "crop": "vanillaexpansions:block/bok_choy_stage1"
+  }
 }

@@ -1,9 +1,9 @@
 {
-    "parent": "block/slab",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/smoky_quartz_block_bottom",
-        "top": "vanillaexpansions:block/smoky_quartz_block_bottom",
-        "side": "vanillaexpansions:block/smoky_quartz_block_bottom"
-    }
+  "parent": "block/slab",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/smoky_quartz_block_bottom",
+    "top": "vanillaexpansions:block/smoky_quartz_block_bottom",
+    "side": "vanillaexpansions:block/smoky_quartz_block_bottom"
+  }
 }

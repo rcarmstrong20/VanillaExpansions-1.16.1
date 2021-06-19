@@ -1,9 +1,9 @@
 {
-    "parent": "block/outer_stairs",
-    "textures":
-	{
-        "bottom": "block/snow",
-        "top": "block/snow",
-        "side": "block/snow"
-    }
+  "parent": "block/outer_stairs",
+  "textures":
+  {
+    "bottom": "block/snow",
+    "top": "block/snow",
+    "side": "block/snow"
+  }
 }

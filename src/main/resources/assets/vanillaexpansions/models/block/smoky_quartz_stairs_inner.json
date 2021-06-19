@@ -1,9 +1,9 @@
 {
-    "parent": "block/inner_stairs",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/smoky_quartz_block_bottom",
-        "top": "vanillaexpansions:block/smoky_quartz_block_top",
-        "side": "vanillaexpansions:block/smoky_quartz_block_side"
-    }
+  "parent": "block/inner_stairs",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/smoky_quartz_block_bottom",
+    "top": "vanillaexpansions:block/smoky_quartz_block_top",
+    "side": "vanillaexpansions:block/smoky_quartz_block_side"
+  }
 }

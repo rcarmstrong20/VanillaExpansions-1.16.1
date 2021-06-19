@@ -1,9 +1,9 @@
 {
-    "parent": "block/cube_bottom_top",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/smoky_quartz_block_top",
-        "top": "vanillaexpansions:block/smoky_quartz_block_top",
-        "side": "vanillaexpansions:block/smoky_quartz_block_side"
-    }
+  "parent": "block/cube_bottom_top",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/smoky_quartz_block_top",
+    "top": "vanillaexpansions:block/smoky_quartz_block_top",
+    "side": "vanillaexpansions:block/smoky_quartz_block_side"
+  }
 }

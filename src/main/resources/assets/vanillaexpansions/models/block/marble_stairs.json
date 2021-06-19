@@ -1,9 +1,9 @@
 {
-    "parent": "block/stairs",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/marble",
-        "top": "vanillaexpansions:block/marble",
-        "side": "vanillaexpansions:block/marble"
-    }
+  "parent": "block/stairs",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/marble",
+    "top": "vanillaexpansions:block/marble",
+    "side": "vanillaexpansions:block/marble"
+  }
 }

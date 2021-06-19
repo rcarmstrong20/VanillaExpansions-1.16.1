@@ -1,7 +1,7 @@
 {
-    "parent": "vanillaexpansions:block/template_ladder",
-    "textures":
-	{
-		"material": "vanillaexpansions:block/birch_ladder"
-    }
+  "parent": "vanillaexpansions:block/template_ladder",
+  "textures":
+  {
+    "material": "vanillaexpansions:block/birch_ladder"
+  }
 }

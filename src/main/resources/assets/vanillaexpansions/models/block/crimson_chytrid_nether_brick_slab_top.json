@@ -1,9 +1,9 @@
 {
-    "parent": "block/slab_top",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/crimson_chytrid_nether_bricks",
-        "top": "vanillaexpansions:block/crimson_chytrid_nether_bricks",
-        "side": "vanillaexpansions:block/crimson_chytrid_nether_bricks"
-    }
+  "parent": "block/slab_top",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/crimson_chytrid_nether_bricks",
+    "top": "vanillaexpansions:block/crimson_chytrid_nether_bricks",
+    "side": "vanillaexpansions:block/crimson_chytrid_nether_bricks"
+  }
 }

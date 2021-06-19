@@ -1,9 +1,9 @@
 {
-    "parent": "block/slab",
-    "textures":
-	{
-        "bottom": "vanillaexpansions:block/snow_bricks",
-        "top": "vanillaexpansions:block/snow_bricks",
-        "side": "vanillaexpansions:block/snow_bricks"
-    }
+  "parent": "block/slab",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/snow_bricks",
+    "top": "vanillaexpansions:block/snow_bricks",
+    "side": "vanillaexpansions:block/snow_bricks"
+  }
 }

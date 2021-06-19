@@ -1,7 +1,7 @@
 {
-    "parent": "block/wall_inventory",
-    "textures":
-	{
-        "wall": "vanillaexpansions:block/crimson_chytrid_nether_bricks"
-    }
+  "parent": "block/wall_inventory",
+  "textures":
+  {
+    "wall": "vanillaexpansions:block/crimson_chytrid_nether_bricks"
+  }
 }

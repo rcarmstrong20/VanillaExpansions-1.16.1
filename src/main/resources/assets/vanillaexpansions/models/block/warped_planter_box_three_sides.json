@@ -1,9 +1,9 @@
 {
-    "parent": "vanillaexpansions:block/template_planter_box_three_sides",
-    "textures":
-	{
-		"material": "block/warped_planks",
-        "log": "block/warped_stem",
-		"soil": "block/soul_soil"
-    }
+  "parent": "vanillaexpansions:block/template_planter_box_three_sides",
+  "textures":
+  {
+    "material": "block/warped_planks",
+    "log": "block/warped_stem",
+    "soil": "block/soul_soil"
+  }
 }

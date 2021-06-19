@@ -1,22 +1,25 @@
 {
-	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
-	"textures": {
-		"particle": "vanillaexpansions:block/dried_bamboo_stalk",
-		"virticle": "vanillaexpansions:block/dried_bamboo_stalk"
-	},
-	"elements": [ 	 
-		{
-			"__comment": "Box2",
-			"from": [ 6.5, 0, 1.5 ],
-			"to": [ 9.5, 16, 4.5 ],
-			"faces": {
-				"down": { "uv": [ 13, 0, 16, 3 ], "texture": "#virticle" },
-				"up": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" },
-				"north": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" },
-				"south": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" },
-				"west": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" },
-				"east": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" }
-			}
-		}
-	]
+  "__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio", 
+  "textures":
+  {
+    "particle": "vanillaexpansions:block/dried_bamboo_stalk",
+    "virticle": "vanillaexpansions:block/dried_bamboo_stalk"
+  },
+  "elements":
+  [
+    {
+      "__comment": "Box2", 
+      "from": [ 6.5, 0, 1.5 ],
+      "to": [ 9.5, 16, 4.5 ],
+      "faces":
+      {
+        "down": { "uv": [ 13, 0, 16, 3 ], "texture": "#virticle" }, 
+        "up": { "uv": [ 13, 4, 16, 7 ], "texture": "#virticle" }, 
+        "north": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" }, 
+        "south": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" }, 
+        "west": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" }, 
+        "east": { "uv": [ 0, 0, 3, 16 ], "texture": "#virticle" } 
+      }
+    }
+  ]
 }

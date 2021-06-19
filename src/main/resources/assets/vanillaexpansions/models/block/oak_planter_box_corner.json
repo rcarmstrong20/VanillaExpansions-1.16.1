@@ -1,9 +1,9 @@
 {
-    "parent": "vanillaexpansions:block/template_planter_box_corner",
-    "textures":
-	{
-		"material": "block/oak_planks",
-        "log": "block/oak_log",
-		"soil": "block/farmland_moist"
-    }
+  "parent": "vanillaexpansions:block/template_planter_box_corner",
+  "textures":
+  {
+    "material": "block/oak_planks",
+    "log": "block/oak_log",
+    "soil": "block/farmland_moist"
+  }
 }
