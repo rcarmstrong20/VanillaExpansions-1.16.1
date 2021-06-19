@@ -31,8 +31,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
-import rndmaccess.vanilla_expansions.block.VEBabyCowPlushBlock;
-import rndmaccess.vanilla_expansions.block.VEBabyMooshroomPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBatPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBeePlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBerryBushBlock;
@@ -115,8 +113,6 @@ public class VEBlocks
             buildProperties(VEMaterialType.WOOL, MaterialColor.WOOL, SoundType.WOOL).strength(0.2F)));
     public static Block cowPlush = register("cow_plush", true, new VECowPlushBlock(
             buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_BROWN, SoundType.WOOL).strength(0.2F)));
-    public static Block babyCowPlush = register("baby_cow_plush", true,
-            new VEBabyCowPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block creeperPlush = register("creeper_plush", true, new VECreeperPlushBlock(
             buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_GREEN, SoundType.WOOL).strength(0.2F)));
     public static Block endermanPlush = register("enderman_plush", true, new VEEndermanPlushBlock(
@@ -137,18 +133,14 @@ public class VEBlocks
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block blackHorsePlush = register("black_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
-    public static Block purpleHorsePlush = register("purple_horse_plush", true,
+    public static Block enderHorsePlush = register("ender_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermitePlush)));
     public static Block magmaCubePlush = register("magma_cube_plush", true, new VEMagmaCubePlushBlock(
             buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_RED, SoundType.WOOL).strength(0.2F)));
     public static Block redMooshroomPlush = register("red_mooshroom_plush", true,
             new VEMooshroomPlushBlock(AbstractBlock.Properties.copy(VEBlocks.magmaCubePlush)));
-    public static Block babyRedMooshroomPlush = register("baby_red_mooshroom_plush", true,
-            new VEBabyMooshroomPlushBlock(AbstractBlock.Properties.copy(VEBlocks.magmaCubePlush)));
     public static Block brownMooshroomPlush = register("brown_mooshroom_plush", true,
             new VEMooshroomPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
-    public static Block babyBrownMooshroomPlush = register("baby_brown_mooshroom_plush", true,
-            new VEBabyMooshroomPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block ocelotPlush = register("ocelot_plush", true,
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block tabbyCatPlush = register("tabby_cat_plush", true,

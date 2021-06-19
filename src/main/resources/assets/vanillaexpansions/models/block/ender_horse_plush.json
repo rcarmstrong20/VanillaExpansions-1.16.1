@@ -1,0 +1,10 @@
+{
+  "parent": "vanillaexpansions:block/template_horse_plush",
+  "textures":
+  {
+    "body": "block/black_wool",
+    "eyes": "block/magenta_wool",
+    "hooves": "block/purple_wool",
+    "hair": "block/purple_wool"
+  }
+}
