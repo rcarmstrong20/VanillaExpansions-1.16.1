@@ -14,7 +14,7 @@ public class VEMagmaCubePlushBlock extends VETallPlushBlock
 {
     // Bottom Magma Cube Bounding Boxes
 
-    protected static final VoxelShape BOTTOM_BODY_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D);
+    protected static final VoxelShape BOTTOM_BODY_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 9.0D, 13.0D);
     protected static final VoxelShape BOTTOM_NORTH_LEFT_EYE_SHAPE = Block.box(10.0D, 5.0D, 3.0D, 12.0D, 7.0D, 2.5D);
     protected static final VoxelShape BOTTOM_NORTH_RIGHT_EYE_SHAPE = Block.box(4.0D, 5.0D, 3.0D, 6.0D, 7.0D, 2.5D);
     protected static final VoxelShape BOTTOM_NORTH_EYES_SHAPES = VoxelShapes.or(BOTTOM_NORTH_LEFT_EYE_SHAPE,
@@ -27,9 +27,9 @@ public class VEMagmaCubePlushBlock extends VETallPlushBlock
 
     // Middle Magma Cube Bounding Box
 
-    protected static final VoxelShape MIDDLE_BODY_SHAPE = Block.box(4.0D, 8.0D, 4.0D, 12.0D, 17.0D, 12.0D);
-    protected static final VoxelShape MIDDLE_NORTH_LEFT_EYE_SHAPE = Block.box(9.0D, 14.0D, 4.0D, 10.5D, 15.5D, 3.5D);
-    protected static final VoxelShape MIDDLE_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 14.0D, 4.0D, 6.5D, 15.5D, 3.5D);
+    protected static final VoxelShape MIDDLE_BODY_SHAPE = Block.box(4.0D, 7.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    protected static final VoxelShape MIDDLE_NORTH_LEFT_EYE_SHAPE = Block.box(9.0D, 13.0D, 4.0D, 10.5D, 14.5D, 3.5D);
+    protected static final VoxelShape MIDDLE_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 13.0D, 4.0D, 6.5D, 14.5D, 3.5D);
     protected static final VoxelShape MIDDLE_NORTH_EYES_SHAPE = VoxelShapes.or(MIDDLE_NORTH_LEFT_EYE_SHAPE,
             MIDDLE_NORTH_RIGHT_EYE_SHAPE);
     protected static final VoxelShape MIDDLE_NORTH_SHAPE = VoxelShapes.or(MIDDLE_BODY_SHAPE, MIDDLE_NORTH_EYES_SHAPE,
@@ -41,9 +41,9 @@ public class VEMagmaCubePlushBlock extends VETallPlushBlock
 
     // Top Magma Cube Bounding Box
 
-    protected static final VoxelShape TOP_BODY_SHAPE = Block.box(6.0D, 1.0D, 6.0D, 10.0D, 5.0D, 10.0D);
-    protected static final VoxelShape TOP_NORTH_LEFT_EYE_SHAPE = Block.box(6.5D, 3.0D, 6.0D, 7.5D, 4.0D, 5.5D);
-    protected static final VoxelShape TOP_NORTH_RIGHT_EYE_SHAPE = Block.box(8.5D, 3.0D, 6.0D, 9.5D, 4.0D, 5.5D);
+    protected static final VoxelShape TOP_BODY_SHAPE = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 4.0D, 10.0D);
+    protected static final VoxelShape TOP_NORTH_LEFT_EYE_SHAPE = Block.box(6.5D, 2.0D, 6.0D, 7.5D, 3.0D, 5.5D);
+    protected static final VoxelShape TOP_NORTH_RIGHT_EYE_SHAPE = Block.box(8.5D, 2.0D, 6.0D, 9.5D, 3.0D, 5.5D);
     protected static final VoxelShape TOP_NORTH_EYES_SHAPE = VoxelShapes.or(TOP_NORTH_LEFT_EYE_SHAPE,
             TOP_NORTH_RIGHT_EYE_SHAPE);
     protected static final VoxelShape TOP_NORTH_SHAPE = VoxelShapes.or(TOP_BODY_SHAPE, TOP_NORTH_EYES_SHAPE);

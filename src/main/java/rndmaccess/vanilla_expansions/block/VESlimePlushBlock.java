@@ -24,7 +24,7 @@ public class VESlimePlushBlock extends VEMagmaCubePlushBlock
 
     // Two Slime Bounding Boxes
 
-    protected static final VoxelShape MIDDLE_NORTH_MOUTH_EYE_SHAPE = Block.box(6.5D, 11.5D, 4.0D, 7.5D, 12.5D, 3.5D);
+    protected static final VoxelShape MIDDLE_NORTH_MOUTH_EYE_SHAPE = Block.box(6.5D, 10.5D, 4.0D, 7.5D, 11.5D, 3.5D);
     protected static final VoxelShape MIDDLE_NORTH_SHAPE = VoxelShapes.or(VEMagmaCubePlushBlock.MIDDLE_NORTH_SHAPE,
             MIDDLE_NORTH_MOUTH_EYE_SHAPE, BOTTOM_NORTH_SHAPE);
 
@@ -34,7 +34,7 @@ public class VESlimePlushBlock extends VEMagmaCubePlushBlock
 
     // Three Slime Bouding Boxes
 
-    protected static final VoxelShape TOP_NORTH_MOUTH_EYE_SHAPE = Block.box(7.0D, 2.0D, 6.0D, 7.5D, 2.5D, 5.5D);
+    protected static final VoxelShape TOP_NORTH_MOUTH_EYE_SHAPE = Block.box(7.0D, 1.0D, 6.0D, 7.5D, 1.5D, 5.5D);
     protected static final VoxelShape TOP_NORTH_SHAPE = VoxelShapes.or(VEMagmaCubePlushBlock.TOP_NORTH_SHAPE,
             TOP_NORTH_MOUTH_EYE_SHAPE);
 
