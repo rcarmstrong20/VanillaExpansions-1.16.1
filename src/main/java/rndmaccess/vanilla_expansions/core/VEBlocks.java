@@ -80,6 +80,7 @@ import rndmaccess.vanilla_expansions.block.VEThreeStageCropsBlock;
 import rndmaccess.vanilla_expansions.block.VETransmutationTableBlock;
 import rndmaccess.vanilla_expansions.block.VEVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWitchPlushBlock;
+import rndmaccess.vanilla_expansions.block.VEWitherPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWolfPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWoodcutterBlock;
 import rndmaccess.vanilla_expansions.block.VEZombieDemonPlushBlock;
@@ -103,22 +104,22 @@ public class VEBlocks
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
             VanillaExpansions.MOD_ID);
 
-    public static Block batPlush = register("bat_plush", true, new VEBatPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_GRAY, SoundType.WOOL).strength(0.2F)));
-    public static Block blazePlush = register("blaze_plush", true, new VEBlazePlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_YELLOW, SoundType.WOOL).strength(0.2F)));
-    public static Block caveSpiderPlush = register("cave_spider_plush", true, new VECaveSpiderPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_CYAN, SoundType.WOOL).strength(0.2F)));
-    public static Block chickenPlush = register("chicken_plush", true, new VEChickenPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.WOOL, SoundType.WOOL).strength(0.2F)));
-    public static Block cowPlush = register("cow_plush", true, new VECowPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_BROWN, SoundType.WOOL).strength(0.2F)));
-    public static Block creeperPlush = register("creeper_plush", true, new VECreeperPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_GREEN, SoundType.WOOL).strength(0.2F)));
-    public static Block endermanPlush = register("enderman_plush", true, new VEEndermanPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_BLACK, SoundType.WOOL).strength(0.2F)));
-    public static Block endermitePlush = register("endermite_plush", true, new VEEndermitePlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_PURPLE, SoundType.WOOL).strength(0.2F)));
+    public static Block batPlush = register("bat_plush", true,
+            new VEBatPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_GRAY).strength(0.2F)));
+    public static Block blazePlush = register("blaze_plush", true,
+            new VEBlazePlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_YELLOW).strength(0.2F)));
+    public static Block caveSpiderPlush = register("cave_spider_plush", true,
+            new VECaveSpiderPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_CYAN).strength(0.2F)));
+    public static Block chickenPlush = register("chicken_plush", true,
+            new VEChickenPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.WOOL).strength(0.2F)));
+    public static Block cowPlush = register("cow_plush", true,
+            new VECowPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_BROWN).strength(0.2F)));
+    public static Block creeperPlush = register("creeper_plush", true,
+            new VECreeperPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_GREEN).strength(0.2F)));
+    public static Block endermanPlush = register("enderman_plush", true,
+            new VEEndermanPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_BLACK).strength(0.2F)));
+    public static Block endermitePlush = register("endermite_plush", true,
+            new VEEndermitePlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_PURPLE).strength(0.2F)));
     public static Block ghastPlush = register("ghast_plush", true,
             new VEGhastPlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block guardianPlush = register("guardian_plush", true,
@@ -127,16 +128,16 @@ public class VEBlocks
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block grayHorsePlush = register("gray_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.batPlush)));
-    public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true, new VEHorsePlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_GRAY, SoundType.WOOL).strength(0.2F)));
+    public static Block lightGrayHorsePlush = register("light_gray_horse_plush", true,
+            new VEHorsePlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_GRAY).strength(0.2F)));
     public static Block brownHorsePlush = register("brown_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block blackHorsePlush = register("black_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
     public static Block enderHorsePlush = register("ender_horse_plush", true,
             new VEHorsePlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermitePlush)));
-    public static Block magmaCubePlush = register("magma_cube_plush", true, new VEMagmaCubePlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_RED, SoundType.WOOL).strength(0.2F)));
+    public static Block magmaCubePlush = register("magma_cube_plush", true,
+            new VEMagmaCubePlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_RED).strength(0.2F)));
     public static Block redMooshroomPlush = register("red_mooshroom_plush", true,
             new VEMooshroomPlushBlock(AbstractBlock.Properties.copy(VEBlocks.magmaCubePlush)));
     public static Block brownMooshroomPlush = register("brown_mooshroom_plush", true,
@@ -147,8 +148,8 @@ public class VEBlocks
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block tuxedoCatPlush = register("tuxedo_cat_plush", true,
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
-    public static Block redCatPlush = register("red_cat_plush", true, new VECatPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_ORANGE, SoundType.WOOL).strength(0.2F)));
+    public static Block redCatPlush = register("red_cat_plush", true,
+            new VECatPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_ORANGE).strength(0.2F)));
     public static Block siameseCatPlush = register("siamese_cat_plush", true,
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block britishShorthairCatPlush = register("british_shorthair_cat_plush", true,
@@ -165,8 +166,8 @@ public class VEBlocks
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block blackCatPlush = register("black_cat_plush", true,
             new VECatPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
-    public static Block pigPlush = register("pig_plush", true, new VEPigPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_PINK, SoundType.WOOL).strength(0.2F)));
+    public static Block pigPlush = register("pig_plush", true,
+            new VEPigPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_PINK).strength(0.2F)));
     public static Block brownRabbitPlush = register("brown_rabbit_plush", true,
             new VERabbitPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block whiteRabbitPlush = register("white_rabbit_plush", true,
@@ -185,14 +186,14 @@ public class VEBlocks
             new VESheepPlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block orangeSheepPlush = register("orange_sheep_plush", true,
             new VESheepPlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush)));
-    public static Block magentaSheepPlush = register("magenta_sheep_plush", true, new VESheepPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_MAGENTA, SoundType.WOOL).strength(0.2F)));
-    public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true, new VESheepPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_BLUE, SoundType.WOOL).strength(0.2F)));
+    public static Block magentaSheepPlush = register("magenta_sheep_plush", true,
+            new VESheepPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_MAGENTA).strength(0.2F)));
+    public static Block lightBlueSheepPlush = register("light_blue_sheep_plush", true,
+            new VESheepPlushBlock(buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_BLUE).strength(0.2F)));
     public static Block yellowSheepPlush = register("yellow_sheep_plush", true,
             new VESheepPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block limeSheepPlush = register("lime_sheep_plush", true, new VESheepPlushBlock(
-            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_GREEN, SoundType.WOOL).strength(0.2F)));
+            buildProperties(VEMaterialType.WOOL, MaterialColor.COLOR_LIGHT_GREEN).strength(0.2F)));
     public static Block pinkSheepPlush = register("pink_sheep_plush", true,
             new VESheepPlushBlock(AbstractBlock.Properties.copy(VEBlocks.pigPlush)));
     public static Block graySheepPlush = register("gray_sheep_plush", true,
@@ -255,6 +256,8 @@ public class VEBlocks
             new VEZombiePigmanPlushBlock(AbstractBlock.Properties.copy(VEBlocks.pigPlush)));
     public static Block pufferfishPlush = register("pufferfish_plush", true,
             new VEPufferfishPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
+    public static Block witherPlush = register("wither_plush", true,
+            new VEWitherPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
     public static Block rubyOre = register("blackstone_ruby_ore", true,
             new VEOreBlock(buildProperties(VEMaterialType.STONE, MaterialColor.COLOR_BLACK).strength(2.0F, 6.0F)));
     public static Block rubyBlock = register("ruby_block", true,
