@@ -15,6 +15,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -64,5 +67,10 @@ public class VETotemOfTheFortunateItem extends Item
 
         VEEffectUtil.addTotemEffectTooltip(ImmutableList.of(luckInstance), VanillaExpansions.FORTUNATE_TOTEM_MAP,
                 stack.getItem(), text);
+
+        text.add(StringTextComponent.EMPTY);
+        text.add(new TranslationTextComponent("fortunateTotem.useDescLine1").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("fortunateTotem.useDescLine2").withStyle(TextFormatting.DARK_PURPLE));
+        text.add(new TranslationTextComponent("fortunateTotem.useDescLine3").withStyle(TextFormatting.DARK_PURPLE));
     }
 }
