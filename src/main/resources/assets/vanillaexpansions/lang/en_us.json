@@ -75,6 +75,7 @@
   "block.vanillaexpansions.zombie_demon_plush": "Zombie Demon Plush",
   "block.vanillaexpansions.zombie_pigman_plush": "Zombie Pigman Plush",
   "block.vanillaexpansions.pufferfish_plush": "Pufferfish Plush",
+  "block.vanillaexpansions.wither_plush": "Wither Plush",
   "block.vanillaexpansions.blackstone_ruby_ore": "Blackstone Ruby Ore",
   "block.vanillaexpansions.ruby_block": "Block of Ruby",
   "block.vanillaexpansions.nether_smoky_quartz_ore": "Nether Smoky Quartz Ore",
@@ -262,6 +263,8 @@
   "block.vanillaexpansions.polished_marble_brick_stairs": "Polished Marble Brick Stairs",
   "block.vanillaexpansions.polished_marble_brick_slab": "Polished Marble Brick Slab",
   "block.vanillaexpansions.polished_marble_brick_wall": "Polished Marble Brick Wall",
+  "block.vanillaexpansions.grass_slab": "Grass Slab",
+  "block.vanillaexpansions.podzol_slab": "Podzol Slab",
   
   "container.woodcutter": "Woodcutter",
   "container.transmutation_table": "Transmutation Table",
