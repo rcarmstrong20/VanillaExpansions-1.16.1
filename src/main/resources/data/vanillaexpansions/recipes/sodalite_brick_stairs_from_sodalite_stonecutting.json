@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:sodalite"
+  },
+  "result": "vanillaexpansions:sodalite_brick_stairs",
+  "count": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:sodalite"
+  },
+  "result": "vanillaexpansions:chiseled_sodalite_bricks",
+  "count": 1
+}
