@@ -27,7 +27,7 @@ import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
 import rndmaccess.vanilla_expansions.block.VEBerryBushBlock;
-import rndmaccess.vanilla_expansions.config.VEOreDataGenConfig;
+import rndmaccess.vanilla_expansions.config.VEOreDataConfig;
 
 /**
  * A class for holding every feature configuration instance that vanilla
@@ -41,16 +41,16 @@ public class VEConfiguredFeatures
             Feature.ORE
                     .configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
                             VEConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE,
-                            VEOreDataGenConfig.VEVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
+                            VEOreDataConfig.VEVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
                     .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
-                    .count(VEOreDataGenConfig.VESpreadConfig.netherSmokyQuartzOreSpread.get()));
+                    .count(VEOreDataConfig.VESpreadConfig.netherSmokyQuartzOreSpread.get()));
     public static final ConfiguredFeature<?, ?> BLACKSTONE_RUBY_ORE = register("blackstone_ruby_ore",
             Feature.ORE
                     .configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.BLACKSTONE),
                             VEConfiguredFeatures.States.NETHER_RUBY_ORE,
-                            VEOreDataGenConfig.VEVeinSizeConfig.blackstoneRubyOreVeinSize.get()))
+                            VEOreDataConfig.VEVeinSizeConfig.blackstoneRubyOreVeinSize.get()))
                     .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
-                    .count(VEOreDataGenConfig.VESpreadConfig.blackstoneRubyOreSpread.get()));
+                    .count(VEOreDataConfig.VESpreadConfig.blackstoneRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
             .configured(VEConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",

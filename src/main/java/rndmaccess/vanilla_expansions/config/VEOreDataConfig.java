@@ -3,7 +3,7 @@ package rndmaccess.vanilla_expansions.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
-public class VEOreDataGenConfig
+public class VEOreDataConfig
 {
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client)
     {

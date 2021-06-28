@@ -39,9 +39,10 @@ public class VEBonemealEvent
                     {
                         blockpos = blockpos.offset(random.nextInt(3) - 1,
                                 (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                        BlockState state = world.getBlockState(blockpos);
+                        BlockState belowState = world.getBlockState(blockpos.below());
 
-                        if (VEBlockTags.endBoneMealable.contains(world.getBlockState(blockpos.below()).getBlock())
-                                && isAir(world.getBlockState(blockpos)))
+                        if (VEBlockTags.endBoneMealable.contains(belowState.getBlock()) && isAir(state))
                         {
                             world.setBlock(blockpos,
                                     VEBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 1);
@@ -59,6 +60,6 @@ public class VEBonemealEvent
      */
     private static boolean isAir(BlockState state)
     {
-        return state.getMaterial() == Material.AIR;
+        return state.getMaterial().equals(Material.AIR);
     }
 }

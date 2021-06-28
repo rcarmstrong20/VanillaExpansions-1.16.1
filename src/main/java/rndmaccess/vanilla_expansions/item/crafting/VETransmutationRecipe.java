@@ -120,34 +120,34 @@ public class VETransmutationRecipe implements IRecipe<IInventory>
         {
             String group = JSONUtils.getAsString(json, "group", "");
             NonNullList<Ingredient> nonnulllist = itemsFromJson(JSONUtils.getAsJsonArray(json, "ingredients"));
-            if (nonnulllist.isEmpty())
-            {
-                throw new JsonParseException("No ingredients for transmutation recipe");
-            }
-            else if (nonnulllist.size() > 3)
-            {
-                throw new JsonParseException("Too many ingredients for transmutation recipe the max is " + 2);
-            }
-            else
-            {
-                ItemStack itemstack = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
-                return new VETransmutationRecipe(recipeId, group, itemstack, nonnulllist);
-            }
+
+            ItemStack itemstack = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
+            return new VETransmutationRecipe(recipeId, group, itemstack, nonnulllist);
         }
 
         private static NonNullList<Ingredient> itemsFromJson(JsonArray jsonArray)
         {
-            NonNullList<Ingredient> ingredients = NonNullList.create();
-
-            for (int i = 0; i < jsonArray.size(); ++i)
+            if (jsonArray.size() != 3)
             {
-                Ingredient ingredient = Ingredient.fromJson(jsonArray.get(i));
-                if (!ingredient.isEmpty())
-                {
-                    ingredients.add(ingredient);
-                }
+                throw new JsonParseException(
+                        "Too many or too few ingredients for transmutation recipe must contain exactly 3 ingredients.");
             }
-            return ingredients;
+            else
+            {
+                NonNullList<Ingredient> ingredients = NonNullList.withSize(3, Ingredient.EMPTY);
+
+                for (int i = 0; i < jsonArray.size(); ++i)
+                {
+                    Ingredient ingredient = Ingredient.fromJson(jsonArray.get(i));
+
+                    if (!ingredient.isEmpty())
+                    {
+                        ingredients.set(i, ingredient);
+                    }
+                }
+
+                return ingredients;
+            }
         }
 
         @Override

@@ -9,6 +9,8 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,24 +25,26 @@ public class VEBlockEvent
         Block block = event.getState().getBlock();
         PlayerEntity player = event.getPlayer();
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+        IWorld world = event.getWorld();
+        BlockPos pos = event.getPos();
 
         if (!player.isCreative() && block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
         {
             Random random = new Random();
             double chance = VEBlockConfig.spruceConePercent.get() / 100.0;
-            float chose = random.nextFloat();
+            float chanceChosen = random.nextFloat();
 
             // 5% chance to drop by default
-            if (chose <= chance)
+            if (chanceChosen <= chance)
             {
-                Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VEItems.spruceCone, 1));
+                Block.popResource((World) world, pos, new ItemStack(VEItems.spruceCone, 1));
             }
             else
             {
                 if (EnchantmentHelper.getEnchantments(stack).get(Enchantments.BLOCK_FORTUNE) != null
-                        && chose <= chance * 4.0)
+                        && chanceChosen <= chance * 4.0)
                 {
-                    Block.popResource((World) event.getWorld(), event.getPos(), new ItemStack(VEItems.spruceCone, 2));
+                    Block.popResource((World) world, pos, new ItemStack(VEItems.spruceCone, 2));
                 }
             }
         }

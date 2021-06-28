@@ -21,10 +21,10 @@ public class VEConfig
 
     static
     {
-        VEOreDataGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEOreDataConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VEBlockConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VEFeatureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        VEStructureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEFeatureConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        VEStructureConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         VEEntityConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
 
         SERVER_CONFIG = SERVER_BUILDER.build();

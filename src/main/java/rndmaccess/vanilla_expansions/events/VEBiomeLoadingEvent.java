@@ -3,92 +3,103 @@ package rndmaccess.vanilla_expansions.events;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
-import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rndmaccess.vanilla_expansions.config.VEFeatureGenConfig;
-import rndmaccess.vanilla_expansions.config.VEStructureGenConfig;
+import rndmaccess.vanilla_expansions.config.VEFeatureConfig;
+import rndmaccess.vanilla_expansions.config.VEStructureConfig;
 import rndmaccess.vanilla_expansions.core.VEConfiguredFeatures;
 import rndmaccess.vanilla_expansions.core.VEConfiguredStructures;
 
 public class VEBiomeLoadingEvent
 {
+    private boolean smokyQuartzFlag = VEFeatureConfig.smokyQuartzOreFlag.get();
+    private boolean rubyFlag = VEFeatureConfig.rubyOreFlag.get();
+    private boolean blueberryFlag = VEFeatureConfig.blueberryBushFlag.get();
+    private boolean cranberryFlag = VEFeatureConfig.cranberryBushFlag.get();
+    private boolean witchesCradleFlag = VEFeatureConfig.witchsCradleFlag.get();
+    private boolean darkMatterLakeFlag = VEFeatureConfig.darkMatterLakeFlag.get();
+    private boolean snapdragonAndEnderGrassFlag = VEFeatureConfig.snapdragonAndEnderGrassFlag.get();
+    private boolean hugePurpleMushroomFlag = VEFeatureConfig.hugePurpleMushroomFlag.get();
+    private boolean taigaCabinFlag = VEStructureConfig.taigaCabinFlag.get();
+    private boolean forestCabinFlag = VEStructureConfig.forestCabinFlag.get();
+    private boolean crimsonCabinFlag = VEStructureConfig.crimsonCabinFlag.get();
+    private boolean purpleMushroomFlag = VEFeatureConfig.purpleMushroomFlag.get();
+    private boolean swampMudFlag = VEFeatureConfig.swampMudFlag.get();
+    private boolean riverMudFlag = VEFeatureConfig.riverMudFlag.get();
+    private boolean cattailFlag = VEFeatureConfig.cattailFlag.get();
+
+    private static final List<String> END_CITY_BIOMES = Arrays.asList("minecraft:end_barrens",
+            "minecraft:end_highlands", "minecraft:end_midlands", "minecraft:small_end_islands");
+    private static final List<String> DARK_FOREST_BIOMES = Arrays.asList("minecraft:dark_forest",
+            "minecraft:dark_forest_hills");
+    private static final List<String> FOREST_BIOMES = Arrays.asList("minecraft:forest", "minecraft:birch_forest",
+            "minecraft:birch_forest_hills", "minecraft:tall_birch_forest", "minecraft:tall_birch_hills");
+
+    private ConfiguredFeature<?, ?> sparseBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
+    private ConfiguredFeature<?, ?> decoratedBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
+    private ConfiguredFeature<?, ?> sparseCranberries = VEConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE;
+    private ConfiguredFeature<?, ?> decoratedCranberries = VEConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED;
+    private ConfiguredFeature<?, ?> sparseWitchsCradle = VEConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE;
+    private ConfiguredFeature<?, ?> decoratedWitchsCradle = VEConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED;
+
+    private Decoration ores = Decoration.UNDERGROUND_ORES;
+    private Decoration vegetal = Decoration.VEGETAL_DECORATION;
+    private Decoration lakes = Decoration.LAKES;
+    private Decoration topLayerMod = Decoration.TOP_LAYER_MODIFICATION;
+
+    private Category nether = Category.NETHER;
+    private Category forest = Category.FOREST;
+    private Category swamp = Category.SWAMP;
+    private Category taiga = Category.TAIGA;
+    private Category river = Category.RIVER;
+
+    private RainType rain = RainType.RAIN;
+    private RainType snow = RainType.SNOW;
+
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onLoadBiome(final BiomeLoadingEvent event)
     {
-        List<String> endCityBiomes = Arrays.asList("end_barrens", "end_highlands", "end_midlands", "small_end_islands");
-        List<String> darkForestBiomes = Arrays.asList("dark_forest", "dark_forest_hills");
-        List<String> forestCabinBiomes = Arrays.asList("forest", "birch_forest", "birch_forest_hills",
-                "tall_birch_forest", "tall_birch_hills");
+        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+        Category category = event.getCategory();
+        ResourceLocation biome = event.getName();
+        RainType weather = event.getClimate().precipitation;
 
-        boolean netherSmokyQuartzFlag = VEFeatureGenConfig.enableNetherSmokyQuartzOreSpawns.get();
-        boolean netherRubyFlag = VEFeatureGenConfig.enableNetherRubyOreSpawns.get();
-        boolean blueberryBushFlag = VEFeatureGenConfig.enableBlueberryBushSpawns.get();
-        boolean cranberryBushFlag = VEFeatureGenConfig.enableCranberryBushSpawns.get();
-        boolean witchesCradleFlag = VEFeatureGenConfig.enableWitchsCradleSpawns.get();
-        boolean darkMatterLakeFlag = VEFeatureGenConfig.enableDarkMatterLakeSpawns.get();
-        boolean snapdragonAndEnderGrassFlag = VEFeatureGenConfig.enableSnapdragonAndEnderGrassSpawns.get();
-        boolean hugePurpleMushroomFlag = VEFeatureGenConfig.enableHugePurpleMushroomSpawns.get();
-        boolean taigaCabinFlag = VEStructureGenConfig.enableTaigaCabinSpawns.get();
-        boolean forestCabinFlag = VEStructureGenConfig.enableForestCabinSpawns.get();
-        boolean crimsonCabinFlag = VEStructureGenConfig.enableCrimsonCabinSpawns.get();
-        boolean purpleMushroomFlag = VEFeatureGenConfig.enablePurpleMushroomSpawns.get();
-        boolean swampMudFlag = VEFeatureGenConfig.enableSwampMudSpawns.get();
-        boolean riverMudFlag = VEFeatureGenConfig.enableRiverMudSpawns.get();
-        boolean cattailFlag = VEFeatureGenConfig.enableCattailSpawns.get();
-
-        ConfiguredFeature<?, ?> sparseBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
-        ConfiguredFeature<?, ?> decoratedBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
-        ConfiguredFeature<?, ?> sparseCranberries = VEConfiguredFeatures.PATCH_CRANBERRY_BUSH_SPARSE;
-        ConfiguredFeature<?, ?> decoratedCranberries = VEConfiguredFeatures.PATCH_CRANBERRY_BUSH_DECORATED;
-        ConfiguredFeature<?, ?> sparseWitchsCradle = VEConfiguredFeatures.PATCH_WITCHS_CRADLE_SPARSE;
-        ConfiguredFeature<?, ?> decoratedWitchsCradle = VEConfiguredFeatures.PATCH_WITCHS_CRADLE_DECORATED;
-
-        Decoration ores = Decoration.UNDERGROUND_ORES;
-        Decoration vegetal = Decoration.VEGETAL_DECORATION;
-        Decoration lakes = Decoration.LAKES;
-
-        Category nether = Category.NETHER;
-        Category forest = Category.FOREST;
-        Category swamp = Category.SWAMP;
-        Category taiga = Category.TAIGA;
-
-        RainType rain = RainType.RAIN;
-        RainType snow = RainType.SNOW;
-
-        addFeature(event, nether, ores, VEConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, netherSmokyQuartzFlag);
-        addFeature(event, nether, ores, VEConfiguredFeatures.BLACKSTONE_RUBY_ORE, netherRubyFlag);
-        addBushFeature(event, forest, sparseBlueberries, decoratedBlueberries, blueberryBushFlag);
-        addBushFeature(event, forest, sparseCranberries, decoratedCranberries, cranberryBushFlag);
-        addBushFeature(event, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
-        addFeature(event, endCityBiomes, vegetal, VEConfiguredFeatures.SNAPDRAGON_AND_GRASS,
-                snapdragonAndEnderGrassFlag);
-        addFeature(event, endCityBiomes, lakes, VEConfiguredFeatures.DARK_MATTER_LAKE, darkMatterLakeFlag);
-        addFeature(event, darkForestBiomes, vegetal, VEConfiguredFeatures.HUGE_PURPLE_MUSHROOM_WG,
-                hugePurpleMushroomFlag);
-        addFeature(event, darkForestBiomes, vegetal, VEConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
-                purpleMushroomFlag);
-        addFeature(event, Category.RIVER, Decoration.TOP_LAYER_MODIFICATION, VEConfiguredFeatures.DISK_RIVER_MUD,
-                riverMudFlag);
-        addFeature(event, Category.SWAMP, Decoration.TOP_LAYER_MODIFICATION, VEConfiguredFeatures.DISK_SWAMP_MUD,
-                swampMudFlag);
-        addFeature(event, Category.SWAMP, vegetal, VEConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
-        addFeatureToAllExcept(event, Category.NETHER, ores, VEConfiguredFeatures.ORE_MARBLE, true);
-
-        addStructure(event, taiga, rain, VEConfiguredStructures.configuredTaigaCabin, taigaCabinFlag);
-        addStructure(event, taiga, snow, VEConfiguredStructures.configuredIcyTaigaCabin, taigaCabinFlag);
-        addStructure(event, forestCabinBiomes, VEConfiguredStructures.configuredForestCabin, forestCabinFlag);
-        addStructure(event, "crimson_forest", VEConfiguredStructures.configuredCrimsonCabin, crimsonCabinFlag);
+        if (biome != null)
+        {
+            addFeature(builder, category, nether, ores, VEConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, smokyQuartzFlag);
+            addFeature(builder, category, nether, ores, VEConfiguredFeatures.BLACKSTONE_RUBY_ORE, rubyFlag);
+            addBushFeature(builder, category, forest, sparseBlueberries, decoratedBlueberries, blueberryFlag);
+            addBushFeature(builder, category, forest, sparseCranberries, decoratedCranberries, cranberryFlag);
+            addBushFeature(builder, category, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
+            addFeature(builder, biome, END_CITY_BIOMES, vegetal, VEConfiguredFeatures.SNAPDRAGON_AND_GRASS,
+                    snapdragonAndEnderGrassFlag);
+            addFeature(builder, biome, END_CITY_BIOMES, lakes, VEConfiguredFeatures.DARK_MATTER_LAKE,
+                    darkMatterLakeFlag);
+            addFeature(builder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.HUGE_PURPLE_MUSHROOM_WG,
+                    hugePurpleMushroomFlag);
+            addFeature(builder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
+                    purpleMushroomFlag);
+            addFeature(builder, category, river, topLayerMod, VEConfiguredFeatures.DISK_RIVER_MUD, riverMudFlag);
+            addFeature(builder, category, swamp, topLayerMod, VEConfiguredFeatures.DISK_SWAMP_MUD, swampMudFlag);
+            addFeature(builder, category, swamp, vegetal, VEConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
+            addFeatureToAllExcept(builder, category, nether, ores, VEConfiguredFeatures.ORE_MARBLE, true);
+            addStructure(builder, category, weather, taiga, rain, VEConfiguredStructures.configuredTaigaCabin,
+                    taigaCabinFlag);
+            addStructure(builder, category, weather, taiga, snow, VEConfiguredStructures.configuredIcyTaigaCabin,
+                    taigaCabinFlag);
+            addStructure(builder, biome, FOREST_BIOMES, VEConfiguredStructures.configuredForestCabin, forestCabinFlag);
+            addStructure(builder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
+                    crimsonCabinFlag);
+        }
     }
 
     /**
@@ -103,27 +114,21 @@ public class VEBiomeLoadingEvent
      * @param maxCount The maximum number of spawns.
      * @param biomes   The biomes that this entity can spawn in.
      */
-    @SuppressWarnings("unused")
-    private static void addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, int weight, int minCount,
-            int maxCount, boolean enable, String... biomes)
-    {
-        if (enable)
-        {
-            for (String biome : biomes)
-            {
-                if (event.getName().equals(new ResourceLocation(biome)))
-                {
-                    event.getSpawns().getSpawner(EntityClassification.MONSTER)
-                            .add(new Spawners(entity, weight, minCount, maxCount));
-                }
-            }
-        }
-    }
+    /*
+     * @SuppressWarnings("unused") private static void
+     * addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, int weight,
+     * int minCount, int maxCount, boolean enable, String... biomes) { if (enable) {
+     * for (String biome : biomes) { if (event.getName().equals(new
+     * ResourceLocation(biome))) {
+     * event.getSpawns().getSpawner(EntityClassification.MONSTER) .add(new
+     * Spawners(entity, weight, minCount, maxCount)); } } } }
+     */
 
     /**
      * A helper method for adding bush features.
      *
-     * @param event            The biome loading event to use.
+     * @param builder          The generation builder to add to.
+     * @param selectedCategory The current category loaded.
      * @param category         The category of biomes to add this feature to.
      * @param decorationType   The decoration category that this feature belongs to.
      * @param featureSparse    The sparse bush feature to add.
@@ -131,92 +136,100 @@ public class VEBiomeLoadingEvent
      * @param enable           A boolean from the config used to enable and disable
      *                         this feature.
      */
-    private static void addBushFeature(BiomeLoadingEvent event, Biome.Category category,
-            ConfiguredFeature<?, ?> featureSparse, ConfiguredFeature<?, ?> featureDecorated, boolean enable)
+    private static void addBushFeature(BiomeGenerationSettingsBuilder builder, Category selectedCategory,
+            Biome.Category category, ConfiguredFeature<?, ?> featureSparse, ConfiguredFeature<?, ?> featureDecorated,
+            boolean enable)
     {
         Decoration vegetalDecoration = Decoration.VEGETAL_DECORATION;
 
-        addFeature(event, category, vegetalDecoration, featureSparse, enable);
-        addFeature(event, category, vegetalDecoration, featureDecorated, enable);
+        addFeature(builder, selectedCategory, category, vegetalDecoration, featureSparse, enable);
+        addFeature(builder, selectedCategory, category, vegetalDecoration, featureDecorated, enable);
     }
 
     /**
      * Adds a new feature to a category of biomes.
      *
-     * @param event      The biome loading event to use.
-     * @param category   The category of biomes to add this feature to.
-     * @param decoration The decoration category that this feature belongs to.
-     * @param feature    The feature to add.
-     * @param enable     A boolean from the config used to enable and disable this
-     *                   feature.
+     * @param builder          The generation builder to add to.
+     * @param selectedCategory The current category loaded.
+     * @param category         The category of biomes to add this feature to.
+     * @param decoration       The decoration category that this feature belongs to.
+     * @param feature          The feature to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this feature.
      */
-    private static void addFeature(BiomeLoadingEvent event, Biome.Category category, Decoration decorationType,
-            ConfiguredFeature<?, ?> feature, boolean enable)
+    private static void addFeature(BiomeGenerationSettingsBuilder builder, Category selectedCategory,
+            Biome.Category category, Decoration decorationType, ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        if (event.getCategory().equals(category) && enable)
+        if (selectedCategory.equals(category) && enable)
         {
-            event.getGeneration().getFeatures(decorationType).add(() -> feature);
+            builder.getFeatures(decorationType).add(() -> feature);
         }
     }
 
     /**
      * Adds a new feature to every biome that is not in a category.
      *
-     * @param event      The biome loading event to use.
-     * @param category   The category of biomes to exclude.
-     * @param decoration The decoration category that this feature belongs to.
-     * @param feature    The feature to add.
-     * @param enable     A boolean from the config used to enable and disable this
-     *                   feature.
+     * @param builder          The generation builder to add to.
+     * @param selectedCategory The current category loaded.
+     * @param category         The category of biomes to exclude.
+     * @param decoration       The decoration category that this feature belongs to.
+     * @param feature          The feature to add.
+     * @param enable           A boolean from the config used to enable and disable
+     *                         this feature.
      */
-    private static void addFeatureToAllExcept(BiomeLoadingEvent event, Biome.Category category,
-            Decoration decorationType, ConfiguredFeature<?, ?> feature, boolean enable)
+    private static void addFeatureToAllExcept(BiomeGenerationSettingsBuilder builder, Category selectedCategory,
+            Category category, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        if (!(event.getCategory().equals(category)) && enable)
+        if (!(selectedCategory.equals(category)) && enable)
         {
-            event.getGeneration().getFeatures(decorationType).add(() -> feature);
+            builder.getFeatures(decoration).add(() -> feature);
         }
     }
 
     /**
      * A helper method that only adds the feature to one biome.
      *
-     * @param event      The biome loading event to use.
-     * @param biome      The biome's name to add the feature to.
-     * @param decoration The decoration category that this feature belongs to.
-     * @param feature    The feature to add.
-     * @param enable     A boolean from the config used to enable and disable this
-     *                   feature.
+     * @param builder       The generation builder to add to.
+     * @param selectedBiome The current biome loaded.
+     * @param biome         The biome's name to add the feature to.
+     * @param decoration    The decoration category that this feature belongs to.
+     * @param feature       The feature to add.
+     * @param enable        A boolean from the config used to enable and disable
+     *                      this feature.
      */
     @SuppressWarnings("unused")
-    private static void addFeature(BiomeLoadingEvent event, String biome, Decoration decoration,
-            ConfiguredFeature<?, ?> feature, boolean enable)
+    private static void addFeature(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome, String biome,
+            Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
     {
-        addFeature(event, Arrays.asList(biome), decoration, feature, enable);
+        addFeature(builder, selectedBiome, Arrays.asList(biome), decoration, feature, enable);
     }
 
     /**
      * Adds a new feature to specific existing biomes using the minecraft name
      * space.
      *
-     * @param event      The biome loading event to use.
-     * @param biomes     The biome names to add the feature to.
-     * @param decoration The decoration category that this feature belongs to.
-     * @param feature    The feature to add.
-     * @param enable     A boolean from the config used to enable and disable the
-     *                   feature.
+     * @param builder       The generation builder to add to.
+     * @param selectedBiome The current biome loaded.
+     * @param biomes        The biome names to add the feature to.
+     * @param decoration    The decoration category that this feature belongs to.
+     * @param feature       The feature to add.
+     * @param enable        A boolean from the config used to enable and disable the
+     *                      feature.
      */
-    private static void addFeature(BiomeLoadingEvent event, List<String> biomes, Decoration decoration,
-            ConfiguredFeature<?, ?> feature, boolean enable)
+    private static void addFeature(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
+            List<String> biomes, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
     {
         if (enable)
         {
-            for (String biome : biomes)
+            /*
+             * for (String biome : biomes) { if (selectedBiome.equals(new
+             * ResourceLocation(biome))) { builder.getFeatures(decoration).add(() ->
+             * feature); } }
+             */
+
+            if (biomes.contains(selectedBiome.toString()))
             {
-                if (event.getName().equals(new ResourceLocation(biome)))
-                {
-                    event.getGeneration().getFeatures(decoration).add(() -> feature);
-                }
+                builder.getFeatures(decoration).add(() -> feature);
             }
         }
     }
@@ -224,39 +237,43 @@ public class VEBiomeLoadingEvent
     /**
      * Adds a new structure to a category of biomes with the rain type provided.
      *
-     * @param event            The biome loading event to use.
+     * @param builder          The generation builder to add to.
+     * @param selectedCategory The current category loaded.
+     * @param selectedRainType The rain type loaded.
      * @param category         The category of biomes to add this structure to.
      * @param rainType         The rain type of the biomes to spawn in.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private static void addStructure(BiomeLoadingEvent event, Category category, RainType rainType,
-            StructureFeature<?, ?> structureFeature, boolean enable)
+    private static void addStructure(BiomeGenerationSettingsBuilder builder, Category selectedCategory,
+            RainType selectedRainType, Category category, RainType rainType, StructureFeature<?, ?> structureFeature,
+            boolean enable)
     {
-        if (event.getClimate().precipitation == rainType)
+        if (selectedRainType.equals(rainType))
         {
-            addStructure(event, category, structureFeature, enable);
+            addStructure(builder, selectedCategory, category, structureFeature, enable);
         }
     }
 
     /**
      * Adds a new structure to a category of biomes.
      *
-     * @param event            The biome loading event to use.
+     * @param builder          The generation builder to add to.
+     * @param selectedCategory The current category loaded.
      * @param category         The category of biomes to add this structure to.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private static void addStructure(BiomeLoadingEvent event, Category category,
-            StructureFeature<?, ?> structureFeature, boolean enable)
+    private static void addStructure(BiomeGenerationSettingsBuilder builder, Category selectedCategory,
+            Category category, StructureFeature<?, ?> structureFeature, boolean enable)
     {
         if (enable)
         {
-            if (event.getCategory().equals(category))
+            if (selectedCategory.equals(category))
             {
-                event.getGeneration().getStructures().add(() -> structureFeature);
+                builder.getStructures().add(() -> structureFeature);
             }
         }
     }
@@ -264,40 +281,44 @@ public class VEBiomeLoadingEvent
     /**
      * A helper method that only adds the feature to one biome.
      *
-     * @param event            The biome loading event to use.
+     * @param builder          The generation builder to add to.
+     * @param selectedBiome    The current biome loaded.
      * @param biome            The biome's name to add the structure to.
      * @param structureFeature The structure to add.
      * @param enable           A boolean from the config used to enable and disable
      *                         this structure.
      */
-    private static void addStructure(BiomeLoadingEvent event, String biome, StructureFeature<?, ?> structureFeature,
-            boolean enable)
+    private static void addStructure(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
+            String biome, StructureFeature<?, ?> structureFeature, boolean enable)
     {
-        addStructure(event, Arrays.asList(biome), structureFeature, enable);
+        addStructure(builder, selectedBiome, Arrays.asList(biome), structureFeature, enable);
     }
 
     /**
      * Adds a new structure to specific existing biomes using the minecraft name
      * space.
      *
-     * @param event            The biome loading event to use.
-     * @param biomes           The biome names to add the structure to.
-     * @param structureFeature The structure to add.
-     * @param enable           A boolean from the config used to enable and disable
-     *                         this structure.
+     * @param builder       The generation builder to add to.
+     * @param selectedBiome The current biome loaded.
+     * @param biomes        The biome names to add the structure to.
+     * @param structure     The structure to add.
+     * @param enable        A boolean from the config used to enable and disable
+     *                      this structure.
      */
-    private static void addStructure(BiomeLoadingEvent event, List<String> biomes,
-            StructureFeature<?, ?> structureFeature, boolean enable)
+    private static void addStructure(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
+            List<String> biomes, StructureFeature<?, ?> structure, boolean enable)
     {
         if (enable)
         {
-            for (String biome : biomes)
+            if (biomes.contains(selectedBiome.toString()))
             {
-                if (event.getName().equals(new ResourceLocation(biome)))
-                {
-                    event.getGeneration().getStructures().add(() -> structureFeature);
-                }
+                builder.getStructures().add(() -> structure);
             }
+
+            /*
+             * for (String biome : biomes) { if (selectedBiome.toString().equals(biome)) {
+             * builder.getStructures().add(() -> structure); } }
+             */
         }
     }
 }
