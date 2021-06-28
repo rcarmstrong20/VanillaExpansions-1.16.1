@@ -13,27 +13,32 @@ import rndmaccess.vanilla_expansions.VanillaExpansions;
 
 public class VECabinStructurePieces
 {
+    public static final String TAIGA_LOCATION = "cabin/taiga/taiga_cabin";
+    public static final String ICY_TAIGA_LOCATION = "cabin/taiga/icy_taiga_cabin";
+    public static final String FOREST_LOCATION = "cabin/forest/forest_cabin";
+    public static final String CRIMSON_LOCATION = "cabin/crimson/crimson_cabin";
+
     public static final JigsawPattern TAIGA_START = JigsawPatternRegistry.register(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/taiga_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":cabin/taiga_cabin",
+            new ResourceLocation(VanillaExpansions.MOD_ID, TAIGA_LOCATION), new ResourceLocation("empty"),
+            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":" + TAIGA_LOCATION,
                     ProcessorLists.MOSSIFY_70_PERCENT), 1)),
             PlacementBehaviour.RIGID));
 
     public static final JigsawPattern ICY_TAIGA_START = JigsawPatternRegistry.register(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/icy_taiga_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":cabin/icy_taiga_cabin",
+            new ResourceLocation(VanillaExpansions.MOD_ID, ICY_TAIGA_LOCATION), new ResourceLocation("empty"),
+            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":" + ICY_TAIGA_LOCATION,
                     ProcessorLists.MOSSIFY_20_PERCENT), 1)),
             PlacementBehaviour.RIGID));
 
     public static final JigsawPattern FOREST_START = JigsawPatternRegistry.register(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/forest_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":cabin/forest_cabin",
+            new ResourceLocation(VanillaExpansions.MOD_ID, FOREST_LOCATION), new ResourceLocation("empty"),
+            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":" + FOREST_LOCATION,
                     ProcessorLists.MOSSIFY_70_PERCENT), 1)),
             PlacementBehaviour.RIGID));
 
     public static final JigsawPattern CRIMSON_START = JigsawPatternRegistry.register(new JigsawPattern(
-            new ResourceLocation(VanillaExpansions.MOD_ID, "cabin/crimson_cabin"), new ResourceLocation("empty"),
-            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":cabin/crimson_cabin",
+            new ResourceLocation(VanillaExpansions.MOD_ID, CRIMSON_LOCATION), new ResourceLocation("empty"),
+            ImmutableList.of(Pair.of(JigsawPiece.single(VanillaExpansions.MOD_ID + ":" + CRIMSON_LOCATION,
                     VEProcessorLists.CRIMSON_MOSSIFY_70_PERCENT), 1)),
             PlacementBehaviour.RIGID));
 }
