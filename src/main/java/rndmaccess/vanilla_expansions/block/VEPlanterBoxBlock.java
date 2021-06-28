@@ -2,12 +2,13 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SixWayBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -21,10 +22,10 @@ import rndmaccess.vanilla_expansions.core.VEBlockTags;
 
 public class VEPlanterBoxBlock extends Block
 {
-    public static final BooleanProperty NORTH = SixWayBlock.NORTH;
-    public static final BooleanProperty SOUTH = SixWayBlock.SOUTH;
-    public static final BooleanProperty WEST = SixWayBlock.WEST;
-    public static final BooleanProperty EAST = SixWayBlock.EAST;
+    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
 
     private static final VoxelShape INSIDE_SINGLE_SHAPE = Block.box(3.0, 15.0, 3.0, 13.0, 16.0, 13.0);
     private static final VoxelShape SINGLE_BOX_SHAPE = VEBoxBlockUtil.cutBox(VoxelShapes.block(), INSIDE_SINGLE_SHAPE);
@@ -67,6 +68,9 @@ public class VEPlanterBoxBlock extends Block
     public VEPlanterBoxBlock(Properties properties)
     {
         super(properties);
+
+        this.registerDefaultState(this.defaultBlockState().setValue(NORTH, false).setValue(SOUTH, false)
+                .setValue(WEST, false).setValue(EAST, false));
     }
 
     /**
@@ -175,6 +179,98 @@ public class VEPlanterBoxBlock extends Block
                 .setValue(SOUTH, world.getBlockState(blockpos.south()).getBlock() == this)
                 .setValue(WEST, world.getBlockState(blockpos.west()).getBlock() == this)
                 .setValue(EAST, world.getBlockState(blockpos.east()).getBlock() == this);
+    }
+
+    /**
+     * When a structure is rotated with this block in it. This method decides what
+     * state each block should be in.
+     */
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation)
+    {
+        BlockState rotatedState = this.defaultBlockState();
+        boolean north = state.getValue(NORTH);
+        boolean south = state.getValue(SOUTH);
+        boolean west = state.getValue(WEST);
+        boolean east = state.getValue(EAST);
+        boolean hasNone = north && south && west && east;
+        boolean hasAll = !north && !south && !west && !east;
+
+        // If the block is surrounded by edges or has no edges. Then we don't have
+        // to rotate it.
+        if (!(hasAll || hasNone))
+        {
+            switch (rotation)
+            {
+                case CLOCKWISE_180:
+                    if (south)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, NORTH);
+                    }
+                    if (north)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, SOUTH);
+                    }
+                    if (east)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, WEST);
+                    }
+                    if (west)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, EAST);
+                    }
+                    return rotatedState;
+                case CLOCKWISE_90:
+                    if (south)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, WEST);
+                    }
+                    if (north)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, EAST);
+                    }
+                    if (east)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, SOUTH);
+                    }
+                    if (west)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, NORTH);
+                    }
+                    return rotatedState;
+                case COUNTERCLOCKWISE_90:
+                    if (south)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, EAST);
+                    }
+                    if (north)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, WEST);
+                    }
+                    if (east)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, NORTH);
+                    }
+                    if (west)
+                    {
+                        rotatedState = setStateValueTrue(rotatedState, SOUTH);
+                    }
+                    return rotatedState;
+                default:
+                    return state;
+            }
+        }
+        return state;
+    }
+
+    /**
+     * @param state    The state to change.
+     * @param property The boolean property to change to true.
+     * @return The state with the property set to true.
+     */
+    private static BlockState setStateValueTrue(BlockState state, BooleanProperty property)
+    {
+        return state.setValue(property, true);
     }
 
     @Override
