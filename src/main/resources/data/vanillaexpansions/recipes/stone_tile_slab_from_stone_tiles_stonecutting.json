@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:stone_tiles"
+  },
+  "result": "vanillaexpansions:stone_tile_slab",
+  "count": 2
+}

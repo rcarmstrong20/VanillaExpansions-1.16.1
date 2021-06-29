@@ -265,6 +265,14 @@
   "block.vanillaexpansions.polished_marble_brick_wall": "Polished Marble Brick Wall",
   "block.vanillaexpansions.grass_slab": "Grass Slab",
   "block.vanillaexpansions.podzol_slab": "Podzol Slab",
+  "block.vanillaexpansions.stone_tiles": "Stone Tiles",
+  "block.vanillaexpansions.stone_tile_slab": "Stone Tile Slab",
+  "block.vanillaexpansions.stone_tile_stairs": "Stone Tile Stairs",
+  "block.vanillaexpansions.stone_tile_wall": "Stone Tile Wall",
+  "block.vanillaexpansions.cracked_stone_tiles": "Cracked Stone Tiles",
+  "block.vanillaexpansions.cracked_stone_tile_slab": "Cracked Stone Tile Slab",
+  "block.vanillaexpansions.cracked_stone_tile_stairs": "Cracked Stone Tile Stairs",
+  "block.vanillaexpansions.cracked_stone_tile_wall": "Cracked Stone Tile Wall",
   
   "container.woodcutter": "Woodcutter",
   "container.transmutation_table": "Transmutation Table",
@@ -323,13 +331,14 @@
   "item.vanillaexpansions.rage_essence": "Rage Essence",
   "item.vanillaexpansions.luck_essence": "Luck Essence",
   "item.vanillaexpansions.stone_essence": "Stone Essence",
+  "item.vanillaexpansions.midnight_essence": "Midnight Essence",
   
   "advancements.vanillaexpansions.story.root.title": "Vanilla expansions",
   "advancements.vanillaexpansions.story.root.description": "A mod designed to enhance vanilla gameplay",
   "advancements.vanillaexpansions.story.craft_witchs_cradle_soup.title": "Is this even edible!?",
   "advancements.vanillaexpansions.story.craft_witchs_cradle_soup.description": "Craft witchs cradle soup from a blood vile, a witchs cradle branch, and a bowl",
   "advancements.vanillaexpansions.story.find_nether_cabin.title": "A long way from home",
-  "advancements.vanillaexpansions.story.find_nether_cabin.description": "Visit a cabin from the nether",
+  "advancements.vanillaexpansions.story.find_nether_cabin.description": "Visit a cabin in the nether",
   
   "liquid.vanillaexpansions.dark_matter": "Dark Matter",
   

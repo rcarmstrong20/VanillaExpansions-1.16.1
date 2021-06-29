@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "vanillaexpansions:block/cracked_stone_tiles"}
+    }
+ }

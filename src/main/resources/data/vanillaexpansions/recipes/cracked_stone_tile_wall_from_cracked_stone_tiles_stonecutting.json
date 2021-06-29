@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:cracked_stone_tiles"
+  },
+  "result": "vanillaexpansions:cracked_stone_tile_wall",
+  "count": 1
+}

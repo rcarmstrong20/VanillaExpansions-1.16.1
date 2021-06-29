@@ -734,6 +734,22 @@ public class VEBlocks
             new VEGrassSlabBlock(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK)));
     public static Block podzolSlab = register("podzol_slab", true,
             new VESnowyDirtSlabBlock(AbstractBlock.Properties.copy(Blocks.PODZOL)));
+    public static Block stoneTiles = register("stone_tiles", true,
+            new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block stoneTileSlab = register("stone_tile_slab", true,
+            new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block stoneTileStairs = register("stone_tile_stairs", true,
+            new StairsBlock(() -> VEBlocks.marble.defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block stoneTileWall = register("stone_tile_wall", true,
+            new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block crackedStoneTiles = register("cracked_stone_tiles", true,
+            new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block crackedStoneTileSlab = register("cracked_stone_tile_slab", true,
+            new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block crackedStoneTileStairs = register("cracked_stone_tile_stairs", true,
+            new StairsBlock(() -> VEBlocks.marble.defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE)));
+    public static Block crackedStoneTileWall = register("cracked_stone_tile_wall", true,
+            new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
 
     private static boolean never(BlockState stateIn, IBlockReader readerIn, BlockPos posIn, EntityType<?> entityTypeIn)
     {

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures":
+  {
+    "all": "vanillaexpansions:block/cracked_stone_tiles"
+  }
+}

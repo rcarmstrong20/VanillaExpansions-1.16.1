@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "vanillaexpansions:stone_tiles"
+    }
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:stone_tile_stairs",
+    "count": 4
+  }
+}

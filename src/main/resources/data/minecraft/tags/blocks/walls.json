@@ -37,6 +37,8 @@
 	"vanillaexpansions:polished_marble_wall",
 	"vanillaexpansions:polished_marble_brick_wall",
 	"vanillaexpansions:dirt_wall",
-	"vanillaexpansions:coarse_dirt_wall"
+	"vanillaexpansions:coarse_dirt_wall",
+	"vanillaexpansions:stone_tile_wall",
+	"vanillaexpansions:cracked_stone_tile_wall"
   ]
 }

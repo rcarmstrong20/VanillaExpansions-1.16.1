@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/cracked_stone_tiles",
+    "top": "vanillaexpansions:block/cracked_stone_tiles",
+    "side": "vanillaexpansions:block/cracked_stone_tiles"
+  }
+}
