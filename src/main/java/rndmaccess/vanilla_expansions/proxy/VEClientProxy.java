@@ -19,10 +19,17 @@ public class VEClientProxy extends VECommonProxy
     public void onSetupClient()
     {
         super.onSetupClient();
-        VEBlockAndItemColors.registerColorHandlers();
+        this.registerBlockColors();
         this.registerScreenFactories();
         this.registerTileEntityRenderers();
         this.registerRenders();
+    }
+
+    private void registerBlockColors()
+    {
+        VEBlockAndItemColors.registerGrassColors(false, VEBlocks.endermanPlush, VEBlocks.grassSlab);
+
+        VanillaExpansions.LOGGER.info("Registered block and item colors.");
     }
 
     /**
