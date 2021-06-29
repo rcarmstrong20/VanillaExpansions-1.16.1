@@ -29,7 +29,7 @@ public class VEBonemealEvent
         // bone meal.
         if (VEBlockTags.endBoneMealable.contains(event.getBlock().getBlock()))
         {
-            if (!world.isClientSide()) // Only place the snapdragon blocks server side.
+            if (!world.isClientSide())
             {
                 for (int i = 0; i < 128; ++i)
                 {
@@ -45,7 +45,7 @@ public class VEBonemealEvent
                         if (VEBlockTags.endBoneMealable.contains(belowState.getBlock()) && isAir(state))
                         {
                             world.setBlock(blockpos,
-                                    VEBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 1);
+                                    VEBlockTags.endBoneMealPlants.getRandomElement(random).defaultBlockState(), 3);
                         }
                     }
                 }
