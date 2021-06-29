@@ -1,8 +1,8 @@
 {
-  "__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio", 
-  "parent": "block/slab_top",
+  "__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio",
   "textures":
   {
+    "particle": "block/dirt",
     "bottom": "block/dirt",
     "top": "block/grass_block_top",
     "side": "block/grass_block_side",
@@ -11,7 +11,7 @@
   "elements":
   [
     {
-      "__comment": "Element", 
+      "__comment": "Element",
       "from": [ 0, 8, 0 ],
       "to": [ 16, 16, 16 ],
       "faces":
@@ -25,7 +25,7 @@
       }
     },
     {
-      "__comment": "Element", 
+      "__comment": "Element",
       "from": [ 0, 8, 0 ],
       "to": [ 16, 16, 16 ],
       "faces":
