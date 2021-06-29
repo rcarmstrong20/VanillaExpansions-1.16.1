@@ -14,7 +14,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rndmaccess.vanilla_expansions.config.VEBlockConfig;
+import rndmaccess.vanilla_expansions.config.VEConfig;
 import rndmaccess.vanilla_expansions.core.VEItems;
 
 public class VEBlockEvent
@@ -31,7 +31,7 @@ public class VEBlockEvent
         if (!player.isCreative() && block == Blocks.SPRUCE_LEAVES && stack.getItem() != Items.SHEARS)
         {
             Random random = new Random();
-            double chance = VEBlockConfig.spruceConePercent.get() / 100.0;
+            double chance = VEConfig.spruceConePercent.get() / 100.0;
             float chanceChosen = random.nextFloat();
 
             // 5% chance to drop by default

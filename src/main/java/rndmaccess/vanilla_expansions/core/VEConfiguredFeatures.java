@@ -27,7 +27,7 @@ import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
 import rndmaccess.vanilla_expansions.block.VEBerryBushBlock;
-import rndmaccess.vanilla_expansions.config.VEOreDataConfig;
+import rndmaccess.vanilla_expansions.config.VEConfig;
 
 /**
  * A class for holding every feature configuration instance that vanilla
@@ -41,16 +41,16 @@ public class VEConfiguredFeatures
             Feature.ORE
                     .configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
                             VEConfiguredFeatures.States.NETHER_SMOKY_QUARTZ_ORE,
-                            VEOreDataConfig.VEVeinSizeConfig.netherSmokyQuartzOreVeinSize.get()))
+                            VEConfig.VEOreDataConfig.netherSmokyQuartzOreVeinSize.get()))
                     .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
-                    .count(VEOreDataConfig.VESpreadConfig.netherSmokyQuartzOreSpread.get()));
+                    .count(VEConfig.VEOreDataConfig.netherSmokyQuartzOreSpread.get()));
     public static final ConfiguredFeature<?, ?> BLACKSTONE_RUBY_ORE = register("blackstone_ruby_ore",
             Feature.ORE
                     .configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.BLACKSTONE),
                             VEConfiguredFeatures.States.NETHER_RUBY_ORE,
-                            VEOreDataConfig.VEVeinSizeConfig.blackstoneRubyOreVeinSize.get()))
+                            VEConfig.VEOreDataConfig.blackstoneRubyOreVeinSize.get()))
                     .decorated(Features.Placements.RANGE_10_20_ROOFED).squared()
-                    .count(VEOreDataConfig.VESpreadConfig.blackstoneRubyOreSpread.get()));
+                    .count(VEConfig.VEOreDataConfig.blackstoneRubyOreSpread.get()));
     protected static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = Feature.RANDOM_PATCH
             .configured(VEConfiguredFeatures.Configs.BLUEBERRY_BUSH_CONFIG);
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse",

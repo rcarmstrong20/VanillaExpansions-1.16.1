@@ -3,39 +3,42 @@ package rndmaccess.vanilla_expansions.events;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
+import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import rndmaccess.vanilla_expansions.config.VEFeatureConfig;
-import rndmaccess.vanilla_expansions.config.VEStructureConfig;
+import rndmaccess.vanilla_expansions.config.VEConfig;
 import rndmaccess.vanilla_expansions.core.VEConfiguredFeatures;
 import rndmaccess.vanilla_expansions.core.VEConfiguredStructures;
 
 public class VEBiomeLoadingEvent
 {
-    private boolean smokyQuartzFlag = VEFeatureConfig.smokyQuartzOreFlag.get();
-    private boolean rubyFlag = VEFeatureConfig.rubyOreFlag.get();
-    private boolean blueberryFlag = VEFeatureConfig.blueberryBushFlag.get();
-    private boolean cranberryFlag = VEFeatureConfig.cranberryBushFlag.get();
-    private boolean witchesCradleFlag = VEFeatureConfig.witchsCradleFlag.get();
-    private boolean darkMatterLakeFlag = VEFeatureConfig.darkMatterLakeFlag.get();
-    private boolean snapdragonAndEnderGrassFlag = VEFeatureConfig.snapdragonAndEnderGrassFlag.get();
-    private boolean hugePurpleMushroomFlag = VEFeatureConfig.hugePurpleMushroomFlag.get();
-    private boolean taigaCabinFlag = VEStructureConfig.taigaCabinFlag.get();
-    private boolean forestCabinFlag = VEStructureConfig.forestCabinFlag.get();
-    private boolean crimsonCabinFlag = VEStructureConfig.crimsonCabinFlag.get();
-    private boolean purpleMushroomFlag = VEFeatureConfig.purpleMushroomFlag.get();
-    private boolean swampMudFlag = VEFeatureConfig.swampMudFlag.get();
-    private boolean riverMudFlag = VEFeatureConfig.riverMudFlag.get();
-    private boolean cattailFlag = VEFeatureConfig.cattailFlag.get();
+    private boolean smokyQuartzFlag = VEConfig.smokyQuartzOreFlag.get();
+    private boolean rubyFlag = VEConfig.rubyOreFlag.get();
+    private boolean blueberryFlag = VEConfig.blueberryBushFlag.get();
+    private boolean cranberryFlag = VEConfig.cranberryBushFlag.get();
+    private boolean witchesCradleFlag = VEConfig.witchsCradleFlag.get();
+    private boolean darkMatterLakeFlag = VEConfig.darkMatterLakeFlag.get();
+    private boolean snapdragonAndEnderGrassFlag = VEConfig.snapdragonAndEnderGrassFlag.get();
+    private boolean hugePurpleMushroomFlag = VEConfig.hugePurpleMushroomFlag.get();
+    private boolean taigaCabinFlag = VEConfig.taigaCabinFlag.get();
+    private boolean forestCabinFlag = VEConfig.forestCabinFlag.get();
+    private boolean crimsonCabinFlag = VEConfig.crimsonCabinFlag.get();
+    private boolean purpleMushroomFlag = VEConfig.purpleMushroomFlag.get();
+    private boolean swampMudFlag = VEConfig.swampMudFlag.get();
+    private boolean riverMudFlag = VEConfig.riverMudFlag.get();
+    private boolean cattailFlag = VEConfig.cattailFlag.get();
 
     private static final List<String> END_CITY_BIOMES = Arrays.asList("minecraft:end_barrens",
             "minecraft:end_highlands", "minecraft:end_midlands", "minecraft:small_end_islands");
@@ -99,6 +102,8 @@ public class VEBiomeLoadingEvent
             addStructure(builder, biome, FOREST_BIOMES, VEConfiguredStructures.configuredForestCabin, forestCabinFlag);
             addStructure(builder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
                     crimsonCabinFlag);
+
+            event.getSpawns()
         }
     }
 
@@ -114,15 +119,19 @@ public class VEBiomeLoadingEvent
      * @param maxCount The maximum number of spawns.
      * @param biomes   The biomes that this entity can spawn in.
      */
-    /*
-     * @SuppressWarnings("unused") private static void
-     * addMonsterSpawner(BiomeLoadingEvent event, EntityType<?> entity, int weight,
-     * int minCount, int maxCount, boolean enable, String... biomes) { if (enable) {
-     * for (String biome : biomes) { if (event.getName().equals(new
-     * ResourceLocation(biome))) {
-     * event.getSpawns().getSpawner(EntityClassification.MONSTER) .add(new
-     * Spawners(entity, weight, minCount, maxCount)); } } } }
-     */
+
+    @SuppressWarnings("unused")
+    private static void addMonsterSpawner(MobSpawnInfoBuilder builder, ResourceLocation selectedBiome,
+            EntityType<?> entity, int weight, int minCount, int maxCount, boolean enable, List<String> biomes)
+    {
+        if (enable)
+        {
+            if (biomes.contains(selectedBiome.toString()))
+            {
+                builder.getSpawner(EntityClassification.MONSTER).add(new Spawners(entity, weight, minCount, maxCount));
+            }
+        }
+    }
 
     /**
      * A helper method for adding bush features.
@@ -221,12 +230,6 @@ public class VEBiomeLoadingEvent
     {
         if (enable)
         {
-            /*
-             * for (String biome : biomes) { if (selectedBiome.equals(new
-             * ResourceLocation(biome))) { builder.getFeatures(decoration).add(() ->
-             * feature); } }
-             */
-
             if (biomes.contains(selectedBiome.toString()))
             {
                 builder.getFeatures(decoration).add(() -> feature);
@@ -314,11 +317,6 @@ public class VEBiomeLoadingEvent
             {
                 builder.getStructures().add(() -> structure);
             }
-
-            /*
-             * for (String biome : biomes) { if (selectedBiome.toString().equals(biome)) {
-             * builder.getStructures().add(() -> structure); } }
-             */
         }
     }
 }

@@ -21,7 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
-import rndmaccess.vanilla_expansions.config.VEBlockConfig;
+import rndmaccess.vanilla_expansions.config.VEConfig;
 import rndmaccess.vanilla_expansions.core.VEBlocks;
 import rndmaccess.vanilla_expansions.util.VETimeUtil;
 
@@ -43,7 +43,7 @@ public class VEPlayerInteractEvent
         IntegerProperty ageSeven = BlockStateProperties.AGE_7;
         IntegerProperty ageThree = BlockStateProperties.AGE_3;
         IntegerProperty ageTwo = BlockStateProperties.AGE_2;
-        boolean flag = VEBlockConfig.enableSmartHarvest.get();
+        boolean flag = VEConfig.enableSmartHarvest.get();
 
         if (!event.getWorld().isClientSide())
         {
