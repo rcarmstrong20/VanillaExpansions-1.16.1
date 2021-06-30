@@ -11,8 +11,6 @@ import rndmaccess.vanilla_expansions.core.VEStructures;
 
 public class VELoadEvent
 {
-    private boolean initLoad = true;
-
     @SubscribeEvent
     public void onLoad(final WorldEvent.Load event)
     {
@@ -27,13 +25,8 @@ public class VELoadEvent
                 return;
             }
 
-            if (initLoad)
-            {
-                addSpacing(serverWorld, VEStructures.overworldCabin, 15, 10, 724628428);
-                addSpacing(serverWorld, VEStructures.netherCabin, 10, 5, 487422842);
-
-                initLoad = false;
-            }
+            addSpacing(serverWorld, VEStructures.overworldCabin, 15, 10, 724628428);
+            addSpacing(serverWorld, VEStructures.netherCabin, 10, 5, 487422842);
         }
     }
 
