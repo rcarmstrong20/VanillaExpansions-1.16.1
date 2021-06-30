@@ -15,11 +15,7 @@ import rndmaccess.vanilla_expansions.VanillaExpansions;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Bus.MOD)
 public class VEConfig
 {
-    public static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec SERVER_CONFIG;
-
-    public static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec CLIENT_CONFIG;
+    public static final ForgeConfigSpec COMMON_CONFIG;
 
     public static BooleanValue enableSmartHarvest;
     public static IntValue spruceConePercent;
@@ -45,76 +41,77 @@ public class VEConfig
 
     static
     {
+        final ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
+
         // Create the ore data configuration portion.
-        SERVER_BUILDER.comment("Ore Data Config").push("oreData");
+        common.comment("Ore Data Config").push("oreData");
 
-        VEOreDataConfig.init(SERVER_BUILDER);
+        VEOreDataConfig.init(common);
 
-        SERVER_BUILDER.pop();
+        common.pop();
 
         // Create the block configuration portion.
-        SERVER_BUILDER.comment("Block Config").push("block");
+        common.comment("Block Config").push("block");
 
-        enableSmartHarvest = SERVER_BUILDER
-                .comment("When true crops can be harvested and re-planted simply by right-clicking the crop.")
+        enableSmartHarvest = common.comment(
+                "When true crops can be harvested and re-planted simply by right-clicking the crop. (Default: true)")
                 .worldRestart().define("EnableSmartHarvest", true);
-        spruceConePercent = SERVER_BUILDER.comment("The chance that a spruce cone will drop from spruce leaves.")
-                .worldRestart().defineInRange("SpruceConePercent", 5, 0, 100);
+        spruceConePercent = common.comment(makeChanceComment("spruce cone", "spruce leaves", 5)).worldRestart()
+                .defineInRange("SpruceConePercent", 5, 0, 100);
 
-        SERVER_BUILDER.pop();
+        common.pop();
 
         // Create the feature configuration portion.
-        SERVER_BUILDER.comment("Feature Config").push("feature");
+        common.comment("Feature Config").push("feature");
 
-        blueberryBushFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("blueberry bushes")).worldRestart()
+        blueberryBushFlag = common.comment(makeSpawnComment("blueberry bushes", true)).worldRestart()
                 .define("EnableBlueberryBushSpawns", true);
-        cranberryBushFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("cranberry bushes")).worldRestart()
+        cranberryBushFlag = common.comment(makeSpawnComment("cranberry bushes", true)).worldRestart()
                 .define("EnableCranberryBushSpawns", true);
-        witchsCradleFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("witch's cradles")).worldRestart()
+        witchsCradleFlag = common.comment(makeSpawnComment("witch's cradles", true)).worldRestart()
                 .define("EnableWitchsCradleSpawns", true);
-        hugePurpleMushroomFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("big purple mushrooms"))
-                .worldRestart().define("EnableBigPurpleMushroomSpawns", true);
-        purpleMushroomFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("purple mushrooms")).worldRestart()
+        hugePurpleMushroomFlag = common.comment(makeSpawnComment("big purple mushrooms", true)).worldRestart()
+                .define("EnableBigPurpleMushroomSpawns", true);
+        purpleMushroomFlag = common.comment(makeSpawnComment("purple mushrooms", true)).worldRestart()
                 .define("EnablePurpleMushroomSpawns", true);
-        swampMudFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("swamp mud")).worldRestart()
-                .define("EnableSwampMudSpawns", true);
-        riverMudFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("river mud")).worldRestart()
-                .define("EnableRiverMudSpawns", true);
-        cattailFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("cattails")).worldRestart()
-                .define("EnableCattailSpawns", true);
-        smokyQuartzOreFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("nether smoky quartz ores"))
-                .worldRestart().define("EnableNetherSmokyQuartzOreSpawns", true);
-        rubyOreFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("nether ruby ores")).worldRestart()
+        swampMudFlag = common.comment(makeSpawnComment("swamp mud", true)).worldRestart().define("EnableSwampMudSpawns",
+                true);
+        riverMudFlag = common.comment(makeSpawnComment("river mud", true)).worldRestart().define("EnableRiverMudSpawns",
+                true);
+        cattailFlag = common.comment(makeSpawnComment("cattails", true)).worldRestart().define("EnableCattailSpawns",
+                true);
+        smokyQuartzOreFlag = common.comment(makeSpawnComment("nether smoky quartz ores", true)).worldRestart()
+                .define("EnableNetherSmokyQuartzOreSpawns", true);
+        rubyOreFlag = common.comment(makeSpawnComment("nether ruby ores", true)).worldRestart()
                 .define("EnableNetherRubyOreSpawns", true);
-        darkMatterLakeFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("dark matter lakes")).worldRestart()
+        darkMatterLakeFlag = common.comment(makeSpawnComment("dark matter lakes", true)).worldRestart()
                 .define("EnableDarkMatterLakeSpawns", true);
-        snapdragonAndEnderGrassFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("snapdragons and ender grass"))
+        snapdragonAndEnderGrassFlag = common.comment(makeSpawnComment("snapdragons and ender grass", true))
                 .worldRestart().define("EnableSnapdragonAndEnderGrassSpawns", true);
 
-        SERVER_BUILDER.pop();
+        common.pop();
 
         // Create the structure configuration portion.
-        SERVER_BUILDER.comment("Structure Config").push("structure");
+        common.comment("Structure Config").push("structure");
 
-        taigaCabinFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("taiga cabins")).worldRestart()
+        taigaCabinFlag = common.comment(makeSpawnComment("taiga cabins", true)).worldRestart()
                 .define("EnableTaigaCabinSpawns", true);
-        forestCabinFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("forest cabins")).worldRestart()
+        forestCabinFlag = common.comment(makeSpawnComment("forest cabins", true)).worldRestart()
                 .define("EnableForestCabinSpawns", true);
-        crimsonCabinFlag = SERVER_BUILDER.comment(compileBooleanSpawnComment("crimson cabins")).worldRestart()
+        crimsonCabinFlag = common.comment(makeSpawnComment("crimson cabins", true)).worldRestart()
                 .define("EnableCrimsonCabinSpawns", true);
 
-        SERVER_BUILDER.pop();
+        common.pop();
 
         // Create the entity configuration portion.
-        SERVER_BUILDER.comment("Entity Config").push("entity");
+        common.comment("Entity Config").push("entity");
 
-        enableSaveTheBunnies = SERVER_BUILDER.comment("Cancels bunny fall damage when true.").worldRestart()
+        enableSaveTheBunnies = common.comment("Cancels bunny fall damage when true. (Default: true)").worldRestart()
                 .define("EnableSaveTheBunnies", true);
 
-        SERVER_BUILDER.pop();
+        common.pop();
 
-        SERVER_CONFIG = SERVER_BUILDER.build();
-        CLIENT_CONFIG = CLIENT_BUILDER.build();
+        COMMON_CONFIG = common.build();
     }
 
     public static void loadConfig(ForgeConfigSpec config, String path)
@@ -131,9 +128,14 @@ public class VEConfig
         config.setConfig(file);
     }
 
-    public static String compileBooleanSpawnComment(String name)
+    private static String makeSpawnComment(String name, boolean defaultValue)
     {
-        return "When true " + name + " will spawn.";
+        return "When true " + name + " will spawn. (Default: " + defaultValue + ")";
+    }
+
+    private static String makeChanceComment(String itemName, String blockName, int defaultValue)
+    {
+        return "The chance that a " + itemName + " will drop from " + blockName + ". (Default: " + defaultValue + ")";
     }
 
     public static class VEOreDataConfig
@@ -158,11 +160,11 @@ public class VEConfig
             server.comment("Vein Size Config").push("veinSize");
 
             netherSmokyQuartzOreVeinSize = server
-                    .comment(compileVeinSizeComment("nether smoky quartz ore", SMOKY_QUARTZ_VEIN_SIZE_DEFAULT))
+                    .comment(makeVeinSizeComment("nether smoky quartz ore", SMOKY_QUARTZ_VEIN_SIZE_DEFAULT))
                     .worldRestart().defineInRange(SMOKY_QUARTZ_VEIN_SIZE_ID, SMOKY_QUARTZ_VEIN_SIZE_DEFAULT, 0, 17);
 
             blackstoneRubyOreVeinSize = server
-                    .comment(compileVeinSizeComment("blackstone ruby ore", BLACKSTONE_RUBY_ORE_VEIN_SIZE_DEFAULT))
+                    .comment(makeVeinSizeComment("blackstone ruby ore", BLACKSTONE_RUBY_ORE_VEIN_SIZE_DEFAULT))
                     .worldRestart()
                     .defineInRange(BLACKSTONE_RUBY_ORE_VEIN_SIZE_ID, BLACKSTONE_RUBY_ORE_VEIN_SIZE_DEFAULT, 0, 17);
 
@@ -171,11 +173,11 @@ public class VEConfig
             server.comment("Spread Config").push("oreSpread");
 
             netherSmokyQuartzOreSpread = server
-                    .comment(compileSpreadComment("nether smoky quartz ore", SMOKY_QUARTZ_ORE_SPREAD_DEFAULT))
+                    .comment(makeSpreadComment("nether smoky quartz ore", SMOKY_QUARTZ_ORE_SPREAD_DEFAULT))
                     .worldRestart().defineInRange(SMOKY_QUARTZ_ORE_SPREAD_ID, SMOKY_QUARTZ_ORE_SPREAD_DEFAULT, 2, 20);
 
             blackstoneRubyOreSpread = server
-                    .comment(compileSpreadComment("blackstone ruby ore", BLACKSTONE_RUBY_ORE_SPREAD_DEFAULT))
+                    .comment(makeSpreadComment("blackstone ruby ore", BLACKSTONE_RUBY_ORE_SPREAD_DEFAULT))
                     .worldRestart()
                     .defineInRange(BLACKSTONE_RUBY_ORE_ORE_SPREAD_ID, BLACKSTONE_RUBY_ORE_SPREAD_DEFAULT, 2, 20);
 
@@ -188,7 +190,7 @@ public class VEConfig
          * @param defaultValue
          * @return A new string with the name and default value inserted.
          */
-        private static String compileVeinSizeComment(String name, int defaultValue)
+        private static String makeVeinSizeComment(String name, int defaultValue)
         {
             return "Sets vein size for " + name + ". (Default: " + defaultValue + ")";
         }
@@ -199,7 +201,7 @@ public class VEConfig
          * @param defaultValue
          * @return A new string with the name and default value inserted.
          */
-        private static String compileSpreadComment(String name, int defaultValue)
+        private static String makeSpreadComment(String name, int defaultValue)
         {
             return "Sets how spread out the ores are when spawned for " + name + ". (Default: " + defaultValue + ")";
         }

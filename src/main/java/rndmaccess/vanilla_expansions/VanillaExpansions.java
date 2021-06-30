@@ -114,13 +114,10 @@ public class VanillaExpansions
         bus.addListener(this::setup);
         bus.addListener(this::clientRegistries);
         bus.addListener(this::onRegisterParticle);
-        ModLoadingContext.get().registerConfig(Type.SERVER, VEConfig.SERVER_CONFIG);
-        ModLoadingContext.get().registerConfig(Type.CLIENT, VEConfig.CLIENT_CONFIG);
+        ModLoadingContext.get().registerConfig(Type.COMMON, VEConfig.COMMON_CONFIG);
 
-        VEConfig.loadConfig(VEConfig.SERVER_CONFIG,
-                FMLPaths.CONFIGDIR.get().resolve(VanillaExpansions.MOD_ID + "-server.toml").toString());
-        VEConfig.loadConfig(VEConfig.CLIENT_CONFIG,
-                FMLPaths.CONFIGDIR.get().resolve(VanillaExpansions.MOD_ID + "-client.toml").toString());
+        VEConfig.loadConfig(VEConfig.COMMON_CONFIG,
+                FMLPaths.CONFIGDIR.get().resolve(VanillaExpansions.MOD_ID + "-common.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(new VEBiomeLoadingEvent());
         MinecraftForge.EVENT_BUS.register(new VEBlockEvent());
