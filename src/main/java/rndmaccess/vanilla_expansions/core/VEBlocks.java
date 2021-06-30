@@ -624,6 +624,14 @@ public class VEBlocks
             () -> VEBlocks.bauxite.defaultBlockState(), AbstractBlock.Properties.copy(VEBlocks.bauxite)));
     public static Block bauxiteWall = register("bauxite_wall", true,
             new WallBlock(AbstractBlock.Properties.copy(VEBlocks.bauxite)));
+    public static Block polishedBauxite = register("polished_bauxite", true,
+            new Block(AbstractBlock.Properties.copy(VEBlocks.bauxite)));
+    public static Block polishedBauxiteSlab = register("polished_bauxite_slab", true,
+            new SlabBlock(AbstractBlock.Properties.copy(VEBlocks.bauxite)));
+    public static Block polishedBauxiteStairs = register("polished_bauxite_stairs", true, new StairsBlock(
+            () -> VEBlocks.bauxite.defaultBlockState(), AbstractBlock.Properties.copy(VEBlocks.bauxite)));
+    public static Block polishedBauxiteWall = register("polished_bauxite_wall", true,
+            new WallBlock(AbstractBlock.Properties.copy(VEBlocks.bauxite)));
     public static Block sodalite = register("sodalite", true,
             new Block(buildProperties(VEMaterialType.STONE, MaterialColor.COLOR_BLACK).strength(0.4F)));
     public static Block sodaliteSlab = register("sodalite_slab", true,
@@ -714,7 +722,7 @@ public class VEBlocks
             new StairsBlock(() -> VEBlocks.marble.defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE)));
     public static Block marbleWall = register("marble_wall", true,
             new WallBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
-    public static Block polished_marble = register("polished_marble", true,
+    public static Block polishedMarble = register("polished_marble", true,
             new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
     public static Block polishedMarbleSlab = register("polished_marble_slab", true,
             new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE)));

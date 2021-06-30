@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures":
+  {
+    "bottom": "vanillaexpansions:block/polished_bauxite",
+    "top": "vanillaexpansions:block/polished_bauxite",
+    "side": "vanillaexpansions:block/polished_bauxite"
+  }
+}
