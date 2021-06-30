@@ -102,8 +102,6 @@ public class VEBiomeLoadingEvent
             addStructure(builder, biome, FOREST_BIOMES, VEConfiguredStructures.configuredForestCabin, forestCabinFlag);
             addStructure(builder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
                     crimsonCabinFlag);
-
-            event.getSpawns()
         }
     }
 
