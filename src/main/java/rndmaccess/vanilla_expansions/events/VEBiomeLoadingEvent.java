@@ -117,7 +117,6 @@ public class VEBiomeLoadingEvent
      * @param maxCount The maximum number of spawns.
      * @param biomes   The biomes that this entity can spawn in.
      */
-
     @SuppressWarnings("unused")
     private static void addMonsterSpawner(MobSpawnInfoBuilder builder, ResourceLocation selectedBiome,
             EntityType<?> entity, int weight, int minCount, int maxCount, boolean enable, List<String> biomes)
