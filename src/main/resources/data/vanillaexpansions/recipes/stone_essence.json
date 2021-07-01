@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "essence",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:granite"
+    },
+    {
+      "item": "minecraft:diorite"
+    },
+    {
+      "item": "minecraft:andesite"
+    },
+    {
+      "item": "minecraft:redstone_ore"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:stone_essence"
+  }
+}

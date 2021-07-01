@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "essence",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:luck_essence"
+  }
+}

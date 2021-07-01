@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "essence",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "minecraft:cobweb"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:midnight_essence"
+  }
+}

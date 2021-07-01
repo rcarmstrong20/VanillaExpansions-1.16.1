@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "essence",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ],
+  "result":
+  {
+    "item": "vanillaexpansions:rage_essence"
+  }
+}
