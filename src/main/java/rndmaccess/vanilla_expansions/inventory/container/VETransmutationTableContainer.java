@@ -15,6 +15,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.SoundCategory;
@@ -38,7 +39,7 @@ public class VETransmutationTableContainer extends Container
     final Slot essenceInput;
     final Slot tierInput;
     final Slot rubyInput;
-    final Slot resultSlot;
+    final Slot outputSlot;
     private Runnable slotUpdateListener = () ->
     {};
 
@@ -53,7 +54,7 @@ public class VETransmutationTableContainer extends Container
         }
     };
 
-    private final CraftResultInventory resultContainer = new CraftResultInventory();
+    private final CraftResultInventory outputContainer = new CraftResultInventory();
 
     public VETransmutationTableContainer(int windowIdIn, PlayerInventory playerInventoryIn)
     {
@@ -77,7 +78,7 @@ public class VETransmutationTableContainer extends Container
             }
         });
 
-        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 3, 116, 40)
+        this.outputSlot = this.addSlot(new Slot(this.outputContainer, 3, 120, 40)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
@@ -89,7 +90,7 @@ public class VETransmutationTableContainer extends Container
             public ItemStack onTake(PlayerEntity player, ItemStack stack)
             {
                 stack.onCraftedBy(player.level, player, stack.getCount());
-                VETransmutationTableContainer.this.resultContainer.awardUsedRecipes(player);
+                VETransmutationTableContainer.this.outputContainer.awardUsedRecipes(player);
                 VETransmutationTableContainer.this.essenceInput.remove(1);
                 VETransmutationTableContainer.this.tierInput.remove(1);
                 VETransmutationTableContainer.this.rubyInput.remove(1);
@@ -150,12 +151,12 @@ public class VETransmutationTableContainer extends Container
         if (!this.recipes.isEmpty())
         {
             VETransmutationRecipe transmutationRecipe = this.recipes.get(this.selectedRecipeIndex.get());
-            this.resultContainer.setRecipeUsed(transmutationRecipe);
-            this.resultSlot.set(transmutationRecipe.assemble(inputContainer));
+            this.outputContainer.setRecipeUsed(transmutationRecipe);
+            this.outputSlot.set(transmutationRecipe.assemble(inputContainer));
         }
         else
         {
-            this.resultSlot.set(ItemStack.EMPTY);
+            this.outputSlot.set(ItemStack.EMPTY);
         }
         this.broadcastChanges();
     }
@@ -185,7 +186,7 @@ public class VETransmutationTableContainer extends Container
     private void setupRecipeList(IInventory inventoryIn, ItemStack stack)
     {
         this.recipes.clear();
-        this.resultSlot.set(ItemStack.EMPTY);
+        this.outputSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty())
         {
             this.recipes = this.level.getRecipeManager().getRecipesFor(VERecipeTypes.transmutation, inventoryIn,
@@ -196,7 +197,7 @@ public class VETransmutationTableContainer extends Container
     @Override
     public boolean canTakeItemForPickAll(ItemStack stack, Slot slotIn)
     {
-        return slotIn.container != this.resultContainer && super.canTakeItemForPickAll(stack, slotIn);
+        return slotIn.container != this.outputContainer && super.canTakeItemForPickAll(stack, slotIn);
     }
 
     @Override
@@ -233,18 +234,17 @@ public class VETransmutationTableContainer extends Container
                 }
             }
             // Move the stack into the input slots.
-            else if (this.level.getRecipeManager()
-                    .getRecipeFor(VERecipeTypes.transmutation, new Inventory(itemstack1), this.level).isPresent())
+            else if (itemstack1.getItem().equals(VEItems.ruby) || this.isIngredientInRecipe(itemstack1))
             {
-                if (itemstack1.getItem().equals(VEItems.ruby) && this.moveItemStackTo(itemstack1, 2, 3, false))
+                if (this.moveItemStackTo(itemstack1, 2, 3, false))
                 {
                     return ItemStack.EMPTY;
                 }
-                if (this.moveItemStackTo(itemstack1, 0, 1, false))
+                else if (this.moveItemStackTo(itemstack1, 0, 1, false))
                 {
                     return ItemStack.EMPTY;
                 }
-                if (this.moveItemStackTo(itemstack1, 1, 2, false))
+                else if (this.moveItemStackTo(itemstack1, 1, 2, false))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -284,11 +284,25 @@ public class VETransmutationTableContainer extends Container
     public void removed(PlayerEntity playerIn)
     {
         super.removed(playerIn);
-        this.resultContainer.removeItemNoUpdate(1);
+        this.outputContainer.removeItemNoUpdate(1);
         this.access.execute((level, pos) ->
         {
             this.clearContainer(playerIn, playerIn.level, this.inputContainer);
         });
+    }
+
+    private boolean isIngredientInRecipe(ItemStack stack)
+    {
+        Ingredient ingredient = Ingredient.of(stack);
+
+        for (VETransmutationRecipe recipe : this.getRecipes())
+        {
+            if (recipe.getIngredients().contains(ingredient))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @OnlyIn(Dist.CLIENT)
