@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " S ",
+    "BBB",
+    " B "
+  ],
+  "key":
+  {
+	"B":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"S":
+	{
+	  "item": "minecraft:wither_skeleton_skull"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:wither_plush"
+  }
+}
