@@ -37,63 +37,57 @@ public class VEPlayerInteractEvent
     {
         BlockPos pos = event.getPos();
         World world = event.getWorld();
-        BlockState state = world.getBlockState(pos);
-        ItemStack itemStack = event.getItemStack();
+        BlockState worldState = world.getBlockState(pos);
+        Block worldBlock = worldState.getBlock();
+        ItemStack heldStack = event.getItemStack();
+        Item heldItem = heldStack.getItem();
         PlayerEntity player = event.getPlayer();
-        IntegerProperty ageSeven = BlockStateProperties.AGE_7;
-        IntegerProperty ageThree = BlockStateProperties.AGE_3;
-        IntegerProperty ageTwo = BlockStateProperties.AGE_2;
-        boolean flag = VEConfig.enableSmartHarvest.get();
+        boolean smartHarvestFlag = VEConfig.enableSmartHarvest.get();
 
         if (!event.getWorld().isClientSide())
         {
-            if (itemStack.getItem().equals(VEBlocks.snapdragon.asItem()) && state.getBlock() == Blocks.FLOWER_POT)
+            if (heldItem.equals(VEBlocks.snapdragon.asItem()) && worldState.getBlock() == Blocks.FLOWER_POT)
             {
-                itemStack.shrink(1);
+                heldStack.shrink(1);
                 world.setBlock(pos, VEBlocks.pottedSnapdragon.defaultBlockState(), 3);
                 player.swing(Hand.MAIN_HAND, true);
                 event.setCanceled(true);
             }
-            if (flag)
+            if (smartHarvestFlag)
             {
-                if (state.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+                IntegerProperty ageSeven = BlockStateProperties.AGE_7;
+                IntegerProperty ageThree = BlockStateProperties.AGE_3;
+                IntegerProperty ageTwo = BlockStateProperties.AGE_2;
+
+                if (worldBlock instanceof CropsBlock && heldItem != Items.BONE_MEAL)
                 {
-                    if (state.hasProperty(ageThree))
+                    if (hasMaxAge(worldState, ageThree, 3))
                     {
-                        if (state.getValue(ageThree).equals(3))
-                        {
-                            resetCrop(state, world, pos, player, ageThree);
-                            event.setResult(Result.ALLOW);
-                            event.setCanceled(true);
-                        }
+                        resetCrop(worldState, world, pos, player, ageThree);
+                        event.setResult(Result.ALLOW);
+                        event.setCanceled(true);
                     }
-                    else if (state.hasProperty(ageSeven))
+                    else if (hasMaxAge(worldState, ageSeven, 7))
                     {
-                        if (state.getValue(ageSeven).equals(7))
-                        {
-                            resetCrop(state, world, pos, player, ageSeven);
-                            event.setResult(Result.ALLOW);
-                            event.setCanceled(true);
-                        }
-                    }
-                }
-                else if (state.getBlock() instanceof NetherWartBlock && state.hasProperty(ageThree))
-                {
-                    if (state.getValue(ageThree).equals(3))
-                    {
-                        resetCrop(state, world, pos, player, ageThree);
+                        resetCrop(worldState, world, pos, player, ageSeven);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
                 }
-                else if (state.hasProperty(ageTwo))
+                else if (worldBlock instanceof NetherWartBlock)
                 {
-                    if (state.getValue(ageTwo).equals(2))
+                    if (hasMaxAge(worldState, ageThree, 3))
                     {
-                        resetCrop(state, world, pos, player, ageTwo);
+                        resetCrop(worldState, world, pos, player, ageThree);
                         event.setResult(Result.ALLOW);
                         event.setCanceled(true);
                     }
+                }
+                else if (hasMaxAge(worldState, ageTwo, 2))
+                {
+                    resetCrop(worldState, world, pos, player, ageTwo);
+                    event.setResult(Result.ALLOW);
+                    event.setCanceled(true);
                 }
             }
             else
@@ -101,6 +95,11 @@ public class VEPlayerInteractEvent
                 event.setResult(Result.DEFAULT);
             }
         }
+    }
+
+    private static boolean hasMaxAge(BlockState state, IntegerProperty ageProperty, int maxAge)
+    {
+        return state.hasProperty(ageProperty) && state.getValue(ageProperty).equals(maxAge);
     }
 
     /**
