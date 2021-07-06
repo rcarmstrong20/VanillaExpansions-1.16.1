@@ -3,21 +3,21 @@
   "group": "horse_plush",
   "pattern":
   [
-    "WWW",
-    "LLL",
-    "SWS"
+    "  B",
+    "BSB",
+    "H H"
   ],
   "key":
   {
-    "W":
+    "B":
 	{
       "item": "minecraft:light_gray_wool"
     },
-	"S":
+	"H":
 	{
-	  "item": "minecraft:white_wool"
+	  "item": "minecraft:gray_wool"
 	},
-	"L":
+	"S":
 	{
 	  "item": "minecraft:leather"
 	}

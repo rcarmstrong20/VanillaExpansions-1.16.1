@@ -4,7 +4,7 @@
   [
     "GGG",
     "CRC",
-    "BBB"
+    "G G"
   ],
   "key":
   {
@@ -15,10 +15,6 @@
 	"C":
 	{
 	  "item": "minecraft:cyan_wool"
-	},
-	"B":
-	{
-	  "item": "minecraft:blue_wool"
 	},
 	"R":
 	{

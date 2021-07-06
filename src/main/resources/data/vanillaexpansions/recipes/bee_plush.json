@@ -2,9 +2,9 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "WYW",
-    "BHB",
-    "YCY"
+    "W W",
+    "SSS",
+    "BCB"
   ],
   "key":
   {
@@ -12,17 +12,13 @@
 	{
       "item": "minecraft:white_wool"
     },
-	"Y":
+	"B":
 	{
 	  "item": "minecraft:yellow_wool"
 	},
-	"B":
+	"S":
 	{
 	  "item": "minecraft:brown_wool"
-	},
-	"H":
-	{
-	  "item": "minecraft:honey_bottle"
 	},
 	"C":
 	{

@@ -3,9 +3,9 @@
   "group": "horse_plush",
   "pattern":
   [
-    "BBB",
-    "LLL",
-    "SBS"
+    "  B",
+    "BSB",
+    "H H"
   ],
   "key":
   {
@@ -13,11 +13,11 @@
 	{
       "item": "minecraft:brown_wool"
     },
-	"S":
+	"H":
 	{
 	  "item": "minecraft:black_wool"
 	},
-	"L":
+	"S":
 	{
 	  "item": "minecraft:leather"
 	}
