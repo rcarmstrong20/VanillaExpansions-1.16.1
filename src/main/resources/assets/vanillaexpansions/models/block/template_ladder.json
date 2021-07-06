@@ -5,8 +5,8 @@
   false,
   "faces":
   {
-    "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }, 
-    "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" } 
+    "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+    "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
   }
 }
 ]
