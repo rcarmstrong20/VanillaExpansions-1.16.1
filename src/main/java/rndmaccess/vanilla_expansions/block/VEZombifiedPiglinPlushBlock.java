@@ -10,20 +10,21 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import rndmaccess.vanilla_expansions.block.util.VEBoxBlockUtil;
 
-public class VEZombieDemonPlushBlock extends VEZombiePlushBlock
+public class VEZombifiedPiglinPlushBlock extends VEZombiePlushBlock
 {
-    protected static final VoxelShape NORTH_LEFT_HORN = Block.box(11.0D, 12.0D, 7.5D, 14.0D, 16.0D, 10.5D);
-    protected static final VoxelShape NORTH_RIGHT_HORN = Block.box(2.0D, 12.0D, 7.5D, 5.0D, 16.0D, 10.5D);
+    protected static final VoxelShape NORTH_SNOUT = Block.box(6.0D, 8.0D, 4.0D, 10.0D, 10.0D, 5.0D);
+    protected static final VoxelShape NORTH_RIGHT_EAR = Block.box(1.5D, 9.0D, 8.0D, 3.5D, 12.0D, 12.0D);
+    protected static final VoxelShape NORTH_LEFT_EAR = Block.box(11.5D, 9.0D, 8.0D, 14.0D, 12.0D, 12.0D);
 
-    protected static final VoxelShape NORTH_HORNS = VoxelShapes.or(NORTH_LEFT_HORN, NORTH_RIGHT_HORN);
-
-    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(VEZombiePlushBlock.NORTH_SHAPE, NORTH_HORNS);
+    protected static final VoxelShape NORTH_EARS = VoxelShapes.or(NORTH_RIGHT_EAR, NORTH_LEFT_EAR);
+    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_SNOUT, NORTH_EARS,
+            VEZombiePlushBlock.NORTH_SHAPE);
 
     protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
     protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
     protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
-    public VEZombieDemonPlushBlock(Properties properties)
+    public VEZombifiedPiglinPlushBlock(Properties properties)
     {
         super(properties);
     }

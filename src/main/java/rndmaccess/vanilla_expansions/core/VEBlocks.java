@@ -83,10 +83,10 @@ import rndmaccess.vanilla_expansions.block.VEWitchPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWitherPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWolfPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWoodcutterBlock;
-import rndmaccess.vanilla_expansions.block.VEZombieDemonPlushBlock;
-import rndmaccess.vanilla_expansions.block.VEZombiePigmanPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEZombiePlushBlock;
+import rndmaccess.vanilla_expansions.block.VEZombifiedPiglinPlushBlock;
 import rndmaccess.vanilla_expansions.enums.VEMaterialType;
+import rndmaccess.vanilla_expansions.enums.VEVillagerType;
 
 /**
  * A class for holding every block instance that vanilla expansions has.
@@ -227,33 +227,33 @@ public class VEBlocks
     public static Block beePlush = register("bee_plush", true,
             new VEBeePlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block plainsVillagerPlush = register("plains_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), 0));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.PLAINS));
     public static Block desertVillagerPlush = register("desert_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush), 1));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush), VEVillagerType.DESERT));
     public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush), 2));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush), VEVillagerType.JUNGLE));
     public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), 3));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SAVANNA));
     public static Block snowVillagerPlush = register("snow_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), 4));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SNOW));
     public static Block swampVillagerPlush = register("swamp_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), 5));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SWAMP));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), 6));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.TAIGA));
     public static Block crimsonVillagerPlush = register("crimson_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), 7));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), VEVillagerType.NETHER));
     public static Block warpedVillagerPlush = register("warped_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), 7));
+            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), VEVillagerType.NETHER));
     public static Block witchPlush = register("witch_plush", true,
             new VEWitchPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermitePlush)));
     public static Block wolfPlush = register("wolf_plush", true,
             new VEWolfPlushBlock(AbstractBlock.Properties.copy(VEBlocks.chickenPlush)));
     public static Block zombiePlush = register("zombie_plush", true,
             new VEZombiePlushBlock(AbstractBlock.Properties.copy(VEBlocks.creeperPlush)));
-    public static Block zombieDemonPlush = register("zombie_demon_plush", true,
-            new VEZombieDemonPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
-    public static Block zombiePigmanPlush = register("zombie_pigman_plush", true,
-            new VEZombiePigmanPlushBlock(AbstractBlock.Properties.copy(VEBlocks.pigPlush)));
+    public static Block charredRemnantPlush = register("charred_remnant_plush", true,
+            new VEZombiePlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush)));
+    public static Block zombifiedPiglinPlush = register("zombified_piglin_plush", true,
+            new VEZombifiedPiglinPlushBlock(AbstractBlock.Properties.copy(VEBlocks.pigPlush)));
     public static Block pufferfishPlush = register("pufferfish_plush", true,
             new VEPufferfishPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block witherPlush = register("wither_plush", true,

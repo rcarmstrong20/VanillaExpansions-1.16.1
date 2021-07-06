@@ -22,11 +22,11 @@
 	},
 	"F":
 	{
-	  "item": "minecraft:rotten_flesh"
+	  "item": "vanillaexpansions:charred_flesh"
 	}
   },
   "result":
   {
-    "item": "vanillaexpansions:zombie_demon_plush"
+    "item": "vanillaexpansions:charred_remnant_plush"
   }
 }
