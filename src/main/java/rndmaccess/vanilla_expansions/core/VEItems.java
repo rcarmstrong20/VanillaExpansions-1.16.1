@@ -8,6 +8,7 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.WallOrFloorItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -158,6 +159,11 @@ public class VEItems
     public static Item luckEssence = register("luck_essence", new Item(buildProperties()));
     public static Item stoneEssence = register("stone_essence", new Item(buildProperties()));
     public static Item midnightEssence = register("midnight_essence", new Item(buildProperties()));
+    public static Item enderHorseEgg = register("ender_horse_spawn_egg",
+            new SpawnEggItem(VEEntityTypes.enderHorse, 0x19181a, 0xb168ba, buildProperties()));
+    public static Item charredRemnantEgg = register("charred_remnant_spawn_egg",
+            new SpawnEggItem(VEEntityTypes.charredRemnant, 0x363431, 0xf55925, buildProperties()));
+    public static Item charredFlesh = register("charred_flesh", new Item(buildProperties()));
 
     /**
      * A helper method that builds default properties for a item.

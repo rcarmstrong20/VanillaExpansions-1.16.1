@@ -31,6 +31,7 @@ import rndmaccess.vanilla_expansions.client.renderer.particle.VEUnderDarkMatterP
 import rndmaccess.vanilla_expansions.config.VEConfig;
 import rndmaccess.vanilla_expansions.core.VEBlocks;
 import rndmaccess.vanilla_expansions.core.VEContainerTypes;
+import rndmaccess.vanilla_expansions.core.VEEntityTypes;
 import rndmaccess.vanilla_expansions.core.VEFeature;
 import rndmaccess.vanilla_expansions.core.VEFluids;
 import rndmaccess.vanilla_expansions.core.VEItems;
@@ -45,6 +46,8 @@ import rndmaccess.vanilla_expansions.core.VEVillagerProfessions;
 import rndmaccess.vanilla_expansions.events.VEBiomeLoadingEvent;
 import rndmaccess.vanilla_expansions.events.VEBlockEvent;
 import rndmaccess.vanilla_expansions.events.VEBonemealEvent;
+import rndmaccess.vanilla_expansions.events.VEEntityAttributeCreationEvent;
+import rndmaccess.vanilla_expansions.events.VELivingDeathEvent;
 import rndmaccess.vanilla_expansions.events.VELivingEvent;
 import rndmaccess.vanilla_expansions.events.VELoadEvent;
 import rndmaccess.vanilla_expansions.events.VEPlayerInteractEvent;
@@ -110,6 +113,8 @@ public class VanillaExpansions
         VEVillagerProfessions.VILLAGER_PROFESSIONS.register(bus);
         VEFeature.FEATURES.register(bus);
         VEStructures.STRUCTURES.register(bus);
+        VEEntityTypes.ENTITIES.register(bus);
+        bus.register(new VEEntityAttributeCreationEvent());
 
         bus.addListener(this::setup);
         bus.addListener(this::clientRegistries);
@@ -127,6 +132,7 @@ public class VanillaExpansions
         MinecraftForge.EVENT_BUS.register(new VEPlayerInteractEvent());
         MinecraftForge.EVENT_BUS.register(new VEViewRenderEvent());
         MinecraftForge.EVENT_BUS.register(new VEVillagerTradesEvent());
+        MinecraftForge.EVENT_BUS.register(new VELivingDeathEvent());
         MinecraftForge.EVENT_BUS.register(this);
     }
 
