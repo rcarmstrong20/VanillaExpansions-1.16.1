@@ -4,13 +4,17 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
-import rndmaccess.vanilla_expansions.client.renderer.VEBlockAndItemColors;
+import rndmaccess.vanilla_expansions.client.renderer.VEColors;
+import rndmaccess.vanilla_expansions.client.renderer.entity.VEEnderHorseRenderer;
+import rndmaccess.vanilla_expansions.client.renderer.entity.VECharredRemnantRenderer;
 import rndmaccess.vanilla_expansions.client.renderer.screen.VETransmutationTableScreen;
 import rndmaccess.vanilla_expansions.client.renderer.screen.VEWoodcutterScreen;
 import rndmaccess.vanilla_expansions.client.renderer.tile_entity.VEColoredCampfireTileEntityRenderer;
 import rndmaccess.vanilla_expansions.core.VEBlocks;
 import rndmaccess.vanilla_expansions.core.VEContainerTypes;
+import rndmaccess.vanilla_expansions.core.VEEntityTypes;
 import rndmaccess.vanilla_expansions.core.VETileEntityTypes;
 
 public class VEClientProxy extends VECommonProxy
@@ -23,13 +27,22 @@ public class VEClientProxy extends VECommonProxy
         this.registerScreenFactories();
         this.registerTileEntityRenderers();
         this.registerRenders();
+        this.registerEntityRenderers();
+    }
+
+    private void registerEntityRenderers()
+    {
+        RenderingRegistry.registerEntityRenderingHandler(VEEntityTypes.charredRemnant,
+                new VECharredRemnantRenderer.RenderFactory());
+        RenderingRegistry.registerEntityRenderingHandler(VEEntityTypes.enderHorse,
+                new VEEnderHorseRenderer.RenderFactory());
     }
 
     private void registerBlockColors()
     {
-        VEBlockAndItemColors.registerGrassColors(false, VEBlocks.endermanPlush, VEBlocks.grassSlab);
+        VEColors.registerGrassColors(false, VEBlocks.endermanPlush, VEBlocks.grassSlab);
 
-        VanillaExpansions.LOGGER.info("Registered block and item colors.");
+        VanillaExpansions.LOGGER.info("Registered colors.");
     }
 
     /**

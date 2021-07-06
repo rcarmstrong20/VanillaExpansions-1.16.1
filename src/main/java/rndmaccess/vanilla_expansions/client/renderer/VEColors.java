@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VEBlockAndItemColors
+public class VEColors
 {
     private static final BlockColors BLOCK_COLORS = Minecraft.getInstance().getBlockColors();
     private static final ItemColors ITEM_COLORS = Minecraft.getInstance().getItemColors();
