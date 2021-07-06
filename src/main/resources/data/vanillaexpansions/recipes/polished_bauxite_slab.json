@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "vanillaexpansions:polished_bauxite"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:polished_bauxite_slab",
+    "count": 6
+  }
+}

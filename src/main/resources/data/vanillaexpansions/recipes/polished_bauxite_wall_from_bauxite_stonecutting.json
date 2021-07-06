@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "vanillaexpansions:bauxite"
+  },
+  "result": "vanillaexpansions:polished_bauxite_wall",
+  "count": 1
+}
