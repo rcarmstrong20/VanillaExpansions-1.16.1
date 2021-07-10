@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
+import rndmaccess.vanilla_expansions.block.VEBaseVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBatPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBeePlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBerryBushBlock;
@@ -42,6 +43,7 @@ import rndmaccess.vanilla_expansions.block.VEChickenPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEColoredCampfireBlock;
 import rndmaccess.vanilla_expansions.block.VECowPlushBlock;
 import rndmaccess.vanilla_expansions.block.VECreeperPlushBlock;
+import rndmaccess.vanilla_expansions.block.VEDesertVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEDirtSlabBlock;
 import rndmaccess.vanilla_expansions.block.VEEnderGrassBlock;
 import rndmaccess.vanilla_expansions.block.VEEndermanPlushBlock;
@@ -64,21 +66,24 @@ import rndmaccess.vanilla_expansions.block.VEPlanterBoxBlock;
 import rndmaccess.vanilla_expansions.block.VEPottedSnapdragonBlock;
 import rndmaccess.vanilla_expansions.block.VEPufferfishPlushBlock;
 import rndmaccess.vanilla_expansions.block.VERabbitPlushBlock;
+import rndmaccess.vanilla_expansions.block.VESavannaVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESevenStageCropBlock;
 import rndmaccess.vanilla_expansions.block.VESheepPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESilverfishPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESkeletonPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESlimePlushBlock;
 import rndmaccess.vanilla_expansions.block.VESnapdragonBlock;
+import rndmaccess.vanilla_expansions.block.VESnowVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESnowyBlock;
 import rndmaccess.vanilla_expansions.block.VESnowyDirtSlabBlock;
 import rndmaccess.vanilla_expansions.block.VESnowySlabBlock;
 import rndmaccess.vanilla_expansions.block.VESnowyStairsBlock;
 import rndmaccess.vanilla_expansions.block.VESpiderPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESquidPlushBlock;
+import rndmaccess.vanilla_expansions.block.VESwampVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEThreeStageCropsBlock;
 import rndmaccess.vanilla_expansions.block.VETransmutationTableBlock;
-import rndmaccess.vanilla_expansions.block.VEVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VEWanderingTraderPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWitchPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWitherPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEWolfPlushBlock;
@@ -86,7 +91,6 @@ import rndmaccess.vanilla_expansions.block.VEWoodcutterBlock;
 import rndmaccess.vanilla_expansions.block.VEZombiePlushBlock;
 import rndmaccess.vanilla_expansions.block.VEZombifiedPiglinPlushBlock;
 import rndmaccess.vanilla_expansions.enums.VEMaterialType;
-import rndmaccess.vanilla_expansions.enums.VEVillagerType;
 
 /**
  * A class for holding every block instance that vanilla expansions has.
@@ -227,23 +231,25 @@ public class VEBlocks
     public static Block beePlush = register("bee_plush", true,
             new VEBeePlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block plainsVillagerPlush = register("plains_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.PLAINS));
+            new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block desertVillagerPlush = register("desert_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush), VEVillagerType.DESERT));
+            new VEDesertVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.redCatPlush)));
     public static Block jungleVillagerPlush = register("jungle_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush), VEVillagerType.JUNGLE));
+            new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block savannaVillagerPlush = register("savanna_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SAVANNA));
+            new VESavannaVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block snowVillagerPlush = register("snow_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SNOW));
+            new VESnowVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block swampVillagerPlush = register("swamp_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.SWAMP));
+            new VESwampVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block taigaVillagerPlush = register("taiga_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush), VEVillagerType.TAIGA));
+            new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
     public static Block crimsonVillagerPlush = register("crimson_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), VEVillagerType.NETHER));
+            new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
     public static Block warpedVillagerPlush = register("warped_villager_plush", true,
-            new VEVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush), VEVillagerType.NETHER));
+            new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
+    public static Block wanderingTraderVillagerPlush = register("wandering_trader_plush", true,
+            new VEWanderingTraderPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blueSheepPlush)));
     public static Block witchPlush = register("witch_plush", true,
             new VEWitchPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermitePlush)));
     public static Block wolfPlush = register("wolf_plush", true,
