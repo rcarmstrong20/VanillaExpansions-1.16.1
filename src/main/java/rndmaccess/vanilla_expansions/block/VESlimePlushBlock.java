@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rndmaccess.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBoxUtil;
 
 public class VESlimePlushBlock extends VEMagmaCubePlushBlock
 {
@@ -18,9 +18,9 @@ public class VESlimePlushBlock extends VEMagmaCubePlushBlock
     protected static final VoxelShape BOTTOM_NORTH_SHAPE = VoxelShapes.or(VEMagmaCubePlushBlock.BOTTOM_NORTH_SHAPE,
             BOTTOM_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape BOTTOM_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, BOTTOM_NORTH_SHAPE);
-    protected static final VoxelShape BOTTOM_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, BOTTOM_NORTH_SHAPE);
-    protected static final VoxelShape BOTTOM_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, BOTTOM_NORTH_SHAPE);
+    protected static final VoxelShape BOTTOM_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, BOTTOM_NORTH_SHAPE);
 
     // Two Slime Bounding Boxes
 
@@ -28,9 +28,9 @@ public class VESlimePlushBlock extends VEMagmaCubePlushBlock
     protected static final VoxelShape MIDDLE_NORTH_SHAPE = VoxelShapes.or(VEMagmaCubePlushBlock.MIDDLE_NORTH_SHAPE,
             MIDDLE_NORTH_MOUTH_EYE_SHAPE, BOTTOM_NORTH_SHAPE);
 
-    protected static final VoxelShape MIDDLE_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, MIDDLE_NORTH_SHAPE);
-    protected static final VoxelShape MIDDLE_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, MIDDLE_NORTH_SHAPE);
-    protected static final VoxelShape MIDDLE_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, MIDDLE_NORTH_SHAPE);
+    protected static final VoxelShape MIDDLE_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, MIDDLE_NORTH_SHAPE);
 
     // Three Slime Bouding Boxes
 
@@ -38,9 +38,9 @@ public class VESlimePlushBlock extends VEMagmaCubePlushBlock
     protected static final VoxelShape TOP_NORTH_SHAPE = VoxelShapes.or(VEMagmaCubePlushBlock.TOP_NORTH_SHAPE,
             TOP_NORTH_MOUTH_EYE_SHAPE);
 
-    protected static final VoxelShape TOP_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, TOP_NORTH_SHAPE);
-    protected static final VoxelShape TOP_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, TOP_NORTH_SHAPE);
-    protected static final VoxelShape TOP_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, TOP_NORTH_SHAPE);
+    protected static final VoxelShape TOP_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, TOP_NORTH_SHAPE);
 
     public VESlimePlushBlock(Properties properties)
     {

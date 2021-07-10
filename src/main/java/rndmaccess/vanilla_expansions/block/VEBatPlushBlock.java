@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rndmaccess.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBoxUtil;
 
 public class VEBatPlushBlock extends VEPlushBlock
 {
@@ -36,9 +36,9 @@ public class VEBatPlushBlock extends VEPlushBlock
 
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(NORTH_BODY, NORTH_HEAD, NORTH_MOUTH, NORTH_EARS,
             NORTH_LEGS, NORTH_WINGS, NORTH_EYES);
-    protected static final VoxelShape SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
+    protected static final VoxelShape EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
 
     public VEBatPlushBlock(Properties properties)
     {

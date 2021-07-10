@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rndmaccess.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBoxUtil;
 
 public class VEChickenPlushBlock extends VEPlushBlock
 {
@@ -40,9 +40,9 @@ public class VEChickenPlushBlock extends VEPlushBlock
             CHICKEN_NORTH_TORSO_SHAPE, CHICKEN_NORTH_WINGS_SHAPE, CHICKEN_NORTH_HEAD_SHAPE, CHICKEN_NORTH_WATTLE_SHAPE,
             CHICKEN_NORTH_BEAK_SHAPE, CHICKEN_NORTH_LEGS_SHAPE, CHICKEN_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape CHICKEN_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, CHICKEN_NORTH_SHAPE);
-    protected static final VoxelShape CHICKEN_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, CHICKEN_NORTH_SHAPE);
-    protected static final VoxelShape CHICKEN_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, CHICKEN_NORTH_SHAPE);
+    protected static final VoxelShape CHICKEN_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, CHICKEN_NORTH_SHAPE);
+    protected static final VoxelShape CHICKEN_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, CHICKEN_NORTH_SHAPE);
+    protected static final VoxelShape CHICKEN_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, CHICKEN_NORTH_SHAPE);
 
     public VEChickenPlushBlock(Properties properties)
     {

@@ -8,7 +8,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import rndmaccess.vanilla_expansions.block.util.VEBoxBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBoxUtil;
 
 public class VEWolfPlushBlock extends VEPlushBlock
 {
@@ -42,9 +42,9 @@ public class VEWolfPlushBlock extends VEPlushBlock
             WOLF_NORTH_SNOUT_SHAPE, WOLF_NORTH_LEGS_SHAPE, WOLF_NORTH_EYES_SHAPE, WOLF_NORTH_EARS_SHAPE,
             WOLF_NORTH_TAIL_SHAPE);
 
-    protected static final VoxelShape WOLF_SOUTH_SHAPE = VEBoxBlockUtil.rotate180(Axis.Y, WOLF_NORTH_SHAPE);
-    protected static final VoxelShape WOLF_WEST_SHAPE = VEBoxBlockUtil.rotate270(Axis.Y, WOLF_NORTH_SHAPE);
-    protected static final VoxelShape WOLF_EAST_SHAPE = VEBoxBlockUtil.rotate90(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, WOLF_NORTH_SHAPE);
+    protected static final VoxelShape WOLF_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, WOLF_NORTH_SHAPE);
 
     public VEWolfPlushBlock(Properties properties)
     {

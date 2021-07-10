@@ -1,4 +1,4 @@
-package rndmaccess.vanilla_expansions.block.util;
+package rndmaccess.vanilla_expansions.util;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +19,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
  *
  * @author Ryan
  */
-public class VEBoxBlockUtil
+public class VEBoxUtil
 {
     private static final double CENTER = 0.5;
     private static final double NINETY_DEGREES = Math.toRadians(90);
