@@ -3,6 +3,7 @@ package rndmaccess.vanilla_expansions.events;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -21,6 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import rndmaccess.vanilla_expansions.config.VEConfig;
 import rndmaccess.vanilla_expansions.core.VEConfiguredFeatures;
 import rndmaccess.vanilla_expansions.core.VEConfiguredStructures;
+import rndmaccess.vanilla_expansions.core.VEEntityTypes;
 
 public class VEBiomeLoadingEvent
 {
@@ -71,37 +73,41 @@ public class VEBiomeLoadingEvent
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onLoadBiome(final BiomeLoadingEvent event)
     {
-        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+        BiomeGenerationSettingsBuilder genBuilder = event.getGeneration();
+        MobSpawnInfoBuilder entityBuilder = event.getSpawns();
         Category category = event.getCategory();
         ResourceLocation biome = event.getName();
         RainType weather = event.getClimate().precipitation;
 
         if (biome != null)
         {
-            addFeature(builder, category, nether, ores, VEConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE, smokyQuartzFlag);
-            addFeature(builder, category, nether, ores, VEConfiguredFeatures.BLACKSTONE_RUBY_ORE, rubyFlag);
-            addBushFeature(builder, category, forest, sparseBlueberries, decoratedBlueberries, blueberryFlag);
-            addBushFeature(builder, category, forest, sparseCranberries, decoratedCranberries, cranberryFlag);
-            addBushFeature(builder, category, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
-            addFeature(builder, biome, END_CITY_BIOMES, vegetal, VEConfiguredFeatures.SNAPDRAGON_AND_GRASS,
+            addFeature(genBuilder, category, nether, ores, VEConfiguredFeatures.NETHER_SMOKY_QUARTZ_ORE,
+                    smokyQuartzFlag);
+            addFeature(genBuilder, category, nether, ores, VEConfiguredFeatures.BLACKSTONE_RUBY_ORE, rubyFlag);
+            addBushFeature(genBuilder, category, forest, sparseBlueberries, decoratedBlueberries, blueberryFlag);
+            addBushFeature(genBuilder, category, forest, sparseCranberries, decoratedCranberries, cranberryFlag);
+            addBushFeature(genBuilder, category, swamp, sparseWitchsCradle, decoratedWitchsCradle, witchesCradleFlag);
+            addFeature(genBuilder, biome, END_CITY_BIOMES, vegetal, VEConfiguredFeatures.SNAPDRAGON_AND_GRASS,
                     snapdragonAndEnderGrassFlag);
-            addFeature(builder, biome, END_CITY_BIOMES, lakes, VEConfiguredFeatures.DARK_MATTER_LAKE,
+            addFeature(genBuilder, biome, END_CITY_BIOMES, lakes, VEConfiguredFeatures.DARK_MATTER_LAKE,
                     darkMatterLakeFlag);
-            addFeature(builder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.HUGE_PURPLE_MUSHROOM_WG,
+            addFeature(genBuilder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.HUGE_PURPLE_MUSHROOM_WG,
                     hugePurpleMushroomFlag);
-            addFeature(builder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
+            addFeature(genBuilder, biome, DARK_FOREST_BIOMES, vegetal, VEConfiguredFeatures.PURPLE_MUSHROOM_DARK_FOREST,
                     purpleMushroomFlag);
-            addFeature(builder, category, river, topLayerMod, VEConfiguredFeatures.DISK_RIVER_MUD, riverMudFlag);
-            addFeature(builder, category, swamp, topLayerMod, VEConfiguredFeatures.DISK_SWAMP_MUD, swampMudFlag);
-            addFeature(builder, category, swamp, vegetal, VEConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
-            addFeatureToAllExcept(builder, category, nether, ores, VEConfiguredFeatures.ORE_MARBLE, true);
-            addStructure(builder, category, weather, taiga, rain, VEConfiguredStructures.configuredTaigaCabin,
+            addFeature(genBuilder, category, river, topLayerMod, VEConfiguredFeatures.DISK_RIVER_MUD, riverMudFlag);
+            addFeature(genBuilder, category, swamp, topLayerMod, VEConfiguredFeatures.DISK_SWAMP_MUD, swampMudFlag);
+            addFeature(genBuilder, category, swamp, vegetal, VEConfiguredFeatures.CATTAIL_SWAMP, cattailFlag);
+            addFeatureToAllExcept(genBuilder, category, nether, ores, VEConfiguredFeatures.ORE_MARBLE, true);
+            addStructure(genBuilder, category, weather, taiga, rain, VEConfiguredStructures.configuredTaigaCabin,
                     taigaCabinFlag);
-            addStructure(builder, category, weather, taiga, snow, VEConfiguredStructures.configuredIcyTaigaCabin,
+            addStructure(genBuilder, category, weather, taiga, snow, VEConfiguredStructures.configuredIcyTaigaCabin,
                     taigaCabinFlag);
-            addStructure(builder, biome, FOREST_BIOMES, VEConfiguredStructures.configuredForestCabin, forestCabinFlag);
-            addStructure(builder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
+            addStructure(genBuilder, biome, FOREST_BIOMES, VEConfiguredStructures.configuredForestCabin,
+                    forestCabinFlag);
+            addStructure(genBuilder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
                     crimsonCabinFlag);
+            addMonsterSpawner(entityBuilder, biome, VEEntityTypes.enderHorse, 5, 5, 5, true, END_CITY_BIOMES);
         }
     }
 
@@ -117,15 +123,17 @@ public class VEBiomeLoadingEvent
      * @param maxCount The maximum number of spawns.
      * @param biomes   The biomes that this entity can spawn in.
      */
-    @SuppressWarnings("unused")
-    private static void addMonsterSpawner(MobSpawnInfoBuilder builder, ResourceLocation selectedBiome,
-            EntityType<?> entity, int weight, int minCount, int maxCount, boolean enable, List<String> biomes)
+    private static <T extends Entity> void addMonsterSpawner(MobSpawnInfoBuilder builder,
+            ResourceLocation selectedBiome, EntityType<T> entity, int weight, int minCount, int maxCount,
+            boolean enable, List<String> biomes)
     {
         if (enable)
         {
             if (biomes.contains(selectedBiome.toString()))
             {
-                builder.getSpawner(EntityClassification.MONSTER).add(new Spawners(entity, weight, minCount, maxCount));
+                Spawners spawner = new Spawners(entity, weight, minCount, maxCount);
+
+                builder.getSpawner(EntityClassification.MONSTER).add(spawner);
             }
         }
     }
