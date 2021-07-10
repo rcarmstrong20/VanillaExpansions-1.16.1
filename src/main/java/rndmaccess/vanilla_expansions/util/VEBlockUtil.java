@@ -1,4 +1,4 @@
-package rndmaccess.vanilla_expansions.block.util;
+package rndmaccess.vanilla_expansions.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.state.EnumProperty;
@@ -6,11 +6,11 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.SlabType;
 
 /**
- * A utility class that holds helper methods for slabs.
+ * A utility class that holds helper methods for blocks.
  *
  * @author Ryan
  */
-public class VESlabBlockUtil
+public class VEBlockUtil
 {
     /**
      * @param state The slab block.

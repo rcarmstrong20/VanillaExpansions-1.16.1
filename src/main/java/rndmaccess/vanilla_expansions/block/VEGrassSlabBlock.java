@@ -8,8 +8,8 @@ import net.minecraft.block.SnowBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
-import rndmaccess.vanilla_expansions.block.util.VESlabBlockUtil;
 import rndmaccess.vanilla_expansions.core.VEBlocks;
+import rndmaccess.vanilla_expansions.util.VEBlockUtil;
 
 public class VEGrassSlabBlock extends VESnowyDirtSlabBlock
 {
@@ -33,7 +33,7 @@ public class VEGrassSlabBlock extends VESnowyDirtSlabBlock
         }
         else
         {
-            return !aboveState.isSolidRender(worldReader, abovepos) || VESlabBlockUtil.isBottom(state);
+            return !aboveState.isSolidRender(worldReader, abovepos) || VEBlockUtil.isBottom(state);
         }
     }
 
