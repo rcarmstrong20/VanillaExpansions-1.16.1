@@ -160,9 +160,9 @@ public class VEItems
     public static Item stoneEssence = register("stone_essence", new Item(buildProperties()));
     public static Item midnightEssence = register("midnight_essence", new Item(buildProperties()));
     public static Item enderHorseEgg = register("ender_horse_spawn_egg",
-            new SpawnEggItem(VEEntityTypes.enderHorse, 0x19181a, 0xb168ba, buildProperties()));
+            new SpawnEggItem(VEEntityTypes.enderHorse, 0x19181a, 0xba40db, buildProperties()));
     public static Item charredRemnantEgg = register("charred_remnant_spawn_egg",
-            new SpawnEggItem(VEEntityTypes.charredRemnant, 0x363431, 0xf55925, buildProperties()));
+            new SpawnEggItem(VEEntityTypes.charredRemnant, 0x944619, 0xdec33c, buildProperties()));
     public static Item charredFlesh = register("charred_flesh", new Item(buildProperties()));
 
     /**
