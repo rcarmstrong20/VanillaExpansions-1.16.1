@@ -5,7 +5,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
 /**
- * This class stores data for shared bounding boxes.
+ * This class stores data for shared bounding boxes for blocks.
  *
  * @author Ryan
  */
