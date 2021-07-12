@@ -184,12 +184,12 @@ public class VECattailBlock extends BushBlock
                     {
                         this.placeCattail(worldIn, pos, i + 1, DoubleBlockHalf.LOWER);
                         this.placeCattail(worldIn, pos.above(), i + 1, DoubleBlockHalf.UPPER);
+                        ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                     }
                     else
                     {
-                        pos = pos.below();
+                        ForgeHooks.onCropsGrowPost(worldIn, pos.below(), state);
                     }
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                 }
             }
         }
