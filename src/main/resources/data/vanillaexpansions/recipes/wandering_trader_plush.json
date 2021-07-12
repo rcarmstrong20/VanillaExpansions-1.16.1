@@ -15,7 +15,7 @@
     },
 	"C":
 	{
-	  "item": "minecraft:white_wool"
+	  "item": "minecraft:blue_wool"
 	},
 	"B":
 	{
@@ -23,11 +23,11 @@
 	},
 	"I":
 	{
-	  "item": "minecraft:spruce_sapling"
+	  "item": "minecraft:lead"
 	}
   },
   "result":
   {
-    "item": "vanillaexpansions:taiga_villager_plush"
+    "item": "vanillaexpansions:wandering_trader_plush"
   }
 }

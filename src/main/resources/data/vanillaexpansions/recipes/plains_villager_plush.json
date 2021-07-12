@@ -3,20 +3,16 @@
   "group": "villager_plush",
   "pattern":
   [
-    "TTT",
-    "GBG",
-    "CRC"
+    "HHH",
+    "HBH",
+    "CIC"
   ],
   "key":
   {
-    "T":
+    "H":
 	{
       "item": "minecraft:terracotta"
     },
-	"G":
-	{
-	  "item": "minecraft:green_wool"
-	},
 	"C":
 	{
 	  "item": "minecraft:brown_wool"
@@ -25,7 +21,7 @@
 	{
 	  "item": "minecraft:book"
 	},
-	"R":
+	"I":
 	{
 	  "item": "minecraft:grass"
 	}

@@ -4,8 +4,8 @@
   "pattern":
   [
     "HHH",
-    "YBY",
-    "GSG"
+    "HBH",
+    "CIC"
   ],
   "key":
   {
@@ -13,19 +13,15 @@
 	{
       "item": "minecraft:terracotta"
     },
-	"Y":
+	"C":
 	{
 	  "item": "minecraft:yellow_wool"
-	},
-	"G":
-	{
-	  "item": "minecraft:green_wool"
 	},
 	"B":
 	{
 	  "item": "minecraft:book"
 	},
-	"S":
+	"I":
 	{
 	  "item": "minecraft:jungle_sapling"
 	}

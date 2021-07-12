@@ -3,13 +3,13 @@
   "group": "villager_plush",
   "pattern":
   [
-    "TTT",
-    "CBC",
-    "WSW"
+    "HHH",
+    "HBH",
+    "CIC"
   ],
   "key":
   {
-    "T":
+    "H":
 	{
       "item": "minecraft:terracotta"
     },
@@ -17,15 +17,11 @@
 	{
 	  "item": "minecraft:cyan_wool"
 	},
-	"W":
-	{
-	  "item": "minecraft:white_wool"
-	},
 	"B":
 	{
 	  "item": "minecraft:book"
 	},
-	"S":
+	"I":
 	{
 	  "item": "minecraft:snow_block"
 	}
