@@ -12,11 +12,11 @@ import rndmaccess.vanilla_expansions.util.VEBoxUtil;
 
 public class VEDesertVillagerPlushBlock extends VEBaseVillagerPlushBlock
 {
-    protected static final VoxelShape NORTH_HAT = Block.box(3.0D, 12.0D, 4.5D, 13.0D, 14.0D, 13.0D);
+    protected static final VoxelShape NORTH_HAT_MAIN = Block.box(3.0D, 12.0D, 4.5D, 13.0D, 14.0D, 13.0D);
     protected static final VoxelShape NORTH_POMPOM = Block.box(6.0D, 14.0D, 7.0D, 10.0D, 15.0D, 10.5D);
+    protected static final VoxelShape NORTH_HAT = VoxelShapes.or(NORTH_HAT_MAIN, NORTH_POMPOM);
 
-    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(VEBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HAT,
-            NORTH_POMPOM);
+    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.or(VEBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HAT);
     protected static final VoxelShape SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, NORTH_SHAPE);
     protected static final VoxelShape WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, NORTH_SHAPE);
     protected static final VoxelShape EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, NORTH_SHAPE);
