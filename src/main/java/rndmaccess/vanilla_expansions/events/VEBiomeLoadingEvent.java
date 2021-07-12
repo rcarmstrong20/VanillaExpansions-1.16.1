@@ -3,9 +3,8 @@ package rndmaccess.vanilla_expansions.events;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -107,34 +106,56 @@ public class VEBiomeLoadingEvent
                     forestCabinFlag);
             addStructure(genBuilder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
                     crimsonCabinFlag);
-            addMonsterSpawner(entityBuilder, biome, VEEntityTypes.enderHorse, 5, 5, 5, true, END_CITY_BIOMES);
+            addSpawner(entityBuilder, VEEntityTypes.charredRemnant, 100, 2, 4, true);
+            addSpawner(entityBuilder, biome, VEEntityTypes.enderHorse, 5, 2, 6, true, END_CITY_BIOMES);
         }
     }
 
     /**
-     * Adds a new spawner for monsters that allows these monsters to spawn in the
-     * world.
+     * Adds a new spawner for monsters that allows these monsters to spawn naturally
+     * in the biomes contained in the list.
      *
-     * @param event    An instance of the biome loading event.
+     * @param <T>
+     * @param builder
+     * @param selectedBiome
+     * @param entity        The entity to use in the spawner.
+     * @param weight        How likely the mob is to spawn. A higher weight equals a
+     *                      higher spawn rate.
+     * @param minCount      The minimum number of spawns.
+     * @param maxCount      The maximum number of spawns.
+     * @param enable        A boolean from the config used to enable and disable
+     *                      this feature.
+     * @param biomes        The biomes to add spawns for.
+     */
+    private static <T extends MobEntity> void addSpawner(MobSpawnInfoBuilder builder, ResourceLocation selectedBiome,
+            EntityType<T> entity, int weight, int minCount, int maxCount, boolean enable, List<String> biomes)
+    {
+        if (biomes.contains(selectedBiome.toString()))
+        {
+            addSpawner(builder, entity, weight, minCount, maxCount, enable);
+        }
+    }
+
+    /**
+     * Adds a new spawner for monsters that allows these monsters to spawn naturally
+     * in every biome.
+     *
+     * @param <T>
+     * @param builder
      * @param entity   The entity to use in the spawner.
      * @param weight   How likely the mob is to spawn. A higher weight equals a
      *                 higher spawn rate.
      * @param minCount The minimum number of spawns.
      * @param maxCount The maximum number of spawns.
-     * @param biomes   The biomes that this entity can spawn in.
+     * @param enable   A boolean from the config used to enable and disable this
+     *                 feature.
      */
-    private static <T extends Entity> void addMonsterSpawner(MobSpawnInfoBuilder builder,
-            ResourceLocation selectedBiome, EntityType<T> entity, int weight, int minCount, int maxCount,
-            boolean enable, List<String> biomes)
+    private static <T extends MobEntity> void addSpawner(MobSpawnInfoBuilder builder, EntityType<T> entity, int weight,
+            int minCount, int maxCount, boolean enable)
     {
         if (enable)
         {
-            if (biomes.contains(selectedBiome.toString()))
-            {
-                Spawners spawner = new Spawners(entity, weight, minCount, maxCount);
-
-                builder.getSpawner(EntityClassification.MONSTER).add(spawner);
-            }
+            builder.getSpawner(entity.getCategory()).add(new Spawners(entity, weight, minCount, maxCount));
         }
     }
 
