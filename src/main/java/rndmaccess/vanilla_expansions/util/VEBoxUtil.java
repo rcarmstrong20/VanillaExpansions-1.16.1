@@ -72,14 +72,13 @@ public class VEBoxUtil
     {
         VoxelShape rotatedShapes = VoxelShapes.empty();
         List<AxisAlignedBB> boxList = shape.toAabbs();
-        VoxelShape rotated;
 
         for (AxisAlignedBB box : boxList)
         {
             Pair<Double, Double> min = rotatePoint(box.minX, box.minZ, radians);
             Pair<Double, Double> max = rotatePoint(box.maxX, box.maxZ, radians);
 
-            rotated = VoxelShapes.box(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
+            VoxelShape rotated = VoxelShapes.box(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
                     max.getSecond());
 
             rotatedShapes = VoxelShapes.or(rotatedShapes, rotated);
