@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.fml.common.Mod;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
@@ -20,25 +21,25 @@ import rndmaccess.vanilla_expansions.gen.feature.structure.VECabinStructurePiece
 public class VEConfiguredStructures
 {
     public static StructureFeature<?, ?> configuredTaigaCabin = register("taiga_cabin",
-            VEStructures.overworldCabin.configured(new VillageConfig(() ->
-            {
-                return VECabinStructurePieces.TAIGA_START;
-            }, 10)));
+            VEStructures.overworldCabin.configured(createVillageConfig(VECabinStructurePieces.TAIGA_START, 7)));
     public static StructureFeature<?, ?> configuredIcyTaigaCabin = register("icy_taiga_cabin",
-            VEStructures.overworldCabin.configured(new VillageConfig(() ->
-            {
-                return VECabinStructurePieces.ICY_TAIGA_START;
-            }, 10)));
+            VEStructures.overworldCabin.configured(createVillageConfig(VECabinStructurePieces.ICY_TAIGA_START, 7)));
     public static StructureFeature<?, ?> configuredForestCabin = register("forest_cabin",
-            VEStructures.overworldCabin.configured(new VillageConfig(() ->
-            {
-                return VECabinStructurePieces.FOREST_START;
-            }, 10)));
+            VEStructures.overworldCabin.configured(createVillageConfig(VECabinStructurePieces.FOREST_START, 7)));
     public static StructureFeature<?, ?> configuredCrimsonCabin = register("crimson_cabin",
-            VEStructures.netherCabin.configured(new VillageConfig(() ->
-            {
-                return VECabinStructurePieces.CRIMSON_START;
-            }, 10)));
+            VEStructures.netherCabin.configured(createVillageConfig(VECabinStructurePieces.CRIMSON_START, 7)));
+
+    /**
+     * When creating village config's the size needs to be between 0 and 7.
+     *
+     * @param jigsaw The starting jigsaw piece.
+     * @param size   The size of the structure.
+     * @return The new config.
+     */
+    private static VillageConfig createVillageConfig(JigsawPattern jigsaw, int size)
+    {
+        return new VillageConfig(() -> jigsaw, size);
+    }
 
     /**
      * A helper method for automatically registering every new configured structure
