@@ -1,7 +1,8 @@
 package rndmaccess.vanilla_expansions.events;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -41,12 +42,13 @@ public class VEBiomeLoadingEvent
     private boolean riverMudFlag = VEConfig.riverMudFlag.get();
     private boolean cattailFlag = VEConfig.cattailFlag.get();
 
-    private static final List<String> END_CITY_BIOMES = Arrays.asList("minecraft:end_barrens",
-            "minecraft:end_highlands", "minecraft:end_midlands", "minecraft:small_end_islands");
-    private static final List<String> DARK_FOREST_BIOMES = Arrays.asList("minecraft:dark_forest",
-            "minecraft:dark_forest_hills");
-    private static final List<String> FOREST_BIOMES = Arrays.asList("minecraft:forest", "minecraft:birch_forest",
-            "minecraft:birch_forest_hills", "minecraft:tall_birch_forest", "minecraft:tall_birch_hills");
+    private static final HashSet<String> END_CITY_BIOMES = new HashSet<>(Arrays.asList("minecraft:end_barrens",
+            "minecraft:end_highlands", "minecraft:end_midlands", "minecraft:small_end_islands"));
+    private static final HashSet<String> DARK_FOREST_BIOMES = new HashSet<>(
+            Arrays.asList("minecraft:dark_forest", "minecraft:dark_forest_hills"));
+    private static final HashSet<String> FOREST_BIOMES = new HashSet<>(
+            Arrays.asList("minecraft:forest", "minecraft:birch_forest", "minecraft:birch_forest_hills",
+                    "minecraft:tall_birch_forest", "minecraft:tall_birch_hills"));
 
     private ConfiguredFeature<?, ?> sparseBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_SPARSE;
     private ConfiguredFeature<?, ?> decoratedBlueberries = VEConfiguredFeatures.PATCH_BLUEBERRY_BUSH_DECORATED;
@@ -128,7 +130,7 @@ public class VEBiomeLoadingEvent
      * @param biomes        The biomes to add spawns for.
      */
     private static <T extends MobEntity> void addSpawner(MobSpawnInfoBuilder builder, ResourceLocation selectedBiome,
-            EntityType<T> entity, int weight, int minCount, int maxCount, boolean enable, List<String> biomes)
+            EntityType<T> entity, int weight, int minCount, int maxCount, boolean enable, HashSet<String> biomes)
     {
         if (biomes.contains(selectedBiome.toString()))
         {
@@ -222,24 +224,6 @@ public class VEBiomeLoadingEvent
     }
 
     /**
-     * A helper method that only adds the feature to one biome.
-     *
-     * @param builder       The generation builder to add to.
-     * @param selectedBiome The current biome loaded.
-     * @param biome         The biome's name to add the feature to.
-     * @param decoration    The decoration category that this feature belongs to.
-     * @param feature       The feature to add.
-     * @param enable        A boolean from the config used to enable and disable
-     *                      this feature.
-     */
-    @SuppressWarnings("unused")
-    private static void addFeature(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome, String biome,
-            Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
-    {
-        addFeature(builder, selectedBiome, Arrays.asList(biome), decoration, feature, enable);
-    }
-
-    /**
      * Adds a new feature to specific existing biomes using the minecraft name
      * space.
      *
@@ -252,7 +236,7 @@ public class VEBiomeLoadingEvent
      *                      feature.
      */
     private static void addFeature(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
-            List<String> biomes, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
+            HashSet<String> biomes, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable)
     {
         if (enable)
         {
@@ -320,7 +304,10 @@ public class VEBiomeLoadingEvent
     private static void addStructure(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
             String biome, StructureFeature<?, ?> structureFeature, boolean enable)
     {
-        addStructure(builder, selectedBiome, Arrays.asList(biome), structureFeature, enable);
+        HashSet<String> set = new HashSet<>();
+        Collections.addAll(set, biome);
+
+        addStructure(builder, selectedBiome, set, structureFeature, enable);
     }
 
     /**
@@ -335,7 +322,7 @@ public class VEBiomeLoadingEvent
      *                      this structure.
      */
     private static void addStructure(BiomeGenerationSettingsBuilder builder, ResourceLocation selectedBiome,
-            List<String> biomes, StructureFeature<?, ?> structure, boolean enable)
+            HashSet<String> biomes, StructureFeature<?, ?> structure, boolean enable)
     {
         if (enable)
         {
