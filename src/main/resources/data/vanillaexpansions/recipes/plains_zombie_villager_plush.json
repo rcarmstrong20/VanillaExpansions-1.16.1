@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "group": "zombie_villager_plush",
+  "pattern":
+  [
+    "HHH",
+    "HRH",
+    "CIC"
+  ],
+  "key":
+  {
+    "H":
+	{
+      "item": "minecraft:green_wool"
+    },
+	"C":
+	{
+	  "item": "minecraft:brown_wool"
+	},
+	"R":
+	{
+	  "item": "minecraft:rotten_flesh"
+	},
+	"I":
+	{
+	  "item": "minecraft:grass"
+	}
+  },
+  "result":
+  {
+    "item": "vanillaexpansions:plains_zombie_villager_plush"
+  }
+}

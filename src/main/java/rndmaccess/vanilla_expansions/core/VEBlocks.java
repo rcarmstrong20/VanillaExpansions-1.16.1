@@ -32,6 +32,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import rndmaccess.vanilla_expansions.VanillaExpansions;
 import rndmaccess.vanilla_expansions.block.VEBaseVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VEBaseZombieVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBatPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBeePlushBlock;
 import rndmaccess.vanilla_expansions.block.VEBerryBushBlock;
@@ -44,6 +45,7 @@ import rndmaccess.vanilla_expansions.block.VEColoredCampfireBlock;
 import rndmaccess.vanilla_expansions.block.VECowPlushBlock;
 import rndmaccess.vanilla_expansions.block.VECreeperPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEDesertVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VEDesertZombieVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEDirtSlabBlock;
 import rndmaccess.vanilla_expansions.block.VEEnderGrassBlock;
 import rndmaccess.vanilla_expansions.block.VEEndermanPlushBlock;
@@ -67,6 +69,7 @@ import rndmaccess.vanilla_expansions.block.VEPottedSnapdragonBlock;
 import rndmaccess.vanilla_expansions.block.VEPufferfishPlushBlock;
 import rndmaccess.vanilla_expansions.block.VERabbitPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESavannaVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VESavannaZombieVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESevenStageCropBlock;
 import rndmaccess.vanilla_expansions.block.VESheepPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESilverfishPlushBlock;
@@ -74,6 +77,7 @@ import rndmaccess.vanilla_expansions.block.VESkeletonPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESlimePlushBlock;
 import rndmaccess.vanilla_expansions.block.VESnapdragonBlock;
 import rndmaccess.vanilla_expansions.block.VESnowVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VESnowZombieVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESnowyBlock;
 import rndmaccess.vanilla_expansions.block.VESnowyDirtSlabBlock;
 import rndmaccess.vanilla_expansions.block.VESnowySlabBlock;
@@ -81,6 +85,7 @@ import rndmaccess.vanilla_expansions.block.VESnowyStairsBlock;
 import rndmaccess.vanilla_expansions.block.VESpiderPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESquidPlushBlock;
 import rndmaccess.vanilla_expansions.block.VESwampVillagerPlushBlock;
+import rndmaccess.vanilla_expansions.block.VESwampZombieVillagerPlushBlock;
 import rndmaccess.vanilla_expansions.block.VEThreeStageCropsBlock;
 import rndmaccess.vanilla_expansions.block.VETransmutationTableBlock;
 import rndmaccess.vanilla_expansions.block.VEWanderingTraderPlushBlock;
@@ -250,6 +255,24 @@ public class VEBlocks
             new VEBaseVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermanPlush)));
     public static Block wanderingTraderVillagerPlush = register("wandering_trader_plush", true,
             new VEWanderingTraderPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blueSheepPlush)));
+    public static Block plainsZombieVillagerPlush = register("plains_zombie_villager_plush", true,
+            new VEBaseZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.creeperPlush)));
+    public static Block desertZombieVillagerPlush = register("desert_zombie_villager_plush", true,
+            new VEDesertZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.creeperPlush)));
+    public static Block jungleZombieVillagerPlush = register("jungle_zombie_villager_plush", true,
+            new VEBaseZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
+    public static Block savannaZombieVillagerPlush = register("savanna_zombie_villager_plush", true,
+            new VESavannaZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
+    public static Block snowZombieVillagerPlush = register("snow_zombie_villager_plush", true,
+            new VESnowZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
+    public static Block swampZombieVillagerPlush = register("swamp_zombie_villager_plush", true,
+            new VESwampZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.cowPlush)));
+    public static Block taigaZombieVillagerPlush = register("taiga_zombie_villager_plush", true,
+            new VEBaseZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
+    public static Block crimsonZombieVillagerPlush = register("crimson_zombie_villager_plush", true,
+            new VEBaseZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
+    public static Block warpedZombieVillagerPlush = register("warped_zombie_villager_plush", true,
+            new VEBaseZombieVillagerPlushBlock(AbstractBlock.Properties.copy(VEBlocks.blazePlush)));
     public static Block witchPlush = register("witch_plush", true,
             new VEWitchPlushBlock(AbstractBlock.Properties.copy(VEBlocks.endermitePlush)));
     public static Block wolfPlush = register("wolf_plush", true,

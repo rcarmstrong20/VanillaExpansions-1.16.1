@@ -1,0 +1,8 @@
+{
+	"parent": "vanillaexpansions:block/template_two_colored_zombie_villager_plush",
+	"textures":
+	{
+		"clothes": "block/white_wool",
+		"sleeves": "block/brown_wool"
+	}
+}
