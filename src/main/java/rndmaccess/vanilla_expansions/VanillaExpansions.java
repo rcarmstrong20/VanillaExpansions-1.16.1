@@ -143,7 +143,7 @@ public class VanillaExpansions
      */
     private void setup(final FMLCommonSetupEvent event)
     {
-        VanillaExpansions.LOGGER.info("setup method registered");
+        VanillaExpansions.LOGGER.info("Setup method registered");
         PROXY.onSetupCommon();
     }
 
@@ -154,7 +154,7 @@ public class VanillaExpansions
      */
     private void clientRegistries(final FMLClientSetupEvent event)
     {
-        VanillaExpansions.LOGGER.info("client method registered");
+        VanillaExpansions.LOGGER.info("Client method registered");
         PROXY.onSetupClient();
     }
 
