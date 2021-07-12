@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -95,9 +94,9 @@ public class VEGhastPlushBlock extends VEPlushBlock
             GHAST_NORTH_MIDDLE_TENTACLES_SHAPES, GHAST_NORTH_LEFT_TENTACLES_SHAPES, GHAST_NORTH_BODY_SHAPE,
             GHAST_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape GHAST_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, GHAST_NORTH_SHAPE);
-    protected static final VoxelShape GHAST_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_SOUTH_SHAPE = VEBoxUtil.rotate180(GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_WEST_SHAPE = VEBoxUtil.rotate270(GHAST_NORTH_SHAPE);
+    protected static final VoxelShape GHAST_EAST_SHAPE = VEBoxUtil.rotate90(GHAST_NORTH_SHAPE);
 
     public VEGhastPlushBlock(Properties properties)
     {

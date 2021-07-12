@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -36,8 +35,8 @@ public class VESkeletonPlushBlock extends VEPlushBlock
             6.0D);
     protected static final VoxelShape SKELETON_NORTH_LEGS_SHAPE = Block.box(5.0D, 0.0D, 3.0D, 11.0D, 1.0D, 9.0D);
 
-    protected static final VoxelShape SKELETON_NORTH_SKULL_SHAPE = VEBoxUtil
-            .cutBox(SKELETON_NORTH_SKULL_OUTSIDE_SHAPE, SKELETON_NORTH_SKULL_INSIDE_SHAPE);
+    protected static final VoxelShape SKELETON_NORTH_SKULL_SHAPE = VEBoxUtil.cutBox(SKELETON_NORTH_SKULL_OUTSIDE_SHAPE,
+            SKELETON_NORTH_SKULL_INSIDE_SHAPE);
 
     protected static final VoxelShape SKELETON_NORTH_RIB_TOP_SHAPE = VEBoxUtil
             .cutBox(SKELETON_NORTH_RIB_TOP_SOLID_SHAPE, SKELETON_NORTH_RIB_TOP_HOLE_SHAPE);
@@ -60,9 +59,9 @@ public class VESkeletonPlushBlock extends VEPlushBlock
             SKELETON_NORTH_ARMS_SHAPE, SKELETON_NORTH_BOW_SHAPE, SKELETON_NORTH_EYES_SHAPE, SKELETON_NORTH_MOUTH_SHAPE,
             SKELETON_NORTH_LEGS_SHAPE);
 
-    protected static final VoxelShape SKELETON_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, SKELETON_NORTH_SHAPE);
-    protected static final VoxelShape SKELETON_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, SKELETON_NORTH_SHAPE);
-    protected static final VoxelShape SKELETON_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_SOUTH_SHAPE = VEBoxUtil.rotate180(SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_WEST_SHAPE = VEBoxUtil.rotate270(SKELETON_NORTH_SHAPE);
+    protected static final VoxelShape SKELETON_EAST_SHAPE = VEBoxUtil.rotate90(SKELETON_NORTH_SHAPE);
 
     public VESkeletonPlushBlock(Properties properties)
     {

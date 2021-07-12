@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -20,9 +19,9 @@ public class VEEndermitePlushBlock extends VEPlushBlock
     protected static final VoxelShape ENDERMITE_NORTH_SHAPE = VoxelShapes.or(ENDERMITE_NORTH_FRONT_SHAPE,
             ENDERMITE_NORTH_MIDDLE_SHAPE, ENDERMITE_NORTH_BACK1_SHAPE, ENDERMITE_NORTH_BACK2_SHAPE);
 
-    protected static final VoxelShape ENDERMITE_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, ENDERMITE_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMITE_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, ENDERMITE_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMITE_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_SOUTH_SHAPE = VEBoxUtil.rotate180(ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_WEST_SHAPE = VEBoxUtil.rotate270(ENDERMITE_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMITE_EAST_SHAPE = VEBoxUtil.rotate90(ENDERMITE_NORTH_SHAPE);
 
     public VEEndermitePlushBlock(Properties properties)
     {

@@ -7,7 +7,6 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -35,35 +34,32 @@ public class VEPlanterBoxBlock extends Block
 
     private static final VoxelShape INSIDE_NORTH_SHAPE = Block.box(3.0, 15.0, 0.0, 13.0, 16.0, 13.0);
     private static final VoxelShape NORTH_BOX_SHAPE = VEBoxUtil.cutBox(VoxelShapes.block(), INSIDE_NORTH_SHAPE);
-    private static final VoxelShape SOUTH_BOX_SHAPE = VEBoxUtil.rotate180(Axis.Y, NORTH_BOX_SHAPE);
-    private static final VoxelShape WEST_BOX_SHAPE = VEBoxUtil.rotate270(Axis.Y, NORTH_BOX_SHAPE);
-    private static final VoxelShape EAST_BOX_SHAPE = VEBoxUtil.rotate90(Axis.Y, NORTH_BOX_SHAPE);
+    private static final VoxelShape SOUTH_BOX_SHAPE = VEBoxUtil.rotate180(NORTH_BOX_SHAPE);
+    private static final VoxelShape WEST_BOX_SHAPE = VEBoxUtil.rotate270(NORTH_BOX_SHAPE);
+    private static final VoxelShape EAST_BOX_SHAPE = VEBoxUtil.rotate90(NORTH_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_SOUTH_SHAPE = Block.box(3.0, 15.0, 0.0, 13.0, 16.0, 16.0);
     private static final VoxelShape NORTH_SOUTH_BOX_SHAPE = VEBoxUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_SOUTH_SHAPE);
-    private static final VoxelShape EAST_WEST_BOX_SHAPE = VEBoxUtil.rotate90(Axis.Y, NORTH_SOUTH_BOX_SHAPE);
+    private static final VoxelShape EAST_WEST_BOX_SHAPE = VEBoxUtil.rotate90(NORTH_SOUTH_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_EAST_SHAPE = Block.box(3.0, 15.0, 0.0, 16.0, 16.0, 13.0);
     private static final VoxelShape NORTH_EAST_BOX_SHAPE = VEBoxUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_EAST_SHAPE);
 
-    private static final VoxelShape SOUTH_WEST_BOX_SHAPE = VEBoxUtil.rotate180(Axis.Y, NORTH_EAST_BOX_SHAPE);
-    private static final VoxelShape NORTH_WEST_BOX_SHAPE = VEBoxUtil.rotate270(Axis.Y, NORTH_EAST_BOX_SHAPE);
-    private static final VoxelShape SOUTH_EAST_BOX_SHAPE = VEBoxUtil.rotate90(Axis.Y, NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_WEST_BOX_SHAPE = VEBoxUtil.rotate180(NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_WEST_BOX_SHAPE = VEBoxUtil.rotate270(NORTH_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_EAST_BOX_SHAPE = VEBoxUtil.rotate90(NORTH_EAST_BOX_SHAPE);
 
     private static final VoxelShape INSIDE_NORTH_WEST_EAST_SHAPE = Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 13.0);
     private static final VoxelShape NORTH_WEST_EAST_BOX_SHAPE = VEBoxUtil.cutBox(VoxelShapes.block(),
             INSIDE_NORTH_WEST_EAST_SHAPE);
 
-    private static final VoxelShape SOUTH_WEST_EAST_BOX_SHAPE = VEBoxUtil.rotate180(Axis.Y,
-            NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape SOUTH_WEST_EAST_BOX_SHAPE = VEBoxUtil.rotate180(NORTH_WEST_EAST_BOX_SHAPE);
 
-    private static final VoxelShape NORTH_SOUTH_WEST_BOX_SHAPE = VEBoxUtil.rotate270(Axis.Y,
-            NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_SOUTH_WEST_BOX_SHAPE = VEBoxUtil.rotate270(NORTH_WEST_EAST_BOX_SHAPE);
 
-    private static final VoxelShape NORTH_SOUTH_EAST_BOX_SHAPE = VEBoxUtil.rotate90(Axis.Y,
-            NORTH_WEST_EAST_BOX_SHAPE);
+    private static final VoxelShape NORTH_SOUTH_EAST_BOX_SHAPE = VEBoxUtil.rotate90(NORTH_WEST_EAST_BOX_SHAPE);
 
     public VEPlanterBoxBlock(Properties properties)
     {

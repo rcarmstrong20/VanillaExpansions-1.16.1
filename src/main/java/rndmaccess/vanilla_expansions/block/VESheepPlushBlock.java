@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -41,9 +40,9 @@ public class VESheepPlushBlock extends VEPlushBlock
     protected static final VoxelShape SHEEP_NORTH_SHAPE = VoxelShapes.or(NORTH_TORSO, NORTH_HEAD, NORTH_MOUTH,
             NORTH_LEG_TUFFS, NORTH_LEGS, NORTH_EYES);
 
-    protected static final VoxelShape SHEEP_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, SHEEP_NORTH_SHAPE);
-    protected static final VoxelShape SHEEP_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, SHEEP_NORTH_SHAPE);
-    protected static final VoxelShape SHEEP_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_SOUTH_SHAPE = VEBoxUtil.rotate180(SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_WEST_SHAPE = VEBoxUtil.rotate270(SHEEP_NORTH_SHAPE);
+    protected static final VoxelShape SHEEP_EAST_SHAPE = VEBoxUtil.rotate90(SHEEP_NORTH_SHAPE);
 
     public VESheepPlushBlock(Properties properties)
     {

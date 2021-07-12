@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -51,9 +50,9 @@ public class VESquidPlushBlock extends VEPlushBlock
     protected static final VoxelShape SQUID_NORTH_SHAPE = VoxelShapes.or(SQUID_BODY_SHAPE, SQUID_MOUTH_SHAPE,
             SQUID_LEGS_SHAPE, SQUID_TEETH_SHAPE, SQUID_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape SQUID_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, SQUID_NORTH_SHAPE);
-    protected static final VoxelShape SQUID_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, SQUID_NORTH_SHAPE);
-    protected static final VoxelShape SQUID_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_SOUTH_SHAPE = VEBoxUtil.rotate180(SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_WEST_SHAPE = VEBoxUtil.rotate270(SQUID_NORTH_SHAPE);
+    protected static final VoxelShape SQUID_EAST_SHAPE = VEBoxUtil.rotate90(SQUID_NORTH_SHAPE);
 
     public VESquidPlushBlock(Properties properties)
     {

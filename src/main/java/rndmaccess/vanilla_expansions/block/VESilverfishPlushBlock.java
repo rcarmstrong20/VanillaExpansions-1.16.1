@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -103,9 +102,9 @@ public class VESilverfishPlushBlock extends VEPlushBlock
             SILVERFISH_NORTH_FRONT_TUFFS_SHAPE, SILVERFISH_NORTH_MIDDLE_TUFFS_SHAPE,
             SILVERFISH_NORTH_BACK2_TUFFS_SHAPE);
 
-    protected static final VoxelShape SILVERFISH_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, SILVERFISH_NORTH_SHAPE);
-    protected static final VoxelShape SILVERFISH_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, SILVERFISH_NORTH_SHAPE);
-    protected static final VoxelShape SILVERFISH_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_SOUTH_SHAPE = VEBoxUtil.rotate180(SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_WEST_SHAPE = VEBoxUtil.rotate270(SILVERFISH_NORTH_SHAPE);
+    protected static final VoxelShape SILVERFISH_EAST_SHAPE = VEBoxUtil.rotate90(SILVERFISH_NORTH_SHAPE);
 
     public VESilverfishPlushBlock(Properties properties)
     {

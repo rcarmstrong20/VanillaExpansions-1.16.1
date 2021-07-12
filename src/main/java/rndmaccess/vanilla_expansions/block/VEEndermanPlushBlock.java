@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -43,9 +42,9 @@ public class VEEndermanPlushBlock extends VEPlushBlock
             ENDERMAN_NORTH_EYES_SHAPE, ENDERMAN_NORTH_LEGS_SHAPE, ENDERMAN_NORTH_ARMS_SHAPE,
             ENDERMAN_NORTH_GRASS_BLOCK_SHAPE);
 
-    protected static final VoxelShape ENDERMAN_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, ENDERMAN_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMAN_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, ENDERMAN_NORTH_SHAPE);
-    protected static final VoxelShape ENDERMAN_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_SOUTH_SHAPE = VEBoxUtil.rotate180(ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_WEST_SHAPE = VEBoxUtil.rotate270(ENDERMAN_NORTH_SHAPE);
+    protected static final VoxelShape ENDERMAN_EAST_SHAPE = VEBoxUtil.rotate90(ENDERMAN_NORTH_SHAPE);
 
     public VEEndermanPlushBlock(Properties properties)
     {

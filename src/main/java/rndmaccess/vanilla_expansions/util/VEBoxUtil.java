@@ -1,14 +1,9 @@
 package rndmaccess.vanilla_expansions.util;
 
-import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -40,101 +35,56 @@ public class VEBoxUtil
     }
 
     /**
-     * @param axis   The axis to rotate the shapes on.
-     * @param shapes The shapes to rotate.
-     * @return The shapes passed rotated 90 degrees.
+     * @param shape The shape to rotate.
+     * @return The shape passed rotated 90 radians on the Y axis.
      */
-    public static VoxelShape rotate90(@Nullable Axis axis, VoxelShape... shapes)
+    public static VoxelShape rotate90(VoxelShape shape)
     {
-        return rotate(axis, NINETY_DEGREES, shapes);
+        return rotateY(NINETY_DEGREES, shape);
     }
 
     /**
-     * @param axis   The axis to rotate the shapes on.
-     * @param shapes The shapes to rotate.
-     * @return The shapes passed rotated 180 degrees.
+     * @param shape The shape to rotate.
+     * @return The shape passed rotated 180 radians on the Y axis.
      */
-    public static VoxelShape rotate180(@Nullable Axis axis, VoxelShape... shapes)
+    public static VoxelShape rotate180(VoxelShape shape)
     {
-        return rotate(axis, ONE_HUNDRED_EIGHTY_DEGREES, shapes);
+        return rotateY(ONE_HUNDRED_EIGHTY_DEGREES, shape);
     }
 
     /**
-     * @param axis   The axis to rotate the shapes on.
-     * @param shapes The shapes to rotate.
-     * @return The shapes passed rotated 270 degrees.
+     * @param shape The shape to rotate.
+     * @return The shape passed rotated 270 radians on the Y axis.
      */
-    public static VoxelShape rotate270(@Nullable Axis axis, VoxelShape... shapes)
+    public static VoxelShape rotate270(VoxelShape shape)
     {
-        return rotate(axis, TWO_HUNDRED_SEVENTY_DEGREES, shapes);
+        return rotateY(TWO_HUNDRED_SEVENTY_DEGREES, shape);
     }
 
-    public static VoxelShape rotate(@Nullable Axis axis, double radians, VoxelShape... shapes)
-    {
-        return rotate(axis, radians, Lists.newArrayList(shapes));
-    }
-
-    public static VoxelShape rotate(@Nullable Axis axis, double radians, Collection<VoxelShape> shapes)
-    {
-        VoxelShape collision = VoxelShapes.empty();
-        for (VoxelShape shape : shapes)
-        {
-            collision = VoxelShapes.or(collision, rotate(axis, radians, shape));
-        }
-        return collision;
-    }
-
-    public static VoxelShape rotate(@Nullable Axis axis, double radians, VoxelShape shape)
+    /**
+     * Rotates each box the number of radians on the Y axis.
+     *
+     * @param radians The degree to rotate.
+     * @param shape   The shape to rotate.
+     * @return A VoxelShape that contains all the boxes rotated.
+     */
+    public static VoxelShape rotateY(double radians, VoxelShape shape)
     {
         VoxelShape rotatedShapes = VoxelShapes.empty();
-        List<AxisAlignedBB> list = shape.toAabbs();
-        Pair<Double, Double> min;
-        Pair<Double, Double> max;
-        VoxelShape rotatedX;
-        VoxelShape rotatedZ;
-        VoxelShape rotatedY;
+        List<AxisAlignedBB> boxList = shape.toAabbs();
+        VoxelShape rotated;
 
-        switch (axis)
+        for (AxisAlignedBB box : boxList)
         {
-            case X:
-                for (AxisAlignedBB box : list)
-                {
-                    min = rotatePoint(box.minY, box.minZ, radians);
-                    max = rotatePoint(box.maxY, box.maxZ, radians);
+            Pair<Double, Double> min = rotatePoint(box.minX, box.minZ, radians);
+            Pair<Double, Double> max = rotatePoint(box.maxX, box.maxZ, radians);
 
-                    rotatedX = VoxelShapes.box(box.minX, min.getFirst(), min.getSecond(), box.maxX, max.getFirst(),
-                            max.getSecond());
+            rotated = VoxelShapes.box(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
+                    max.getSecond());
 
-                    rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedX);
-                }
-                return rotatedShapes;
-            case Y:
-                for (AxisAlignedBB box : list)
-                {
-                    min = rotatePoint(box.minX, box.minZ, radians);
-                    max = rotatePoint(box.maxX, box.maxZ, radians);
-
-                    rotatedY = VoxelShapes.box(min.getFirst(), box.minY, min.getSecond(), max.getFirst(), box.maxY,
-                            max.getSecond());
-
-                    rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedY);
-                }
-                return rotatedShapes;
-            case Z:
-                for (AxisAlignedBB box : list)
-                {
-                    min = rotatePoint(box.minX, box.minY, radians);
-                    max = rotatePoint(box.maxX, box.maxY, radians);
-
-                    rotatedZ = VoxelShapes.box(min.getFirst(), min.getSecond(), box.minZ, max.getFirst(),
-                            max.getSecond(), box.maxZ);
-
-                    rotatedShapes = VoxelShapes.or(rotatedShapes, rotatedZ);
-                }
-                return rotatedShapes;
-            default:
-                return rotatedShapes;
+            rotatedShapes = VoxelShapes.or(rotatedShapes, rotated);
         }
+        return rotatedShapes;
     }
 
     private static Pair<Double, Double> rotatePoint(double p1, double p2, double rotation)

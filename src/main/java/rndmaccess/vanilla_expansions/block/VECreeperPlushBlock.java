@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -35,9 +34,9 @@ public class VECreeperPlushBlock extends VEPlushBlock
     protected static final VoxelShape CREEPER_NORTH_SHAPE = VoxelShapes.or(CREEPER_NORTH_HEAD_SHAPE,
             CREEPER_NORTH_TORSO_SHAPE, CREEPER_NORTH_FEET_SHAPE, CREEPER_NORTH_EYES_SHAPE, CREEPER_NORTH_MOUTH_SHAPE);
 
-    protected static final VoxelShape CREEPER_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, CREEPER_NORTH_SHAPE);
-    protected static final VoxelShape CREEPER_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, CREEPER_NORTH_SHAPE);
-    protected static final VoxelShape CREEPER_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_SOUTH_SHAPE = VEBoxUtil.rotate180(CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_WEST_SHAPE = VEBoxUtil.rotate270(CREEPER_NORTH_SHAPE);
+    protected static final VoxelShape CREEPER_EAST_SHAPE = VEBoxUtil.rotate90(CREEPER_NORTH_SHAPE);
 
     public VECreeperPlushBlock(Properties properties)
     {

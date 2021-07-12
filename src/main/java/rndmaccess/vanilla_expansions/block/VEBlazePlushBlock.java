@@ -2,7 +2,6 @@ package rndmaccess.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -36,9 +35,9 @@ public class VEBlazePlushBlock extends VEPlushBlock
     protected static final VoxelShape BLAZE_NORTH_SHAPE = VoxelShapes.or(BLAZE_NORTH_HEAD_SHAPE, BLAZE_NORTH_LEGS_SHAPE,
             BLAZE_NORTH_EYES_SHAPE);
 
-    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VEBoxUtil.rotate180(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_WEST_SHAPE = VEBoxUtil.rotate270(Axis.Y, BLAZE_NORTH_SHAPE);
-    protected static final VoxelShape BLAZE_EAST_SHAPE = VEBoxUtil.rotate90(Axis.Y, BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_SOUTH_SHAPE = VEBoxUtil.rotate180(BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_WEST_SHAPE = VEBoxUtil.rotate270(BLAZE_NORTH_SHAPE);
+    protected static final VoxelShape BLAZE_EAST_SHAPE = VEBoxUtil.rotate90(BLAZE_NORTH_SHAPE);
 
     public VEBlazePlushBlock(Properties properties)
     {
