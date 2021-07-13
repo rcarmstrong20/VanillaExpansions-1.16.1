@@ -2,8 +2,8 @@
 	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
-		"particle": "block/green_wool",
-		"green_wool": "block/green_wool",
+		"particle": "block/lime_wool",
+		"green_wool": "block/lime_wool",
 		"black_wool": "block/black_wool"
 	},
 	"elements": [ 	 
