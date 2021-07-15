@@ -86,7 +86,7 @@ public class VECattailBlock extends BushBlock
     {
         Block block = world.getBlockState(pos.below()).getBlock();
 
-        return VEBlockTags.cattailLandSoil.contains(block) || VEBlockTags.cattailWaterSoil.contains(block);
+        return VEBlockTags.cattailLandSoil.contains(block) || world.getFluidState(pos).is(FluidTags.WATER);
     }
 
     @Override
