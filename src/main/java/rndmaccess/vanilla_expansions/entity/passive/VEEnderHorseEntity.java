@@ -1,7 +1,11 @@
 package rndmaccess.vanilla_expansions.entity.passive;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -10,9 +14,11 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.EntityTeleportEvent;
+import rndmaccess.vanilla_expansions.VanillaExpansions;
 import rndmaccess.vanilla_expansions.core.VEEntityTypes;
 
 public class VEEnderHorseEntity extends HorseEntity
@@ -20,6 +26,13 @@ public class VEEnderHorseEntity extends HorseEntity
     public VEEnderHorseEntity(EntityType<? extends HorseEntity> horseEntiy, World world)
     {
         super(VEEntityTypes.enderHorse, world);
+    }
+
+    public static boolean checkEnderHorseSpawnRules(EntityType<? extends VEEnderHorseEntity> entity, IWorld world,
+            SpawnReason reason, BlockPos pos, Random random)
+    {
+        VanillaExpansions.LOGGER.info("Tried to spawn horse.");
+        return world.getBlockState(pos.below()).is(Blocks.END_STONE);
     }
 
     @Override

@@ -14,6 +14,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.fluid.Fluid;
@@ -44,7 +46,6 @@ public class VECharredRemnantEntity extends ZombieEntity
         super(VEEntityTypes.charredRemnant, world);
     }
 
-    @SuppressWarnings("deprecation")
     public static boolean checkCharredRemnantSpawnRules(EntityType<VECharredRemnantEntity> entity, IWorld world,
             SpawnReason reason, BlockPos pos, Random random)
     {
@@ -54,9 +55,9 @@ public class VECharredRemnantEntity extends ZombieEntity
         {
             blockpos$mutable.move(Direction.UP);
         }
-        while (world.getFluidState(blockpos$mutable).is(FluidTags.LAVA));
+        while (!world.getBlockState(blockpos$mutable).isAir());
 
-        return world.getBlockState(blockpos$mutable).isAir();
+        return world.getFluidState(blockpos$mutable.below()).is(FluidTags.LAVA);
     }
 
     @Override
@@ -64,7 +65,17 @@ public class VECharredRemnantEntity extends ZombieEntity
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason,
             @Nullable ILivingEntityData livingData, @Nullable CompoundNBT compound)
     {
-        livingData = super.finalizeSpawn(world, difficulty, reason, livingData, compound);
+        this.getAttribute(Attributes.FOLLOW_RANGE).addPermanentModifier(new AttributeModifier("Random spawn bonus",
+                this.random.nextGaussian() * 0.05D, AttributeModifier.Operation.MULTIPLY_BASE));
+        if (this.random.nextFloat() < 0.05F)
+        {
+            this.setLeftHanded(true);
+        }
+        else
+        {
+            this.setLeftHanded(false);
+        }
+
         float f = difficulty.getSpecialMultiplier();
         this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * f);
         if (livingData == null)

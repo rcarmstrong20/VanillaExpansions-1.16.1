@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
-import net.minecraft.world.biome.MobSpawnInfo.Spawners;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -108,8 +108,18 @@ public class VEBiomeLoadingEvent
                     forestCabinFlag);
             addStructure(genBuilder, biome, "minecraft:crimson_forest", VEConfiguredStructures.configuredCrimsonCabin,
                     crimsonCabinFlag);
-            addSpawner(entityBuilder, VEEntityTypes.charredRemnant, 100, 2, 4, true);
-            addSpawner(entityBuilder, biome, VEEntityTypes.enderHorse, 5, 2, 6, true, END_CITY_BIOMES);
+            addSpawnerToAllExcept(entityBuilder, biome, VEEntityTypes.charredRemnant, 50, 2, 4, true, END_CITY_BIOMES);
+            addSpawner(entityBuilder, biome, VEEntityTypes.enderHorse, 100, 2, 6, true, END_CITY_BIOMES);
+        }
+    }
+
+    private static <T extends MobEntity> void addSpawnerToAllExcept(MobSpawnInfoBuilder builder,
+            ResourceLocation selectedBiome, EntityType<T> entity, int weight, int minCount, int maxCount,
+            boolean enable, HashSet<String> biomes)
+    {
+        if (!biomes.contains(selectedBiome.toString()))
+        {
+            addSpawner(builder, entity, weight, minCount, maxCount, enable);
         }
     }
 
@@ -157,7 +167,7 @@ public class VEBiomeLoadingEvent
     {
         if (enable)
         {
-            builder.getSpawner(entity.getCategory()).add(new Spawners(entity, weight, minCount, maxCount));
+            builder.addSpawn(entity.getCategory(), new MobSpawnInfo.Spawners(entity, weight, minCount, maxCount));// .getSpawner().add();
         }
     }
 

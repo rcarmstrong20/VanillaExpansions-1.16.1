@@ -9,20 +9,25 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaParticle;
 import net.minecraft.client.particle.ParticleManager.IParticleMetaFactory;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
 import net.minecraft.item.Item;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import rndmaccess.vanilla_expansions.client.renderer.particle.VEDripParticle;
@@ -43,6 +48,8 @@ import rndmaccess.vanilla_expansions.core.VESoundEvents;
 import rndmaccess.vanilla_expansions.core.VEStructures;
 import rndmaccess.vanilla_expansions.core.VETileEntityTypes;
 import rndmaccess.vanilla_expansions.core.VEVillagerProfessions;
+import rndmaccess.vanilla_expansions.entity.hostile.VECharredRemnantEntity;
+import rndmaccess.vanilla_expansions.entity.passive.VEEnderHorseEntity;
 import rndmaccess.vanilla_expansions.events.VEBiomeLoadingEvent;
 import rndmaccess.vanilla_expansions.events.VEBlockEvent;
 import rndmaccess.vanilla_expansions.events.VEBonemealEvent;
@@ -145,6 +152,25 @@ public class VanillaExpansions
     {
         VanillaExpansions.LOGGER.info("Setup method registered");
         PROXY.onSetupCommon();
+    }
+
+    @SubscribeEvent
+    public void onParallelDispatch(final ParallelDispatchEvent event)
+    {
+        event.enqueueWork(() -> new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                EntitySpawnPlacementRegistry.register(VEEntityTypes.charredRemnant, PlacementType.IN_LAVA,
+                        Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                        VECharredRemnantEntity::checkCharredRemnantSpawnRules);
+                EntitySpawnPlacementRegistry.register(VEEntityTypes.enderHorse, PlacementType.ON_GROUND,
+                        Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, VEEnderHorseEntity::checkEnderHorseSpawnRules);
+            }
+        });
+
+        LOGGER.info("Dispatched.");
     }
 
     /**
