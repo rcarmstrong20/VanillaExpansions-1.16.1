@@ -52,14 +52,7 @@ public class VEIcicleBlock extends FallingBlock
         BlockPos pos = context.getClickedPos();
 
         // Used to keep the player from placing icicle's without supporting blocks.
-        if (world.getBlockState(pos.above()).isCollisionShapeFullBlock(world, pos))
-        {
-            return super.getStateForPlacement(context);
-        }
-        else
-        {
-            return null;
-        }
+        return world.getBlockState(pos.above()).isCollisionShapeFullBlock(world, pos) ? this.defaultBlockState() : null;
     }
 
     @Override

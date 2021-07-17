@@ -14,7 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import rndmaccess.vanilla_expansions.util.VEBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VESnowyDirtSlabBlock extends VESoilSlabBlock
 {
@@ -32,7 +32,7 @@ public class VESnowyDirtSlabBlock extends VESoilSlabBlock
     {
         boolean flag = state2.is(Blocks.SNOW_BLOCK) || state2.is(Blocks.SNOW);
 
-        if (direction != Direction.UP || VEBlockUtil.isBottom(state))
+        if (direction != Direction.UP || VEBlockStateUtil.isBottomSlab(state))
         {
             return state;
         }

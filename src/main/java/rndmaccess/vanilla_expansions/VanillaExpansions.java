@@ -169,8 +169,6 @@ public class VanillaExpansions
                         Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, VEEnderHorseEntity::checkEnderHorseSpawnRules);
             }
         });
-
-        LOGGER.info("Dispatched.");
     }
 
     /**

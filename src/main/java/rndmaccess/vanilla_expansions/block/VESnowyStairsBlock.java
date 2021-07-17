@@ -10,7 +10,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import rndmaccess.vanilla_expansions.util.VEBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VESnowyStairsBlock extends StairsBlock
 {
@@ -52,7 +52,7 @@ public class VESnowyStairsBlock extends StairsBlock
         {
             if (belowState.hasProperty(BlockStateProperties.SNOWY)
                     && state.getFaceOcclusionShape(world, pos, Direction.DOWN).optimize() == BOTTOM_SHAPES[i]
-                    && !VEBlockUtil.isBottom(belowState))
+                    && !VEBlockStateUtil.isBottomSlab(belowState))
             {
                 world.setBlock(belowPos, belowState.setValue(BlockStateProperties.SNOWY, true), 3);
             }

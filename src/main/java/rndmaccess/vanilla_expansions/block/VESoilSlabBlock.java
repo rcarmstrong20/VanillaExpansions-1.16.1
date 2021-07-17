@@ -6,7 +6,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.IPlantable;
-import rndmaccess.vanilla_expansions.util.VEBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VESoilSlabBlock extends SlabBlock
 {
@@ -21,6 +21,6 @@ public class VESoilSlabBlock extends SlabBlock
     {
         // Block plantBlock = plantable.getPlant(world, pos).getBlock();
 
-        return !VEBlockUtil.isBottom(state);
+        return !VEBlockStateUtil.isBottomSlab(state);
     }
 }

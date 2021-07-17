@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -30,6 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import rndmaccess.vanilla_expansions.core.VEBlockTags;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VECattailBlock extends BushBlock
 {
@@ -53,7 +53,7 @@ public class VECattailBlock extends BushBlock
     @Override
     public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
     {
-        if (state.getValue(HALF) != DoubleBlockHalf.UPPER)
+        if (!VEBlockStateUtil.isUpperHalf(state))
         {
             return canSupportCattail(world, pos);
         }
@@ -64,7 +64,7 @@ public class VECattailBlock extends BushBlock
             {
                 return canSupportCattail(world, pos);
             }
-            return blockstate.is(this) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
+            return VEBlockStateUtil.isLowerHalf(blockstate);
         }
     }
 
@@ -75,62 +75,48 @@ public class VECattailBlock extends BushBlock
         return canSupportCattail(world, pos);
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        BlockPos pos = context.getClickedPos();
+        World world = context.getPlayer().getCommandSenderWorld();
+        FluidState fluidstate = world.getFluidState(pos);
+
+        return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
+    }
+
     /**
      * A helper method used for checking that the plant placement is valid.
      *
      * @param world The current world.
      * @param pos   The plants position.
-     * @return True if the soil can support the plant.
+     * @return True if the cattail is either placed in water with air above or on a
+     *         exception block.
      */
-    private boolean canSupportCattail(IBlockReader world, BlockPos pos)
+    private static boolean canSupportCattail(IBlockReader world, BlockPos pos)
     {
-        Block block = world.getBlockState(pos.below()).getBlock();
+        BlockState state = world.getBlockState(pos.below());
+        Block block = state.getBlock();
+        FluidState bottomFluid = world.getFluidState(pos);
+        FluidState topFluid = world.getFluidState(pos.above());
 
-        return VEBlockTags.cattailLandSoil.contains(block) || world.getFluidState(pos).is(FluidTags.WATER);
-    }
-
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context)
-    {
-        BlockPos blockpos = context.getClickedPos();
-        World world = context.getPlayer().getCommandSenderWorld();
-        FluidState fluidstate = world.getFluidState(blockpos);
-        FluidState topFluidstate = world.getFluidState(blockpos.above());
-        Block block = world.getBlockState(blockpos.below()).getBlock();
-
-        if (VEBlockTags.cattailLandSoil.contains(block))
-        {
-            return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
-        }
-        else if (fluidstate.is(FluidTags.WATER) && !topFluidstate.is(FluidTags.WATER))
-        {
-            return this.defaultBlockState().setValue(WATERLOGGED, isWater(fluidstate));
-        }
-        else
-        {
-            return null;
-        }
+        return (isWater(bottomFluid) && !isWater(topFluid) || VEBlockTags.cattailLandSoil.contains(block))
+                && state.isFaceSturdy(world, pos, Direction.UP);
     }
 
     /**
      * @param fluidState
-     * @return true if this block is filled with water.
+     * @return true if this block is filled with water source block.
      */
-    protected boolean isWater(FluidState fluidState)
+    protected static boolean isWater(FluidState fluidState)
     {
-        return Boolean.valueOf(fluidState.getType() == Fluids.WATER);
+        return fluidState.is(FluidTags.WATER) && fluidState.isSource();
     }
 
     @Override
     public FluidState getFluidState(BlockState state)
     {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
-    {
-        builder.add(HALF, WATERLOGGED, AGE);
     }
 
     /**
@@ -143,12 +129,11 @@ public class VECattailBlock extends BushBlock
      */
     private boolean canCattailGrow(IBlockReader worldIn, BlockState state, BlockPos pos)
     {
-        BlockState stateTop = worldIn.getBlockState(pos.above());
+        BlockPos abovePos = pos.above();
+        BlockState stateTop = worldIn.getBlockState(abovePos);
+        FluidState fluidTop = worldIn.getFluidState(abovePos);
 
-        return !isMaxAge(state)
-                && (isAir(stateTop)
-                        || (stateTop.hasProperty(HALF) && stateTop.getValue(HALF).equals(DoubleBlockHalf.UPPER)))
-                && stateTop.getBlock() != Blocks.WATER;
+        return !isMaxAge(state) && (isAir(stateTop) || VEBlockStateUtil.isUpperHalf(stateTop)) && !isWater(fluidTop);
     }
 
     /**
@@ -174,8 +159,8 @@ public class VECattailBlock extends BushBlock
 
         if (canCattailGrow(worldIn, state, pos) && worldIn.getRawBrightness(pos, 0) >= 9)
         {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge())
+            int i = getAge(state);
+            if (i < getMaxAge())
             {
                 float f = getGrowthSpeed(this, worldIn, pos);
                 if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0))
@@ -294,15 +279,15 @@ public class VECattailBlock extends BushBlock
     @Override
     public boolean isRandomlyTicking(BlockState state)
     {
-        return !this.isMaxAge(state);
+        return !isMaxAge(state);
     }
 
-    protected int getAge(BlockState state)
+    protected static int getAge(BlockState state)
     {
         return state.getValue(AGE);
     }
 
-    protected int getMaxAge()
+    protected static int getMaxAge()
     {
         return 3;
     }
@@ -312,8 +297,14 @@ public class VECattailBlock extends BushBlock
         return this.defaultBlockState().setValue(AGE, Integer.valueOf(age));
     }
 
-    protected boolean isMaxAge(BlockState state)
+    protected static boolean isMaxAge(BlockState state)
     {
-        return state.getValue(AGE) >= this.getMaxAge();
+        return state.getValue(AGE) >= getMaxAge();
+    }
+
+    @Override
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
+    {
+        builder.add(HALF, WATERLOGGED, AGE);
     }
 }

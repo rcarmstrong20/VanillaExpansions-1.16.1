@@ -6,7 +6,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import rndmaccess.vanilla_expansions.util.VEBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VESnowyBlock extends Block
 {
@@ -43,7 +43,7 @@ public class VESnowyBlock extends Block
         BlockState belowState = world.getBlockState(belowPos);
 
         if (!world.isClientSide() && belowState.hasProperty(BlockStateProperties.SNOWY)
-                && !VEBlockUtil.isBottom(belowState))
+                && !VEBlockStateUtil.isBottomSlab(belowState))
         {
             world.setBlock(belowPos, belowState.setValue(BlockStateProperties.SNOWY, true), 3);
         }

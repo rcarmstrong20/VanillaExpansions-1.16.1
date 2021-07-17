@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
 import rndmaccess.vanilla_expansions.state.properties.VEBlockStateProperties;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 /**
  * A base class designed to help create tall plush blocks.
@@ -38,7 +39,7 @@ public class VETallPlushBlock extends VEPlushBlock
     public void placeTop(World world, BlockPos pos, BlockState state)
     {
         FluidState fluidstate = world.getFluidState(pos);
-        boolean flag = fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8;
+        boolean flag = fluidstate.is(FluidTags.WATER) && fluidstate.isSource();
 
         if (state.getValue(PLUSH_STACK_SIZE).equals(2))
         {
@@ -85,11 +86,11 @@ public class VETallPlushBlock extends VEPlushBlock
     {
         if (state.getValue(PLUSH_STACK_SIZE) == 3)
         {
-            if (state.getValue(HALF) == DoubleBlockHalf.UPPER)
+            if (VEBlockStateUtil.isUpperHalf(state))
             {
                 this.breakOtherBlock(world, pos.below(), player);
             }
-            else if (state.getValue(HALF) == DoubleBlockHalf.LOWER)
+            else if (VEBlockStateUtil.isLowerHalf(state))
             {
                 this.breakOtherBlock(world, pos.above(), player);
             }

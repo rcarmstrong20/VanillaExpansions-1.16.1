@@ -8,7 +8,7 @@ import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import rndmaccess.vanilla_expansions.util.VEBlockUtil;
+import rndmaccess.vanilla_expansions.util.VEBlockStateUtil;
 
 public class VESnowySlabBlock extends SlabBlock
 {
@@ -48,7 +48,7 @@ public class VESnowySlabBlock extends SlabBlock
         SlabType slabType = state.getValue(TYPE);
 
         if (belowState.hasProperty(BlockStateProperties.SNOWY) && state.hasProperty(TYPE) && slabType != SlabType.TOP
-                && !VEBlockUtil.isBottom(belowState))
+                && !VEBlockStateUtil.isBottomSlab(belowState))
         {
             world.setBlock(belowPos, belowState.setValue(BlockStateProperties.SNOWY, true), 3);
         }
