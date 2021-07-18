@@ -96,12 +96,10 @@ public class VECattailBlock extends BushBlock
     private static boolean canSupportCattail(IBlockReader world, BlockPos pos)
     {
         BlockState state = world.getBlockState(pos.below());
-        Block block = state.getBlock();
         FluidState bottomFluid = world.getFluidState(pos);
         FluidState topFluid = world.getFluidState(pos.above());
 
-        return (isWater(bottomFluid) && !isWater(topFluid) || VEBlockTags.cattailLandSoil.contains(block))
-                && state.isFaceSturdy(world, pos, Direction.UP);
+        return isWater(bottomFluid) && !isWater(topFluid) && state.isFaceSturdy(world, pos, Direction.UP);
     }
 
     /**
@@ -136,21 +134,6 @@ public class VECattailBlock extends BushBlock
         return !isMaxAge(state) && (isAir(stateTop) || VEBlockStateUtil.isUpperHalf(stateTop)) && !isWater(fluidTop);
     }
 
-    /**
-     * A helper method used to place cattails.
-     *
-     * @param worldIn
-     * @param pos     The position of the plant.
-     * @param i       The age for this plant.
-     * @param half    The half property for the cattail, upper or lower.
-     */
-    protected void placeCattail(World worldIn, BlockPos pos, int i, DoubleBlockHalf half)
-    {
-        FluidState fluid = worldIn.getFluidState(pos);
-
-        worldIn.setBlock(pos, this.withAge(i).setValue(HALF, half).setValue(WATERLOGGED, isWater(fluid)), 2);
-    }
-
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
     {
@@ -160,20 +143,25 @@ public class VECattailBlock extends BushBlock
         if (canCattailGrow(worldIn, state, pos) && worldIn.getRawBrightness(pos, 0) >= 9)
         {
             int i = getAge(state);
+
             if (i < getMaxAge())
             {
                 float f = getGrowthSpeed(this, worldIn, pos);
+                BlockPos belowPos = pos.below();
+
                 if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0))
                 {
-                    if (Block.canSupportRigidBlock(worldIn, pos.below()))
+                    BlockState soilState = worldIn.getBlockState(belowPos);
+
+                    if (soilState.isFaceSturdy(worldIn, pos, Direction.UP))
                     {
-                        this.placeCattail(worldIn, pos, i + 1, DoubleBlockHalf.LOWER);
-                        this.placeCattail(worldIn, pos.above(), i + 1, DoubleBlockHalf.UPPER);
+                        this.growCattail(worldIn, pos, i);
                         ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                     }
                     else
                     {
-                        ForgeHooks.onCropsGrowPost(worldIn, pos.below(), state);
+                        this.growCattail(worldIn, belowPos, i);
+                        ForgeHooks.onCropsGrowPost(worldIn, belowPos, state);
                     }
                 }
             }
@@ -181,12 +169,33 @@ public class VECattailBlock extends BushBlock
     }
 
     /**
-     * Cattails will grow faster in water and slower on land.
+     * A helper method to grow that grows the cattails.
+     *
+     * @param worldIn
+     * @param pos     The position of the cattails bottom half.
+     * @param age     The age prior to growing.
+     */
+    private void growCattail(World worldIn, BlockPos pos, int age)
+    {
+        BlockPos abovePos = pos.above();
+        FluidState bottomFluid = worldIn.getFluidState(pos);
+        FluidState topFluid = worldIn.getFluidState(abovePos);
+        age++;
+
+        worldIn.setBlock(pos,
+                this.withAge(age).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, isWater(bottomFluid)), 2);
+        worldIn.setBlock(abovePos,
+                this.withAge(age).setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, isWater(topFluid)), 2);
+    }
+
+    /**
+     * Cattails will grow faster on the blocks contained in the fertileCattailSoil
+     * block tag and slower on all other blocks.
      *
      * @param blockIn The plant.
      * @param worldIn
      * @param pos     The position for the plant.
-     * @return The growth chance.
+     * @return The growth speed.
      */
     protected static float getGrowthSpeed(Block blockIn, IBlockReader worldIn, BlockPos pos)
     {
@@ -202,7 +211,10 @@ public class VECattailBlock extends BushBlock
                 if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), Direction.UP, (IPlantable) blockIn))
                 {
                     f1 = 1.0F;
-                    if (worldIn.getFluidState(pos.offset(i, 0, j)).is(FluidTags.WATER))
+
+                    Block block = worldIn.getBlockState(pos.offset(i, 0, j)).getBlock();
+
+                    if (VEBlockTags.fertileCattailSoil.contains(block))
                     {
                         f1 = 3.0F;
                     }

@@ -22,8 +22,7 @@ public class VEBlockTags
     public static ITag<Block> overworldBoxable = VEBlockTags.bind("overworld_boxable");
     public static ITag<Block> netherBoxable = VEBlockTags.bind("nether_boxable");
     public static ITag<Block> endBoxable = VEBlockTags.bind("end_boxable");
-    public static ITag<Block> cattailLandSoil = VEBlockTags.bind("cattail_land_soil");
-    public static ITag<Block> cattailWaterSoil = VEBlockTags.bind("cattail_water_soil");
+    public static ITag<Block> fertileCattailSoil = VEBlockTags.bind("fertile_cattail_soil");
     public static ITag<Block> endPlantable = VEBlockTags.bind("end_plantable");
 
     /**
